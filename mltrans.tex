@@ -1,0 +1,822 @@
+% Compile with xelatex for conjuncts/ligatures
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{fontspec}
+%\usepackage{xparse}
+\setmainfont{Noto Serif}
+
+\newfontfamily\mlfont{Chilanka}[Colour=blue,Scale=1.5,Script=Malayalam]
+
+
+
+%\input{metacsinput.tex}%helper macros for meta-commands
+
+%----- Named macros
+\newcommand\mlcombininganusvaraabove{\symbol{3328}}
+\newcommand\mlcandrabindu{\symbol{3329}}
+\newcommand\mlanusvara{\symbol{3330}}
+\newcommand\mlvisarga{\symbol{3331}}
+\newcommand\mlvedicanusvara{\symbol{3332}}
+\newcommand\mllettera{\symbol{3333}}
+\newcommand\mlletteraa{\symbol{3334}}
+\newcommand\mlletteri{\symbol{3335}}
+\newcommand\mlletterii{\symbol{3336}}
+\newcommand\mlletteru{\symbol{3337}}
+\newcommand\mlletteruu{\symbol{3338}}
+\newcommand\mllettervocalicr{\symbol{3339}}
+\newcommand\mllettervocalicl{\symbol{3340}}
+\newcommand\mllettere{\symbol{3342}}
+\newcommand\mlletteree{\symbol{3343}}
+\newcommand\mlletterai{\symbol{3344}}
+\newcommand\mllettero{\symbol{3346}}
+\newcommand\mlletteroo{\symbol{3347}}
+\newcommand\mlletterau{\symbol{3348}}
+\newcommand\mlka{\symbol{3349}}
+\newcommand\mlkha{\symbol{3350}}
+\newcommand\mlga{\symbol{3351}}
+\newcommand\mlgha{\symbol{3352}}
+\newcommand\mlnga{\symbol{3353}}
+\newcommand\mlca{\symbol{3354}}
+\newcommand\mlcha{\symbol{3355}}
+\newcommand\mlja{\symbol{3356}}
+\newcommand\mljha{\symbol{3357}}
+\newcommand\mlnya{\symbol{3358}}
+\newcommand\mltta{\symbol{3359}}
+\newcommand\mlttha{\symbol{3360}}
+\newcommand\mldda{\symbol{3361}}
+\newcommand\mlddha{\symbol{3362}}
+\newcommand\mlnna{\symbol{3363}}
+\newcommand\mlta{\symbol{3364}}
+\newcommand\mltha{\symbol{3365}}
+\newcommand\mlda{\symbol{3366}}
+\newcommand\mldha{\symbol{3367}}
+\newcommand\mlna{\symbol{3368}}
+\newcommand\mlnnna{\symbol{3369}}
+\newcommand\mlpa{\symbol{3370}}
+\newcommand\mlpha{\symbol{3371}}
+\newcommand\mlba{\symbol{3372}}
+\newcommand\mlbha{\symbol{3373}}
+\newcommand\mlma{\symbol{3374}}
+\newcommand\mlya{\symbol{3375}}
+\newcommand\mlra{\symbol{3376}}
+\newcommand\mlrra{\symbol{3377}}
+\newcommand\mlla{\symbol{3378}}
+\newcommand\mllla{\symbol{3379}}
+\newcommand\mlllla{\symbol{3380}}
+\newcommand\mlva{\symbol{3381}}
+\newcommand\mlsha{\symbol{3382}}
+\newcommand\mlssa{\symbol{3383}}
+\newcommand\mlsa{\symbol{3384}}
+\newcommand\mlha{\symbol{3385}}
+\newcommand\mlttta{\symbol{3386}}
+\newcommand\mlverticalbarvirama{\symbol{3387}}
+\newcommand\mlcircularvirama{\symbol{3388}}
+\newcommand\mlavagraha{\symbol{3389}}
+\newcommand\mlaa{\symbol{3390}}
+\newcommand\mli{\symbol{3391}}
+\newcommand\mlii{\symbol{3392}}
+\newcommand\mlu{\symbol{3393}}
+\newcommand\mluu{\symbol{3394}}
+\newcommand\mlvocalicr{\symbol{3395}}
+\newcommand\mlvocalicrr{\symbol{3396}}
+\newcommand\mle{\symbol{3398}}
+\newcommand\mlee{\symbol{3399}}
+\newcommand\mlai{\symbol{3400}}
+\newcommand\mlo{\symbol{3402}}
+\newcommand\mloo{\symbol{3403}}
+\newcommand\mlau{\symbol{3404}}
+\newcommand\mlvirama{\symbol{3405}}
+\newcommand\mldotreph{\symbol{3406}}
+\newcommand\mlpara{\symbol{3407}}
+\newcommand\mlchillum{\symbol{3412}}
+\newcommand\mlchilluy{\symbol{3413}}
+\newcommand\mlchillulll{\symbol{3414}}
+\newcommand\mlaulengthmark{\symbol{3415}}
+\newcommand\mloneonehundredandsixtieth{\symbol{3416}}
+\newcommand\mlonefortieth{\symbol{3417}}
+\newcommand\mlthreeeightieths{\symbol{3418}}
+\newcommand\mlonetwentieth{\symbol{3419}}
+\newcommand\mlonetenth{\symbol{3420}}
+\newcommand\mlthreetwentieths{\symbol{3421}}
+\newcommand\mlonefifth{\symbol{3422}}
+\newcommand\mlarchaicii{\symbol{3423}}
+\newcommand\mllettervocalicrr{\symbol{3424}}
+\newcommand\mllettervocalicll{\symbol{3425}}
+\newcommand\mlvocalicl{\symbol{3426}}
+\newcommand\mlvocalicll{\symbol{3427}}
+\newcommand\mlzero{\symbol{3430}}
+\newcommand\mlone{\symbol{3431}}
+\newcommand\mltwo{\symbol{3432}}
+\newcommand\mlthree{\symbol{3433}}
+\newcommand\mlfour{\symbol{3434}}
+\newcommand\mlfive{\symbol{3435}}
+\newcommand\mlsix{\symbol{3436}}
+\newcommand\mlseven{\symbol{3437}}
+\newcommand\mleight{\symbol{3438}}
+\newcommand\mlnine{\symbol{3439}}
+\newcommand\mlten{\symbol{3440}}
+\newcommand\mlonehundred{\symbol{3441}}
+\newcommand\mlonethousand{\symbol{3442}}
+\newcommand\mlonequarter{\symbol{3443}}
+\newcommand\mlonehalf{\symbol{3444}}
+\newcommand\mlthreequarters{\symbol{3445}}
+\newcommand\mlonesixteenth{\symbol{3446}}
+\newcommand\mloneeighth{\symbol{3447}}
+\newcommand\mlthreesixteenths{\symbol{3448}}
+\newcommand\mldatemark{\symbol{3449}}
+\newcommand\mlchillunn{\symbol{3450}}
+\newcommand\mlchillun{\symbol{3451}}
+\newcommand\mlchillurr{\symbol{3452}}
+\newcommand\mlchillul{\symbol{3453}}
+\newcommand\mlchillull{\symbol{3454}}
+\newcommand\mlchilluk{\symbol{3455}}
+
+
+
+%Coverage of Malayalam by Chilanka			
+%U+0D00	ഀ	MALAYALAM SIGN COMBINING ANUSVARA ABOVE	YES
+%U+0D01	ഁ	MALAYALAM SIGN CANDRABINDU	YES
+%U+0D02	ം	MALAYALAM SIGN ANUSVARA	YES
+%U+0D03	ഃ	MALAYALAM SIGN VISARGA	YES
+%U+0D04	ഄ	MALAYALAM LETTER VEDIC ANUSVARA	NO
+%U+0D05	അ	MALAYALAM LETTER A	YES
+%U+0D06	ആ	MALAYALAM LETTER AA	YES
+%U+0D07	ഇ	MALAYALAM LETTER I	YES
+%U+0D08	ഈ	MALAYALAM LETTER II	YES
+%U+0D09	ഉ	MALAYALAM LETTER U	YES
+%U+0D0A	ഊ	MALAYALAM LETTER UU	YES
+%U+0D0B	ഋ	MALAYALAM LETTER VOCALIC R	YES
+%U+0D0C	ഌ	MALAYALAM LETTER VOCALIC L	YES
+%U+0D0E	എ	MALAYALAM LETTER E	YES
+%U+0D0F	ഏ	MALAYALAM LETTER EE	YES
+%U+0D10	ഐ	MALAYALAM LETTER AI	YES
+%U+0D12	ഒ	MALAYALAM LETTER O	YES
+%U+0D13	ഓ	MALAYALAM LETTER OO	YES
+%U+0D14	ഔ	MALAYALAM LETTER AU	YES
+%U+0D15	ക	MALAYALAM LETTER KA	YES
+%U+0D16	ഖ	MALAYALAM LETTER KHA	YES
+%U+0D17	ഗ	MALAYALAM LETTER GA	YES
+%U+0D18	ഘ	MALAYALAM LETTER GHA	YES
+%U+0D19	ങ	MALAYALAM LETTER NGA	YES
+%U+0D1A	ച	MALAYALAM LETTER CA	YES
+%U+0D1B	ഛ	MALAYALAM LETTER CHA	YES
+%U+0D1C	ജ	MALAYALAM LETTER JA	YES
+%U+0D1D	ഝ	MALAYALAM LETTER JHA	YES
+%U+0D1E	ഞ	MALAYALAM LETTER NYA	YES
+%U+0D1F	ട	MALAYALAM LETTER TTA	YES
+%U+0D20	ഠ	MALAYALAM LETTER TTHA	YES
+%U+0D21	ഡ	MALAYALAM LETTER DDA	YES
+%U+0D22	ഢ	MALAYALAM LETTER DDHA	YES
+%U+0D23	ണ	MALAYALAM LETTER NNA	YES
+%U+0D24	ത	MALAYALAM LETTER TA	YES
+%U+0D25	ഥ	MALAYALAM LETTER THA	YES
+%U+0D26	ദ	MALAYALAM LETTER DA	YES
+%U+0D27	ധ	MALAYALAM LETTER DHA	YES
+%U+0D28	ന	MALAYALAM LETTER NA	YES
+%U+0D29	ഩ	MALAYALAM LETTER NNNA	YES
+%U+0D2A	പ	MALAYALAM LETTER PA	YES
+%U+0D2B	ഫ	MALAYALAM LETTER PHA	YES
+%U+0D2C	ബ	MALAYALAM LETTER BA	YES
+%U+0D2D	ഭ	MALAYALAM LETTER BHA	YES
+%U+0D2E	മ	MALAYALAM LETTER MA	YES
+%U+0D2F	യ	MALAYALAM LETTER YA	YES
+%U+0D30	ര	MALAYALAM LETTER RA	YES
+%U+0D31	റ	MALAYALAM LETTER RRA	YES
+%U+0D32	ല	MALAYALAM LETTER LA	YES
+%U+0D33	ള	MALAYALAM LETTER LLA	YES
+%U+0D34	ഴ	MALAYALAM LETTER LLLA	YES
+%U+0D35	വ	MALAYALAM LETTER VA	YES
+%U+0D36	ശ	MALAYALAM LETTER SHA	YES
+%U+0D37	ഷ	MALAYALAM LETTER SSA	YES
+%U+0D38	സ	MALAYALAM LETTER SA	YES
+%U+0D39	ഹ	MALAYALAM LETTER HA	YES
+%U+0D3A	ഺ	MALAYALAM LETTER TTTA	YES
+%U+0D3B	഻	MALAYALAM SIGN VERTICAL BAR VIRAMA	YES
+%U+0D3C	഼	MALAYALAM SIGN CIRCULAR VIRAMA	YES
+%U+0D3D	ഽ	MALAYALAM SIGN AVAGRAHA	YES
+%U+0D3E	ാ	MALAYALAM VOWEL SIGN AA	YES
+%U+0D3F	ി	MALAYALAM VOWEL SIGN I	YES
+%U+0D40	ീ	MALAYALAM VOWEL SIGN II	YES
+%U+0D41	ു	MALAYALAM VOWEL SIGN U	YES
+%U+0D42	ൂ	MALAYALAM VOWEL SIGN UU	YES
+%U+0D43	ൃ	MALAYALAM VOWEL SIGN VOCALIC R	YES
+%U+0D44	ൄ	MALAYALAM VOWEL SIGN VOCALIC RR	YES
+%U+0D46	െ	MALAYALAM VOWEL SIGN E	YES
+%U+0D47	േ	MALAYALAM VOWEL SIGN EE	YES
+%U+0D48	ൈ	MALAYALAM VOWEL SIGN AI	YES
+%U+0D4A	ൊ	MALAYALAM VOWEL SIGN O	YES
+%U+0D4B	ോ	MALAYALAM VOWEL SIGN OO	YES
+%U+0D4C	ൌ	MALAYALAM VOWEL SIGN AU	YES
+%U+0D4D	്	MALAYALAM SIGN VIRAMA	YES
+%U+0D4E	ൎ	MALAYALAM LETTER DOT REPH	YES
+%U+0D4F	൏	MALAYALAM SIGN PARA	YES
+%U+0D54	ൔ	MALAYALAM LETTER CHILLU M	YES
+%U+0D55	ൕ	MALAYALAM LETTER CHILLU Y	YES
+%U+0D56	ൖ	MALAYALAM LETTER CHILLU LLL	YES
+%U+0D57	ൗ	MALAYALAM AU LENGTH MARK	YES
+%U+0D58	൘	MALAYALAM FRACTION ONE ONEHUNDREDANDSIXTIETH	YES
+%U+0D59	൙	MALAYALAM FRACTION ONE FORTIETH	YES
+%U+0D5A	൚	MALAYALAM FRACTION THREE EIGHTIETHS	YES
+%U+0D5B	൛	MALAYALAM FRACTION ONE TWENTIETH	YES
+%U+0D5C	൜	MALAYALAM FRACTION ONE TENTH	YES
+%U+0D5D	൝	MALAYALAM FRACTION THREE TWENTIETHS	YES
+%U+0D5E	൞	MALAYALAM FRACTION ONE FIFTH	YES
+%U+0D5F	ൟ	MALAYALAM LETTER ARCHAIC II	YES
+%U+0D60	ൠ	MALAYALAM LETTER VOCALIC RR	YES
+%U+0D61	ൡ	MALAYALAM LETTER VOCALIC LL	YES
+%U+0D62	ൢ	MALAYALAM VOWEL SIGN VOCALIC L	YES
+%U+0D63	ൣ	MALAYALAM VOWEL SIGN VOCALIC LL	YES
+%U+0D66	0	MALAYALAM DIGIT ZERO	YES
+%U+0D67	1	MALAYALAM DIGIT ONE	YES
+%U+0D68	2	MALAYALAM DIGIT TWO	YES
+%U+0D69	3	MALAYALAM DIGIT THREE	YES
+%U+0D6A	4	MALAYALAM DIGIT FOUR	YES
+%U+0D6B	5	MALAYALAM DIGIT FIVE	YES
+%U+0D6C	6	MALAYALAM DIGIT SIX	YES
+%U+0D6D	7	MALAYALAM DIGIT SEVEN	YES
+%U+0D6E	8	MALAYALAM DIGIT EIGHT	YES
+%U+0D6F	9	MALAYALAM DIGIT NINE	YES
+%U+0D70	൰	MALAYALAM NUMBER TEN	YES
+%U+0D71	൱	MALAYALAM NUMBER ONE HUNDRED	YES
+%U+0D72	൲	MALAYALAM NUMBER ONE THOUSAND	YES
+%U+0D73	൳	MALAYALAM FRACTION ONE QUARTER	YES
+%U+0D74	൴	MALAYALAM FRACTION ONE HALF	YES
+%U+0D75	൵	MALAYALAM FRACTION THREE QUARTERS	YES
+%U+0D76	൶	MALAYALAM FRACTION ONE SIXTEENTH	YES
+%U+0D77	൷	MALAYALAM FRACTION ONE EIGHTH	YES
+%U+0D78	൸	MALAYALAM FRACTION THREE SIXTEENTHS	YES
+%U+0D79	൹	MALAYALAM DATE MARK	YES
+%U+0D7A	ൺ	MALAYALAM LETTER CHILLU NN	YES
+%U+0D7B	ൻ	MALAYALAM LETTER CHILLU N	YES
+%U+0D7C	ർ	MALAYALAM LETTER CHILLU RR	YES
+%U+0D7D	ൽ	MALAYALAM LETTER CHILLU L	YES
+%U+0D7E	ൾ	MALAYALAM LETTER CHILLU LL	YES
+%U+0D7F	ൿ	MALAYALAM LETTER CHILLU K	YES
+
+
+
+
+\ExplSyntaxOn
+
+
+%--------------- Malayalam
+\newcommand\domalayalamtrans{%
+
+
+% Unicode codepoints
+
+\regex_replace_all:nnN { U\+0D00 } { \c{symbol} \cB\{ 3328\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D01 } { \c{symbol} \cB\{ 3329\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D02 } { \c{symbol} \cB\{ 3330\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D03 } { \c{symbol} \cB\{ 3331\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D04 } { \c{symbol} \cB\{ 3332\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D05 } { \c{symbol} \cB\{ 3333\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D06 } { \c{symbol} \cB\{ 3334\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D07 } { \c{symbol} \cB\{ 3335\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D08 } { \c{symbol} \cB\{ 3336\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D09 } { \c{symbol} \cB\{ 3337\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D0A } { \c{symbol} \cB\{ 3338\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D0B } { \c{symbol} \cB\{ 3339\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D0C } { \c{symbol} \cB\{ 3340\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D0E } { \c{symbol} \cB\{ 3342\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D0F } { \c{symbol} \cB\{ 3343\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D10 } { \c{symbol} \cB\{ 3344\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D12 } { \c{symbol} \cB\{ 3346\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D13 } { \c{symbol} \cB\{ 3347\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D14 } { \c{symbol} \cB\{ 3348\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D15 } { \c{symbol} \cB\{ 3349\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D16 } { \c{symbol} \cB\{ 3350\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D17 } { \c{symbol} \cB\{ 3351\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D18 } { \c{symbol} \cB\{ 3352\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D19 } { \c{symbol} \cB\{ 3353\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D1A } { \c{symbol} \cB\{ 3354\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D1B } { \c{symbol} \cB\{ 3355\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D1C } { \c{symbol} \cB\{ 3356\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D1D } { \c{symbol} \cB\{ 3357\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D1E } { \c{symbol} \cB\{ 3358\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D1F } { \c{symbol} \cB\{ 3359\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D20 } { \c{symbol} \cB\{ 3360\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D21 } { \c{symbol} \cB\{ 3361\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D22 } { \c{symbol} \cB\{ 3362\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D23 } { \c{symbol} \cB\{ 3363\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D24 } { \c{symbol} \cB\{ 3364\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D25 } { \c{symbol} \cB\{ 3365\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D26 } { \c{symbol} \cB\{ 3366\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D27 } { \c{symbol} \cB\{ 3367\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D28 } { \c{symbol} \cB\{ 3368\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D29 } { \c{symbol} \cB\{ 3369\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D2A } { \c{symbol} \cB\{ 3370\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D2B } { \c{symbol} \cB\{ 3371\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D2C } { \c{symbol} \cB\{ 3372\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D2D } { \c{symbol} \cB\{ 3373\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D2E } { \c{symbol} \cB\{ 3374\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D2F } { \c{symbol} \cB\{ 3375\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D30 } { \c{symbol} \cB\{ 3376\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D31 } { \c{symbol} \cB\{ 3377\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D32 } { \c{symbol} \cB\{ 3378\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D33 } { \c{symbol} \cB\{ 3379\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D34 } { \c{symbol} \cB\{ 3380\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D35 } { \c{symbol} \cB\{ 3381\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D36 } { \c{symbol} \cB\{ 3382\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D37 } { \c{symbol} \cB\{ 3383\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D38 } { \c{symbol} \cB\{ 3384\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D39 } { \c{symbol} \cB\{ 3385\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D3A } { \c{symbol} \cB\{ 3386\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D3B } { \c{symbol} \cB\{ 3387\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D3C } { \c{symbol} \cB\{ 3388\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D3D } { \c{symbol} \cB\{ 3389\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D3E } { \c{symbol} \cB\{ 3390\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D3F } { \c{symbol} \cB\{ 3391\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D40 } { \c{symbol} \cB\{ 3392\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D41 } { \c{symbol} \cB\{ 3393\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D42 } { \c{symbol} \cB\{ 3394\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D43 } { \c{symbol} \cB\{ 3395\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D44 } { \c{symbol} \cB\{ 3396\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D46 } { \c{symbol} \cB\{ 3398\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D47 } { \c{symbol} \cB\{ 3399\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D48 } { \c{symbol} \cB\{ 3400\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D4A } { \c{symbol} \cB\{ 3402\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D4B } { \c{symbol} \cB\{ 3403\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D4C } { \c{symbol} \cB\{ 3404\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D4D } { \c{symbol} \cB\{ 3405\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D4E } { \c{symbol} \cB\{ 3406\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D4F } { \c{symbol} \cB\{ 3407\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D54 } { \c{symbol} \cB\{ 3412\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D55 } { \c{symbol} \cB\{ 3413\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D56 } { \c{symbol} \cB\{ 3414\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D57 } { \c{symbol} \cB\{ 3415\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D58 } { \c{symbol} \cB\{ 3416\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D59 } { \c{symbol} \cB\{ 3417\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D5A } { \c{symbol} \cB\{ 3418\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D5B } { \c{symbol} \cB\{ 3419\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D5C } { \c{symbol} \cB\{ 3420\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D5D } { \c{symbol} \cB\{ 3421\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D5E } { \c{symbol} \cB\{ 3422\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D5F } { \c{symbol} \cB\{ 3423\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D60 } { \c{symbol} \cB\{ 3424\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D61 } { \c{symbol} \cB\{ 3425\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D62 } { \c{symbol} \cB\{ 3426\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D63 } { \c{symbol} \cB\{ 3427\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D66 } { \c{symbol} \cB\{ 3430\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D67 } { \c{symbol} \cB\{ 3431\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D68 } { \c{symbol} \cB\{ 3432\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D69 } { \c{symbol} \cB\{ 3433\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D6A } { \c{symbol} \cB\{ 3434\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D6B } { \c{symbol} \cB\{ 3435\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D6C } { \c{symbol} \cB\{ 3436\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D6D } { \c{symbol} \cB\{ 3437\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D6E } { \c{symbol} \cB\{ 3438\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D6F } { \c{symbol} \cB\{ 3439\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D70 } { \c{symbol} \cB\{ 3440\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D71 } { \c{symbol} \cB\{ 3441\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D72 } { \c{symbol} \cB\{ 3442\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D73 } { \c{symbol} \cB\{ 3443\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D74 } { \c{symbol} \cB\{ 3444\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D75 } { \c{symbol} \cB\{ 3445\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D76 } { \c{symbol} \cB\{ 3446\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D77 } { \c{symbol} \cB\{ 3447\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D78 } { \c{symbol} \cB\{ 3448\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D79 } { \c{symbol} \cB\{ 3449\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D7A } { \c{symbol} \cB\{ 3450\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D7B } { \c{symbol} \cB\{ 3451\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D7C } { \c{symbol} \cB\{ 3452\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D7D } { \c{symbol} \cB\{ 3453\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D7E } { \c{symbol} \cB\{ 3454\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { U\+0D7F } { \c{symbol} \cB\{ 3455\cE\}  } \l_myml_tl
+
+%Unicode-based names
+% longest strings first, so regex replacement happens in right order
+\regex_replace_all:nnN { oneonehundredandsixtieth\. } { \c{symbol} \cB\{ 3416\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { combininganusvaraabove\. } { \c{symbol} \cB\{ 3328\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { verticalbarvirama\. } { \c{symbol} \cB\{ 3387\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { threeeightieths\. } { \c{symbol} \cB\{ 3418\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { threetwentieths\. } { \c{symbol} \cB\{ 3421\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { lettervocalicrr\. } { \c{symbol} \cB\{ 3424\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { lettervocalicll\. } { \c{symbol} \cB\{ 3425\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { threesixteenths\. } { \c{symbol} \cB\{ 3448\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { lettervocalicr\. } { \c{symbol} \cB\{ 3339\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { lettervocalicl\. } { \c{symbol} \cB\{ 3340\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { circularvirama\. } { \c{symbol} \cB\{ 3388\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { vedicanusvara\. } { \c{symbol} \cB\{ 3332\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { threequarters\. } { \c{symbol} \cB\{ 3445\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { aulengthmark\. } { \c{symbol} \cB\{ 3415\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onetwentieth\. } { \c{symbol} \cB\{ 3419\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onesixteenth\. } { \c{symbol} \cB\{ 3446\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { candrabindu\. } { \c{symbol} \cB\{ 3329\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onefortieth\. } { \c{symbol} \cB\{ 3417\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onethousand\. } { \c{symbol} \cB\{ 3442\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onehundred\. } { \c{symbol} \cB\{ 3441\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onequarter\. } { \c{symbol} \cB\{ 3443\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { vocalicrr\. } { \c{symbol} \cB\{ 3396\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chillulll\. } { \c{symbol} \cB\{ 3414\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { archaicii\. } { \c{symbol} \cB\{ 3423\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { vocalicll\. } { \c{symbol} \cB\{ 3427\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { oneeighth\. } { \c{symbol} \cB\{ 3447\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { anusvara\. } { \c{symbol} \cB\{ 3330\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letteraa\. } { \c{symbol} \cB\{ 3334\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letterii\. } { \c{symbol} \cB\{ 3336\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letteruu\. } { \c{symbol} \cB\{ 3338\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letteree\. } { \c{symbol} \cB\{ 3343\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letterai\. } { \c{symbol} \cB\{ 3344\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letteroo\. } { \c{symbol} \cB\{ 3347\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letterau\. } { \c{symbol} \cB\{ 3348\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { avagraha\. } { \c{symbol} \cB\{ 3389\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { vocalicr\. } { \c{symbol} \cB\{ 3395\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onetenth\. } { \c{symbol} \cB\{ 3420\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onefifth\. } { \c{symbol} \cB\{ 3422\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { vocalicl\. } { \c{symbol} \cB\{ 3426\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { datemark\. } { \c{symbol} \cB\{ 3449\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chillunn\. } { \c{symbol} \cB\{ 3450\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chillurr\. } { \c{symbol} \cB\{ 3452\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chillull\. } { \c{symbol} \cB\{ 3454\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { visarga\. } { \c{symbol} \cB\{ 3331\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letteri\. } { \c{symbol} \cB\{ 3335\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { letteru\. } { \c{symbol} \cB\{ 3337\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { lettere\. } { \c{symbol} \cB\{ 3342\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { lettero\. } { \c{symbol} \cB\{ 3346\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { dotreph\. } { \c{symbol} \cB\{ 3406\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chillum\. } { \c{symbol} \cB\{ 3412\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chilluy\. } { \c{symbol} \cB\{ 3413\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { onehalf\. } { \c{symbol} \cB\{ 3444\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chillun\. } { \c{symbol} \cB\{ 3451\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chillul\. } { \c{symbol} \cB\{ 3453\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { chilluk\. } { \c{symbol} \cB\{ 3455\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { virama\. } { \c{symbol} \cB\{ 3405\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { three\. } { \c{symbol} \cB\{ 3433\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { seven\. } { \c{symbol} \cB\{ 3437\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { eight\. } { \c{symbol} \cB\{ 3438\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ttha\. } { \c{symbol} \cB\{ 3360\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ddha\. } { \c{symbol} \cB\{ 3362\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { nnna\. } { \c{symbol} \cB\{ 3369\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { llla\. } { \c{symbol} \cB\{ 3380\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ttta\. } { \c{symbol} \cB\{ 3386\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { para\. } { \c{symbol} \cB\{ 3407\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { zero\. } { \c{symbol} \cB\{ 3430\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { four\. } { \c{symbol} \cB\{ 3434\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { five\. } { \c{symbol} \cB\{ 3435\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { nine\. } { \c{symbol} \cB\{ 3439\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { kha\. } { \c{symbol} \cB\{ 3350\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { gha\. } { \c{symbol} \cB\{ 3352\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { nga\. } { \c{symbol} \cB\{ 3353\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { cha\. } { \c{symbol} \cB\{ 3355\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { jha\. } { \c{symbol} \cB\{ 3357\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { nya\. } { \c{symbol} \cB\{ 3358\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { tta\. } { \c{symbol} \cB\{ 3359\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { dda\. } { \c{symbol} \cB\{ 3361\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { nna\. } { \c{symbol} \cB\{ 3363\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { tha\. } { \c{symbol} \cB\{ 3365\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { dha\. } { \c{symbol} \cB\{ 3367\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { pha\. } { \c{symbol} \cB\{ 3371\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { bha\. } { \c{symbol} \cB\{ 3373\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { rra\. } { \c{symbol} \cB\{ 3377\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { lla\. } { \c{symbol} \cB\{ 3379\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { sha\. } { \c{symbol} \cB\{ 3382\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ssa\. } { \c{symbol} \cB\{ 3383\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { one\. } { \c{symbol} \cB\{ 3431\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { two\. } { \c{symbol} \cB\{ 3432\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { six\. } { \c{symbol} \cB\{ 3436\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ten\. } { \c{symbol} \cB\{ 3440\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ka\. } { \c{symbol} \cB\{ 3349\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ga\. } { \c{symbol} \cB\{ 3351\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ca\. } { \c{symbol} \cB\{ 3354\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ja\. } { \c{symbol} \cB\{ 3356\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ta\. } { \c{symbol} \cB\{ 3364\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { da\. } { \c{symbol} \cB\{ 3366\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { na\. } { \c{symbol} \cB\{ 3368\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { pa\. } { \c{symbol} \cB\{ 3370\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ba\. } { \c{symbol} \cB\{ 3372\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ma\. } { \c{symbol} \cB\{ 3374\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ya\. } { \c{symbol} \cB\{ 3375\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ra\. } { \c{symbol} \cB\{ 3376\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { la\. } { \c{symbol} \cB\{ 3378\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { va\. } { \c{symbol} \cB\{ 3381\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { sa\. } { \c{symbol} \cB\{ 3384\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ha\. } { \c{symbol} \cB\{ 3385\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { aa\. } { \c{symbol} \cB\{ 3390\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ii\. } { \c{symbol} \cB\{ 3392\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { uu\. } { \c{symbol} \cB\{ 3394\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ee\. } { \c{symbol} \cB\{ 3399\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { ai\. } { \c{symbol} \cB\{ 3400\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { oo\. } { \c{symbol} \cB\{ 3403\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { au\. } { \c{symbol} \cB\{ 3404\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { a\. } { \c{symbol} \cB\{ 3333\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { i\. } { \c{symbol} \cB\{ 3391\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { u\. } { \c{symbol} \cB\{ 3393\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { e\. } { \c{symbol} \cB\{ 3398\cE\}  } \l_myml_tl
+\regex_replace_all:nnN { o\. } { \c{symbol} \cB\{ 3402\cE\}  } \l_myml_tl
+
+% handy shortcuts
+%
+
+
+}
+% from Malayalam to trans
+
+\newcommand\domalayalamtransrev{%
+\regex_replace_all:nnN { ഀ } { combininganusvaraabove\. } \l_myml_tl
+\regex_replace_all:nnN { ഁ } { candrabindu\. } \l_myml_tl
+\regex_replace_all:nnN { ം } { anusvara\. } \l_myml_tl
+\regex_replace_all:nnN { ഃ } { visarga\. } \l_myml_tl
+\regex_replace_all:nnN { ഄ } { vedicanusvara\. } \l_myml_tl
+\regex_replace_all:nnN { അ } { a\. } \l_myml_tl
+\regex_replace_all:nnN { ആ } { letteraa\. } \l_myml_tl
+\regex_replace_all:nnN { ഇ } { letteri\. } \l_myml_tl
+\regex_replace_all:nnN { ഈ } { letterii\. } \l_myml_tl
+\regex_replace_all:nnN { ഉ } { letteru\. } \l_myml_tl
+\regex_replace_all:nnN { ഊ } { letteruu\. } \l_myml_tl
+\regex_replace_all:nnN { ഋ } { lettervocalicr\. } \l_myml_tl
+\regex_replace_all:nnN { ഌ } { lettervocalicl\. } \l_myml_tl
+\regex_replace_all:nnN { എ } { lettere\. } \l_myml_tl
+\regex_replace_all:nnN { ഏ } { letteree\. } \l_myml_tl
+\regex_replace_all:nnN { ഐ } { letterai\. } \l_myml_tl
+\regex_replace_all:nnN { ഒ } { lettero\. } \l_myml_tl
+\regex_replace_all:nnN { ഓ } { letteroo\. } \l_myml_tl
+\regex_replace_all:nnN { ഔ } { letterau\. } \l_myml_tl
+\regex_replace_all:nnN { ക } { ka\. } \l_myml_tl
+\regex_replace_all:nnN { ഖ } { kha\. } \l_myml_tl
+\regex_replace_all:nnN { ഗ } { ga\. } \l_myml_tl
+\regex_replace_all:nnN { ഘ } { gha\. } \l_myml_tl
+\regex_replace_all:nnN { ങ } { nga\. } \l_myml_tl
+\regex_replace_all:nnN { ച } { ca\. } \l_myml_tl
+\regex_replace_all:nnN { ഛ } { cha\. } \l_myml_tl
+\regex_replace_all:nnN { ജ } { ja\. } \l_myml_tl
+\regex_replace_all:nnN { ഝ } { jha\. } \l_myml_tl
+\regex_replace_all:nnN { ഞ } { nya\. } \l_myml_tl
+\regex_replace_all:nnN { ട } { tta\. } \l_myml_tl
+\regex_replace_all:nnN { ഠ } { ttha\. } \l_myml_tl
+\regex_replace_all:nnN { ഡ } { dda\. } \l_myml_tl
+\regex_replace_all:nnN { ഢ } { ddha\. } \l_myml_tl
+\regex_replace_all:nnN { ണ } { nna\. } \l_myml_tl
+\regex_replace_all:nnN { ത } { ta\. } \l_myml_tl
+\regex_replace_all:nnN { ഥ } { tha\. } \l_myml_tl
+\regex_replace_all:nnN { ദ } { da\. } \l_myml_tl
+\regex_replace_all:nnN { ധ } { dha\. } \l_myml_tl
+\regex_replace_all:nnN { ന } { na\. } \l_myml_tl
+\regex_replace_all:nnN { ഩ } { nnna\. } \l_myml_tl
+\regex_replace_all:nnN { പ } { pa\. } \l_myml_tl
+\regex_replace_all:nnN { ഫ } { pha\. } \l_myml_tl
+\regex_replace_all:nnN { ബ } { ba\. } \l_myml_tl
+\regex_replace_all:nnN { ഭ } { bha\. } \l_myml_tl
+\regex_replace_all:nnN { മ } { ma\. } \l_myml_tl
+\regex_replace_all:nnN { യ } { ya\. } \l_myml_tl
+\regex_replace_all:nnN { ര } { ra\. } \l_myml_tl
+\regex_replace_all:nnN { റ } { rra\. } \l_myml_tl
+\regex_replace_all:nnN { ല } { la\. } \l_myml_tl
+\regex_replace_all:nnN { ള } { lla\. } \l_myml_tl
+\regex_replace_all:nnN { ഴ } { llla\. } \l_myml_tl
+\regex_replace_all:nnN { വ } { va\. } \l_myml_tl
+\regex_replace_all:nnN { ശ } { sha\. } \l_myml_tl
+\regex_replace_all:nnN { ഷ } { ssa\. } \l_myml_tl
+\regex_replace_all:nnN { സ } { sa\. } \l_myml_tl
+\regex_replace_all:nnN { ഹ } { ha\. } \l_myml_tl
+\regex_replace_all:nnN { ഺ } { ttta\. } \l_myml_tl
+\regex_replace_all:nnN { ഻ } { verticalbarvirama\. } \l_myml_tl
+\regex_replace_all:nnN { ഼ } { circularvirama\. } \l_myml_tl
+\regex_replace_all:nnN { ഽ } { avagraha\. } \l_myml_tl
+\regex_replace_all:nnN { ാ } { aa\. } \l_myml_tl
+\regex_replace_all:nnN { ി } { i\. } \l_myml_tl
+\regex_replace_all:nnN { ീ } { ii\. } \l_myml_tl
+\regex_replace_all:nnN { ു } { u\. } \l_myml_tl
+\regex_replace_all:nnN { ൂ } { uu\. } \l_myml_tl
+\regex_replace_all:nnN { ൃ } { vocalicr\. } \l_myml_tl
+\regex_replace_all:nnN { ൄ } { vocalicrr\. } \l_myml_tl
+\regex_replace_all:nnN { െ } { e\. } \l_myml_tl
+\regex_replace_all:nnN { േ } { ee\. } \l_myml_tl
+\regex_replace_all:nnN { ൈ } { ai\. } \l_myml_tl
+\regex_replace_all:nnN { ൊ } { o\. } \l_myml_tl
+\regex_replace_all:nnN { ോ } { oo\. } \l_myml_tl
+\regex_replace_all:nnN { ൌ } { au\. } \l_myml_tl
+\regex_replace_all:nnN { ് } { virama\. } \l_myml_tl
+\regex_replace_all:nnN { ൎ } { dotreph\. } \l_myml_tl
+\regex_replace_all:nnN { ൏ } { para\. } \l_myml_tl
+\regex_replace_all:nnN { ൔ } { chillum\. } \l_myml_tl
+\regex_replace_all:nnN { ൕ } { chilluy\. } \l_myml_tl
+\regex_replace_all:nnN { ൖ } { chillulll\. } \l_myml_tl
+\regex_replace_all:nnN { ൗ } { aulengthmark\. } \l_myml_tl
+\regex_replace_all:nnN { ൘ } { oneonehundredandsixtieth\. } \l_myml_tl
+\regex_replace_all:nnN { ൙ } { onefortieth\. } \l_myml_tl
+\regex_replace_all:nnN { ൚ } { threeeightieths\. } \l_myml_tl
+\regex_replace_all:nnN { ൛ } { onetwentieth\. } \l_myml_tl
+\regex_replace_all:nnN { ൜ } { onetenth\. } \l_myml_tl
+\regex_replace_all:nnN { ൝ } { threetwentieths\. } \l_myml_tl
+\regex_replace_all:nnN { ൞ } { onefifth\. } \l_myml_tl
+\regex_replace_all:nnN { ൟ } { archaicii\. } \l_myml_tl
+\regex_replace_all:nnN { ൠ } { lettervocalicrr\. } \l_myml_tl
+\regex_replace_all:nnN { ൡ } { lettervocalicll\. } \l_myml_tl
+\regex_replace_all:nnN { ൢ } { vocalicl\. } \l_myml_tl
+\regex_replace_all:nnN { ൣ } { vocalicll\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d66 } { zero\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d67 } { one\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d68 } { two\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d69 } { three\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d6a } { four\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d6b } { five\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d6c } { six\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d6d } { seven\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d6e } { eight\. } \l_myml_tl
+\regex_replace_all:nnN { ^^^^0d6f } { nine\. } \l_myml_tl
+\regex_replace_all:nnN { ൰ } { ten\. } \l_myml_tl
+\regex_replace_all:nnN { ൱ } { onehundred\. } \l_myml_tl
+\regex_replace_all:nnN { ൲ } { onethousand\. } \l_myml_tl
+\regex_replace_all:nnN { ൳ } { onequarter\. } \l_myml_tl
+\regex_replace_all:nnN { ൴ } { onehalf\. } \l_myml_tl
+\regex_replace_all:nnN { ൵ } { threequarters\. } \l_myml_tl
+\regex_replace_all:nnN { ൶ } { onesixteenth\. } \l_myml_tl
+\regex_replace_all:nnN { ൷ } { oneeighth\. } \l_myml_tl
+\regex_replace_all:nnN { ൸ } { threesixteenths\. } \l_myml_tl
+\regex_replace_all:nnN { ൹ } { datemark\. } \l_myml_tl
+\regex_replace_all:nnN { ൺ } { chillunn\. } \l_myml_tl
+\regex_replace_all:nnN { ൻ } { chillun\. } \l_myml_tl
+\regex_replace_all:nnN { ർ } { chillurr\. } \l_myml_tl
+\regex_replace_all:nnN { ൽ } { chillul\. } \l_myml_tl
+\regex_replace_all:nnN { ൾ } { chillull\. } \l_myml_tl
+\regex_replace_all:nnN { ൿ } { chilluk\. } \l_myml_tl
+
+}
+
+
+%=================
+\str_new:N \l_myml_str
+
+\NewDocumentCommand { \mltrans } { m } {%
+\tl_set:Nn \l_myml_tl { #1 }
+ \domalayalamtrans 
+{ \mlfont \tl_use:N \l_myml_tl }
+}
+
+\NewDocumentEnvironment{mltranse}{ +b } 
+{
+\tl_set:Nn \l_myml_tl { #1 }
+	\domalayalamtrans
+{ \mlfont \tl_use:N \l_myml_tl }
+}
+{ }
+
+%-----
+\NewDocumentCommand { \mltransrev } { m } {%
+\tl_set:Nn \l_myml_tl { #1 }
+ \domalayalamtransrev 
+{ \tl_use:N \l_myml_tl }
+}
+
+\NewDocumentEnvironment{mltranserev}{ +b } 
+{
+\tl_set:Nn \l_myml_tl { #1 }
+	\domalayalamtransrev
+{ \tl_use:N \l_myml_tl }
+}
+{ }
+
+
+
+\ExplSyntaxOff
+
+
+
+%-----------------------------------------
+%subset of helper meta-commands:
+\ExplSyntaxOn
+%cs: print the command name
+%cdr: print and run the comman
+%cdpr: print with formatted argument and run
+%codedetok: print (unemphasized)
+
+%------------------------------- control sequence
+\NewDocumentCommand{\cs}{ m }{%
+  {\bfseries\sffamily\color{blue}
+  \token_to_str:N #1 % If you already have a token
+  }
+}%
+%------------------------------- print and run #1
+
+\NewDocumentCommand{\cdr}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+}%
+
+
+%------------------------------- print and run command+argumentt separately
+\NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \textbackslash \detokenize{#2} % command
+  \{ 
+  		{
+  		\tl_use:N \l_my_tl % formatting
+  		\detokenize{#3}       % argument
+  		}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+\cs:w \tl_use:N \l_myb_tl \cs_end: {  
+									#3 % argument
+									 }
+}%
+%------------------------------- just print #1 as plain detok code
+\NewDocumentCommand{\codedetok}{ o m }{
+ 
+			{%true 
+			    {
+						\ttfamily
+					  															\detokenize{#2}
+						}
+			  }
+}%
+
+\ExplSyntaxOff
+
+
+
+
+
+%===================================
+\begin{document}
+\noindent{\large \mltrans{ma.la.ya.aa.lla.la.i.pa.i.} {\small\ttfamily \mltransrev{മലയാളലിപി}}\\ Malayalam script, using \textsc{ASCII} transliteration input method}
+
+\bigskip
+(1) Named macros (use with \cs{\mlfont})
+
+\cdr{{\mlfont\mlka\mlta\mlone\mltwo\mlthree}}
+
+\cdr{{\mlfont\mlka\mlu\mlla\mlvirama\mlba\mlna\mlna}}
+
+
+\bigskip
+(2a) Command \cs{\mltrans} (assumes \cs{\mlfont} is defined)
+
+\cdr{\mltrans{ka.ta.}}
+
+\cdr{\mltrans{ka.u.la.virama.ba.na.na.}}
+
+(2b) Environment \cs{mltranse} (assumes \cs{\mlfont} is defined)
+
+\begin{mltranse}
+ka.ta. 
+
+ka.u.la.virama.ba.na.na..
+
+\end{mltranse}
+
+Examples
+
+\fbox{\mltrans{ka.} + \mltrans{ka.} = \mltrans{ka.virama.ka.}},
+\fbox{\mltrans{ta.} + \mltrans{ta.} = \mltrans{ta.virama.ta.}},
+\fbox{\mltrans{sa.} + \mltrans{ta.} = \mltrans{sa.virama.ta.}},
+\fbox{\mltrans{nga.} + \mltrans{ka.} = \mltrans{nga.virama.ka.}},
+\fbox{\mltrans{la.} + \mltrans{la.} = \mltrans{la.virama.la.}}.
+
+\fbox{\mltrans{ka.} + \mltrans{u.} = \mltrans{ka.u.anusvara.}}.
+
+
+%Shortened version of virama string (V)
+%
+%\cdr{\mltrans{ka.Vka.}}
+%
+%or (v.)
+%
+%\cdr{\mltrans{ka.v.ka.}}
+
+\bigskip
+Spaces
+
+\cdr{\mltrans{ka. virama. ka.}}
+
+\cdr{\mltrans{ka.virama.ka.}}
+
+\bigskip
+Unicode
+
+\cdr{\mltrans{U+0D15U+0D4DU+0D15}}
+
+\bigskip
+Reverse transliteration
+
+(3a) Command version
+
+\cdpr[\mlfont]{mltransrev}{ആർക്കും തിരുത്താവുന്ന കല ഗണിതം ചരിത്രം ഭൂമിശാസ്ത്രം ശാസ്ത്രം സാങ്കേതികം സാമൂഹികം കായികം എല്ലാ താളുകളും}
+
+(3b) Environment version,
+with \codedetok{\begin{mltranserev} ... \end{mltranserev}}
+
+\begin{mltranserev}
+മഴത്തുള്ളൻ ശലഭം 
+
+മലയാളലിപി
+
+മലയാളം  വിക്കിപീഡിയ   ...
+\end{mltranserev}
+
+
+\end{document}
