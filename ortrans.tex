@@ -1,0 +1,687 @@
+% Compile with xelatex for conjuncts/ligatures
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{fontspec}
+%\usepackage{xparse}
+\setmainfont{Noto Serif}
+\newfontfamily\enfont{Noto Serif}
+
+\newfontfamily\orfont{Noto Sans Oriya}[Colour=blue,Scale=1.5,Script=Oriya]
+
+
+
+%\input{metacsinput.tex}%helper macros for meta-commands
+
+%----- Named macros
+\newcommand\orcandrabindu{\symbol{2817}}
+\newcommand\oranusvara{\symbol{2818}}
+\newcommand\orvisarga{\symbol{2819}}
+\newcommand\orlettera{\symbol{2821}}
+\newcommand\orletteraa{\symbol{2822}}
+\newcommand\orletteri{\symbol{2823}}
+\newcommand\orletterii{\symbol{2824}}
+\newcommand\orletteru{\symbol{2825}}
+\newcommand\orletteruu{\symbol{2826}}
+\newcommand\orlettervocalicr{\symbol{2827}}
+\newcommand\orlettervocalicl{\symbol{2828}}
+\newcommand\orlettere{\symbol{2831}}
+\newcommand\orletterai{\symbol{2832}}
+\newcommand\orlettero{\symbol{2835}}
+\newcommand\orletterau{\symbol{2836}}
+\newcommand\orka{\symbol{2837}}
+\newcommand\orkha{\symbol{2838}}
+\newcommand\orga{\symbol{2839}}
+\newcommand\orgha{\symbol{2840}}
+\newcommand\ornga{\symbol{2841}}
+\newcommand\orca{\symbol{2842}}
+\newcommand\orcha{\symbol{2843}}
+\newcommand\orja{\symbol{2844}}
+\newcommand\orjha{\symbol{2845}}
+\newcommand\ornya{\symbol{2846}}
+\newcommand\ortta{\symbol{2847}}
+\newcommand\orttha{\symbol{2848}}
+\newcommand\ordda{\symbol{2849}}
+\newcommand\orddha{\symbol{2850}}
+\newcommand\ornna{\symbol{2851}}
+\newcommand\orta{\symbol{2852}}
+\newcommand\ortha{\symbol{2853}}
+\newcommand\orda{\symbol{2854}}
+\newcommand\ordha{\symbol{2855}}
+\newcommand\orna{\symbol{2856}}
+\newcommand\orpa{\symbol{2858}}
+\newcommand\orpha{\symbol{2859}}
+\newcommand\orba{\symbol{2860}}
+\newcommand\orbha{\symbol{2861}}
+\newcommand\orma{\symbol{2862}}
+\newcommand\orya{\symbol{2863}}
+\newcommand\orra{\symbol{2864}}
+\newcommand\orla{\symbol{2866}}
+\newcommand\orlla{\symbol{2867}}
+\newcommand\orva{\symbol{2869}}
+\newcommand\orsha{\symbol{2870}}
+\newcommand\orssa{\symbol{2871}}
+\newcommand\orsa{\symbol{2872}}
+\newcommand\orha{\symbol{2873}}
+\newcommand\ornukta{\symbol{2876}}
+\newcommand\oravagraha{\symbol{2877}}
+\newcommand\oraa{\symbol{2878}}
+\newcommand\ori{\symbol{2879}}
+\newcommand\orii{\symbol{2880}}
+\newcommand\oru{\symbol{2881}}
+\newcommand\oruu{\symbol{2882}}
+\newcommand\orvocalicr{\symbol{2883}}
+\newcommand\orvocalicrr{\symbol{2884}}
+\newcommand\ore{\symbol{2887}}
+\newcommand\orai{\symbol{2888}}
+\newcommand\oro{\symbol{2891}}
+\newcommand\orau{\symbol{2892}}
+\newcommand\orvirama{\symbol{2893}}
+\newcommand\oroverline{\symbol{2901}}
+\newcommand\orailengthmark{\symbol{2902}}
+\newcommand\oraulengthmark{\symbol{2903}}
+\newcommand\orrra{\symbol{2908}}
+\newcommand\orrha{\symbol{2909}}
+\newcommand\oryya{\symbol{2911}}
+\newcommand\orlettervocalicrr{\symbol{2912}}
+\newcommand\orlettervocalicll{\symbol{2913}}
+\newcommand\orvocalicl{\symbol{2914}}
+\newcommand\orvocalicll{\symbol{2915}}
+\newcommand\orzero{\symbol{2918}}
+\newcommand\orone{\symbol{2919}}
+\newcommand\ortwo{\symbol{2920}}
+\newcommand\orthree{\symbol{2921}}
+\newcommand\orfour{\symbol{2922}}
+\newcommand\orfive{\symbol{2923}}
+\newcommand\orsix{\symbol{2924}}
+\newcommand\orseven{\symbol{2925}}
+\newcommand\oreight{\symbol{2926}}
+\newcommand\ornine{\symbol{2927}}
+\newcommand\orisshar{\symbol{2928}}
+\newcommand\orwa{\symbol{2929}}
+\newcommand\oronequarter{\symbol{2930}}
+\newcommand\oronehalf{\symbol{2931}}
+\newcommand\orthreequarters{\symbol{2932}}
+\newcommand\oronesixteenth{\symbol{2933}}
+\newcommand\oroneeighth{\symbol{2934}}
+\newcommand\orthreesixteenths{\symbol{2935}}
+
+
+
+%Coverage of Oriya by Noto Sans Oriya
+%U+0B01	ଁ	ORIYA SIGN CANDRABINDU	YES
+%U+0B02	ଂ	ORIYA SIGN ANUSVARA	YES
+%U+0B03	ଃ	ORIYA SIGN VISARGA	YES
+%U+0B05	ଅ	ORIYA LETTER A	YES
+%U+0B06	ଆ	ORIYA LETTER AA	YES
+%U+0B07	ଇ	ORIYA LETTER I	YES
+%U+0B08	ଈ	ORIYA LETTER II	YES
+%U+0B09	ଉ	ORIYA LETTER U	YES
+%U+0B0A	ଊ	ORIYA LETTER UU	YES
+%U+0B0B	ଋ	ORIYA LETTER VOCALIC R	YES
+%U+0B0C	ଌ	ORIYA LETTER VOCALIC L	YES
+%U+0B0F	ଏ	ORIYA LETTER E	YES
+%U+0B10	ଐ	ORIYA LETTER AI	YES
+%U+0B13	ଓ	ORIYA LETTER O	YES
+%U+0B14	ଔ	ORIYA LETTER AU	YES
+%U+0B15	କ	ORIYA LETTER KA	YES
+%U+0B16	ଖ	ORIYA LETTER KHA	YES
+%U+0B17	ଗ	ORIYA LETTER GA	YES
+%U+0B18	ଘ	ORIYA LETTER GHA	YES
+%U+0B19	ଙ	ORIYA LETTER NGA	YES
+%U+0B1A	ଚ	ORIYA LETTER CA	YES
+%U+0B1B	ଛ	ORIYA LETTER CHA	YES
+%U+0B1C	ଜ	ORIYA LETTER JA	YES
+%U+0B1D	ଝ	ORIYA LETTER JHA	YES
+%U+0B1E	ଞ	ORIYA LETTER NYA	YES
+%U+0B1F	ଟ	ORIYA LETTER TTA	YES
+%U+0B20	ଠ	ORIYA LETTER TTHA	YES
+%U+0B21	ଡ	ORIYA LETTER DDA	YES
+%U+0B22	ଢ	ORIYA LETTER DDHA	YES
+%U+0B23	ଣ	ORIYA LETTER NNA	YES
+%U+0B24	ତ	ORIYA LETTER TA	YES
+%U+0B25	ଥ	ORIYA LETTER THA	YES
+%U+0B26	ଦ	ORIYA LETTER DA	YES
+%U+0B27	ଧ	ORIYA LETTER DHA	YES
+%U+0B28	ନ	ORIYA LETTER NA	YES
+%U+0B2A	ପ	ORIYA LETTER PA	YES
+%U+0B2B	ଫ	ORIYA LETTER PHA	YES
+%U+0B2C	ବ	ORIYA LETTER BA	YES
+%U+0B2D	ଭ	ORIYA LETTER BHA	YES
+%U+0B2E	ମ	ORIYA LETTER MA	YES
+%U+0B2F	ଯ	ORIYA LETTER YA	YES
+%U+0B30	ର	ORIYA LETTER RA	YES
+%U+0B32	ଲ	ORIYA LETTER LA	YES
+%U+0B33	ଳ	ORIYA LETTER LLA	YES
+%U+0B35	ଵ	ORIYA LETTER VA	YES
+%U+0B36	ଶ	ORIYA LETTER SHA	YES
+%U+0B37	ଷ	ORIYA LETTER SSA	YES
+%U+0B38	ସ	ORIYA LETTER SA	YES
+%U+0B39	ହ	ORIYA LETTER HA	YES
+%U+0B3C	଼	ORIYA SIGN NUKTA	YES
+%U+0B3D	ଽ	ORIYA SIGN AVAGRAHA	YES
+%U+0B3E	ା	ORIYA VOWEL SIGN AA	YES
+%U+0B3F	ି	ORIYA VOWEL SIGN I	YES
+%U+0B40	ୀ	ORIYA VOWEL SIGN II	YES
+%U+0B41	ୁ	ORIYA VOWEL SIGN U	YES
+%U+0B42	ୂ	ORIYA VOWEL SIGN UU	YES
+%U+0B43	ୃ	ORIYA VOWEL SIGN VOCALIC R	YES
+%U+0B44	ୄ	ORIYA VOWEL SIGN VOCALIC RR	YES
+%U+0B47	େ	ORIYA VOWEL SIGN E	YES
+%U+0B48	ୈ	ORIYA VOWEL SIGN AI	YES
+%U+0B4B	ୋ	ORIYA VOWEL SIGN O	YES
+%U+0B4C	ୌ	ORIYA VOWEL SIGN AU	YES
+%U+0B4D	୍	ORIYA SIGN VIRAMA	YES
+%U+0B55	୕	ORIYA SIGN OVERLINE	NO
+%U+0B56	ୖ	ORIYA AI LENGTH MARK	YES
+%U+0B57	ୗ	ORIYA AU LENGTH MARK	YES
+%U+0B5C	ଡ଼	ORIYA LETTER RRA	YES
+%U+0B5D	ଢ଼	ORIYA LETTER RHA	YES
+%U+0B5F	ୟ	ORIYA LETTER YYA	YES
+%U+0B60	ୠ	ORIYA LETTER VOCALIC RR	YES
+%U+0B61	ୡ	ORIYA LETTER VOCALIC LL	YES
+%U+0B62	ୢ	ORIYA VOWEL SIGN VOCALIC L	YES
+%U+0B63	ୣ	ORIYA VOWEL SIGN VOCALIC LL	YES
+%U+0B66	୦	ORIYA DIGIT ZERO	YES
+%U+0B67	୧	ORIYA DIGIT ONE	YES
+%U+0B68	୨	ORIYA DIGIT TWO	YES
+%U+0B69	୩	ORIYA DIGIT THREE	YES
+%U+0B6A	୪	ORIYA DIGIT FOUR	YES
+%U+0B6B	୫	ORIYA DIGIT FIVE	YES
+%U+0B6C	୬	ORIYA DIGIT SIX	YES
+%U+0B6D	୭	ORIYA DIGIT SEVEN	YES
+%U+0B6E	୮	ORIYA DIGIT EIGHT	YES
+%U+0B6F	୯	ORIYA DIGIT NINE	YES
+%U+0B70	୰	ORIYA ISSHAR	YES
+%U+0B71	ୱ	ORIYA LETTER WA	YES
+%U+0B72	୲	ORIYA FRACTION ONE QUARTER	YES
+%U+0B73	୳	ORIYA FRACTION ONE HALF	YES
+%U+0B74	୴	ORIYA FRACTION THREE QUARTERS	YES
+%U+0B75	୵	ORIYA FRACTION ONE SIXTEENTH	YES
+%U+0B76	୶	ORIYA FRACTION ONE EIGHTH	YES
+%U+0B77	୷	ORIYA FRACTION THREE SIXTEENTHS	YES
+
+
+
+
+\ExplSyntaxOn
+
+
+%--------------- Oriya/Odia
+\newcommand\dooriyatrans{%
+
+
+% Unicode codepoints
+
+\regex_replace_all:nnN { U\+0B01 } { \c{symbol} \cB\{ 2817\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B02 } { \c{symbol} \cB\{ 2818\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B03 } { \c{symbol} \cB\{ 2819\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B05 } { \c{symbol} \cB\{ 2821\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B06 } { \c{symbol} \cB\{ 2822\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B07 } { \c{symbol} \cB\{ 2823\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B08 } { \c{symbol} \cB\{ 2824\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B09 } { \c{symbol} \cB\{ 2825\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B0A } { \c{symbol} \cB\{ 2826\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B0B } { \c{symbol} \cB\{ 2827\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B0C } { \c{symbol} \cB\{ 2828\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B0F } { \c{symbol} \cB\{ 2831\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B10 } { \c{symbol} \cB\{ 2832\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B13 } { \c{symbol} \cB\{ 2835\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B14 } { \c{symbol} \cB\{ 2836\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B15 } { \c{symbol} \cB\{ 2837\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B16 } { \c{symbol} \cB\{ 2838\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B17 } { \c{symbol} \cB\{ 2839\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B18 } { \c{symbol} \cB\{ 2840\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B19 } { \c{symbol} \cB\{ 2841\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B1A } { \c{symbol} \cB\{ 2842\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B1B } { \c{symbol} \cB\{ 2843\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B1C } { \c{symbol} \cB\{ 2844\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B1D } { \c{symbol} \cB\{ 2845\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B1E } { \c{symbol} \cB\{ 2846\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B1F } { \c{symbol} \cB\{ 2847\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B20 } { \c{symbol} \cB\{ 2848\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B21 } { \c{symbol} \cB\{ 2849\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B22 } { \c{symbol} \cB\{ 2850\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B23 } { \c{symbol} \cB\{ 2851\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B24 } { \c{symbol} \cB\{ 2852\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B25 } { \c{symbol} \cB\{ 2853\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B26 } { \c{symbol} \cB\{ 2854\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B27 } { \c{symbol} \cB\{ 2855\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B28 } { \c{symbol} \cB\{ 2856\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B2A } { \c{symbol} \cB\{ 2858\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B2B } { \c{symbol} \cB\{ 2859\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B2C } { \c{symbol} \cB\{ 2860\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B2D } { \c{symbol} \cB\{ 2861\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B2E } { \c{symbol} \cB\{ 2862\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B2F } { \c{symbol} \cB\{ 2863\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B30 } { \c{symbol} \cB\{ 2864\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B32 } { \c{symbol} \cB\{ 2866\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B33 } { \c{symbol} \cB\{ 2867\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B35 } { \c{symbol} \cB\{ 2869\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B36 } { \c{symbol} \cB\{ 2870\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B37 } { \c{symbol} \cB\{ 2871\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B38 } { \c{symbol} \cB\{ 2872\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B39 } { \c{symbol} \cB\{ 2873\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B3C } { \c{symbol} \cB\{ 2876\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B3D } { \c{symbol} \cB\{ 2877\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B3E } { \c{symbol} \cB\{ 2878\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B3F } { \c{symbol} \cB\{ 2879\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B40 } { \c{symbol} \cB\{ 2880\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B41 } { \c{symbol} \cB\{ 2881\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B42 } { \c{symbol} \cB\{ 2882\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B43 } { \c{symbol} \cB\{ 2883\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B44 } { \c{symbol} \cB\{ 2884\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B47 } { \c{symbol} \cB\{ 2887\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B48 } { \c{symbol} \cB\{ 2888\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B4B } { \c{symbol} \cB\{ 2891\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B4C } { \c{symbol} \cB\{ 2892\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B4D } { \c{symbol} \cB\{ 2893\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B55 } { \c{symbol} \cB\{ 2901\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B56 } { \c{symbol} \cB\{ 2902\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B57 } { \c{symbol} \cB\{ 2903\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B5C } { \c{symbol} \cB\{ 2908\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B5D } { \c{symbol} \cB\{ 2909\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B5F } { \c{symbol} \cB\{ 2911\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B60 } { \c{symbol} \cB\{ 2912\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B61 } { \c{symbol} \cB\{ 2913\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B62 } { \c{symbol} \cB\{ 2914\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B63 } { \c{symbol} \cB\{ 2915\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B66 } { \c{symbol} \cB\{ 2918\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B67 } { \c{symbol} \cB\{ 2919\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B68 } { \c{symbol} \cB\{ 2920\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B69 } { \c{symbol} \cB\{ 2921\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B6A } { \c{symbol} \cB\{ 2922\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B6B } { \c{symbol} \cB\{ 2923\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B6C } { \c{symbol} \cB\{ 2924\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B6D } { \c{symbol} \cB\{ 2925\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B6E } { \c{symbol} \cB\{ 2926\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B6F } { \c{symbol} \cB\{ 2927\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B70 } { \c{symbol} \cB\{ 2928\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B71 } { \c{symbol} \cB\{ 2929\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B72 } { \c{symbol} \cB\{ 2930\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B73 } { \c{symbol} \cB\{ 2931\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B74 } { \c{symbol} \cB\{ 2932\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B75 } { \c{symbol} \cB\{ 2933\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B76 } { \c{symbol} \cB\{ 2934\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { U\+0B77 } { \c{symbol} \cB\{ 2935\cE\}  } \l_myor_tl
+
+%Unicode-based names
+% longest strings first, so regex replacement happens in right order
+\regex_replace_all:nnN { lettervocalicrr\. } { \c{symbol} \cB\{ 2912\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { lettervocalicll\. } { \c{symbol} \cB\{ 2913\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { threesixteenths\. } { \c{symbol} \cB\{ 2935\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { lettervocalicr\. } { \c{symbol} \cB\{ 2827\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { lettervocalicl\. } { \c{symbol} \cB\{ 2828\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { threequarters\. } { \c{symbol} \cB\{ 2932\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ailengthmark\. } { \c{symbol} \cB\{ 2902\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { aulengthmark\. } { \c{symbol} \cB\{ 2903\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { onesixteenth\. } { \c{symbol} \cB\{ 2933\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { candrabindu\. } { \c{symbol} \cB\{ 2817\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { onequarter\. } { \c{symbol} \cB\{ 2930\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { vocalicrr\. } { \c{symbol} \cB\{ 2884\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { vocalicll\. } { \c{symbol} \cB\{ 2915\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { oneeighth\. } { \c{symbol} \cB\{ 2934\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { anusvara\. } { \c{symbol} \cB\{ 2818\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { letteraa\. } { \c{symbol} \cB\{ 2822\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { letterii\. } { \c{symbol} \cB\{ 2824\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { letteruu\. } { \c{symbol} \cB\{ 2826\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { letterai\. } { \c{symbol} \cB\{ 2832\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { letterau\. } { \c{symbol} \cB\{ 2836\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { avagraha\. } { \c{symbol} \cB\{ 2877\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { vocalicr\. } { \c{symbol} \cB\{ 2883\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { overline\. } { \c{symbol} \cB\{ 2901\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { vocalicl\. } { \c{symbol} \cB\{ 2914\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { visarga\. } { \c{symbol} \cB\{ 2819\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { lettera\. } { \c{symbol} \cB\{ 2821\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { letteri\. } { \c{symbol} \cB\{ 2823\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { letteru\. } { \c{symbol} \cB\{ 2825\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { lettere\. } { \c{symbol} \cB\{ 2831\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { lettero\. } { \c{symbol} \cB\{ 2835\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { onehalf\. } { \c{symbol} \cB\{ 2931\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { virama\. } { \c{symbol} \cB\{ 2893\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { isshar\. } { \c{symbol} \cB\{ 2928\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { nukta\. } { \c{symbol} \cB\{ 2876\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { three\. } { \c{symbol} \cB\{ 2921\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { seven\. } { \c{symbol} \cB\{ 2925\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { eight\. } { \c{symbol} \cB\{ 2926\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ttha\. } { \c{symbol} \cB\{ 2848\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ddha\. } { \c{symbol} \cB\{ 2850\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { zero\. } { \c{symbol} \cB\{ 2918\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { four\. } { \c{symbol} \cB\{ 2922\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { five\. } { \c{symbol} \cB\{ 2923\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { nine\. } { \c{symbol} \cB\{ 2927\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { kha\. } { \c{symbol} \cB\{ 2838\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { gha\. } { \c{symbol} \cB\{ 2840\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { nga\. } { \c{symbol} \cB\{ 2841\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { cha\. } { \c{symbol} \cB\{ 2843\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { jha\. } { \c{symbol} \cB\{ 2845\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { nya\. } { \c{symbol} \cB\{ 2846\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { tta\. } { \c{symbol} \cB\{ 2847\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { dda\. } { \c{symbol} \cB\{ 2849\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { nna\. } { \c{symbol} \cB\{ 2851\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { tha\. } { \c{symbol} \cB\{ 2853\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { dha\. } { \c{symbol} \cB\{ 2855\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { pha\. } { \c{symbol} \cB\{ 2859\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { bha\. } { \c{symbol} \cB\{ 2861\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { lla\. } { \c{symbol} \cB\{ 2867\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { sha\. } { \c{symbol} \cB\{ 2870\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ssa\. } { \c{symbol} \cB\{ 2871\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { rra\. } { \c{symbol} \cB\{ 2908\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { rha\. } { \c{symbol} \cB\{ 2909\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { yya\. } { \c{symbol} \cB\{ 2911\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { one\. } { \c{symbol} \cB\{ 2919\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { two\. } { \c{symbol} \cB\{ 2920\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { six\. } { \c{symbol} \cB\{ 2924\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ka\. } { \c{symbol} \cB\{ 2837\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ga\. } { \c{symbol} \cB\{ 2839\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ca\. } { \c{symbol} \cB\{ 2842\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ja\. } { \c{symbol} \cB\{ 2844\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ta\. } { \c{symbol} \cB\{ 2852\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { da\. } { \c{symbol} \cB\{ 2854\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { na\. } { \c{symbol} \cB\{ 2856\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { pa\. } { \c{symbol} \cB\{ 2858\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ba\. } { \c{symbol} \cB\{ 2860\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ma\. } { \c{symbol} \cB\{ 2862\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ya\. } { \c{symbol} \cB\{ 2863\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ra\. } { \c{symbol} \cB\{ 2864\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { la\. } { \c{symbol} \cB\{ 2866\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { va\. } { \c{symbol} \cB\{ 2869\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { sa\. } { \c{symbol} \cB\{ 2872\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ha\. } { \c{symbol} \cB\{ 2873\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { aa\. } { \c{symbol} \cB\{ 2878\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ii\. } { \c{symbol} \cB\{ 2880\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { uu\. } { \c{symbol} \cB\{ 2882\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { ai\. } { \c{symbol} \cB\{ 2888\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { au\. } { \c{symbol} \cB\{ 2892\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { wa\. } { \c{symbol} \cB\{ 2929\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { i\. } { \c{symbol} \cB\{ 2879\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { u\. } { \c{symbol} \cB\{ 2881\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { e\. } { \c{symbol} \cB\{ 2887\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { o\. } { \c{symbol} \cB\{ 2891\cE\}  } \l_myor_tl
+
+% handy shortcuts
+\regex_replace_all:nnN { v\. } { \c{symbol} \cB\{ 2893\cE\}  } \l_myor_tl
+\regex_replace_all:nnN { V } { \c{symbol} \cB\{ 2893\cE\}  } \l_myor_tl
+
+
+
+}
+% from Odia to trans
+
+\newcommand\dooriyatransrev{%
+\regex_replace_all:nnN { ଁ } { candrabindu\. } \l_myor_tl
+\regex_replace_all:nnN { ଂ } { anusvara\. } \l_myor_tl
+\regex_replace_all:nnN { ଃ } { visarga\. } \l_myor_tl
+\regex_replace_all:nnN { ଅ } { lettera\. } \l_myor_tl
+\regex_replace_all:nnN { ଆ } { letteraa\. } \l_myor_tl
+\regex_replace_all:nnN { ଇ } { letteri\. } \l_myor_tl
+\regex_replace_all:nnN { ଈ } { letterii\. } \l_myor_tl
+\regex_replace_all:nnN { ଉ } { letteru\. } \l_myor_tl
+\regex_replace_all:nnN { ଊ } { letteruu\. } \l_myor_tl
+\regex_replace_all:nnN { ଋ } { lettervocalicr\. } \l_myor_tl
+\regex_replace_all:nnN { ଌ } { lettervocalicl\. } \l_myor_tl
+\regex_replace_all:nnN { ଏ } { lettere\. } \l_myor_tl
+\regex_replace_all:nnN { ଐ } { letterai\. } \l_myor_tl
+\regex_replace_all:nnN { ଓ } { lettero\. } \l_myor_tl
+\regex_replace_all:nnN { ଔ } { letterau\. } \l_myor_tl
+\regex_replace_all:nnN { କ } { ka\. } \l_myor_tl
+\regex_replace_all:nnN { ଖ } { kha\. } \l_myor_tl
+\regex_replace_all:nnN { ଗ } { ga\. } \l_myor_tl
+\regex_replace_all:nnN { ଘ } { gha\. } \l_myor_tl
+\regex_replace_all:nnN { ଙ } { nga\. } \l_myor_tl
+\regex_replace_all:nnN { ଚ } { ca\. } \l_myor_tl
+\regex_replace_all:nnN { ଛ } { cha\. } \l_myor_tl
+\regex_replace_all:nnN { ଜ } { ja\. } \l_myor_tl
+\regex_replace_all:nnN { ଝ } { jha\. } \l_myor_tl
+\regex_replace_all:nnN { ଞ } { nya\. } \l_myor_tl
+\regex_replace_all:nnN { ଟ } { tta\. } \l_myor_tl
+\regex_replace_all:nnN { ଠ } { ttha\. } \l_myor_tl
+\regex_replace_all:nnN { ଡ } { dda\. } \l_myor_tl
+\regex_replace_all:nnN { ଢ } { ddha\. } \l_myor_tl
+\regex_replace_all:nnN { ଣ } { nna\. } \l_myor_tl
+\regex_replace_all:nnN { ତ } { ta\. } \l_myor_tl
+\regex_replace_all:nnN { ଥ } { tha\. } \l_myor_tl
+\regex_replace_all:nnN { ଦ } { da\. } \l_myor_tl
+\regex_replace_all:nnN { ଧ } { dha\. } \l_myor_tl
+\regex_replace_all:nnN { ନ } { na\. } \l_myor_tl
+\regex_replace_all:nnN { ପ } { pa\. } \l_myor_tl
+\regex_replace_all:nnN { ଫ } { pha\. } \l_myor_tl
+\regex_replace_all:nnN { ବ } { ba\. } \l_myor_tl
+\regex_replace_all:nnN { ଭ } { bha\. } \l_myor_tl
+\regex_replace_all:nnN { ମ } { ma\. } \l_myor_tl
+\regex_replace_all:nnN { ଯ } { ya\. } \l_myor_tl
+\regex_replace_all:nnN { ର } { ra\. } \l_myor_tl
+\regex_replace_all:nnN { ଲ } { la\. } \l_myor_tl
+\regex_replace_all:nnN { ଳ } { lla\. } \l_myor_tl
+\regex_replace_all:nnN { ଵ } { va\. } \l_myor_tl
+\regex_replace_all:nnN { ଶ } { sha\. } \l_myor_tl
+\regex_replace_all:nnN { ଷ } { ssa\. } \l_myor_tl
+\regex_replace_all:nnN { ସ } { sa\. } \l_myor_tl
+\regex_replace_all:nnN { ହ } { ha\. } \l_myor_tl
+\regex_replace_all:nnN { ଼ } { nukta\. } \l_myor_tl
+\regex_replace_all:nnN { ଽ } { avagraha\. } \l_myor_tl
+\regex_replace_all:nnN { ା } { aa\. } \l_myor_tl
+\regex_replace_all:nnN { ି } { i\. } \l_myor_tl
+\regex_replace_all:nnN { ୀ } { ii\. } \l_myor_tl
+\regex_replace_all:nnN { ୁ } { u\. } \l_myor_tl
+\regex_replace_all:nnN { ୂ } { uu\. } \l_myor_tl
+\regex_replace_all:nnN { ୃ } { vocalicr\. } \l_myor_tl
+\regex_replace_all:nnN { ୄ } { vocalicrr\. } \l_myor_tl
+\regex_replace_all:nnN { େ } { e\. } \l_myor_tl
+\regex_replace_all:nnN { ୈ } { ai\. } \l_myor_tl
+\regex_replace_all:nnN { ୋ } { o\. } \l_myor_tl
+\regex_replace_all:nnN { ୌ } { au\. } \l_myor_tl
+\regex_replace_all:nnN { ୍ } { virama\. } \l_myor_tl
+\regex_replace_all:nnN { ୕ } { overline\. } \l_myor_tl
+\regex_replace_all:nnN { ୖ } { ailengthmark\. } \l_myor_tl
+\regex_replace_all:nnN { ୗ } { aulengthmark\. } \l_myor_tl
+\regex_replace_all:nnN { ଡ଼ } { rra\. } \l_myor_tl
+\regex_replace_all:nnN { ଢ଼ } { rha\. } \l_myor_tl
+\regex_replace_all:nnN { ୟ } { yya\. } \l_myor_tl
+\regex_replace_all:nnN { ୠ } { lettervocalicrr\. } \l_myor_tl
+\regex_replace_all:nnN { ୡ } { lettervocalicll\. } \l_myor_tl
+\regex_replace_all:nnN { ୢ } { vocalicl\. } \l_myor_tl
+\regex_replace_all:nnN { ୣ } { vocalicll\. } \l_myor_tl
+%digits
+\regex_replace_all:nnN { ^^^^0b66 } { zero\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b67 } { one\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b68 } { two\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b69 } { three\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b6a } { four\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b6b } { five\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b6c } { six\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b6d } { seven\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b6e } { eight\. } \l_myor_tl
+\regex_replace_all:nnN { ^^^^0b6f } { nine\. } \l_myor_tl
+
+\regex_replace_all:nnN { ୰ } { isshar\. } \l_myor_tl
+\regex_replace_all:nnN { ୱ } { wa\. } \l_myor_tl
+\regex_replace_all:nnN { ୲ } { onequarter\. } \l_myor_tl
+\regex_replace_all:nnN { ୳ } { onehalf\. } \l_myor_tl
+\regex_replace_all:nnN { ୴ } { threequarters\. } \l_myor_tl
+\regex_replace_all:nnN { ୵ } { onesixteenth\. } \l_myor_tl
+\regex_replace_all:nnN { ୶ } { oneeighth\. } \l_myor_tl
+\regex_replace_all:nnN { ୷ } { threesixteenths\. } \l_myor_tl
+
+}
+
+
+%=================
+\str_new:N \l_myor_str
+
+\NewDocumentCommand { \ortrans } { m } {%
+\tl_set:Nn \l_myor_tl { #1 }
+ \dooriyatrans 
+{ \orfont \tl_use:N \l_myor_tl }
+}
+
+\NewDocumentEnvironment{ortranse}{ +b } 
+{
+\tl_set:Nn \l_myor_tl { #1 }
+	\dooriyatrans
+{ \orfont \tl_use:N \l_myor_tl }
+}
+{ }
+
+%-----
+\NewDocumentCommand { \ortransrev } { m } {%
+\tl_set:Nn \l_myor_tl { #1 }
+ \dooriyatransrev 
+{ \tl_use:N \l_myor_tl }
+}
+
+\NewDocumentEnvironment{ortranserev}{ +b } 
+{
+\tl_set:Nn \l_myor_tl { #1 }
+	\dooriyatransrev
+{ \tl_use:N \l_myor_tl }
+}
+{ }
+
+
+
+\ExplSyntaxOff
+
+
+
+%-----------------------------------------
+%subset of helper meta-commands:
+\ExplSyntaxOn
+%cs: print the command name
+%cdr: print and run the comman
+%cdpr: print with formatted argument and run
+%codedetok: print (unemphasized)
+
+%------------------------------- control sequence
+\NewDocumentCommand{\cs}{ m }{%
+  {\bfseries\sffamily\color{blue}
+  \token_to_str:N #1 % If you already have a token
+  }
+}%
+%------------------------------- print and run #1
+
+\NewDocumentCommand{\cdr}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+}%
+
+
+%------------------------------- print and run command+argumentt separately
+\NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \textbackslash \detokenize{#2} % command
+  \{ 
+  		{
+  		\tl_use:N \l_my_tl % formatting
+  		\detokenize{#3}       % argument
+  		}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+\cs:w \tl_use:N \l_myb_tl \cs_end: {  
+									#3 % argument
+									 }
+}%
+%------------------------------- just print #1 as plain detok code
+\NewDocumentCommand{\codedetok}{ o m }{
+ 
+			{%true 
+			    {
+						\ttfamily
+					  															\detokenize{#2}
+						}
+			  }
+}%
+
+\ExplSyntaxOff
+
+
+
+
+
+%===================================
+\begin{document}
+\noindent{\large Odia (\ortrans{lettero.dda.nukta.i.letteraa.}) script, using \textsc{ASCII} transliteration input method}
+
+\bigskip
+(1) Named macros (use with \cs{\orfont})
+
+\cdr{{\orfont\orka\orta\orone\ortwo\orthree}}
+
+\cdr{{\orfont\orka\oru\orla\orvirama\orba\orna\orna}}
+
+
+\bigskip
+(2a) Command \cs{\ortrans} (assumes \cs{\orfont} is defined)
+
+\cdr{\ortrans{ka.ta.}}
+
+\cdr{\ortrans{ka.u.la.virama.ba.na.na.}}
+
+(2b) Environment \cs{ortranse} (assumes \cs{\orfont} is defined)
+
+\begin{ortranse}
+ka.ta. 
+
+ka.u.la.virama.ba.na.na..
+
+\end{ortranse}
+
+Examples
+
+\ortrans{ka.} + \ortrans{ka.} = \ortrans{ka.virama.ka.}
+
+(\ortrans{ka.} + \ortrans{i.}) + (\ortrans{na.} + \ortrans{ga.}) = \ortrans{ka.i.na.virama.ga.}
+
+Shortened version of virama string (V)
+
+\cdr{\ortrans{ka.Vka.}}
+
+or (v.)
+
+\cdr{\ortrans{ka.v.ka.}}
+
+\bigskip
+Spaces
+
+\cdr{\ortrans{ka. virama. ka.}}
+
+\cdr{\ortrans{ka.virama.ka.}}
+
+\bigskip
+Unicode
+
+\cdr{\ortrans{U+0B15U+0B4DU+0B15}}
+
+%\cdr{\ortransrev{ଓଡ଼ିଆ ଉଇକିପିଡ଼ିଆ   ଓଡ଼ିଶା   	   କଳା    	   ଚଳଣି    	   ବିଜ୍ଞାନ    	   ଭୂଗୋଳ    	   ଇତିହାସ    	   ଧର୍ମ    	   ରାନ୍ଧଣା    	   ମନୋରଞ୍ଜନ    }}
+
+\bigskip
+Reverse transliteration
+
+(3a) Command version
+
+\cdpr[\orfont]{ortransrev}{୧୨୩ ଓଡ଼ିଆ ଉଇକିପିଡ଼ିଆ   ଓଡ଼ିଶା   	   କଳା    	   ଚଳଣି    	   ବିଜ୍ଞାନ    	   ଭୂଗୋଳ    	   ଇତିହାସ    	   ଧର୍ମ    	   ରାନ୍ଧଣା    	   ମନୋରଞ୍ଜନ    }
+
+(3b) Environment version,
+with \codedetok{\begin{ortranserev} ... \end{ortranserev}}
+
+\begin{ortranserev}
+ଓଡ଼ିଆ 
+
+ଉଇକିପିଡ଼ିଆ    ...
+\end{ortranserev}
+
+
+\end{document}
