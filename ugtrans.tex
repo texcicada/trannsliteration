@@ -214,7 +214,7 @@
 \regex_replace_all:nnN { l\. } { \c{symbol} \cB\{ 66445\cE\}  } \l_myug_tl
 \regex_replace_all:nnN { m\. } { \c{symbol} \cB\{ 66446\cE\}  } \l_myug_tl
 \regex_replace_all:nnN { n\. } { \c{symbol} \cB\{ 66448\cE\}  } \l_myug_tl
-\regex_replace_all:nnN { '\. } { \c{symbol} \cB\{ 66451\cE\}  } \l_myug_tl
+\regex_replace_all:nnN { j\. } { \c{symbol} \cB\{ 66451\cE\}  } \l_myug_tl
 \regex_replace_all:nnN { p\. } { \c{symbol} \cB\{ 66452\cE\}  } \l_myug_tl
 \regex_replace_all:nnN { s\. } { \c{symbol} \cB\{ 66453\cE\}  } \l_myug_tl
 \regex_replace_all:nnN { q\. } { \c{symbol} \cB\{ 66454\cE\}  } \l_myug_tl
@@ -251,7 +251,7 @@
 \regex_replace_all:nnN { 𐎐 } { n\. } \l_myug_tl
 \regex_replace_all:nnN { 𐎑 } { zz\. } \l_myug_tl
 \regex_replace_all:nnN { 𐎒 } { ss\. } \l_myug_tl
-\regex_replace_all:nnN { 𐎓 } { '\. } \l_myug_tl
+\regex_replace_all:nnN { 𐎓 } { j\. } \l_myug_tl
 \regex_replace_all:nnN { 𐎔 } { p\. } \l_myug_tl
 \regex_replace_all:nnN { 𐎕 } { s\. } \l_myug_tl
 \regex_replace_all:nnN { 𐎖 } { q\. } \l_myug_tl
@@ -404,12 +404,27 @@
 \end{tabular} {\ugfontb\ugdiv}
 }}
 
+
+
 %Scholarly transliteration
+%\str_new:N \l_myugx_str
+%\tl_new:N \l_myugx_tl
+%\def\l_myugx_f{}
 \NewDocumentCommand\smapruby{ m } {%
 {
+%\str_set:Nn \l_myugx_str { #1 }
+%\tl_set:Nn \l_myugx_tl { #1 }
+%\tl_set:Nn \l_myugx_tl { \sugtransrev{#1} }
+%\tl_to_str:V { \l_myugx_tl }
 \setlength{\tabcolsep}{-0.5pt} 
 \begin{tabular}[b]{c}
-\strut{\scriptsize\sugtransrev{#1} } \\
+%\scriptsize\sugtransrev{\str_use:N \l_myugx_str}  \\
+%\scriptsize\sugtransrev{\tl_use:N \l_myugx_tl}  \\
+%\exp_args:cc { \l_myugx_f } { #1 }
+%\scriptsize \exp_args:Nx \sugtransrev {#1}  \\
+%\scriptsize\sugtransrev{\exp:w #1 \exp_end:}  \\
+%\tl_use:N \l_myugx_tl \\
+\scriptsize\sugtransrev{#1}  \\
 \rule{0pt}{2ex} \ugfont #1 \\
 \end{tabular} 
 }}
@@ -504,6 +519,10 @@
   \tl_use:N \l_my_tl
 }%
 
+%\tl_new:N \l_my_tl
+%\tl_new:N \l_myb_tl
+%\tl_new:N \l_myc_tl
+%\tl_new:N \l_myd_tl
 
 %------------------------------- print and run command+argumentt separately
 \NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
@@ -527,6 +546,80 @@
 									#3 % argument
 									 }
 }%
+
+%------------------------------- print and run command+argumentt separately, command formatted
+\NewDocumentCommand{\cdprr}{ o o m m }{%1=print format,2=command format,3=command,4=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	\tl_set:Nn \l_myd_tl { #4 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \textbackslash \detokenize{#3} % command
+  \{ 
+  		{
+  		\tl_use:N \l_my_tl % formatting
+  		\detokenize{#4}       % argument
+  		}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myb_tl %command format
+\cs:w \tl_use:N \l_myc_tl \cs_end: {  
+									#4 % argument
+									 }
+		}
+}%
+
+%------------------------------- print and run command (no argument_ separately, command formatted
+\NewDocumentCommand{\cdprrn}{ o o m }{%1=print format,2=command format,3=command
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+
+  \textbackslash \detokenize{#3} % command
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myb_tl %command format
+\cs:w \tl_use:N \l_myc_tl \cs_end: 
+		}
+}%
+
+
+%------------------------------- print and run command (no argument_ separately, command formatted, print with wrapper
+\NewDocumentCommand{\cdprrnw}{ o o o m }{%1,2=print format wrapper,3=command format,4=command
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	\tl_set:Nn \l_myd_tl { #4 }
+	
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+		{ 
+			\tl_use:N \l_my_tl %wrapper begin
+  \textbackslash \detokenize{#4} % command
+     \tl_use:N \l_myb_tl % wrapper end
+  	}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myc_tl %command format
+\cs:w \tl_use:N \l_myd_tl \cs_end: 
+		}
+}%
+
+
+
+
+
 %------------------------------- just print #1 as plain detok code
 \NewDocumentCommand{\codedetok}{ o m }{
  
@@ -689,12 +782,161 @@ Scholarly transliteration
 %\sugruby{\ugtrans{tt.};}
 
 \section{Commands}
+\textbf{\textsc{ASCII}-to-Ugaritic}
+
+To produce Ugaritic text in-paragraph, define a \cs{\ugfont} and use command \cs{\ugtrans} with either dot-notation or Unicode code point:
+
+\begin{quotation}
+\cdr{\ugtrans{a.}}
+
+\cdr{\ugtrans{U+10380}}
+\end{quotation}
+or use named macros, specifying the font:
+
+
+\begin{quotation}
+%{\ttfamily \{}
+%\codedetok{\ugfont} 
+\cdprrnw[\color{black}\{\enspace\codedetok{\ugfont}\color{blue}][\color{black}\enspace\}][\ugfont]{ugalpa}
+%{\ttfamily \}}
+
+
+\end{quotation}
+
+\bigskip
+For longer texts across paragraphs, the \cs{ugtranse} environment is available.
+
+\begin{quotation}
+\noindent\begin{verbatim}
+\begin{ugtranse}
+d.l.t.
+
+u.g.r.t.
+\end{ugtranse}}
+\end{verbatim}
+\end{quotation}
+produces
+
+\begin{quotation}
+\begin{ugtranse}
+d.l.t.
+
+u.g.r.t.
+\end{ugtranse}
+\end{quotation}
+
+\bigskip
+\textbf{Ugaritic-to-\textsc{ASCII}}
+
+Command \cs{\ugtransrev} and environment \cs{ugtranserev} convert Ugaritic glyphs to dot-notation transliteration.
+
+{\ugfont
+𐎀
+𐎃
+𐎈
+𐎉
+𐎌
+𐎏
+𐎑
+𐎓
+𐎕
+𐎘
+𐎙
+𐎛
+𐎜
+}
+become \ugtransrev{
+𐎀
+𐎃
+𐎈
+𐎉
+𐎌
+𐎏
+𐎑
+𐎓
+𐎕
+𐎘
+𐎙
+𐎛
+𐎜
+}
+with the command
+and the environment produces
+\begin{ugtranserev}
+𐎀
+𐎃
+𐎈
+𐎉
+𐎌
+𐎏
+𐎑
+𐎓
+𐎕
+𐎘
+𐎙
+𐎛
+𐎜
+\end{ugtranserev}
+
+\bigskip
+Adding an ``s'' prefix, command \cs{\sugtransrev} and environment \cs{sugtranserev} produce scholarly transliteration.
+
+{\ugfont
+𐎀
+𐎃
+𐎈
+𐎉
+𐎌
+𐎏
+𐎑
+𐎓
+𐎕
+𐎘
+𐎙
+𐎛
+𐎜
+}
+become \sugtransrev{
+𐎀
+𐎃
+𐎈
+𐎉
+𐎌
+𐎏
+𐎑
+𐎓
+𐎕
+𐎘
+𐎙
+𐎛
+𐎜
+}
+with the command
+and the environment produces
+\begin{sugtranserev}
+𐎀
+𐎃
+𐎈
+𐎉
+𐎌
+𐎏
+𐎑
+𐎓
+𐎕
+𐎘
+𐎙
+𐎛
+𐎜
+\end{sugtranserev}
+
+
+\bigskip\textbf{Ruby}
 
 Command \cs{\sugrubyw} does ruby scholarly transliteration by space delimiter (intended for words), calling \cs{\smaprubyw} for each item.
 
 \cs{\smaprubyw} does the individual transliteration ruby unit stack, adding the word divider.
 
-\cdr{\sugrubyw{𐎄𐎍𐎚 𐎜𐎂𐎗𐎚}}
+\cdpr[\ugfont\scriptsize]{sugrubyw}{𐎄𐎍𐎚 𐎜𐎂𐎗𐎚}
 
 \cdr{\smaprubyw{x}}
 
@@ -703,9 +945,125 @@ Command \cs{\sugruby} does ruby scholarly transliteration by semicolon delimiter
 
 \cs{\smapruby} does the individual transliteration ruby unit stack.
 
-\cdr{\sugruby{𐎄;𐎍;𐎚}}
+%\cdpr[\ugfont\scriptsize]{sugruby}{𐎄;𐎍;𐎚}
+{\ttfamily\color{blue}\textbackslash sugruby\{{\ugfont\scriptsize 𐎄};{\ugfont\scriptsize 𐎍};{\ugfont\scriptsize 𐎚};\}}
+\enspace$\mapsto$\enspace
+\sugruby{𐎄;𐎍;𐎚}
+
 
 \cdr{\smapruby{x}}
+
+Alternatively, words may be separated by semicolons, or letters by spaces, as long as the appropriate ruby command is used.
+
+\bigskip
+The letter alpa, \smapruby{𐎀}, ...
+
+\bigskip
+List of shortcut dot-transliteration input codes (these assume that a font command \cs{\ugfont} has been defined, e.g. via \textsc{fontspec}'s \codedetok{\newfontface\ugfont{Noto Sans Ugaritic}}):
+
+\cdr{\ugtrans{a.}}\par
+\cdr{\ugtrans{b.}}\par
+\cdr{\ugtrans{g.}}\par
+\cdr{\ugtrans{kh.}}\par
+\cdr{\ugtrans{d.}}\par
+\cdr{\ugtrans{h.}}\par
+\cdr{\ugtrans{w.}}\par
+\cdr{\ugtrans{z.}}\par
+\cdr{\ugtrans{hh.}}\par
+\cdr{\ugtrans{t.}}\par
+\cdr{\ugtrans{y.}}\par
+\cdr{\ugtrans{k.}}\par
+\cdr{\ugtrans{sh.}}\par
+\cdr{\ugtrans{l.}}\par
+\cdr{\ugtrans{m.}}\par
+\cdr{\ugtrans{dh.}}\par
+\cdr{\ugtrans{n.}}\par
+\cdr{\ugtrans{zz.}}\par
+\cdr{\ugtrans{ss.}}\par
+\cdr{\ugtrans{j.}}\par
+\cdr{\ugtrans{p.}}\par
+\cdr{\ugtrans{s.}}\par
+\cdr{\ugtrans{q.}}\par
+\cdr{\ugtrans{r.}}\par
+\cdr{\ugtrans{th.}}\par
+\cdr{\ugtrans{gh.}}\par
+\cdr{\ugtrans{tt.}}\par
+\cdr{\ugtrans{i.}}\par
+\cdr{\ugtrans{u.}}\par
+\cdr{\ugtrans{ssu.}}\par
+\cdr{\ugtrans{div.}}\par
+
+\bigskip
+List of named macros (these require the current font to be set to one already containing Ugaritic glyphs):
+
+\cdprrn[][\ugfont]{ugalpa}{}\par
+\cdprrn[][\ugfont]{ugbeta}{}\par
+\cdprrn[][\ugfont]{uggamla}{}\par
+\cdprrn[][\ugfont]{ugkha}{}\par
+\cdprrn[][\ugfont]{ugdelta}{}\par
+\cdprrn[][\ugfont]{ugho}{}\par
+\cdprrn[][\ugfont]{ugwo}{}\par
+\cdprrn[][\ugfont]{ugzeta}{}\par
+\cdprrn[][\ugfont]{ughota}{}\par
+\cdprrn[][\ugfont]{ugtet}{}\par
+\cdprrn[][\ugfont]{ugyod}{}\par
+\cdprrn[][\ugfont]{ugkaf}{}\par
+\cdprrn[][\ugfont]{ugshin}{}\par
+\cdprrn[][\ugfont]{uglamda}{}\par
+\cdprrn[][\ugfont]{ugmem}{}\par
+\cdprrn[][\ugfont]{ugdhal}{}\par
+\cdprrn[][\ugfont]{ugnun}{}\par
+\cdprrn[][\ugfont]{ugzu}{}\par
+\cdprrn[][\ugfont]{ugsamka}{}\par
+\cdprrn[][\ugfont]{ugain}{}\par
+\cdprrn[][\ugfont]{ugpu}{}\par
+\cdprrn[][\ugfont]{ugsade}{}\par
+\cdprrn[][\ugfont]{ugqopa}{}\par
+\cdprrn[][\ugfont]{ugrasha}{}\par
+\cdprrn[][\ugfont]{ugthanna}{}\par
+\cdprrn[][\ugfont]{ugghain}{}\par
+\cdprrn[][\ugfont]{ugto}{}\par
+\cdprrn[][\ugfont]{ugletteri}{}\par
+\cdprrn[][\ugfont]{ugletteru}{}\par
+\cdprrn[][\ugfont]{ugletterssu}{}\par
+\cdprrn[][\ugfont]{ugworddivider}{}\par
+
+\bigskip
+List of Unicode codepoints:
+
+\cdr{\ugtrans{U+10380}}\par
+\cdr{\ugtrans{U+10381}}\par
+\cdr{\ugtrans{U+10382}}\par
+\cdr{\ugtrans{U+10383}}\par
+\cdr{\ugtrans{U+10384}}\par
+\cdr{\ugtrans{U+10385}}\par
+\cdr{\ugtrans{U+10386}}\par
+\cdr{\ugtrans{U+10387}}\par
+\cdr{\ugtrans{U+10388}}\par
+\cdr{\ugtrans{U+10389}}\par
+\cdr{\ugtrans{U+1038A}}\par
+\cdr{\ugtrans{U+1038B}}\par
+\cdr{\ugtrans{U+1038C}}\par
+\cdr{\ugtrans{U+1038D}}\par
+\cdr{\ugtrans{U+1038E}}\par
+\cdr{\ugtrans{U+1038F}}\par
+\cdr{\ugtrans{U+10390}}\par
+\cdr{\ugtrans{U+10391}}\par
+\cdr{\ugtrans{U+10392}}\par
+\cdr{\ugtrans{U+10393}}\par
+\cdr{\ugtrans{U+10394}}\par
+\cdr{\ugtrans{U+10395}}\par
+\cdr{\ugtrans{U+10396}}\par
+\cdr{\ugtrans{U+10397}}\par
+\cdr{\ugtrans{U+10398}}\par
+\cdr{\ugtrans{U+10399}}\par
+\cdr{\ugtrans{U+1039A}}\par
+\cdr{\ugtrans{U+1039B}}\par
+\cdr{\ugtrans{U+1039C}}\par
+\cdr{\ugtrans{U+1039D}}\par
+\cdr{\ugtrans{U+1039F}}\par
+
+
 
 \end{document}
 
