@@ -6,7 +6,7 @@
 \setmainfont{Noto Serif}
 
 \newfontfamily\ugfont{Noto Sans Ugaritic}[Colour=blue,Scale=1.5]
-\newfontfamily\ugfontb{Noto Sans Ugaritic}
+\newfontfamily\ugfontb{Noto Sans Ugaritic}%plain font
 
 
 
@@ -266,6 +266,75 @@
 
 }
 
+%scholarly transliteration
+\newcommand\dosugtrans{%
+\regex_replace_all:nnN { 𐎀 } { ^^^^02c0a } \l_myug_tl
+\regex_replace_all:nnN { 𐎁 } { b } \l_myug_tl
+\regex_replace_all:nnN { 𐎂 } { g } \l_myug_tl
+\regex_replace_all:nnN { 𐎃 } { ^^^^1e2b } \l_myug_tl
+\regex_replace_all:nnN { 𐎄 } { d } \l_myug_tl
+\regex_replace_all:nnN { 𐎅 } { h } \l_myug_tl
+\regex_replace_all:nnN { 𐎆 } { w } \l_myug_tl
+\regex_replace_all:nnN { 𐎇 } { z } \l_myug_tl
+\regex_replace_all:nnN { 𐎈 } { h^^^^0323 } \l_myug_tl
+\regex_replace_all:nnN { 𐎉 } { t^^^^0323 } \l_myug_tl
+\regex_replace_all:nnN { 𐎊 } { y } \l_myug_tl
+\regex_replace_all:nnN { 𐎋 } { k } \l_myug_tl
+\regex_replace_all:nnN { 𐎌 } { s^^^^030c } \l_myug_tl
+\regex_replace_all:nnN { 𐎍 } { l } \l_myug_tl
+\regex_replace_all:nnN { 𐎎 } { m } \l_myug_tl
+\regex_replace_all:nnN { 𐎏 } { d^^^^0320 } \l_myug_tl
+\regex_replace_all:nnN { 𐎐 } { n } \l_myug_tl
+\regex_replace_all:nnN { 𐎑 } { z^^^^0323 } \l_myug_tl
+\regex_replace_all:nnN { 𐎒 } { s } \l_myug_tl
+\regex_replace_all:nnN { 𐎓 } { ^^^^02e4 } \l_myug_tl
+\regex_replace_all:nnN { 𐎔 } { p } \l_myug_tl
+\regex_replace_all:nnN { 𐎕 } { s^^^^0323 } \l_myug_tl
+\regex_replace_all:nnN { 𐎖 } { q } \l_myug_tl
+\regex_replace_all:nnN { 𐎗 } { r } \l_myug_tl
+\regex_replace_all:nnN { 𐎘 } { t^^^^0320 } \l_myug_tl
+\regex_replace_all:nnN { 𐎙 } { g^^^^0307 } \l_myug_tl
+\regex_replace_all:nnN { 𐎚 } { t } \l_myug_tl
+\regex_replace_all:nnN { 𐎛 } { ^^^^02c0i } \l_myug_tl
+\regex_replace_all:nnN { 𐎜 } { ^^^^02c0u } \l_myug_tl
+\regex_replace_all:nnN { 𐎝 } { ss } \l_myug_tl
+\regex_replace_all:nnN { 𐎟 } {  ~  } \l_myug_tl
+}
+%variation
+\newcommand\dosugtransvar{%
+\regex_replace_all:nnN { 𐎀 } { ^^^^02c0a } \l_myug_tl
+\regex_replace_all:nnN { 𐎁 } { b } \l_myug_tl
+\regex_replace_all:nnN { 𐎂 } { g } \l_myug_tl
+\regex_replace_all:nnN { 𐎃 } { ^^^^1e2b } \l_myug_tl
+\regex_replace_all:nnN { 𐎄 } { d } \l_myug_tl
+\regex_replace_all:nnN { 𐎅 } { h } \l_myug_tl
+\regex_replace_all:nnN { 𐎆 } { w } \l_myug_tl
+\regex_replace_all:nnN { 𐎇 } { z } \l_myug_tl
+\regex_replace_all:nnN { 𐎈 } { ^^^^0127 } \l_myug_tl
+\regex_replace_all:nnN { 𐎉 } { t^^^^0323 } \l_myug_tl
+\regex_replace_all:nnN { 𐎊 } { y } \l_myug_tl
+\regex_replace_all:nnN { 𐎋 } { k } \l_myug_tl
+\regex_replace_all:nnN { 𐎌 } { s^^^^030c } \l_myug_tl
+\regex_replace_all:nnN { 𐎍 } { l } \l_myug_tl
+\regex_replace_all:nnN { 𐎎 } { m } \l_myug_tl
+\regex_replace_all:nnN { 𐎏 } { ^^^^0111 } \l_myug_tl
+\regex_replace_all:nnN { 𐎐 } { n } \l_myug_tl
+\regex_replace_all:nnN { 𐎑 } { ^^^^03b8^^^^0323 } \l_myug_tl
+\regex_replace_all:nnN { 𐎒 } { s } \l_myug_tl
+\regex_replace_all:nnN { 𐎓 } { ^^^^02e4 } \l_myug_tl
+\regex_replace_all:nnN { 𐎔 } { p } \l_myug_tl
+\regex_replace_all:nnN { 𐎕 } { s^^^^0323 } \l_myug_tl
+\regex_replace_all:nnN { 𐎖 } { q } \l_myug_tl
+\regex_replace_all:nnN { 𐎗 } { r } \l_myug_tl
+\regex_replace_all:nnN { 𐎘 } { ^^^^03b8 } \l_myug_tl
+\regex_replace_all:nnN { 𐎙 } { ^^^^0263 } \l_myug_tl
+\regex_replace_all:nnN { 𐎚 } { t } \l_myug_tl
+\regex_replace_all:nnN { 𐎛 } { ^^^^02c0i } \l_myug_tl
+\regex_replace_all:nnN { 𐎜 } { ^^^^02c0u } \l_myug_tl
+\regex_replace_all:nnN { 𐎝 } { ss } \l_myug_tl
+\regex_replace_all:nnN { 𐎟 } {  ~  } \l_myug_tl
+
+}
 
 %=================
 \str_new:N \l_myug_str
@@ -284,7 +353,7 @@
 }
 { }
 
-%-----
+%----- Ugaritic to Unicode names
 \NewDocumentCommand { \ugtransrev } { m } {%
 \tl_set:Nn \l_myug_tl { #1 }
  \dougaritictransrev 
@@ -299,9 +368,111 @@
 }
 { }
 
+%----- Ugaritic to Scholarly transliteration
+\NewDocumentCommand { \sugtransrev } { m } {%
+\tl_set:Nn \l_myug_tl { #1 }
+  \dosugtrans 
+{ \tl_use:N \l_myug_tl }
+}
+
+\NewDocumentEnvironment{sugtranserev}{ +b } 
+{
+\tl_set:Nn \l_myug_tl { #1 }
+	\dosugtrans
+{ \tl_use:N \l_myug_tl }
+}
+{ }
+
+
+%Unicode name transliteration
+\NewDocumentCommand\mapruby{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+{\scriptsize\ugtransrev{#1}} \\
+\rule{0pt}{2ex}\ugfont #1 \\
+\end{tabular} 
+}}
+
+
+\NewDocumentCommand\maprubyw{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+{\scriptsize\ugtransrev{#1}} \\
+\rule{0pt}{2ex}\ugfont #1 \\
+\end{tabular} {\ugfontb\ugdiv}
+}}
+
+%Scholarly transliteration
+\NewDocumentCommand\smapruby{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+\strut{\scriptsize\sugtransrev{#1} } \\
+\rule{0pt}{2ex} \ugfont #1 \\
+\end{tabular} 
+}}
+
+
+\NewDocumentCommand\smaprubyw{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+{\scriptsize\sugtransrev{#1}} \\
+\rule{0pt}{2ex}\ugfont #1 \\
+\end{tabular} {\ugfontb\ugdiv}
+}}
+
+
+
+
+
+
+%\seq_new:N \l_ruby_seq
+\NewDocumentCommand{\ugruby}{ > { \SplitList { ; } } m }{%
+  \ProcessList {#1 } { \mapruby }
+%%	\tl_set:Nn \l_my_tl { #1 }
+%%	\seq_set_split:Nnn 
+%%								\l_ruby_seq 
+%%								{ ; } 
+%%								{ \l_my_tl }
+%%{\ugfont		\seq_use:Nnnn
+%%								\l_ruby_seq {;}{}{}
+%%								}
+%%%	\seq_map_function:NN 
+%%%								\l_ruby_seq  
+%%%								\mapruby
+%%	\seq_map_inline:Nn 
+%%								\l_ruby_seq  
+%%								{ \mapruby{#1} }
+%%%\tl_use:N \l_my_tl
+%%%\ugtransrev{}
+}
+
+\NewDocumentCommand{\ugrubyw}{ > { \SplitList { ~ } } m }{%
+  \ProcessList {#1 } { \maprubyw }
+}
+
+\NewDocumentCommand{\sugruby}{ > { \SplitList { ; } } m }{%
+  \ProcessList {#1 } { \smapruby }
+}
+
+\NewDocumentCommand{\sugrubyw}{ > { \SplitList { ~ } } m }{%
+  \ProcessList {#1 } { \smaprubyw }
+}
+
+
+
 
 
 \ExplSyntaxOff
+
+
+
+
+
+
 
 
 
@@ -309,7 +480,7 @@
 %subset of helper meta-commands:
 \ExplSyntaxOn
 %cs: print the command name
-%cdr: print and run the comman
+%cdr: print and run the command
 %cdpr: print with formatted argument and run
 %codedetok: print (unemphasized)
 
@@ -366,52 +537,6 @@
 						}
 			  }
 }%
-
-
-\NewDocumentCommand\mapruby{ m } {%
-{
-\setlength{\tabcolsep}{-0.5pt} 
-\begin{tabular}[b]{c}
-{\scriptsize\ugtransrev{#1}} \\
-\ugfont #1 \\
-\end{tabular} 
-}}
-
-
-\NewDocumentCommand\maprubyw{ m } {%
-{
-\setlength{\tabcolsep}{-0.5pt} 
-\begin{tabular}[b]{c}
-{\scriptsize\ugtransrev{#1}} \\
-\ugfont #1 \\
-\end{tabular} {\ugfontb\ugdiv}
-}}
-
-
-%\seq_new:N \l_ruby_seq
-\NewDocumentCommand{\ugruby}{ > { \SplitList { ; } } m }{%
-  \ProcessList {#1 } { \mapruby }
-%%	\tl_set:Nn \l_my_tl { #1 }
-%%	\seq_set_split:Nnn 
-%%								\l_ruby_seq 
-%%								{ ; } 
-%%								{ \l_my_tl }
-%%{\ugfont		\seq_use:Nnnn
-%%								\l_ruby_seq {;}{}{}
-%%								}
-%%%	\seq_map_function:NN 
-%%%								\l_ruby_seq  
-%%%								\mapruby
-%%	\seq_map_inline:Nn 
-%%								\l_ruby_seq  
-%%								{ \mapruby{#1} }
-%%%\tl_use:N \l_my_tl
-%%%\ugtransrev{}
-}
-
-\NewDocumentCommand{\ugrubyw}{ > { \SplitList { ~ } } m }{%
-  \ProcessList {#1 } { \maprubyw }
-}
 
 
 \ExplSyntaxOff
@@ -515,6 +640,72 @@ x
 In \ugruby{𐎜;𐎂;𐎗;𐎚}, the \ugruby{𐎄;𐎍;𐎚} or royal guard post, ...
 
 The \ugrubyw{𐎄𐎍𐎚 𐎜𐎂𐎗𐎚} was ...
+
+\bigskip
+Scholarly transliteration
+%𐎀
+
+%\sugtransrev{𐎀;}x
+%
+%\sugruby{𐎀;}y
+
+\sugruby{𐎀;
+𐎁;
+𐎂;
+𐎃;
+𐎄;
+𐎅;
+𐎆;
+𐎇;
+𐎈;
+𐎉;
+𐎊;
+𐎋;
+𐎌;
+𐎍;
+𐎎
+}
+
+\sugruby{𐎏;
+𐎐;
+𐎑;
+𐎒;
+𐎓;
+𐎔;
+𐎕;
+𐎖;
+𐎗;
+𐎘;
+𐎙;
+𐎚;
+𐎛;
+𐎜;
+𐎝;
+𐎟
+}
+
+\sugrubyw{𐎄𐎍𐎚 𐎜𐎂𐎗𐎚}
+
+%\sugruby{\ugtrans{tt.};}
+
+\section{Commands}
+
+Command \cs{\sugrubyw} does ruby scholarly transliteration by space delimiter (intended for words), calling \cs{\smaprubyw} for each item.
+
+\cs{\smaprubyw} does the individual transliteration ruby unit stack, adding the word divider.
+
+\cdr{\sugrubyw{𐎄𐎍𐎚 𐎜𐎂𐎗𐎚}}
+
+\cdr{\smaprubyw{x}}
+
+\bigskip
+Command \cs{\sugruby} does ruby scholarly transliteration by semicolon delimiter (intended for the letters of words), calling \cs{\smapruby} for each item.
+
+\cs{\smapruby} does the individual transliteration ruby unit stack.
+
+\cdr{\sugruby{𐎄;𐎍;𐎚}}
+
+\cdr{\smapruby{x}}
 
 \end{document}
 
