@@ -1,4 +1,3 @@
-% Compile with xelatex for conjuncts/ligatures
 \documentclass{article}
 \usepackage{xcolor}
 \usepackage{fontspec}
@@ -8,9 +7,6 @@
 \newfontfamily\ugfont{Noto Sans Ugaritic}[Colour=blue,Scale=1.5]
 \newfontfamily\ugfontb{Noto Sans Ugaritic}%plain font
 
-
-
-%\input{metacsinput.tex}%helper macros for meta-commands
 
 %----- Named macros
 \newcommand\ugalpa{\symbol{66432}}
@@ -412,22 +408,31 @@
 %\def\l_myugx_f{}
 \NewDocumentCommand\smapruby{ m } {%
 {
-%\str_set:Nn \l_myugx_str { #1 }
-%\tl_set:Nn \l_myugx_tl { #1 }
-%\tl_set:Nn \l_myugx_tl { \sugtransrev{#1} }
-%\tl_to_str:V { \l_myugx_tl }
 \setlength{\tabcolsep}{-0.5pt} 
 \begin{tabular}[b]{c}
-%\scriptsize\sugtransrev{\str_use:N \l_myugx_str}  \\
-%\scriptsize\sugtransrev{\tl_use:N \l_myugx_tl}  \\
-%\exp_args:cc { \l_myugx_f } { #1 }
-%\scriptsize \exp_args:Nx \sugtransrev {#1}  \\
-%\scriptsize\sugtransrev{\exp:w #1 \exp_end:}  \\
-%\tl_use:N \l_myugx_tl \\
 \scriptsize\sugtransrev{#1}  \\
 \rule{0pt}{2ex} \ugfont #1 \\
 \end{tabular} 
 }}
+
+\NewDocumentCommand\dosmaprubye{ m } {%
+{
+	\begin{smaprubye}
+	#1
+	\end{smaprubye}
+}}
+
+
+\NewDocumentEnvironment{smaprubye}{ +b }
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+\scriptsize\sugtransrev{#1}  \\
+\rule{0pt}{2ex} \ugfont #1 \\
+\end{tabular} 
+}
+{}
+
 
 
 \NewDocumentCommand\smaprubyw{ m } {%
@@ -477,6 +482,33 @@
   \ProcessList {#1 } { \smaprubyw }
 }
 
+\NewDocumentCommand{\sugrubynd}{ > { \SplitList { } } m }{%
+  \ProcessList {#1 } { \smapruby }
+}
+
+
+\NewDocumentEnvironment{sugrubynde}{ +b } 
+{
+	\tl_set:Nn \l_my_tl { #1 }
+	\seq_set_split:Nnn 
+								\l_ruby_seq 
+								{  } 
+								{ \l_my_tl }
+{\ugfont		\seq_use:Nnnn
+								\l_ruby_seq {}{}{}
+								}
+	\seq_map_function:NN 
+								\l_ruby_seq  
+%								\dosmaprubye
+								\smapruby
+%%	\seq_map_inline:Nn 
+%%								\l_ruby_seq  
+%%								{ \mapruby{#1} }
+%%%\tl_use:N \l_my_tl
+
+% { \smapruby }
+}
+{ }
 
 
 
@@ -948,12 +980,32 @@ Command \cs{\sugruby} does ruby scholarly transliteration by semicolon delimiter
 %\cdpr[\ugfont\scriptsize]{sugruby}{𐎄;𐎍;𐎚}
 {\ttfamily\color{blue}\textbackslash sugruby\{{\ugfont\scriptsize 𐎄};{\ugfont\scriptsize 𐎍};{\ugfont\scriptsize 𐎚};\}}
 \enspace$\mapsto$\enspace
-\sugruby{𐎄;𐎍;𐎚}
+\sugruby{𐎄;𐎍;𐎚}nodelim 
 
 
 \cdr{\smapruby{x}}
 
-Alternatively, words may be separated by semicolons, or letters by spaces, as long as the appropriate ruby command is used.
+\bigskip
+Command \cs{\sugrubynd} rubifies each character without the need to use delimiters.
+
+\bigskip
+\cdpr[\ugfont\scriptsize]{sugrubynd}{𐎄𐎍𐎚𐎟𐎜𐎂𐎗𐎚𐎟}
+
+%%Splitting is not allowed across paragraph breaks?
+%Environment \cs{sugrubynde}:
+%
+%\begin{quotation}
+%\begin{sugrubynde}
+%𐎄𐎍𐎚
+%
+%𐎕𐎘𐎙
+%
+%𐎛𐎜
+%\end{sugrubynde}
+%\end{quotation}
+
+\bigskip
+(Alternatively, words may be separated by semicolons, or letters by spaces, as long as the appropriate ruby command is used.
 
 \bigskip
 The letter alpa, \smapruby{𐎀}, ...
