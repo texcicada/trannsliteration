@@ -332,6 +332,46 @@
 
 }
 
+%rubify
+\newcommand\dougariticruby{%
+\regex_replace_all:nnN { 𐎀 } {  \c{smapruby} \cB\{ 𐎀 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎁 } {  \c{smapruby} \cB\{ 𐎁 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎂 } {  \c{smapruby} \cB\{ 𐎂 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎃 } {  \c{smapruby} \cB\{ 𐎃 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎄 } {  \c{smapruby} \cB\{ 𐎄 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎅 } {  \c{smapruby} \cB\{ 𐎅 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎆 } {  \c{smapruby} \cB\{ 𐎆 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎇 } {  \c{smapruby} \cB\{ 𐎇 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎈 } {  \c{smapruby} \cB\{ 𐎈 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎉 } {  \c{smapruby} \cB\{ 𐎉 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎊 } {  \c{smapruby} \cB\{ 𐎊 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎋 } {  \c{smapruby} \cB\{ 𐎋 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎌 } {  \c{smapruby} \cB\{ 𐎌 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎍 } {  \c{smapruby} \cB\{ 𐎍 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎎 } {  \c{smapruby} \cB\{ 𐎎 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎏 } {  \c{smapruby} \cB\{ 𐎏 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎐 } {  \c{smapruby} \cB\{ 𐎐 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎑 } {  \c{smapruby} \cB\{ 𐎑 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎒 } {  \c{smapruby} \cB\{ 𐎒 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎓 } {  \c{smapruby} \cB\{ 𐎓 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎔 } {  \c{smapruby} \cB\{ 𐎔 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎕 } {  \c{smapruby} \cB\{ 𐎕 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎖 } {  \c{smapruby} \cB\{ 𐎖 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎗 } {  \c{smapruby} \cB\{ 𐎗 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎘 } {  \c{smapruby} \cB\{ 𐎘 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎙 } {  \c{smapruby} \cB\{ 𐎙 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎚 } {  \c{smapruby} \cB\{ 𐎚 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎛 } {  \c{smapruby} \cB\{ 𐎛 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎜 } {  \c{smapruby} \cB\{ 𐎜 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎝 } {  \c{smapruby} \cB\{ 𐎝 \cE\}  } \l_myug_tl
+\regex_replace_all:nnN { 𐎟 } {  \c{smapruby} \cB\{ 𐎟 \cE\}  } \l_myug_tl
+}
+
+
+
+
+
+
 %=================
 \str_new:N \l_myug_str
 
@@ -489,24 +529,28 @@
 
 \NewDocumentEnvironment{sugrubynde}{ +b } 
 {
-	\tl_set:Nn \l_my_tl { #1 }
-	\seq_set_split:Nnn 
-								\l_ruby_seq 
-								{  } 
-								{ \l_my_tl }
-{\ugfont		\seq_use:Nnnn
-								\l_ruby_seq {}{}{}
-								}
-	\seq_map_function:NN 
-								\l_ruby_seq  
-%								\dosmaprubye
-								\smapruby
-%%	\seq_map_inline:Nn 
-%%								\l_ruby_seq  
-%%								{ \mapruby{#1} }
-%%%\tl_use:N \l_my_tl
+\tl_set:Nn \l_myug_tl { #1 }
+	\dougariticruby
+{ \tl_use:N \l_myug_tl }
 
-% { \smapruby }
+%%	\tl_set:Nn \l_my_tl { #1 }
+%%	\seq_set_split:Nnn 
+%%								\l_ruby_seq 
+%%								{  } 
+%%								{ \l_my_tl }
+%%{\ugfont		\seq_use:Nnnn
+%%								\l_ruby_seq {}{}{}
+%%								}
+%%	\seq_map_function:NN 
+%%								\l_ruby_seq  
+%%%								\dosmaprubye
+%%								\smapruby
+%%%%	\seq_map_inline:Nn 
+%%%%								\l_ruby_seq  
+%%%%								{ \mapruby{#1} }
+%%%%%\tl_use:N \l_my_tl
+%%
+%%% { \smapruby }
 }
 { }
 
@@ -992,17 +1036,19 @@ Command \cs{\sugrubynd} rubifies each character without the need to use delimite
 \cdpr[\ugfont\scriptsize]{sugrubynd}{𐎄𐎍𐎚𐎟𐎜𐎂𐎗𐎚𐎟}
 
 %%Splitting is not allowed across paragraph breaks?
-%Environment \cs{sugrubynde}:
-%
-%\begin{quotation}
-%\begin{sugrubynde}
-%𐎄𐎍𐎚
-%
-%𐎕𐎘𐎙
-%
-%𐎛𐎜
-%\end{sugrubynde}
-%\end{quotation}
+Environment \cs{sugrubynde}:
+
+\begin{quotation}
+\begin{sugrubynde}
+𐎀
+
+𐎄𐎍𐎚
+
+𐎕𐎘𐎙
+
+𐎛𐎜
+\end{sugrubynde}
+\end{quotation}
 
 \bigskip
 (Alternatively, words may be separated by semicolons, or letters by spaces, as long as the appropriate ruby command is used.
