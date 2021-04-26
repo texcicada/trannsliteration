@@ -1,0 +1,1289 @@
+%Old Persian: ASCII transliterated input method
+
+
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{fontspec}
+%\usepackage{xparse}
+\setmainfont{Noto Serif}
+
+\newfontfamily\opfont{Noto Sans OldPersian}[Colour=blue,Scale=1.5]
+\newfontfamily\opfontb{Noto Sans OldPersian}%plain font
+
+
+%----- Named macros
+\newcommand\opa{\symbol{66464}}
+\newcommand\opi{\symbol{66465}}
+\newcommand\opu{\symbol{66466}}
+\newcommand\opka{\symbol{66467}}
+\newcommand\opku{\symbol{66468}}
+\newcommand\opga{\symbol{66469}}
+\newcommand\opgu{\symbol{66470}}
+\newcommand\opxa{\symbol{66471}}
+\newcommand\opca{\symbol{66472}}
+\newcommand\opja{\symbol{66473}}
+\newcommand\opji{\symbol{66474}}
+\newcommand\opta{\symbol{66475}}
+\newcommand\optu{\symbol{66476}}
+\newcommand\opda{\symbol{66477}}
+\newcommand\opdi{\symbol{66478}}
+\newcommand\opdu{\symbol{66479}}
+\newcommand\optha{\symbol{66480}}
+\newcommand\oppa{\symbol{66481}}
+\newcommand\opba{\symbol{66482}}
+\newcommand\opfa{\symbol{66483}}
+\newcommand\opna{\symbol{66484}}
+\newcommand\opnu{\symbol{66485}}
+\newcommand\opma{\symbol{66486}}
+\newcommand\opmi{\symbol{66487}}
+\newcommand\opmu{\symbol{66488}}
+\newcommand\opya{\symbol{66489}}
+\newcommand\opva{\symbol{66490}}
+\newcommand\opvi{\symbol{66491}}
+\newcommand\opra{\symbol{66492}}
+\newcommand\opru{\symbol{66493}}
+\newcommand\opla{\symbol{66494}}
+\newcommand\opsa{\symbol{66495}}
+\newcommand\opza{\symbol{66496}}
+\newcommand\opsha{\symbol{66497}}
+\newcommand\opssa{\symbol{66498}}
+\newcommand\opha{\symbol{66499}}
+\newcommand\opauramazdaa{\symbol{66504}}
+\newcommand\opauramazdaab{\symbol{66505}}
+\newcommand\opauramazdaaha{\symbol{66506}}
+\newcommand\opxshaayathiya{\symbol{66507}}
+\newcommand\opdahyaaush{\symbol{66508}}
+\newcommand\opdahyaaushb{\symbol{66509}}
+\newcommand\opbaga{\symbol{66510}}
+\newcommand\opbuumish{\symbol{66511}}
+\newcommand\opworddivider{\symbol{66512}}
+\newcommand\opone{\symbol{66513}}
+\newcommand\optwo{\symbol{66514}}
+\newcommand\opten{\symbol{66515}}
+\newcommand\optwenty{\symbol{66516}}
+\newcommand\ophundred{\symbol{66517}}
+
+
+% letter names
+%(not needed for OPer)
+
+%Coverage of Old Persian by Noto Sans Old Persian
+%U+103A0	𐎠	OLD PERSIAN SIGN A	YES
+%U+103A1	𐎡	OLD PERSIAN SIGN I	YES
+%U+103A2	𐎢	OLD PERSIAN SIGN U	YES
+%U+103A3	𐎣	OLD PERSIAN SIGN KA	YES
+%U+103A4	𐎤	OLD PERSIAN SIGN KU	YES
+%U+103A5	𐎥	OLD PERSIAN SIGN GA	YES
+%U+103A6	𐎦	OLD PERSIAN SIGN GU	YES
+%U+103A7	𐎧	OLD PERSIAN SIGN XA	YES
+%U+103A8	𐎨	OLD PERSIAN SIGN CA	YES
+%U+103A9	𐎩	OLD PERSIAN SIGN JA	YES
+%U+103AA	𐎪	OLD PERSIAN SIGN JI	YES
+%U+103AB	𐎫	OLD PERSIAN SIGN TA	YES
+%U+103AC	𐎬	OLD PERSIAN SIGN TU	YES
+%U+103AD	𐎭	OLD PERSIAN SIGN DA	YES
+%U+103AE	𐎮	OLD PERSIAN SIGN DI	YES
+%U+103AF	𐎯	OLD PERSIAN SIGN DU	YES
+%U+103B0	𐎰	OLD PERSIAN SIGN THA	YES
+%U+103B1	𐎱	OLD PERSIAN SIGN PA	YES
+%U+103B2	𐎲	OLD PERSIAN SIGN BA	YES
+%U+103B3	𐎳	OLD PERSIAN SIGN FA	YES
+%U+103B4	𐎴	OLD PERSIAN SIGN NA	YES
+%U+103B5	𐎵	OLD PERSIAN SIGN NU	YES
+%U+103B6	𐎶	OLD PERSIAN SIGN MA	YES
+%U+103B7	𐎷	OLD PERSIAN SIGN MI	YES
+%U+103B8	𐎸	OLD PERSIAN SIGN MU	YES
+%U+103B9	𐎹	OLD PERSIAN SIGN YA	YES
+%U+103BA	𐎺	OLD PERSIAN SIGN VA	YES
+%U+103BB	𐎻	OLD PERSIAN SIGN VI	YES
+%U+103BC	𐎼	OLD PERSIAN SIGN RA	YES
+%U+103BD	𐎽	OLD PERSIAN SIGN RU	YES
+%U+103BE	𐎾	OLD PERSIAN SIGN LA	YES
+%U+103BF	𐎿	OLD PERSIAN SIGN SA	YES
+%U+103C0	𐏀	OLD PERSIAN SIGN ZA	YES
+%U+103C1	𐏁	OLD PERSIAN SIGN SHA	YES
+%U+103C2	𐏂	OLD PERSIAN SIGN SSA	YES
+%U+103C3	𐏃	OLD PERSIAN SIGN HA	YES
+%U+103C8	𐏈	OLD PERSIAN SIGN AURAMAZDAA	YES
+%U+103C9	𐏉	OLD PERSIAN SIGN AURAMAZDAA-2	YES
+%U+103CA	𐏊	OLD PERSIAN SIGN AURAMAZDAAHA	YES
+%U+103CB	𐏋	OLD PERSIAN SIGN XSHAAYATHIYA	YES
+%U+103CC	𐏌	OLD PERSIAN SIGN DAHYAAUSH	YES
+%U+103CD	𐏍	OLD PERSIAN SIGN DAHYAAUSH-2	YES
+%U+103CE	𐏎	OLD PERSIAN SIGN BAGA	YES
+%U+103CF	𐏏	OLD PERSIAN SIGN BUUMISH	YES
+%U+103D0	𐏐	OLD PERSIAN WORD DIVIDER	YES
+%U+103D1	𐏑	OLD PERSIAN NUMBER ONE	YES
+%U+103D2	𐏒	OLD PERSIAN NUMBER TWO	YES
+%U+103D3	𐏓	OLD PERSIAN NUMBER TEN	YES
+%U+103D4	𐏔	OLD PERSIAN NUMBER TWENTY	YES
+%U+103D5	𐏕	OLD PERSIAN NUMBER HUNDRED	YES
+
+
+
+\ExplSyntaxOn
+
+
+%--------------- Old Persian
+\newcommand\dooldpersiantrans{%
+
+
+% Unicode codepoints
+
+\regex_replace_all:nnN { U\+103A0 } { \c{symbol} \cB\{ 66464\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A1 } { \c{symbol} \cB\{ 66465\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A2 } { \c{symbol} \cB\{ 66466\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A3 } { \c{symbol} \cB\{ 66467\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A4 } { \c{symbol} \cB\{ 66468\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A5 } { \c{symbol} \cB\{ 66469\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A6 } { \c{symbol} \cB\{ 66470\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A7 } { \c{symbol} \cB\{ 66471\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A8 } { \c{symbol} \cB\{ 66472\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103A9 } { \c{symbol} \cB\{ 66473\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103AA } { \c{symbol} \cB\{ 66474\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103AB } { \c{symbol} \cB\{ 66475\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103AC } { \c{symbol} \cB\{ 66476\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103AD } { \c{symbol} \cB\{ 66477\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103AE } { \c{symbol} \cB\{ 66478\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103AF } { \c{symbol} \cB\{ 66479\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B0 } { \c{symbol} \cB\{ 66480\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B1 } { \c{symbol} \cB\{ 66481\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B2 } { \c{symbol} \cB\{ 66482\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B3 } { \c{symbol} \cB\{ 66483\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B4 } { \c{symbol} \cB\{ 66484\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B5 } { \c{symbol} \cB\{ 66485\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B6 } { \c{symbol} \cB\{ 66486\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B7 } { \c{symbol} \cB\{ 66487\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B8 } { \c{symbol} \cB\{ 66488\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103B9 } { \c{symbol} \cB\{ 66489\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103BA } { \c{symbol} \cB\{ 66490\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103BB } { \c{symbol} \cB\{ 66491\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103BC } { \c{symbol} \cB\{ 66492\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103BD } { \c{symbol} \cB\{ 66493\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103BE } { \c{symbol} \cB\{ 66494\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103BF } { \c{symbol} \cB\{ 66495\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103C0 } { \c{symbol} \cB\{ 66496\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103C1 } { \c{symbol} \cB\{ 66497\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103C2 } { \c{symbol} \cB\{ 66498\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103C3 } { \c{symbol} \cB\{ 66499\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103C8 } { \c{symbol} \cB\{ 66504\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103C9 } { \c{symbol} \cB\{ 66505\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103CA } { \c{symbol} \cB\{ 66506\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103CB } { \c{symbol} \cB\{ 66507\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103CC } { \c{symbol} \cB\{ 66508\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103CD } { \c{symbol} \cB\{ 66509\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103CE } { \c{symbol} \cB\{ 66510\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103CF } { \c{symbol} \cB\{ 66511\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103D0 } { \c{symbol} \cB\{ 66512\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103D1 } { \c{symbol} \cB\{ 66513\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103D2 } { \c{symbol} \cB\{ 66514\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103D3 } { \c{symbol} \cB\{ 66515\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103D4 } { \c{symbol} \cB\{ 66516\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { U\+103D5 } { \c{symbol} \cB\{ 66517\cE\}  } \l_myop_tl
+
+%Unicode-based names
+% longest strings first, so regex replacement happens in right order
+%AG:
+\regex_replace_all:nnN { opauramazdaaha\. } { \c{symbol} \cB\{ 66506\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opxshaayathiya\. } { \c{symbol} \cB\{ 66507\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opauramazdaab\. } { \c{symbol} \cB\{ 66505\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opworddivider\. } { \c{symbol} \cB\{ 66512\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opauramazdaa\. } { \c{symbol} \cB\{ 66504\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opdahyaaushb\. } { \c{symbol} \cB\{ 66509\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opdahyaaush\. } { \c{symbol} \cB\{ 66508\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opbuumish\. } { \c{symbol} \cB\{ 66511\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ophundred\. } { \c{symbol} \cB\{ 66517\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { optwenty\. } { \c{symbol} \cB\{ 66516\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opbaga\. } { \c{symbol} \cB\{ 66510\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { optha\. } { \c{symbol} \cB\{ 66480\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opsha\. } { \c{symbol} \cB\{ 66497\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opssa\. } { \c{symbol} \cB\{ 66498\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opone\. } { \c{symbol} \cB\{ 66513\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { optwo\. } { \c{symbol} \cB\{ 66514\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opten\. } { \c{symbol} \cB\{ 66515\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opka\. } { \c{symbol} \cB\{ 66467\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opku\. } { \c{symbol} \cB\{ 66468\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opga\. } { \c{symbol} \cB\{ 66469\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opgu\. } { \c{symbol} \cB\{ 66470\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opxa\. } { \c{symbol} \cB\{ 66471\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opca\. } { \c{symbol} \cB\{ 66472\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opja\. } { \c{symbol} \cB\{ 66473\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opji\. } { \c{symbol} \cB\{ 66474\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opta\. } { \c{symbol} \cB\{ 66475\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { optu\. } { \c{symbol} \cB\{ 66476\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opda\. } { \c{symbol} \cB\{ 66477\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opdi\. } { \c{symbol} \cB\{ 66478\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opdu\. } { \c{symbol} \cB\{ 66479\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { oppa\. } { \c{symbol} \cB\{ 66481\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opba\. } { \c{symbol} \cB\{ 66482\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opfa\. } { \c{symbol} \cB\{ 66483\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opna\. } { \c{symbol} \cB\{ 66484\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opnu\. } { \c{symbol} \cB\{ 66485\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opma\. } { \c{symbol} \cB\{ 66486\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opmi\. } { \c{symbol} \cB\{ 66487\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opmu\. } { \c{symbol} \cB\{ 66488\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opya\. } { \c{symbol} \cB\{ 66489\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opva\. } { \c{symbol} \cB\{ 66490\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opvi\. } { \c{symbol} \cB\{ 66491\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opra\. } { \c{symbol} \cB\{ 66492\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opru\. } { \c{symbol} \cB\{ 66493\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opla\. } { \c{symbol} \cB\{ 66494\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opsa\. } { \c{symbol} \cB\{ 66495\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opza\. } { \c{symbol} \cB\{ 66496\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opha\. } { \c{symbol} \cB\{ 66499\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opa\. } { \c{symbol} \cB\{ 66464\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opi\. } { \c{symbol} \cB\{ 66465\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { opu\. } { \c{symbol} \cB\{ 66466\cE\}  } \l_myop_tl
+
+% shortnames
+%AO:
+\regex_replace_all:nnN { hundred\. } { \c{symbol} \cB\{ 66517\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { twenty\. } { \c{symbol} \cB\{ 66516\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { amh\. } { \c{symbol} \cB\{ 66506\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { xsh\. } { \c{symbol} \cB\{ 66507\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { amb\. } { \c{symbol} \cB\{ 66505\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { div\. } { \c{symbol} \cB\{ 66512\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { dyb\. } { \c{symbol} \cB\{ 66509\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { buu\. } { \c{symbol} \cB\{ 66511\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { bag\. } { \c{symbol} \cB\{ 66510\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { tha\. } { \c{symbol} \cB\{ 66480\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { sha\. } { \c{symbol} \cB\{ 66497\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ssa\. } { \c{symbol} \cB\{ 66498\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { one\. } { \c{symbol} \cB\{ 66513\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { two\. } { \c{symbol} \cB\{ 66514\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ten\. } { \c{symbol} \cB\{ 66515\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { am\. } { \c{symbol} \cB\{ 66504\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { dy\. } { \c{symbol} \cB\{ 66508\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ka\. } { \c{symbol} \cB\{ 66467\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ku\. } { \c{symbol} \cB\{ 66468\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ga\. } { \c{symbol} \cB\{ 66469\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { gu\. } { \c{symbol} \cB\{ 66470\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { xa\. } { \c{symbol} \cB\{ 66471\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ca\. } { \c{symbol} \cB\{ 66472\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ja\. } { \c{symbol} \cB\{ 66473\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ji\. } { \c{symbol} \cB\{ 66474\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ta\. } { \c{symbol} \cB\{ 66475\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { tu\. } { \c{symbol} \cB\{ 66476\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { da\. } { \c{symbol} \cB\{ 66477\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { di\. } { \c{symbol} \cB\{ 66478\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { du\. } { \c{symbol} \cB\{ 66479\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { pa\. } { \c{symbol} \cB\{ 66481\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ba\. } { \c{symbol} \cB\{ 66482\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { fa\. } { \c{symbol} \cB\{ 66483\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { na\. } { \c{symbol} \cB\{ 66484\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { nu\. } { \c{symbol} \cB\{ 66485\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ma\. } { \c{symbol} \cB\{ 66486\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { mi\. } { \c{symbol} \cB\{ 66487\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { mu\. } { \c{symbol} \cB\{ 66488\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ya\. } { \c{symbol} \cB\{ 66489\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { va\. } { \c{symbol} \cB\{ 66490\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { vi\. } { \c{symbol} \cB\{ 66491\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ra\. } { \c{symbol} \cB\{ 66492\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ru\. } { \c{symbol} \cB\{ 66493\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { la\. } { \c{symbol} \cB\{ 66494\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { sa\. } { \c{symbol} \cB\{ 66495\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { za\. } { \c{symbol} \cB\{ 66496\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { ha\. } { \c{symbol} \cB\{ 66499\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { a\. } { \c{symbol} \cB\{ 66464\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { i\. } { \c{symbol} \cB\{ 66465\cE\}  } \l_myop_tl
+\regex_replace_all:nnN { u\. } { \c{symbol} \cB\{ 66466\cE\}  } \l_myop_tl
+	
+
+
+% handy shortcuts
+%\newcommand\opdiv{\opworddivider}
+
+
+}
+% from old persian to trans
+
+\newcommand\dooldpersiantransrev{%
+%AP:
+\regex_replace_all:nnN { 𐎠 } { a\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎡 } { i\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎢 } { u\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎣 } { ka\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎤 } { ku\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎥 } { ga\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎦 } { gu\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎧 } { xa\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎨 } { ca\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎩 } { ja\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎪 } { ji\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎫 } { ta\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎬 } { tu\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎭 } { da\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎮 } { di\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎯 } { du\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎰 } { tha\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎱 } { pa\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎲 } { ba\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎳 } { fa\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎴 } { na\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎵 } { nu\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎶 } { ma\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎷 } { mi\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎸 } { mu\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎹 } { ya\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎺 } { va\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎻 } { vi\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎼 } { ra\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎽 } { ru\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎾 } { la\. } \l_myop_tl
+\regex_replace_all:nnN { 𐎿 } { sa\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏀 } { za\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏁 } { sha\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏂 } { ssa\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏃 } { ha\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏈 } { am\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏉 } { amb\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏊 } { amh\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏋 } { xsh\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏌 } { dy\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏍 } { dyb\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏎 } { bag\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏏 } { buu\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏐 } { div\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏑 } { one\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏒 } { two\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏓 } { ten\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏔 } { twenty\. } \l_myop_tl
+\regex_replace_all:nnN { 𐏕 } { hundred\. } \l_myop_tl
+
+}
+
+%scholarly transliteration
+\newcommand\dosoptrans{%
+%todo
+%AY:
+\regex_replace_all:nnN { 𐎠 } { a } \l_myop_tl
+\regex_replace_all:nnN { 𐎡 } { i } \l_myop_tl
+\regex_replace_all:nnN { 𐎢 } { u } \l_myop_tl
+\regex_replace_all:nnN { 𐎣 } { ka } \l_myop_tl
+\regex_replace_all:nnN { 𐎤 } { ku } \l_myop_tl
+\regex_replace_all:nnN { 𐎥 } { ga } \l_myop_tl
+\regex_replace_all:nnN { 𐎦 } { gu } \l_myop_tl
+\regex_replace_all:nnN { 𐎧 } { xa } \l_myop_tl
+\regex_replace_all:nnN { 𐎨 } { ca } \l_myop_tl
+\regex_replace_all:nnN { 𐎩 } { ja } \l_myop_tl
+\regex_replace_all:nnN { 𐎪 } { ji } \l_myop_tl
+\regex_replace_all:nnN { 𐎫 } { ta } \l_myop_tl
+\regex_replace_all:nnN { 𐎬 } { tu } \l_myop_tl
+\regex_replace_all:nnN { 𐎭 } { da } \l_myop_tl
+\regex_replace_all:nnN { 𐎮 } { di } \l_myop_tl
+\regex_replace_all:nnN { 𐎯 } { du } \l_myop_tl
+\regex_replace_all:nnN { 𐎰 } { ^^^^03b8a } \l_myop_tl
+\regex_replace_all:nnN { 𐎱 } { pa } \l_myop_tl
+\regex_replace_all:nnN { 𐎲 } { ba } \l_myop_tl
+\regex_replace_all:nnN { 𐎳 } { fa } \l_myop_tl
+\regex_replace_all:nnN { 𐎴 } { na } \l_myop_tl
+\regex_replace_all:nnN { 𐎵 } { nu } \l_myop_tl
+\regex_replace_all:nnN { 𐎶 } { ma } \l_myop_tl
+\regex_replace_all:nnN { 𐎷 } { mo } \l_myop_tl
+\regex_replace_all:nnN { 𐎸 } { mu } \l_myop_tl
+\regex_replace_all:nnN { 𐎹 } { ya } \l_myop_tl
+\regex_replace_all:nnN { 𐎺 } { va } \l_myop_tl
+\regex_replace_all:nnN { 𐎻 } { vi } \l_myop_tl
+\regex_replace_all:nnN { 𐎼 } { ra } \l_myop_tl
+\regex_replace_all:nnN { 𐎽 } { ru } \l_myop_tl
+\regex_replace_all:nnN { 𐎾 } { la } \l_myop_tl
+\regex_replace_all:nnN { 𐎿 } { sa } \l_myop_tl
+\regex_replace_all:nnN { 𐏀 } { za } \l_myop_tl
+\regex_replace_all:nnN { 𐏁 } { s^^^^030ca } \l_myop_tl
+\regex_replace_all:nnN { 𐏂 } { c^^^^0327a } \l_myop_tl
+\regex_replace_all:nnN { 𐏃 } { ha } \l_myop_tl
+\regex_replace_all:nnN { 𐏈 } { AM } \l_myop_tl
+\regex_replace_all:nnN { 𐏉 } { AMb } \l_myop_tl
+\regex_replace_all:nnN { 𐏊 } { AMha } \l_myop_tl
+\regex_replace_all:nnN { 𐏋 } { XSH } \l_myop_tl
+\regex_replace_all:nnN { 𐏌 } { DAH } \l_myop_tl
+\regex_replace_all:nnN { 𐏍 } { DAHb } \l_myop_tl
+\regex_replace_all:nnN { 𐏎 } { BAG } \l_myop_tl
+\regex_replace_all:nnN { 𐏏 } { BUU } \l_myop_tl
+\regex_replace_all:nnN { 𐏐 } {  } \l_myop_tl
+\regex_replace_all:nnN { 𐏑 } { 1 } \l_myop_tl
+\regex_replace_all:nnN { 𐏒 } { 2 } \l_myop_tl
+\regex_replace_all:nnN { 𐏓 } { 10 } \l_myop_tl
+\regex_replace_all:nnN { 𐏔 } { 20 } \l_myop_tl
+\regex_replace_all:nnN { 𐏕 } { 100 } \l_myop_tl
+}
+
+
+%variation
+\newcommand\dosoptransvar{%
+%todo
+%none for OP
+}
+
+%rubify
+\newcommand\dooldpersianruby{%
+%BF:
+\regex_replace_all:nnN { 𐎠 } {  \c{sopmapruby} \cB\{ 𐎠 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎡 } {  \c{sopmapruby} \cB\{ 𐎡 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎢 } {  \c{sopmapruby} \cB\{ 𐎢 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎣 } {  \c{sopmapruby} \cB\{ 𐎣 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎤 } {  \c{sopmapruby} \cB\{ 𐎤 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎥 } {  \c{sopmapruby} \cB\{ 𐎥 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎦 } {  \c{sopmapruby} \cB\{ 𐎦 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎧 } {  \c{sopmapruby} \cB\{ 𐎧 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎨 } {  \c{sopmapruby} \cB\{ 𐎨 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎩 } {  \c{sopmapruby} \cB\{ 𐎩 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎪 } {  \c{sopmapruby} \cB\{ 𐎪 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎫 } {  \c{sopmapruby} \cB\{ 𐎫 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎬 } {  \c{sopmapruby} \cB\{ 𐎬 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎭 } {  \c{sopmapruby} \cB\{ 𐎭 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎮 } {  \c{sopmapruby} \cB\{ 𐎮 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎯 } {  \c{sopmapruby} \cB\{ 𐎯 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎰 } {  \c{sopmapruby} \cB\{ 𐎰 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎱 } {  \c{sopmapruby} \cB\{ 𐎱 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎲 } {  \c{sopmapruby} \cB\{ 𐎲 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎳 } {  \c{sopmapruby} \cB\{ 𐎳 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎴 } {  \c{sopmapruby} \cB\{ 𐎴 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎵 } {  \c{sopmapruby} \cB\{ 𐎵 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎶 } {  \c{sopmapruby} \cB\{ 𐎶 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎷 } {  \c{sopmapruby} \cB\{ 𐎷 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎸 } {  \c{sopmapruby} \cB\{ 𐎸 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎹 } {  \c{sopmapruby} \cB\{ 𐎹 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎺 } {  \c{sopmapruby} \cB\{ 𐎺 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎻 } {  \c{sopmapruby} \cB\{ 𐎻 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎼 } {  \c{sopmapruby} \cB\{ 𐎼 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎽 } {  \c{sopmapruby} \cB\{ 𐎽 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎾 } {  \c{sopmapruby} \cB\{ 𐎾 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐎿 } {  \c{sopmapruby} \cB\{ 𐎿 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏀 } {  \c{sopmapruby} \cB\{ 𐏀 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏁 } {  \c{sopmapruby} \cB\{ 𐏁 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏂 } {  \c{sopmapruby} \cB\{ 𐏂 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏃 } {  \c{sopmapruby} \cB\{ 𐏃 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏈 } {  \c{sopmapruby} \cB\{ 𐏈 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏉 } {  \c{sopmapruby} \cB\{ 𐏉 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏊 } {  \c{sopmapruby} \cB\{ 𐏊 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏋 } {  \c{sopmapruby} \cB\{ 𐏋 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏌 } {  \c{sopmapruby} \cB\{ 𐏌 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏍 } {  \c{sopmapruby} \cB\{ 𐏍 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏎 } {  \c{sopmapruby} \cB\{ 𐏎 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏏 } {  \c{sopmapruby} \cB\{ 𐏏 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏐 } {  \c{sopmapruby} \cB\{ 𐏐 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏑 } {  \c{sopmapruby} \cB\{ 𐏑 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏒 } {  \c{sopmapruby} \cB\{ 𐏒 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏓 } {  \c{sopmapruby} \cB\{ 𐏓 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏔 } {  \c{sopmapruby} \cB\{ 𐏔 \cE\}  } \l_myop_tl
+\regex_replace_all:nnN { 𐏕 } {  \c{sopmapruby} \cB\{ 𐏕 \cE\}  } \l_myop_tl
+
+}
+
+
+
+
+
+
+%=================
+\str_new:N \l_myop_str
+
+\NewDocumentCommand { \optrans } { m } {%
+\tl_set:Nn \l_myop_tl { #1 }
+ \dooldpersiantrans 
+{ \opfont \tl_use:N \l_myop_tl }
+}
+
+\NewDocumentEnvironment{optranse}{ +b } 
+{
+\tl_set:Nn \l_myop_tl { #1 }
+	\dooldpersiantrans 
+{ \opfont \tl_use:N \l_myop_tl }
+}
+{ }
+
+%----- Old Persian to Unicode names
+\NewDocumentCommand { \optransrev } { m } {%
+\tl_set:Nn \l_myop_tl { #1 }
+ \dooldpersiantransrev 
+{ \tl_use:N \l_myop_tl }
+}
+
+
+
+
+\NewDocumentEnvironment{optranserev}{ +b } 
+{
+\tl_set:Nn \l_myop_tl { #1 }
+	\dooldpersiantransrev
+{ \tl_use:N \l_myop_tl }
+}
+{ }
+
+
+
+
+%----- Ugaritic to Scholarly transliteration
+\NewDocumentCommand { \soptransrev } { m } {%
+\tl_set:Nn \l_myop_tl { #1 }
+  \dosoptrans 
+{ \tl_use:N \l_myop_tl }
+}
+
+\NewDocumentEnvironment{soptranserev}{ +b } 
+{
+\tl_set:Nn \l_myop_tl { #1 }
+	\dosoptrans
+{ \tl_use:N \l_myop_tl }
+}
+{ }
+
+
+%Unicode name transliteration
+\NewDocumentCommand\opmapruby{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+{\scriptsize\optransrev{#1}} \\
+\rule{0pt}{2ex}\opfont #1 \\
+\end{tabular} 
+}}
+
+
+\NewDocumentCommand\opmaprubyw{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+{\scriptsize\optransrev{#1}} \\
+\rule{0pt}{2ex}\opfont #1 \\
+\end{tabular} {\opfontb\opworddivider}
+}}
+
+
+
+%Scholarly transliteration
+%\str_new:N \l_myugx_str
+%\tl_new:N \l_myugx_tl
+%\def\l_myugx_f{}
+\NewDocumentCommand\sopmapruby{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+\scriptsize\soptransrev{#1}  \\
+\rule{0pt}{2ex} \opfont #1 \\
+\end{tabular} 
+}}
+
+\NewDocumentCommand\dosopmaprubye{ m } {%
+{
+	\begin{sopmaprubye}
+	#1
+	\end{sopmaprubye}
+}}
+
+
+\NewDocumentEnvironment{sopmaprubye}{ +b }
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+\scriptsize\soptransrev{#1}  \\
+\rule{0pt}{2ex} \opfont #1 \\
+\end{tabular} 
+}
+{}
+
+
+
+\NewDocumentCommand\sopmaprubyw{ m } {%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+{\scriptsize\soptransrev{#1}} \\
+\rule{0pt}{2ex}\opfont #1 \\
+\end{tabular} {\opfontb\opworddivider}
+}}
+
+
+
+
+
+
+%\seq_new:N \l_ruby_seq
+\NewDocumentCommand{\opruby}{ > { \SplitList { ; } } m }{%
+  \ProcessList {#1 } { \opmapruby }
+%%	\tl_set:Nn \l_my_tl { #1 }
+%%	\seq_set_split:Nnn 
+%%								\l_ruby_seq 
+%%								{ ; } 
+%%								{ \l_my_tl }
+%%{\ugfont		\seq_use:Nnnn
+%%								\l_ruby_seq {;}{}{}
+%%								}
+%%%	\seq_map_function:NN 
+%%%								\l_ruby_seq  
+%%%								\mapruby
+%%	\seq_map_inline:Nn 
+%%								\l_ruby_seq  
+%%								{ \mapruby{#1} }
+%%%\tl_use:N \l_my_tl
+%%%\ugtransrev{}
+}
+
+\NewDocumentCommand{\oprubyw}{ > { \SplitList { ~ } } m }{%
+  \ProcessList {#1 } { \opmaprubyw }
+}
+
+\NewDocumentCommand{\sopruby}{ > { \SplitList { ; } } m }{%
+  \ProcessList {#1 } { \sopmapruby }
+}
+
+\NewDocumentCommand{\soprubyw}{ > { \SplitList { ~ } } m }{%
+  \ProcessList {#1 } { \sopmaprubyw }
+}
+
+\NewDocumentCommand{\soprubynd}{ > { \SplitList { } } m }{%
+  \ProcessList {#1 } { \sopmapruby }
+}
+
+
+\NewDocumentEnvironment{soprubynde}{ +b } 
+{
+\tl_set:Nn \l_myop_tl { #1 }
+	\dooldpersianruby
+{ \tl_use:N \l_myop_tl }
+
+%%	\tl_set:Nn \l_my_tl { #1 }
+%%	\seq_set_split:Nnn 
+%%								\l_ruby_seq 
+%%								{  } 
+%%								{ \l_my_tl }
+%%{\ugfont		\seq_use:Nnnn
+%%								\l_ruby_seq {}{}{}
+%%								}
+%%	\seq_map_function:NN 
+%%								\l_ruby_seq  
+%%%								\dosmaprubye
+%%								\smapruby
+%%%%	\seq_map_inline:Nn 
+%%%%								\l_ruby_seq  
+%%%%								{ \mapruby{#1} }
+%%%%%\tl_use:N \l_my_tl
+%%
+%%% { \smapruby }
+}
+{ }
+
+
+
+
+\ExplSyntaxOff
+
+
+
+
+
+
+
+
+
+%-----------------------------------------
+%subset of helper meta-commands:
+\ExplSyntaxOn
+%cs: print the command name
+%cdr: print and run the command
+%cdpr: print with formatted argument and run
+%codedetok: print (unemphasized)
+
+%------------------------------- control sequence
+\NewDocumentCommand{\cs}{ m }{%
+  {\bfseries\sffamily\color{blue}
+  \token_to_str:N #1 % If you already have a token
+  }
+}%
+%------------------------------- print and run #1
+
+\NewDocumentCommand{\cdr}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+}%
+
+%\tl_new:N \l_my_tl
+%\tl_new:N \l_myb_tl
+%\tl_new:N \l_myc_tl
+%\tl_new:N \l_myd_tl
+
+%------------------------------- print and run command+argumentt separately
+\NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \textbackslash \detokenize{#2} % command
+  \{ 
+  		{
+  		\tl_use:N \l_my_tl % formatting
+  		\detokenize{#3}       % argument
+  		}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+\cs:w \tl_use:N \l_myb_tl \cs_end: {  
+									#3 % argument
+									 }
+}%
+
+%------------------------------- print and run command+argumentt separately, command formatted
+\NewDocumentCommand{\cdprr}{ o o m m }{%1=print format,2=command format,3=command,4=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	\tl_set:Nn \l_myd_tl { #4 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \textbackslash \detokenize{#3} % command
+  \{ 
+  		{
+  		\tl_use:N \l_my_tl % formatting
+  		\detokenize{#4}       % argument
+  		}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myb_tl %command format
+\cs:w \tl_use:N \l_myc_tl \cs_end: {  
+									#4 % argument
+									 }
+		}
+}%
+
+%------------------------------- print and run command (no argument_ separately, command formatted
+\NewDocumentCommand{\cdprrn}{ o o m }{%1=print format,2=command format,3=command
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+
+  \textbackslash \detokenize{#3} % command
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myb_tl %command format
+\cs:w \tl_use:N \l_myc_tl \cs_end: 
+		}
+}%
+
+
+%------------------------------- print and run command (no argument_ separately, command formatted, print with wrapper
+\NewDocumentCommand{\cdprrnw}{ o o o m }{%1,2=print format wrapper,3=command format,4=command
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	\tl_set:Nn \l_myd_tl { #4 }
+	
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+		{ 
+			\tl_use:N \l_my_tl %wrapper begin
+  \textbackslash \detokenize{#4} % command
+     \tl_use:N \l_myb_tl % wrapper end
+  	}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myc_tl %command format
+\cs:w \tl_use:N \l_myd_tl \cs_end: 
+		}
+}%
+
+
+
+
+
+%------------------------------- just print #1 as plain detok code
+\NewDocumentCommand{\codedetok}{ o m }{
+ 
+			{%true 
+			    {
+						\ttfamily
+					  															\detokenize{#2}
+						}
+			  }
+}%
+
+
+\ExplSyntaxOff
+
+
+
+
+
+%===================================
+\begin{document}
+\noindent{\large \optrans{a.ra.ya.}\\ Old Persian script, using \textsc{ASCII} transliteration input method}
+
+\bigskip
+(1) Named macros (use with \cs{\opfont})
+
+\cdr{{\opfont\opka\opta}}
+
+%\cdr{{\ugfont\ugk\ugu\ugl\ugb\ugn\ugn}}
+
+
+\bigskip
+(2a) Command \cs{\optrans} (assumes \cs{\opfont} is defined)
+
+\cdr{\optrans{ka.ta.}}
+
+%\cdr{\ugtrans{k.u.l.b.n.n.}}
+
+(2b) Environment \cs{optranse} (assumes \cs{\opfont} is defined)
+
+\begin{optranse}
+ka.ta. 
+
+xa.ca.ja.
+
+ba.na.na.
+\end{optranse}
+
+%%Examples
+%
+%\bigskip
+Unicode
+
+\cdr{\optrans{U+103A3U+103AB}}
+
+\bigskip
+Reverse transliteration
+
+(3a) Command version
+
+\cdpr[\opfont]{optransrev}{𐎣𐎫}
+
+(3b) Environment version,
+with \codedetok{\begin{optranserev} ... \end{optranserev}}
+
+\begin{optranserev}
+𐎣𐎫
+
+𐎥𐎦𐎧𐎨
+\end{optranserev}
+
+%{
+%\setlength{\tabcolsep}{-0.5pt} 
+%\begin{tabular}{c}
+%?u \\
+%\ugfont 𐎜 \\
+%\end{tabular}
+%\begin{tabular}{c}
+%g \\
+%\ugfont 𐎂 \\
+%\end{tabular}
+%\begin{tabular}{c}
+%r \\
+%\ugfont 𐎗 \\
+%\end{tabular}
+%\begin{tabular}{c}
+%t \\
+%\ugfont 𐎚 \\
+%\end{tabular}
+%}
+%x
+%{
+%\setlength{\tabcolsep}{-0.5pt} 
+%\begin{tabular}{c}
+%\ugtransrev{𐎜} \\
+%\ugfont 𐎜 \\
+%\end{tabular}
+%\begin{tabular}{c}
+%\ugtransrev{𐎂} \\
+%\ugfont 𐎂 \\
+%\end{tabular}
+%\begin{tabular}{c}
+%\ugtransrev{𐎗} \\
+%\ugfont 𐎗 \\
+%\end{tabular}
+%\begin{tabular}{c}
+%\ugtransrev{𐎚} \\
+%\ugfont 𐎚 \\
+%\end{tabular}
+%}
+%
+%In \ugruby{𐎜;𐎂;𐎗;𐎚}, the \ugruby{𐎄;𐎍;𐎚} or royal guard post, ...
+%
+%The \ugrubyw{𐎄𐎍𐎚 𐎜𐎂𐎗𐎚} was ...
+%
+%\bigskip
+%Scholarly transliteration
+%%𐎀
+%
+%%\sugtransrev{𐎀;}x
+%%
+%%\sugruby{𐎀;}y
+%
+%\sugruby{𐎀;
+%𐎁;
+%𐎂;
+%𐎃;
+%𐎄;
+%𐎅;
+%𐎆;
+%𐎇;
+%𐎈;
+%𐎉;
+%𐎊;
+%𐎋;
+%𐎌;
+%𐎍;
+%𐎎
+%}
+%
+%\sugruby{𐎏;
+%𐎐;
+%𐎑;
+%𐎒;
+%𐎓;
+%𐎔;
+%𐎕;
+%𐎖;
+%𐎗;
+%𐎘;
+%𐎙;
+%𐎚;
+%𐎛;
+%𐎜;
+%𐎝;
+%𐎟
+%}
+%
+%\sugrubyw{𐎄𐎍𐎚 𐎜𐎂𐎗𐎚}
+%
+%%\sugruby{\ugtrans{tt.};}
+%
+\section{Commands}
+\textbf{\textsc{ASCII}-to-Old Persian}
+
+To produce Old Persian text in-line, define a \cs{\opfont} and use command \cs{\optrans} with either dot-notation or Unicode code point:
+
+\begin{quotation}
+\cdr{\optrans{a.}}
+
+\cdr{\optrans{U+103A0}}
+\end{quotation}
+or use named macros, specifying the font:
+
+
+\begin{quotation}
+%{\ttfamily \{}
+%\codedetok{\ugfont} 
+\cdprrnw[\color{black}\{\enspace\codedetok{\opfont}\color{blue}][\color{black}\enspace\}][\opfont]{opa}
+%{\ttfamily \}}
+
+
+\end{quotation}
+
+\bigskip
+For longer texts across paragraphs, the \cs{optranse} environment is available.
+
+\begin{quotation}
+\noindent\begin{verbatim}
+\begin{optranse}
+ma.a.ha.
+
+sha.i.ya.a.ta.
+\end{optranse}}
+\end{verbatim}
+\end{quotation}
+produces
+
+\begin{quotation}
+\begin{optranse}
+ma.a.ha.
+
+sha.i.ya.a.ta.
+\end{optranse}
+\end{quotation}
+
+\bigskip
+\textbf{Old Persian-to-\textsc{ASCII}}
+
+Command \cs{\optransrev} and environment \cs{optranserev} convert Old Persian signs to dot-notation transliteration.
+
+{\opfont
+𐎠
+𐎡
+𐎢
+𐎣
+𐎤
+𐎥
+𐎦
+𐎧
+}
+become \optransrev{
+𐎠
+𐎡
+𐎢
+𐎣
+𐎤
+𐎥
+𐎦
+𐎧
+}
+with the command
+and the environment produces
+\begin{optranserev}
+𐎠
+𐎡
+𐎢
+𐎣
+𐎤
+𐎥
+𐎦
+𐎧
+\end{optranserev}
+
+\bigskip
+Adding an ``s'' prefix, command \cs{\soptransrev} and environment \cs{soptranserev} produce scholarly transliteration.
+
+{\opfont
+𐎰
+𐏁
+𐏂
+}
+become \soptransrev{
+𐎰
+𐏁
+𐏂
+}
+with the command
+and the environment produces
+\begin{soptranserev}
+𐎰
+𐏁
+𐏂
+\end{soptranserev}
+
+
+\bigskip\textbf{Ruby}
+
+Command \cs{\soprubyw} does ruby scholarly transliteration by space delimiter (intended for words), calling \cs{\sopmaprubyw} for each item.
+
+\cs{\sopmaprubyw} does the individual transliteration ruby unit stack, adding the word divider.
+
+\cdpr[\opfont\scriptsize]{soprubyw}{𐎶𐎼𐎫𐎡𐎹 𐎿𐎬𐎢𐎴𐎠}
+
+\cdr{\sopmaprubyw{x}}
+
+\bigskip
+Command \cs{\sopruby} does ruby scholarly transliteration by semicolon delimiter (intended for the letters of words), calling \cs{\sopmapruby} for each item.
+
+\cs{\sopmapruby} does the individual transliteration ruby unit stack.
+
+%\cdpr[\ugfont\scriptsize]{sugruby}{𐎄;𐎍;𐎚}
+{\ttfamily\color{blue}\textbackslash sopruby\{{\opfont\scriptsize 𐎣};{\opfont\scriptsize 𐎠};{\opfont\scriptsize 𐎶};\}}
+\enspace$\mapsto$\enspace
+\sopruby{𐎣;𐎠;𐎶}
+
+
+\cdr{\sopmapruby{x}}
+
+\bigskip
+Command \cs{\soprubynd} rubifies each character without the need to use delimiters.
+
+\bigskip
+\cdpr[\opfont\scriptsize]{soprubynd}{𐎣𐎠𐎶}
+
+%%%Splitting is not allowed across paragraph breaks?
+Environment \cs{soprubynde}:
+
+\begin{quotation}
+\begin{soprubynde}
+𐎲𐎼𐎠𐎫𐎠
+
+𐎭𐎼𐎹
+
+𐏏
+\end{soprubynde}
+\end{quotation}
+
+%\bigskip
+%(Alternatively, words may be separated by semicolons, or letters by spaces, as long as the appropriate ruby command is used.
+%
+%\bigskip
+List of shortcut dot-transliteration input codes (these assume that a font command \cs{\opfont} has been defined, e.g. via \textsc{fontspec}'s \codedetok{\newfontface\opfont{Noto Sans OldPersian}}):
+
+\cdr{\optrans{a.}}\par
+\cdr{\optrans{i.}}\par
+\cdr{\optrans{u.}}\par
+\cdr{\optrans{ka.}}\par
+\cdr{\optrans{ku.}}\par
+\cdr{\optrans{ga.}}\par
+\cdr{\optrans{gu.}}\par
+\cdr{\optrans{xa.}}\par
+\cdr{\optrans{ca.}}\par
+\cdr{\optrans{ja.}}\par
+\cdr{\optrans{ji.}}\par
+\cdr{\optrans{ta.}}\par
+\cdr{\optrans{tu.}}\par
+\cdr{\optrans{da.}}\par
+\cdr{\optrans{di.}}\par
+\cdr{\optrans{du.}}\par
+\cdr{\optrans{tha.}}\par
+\cdr{\optrans{pa.}}\par
+\cdr{\optrans{ba.}}\par
+\cdr{\optrans{fa.}}\par
+\cdr{\optrans{na.}}\par
+\cdr{\optrans{nu.}}\par
+\cdr{\optrans{ma.}}\par
+\cdr{\optrans{mi.}}\par
+\cdr{\optrans{mu.}}\par
+\cdr{\optrans{ya.}}\par
+\cdr{\optrans{va.}}\par
+\cdr{\optrans{vi.}}\par
+\cdr{\optrans{ra.}}\par
+\cdr{\optrans{ru.}}\par
+\cdr{\optrans{la.}}\par
+\cdr{\optrans{sa.}}\par
+\cdr{\optrans{za.}}\par
+\cdr{\optrans{sha.}}\par
+\cdr{\optrans{ssa.}}\par
+\cdr{\optrans{ha.}}\par
+\cdr{\optrans{am.}}\par
+\cdr{\optrans{amb.}}\par
+\cdr{\optrans{amh.}}\par
+\cdr{\optrans{xsh.}}\par
+\cdr{\optrans{dy.}}\par
+\cdr{\optrans{dyb.}}\par
+\cdr{\optrans{bag.}}\par
+\cdr{\optrans{buu.}}\par
+\cdr{\optrans{div.}}\par
+\cdr{\optrans{one.}}\par
+\cdr{\optrans{two.}}\par
+\cdr{\optrans{ten.}}\par
+\cdr{\optrans{twenty.}}\par
+\cdr{\optrans{hundred.}}\par
+
+\bigskip
+List of named macros (these require the current font to be set to one already containing Ugaritic glyphs):
+
+%BD:
+\cdprrn[][\opfont]{opa}{}\par
+\cdprrn[][\opfont]{opi}{}\par
+\cdprrn[][\opfont]{opu}{}\par
+\cdprrn[][\opfont]{opka}{}\par
+\cdprrn[][\opfont]{opku}{}\par
+\cdprrn[][\opfont]{opga}{}\par
+\cdprrn[][\opfont]{opgu}{}\par
+\cdprrn[][\opfont]{opxa}{}\par
+\cdprrn[][\opfont]{opca}{}\par
+\cdprrn[][\opfont]{opja}{}\par
+\cdprrn[][\opfont]{opji}{}\par
+\cdprrn[][\opfont]{opta}{}\par
+\cdprrn[][\opfont]{optu}{}\par
+\cdprrn[][\opfont]{opda}{}\par
+\cdprrn[][\opfont]{opdi}{}\par
+\cdprrn[][\opfont]{opdu}{}\par
+\cdprrn[][\opfont]{optha}{}\par
+\cdprrn[][\opfont]{oppa}{}\par
+\cdprrn[][\opfont]{opba}{}\par
+\cdprrn[][\opfont]{opfa}{}\par
+\cdprrn[][\opfont]{opna}{}\par
+\cdprrn[][\opfont]{opnu}{}\par
+\cdprrn[][\opfont]{opma}{}\par
+\cdprrn[][\opfont]{opmi}{}\par
+\cdprrn[][\opfont]{opmu}{}\par
+\cdprrn[][\opfont]{opya}{}\par
+\cdprrn[][\opfont]{opva}{}\par
+\cdprrn[][\opfont]{opvi}{}\par
+\cdprrn[][\opfont]{opra}{}\par
+\cdprrn[][\opfont]{opru}{}\par
+\cdprrn[][\opfont]{opla}{}\par
+\cdprrn[][\opfont]{opsa}{}\par
+\cdprrn[][\opfont]{opza}{}\par
+\cdprrn[][\opfont]{opsha}{}\par
+\cdprrn[][\opfont]{opssa}{}\par
+\cdprrn[][\opfont]{opha}{}\par
+\cdprrn[][\opfont]{opauramazdaa}{}\par
+\cdprrn[][\opfont]{opauramazdaab}{}\par
+\cdprrn[][\opfont]{opauramazdaaha}{}\par
+\cdprrn[][\opfont]{opxshaayathiya}{}\par
+\cdprrn[][\opfont]{opdahyaaush}{}\par
+\cdprrn[][\opfont]{opdahyaaushb}{}\par
+\cdprrn[][\opfont]{opbaga}{}\par
+\cdprrn[][\opfont]{opbuumish}{}\par
+\cdprrn[][\opfont]{opworddivider}{}\par
+\cdprrn[][\opfont]{opone}{}\par
+\cdprrn[][\opfont]{optwo}{}\par
+\cdprrn[][\opfont]{opten}{}\par
+\cdprrn[][\opfont]{optwenty}{}\par
+\cdprrn[][\opfont]{ophundred}{}\par
+
+
+\bigskip
+List of Unicode codepoints:
+
+%BE:
+\cdr{\optrans{U+103A0}}\par
+\cdr{\optrans{U+103A1}}\par
+\cdr{\optrans{U+103A2}}\par
+\cdr{\optrans{U+103A3}}\par
+\cdr{\optrans{U+103A4}}\par
+\cdr{\optrans{U+103A5}}\par
+\cdr{\optrans{U+103A6}}\par
+\cdr{\optrans{U+103A7}}\par
+\cdr{\optrans{U+103A8}}\par
+\cdr{\optrans{U+103A9}}\par
+\cdr{\optrans{U+103AA}}\par
+\cdr{\optrans{U+103AB}}\par
+\cdr{\optrans{U+103AC}}\par
+\cdr{\optrans{U+103AD}}\par
+\cdr{\optrans{U+103AE}}\par
+\cdr{\optrans{U+103AF}}\par
+\cdr{\optrans{U+103B0}}\par
+\cdr{\optrans{U+103B1}}\par
+\cdr{\optrans{U+103B2}}\par
+\cdr{\optrans{U+103B3}}\par
+\cdr{\optrans{U+103B4}}\par
+\cdr{\optrans{U+103B5}}\par
+\cdr{\optrans{U+103B6}}\par
+\cdr{\optrans{U+103B7}}\par
+\cdr{\optrans{U+103B8}}\par
+\cdr{\optrans{U+103B9}}\par
+\cdr{\optrans{U+103BA}}\par
+\cdr{\optrans{U+103BB}}\par
+\cdr{\optrans{U+103BC}}\par
+\cdr{\optrans{U+103BD}}\par
+\cdr{\optrans{U+103BE}}\par
+\cdr{\optrans{U+103BF}}\par
+\cdr{\optrans{U+103C0}}\par
+\cdr{\optrans{U+103C1}}\par
+\cdr{\optrans{U+103C2}}\par
+\cdr{\optrans{U+103C3}}\par
+\cdr{\optrans{U+103C8}}\par
+\cdr{\optrans{U+103C9}}\par
+\cdr{\optrans{U+103CA}}\par
+\cdr{\optrans{U+103CB}}\par
+\cdr{\optrans{U+103CC}}\par
+\cdr{\optrans{U+103CD}}\par
+\cdr{\optrans{U+103CE}}\par
+\cdr{\optrans{U+103CF}}\par
+\cdr{\optrans{U+103D0}}\par
+\cdr{\optrans{U+103D1}}\par
+\cdr{\optrans{U+103D2}}\par
+\cdr{\optrans{U+103D3}}\par
+\cdr{\optrans{U+103D4}}\par
+\cdr{\optrans{U+103D5}}\par
+
+
+
+\end{document}
+
+𐎜𐎂𐎗𐎚, ʼUgart
+ l(a) (𐎾), from la (𒆷)
