@@ -1,0 +1,338 @@
+
+
+\ExplSyntaxOn
+
+
+
+%-----   Unicode codepoint
+\newcommand\dobrtransuc{%
+%
+\regex_replace_all:nnN { U\+11000 } { \cB\{ \c{brfont}𑀀 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11001 } { \cB\{ \c{brfont}𑀁 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11002 } { \cB\{ \c{brfont}𑀂 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11003 } { \cB\{ \c{brfont}𑀃 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11004 } { \cB\{ \c{brfont}𑀄 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11005 } { \cB\{ \c{brfont}𑀅 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11006 } { \cB\{ \c{brfont}𑀆 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11007 } { \cB\{ \c{brfont}𑀇 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11008 } { \cB\{ \c{brfont}𑀈 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11009 } { \cB\{ \c{brfont}𑀉 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1100A } { \cB\{ \c{brfont}𑀊 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1100B } { \cB\{ \c{brfont}𑀋 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1100C } { \cB\{ \c{brfont}𑀌 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1100D } { \cB\{ \c{brfont}𑀍 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1100E } { \cB\{ \c{brfont}𑀎 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1100F } { \cB\{ \c{brfont}𑀏 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11010 } { \cB\{ \c{brfont}𑀐 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11011 } { \cB\{ \c{brfont}𑀑 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11012 } { \cB\{ \c{brfont}𑀒 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11013 } { \cB\{ \c{brfont}𑀓 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11014 } { \cB\{ \c{brfont}𑀔 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11015 } { \cB\{ \c{brfont}𑀕 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11016 } { \cB\{ \c{brfont}𑀖 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11017 } { \cB\{ \c{brfont}𑀗 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11018 } { \cB\{ \c{brfont}𑀘 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11019 } { \cB\{ \c{brfont}𑀙 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1101A } { \cB\{ \c{brfont}𑀚 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1101B } { \cB\{ \c{brfont}𑀛 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1101C } { \cB\{ \c{brfont}𑀜 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1101D } { \cB\{ \c{brfont}𑀝 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1101E } { \cB\{ \c{brfont}𑀞 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1101F } { \cB\{ \c{brfont}𑀟 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11020 } { \cB\{ \c{brfont}𑀠 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11021 } { \cB\{ \c{brfont}𑀡 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11022 } { \cB\{ \c{brfont}𑀢 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11023 } { \cB\{ \c{brfont}𑀣 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11024 } { \cB\{ \c{brfont}𑀤 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11025 } { \cB\{ \c{brfont}𑀥 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11026 } { \cB\{ \c{brfont}𑀦 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11027 } { \cB\{ \c{brfont}𑀧 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11028 } { \cB\{ \c{brfont}𑀨 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11029 } { \cB\{ \c{brfont}𑀩 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1102A } { \cB\{ \c{brfont}𑀪 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1102B } { \cB\{ \c{brfont}𑀫 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1102C } { \cB\{ \c{brfont}𑀬 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1102D } { \cB\{ \c{brfont}𑀭 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1102E } { \cB\{ \c{brfont}𑀮 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1102F } { \cB\{ \c{brfont}𑀯 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11030 } { \cB\{ \c{brfont}𑀰 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11031 } { \cB\{ \c{brfont}𑀱 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11032 } { \cB\{ \c{brfont}𑀲 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11033 } { \cB\{ \c{brfont}𑀳 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11034 } { \cB\{ \c{brfont}𑀴 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11035 } { \cB\{ \c{brfont}𑀵 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11036 } { \cB\{ \c{brfont}𑀶 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11037 } { \cB\{ \c{brfont}𑀷 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11038 } { \cB\{ \c{brfont}𑀸 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11039 } { \cB\{ \c{brfont}𑀹 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1103A } { \cB\{ \c{brfont}𑀺 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1103B } { \cB\{ \c{brfont}𑀻 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1103C } { \cB\{ \c{brfont}𑀼 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1103D } { \cB\{ \c{brfont}𑀽 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1103E } { \cB\{ \c{brfont}𑀾 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1103F } { \cB\{ \c{brfont}𑀿 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11040 } { \cB\{ \c{brfont}𑁀 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11041 } { \cB\{ \c{brfont}𑁁 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11042 } { \cB\{ \c{brfont}𑁂 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11043 } { \cB\{ \c{brfont}𑁃 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11044 } { \cB\{ \c{brfont}𑁄 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11045 } { \cB\{ \c{brfont}𑁅 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11046 } { \cB\{ \c{brfont}𑁆 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11047 } { \cB\{ \c{brfont}𑁇 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11048 } { \cB\{ \c{brfont}𑁈 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11049 } { \cB\{ \c{brfont}𑁉 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1104A } { \cB\{ \c{brfont}𑁊 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1104B } { \cB\{ \c{brfont}𑁋 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1104C } { \cB\{ \c{brfont}𑁌 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1104D } { \cB\{ \c{brfont}𑁍 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11052 } { \cB\{ \c{brfont}𑁒 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11053 } { \cB\{ \c{brfont}𑁓 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11054 } { \cB\{ \c{brfont}𑁔 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11055 } { \cB\{ \c{brfont}𑁕 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11056 } { \cB\{ \c{brfont}𑁖 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11057 } { \cB\{ \c{brfont}𑁗 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11058 } { \cB\{ \c{brfont}𑁘 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11059 } { \cB\{ \c{brfont}𑁙 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1105A } { \cB\{ \c{brfont}𑁚 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1105B } { \cB\{ \c{brfont}𑁛 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1105C } { \cB\{ \c{brfont}𑁜 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1105D } { \cB\{ \c{brfont}𑁝 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1105E } { \cB\{ \c{brfont}𑁞 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1105F } { \cB\{ \c{brfont}𑁟 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11060 } { \cB\{ \c{brfont}𑁠 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11061 } { \cB\{ \c{brfont}𑁡 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11062 } { \cB\{ \c{brfont}𑁢 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11063 } { \cB\{ \c{brfont}𑁣 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11064 } { \cB\{ \c{brfont}𑁤 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11065 } { \cB\{ \c{brfont}𑁥 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11066 } { \cB\{ \c{brfont}𑁦 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11067 } { \cB\{ \c{brfont}𑁧 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11068 } { \cB\{ \c{brfont}𑁨 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+11069 } { \cB\{ \c{brfont}𑁩 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1106A } { \cB\{ \c{brfont}𑁪 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1106B } { \cB\{ \c{brfont}𑁫 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1106C } { \cB\{ \c{brfont}𑁬 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1106D } { \cB\{ \c{brfont}𑁭 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1106E } { \cB\{ \c{brfont}𑁮 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1106F } { \cB\{ \c{brfont}𑁯 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1107F } { \cB\{ \c{brfont}𑁿 \cE\}  } \l_myuc_tl
+}
+
+
+%-----   Unicode name
+\newcommand\dobrtransun{%
+%
+\regex_replace_all:nnN { lettervocalicrr } { \cB\{ \c{brfont}𑀌 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lettervocalicll } { \cB\{ \c{brfont}𑀎 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lettervocalicr } { \cB\{ \c{brfont}𑀋 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lettervocalicl } { \cB\{ \c{brfont}𑀍 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { bhattiproluaa } { \cB\{ \c{brfont}𑀹 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { oldtamilllla } { \cB\{ \c{brfont}𑀵 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { oldtamilnnna } { \cB\{ \c{brfont}𑀷 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { candrabindu } { \cB\{ \c{brfont}𑀀 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { jihvamuliya } { \cB\{ \c{brfont}𑀃 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { upadhmaniya } { \cB\{ \c{brfont}𑀄 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { oldtamilrra } { \cB\{ \c{brfont}𑀶 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { doubledanda } { \cB\{ \c{brfont}𑁈 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { crescentbar } { \cB\{ \c{brfont}𑁌 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { onethousand } { \cB\{ \c{brfont}𑁥 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { onehundred } { \cB\{ \c{brfont}𑁤 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitthree } { \cB\{ \c{brfont}𑁩 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitseven } { \cB\{ \c{brfont}𑁭 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digiteight } { \cB\{ \c{brfont}𑁮 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { vocalicrr } { \cB\{ \c{brfont}𑀿 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { vocalicll } { \cB\{ \c{brfont}𑁁 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { doubledot } { \cB\{ \c{brfont}𑁊 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitzero } { \cB\{ \c{brfont}𑁦 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitfour } { \cB\{ \c{brfont}𑁪 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitfive } { \cB\{ \c{brfont}𑁫 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitnine } { \cB\{ \c{brfont}𑁯 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { anusvara } { \cB\{ \c{brfont}𑀁 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { letteraa } { \cB\{ \c{brfont}𑀆 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { letterii } { \cB\{ \c{brfont}𑀈 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { letteruu } { \cB\{ \c{brfont}𑀊 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { letterai } { \cB\{ \c{brfont}𑀐 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { letterau } { \cB\{ \c{brfont}𑀒 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { vocalicr } { \cB\{ \c{brfont}𑀾 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { vocalicl } { \cB\{ \c{brfont}𑁀 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitone } { \cB\{ \c{brfont}𑁧 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digittwo } { \cB\{ \c{brfont}𑁨 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { digitsix } { \cB\{ \c{brfont}𑁬 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { visarga } { \cB\{ \c{brfont}𑀂 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lettera } { \cB\{ \c{brfont}𑀅 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { letteri } { \cB\{ \c{brfont}𑀇 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { letteru } { \cB\{ \c{brfont}𑀉 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lettere } { \cB\{ \c{brfont}𑀏 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lettero } { \cB\{ \c{brfont}𑀑 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { seventy } { \cB\{ \c{brfont}𑁡 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { virama } { \cB\{ \c{brfont}𑁆 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { twenty } { \cB\{ \c{brfont}𑁜 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { thirty } { \cB\{ \c{brfont}𑁝 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { eighty } { \cB\{ \c{brfont}𑁢 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ninety } { \cB\{ \c{brfont}𑁣 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { joiner } { \cB\{ \c{brfont}𑁿 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { danda } { \cB\{ \c{brfont}𑁇 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lotus } { \cB\{ \c{brfont}𑁍 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { three } { \cB\{ \c{brfont}𑁔 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { seven } { \cB\{ \c{brfont}𑁘 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { eight } { \cB\{ \c{brfont}𑁙 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { forty } { \cB\{ \c{brfont}𑁞 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { fifty } { \cB\{ \c{brfont}𑁟 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { sixty } { \cB\{ \c{brfont}𑁠 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ttha } { \cB\{ \c{brfont}𑀞 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ddha } { \cB\{ \c{brfont}𑀠 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { line } { \cB\{ \c{brfont}𑁋 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { four } { \cB\{ \c{brfont}𑁕 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { five } { \cB\{ \c{brfont}𑁖 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nine } { \cB\{ \c{brfont}𑁚 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { kha } { \cB\{ \c{brfont}𑀔 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { gha } { \cB\{ \c{brfont}𑀖 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nga } { \cB\{ \c{brfont}𑀗 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { cha } { \cB\{ \c{brfont}𑀙 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { jha } { \cB\{ \c{brfont}𑀛 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nya } { \cB\{ \c{brfont}𑀜 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { tta } { \cB\{ \c{brfont}𑀝 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { dda } { \cB\{ \c{brfont}𑀟 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nna } { \cB\{ \c{brfont}𑀡 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { tha } { \cB\{ \c{brfont}𑀣 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { dha } { \cB\{ \c{brfont}𑀥 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { pha } { \cB\{ \c{brfont}𑀨 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { bha } { \cB\{ \c{brfont}𑀪 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { sha } { \cB\{ \c{brfont}𑀰 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ssa } { \cB\{ \c{brfont}𑀱 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lla } { \cB\{ \c{brfont}𑀴 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { dot } { \cB\{ \c{brfont}𑁉 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { one } { \cB\{ \c{brfont}𑁒 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { two } { \cB\{ \c{brfont}𑁓 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { six } { \cB\{ \c{brfont}𑁗 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ten } { \cB\{ \c{brfont}𑁛 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ka } { \cB\{ \c{brfont}𑀓 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ga } { \cB\{ \c{brfont}𑀕 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ca } { \cB\{ \c{brfont}𑀘 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ja } { \cB\{ \c{brfont}𑀚 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ta } { \cB\{ \c{brfont}𑀢 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { da } { \cB\{ \c{brfont}𑀤 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { na } { \cB\{ \c{brfont}𑀦 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { pa } { \cB\{ \c{brfont}𑀧 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ba } { \cB\{ \c{brfont}𑀩 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ma } { \cB\{ \c{brfont}𑀫 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ya } { \cB\{ \c{brfont}𑀬 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ra } { \cB\{ \c{brfont}𑀭 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { la } { \cB\{ \c{brfont}𑀮 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { va } { \cB\{ \c{brfont}𑀯 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { sa } { \cB\{ \c{brfont}𑀲 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ha } { \cB\{ \c{brfont}𑀳 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { aa } { \cB\{ \c{brfont}𑀸 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ii } { \cB\{ \c{brfont}𑀻 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { uu } { \cB\{ \c{brfont}𑀽 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ai } { \cB\{ \c{brfont}𑁃 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { au } { \cB\{ \c{brfont}𑁅 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { i } { \cB\{ \c{brfont}𑀺 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { u } { \cB\{ \c{brfont}𑀼 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { e } { \cB\{ \c{brfont}𑁂 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { o } { \cB\{ \c{brfont}𑁄 \cE\}  } \l_myun_tl
+
+}
+
+
+
+\NewDocumentCommand { \bruc } { m } {	\brtransuc {#1} }
+
+\NewDocumentCommand { \brtransuc } { m } {%
+\tl_set:Nn \l_myuc_tl { #1 }
+ \dobrtransuc 
+  \tl_use:N \l_myuc_tl 
+}
+
+
+\NewDocumentCommand { \brun } { m } {	\brtransun {#1} }
+\NewDocumentCommand { \brtransun } { m } {%
+\tl_set:Nn \l_myun_tl { #1 }
+ \dobrtransun 
+ \tl_use:N \l_myun_tl 
+}
+
+\NewDocumentCommand { \brts } { m } {	\brtransts {#1} }
+\NewDocumentCommand { \brtransts } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+ \dobrtransts 
+  \tl_use:N \l_myts_tl 
+}
+
+
+%---- Environments
+\NewDocumentEnvironment{brtransuce}{ +b } 
+{
+  \tl_set:Nn \l_myuc_tl { #1 }
+	\dobrtransuc
+	\tl_use:N \l_myuc_tl 
+}
+{ }
+
+\NewDocumentEnvironment{brtransune}{ +b } 
+{
+  \tl_set:Nn \l_myun_tl { #1 }
+	\dobrtransun
+  \tl_use:N \l_myun_tl 
+}
+{ }
+
+\NewDocumentEnvironment{brtranstse}{ +b } 
+{
+  \tl_set:Nn \l_myts_tl { #1 }
+	\dobrtransts
+  \tl_use:N \l_myts_tl 
+}
+{ }
+
+
+\NewDocumentEnvironment{brtranstsste}{ +b } 
+{
+%  \tl_set:Nn \l_myug_tl { #1 }
+	\dobrtranstsst {#1}
+%{ \ugfont \tl_use:N \l_myug_tl }
+}
+{ }
+
+
+\NewDocumentEnvironment{brrubye}{ +b } 
+{
+%  \tl_set:Nn \l_myug_tl { #1 }
+	\dobrtranstsrubye {#1}
+%{ \ugfont \tl_use:N \l_myug_tl }
+}
+{ }
+
+
+
+\NewDocumentEnvironment{brtableture}{ +b } 
+{
+	\begin{quotation}
+%	{\raggedright
+%	\begin{tabular}{|l|}
+%	\hline
+%	\rowcolor{blue!5}
+	\begin{brtranstse}
+	#1
+	\end{brtranstse} 			
+%					\\
+%	\rowcolor{red!5}
+\par
+
+\bigskip
+	\begin{brtranstsste}
+		#1
+		\end{brtranstsste} 
+%					\\
+%	\hline
+%	\end{tabular}
+%		}
+	\end{quotation}
+}
+{ }
+
+
+
+
+
+\ExplSyntaxOff

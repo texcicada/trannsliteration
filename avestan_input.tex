@@ -1,0 +1,242 @@
+
+
+\ExplSyntaxOn
+
+%\transrev: common code
+
+%-----   Unicode codepoint
+\newcommand\doavtransuc{%
+%
+\regex_replace_all:nnN { U\+10B00 } { \cB\{ \c{avfont}𐬀 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B01 } { \cB\{ \c{avfont}𐬁 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B02 } { \cB\{ \c{avfont}𐬂 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B03 } { \cB\{ \c{avfont}𐬃 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B04 } { \cB\{ \c{avfont}𐬄 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B05 } { \cB\{ \c{avfont}𐬅 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B06 } { \cB\{ \c{avfont}𐬆 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B07 } { \cB\{ \c{avfont}𐬇 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B08 } { \cB\{ \c{avfont}𐬈 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B09 } { \cB\{ \c{avfont}𐬉 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B0A } { \cB\{ \c{avfont}𐬊 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B0B } { \cB\{ \c{avfont}𐬋 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B0C } { \cB\{ \c{avfont}𐬌 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B0D } { \cB\{ \c{avfont}𐬍 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B0E } { \cB\{ \c{avfont}𐬎 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B0F } { \cB\{ \c{avfont}𐬏 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B10 } { \cB\{ \c{avfont}𐬐 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B11 } { \cB\{ \c{avfont}𐬑 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B12 } { \cB\{ \c{avfont}𐬒 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B13 } { \cB\{ \c{avfont}𐬓 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B14 } { \cB\{ \c{avfont}𐬔 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B15 } { \cB\{ \c{avfont}𐬕 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B16 } { \cB\{ \c{avfont}𐬖 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B17 } { \cB\{ \c{avfont}𐬗 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B18 } { \cB\{ \c{avfont}𐬘 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B19 } { \cB\{ \c{avfont}𐬙 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B1A } { \cB\{ \c{avfont}𐬚 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B1B } { \cB\{ \c{avfont}𐬛 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B1C } { \cB\{ \c{avfont}𐬜 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B1D } { \cB\{ \c{avfont}𐬝 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B1E } { \cB\{ \c{avfont}𐬞 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B1F } { \cB\{ \c{avfont}𐬟 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B20 } { \cB\{ \c{avfont}𐬠 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B21 } { \cB\{ \c{avfont}𐬡 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B22 } { \cB\{ \c{avfont}𐬢 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B23 } { \cB\{ \c{avfont}𐬣 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B24 } { \cB\{ \c{avfont}𐬤 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B25 } { \cB\{ \c{avfont}𐬥 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B26 } { \cB\{ \c{avfont}𐬦 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B27 } { \cB\{ \c{avfont}𐬧 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B28 } { \cB\{ \c{avfont}𐬨 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B29 } { \cB\{ \c{avfont}𐬩 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B2A } { \cB\{ \c{avfont}𐬪 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B2B } { \cB\{ \c{avfont}𐬫 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B2C } { \cB\{ \c{avfont}𐬬 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B2D } { \cB\{ \c{avfont}𐬭 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B2E } { \cB\{ \c{avfont}𐬮 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B2F } { \cB\{ \c{avfont}𐬯 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B30 } { \cB\{ \c{avfont}𐬰 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B31 } { \cB\{ \c{avfont}𐬱 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B32 } { \cB\{ \c{avfont}𐬲 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B33 } { \cB\{ \c{avfont}𐬳 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B34 } { \cB\{ \c{avfont}𐬴 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B35 } { \cB\{ \c{avfont}𐬵 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B39 } { \cB\{ \c{avfont}𐬹 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B3A } { \cB\{ \c{avfont}𐬺 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B3B } { \cB\{ \c{avfont}𐬻 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B3C } { \cB\{ \c{avfont}𐬼 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B3D } { \cB\{ \c{avfont}𐬽 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B3E } { \cB\{ \c{avfont}𐬾 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10B3F } { \cB\{ \c{avfont}𐬿 \cE\}  } \l_myuc_tl
+}
+
+
+%-----   Unicode name
+\newcommand\doavtransun{%
+%
+\regex_replace_all:nnN { abbreviationmark } { \cB\{ \c{avfont}𐬹 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ngye } { \cB\{ \c{avfont}𐬣 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ngve } { \cB\{ \c{avfont}𐬤 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { shye } { \cB\{ \c{avfont}𐬳 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { sshe } { \cB\{ \c{avfont}𐬴 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { aao } { \cB\{ \c{avfont}𐬃 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { aan } { \cB\{ \c{avfont}𐬅 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { aee } { \cB\{ \c{avfont}𐬇 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { xye } { \cB\{ \c{avfont}𐬒 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { xve } { \cB\{ \c{avfont}𐬓 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { gge } { \cB\{ \c{avfont}𐬕 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ghe } { \cB\{ \c{avfont}𐬖 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { the } { \cB\{ \c{avfont}𐬚 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { dhe } { \cB\{ \c{avfont}𐬜 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { tte } { \cB\{ \c{avfont}𐬝 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { bhe } { \cB\{ \c{avfont}𐬡 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nge } { \cB\{ \c{avfont}𐬢 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nye } { \cB\{ \c{avfont}𐬦 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nne } { \cB\{ \c{avfont}𐬧 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { hme } { \cB\{ \c{avfont}𐬩 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { yye } { \cB\{ \c{avfont}𐬪 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { she } { \cB\{ \c{avfont}𐬱 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { zhe } { \cB\{ \c{avfont}𐬲 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { aa } { \cB\{ \c{avfont}𐬁 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ao } { \cB\{ \c{avfont}𐬂 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { an } { \cB\{ \c{avfont}𐬄 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ae } { \cB\{ \c{avfont}𐬆 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ee } { \cB\{ \c{avfont}𐬉 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { oo } { \cB\{ \c{avfont}𐬋 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ii } { \cB\{ \c{avfont}𐬍 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { uu } { \cB\{ \c{avfont}𐬏 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ke } { \cB\{ \c{avfont}𐬐 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { xe } { \cB\{ \c{avfont}𐬑 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ge } { \cB\{ \c{avfont}𐬔 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ce } { \cB\{ \c{avfont}𐬗 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { je } { \cB\{ \c{avfont}𐬘 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { te } { \cB\{ \c{avfont}𐬙 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { de } { \cB\{ \c{avfont}𐬛 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { pe } { \cB\{ \c{avfont}𐬞 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { fe } { \cB\{ \c{avfont}𐬟 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { be } { \cB\{ \c{avfont}𐬠 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ne } { \cB\{ \c{avfont}𐬥 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { me } { \cB\{ \c{avfont}𐬨 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ye } { \cB\{ \c{avfont}𐬫 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ve } { \cB\{ \c{avfont}𐬬 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { re } { \cB\{ \c{avfont}𐬭 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { le } { \cB\{ \c{avfont}𐬮 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { se } { \cB\{ \c{avfont}𐬯 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ze } { \cB\{ \c{avfont}𐬰 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { he } { \cB\{ \c{avfont}𐬵 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { p1 } { \cB\{ \c{avfont}𐬺 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { p2 } { \cB\{ \c{avfont}𐬻 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { p3 } { \cB\{ \c{avfont}𐬼 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { p4 } { \cB\{ \c{avfont}𐬽 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { p5 } { \cB\{ \c{avfont}𐬾 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { p6 } { \cB\{ \c{avfont}𐬿 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { a } { \cB\{ \c{avfont}𐬀 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { e } { \cB\{ \c{avfont}𐬈 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { o } { \cB\{ \c{avfont}𐬊 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { i } { \cB\{ \c{avfont}𐬌 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { u } { \cB\{ \c{avfont}𐬎 \cE\}  } \l_myun_tl
+}
+
+
+
+\NewDocumentCommand { \avuc } { m } {	\avtransuc {#1} }
+\NewDocumentCommand { \avtransuc } { m } {%
+\tl_set:Nn \l_myuc_tl { #1 }
+ \doavtransuc 
+ \transrev { \tl_use:N \l_myuc_tl }
+}
+
+
+\NewDocumentCommand { \avun } { m } {	\avtransun {#1} }
+\NewDocumentCommand { \avtransun } { m } {%
+\tl_set:Nn \l_myun_tl { #1 }
+ \doavtransun 
+ \exp_args:No 
+										\transrev
+										{ \l_myun_tl }
+}
+
+\NewDocumentCommand { \avts } { m } {	\avtransts {#1} }
+\NewDocumentCommand { \avtransts } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+ \doavtransts 
+  \transrev { \tl_use:N \l_myts_tl  }
+}
+
+
+%---- Environments
+\NewDocumentEnvironment{avtransuce}{ +b } 
+{
+  \tl_set:Nn \l_myuc_tl { #1 }
+	\doavtransuc
+	\transrev { \tl_use:N \l_myuc_tl  }
+}
+{ }
+
+\NewDocumentEnvironment{avtransune}{ +b } 
+{
+  \tl_set:Nn \l_myun_tl { #1 }
+	\doavtransun
+  \transrev { \tl_use:N \l_myun_tl  }
+}
+{ }
+
+\NewDocumentEnvironment{avtranstse}{ +b } 
+{
+  \tl_set:Nn \l_myts_tl { #1 }
+	\doavtransts
+  \transrev { \tl_use:N \l_myts_tl }
+}
+{ }
+
+
+\NewDocumentEnvironment{avtranstsste}{ +b } 
+{
+%  \tl_set:Nn \l_myug_tl { #1 }
+	\doavtranstsst {#1}
+%{ \ugfont \tl_use:N \l_myug_tl }
+}
+{ }
+
+
+\NewDocumentEnvironment{avrubye}{ +b } 
+{
+%  \tl_set:Nn \l_myug_tl { #1 }
+	\doavtranstsrubye {#1}
+%{ \ugfont \tl_use:N \l_myug_tl }
+}
+{ }
+
+
+
+\NewDocumentEnvironment{avtableture}{ +b } 
+{
+	\begin{quotation}
+%	{\raggedright
+%	\begin{tabular}{|l|}
+%	\hline
+%	\rowcolor{blue!5}
+	\begin{avtranstse}
+	#1
+	\end{avtranstse} 			
+%					\\
+%	\rowcolor{red!5}
+\par
+
+\bigskip
+	\begin{avtranstsste}
+		#1
+		\end{avtranstsste} 
+%					\\
+%	\hline
+%	\end{tabular}
+%		}
+	\end{quotation}
+}
+{ }
+
+
+
+
+
+\ExplSyntaxOff
