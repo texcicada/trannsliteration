@@ -8,7 +8,7 @@
 \newcommand\theadercolour{red!20!yellow}
 \usepackage{fontspec}
 \usepackage[listings]{tcolorbox}
-
+\usepackage{longtable}
 
 %\usepackage{xparse}
 \setmainfont{Noto Serif}
@@ -37,7 +37,20 @@
 
 
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+%Common code: plain
 \newcommand\translitformat{\color{red}\bfseries}
+\newcommand\tablea{%
+\setlength{\tabcolsep}{-0.5pt}%
+\begin{tabular}[b]{c}
+\scriptsize 
+}
+\newcommand\tableb{%
+\\ \rule{0pt}{1.8ex} 
+}
+\newcommand\tablec{%
+\\\end{tabular}%
+}
+
 
 
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -53,7 +66,30 @@
 \newcommand\rbracket{{\mdseries\markerfontb\symbol{93}}}% ]
 
 
+% Common code
+\ExplSyntaxOn
 
+\tl_new:N \l_myuc_tl
+\tl_new:N \l_myun_tl
+\tl_new:N \l_myts_tl
+\tl_new:N \l_myb_tl
+\tl_new:N \l_myy_tl
+\tl_new:N \l_myz_tl
+\tl_new:N \l_myrev_tl
+
+\NewDocumentCommand{\transrev}{ m }{
+
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+		\tl_use:N \l_myrev_tl
+}
+\NewDocumentCommand{\transrevonly}{ m }{
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+%		\tl_use:N \l_myrev_tl
+}
+
+\ExplSyntaxOff
 
 
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -128,7 +164,7 @@
 
 \ExplSyntaxOn
 
-\tl_new:N \l_myuc_tl
+%\tl_new:N \l_myuc_tl
 %-----   Unicode codepoint
 \newcommand\dougtransuc{%
 %
@@ -166,7 +202,7 @@
 }
 %
 
-\tl_new:N \l_myun_tl
+%\tl_new:N \l_myun_tl
 %-----   Unicode name
 \newcommand\dougtransun{%
 
@@ -204,7 +240,7 @@
 }
 
 
-\tl_new:N \l_myts_tl
+%\tl_new:N \l_myts_tl
 %-----   Typing shortcut
 \newcommand\dougtransts{%
 %
@@ -339,8 +375,8 @@
 }
 
 
-\tl_new:N \l_myy_tl
-\tl_new:N \l_myz_tl
+%\tl_new:N \l_myy_tl
+%\tl_new:N \l_myz_tl
 \newcommand\dougtranstsruby[1]{%
 \tl_set:Nn \l_myy_tl { #1 }
 \tl_set:Nn \l_myz_tl { #1 }
@@ -475,18 +511,18 @@
 %%		\tl_use:N \l_myy_tl 
 %%\\\\\c{end} \cB\{ tabular \cE\}  
 
-\newcommand\tablea{%
-\setlength{\tabcolsep}{-0.5pt} 
-\begin{tabular}[b]{c}
-\scriptsize 
-}
-\newcommand\tableb{%
-\\ \rule{0pt}{1.8ex} 
-}
-\newcommand\tablec{%
-\\\end{tabular} 
-}
-
+%%\newcommand\tablea{%
+%%\setlength{\tabcolsep}{-0.5pt} 
+%%\begin{tabular}[b]{c}
+%%\scriptsize 
+%%}
+%%\newcommand\tableb{%
+%%\\ \rule{0pt}{1.8ex} 
+%%}
+%%\newcommand\tablec{%
+%%\\\end{tabular} 
+%%}
+%%
 
 
 
@@ -645,14 +681,6 @@
 %  \ProcessList {#1 } { \dougtranstsrubyb }
 %}
 
-\tl_new:N \l_myrev_tl
-\NewDocumentCommand{\transrev}{ m }{
-
-		\tl_set:Nn \l_myrev_tl { #1 }
-		\tl_reverse:N \l_myrev_tl
-		\tl_use:N \l_myrev_tl
-		
-}
 
 
 
@@ -1104,6 +1132,25 @@
 \end{center}
 }
 
+%%\newcommand\tdemo[4]{%1=heading,2=itemIn,3=itemOut,4=example
+%%\begin{center}
+%%\begin{tabular}{|c|c|}
+%%\rowcolor{black}
+%%\multicolumn{2}{c}{\color{blue!3}\sffamily\bfseries\large #1 }\\
+%%%\begin{tabular}{c|c}
+%%#2 & #3 \\
+%%%\end{tabular}\\
+%%\hline
+%%\rowcolor{blue!5}
+%%\multicolumn{2}{c}{#4} \\
+%%\hline
+%%\end{tabular}
+%%\marginpar{\p}%display numbering
+%%\end{center}
+%%}
+
+
+
 \newcommand\tdemob[2]{%1=heading,2=example
 \begin{center}
 \begin{tabular}{|c|}
@@ -1424,6 +1471,7 @@ ml\tlcorner kk\trcorner
 %########
 \section{Reference Table}
 
+{
 \rowcolors{2}{blue!3}{blue!7}
 \begin{tabular}{ccclll}
 \rowcolor{\theadercolour}Glyph &Transliteration &Shortcut &U-name &Macro &Codepoint \\\hline
@@ -1459,6 +1507,7 @@ ml\tlcorner kk\trcorner
 {\ugfont 𐎝 } &s\textsubscript{2} &ssu &ssu &\textbackslash ugssu &U+1039D \\
 {\ugfont 𐎟 } & ~  &div &worddivider &\textbackslash ugworddivider &U+1039F \\
 \hline\end{tabular}
+}
 
 
 %***
@@ -1550,10 +1599,10 @@ ml\tlcorner kk\trcorner
 %%	
 
 
-\section{Other Scripts}
+%\section{Other Scripts}
 
 %--------------------
-\subsection{Anatolian Hieroglyphs}
+\section{Anatolian Hieroglyphs}
 
 \tdemo{Unicode codepoint}{U+14400}{\ahuc{U+14400}}{\cdr{\ahuc{U+14400}}}
 
@@ -1564,18 +1613,122 @@ ml\tlcorner kk\trcorner
 
 
 %--------------------
-\subsection{Avestan}
+\section{Avestan}
+\begin{center}
+\avgloss{voo vataami}{I understand you}
 
+%\avruby{voovataami}
+\end{center}
+
+\bigskip
 \tdemo{Unicode codepoint}{U+10B00}{\avuc{U+10B00}}{\cdr{\avuc{U+10B00}}}
 
 \tdemo{Unicode name}{a}{\avun{a}}{\cdr{\avun{a}}}
 
-\hfill \avun{akexe} $\leftarrow$%\avun{123}
+\tdemo{Typing shortcut}{a}{\avts{a}}{\cdr{\avts{a}}}
 
+\tdemo{Transliteration}{aa}{\avst{aa}}{\cdr{\avst{aa}}}
+
+\tdemo{Ruby text}{aaahh}{\avruby{aaahh}}{\cdr{\avruby{aaahh}}}
+
+
+\hfill \avruby{aaahh}\avun{akexe} $\leftarrow$%\avun{123}
+
+Note the reversal: \cdr{\avruby{aa}} + \cdr{\avruby{ahh}} comes out as \cdr{\avruby{aaahh}}.
 %\transrev{abc}
 
+The word \avw{aap} means `water', and \avgloss{madu}{honey} is `mead'. 
+
+\avruby{aap madu}
+
+\avruby{yasna}, \avw{yasna}
+
+%vō vatāmi 	I understand you 	
+%mā vātaiiaθa 	You teach me 	Literally: "You let me understand" 
+
+%http://www.avesta.org/kanga/kanga_gathas.pdf
+
+\dolistavtransuc
+
+\dolistavtransun
+
+\dolistavtransts
+
+\dolistavtranstsst
+
+\subsection{Reference table}
+
+{
+\rowcolors{2}{blue!3}{blue!7}
+\begin{longtable}{ccclll}
+\rowcolor{\theadercolour}Glyph &Transliteration &Shortcut &U-name &Macro &Codepoint \\\hline
+{\avfont 𐬀 } &a &a &a &\textbackslash ava &U+10B00 \\
+{\avfont 𐬁 } &ā &aa &aa &\textbackslash avaa &U+10B01 \\
+{\avfont 𐬂 } &å &ah &ao &\textbackslash avao &U+10B02 \\
+{\avfont 𐬃 } &ā̊ &ahh &aao &\textbackslash avaao &U+10B03 \\
+{\avfont 𐬄 } &ą &au &an &\textbackslash avan &U+10B04 \\
+{\avfont 𐬅 } &ą̇ &auu &aan &\textbackslash avaan &U+10B05 \\
+{\avfont 𐬆 } &ə &eh &ae &\textbackslash avae &U+10B06 \\
+{\avfont 𐬇 } &ə̄ &ehh &aee &\textbackslash avaee &U+10B07 \\
+{\avfont 𐬈 } &e &e &e &\textbackslash ave &U+10B08 \\
+{\avfont 𐬉 } &ē &ee &ee &\textbackslash avee &U+10B09 \\
+{\avfont 𐬊 } &o &o &o &\textbackslash avo &U+10B0A \\
+{\avfont 𐬋 } &ō &oo &oo &\textbackslash avoo &U+10B0B \\
+{\avfont 𐬌 } &i &i &i &\textbackslash avi &U+10B0C \\
+{\avfont 𐬍 } &ī &ii &ii &\textbackslash avii &U+10B0D \\
+{\avfont 𐬎 } &u &u &u &\textbackslash avu &U+10B0E \\
+{\avfont 𐬏 } &ū &uu &uu &\textbackslash avuu &U+10B0F \\
+{\avfont 𐬐 } &k &k &ke &\textbackslash avke &U+10B10 \\
+{\avfont 𐬑 } &x &x &xe &\textbackslash avxe &U+10B11 \\
+{\avfont 𐬒 } &x́ &xx &xye &\textbackslash avxye &U+10B12 \\
+{\avfont 𐬓 } &xᵛ &xv &xve &\textbackslash avxve &U+10B13 \\
+{\avfont 𐬔 } &g &g &ge &\textbackslash avge &U+10B14 \\
+{\avfont 𐬕 } &ġ &gg &gge &\textbackslash avgge &U+10B15 \\
+{\avfont 𐬖 } &γ &gh &ghe &\textbackslash avghe &U+10B16 \\
+{\avfont 𐬗 } &c &c &ce &\textbackslash avce &U+10B17 \\
+{\avfont 𐬘 } &j &j &je &\textbackslash avje &U+10B18 \\
+{\avfont 𐬙 } &t &t &te &\textbackslash avte &U+10B19 \\
+{\avfont 𐬚 } &ϑ &th &the &\textbackslash avthe &U+10B1A \\
+{\avfont 𐬛 } &d &d &de &\textbackslash avde &U+10B1B \\
+{\avfont 𐬜 } &δ &dh &dhe &\textbackslash avdhe &U+10B1C \\
+{\avfont 𐬝 } &t̰ &tt &tte &\textbackslash avtte &U+10B1D \\
+{\avfont 𐬞 } &p &p &pe &\textbackslash avpe &U+10B1E \\
+{\avfont 𐬟 } &f &f &fe &\textbackslash avfe &U+10B1F \\
+{\avfont 𐬠 } &b &b &be &\textbackslash avbe &U+10B20 \\
+{\avfont 𐬡 } &β &w &bhe &\textbackslash avbhe &U+10B21 \\
+{\avfont 𐬢 } &ŋ &ng &nge &\textbackslash avnge &U+10B22 \\
+{\avfont 𐬣 } &ŋ́ &ngj &ngye &\textbackslash avngye &U+10B23 \\
+{\avfont 𐬤 } &ŋᵛ &ngw &ngve &\textbackslash avngve &U+10B24 \\
+{\avfont 𐬥 } &n &n &ne &\textbackslash avne &U+10B25 \\
+{\avfont 𐬦 } &ń &ny &nye &\textbackslash avnye &U+10B26 \\
+{\avfont 𐬧 } &ṇ &nny &nne &\textbackslash avnne &U+10B27 \\
+{\avfont 𐬨 } &m &m &me &\textbackslash avme &U+10B28 \\
+{\avfont 𐬩 } &m̨ &mh &hme &\textbackslash avhme &U+10B29 \\
+{\avfont 𐬪 } &ẏ &yy &yye &\textbackslash avyye &U+10B2A \\
+{\avfont 𐬫 } &y &y &ye &\textbackslash avye &U+10B2B \\
+{\avfont 𐬬 } &v &v &ve &\textbackslash avve &U+10B2C \\
+{\avfont 𐬭 } &r &r &re &\textbackslash avre &U+10B2D \\
+{\avfont 𐬮 } &l &l &le &\textbackslash avle &U+10B2E \\
+{\avfont 𐬯 } &s &s &se &\textbackslash avse &U+10B2F \\
+{\avfont 𐬰 } &z &z &ze &\textbackslash avze &U+10B30 \\
+{\avfont 𐬱 } &š &sh &she &\textbackslash avshe &U+10B31 \\
+{\avfont 𐬲 } &ž &zh &zhe &\textbackslash avzhe &U+10B32 \\
+{\avfont 𐬳 } &š́ &ssh &shye &\textbackslash avshye &U+10B33 \\
+{\avfont 𐬴 } &ṣ̌ &ss &sshe &\textbackslash avsshe &U+10B34 \\
+{\avfont 𐬵 } &h &h &he &\textbackslash avhe &U+10B35 \\
+{\avfont 𐬹 } &' &' &abbreviationmark &\textbackslash avabbreviationmark &U+10B39 \\
+{\avfont 𐬺 } &p1 &p1 &p1 &\textbackslash avpi &U+10B3A \\
+{\avfont 𐬻 } &p2 &p2 &p2 &\textbackslash avpii &U+10B3B \\
+{\avfont 𐬼 } &p3 &p3 &p3 &\textbackslash avpiii &U+10B3C \\
+{\avfont 𐬽 } &p4 &p4 &p4 &\textbackslash avpiv &U+10B3D \\
+{\avfont 𐬾 } &p5 &p5 &p5 &\textbackslash avpv &U+10B3E \\
+{\avfont 𐬿 } &p6 &p6 &p6 &\textbackslash avpvi &U+10B3F \\
+\hline
+\end{longtable}
+}
+
 %--------------------
-\subsection{Brahmi}
+\section{Brahmi}
 
 \tdemo{Unicode codepoint}{U+11005}{\bruc{U+11005}}{\cdr{\bruc{U+11005}}}
 
