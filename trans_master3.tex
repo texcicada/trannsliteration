@@ -9,6 +9,9 @@
 \usepackage{fontspec}
 \usepackage[listings]{tcolorbox}
 \usepackage{longtable}
+%%\usepackage{bidi}% needs xelatex
+\usepackage[bidi=basic]{babel}
+
 
 %\usepackage{xparse}
 \setmainfont{Noto Serif}
@@ -20,8 +23,8 @@
 \newfontfamily\ugfont{Noto Sans Ugaritic}[Colour=blue,Scale=1.5]
 \newfontfamily\ugfontb{Noto Sans Ugaritic}%plain font
 
-\newfontfamily\opfont{Noto Sans OldPersian}[Colour=blue,Scale=1.5]
-\newfontfamily\opfontb{Noto Sans OldPersian}%plain font
+\newfontfamily\opfont{NotoSansOldPersian-Regular.ttf}%Noto Sans OldPersian}[Colour=blue,Scale=1.5]
+\newfontfamily\opfontb{NotoSansOldPersian-Regular.ttf}%Noto Sans OldPersian}%plain font
 
 \newfontface\mlfont{Noto Sans Malayalam}[Colour=blue,Scale=1.5]
 \newfontface\mlfontb{Noto Sans Malayalam}
@@ -1615,9 +1618,9 @@ ml\tlcorner kk\trcorner
 %--------------------
 \section{Avestan}
 \begin{center}
-\avgloss{voo vataami}{I understand you}
+\avglossr{voo vataami}{I understand you}
 
-%\avruby{voovataami}
+\avruby{voo vataami}$\leftarrow$
 \end{center}
 
 \bigskip
@@ -1637,11 +1640,45 @@ ml\tlcorner kk\trcorner
 Note the reversal: \cdr{\avruby{aa}} + \cdr{\avruby{ahh}} comes out as \cdr{\avruby{aaahh}}.
 %\transrev{abc}
 
-The word \avw{aap} means `water', and \avgloss{madu}{honey} is `mead'. 
+The word \avwr{aap} means `water', and \avglossr{madu}{honey} is `mead'. 
 
 \avruby{aap madu}
 
-\avruby{yasna}, \avw{yasna}
+\avruby{yasna}, as ruby text; and \avwr{yasna}, as a word.
+
+\avts{ap madu ap madu}
+
+With the \cs{avestan} environment 
+%(which calls in \codegeneral{bidi} package), 
+(which uses \codegeneral{babel}'s \codedetok{{otherlanguage} {hebrew}} environment)
+words are set RTL in RTL paragraphs, and the letter sequence in the words is RTL-reversed with \cs{\avts} internally:
+
+
+
+\begin{avestan}
+aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu 
+
+aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu.
+
+
+\end{avestan}
+
+
+
+
+
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Avestan environment: \bfseries\textcolor{blue!10}{avestan}}},colback=red!5!white,colframe=red!75!black,listing side text,code={\marginpar{\p}}}
+\begin{avestan}
+aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu.
+
+aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu.
+\end{avestan}
+\end{tcblisting}
+%%%
+
+
 
 %vō vatāmi 	I understand you 	
 %mā vātaiiaθa 	You teach me 	Literally: "You let me understand" 
