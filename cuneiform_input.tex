@@ -1,0 +1,2318 @@
+\newcommand\cutag{{\tiny [Cuneiform]\par}}
+
+
+
+\ExplSyntaxOn
+
+
+
+%%%%%%-----   Unicode codepoint
+%%%%%\newcommand\dobrtransuc{%
+%%%%%%
+%%%%%\regex_replace_all:nnN { U\+11000 } { \cB\{ \c{brfont}𑀀 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11001 } { \cB\{ \c{brfont}𑀁 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11002 } { \cB\{ \c{brfont}𑀂 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11003 } { \cB\{ \c{brfont}𑀃 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11004 } { \cB\{ \c{brfont}𑀄 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11005 } { \cB\{ \c{brfont}𑀅 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11006 } { \cB\{ \c{brfont}𑀆 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11007 } { \cB\{ \c{brfont}𑀇 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11008 } { \cB\{ \c{brfont}𑀈 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11009 } { \cB\{ \c{brfont}𑀉 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1100A } { \cB\{ \c{brfont}𑀊 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1100B } { \cB\{ \c{brfont}𑀋 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1100C } { \cB\{ \c{brfont}𑀌 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1100D } { \cB\{ \c{brfont}𑀍 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1100E } { \cB\{ \c{brfont}𑀎 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1100F } { \cB\{ \c{brfont}𑀏 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11010 } { \cB\{ \c{brfont}𑀐 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11011 } { \cB\{ \c{brfont}𑀑 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11012 } { \cB\{ \c{brfont}𑀒 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11013 } { \cB\{ \c{brfont}𑀓 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11014 } { \cB\{ \c{brfont}𑀔 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11015 } { \cB\{ \c{brfont}𑀕 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11016 } { \cB\{ \c{brfont}𑀖 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11017 } { \cB\{ \c{brfont}𑀗 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11018 } { \cB\{ \c{brfont}𑀘 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11019 } { \cB\{ \c{brfont}𑀙 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1101A } { \cB\{ \c{brfont}𑀚 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1101B } { \cB\{ \c{brfont}𑀛 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1101C } { \cB\{ \c{brfont}𑀜 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1101D } { \cB\{ \c{brfont}𑀝 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1101E } { \cB\{ \c{brfont}𑀞 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1101F } { \cB\{ \c{brfont}𑀟 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11020 } { \cB\{ \c{brfont}𑀠 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11021 } { \cB\{ \c{brfont}𑀡 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11022 } { \cB\{ \c{brfont}𑀢 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11023 } { \cB\{ \c{brfont}𑀣 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11024 } { \cB\{ \c{brfont}𑀤 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11025 } { \cB\{ \c{brfont}𑀥 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11026 } { \cB\{ \c{brfont}𑀦 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11027 } { \cB\{ \c{brfont}𑀧 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11028 } { \cB\{ \c{brfont}𑀨 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11029 } { \cB\{ \c{brfont}𑀩 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1102A } { \cB\{ \c{brfont}𑀪 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1102B } { \cB\{ \c{brfont}𑀫 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1102C } { \cB\{ \c{brfont}𑀬 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1102D } { \cB\{ \c{brfont}𑀭 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1102E } { \cB\{ \c{brfont}𑀮 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1102F } { \cB\{ \c{brfont}𑀯 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11030 } { \cB\{ \c{brfont}𑀰 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11031 } { \cB\{ \c{brfont}𑀱 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11032 } { \cB\{ \c{brfont}𑀲 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11033 } { \cB\{ \c{brfont}𑀳 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11034 } { \cB\{ \c{brfont}𑀴 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11035 } { \cB\{ \c{brfont}𑀵 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11036 } { \cB\{ \c{brfont}𑀶 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11037 } { \cB\{ \c{brfont}𑀷 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11038 } { \cB\{ \c{brfont}𑀸 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11039 } { \cB\{ \c{brfont}𑀹 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1103A } { \cB\{ \c{brfont}𑀺 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1103B } { \cB\{ \c{brfont}𑀻 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1103C } { \cB\{ \c{brfont}𑀼 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1103D } { \cB\{ \c{brfont}𑀽 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1103E } { \cB\{ \c{brfont}𑀾 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1103F } { \cB\{ \c{brfont}𑀿 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11040 } { \cB\{ \c{brfont}𑁀 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11041 } { \cB\{ \c{brfont}𑁁 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11042 } { \cB\{ \c{brfont}𑁂 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11043 } { \cB\{ \c{brfont}𑁃 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11044 } { \cB\{ \c{brfont}𑁄 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11045 } { \cB\{ \c{brfont}𑁅 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11046 } { \cB\{ \c{brfont}𑁆 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11047 } { \cB\{ \c{brfont}𑁇 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11048 } { \cB\{ \c{brfont}𑁈 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11049 } { \cB\{ \c{brfont}𑁉 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1104A } { \cB\{ \c{brfont}𑁊 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1104B } { \cB\{ \c{brfont}𑁋 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1104C } { \cB\{ \c{brfont}𑁌 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1104D } { \cB\{ \c{brfont}𑁍 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11052 } { \cB\{ \c{brfont}𑁒 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11053 } { \cB\{ \c{brfont}𑁓 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11054 } { \cB\{ \c{brfont}𑁔 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11055 } { \cB\{ \c{brfont}𑁕 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11056 } { \cB\{ \c{brfont}𑁖 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11057 } { \cB\{ \c{brfont}𑁗 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11058 } { \cB\{ \c{brfont}𑁘 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11059 } { \cB\{ \c{brfont}𑁙 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1105A } { \cB\{ \c{brfont}𑁚 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1105B } { \cB\{ \c{brfont}𑁛 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1105C } { \cB\{ \c{brfont}𑁜 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1105D } { \cB\{ \c{brfont}𑁝 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1105E } { \cB\{ \c{brfont}𑁞 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1105F } { \cB\{ \c{brfont}𑁟 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11060 } { \cB\{ \c{brfont}𑁠 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11061 } { \cB\{ \c{brfont}𑁡 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11062 } { \cB\{ \c{brfont}𑁢 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11063 } { \cB\{ \c{brfont}𑁣 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11064 } { \cB\{ \c{brfont}𑁤 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11065 } { \cB\{ \c{brfont}𑁥 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11066 } { \cB\{ \c{brfont}𑁦 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11067 } { \cB\{ \c{brfont}𑁧 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11068 } { \cB\{ \c{brfont}𑁨 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+11069 } { \cB\{ \c{brfont}𑁩 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1106A } { \cB\{ \c{brfont}𑁪 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1106B } { \cB\{ \c{brfont}𑁫 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1106C } { \cB\{ \c{brfont}𑁬 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1106D } { \cB\{ \c{brfont}𑁭 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1106E } { \cB\{ \c{brfont}𑁮 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1106F } { \cB\{ \c{brfont}𑁯 \cE\}  } \l_myuc_tl
+%%%%%\regex_replace_all:nnN { U\+1107F } { \cB\{ \c{brfont}𑁿 \cE\}  } \l_myuc_tl
+%%%%%}
+%%%%%
+%%%%%
+%%%%%%-----   Unicode name
+%%%%%\newcommand\dobrtransun{%
+%%%%%%
+%%%%%\regex_replace_all:nnN { lettervocalicrr } { \cB\{ \c{brfont}𑀌 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lettervocalicll } { \cB\{ \c{brfont}𑀎 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lettervocalicr } { \cB\{ \c{brfont}𑀋 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lettervocalicl } { \cB\{ \c{brfont}𑀍 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { bhattiproluaa } { \cB\{ \c{brfont}𑀹 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { oldtamilllla } { \cB\{ \c{brfont}𑀵 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { oldtamilnnna } { \cB\{ \c{brfont}𑀷 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { candrabindu } { \cB\{ \c{brfont}𑀀 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { jihvamuliya } { \cB\{ \c{brfont}𑀃 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { upadhmaniya } { \cB\{ \c{brfont}𑀄 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { oldtamilrra } { \cB\{ \c{brfont}𑀶 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { doubledanda } { \cB\{ \c{brfont}𑁈 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { crescentbar } { \cB\{ \c{brfont}𑁌 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { onethousand } { \cB\{ \c{brfont}𑁥 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { onehundred } { \cB\{ \c{brfont}𑁤 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitthree } { \cB\{ \c{brfont}𑁩 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitseven } { \cB\{ \c{brfont}𑁭 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digiteight } { \cB\{ \c{brfont}𑁮 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { vocalicrr } { \cB\{ \c{brfont}𑀿 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { vocalicll } { \cB\{ \c{brfont}𑁁 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { doubledot } { \cB\{ \c{brfont}𑁊 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitzero } { \cB\{ \c{brfont}𑁦 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitfour } { \cB\{ \c{brfont}𑁪 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitfive } { \cB\{ \c{brfont}𑁫 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitnine } { \cB\{ \c{brfont}𑁯 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { anusvara } { \cB\{ \c{brfont}𑀁 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { letteraa } { \cB\{ \c{brfont}𑀆 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { letterii } { \cB\{ \c{brfont}𑀈 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { letteruu } { \cB\{ \c{brfont}𑀊 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { letterai } { \cB\{ \c{brfont}𑀐 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { letterau } { \cB\{ \c{brfont}𑀒 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { vocalicr } { \cB\{ \c{brfont}𑀾 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { vocalicl } { \cB\{ \c{brfont}𑁀 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitone } { \cB\{ \c{brfont}𑁧 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digittwo } { \cB\{ \c{brfont}𑁨 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { digitsix } { \cB\{ \c{brfont}𑁬 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { visarga } { \cB\{ \c{brfont}𑀂 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lettera } { \cB\{ \c{brfont}𑀅 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { letteri } { \cB\{ \c{brfont}𑀇 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { letteru } { \cB\{ \c{brfont}𑀉 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lettere } { \cB\{ \c{brfont}𑀏 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lettero } { \cB\{ \c{brfont}𑀑 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { seventy } { \cB\{ \c{brfont}𑁡 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { virama } { \cB\{ \c{brfont}𑁆 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { twenty } { \cB\{ \c{brfont}𑁜 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { thirty } { \cB\{ \c{brfont}𑁝 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { eighty } { \cB\{ \c{brfont}𑁢 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ninety } { \cB\{ \c{brfont}𑁣 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { joiner } { \cB\{ \c{brfont}𑁿 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { danda } { \cB\{ \c{brfont}𑁇 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lotus } { \cB\{ \c{brfont}𑁍 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { three } { \cB\{ \c{brfont}𑁔 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { seven } { \cB\{ \c{brfont}𑁘 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { eight } { \cB\{ \c{brfont}𑁙 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { forty } { \cB\{ \c{brfont}𑁞 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { fifty } { \cB\{ \c{brfont}𑁟 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { sixty } { \cB\{ \c{brfont}𑁠 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ttha } { \cB\{ \c{brfont}𑀞 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ddha } { \cB\{ \c{brfont}𑀠 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { line } { \cB\{ \c{brfont}𑁋 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { four } { \cB\{ \c{brfont}𑁕 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { five } { \cB\{ \c{brfont}𑁖 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { nine } { \cB\{ \c{brfont}𑁚 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { kha } { \cB\{ \c{brfont}𑀔 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { gha } { \cB\{ \c{brfont}𑀖 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { nga } { \cB\{ \c{brfont}𑀗 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { cha } { \cB\{ \c{brfont}𑀙 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { jha } { \cB\{ \c{brfont}𑀛 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { nya } { \cB\{ \c{brfont}𑀜 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { tta } { \cB\{ \c{brfont}𑀝 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { dda } { \cB\{ \c{brfont}𑀟 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { nna } { \cB\{ \c{brfont}𑀡 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { tha } { \cB\{ \c{brfont}𑀣 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { dha } { \cB\{ \c{brfont}𑀥 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { pha } { \cB\{ \c{brfont}𑀨 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { bha } { \cB\{ \c{brfont}𑀪 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { sha } { \cB\{ \c{brfont}𑀰 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ssa } { \cB\{ \c{brfont}𑀱 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { lla } { \cB\{ \c{brfont}𑀴 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { dot } { \cB\{ \c{brfont}𑁉 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { one } { \cB\{ \c{brfont}𑁒 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { two } { \cB\{ \c{brfont}𑁓 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { six } { \cB\{ \c{brfont}𑁗 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ten } { \cB\{ \c{brfont}𑁛 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ka } { \cB\{ \c{brfont}𑀓 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ga } { \cB\{ \c{brfont}𑀕 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ca } { \cB\{ \c{brfont}𑀘 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ja } { \cB\{ \c{brfont}𑀚 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ta } { \cB\{ \c{brfont}𑀢 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { da } { \cB\{ \c{brfont}𑀤 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { na } { \cB\{ \c{brfont}𑀦 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { pa } { \cB\{ \c{brfont}𑀧 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ba } { \cB\{ \c{brfont}𑀩 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ma } { \cB\{ \c{brfont}𑀫 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ya } { \cB\{ \c{brfont}𑀬 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ra } { \cB\{ \c{brfont}𑀭 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { la } { \cB\{ \c{brfont}𑀮 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { va } { \cB\{ \c{brfont}𑀯 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { sa } { \cB\{ \c{brfont}𑀲 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ha } { \cB\{ \c{brfont}𑀳 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { aa } { \cB\{ \c{brfont}𑀸 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ii } { \cB\{ \c{brfont}𑀻 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { uu } { \cB\{ \c{brfont}𑀽 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { ai } { \cB\{ \c{brfont}𑁃 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { au } { \cB\{ \c{brfont}𑁅 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { i } { \cB\{ \c{brfont}𑀺 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { u } { \cB\{ \c{brfont}𑀼 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { e } { \cB\{ \c{brfont}𑁂 \cE\}  } \l_myun_tl
+%%%%%\regex_replace_all:nnN { o } { \cB\{ \c{brfont}𑁄 \cE\}  } \l_myun_tl
+%%%%%
+%%%%%}
+%%%%%
+%%%%%
+%%%%%
+%%%%%\NewDocumentCommand { \bruc } { m } {	\brtransuc {#1} }
+%%%%%
+%%%%%\NewDocumentCommand { \brtransuc } { m } {%
+%%%%%\tl_set:Nn \l_myuc_tl { #1 }
+%%%%% \dobrtransuc 
+%%%%%  \tl_use:N \l_myuc_tl 
+%%%%%}
+%%%%%
+%%%%%
+%%%%%\NewDocumentCommand { \brun } { m } {	\brtransun {#1} }
+%%%%%\NewDocumentCommand { \brtransun } { m } {%
+%%%%%\tl_set:Nn \l_myun_tl { #1 }
+%%%%% \dobrtransun 
+%%%%% \tl_use:N \l_myun_tl 
+%%%%%}
+%%%%%
+%%%%%\NewDocumentCommand { \brts } { m } {	\brtransts {#1} }
+%%%%%\NewDocumentCommand { \brtransts } { m } {%
+%%%%%\tl_set:Nn \l_myts_tl { #1 }
+%%%%% \dobrtransts 
+%%%%%  \tl_use:N \l_myts_tl 
+%%%%%}
+%%%%%
+%%%%%
+%%%%%%---- Environments
+%%%%%\NewDocumentEnvironment{brtransuce}{ +b } 
+%%%%%{
+%%%%%  \tl_set:Nn \l_myuc_tl { #1 }
+%%%%%	\dobrtransuc
+%%%%%	\tl_use:N \l_myuc_tl 
+%%%%%}
+%%%%%{ }
+%%%%%
+%%%%%\NewDocumentEnvironment{brtransune}{ +b } 
+%%%%%{
+%%%%%  \tl_set:Nn \l_myun_tl { #1 }
+%%%%%	\dobrtransun
+%%%%%  \tl_use:N \l_myun_tl 
+%%%%%}
+%%%%%{ }
+%%%%%
+%%%%%\NewDocumentEnvironment{brtranstse}{ +b } 
+%%%%%{
+%%%%%  \tl_set:Nn \l_myts_tl { #1 }
+%%%%%	\dobrtransts
+%%%%%  \tl_use:N \l_myts_tl 
+%%%%%}
+%%%%%{ }
+%%%%%
+%%%%%
+%%%%%\NewDocumentEnvironment{brtranstsste}{ +b } 
+%%%%%{
+%%%%%%  \tl_set:Nn \l_myug_tl { #1 }
+%%%%%	\dobrtranstsst {#1}
+%%%%%%{ \ugfont \tl_use:N \l_myug_tl }
+%%%%%}
+%%%%%{ }
+%%%%%
+%%%%%
+%%%%%\NewDocumentEnvironment{brrubye}{ +b } 
+%%%%%{
+%%%%%%  \tl_set:Nn \l_myug_tl { #1 }
+%%%%%	\dobrtranstsrubye {#1}
+%%%%%%{ \ugfont \tl_use:N \l_myug_tl }
+%%%%%}
+%%%%%{ }
+%%%%%
+%%%%%
+%%%%%
+%%%%%\NewDocumentEnvironment{brtableture}{ +b } 
+%%%%%{
+%%%%%	\begin{quotation}
+%%%%%%	{\raggedright
+%%%%%%	\begin{tabular}{|l|}
+%%%%%%	\hline
+%%%%%%	\rowcolor{blue!5}
+%%%%%	\begin{brtranstse}
+%%%%%	#1
+%%%%%	\end{brtranstse} 			
+%%%%%%					\\
+%%%%%%	\rowcolor{red!5}
+%%%%%\par
+%%%%%
+%%%%%\bigskip
+%%%%%	\begin{brtranstsste}
+%%%%%		#1
+%%%%%		\end{brtranstsste} 
+%%%%%%					\\
+%%%%%%	\hline
+%%%%%%	\end{tabular}
+%%%%%%		}
+%%%%%	\end{quotation}
+%%%%%}
+%%%%%{ }
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%\ExplSyntaxOff
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+
+%-----   List of Unicode codepoints
+\newcommand\cushowplainlistuc{%
+%\subsection{List of Unicode codepoints}\label{sec:listcuuc}
+\noindent U+12000  $\mapsto$ {\cufont 𒀀}\par
+\noindent U+12001  $\mapsto$ {\cufont 𒀁}\par
+\noindent U+12002  $\mapsto$ {\cufont 𒀂}\par
+\noindent U+12003  $\mapsto$ {\cufont 𒀃}\par
+\noindent U+12004  $\mapsto$ {\cufont 𒀄}\par
+\noindent U+12005  $\mapsto$ {\cufont 𒀅}\par
+\noindent U+12006  $\mapsto$ {\cufont 𒀆}\par
+\noindent U+12007  $\mapsto$ {\cufont 𒀇}\par
+\noindent U+12008  $\mapsto$ {\cufont 𒀈}\par
+\noindent U+12009  $\mapsto$ {\cufont 𒀉}\par
+\noindent U+1200A  $\mapsto$ {\cufont 𒀊}\par
+\noindent U+1200B  $\mapsto$ {\cufont 𒀋}\par
+\noindent U+1200C  $\mapsto$ {\cufont 𒀌}\par
+\noindent U+1200D  $\mapsto$ {\cufont 𒀍}\par
+\noindent U+1200E  $\mapsto$ {\cufont 𒀎}\par
+\noindent U+1200F  $\mapsto$ {\cufont 𒀏}\par
+\noindent U+12010  $\mapsto$ {\cufont 𒀐}\par
+\noindent U+12011  $\mapsto$ {\cufont 𒀑}\par
+\noindent U+12012  $\mapsto$ {\cufont 𒀒}\par
+\noindent U+12013  $\mapsto$ {\cufont 𒀓}\par
+\noindent U+12014  $\mapsto$ {\cufont 𒀔}\par
+\noindent U+12015  $\mapsto$ {\cufont 𒀕}\par
+\noindent U+12016  $\mapsto$ {\cufont 𒀖}\par
+\noindent U+12017  $\mapsto$ {\cufont 𒀗}\par
+\noindent U+12018  $\mapsto$ {\cufont 𒀘}\par
+\noindent U+12019  $\mapsto$ {\cufont 𒀙}\par
+\noindent U+1201A  $\mapsto$ {\cufont 𒀚}\par
+\noindent U+1201B  $\mapsto$ {\cufont 𒀛}\par
+\noindent U+1201C  $\mapsto$ {\cufont 𒀜}\par
+\noindent U+1201D  $\mapsto$ {\cufont 𒀝}\par
+\noindent U+1201E  $\mapsto$ {\cufont 𒀞}\par
+\noindent U+1201F  $\mapsto$ {\cufont 𒀟}\par
+\noindent U+12020  $\mapsto$ {\cufont 𒀠}\par
+\noindent U+12021  $\mapsto$ {\cufont 𒀡}\par
+\noindent U+12022  $\mapsto$ {\cufont 𒀢}\par
+\noindent U+12023  $\mapsto$ {\cufont 𒀣}\par
+\noindent U+12024  $\mapsto$ {\cufont 𒀤}\par
+\noindent U+12025  $\mapsto$ {\cufont 𒀥}\par
+\noindent U+12026  $\mapsto$ {\cufont 𒀦}\par
+\noindent U+12027  $\mapsto$ {\cufont 𒀧}\par
+\noindent U+12028  $\mapsto$ {\cufont 𒀨}\par
+\noindent U+12029  $\mapsto$ {\cufont 𒀩}\par
+\noindent U+1202A  $\mapsto$ {\cufont 𒀪}\par
+\noindent U+1202B  $\mapsto$ {\cufont 𒀫}\par
+\noindent U+1202C  $\mapsto$ {\cufont 𒀬}\par
+\noindent U+1202D  $\mapsto$ {\cufont 𒀭}\par
+\noindent U+1202E  $\mapsto$ {\cufont 𒀮}\par
+\noindent U+1202F  $\mapsto$ {\cufont 𒀯}\par
+\noindent U+12030  $\mapsto$ {\cufont 𒀰}\par
+\noindent U+12031  $\mapsto$ {\cufont 𒀱}\par
+\noindent U+12032  $\mapsto$ {\cufont 𒀲}\par
+\noindent U+12033  $\mapsto$ {\cufont 𒀳}\par
+\noindent U+12034  $\mapsto$ {\cufont 𒀴}\par
+\noindent U+12035  $\mapsto$ {\cufont 𒀵}\par
+\noindent U+12036  $\mapsto$ {\cufont 𒀶}\par
+\noindent U+12037  $\mapsto$ {\cufont 𒀷}\par
+\noindent U+12038  $\mapsto$ {\cufont 𒀸}\par
+\noindent U+12039  $\mapsto$ {\cufont 𒀹}\par
+\noindent U+1203A  $\mapsto$ {\cufont 𒀺}\par
+\noindent U+1203B  $\mapsto$ {\cufont 𒀻}\par
+\noindent U+1203C  $\mapsto$ {\cufont 𒀼}\par
+\noindent U+1203D  $\mapsto$ {\cufont 𒀽}\par
+\noindent U+1203E  $\mapsto$ {\cufont 𒀾}\par
+\noindent U+1203F  $\mapsto$ {\cufont 𒀿}\par
+\noindent U+12040  $\mapsto$ {\cufont 𒁀}\par
+\noindent U+12041  $\mapsto$ {\cufont 𒁁}\par
+\noindent U+12042  $\mapsto$ {\cufont 𒁂}\par
+\noindent U+12043  $\mapsto$ {\cufont 𒁃}\par
+\noindent U+12044  $\mapsto$ {\cufont 𒁄}\par
+\noindent U+12045  $\mapsto$ {\cufont 𒁅}\par
+\noindent U+12046  $\mapsto$ {\cufont 𒁆}\par
+\noindent U+12047  $\mapsto$ {\cufont 𒁇}\par
+\noindent U+12048  $\mapsto$ {\cufont 𒁈}\par
+\noindent U+12049  $\mapsto$ {\cufont 𒁉}\par
+\noindent U+1204A  $\mapsto$ {\cufont 𒁊}\par
+\noindent U+1204B  $\mapsto$ {\cufont 𒁋}\par
+\noindent U+1204C  $\mapsto$ {\cufont 𒁌}\par
+\noindent U+1204D  $\mapsto$ {\cufont 𒁍}\par
+\noindent U+1204E  $\mapsto$ {\cufont 𒁎}\par
+\noindent U+1204F  $\mapsto$ {\cufont 𒁏}\par
+\noindent U+12050  $\mapsto$ {\cufont 𒁐}\par
+\noindent U+12051  $\mapsto$ {\cufont 𒁑}\par
+\noindent U+12052  $\mapsto$ {\cufont 𒁒}\par
+\noindent U+12053  $\mapsto$ {\cufont 𒁓}\par
+\noindent U+12054  $\mapsto$ {\cufont 𒁔}\par
+\noindent U+12055  $\mapsto$ {\cufont 𒁕}\par
+\noindent U+12056  $\mapsto$ {\cufont 𒁖}\par
+\noindent U+12057  $\mapsto$ {\cufont 𒁗}\par
+\noindent U+12058  $\mapsto$ {\cufont 𒁘}\par
+\noindent U+12059  $\mapsto$ {\cufont 𒁙}\par
+\noindent U+1205A  $\mapsto$ {\cufont 𒁚}\par
+\noindent U+1205B  $\mapsto$ {\cufont 𒁛}\par
+\noindent U+1205C  $\mapsto$ {\cufont 𒁜}\par
+\noindent U+1205D  $\mapsto$ {\cufont 𒁝}\par
+\noindent U+1205E  $\mapsto$ {\cufont 𒁞}\par
+\noindent U+1205F  $\mapsto$ {\cufont 𒁟}\par
+\noindent U+12060  $\mapsto$ {\cufont 𒁠}\par
+\noindent U+12061  $\mapsto$ {\cufont 𒁡}\par
+\noindent U+12062  $\mapsto$ {\cufont 𒁢}\par
+\noindent U+12063  $\mapsto$ {\cufont 𒁣}\par
+\noindent U+12064  $\mapsto$ {\cufont 𒁤}\par
+\noindent U+12065  $\mapsto$ {\cufont 𒁥}\par
+\noindent U+12066  $\mapsto$ {\cufont 𒁦}\par
+\noindent U+12067  $\mapsto$ {\cufont 𒁧}\par
+\noindent U+12068  $\mapsto$ {\cufont 𒁨}\par
+\noindent U+12069  $\mapsto$ {\cufont 𒁩}\par
+\noindent U+1206A  $\mapsto$ {\cufont 𒁪}\par
+\noindent U+1206B  $\mapsto$ {\cufont 𒁫}\par
+\noindent U+1206C  $\mapsto$ {\cufont 𒁬}\par
+\noindent U+1206D  $\mapsto$ {\cufont 𒁭}\par
+\noindent U+1206E  $\mapsto$ {\cufont 𒁮}\par
+\noindent U+1206F  $\mapsto$ {\cufont 𒁯}\par
+\noindent U+12070  $\mapsto$ {\cufont 𒁰}\par
+\noindent U+12071  $\mapsto$ {\cufont 𒁱}\par
+\noindent U+12072  $\mapsto$ {\cufont 𒁲}\par
+\noindent U+12073  $\mapsto$ {\cufont 𒁳}\par
+\noindent U+12074  $\mapsto$ {\cufont 𒁴}\par
+\noindent U+12075  $\mapsto$ {\cufont 𒁵}\par
+\noindent U+12076  $\mapsto$ {\cufont 𒁶}\par
+\noindent U+12077  $\mapsto$ {\cufont 𒁷}\par
+\noindent U+12078  $\mapsto$ {\cufont 𒁸}\par
+\noindent U+12079  $\mapsto$ {\cufont 𒁹}\par
+\noindent U+1207A  $\mapsto$ {\cufont 𒁺}\par
+\noindent U+1207B  $\mapsto$ {\cufont 𒁻}\par
+\noindent U+1207C  $\mapsto$ {\cufont 𒁼}\par
+\noindent U+1207D  $\mapsto$ {\cufont 𒁽}\par
+\noindent U+1207E  $\mapsto$ {\cufont 𒁾}\par
+\noindent U+1207F  $\mapsto$ {\cufont 𒁿}\par
+\noindent U+12080  $\mapsto$ {\cufont 𒂀}\par
+\noindent U+12081  $\mapsto$ {\cufont 𒂁}\par
+\noindent U+12082  $\mapsto$ {\cufont 𒂂}\par
+\noindent U+12083  $\mapsto$ {\cufont 𒂃}\par
+\noindent U+12084  $\mapsto$ {\cufont 𒂄}\par
+\noindent U+12085  $\mapsto$ {\cufont 𒂅}\par
+\noindent U+12086  $\mapsto$ {\cufont 𒂆}\par
+\noindent U+12087  $\mapsto$ {\cufont 𒂇}\par
+\noindent U+12088  $\mapsto$ {\cufont 𒂈}\par
+\noindent U+12089  $\mapsto$ {\cufont 𒂉}\par
+\noindent U+1208A  $\mapsto$ {\cufont 𒂊}\par
+\noindent U+1208B  $\mapsto$ {\cufont 𒂋}\par
+\noindent U+1208C  $\mapsto$ {\cufont 𒂌}\par
+\noindent U+1208D  $\mapsto$ {\cufont 𒂍}\par
+\noindent U+1208E  $\mapsto$ {\cufont 𒂎}\par
+\noindent U+1208F  $\mapsto$ {\cufont 𒂏}\par
+\noindent U+12090  $\mapsto$ {\cufont 𒂐}\par
+\noindent U+12091  $\mapsto$ {\cufont 𒂑}\par
+\noindent U+12092  $\mapsto$ {\cufont 𒂒}\par
+\noindent U+12093  $\mapsto$ {\cufont 𒂓}\par
+\noindent U+12094  $\mapsto$ {\cufont 𒂔}\par
+\noindent U+12095  $\mapsto$ {\cufont 𒂕}\par
+\noindent U+12096  $\mapsto$ {\cufont 𒂖}\par
+\noindent U+12097  $\mapsto$ {\cufont 𒂗}\par
+\noindent U+12098  $\mapsto$ {\cufont 𒂘}\par
+\noindent U+12099  $\mapsto$ {\cufont 𒂙}\par
+\noindent U+1209A  $\mapsto$ {\cufont 𒂚}\par
+\noindent U+1209B  $\mapsto$ {\cufont 𒂛}\par
+\noindent U+1209C  $\mapsto$ {\cufont 𒂜}\par
+\noindent U+1209D  $\mapsto$ {\cufont 𒂝}\par
+\noindent U+1209E  $\mapsto$ {\cufont 𒂞}\par
+\noindent U+1209F  $\mapsto$ {\cufont 𒂟}\par
+\noindent U+120A0  $\mapsto$ {\cufont 𒂠}\par
+\noindent U+120A1  $\mapsto$ {\cufont 𒂡}\par
+\noindent U+120A2  $\mapsto$ {\cufont 𒂢}\par
+\noindent U+120A3  $\mapsto$ {\cufont 𒂣}\par
+\noindent U+120A4  $\mapsto$ {\cufont 𒂤}\par
+\noindent U+120A5  $\mapsto$ {\cufont 𒂥}\par
+\noindent U+120A6  $\mapsto$ {\cufont 𒂦}\par
+\noindent U+120A7  $\mapsto$ {\cufont 𒂧}\par
+\noindent U+120A8  $\mapsto$ {\cufont 𒂨}\par
+\noindent U+120A9  $\mapsto$ {\cufont 𒂩}\par
+\noindent U+120AA  $\mapsto$ {\cufont 𒂪}\par
+\noindent U+120AB  $\mapsto$ {\cufont 𒂫}\par
+\noindent U+120AC  $\mapsto$ {\cufont 𒂬}\par
+\noindent U+120AD  $\mapsto$ {\cufont 𒂭}\par
+\noindent U+120AE  $\mapsto$ {\cufont 𒂮}\par
+\noindent U+120AF  $\mapsto$ {\cufont 𒂯}\par
+\noindent U+120B0  $\mapsto$ {\cufont 𒂰}\par
+\noindent U+120B1  $\mapsto$ {\cufont 𒂱}\par
+\noindent U+120B2  $\mapsto$ {\cufont 𒂲}\par
+\noindent U+120B3  $\mapsto$ {\cufont 𒂳}\par
+\noindent U+120B4  $\mapsto$ {\cufont 𒂴}\par
+\noindent U+120B5  $\mapsto$ {\cufont 𒂵}\par
+\noindent U+120B6  $\mapsto$ {\cufont 𒂶}\par
+\noindent U+120B7  $\mapsto$ {\cufont 𒂷}\par
+\noindent U+120B8  $\mapsto$ {\cufont 𒂸}\par
+\noindent U+120B9  $\mapsto$ {\cufont 𒂹}\par
+\noindent U+120BA  $\mapsto$ {\cufont 𒂺}\par
+\noindent U+120BB  $\mapsto$ {\cufont 𒂻}\par
+\noindent U+120BC  $\mapsto$ {\cufont 𒂼}\par
+\noindent U+120BD  $\mapsto$ {\cufont 𒂽}\par
+\noindent U+120BE  $\mapsto$ {\cufont 𒂾}\par
+\noindent U+120BF  $\mapsto$ {\cufont 𒂿}\par
+\noindent U+120C0  $\mapsto$ {\cufont 𒃀}\par
+\noindent U+120C1  $\mapsto$ {\cufont 𒃁}\par
+\noindent U+120C2  $\mapsto$ {\cufont 𒃂}\par
+\noindent U+120C3  $\mapsto$ {\cufont 𒃃}\par
+\noindent U+120C4  $\mapsto$ {\cufont 𒃄}\par
+\noindent U+120C5  $\mapsto$ {\cufont 𒃅}\par
+\noindent U+120C6  $\mapsto$ {\cufont 𒃆}\par
+\noindent U+120C7  $\mapsto$ {\cufont 𒃇}\par
+\noindent U+120C8  $\mapsto$ {\cufont 𒃈}\par
+\noindent U+120C9  $\mapsto$ {\cufont 𒃉}\par
+\noindent U+120CA  $\mapsto$ {\cufont 𒃊}\par
+\noindent U+120CB  $\mapsto$ {\cufont 𒃋}\par
+\noindent U+120CC  $\mapsto$ {\cufont 𒃌}\par
+\noindent U+120CD  $\mapsto$ {\cufont 𒃍}\par
+\noindent U+120CE  $\mapsto$ {\cufont 𒃎}\par
+\noindent U+120CF  $\mapsto$ {\cufont 𒃏}\par
+\noindent U+120D0  $\mapsto$ {\cufont 𒃐}\par
+\noindent U+120D1  $\mapsto$ {\cufont 𒃑}\par
+\noindent U+120D2  $\mapsto$ {\cufont 𒃒}\par
+\noindent U+120D3  $\mapsto$ {\cufont 𒃓}\par
+\noindent U+120D4  $\mapsto$ {\cufont 𒃔}\par
+\noindent U+120D5  $\mapsto$ {\cufont 𒃕}\par
+\noindent U+120D6  $\mapsto$ {\cufont 𒃖}\par
+\noindent U+120D7  $\mapsto$ {\cufont 𒃗}\par
+\noindent U+120D8  $\mapsto$ {\cufont 𒃘}\par
+\noindent U+120D9  $\mapsto$ {\cufont 𒃙}\par
+\noindent U+120DA  $\mapsto$ {\cufont 𒃚}\par
+\noindent U+120DB  $\mapsto$ {\cufont 𒃛}\par
+\noindent U+120DC  $\mapsto$ {\cufont 𒃜}\par
+\noindent U+120DD  $\mapsto$ {\cufont 𒃝}\par
+\noindent U+120DE  $\mapsto$ {\cufont 𒃞}\par
+\noindent U+120DF  $\mapsto$ {\cufont 𒃟}\par
+\noindent U+120E0  $\mapsto$ {\cufont 𒃠}\par
+\noindent U+120E1  $\mapsto$ {\cufont 𒃡}\par
+\noindent U+120E2  $\mapsto$ {\cufont 𒃢}\par
+\noindent U+120E3  $\mapsto$ {\cufont 𒃣}\par
+\noindent U+120E4  $\mapsto$ {\cufont 𒃤}\par
+\noindent U+120E5  $\mapsto$ {\cufont 𒃥}\par
+\noindent U+120E6  $\mapsto$ {\cufont 𒃦}\par
+\noindent U+120E7  $\mapsto$ {\cufont 𒃧}\par
+\noindent U+120E8  $\mapsto$ {\cufont 𒃨}\par
+\noindent U+120E9  $\mapsto$ {\cufont 𒃩}\par
+\noindent U+120EA  $\mapsto$ {\cufont 𒃪}\par
+\noindent U+120EB  $\mapsto$ {\cufont 𒃫}\par
+\noindent U+120EC  $\mapsto$ {\cufont 𒃬}\par
+\noindent U+120ED  $\mapsto$ {\cufont 𒃭}\par
+\noindent U+120EE  $\mapsto$ {\cufont 𒃮}\par
+\noindent U+120EF  $\mapsto$ {\cufont 𒃯}\par
+\noindent U+120F0  $\mapsto$ {\cufont 𒃰}\par
+\noindent U+120F1  $\mapsto$ {\cufont 𒃱}\par
+\noindent U+120F2  $\mapsto$ {\cufont 𒃲}\par
+\noindent U+120F3  $\mapsto$ {\cufont 𒃳}\par
+\noindent U+120F4  $\mapsto$ {\cufont 𒃴}\par
+\noindent U+120F5  $\mapsto$ {\cufont 𒃵}\par
+\noindent U+120F6  $\mapsto$ {\cufont 𒃶}\par
+\noindent U+120F7  $\mapsto$ {\cufont 𒃷}\par
+\noindent U+120F8  $\mapsto$ {\cufont 𒃸}\par
+\noindent U+120F9  $\mapsto$ {\cufont 𒃹}\par
+\noindent U+120FA  $\mapsto$ {\cufont 𒃺}\par
+\noindent U+120FB  $\mapsto$ {\cufont 𒃻}\par
+\noindent U+120FC  $\mapsto$ {\cufont 𒃼}\par
+\noindent U+120FD  $\mapsto$ {\cufont 𒃽}\par
+\noindent U+120FE  $\mapsto$ {\cufont 𒃾}\par
+\noindent U+120FF  $\mapsto$ {\cufont 𒃿}\par
+\noindent U+12100  $\mapsto$ {\cufont 𒄀}\par
+\noindent U+12101  $\mapsto$ {\cufont 𒄁}\par
+\noindent U+12102  $\mapsto$ {\cufont 𒄂}\par
+\noindent U+12103  $\mapsto$ {\cufont 𒄃}\par
+\noindent U+12104  $\mapsto$ {\cufont 𒄄}\par
+\noindent U+12105  $\mapsto$ {\cufont 𒄅}\par
+\noindent U+12106  $\mapsto$ {\cufont 𒄆}\par
+\noindent U+12107  $\mapsto$ {\cufont 𒄇}\par
+\noindent U+12108  $\mapsto$ {\cufont 𒄈}\par
+\noindent U+12109  $\mapsto$ {\cufont 𒄉}\par
+\noindent U+1210A  $\mapsto$ {\cufont 𒄊}\par
+\noindent U+1210B  $\mapsto$ {\cufont 𒄋}\par
+\noindent U+1210C  $\mapsto$ {\cufont 𒄌}\par
+\noindent U+1210D  $\mapsto$ {\cufont 𒄍}\par
+\noindent U+1210E  $\mapsto$ {\cufont 𒄎}\par
+\noindent U+1210F  $\mapsto$ {\cufont 𒄏}\par
+\noindent U+12110  $\mapsto$ {\cufont 𒄐}\par
+\noindent U+12111  $\mapsto$ {\cufont 𒄑}\par
+\noindent U+12112  $\mapsto$ {\cufont 𒄒}\par
+\noindent U+12113  $\mapsto$ {\cufont 𒄓}\par
+\noindent U+12114  $\mapsto$ {\cufont 𒄔}\par
+\noindent U+12115  $\mapsto$ {\cufont 𒄕}\par
+\noindent U+12116  $\mapsto$ {\cufont 𒄖}\par
+\noindent U+12117  $\mapsto$ {\cufont 𒄗}\par
+\noindent U+12118  $\mapsto$ {\cufont 𒄘}\par
+\noindent U+12119  $\mapsto$ {\cufont 𒄙}\par
+\noindent U+1211A  $\mapsto$ {\cufont 𒄚}\par
+\noindent U+1211B  $\mapsto$ {\cufont 𒄛}\par
+\noindent U+1211C  $\mapsto$ {\cufont 𒄜}\par
+\noindent U+1211D  $\mapsto$ {\cufont 𒄝}\par
+\noindent U+1211E  $\mapsto$ {\cufont 𒄞}\par
+\noindent U+1211F  $\mapsto$ {\cufont 𒄟}\par
+\noindent U+12120  $\mapsto$ {\cufont 𒄠}\par
+\noindent U+12121  $\mapsto$ {\cufont 𒄡}\par
+\noindent U+12122  $\mapsto$ {\cufont 𒄢}\par
+\noindent U+12123  $\mapsto$ {\cufont 𒄣}\par
+\noindent U+12124  $\mapsto$ {\cufont 𒄤}\par
+\noindent U+12125  $\mapsto$ {\cufont 𒄥}\par
+\noindent U+12126  $\mapsto$ {\cufont 𒄦}\par
+\noindent U+12127  $\mapsto$ {\cufont 𒄧}\par
+\noindent U+12128  $\mapsto$ {\cufont 𒄨}\par
+\noindent U+12129  $\mapsto$ {\cufont 𒄩}\par
+\noindent U+1212A  $\mapsto$ {\cufont 𒄪}\par
+\noindent U+1212B  $\mapsto$ {\cufont 𒄫}\par
+\noindent U+1212C  $\mapsto$ {\cufont 𒄬}\par
+\noindent U+1212D  $\mapsto$ {\cufont 𒄭}\par
+\noindent U+1212E  $\mapsto$ {\cufont 𒄮}\par
+\noindent U+1212F  $\mapsto$ {\cufont 𒄯}\par
+\noindent U+12130  $\mapsto$ {\cufont 𒄰}\par
+\noindent U+12131  $\mapsto$ {\cufont 𒄱}\par
+\noindent U+12132  $\mapsto$ {\cufont 𒄲}\par
+\noindent U+12133  $\mapsto$ {\cufont 𒄳}\par
+\noindent U+12134  $\mapsto$ {\cufont 𒄴}\par
+\noindent U+12135  $\mapsto$ {\cufont 𒄵}\par
+\noindent U+12136  $\mapsto$ {\cufont 𒄶}\par
+\noindent U+12137  $\mapsto$ {\cufont 𒄷}\par
+\noindent U+12138  $\mapsto$ {\cufont 𒄸}\par
+\noindent U+12139  $\mapsto$ {\cufont 𒄹}\par
+\noindent U+1213A  $\mapsto$ {\cufont 𒄺}\par
+\noindent U+1213B  $\mapsto$ {\cufont 𒄻}\par
+\noindent U+1213C  $\mapsto$ {\cufont 𒄼}\par
+\noindent U+1213D  $\mapsto$ {\cufont 𒄽}\par
+\noindent U+1213E  $\mapsto$ {\cufont 𒄾}\par
+\noindent U+1213F  $\mapsto$ {\cufont 𒄿}\par
+\noindent U+12140  $\mapsto$ {\cufont 𒅀}\par
+\noindent U+12141  $\mapsto$ {\cufont 𒅁}\par
+\noindent U+12142  $\mapsto$ {\cufont 𒅂}\par
+\noindent U+12143  $\mapsto$ {\cufont 𒅃}\par
+\noindent U+12144  $\mapsto$ {\cufont 𒅄}\par
+\noindent U+12145  $\mapsto$ {\cufont 𒅅}\par
+\noindent U+12146  $\mapsto$ {\cufont 𒅆}\par
+\noindent U+12147  $\mapsto$ {\cufont 𒅇}\par
+\noindent U+12148  $\mapsto$ {\cufont 𒅈}\par
+\noindent U+12149  $\mapsto$ {\cufont 𒅉}\par
+\noindent U+1214A  $\mapsto$ {\cufont 𒅊}\par
+\noindent U+1214B  $\mapsto$ {\cufont 𒅋}\par
+\noindent U+1214C  $\mapsto$ {\cufont 𒅌}\par
+\noindent U+1214D  $\mapsto$ {\cufont 𒅍}\par
+\noindent U+1214E  $\mapsto$ {\cufont 𒅎}\par
+\noindent U+1214F  $\mapsto$ {\cufont 𒅏}\par
+\noindent U+12150  $\mapsto$ {\cufont 𒅐}\par
+\noindent U+12151  $\mapsto$ {\cufont 𒅑}\par
+\noindent U+12152  $\mapsto$ {\cufont 𒅒}\par
+\noindent U+12153  $\mapsto$ {\cufont 𒅓}\par
+\noindent U+12154  $\mapsto$ {\cufont 𒅔}\par
+\noindent U+12155  $\mapsto$ {\cufont 𒅕}\par
+\noindent U+12156  $\mapsto$ {\cufont 𒅖}\par
+\noindent U+12157  $\mapsto$ {\cufont 𒅗}\par
+\noindent U+12158  $\mapsto$ {\cufont 𒅘}\par
+\noindent U+12159  $\mapsto$ {\cufont 𒅙}\par
+\noindent U+1215A  $\mapsto$ {\cufont 𒅚}\par
+\noindent U+1215B  $\mapsto$ {\cufont 𒅛}\par
+\noindent U+1215C  $\mapsto$ {\cufont 𒅜}\par
+\noindent U+1215D  $\mapsto$ {\cufont 𒅝}\par
+\noindent U+1215E  $\mapsto$ {\cufont 𒅞}\par
+\noindent U+1215F  $\mapsto$ {\cufont 𒅟}\par
+\noindent U+12160  $\mapsto$ {\cufont 𒅠}\par
+\noindent U+12161  $\mapsto$ {\cufont 𒅡}\par
+\noindent U+12162  $\mapsto$ {\cufont 𒅢}\par
+\noindent U+12163  $\mapsto$ {\cufont 𒅣}\par
+\noindent U+12164  $\mapsto$ {\cufont 𒅤}\par
+\noindent U+12165  $\mapsto$ {\cufont 𒅥}\par
+\noindent U+12166  $\mapsto$ {\cufont 𒅦}\par
+\noindent U+12167  $\mapsto$ {\cufont 𒅧}\par
+\noindent U+12168  $\mapsto$ {\cufont 𒅨}\par
+\noindent U+12169  $\mapsto$ {\cufont 𒅩}\par
+\noindent U+1216A  $\mapsto$ {\cufont 𒅪}\par
+\noindent U+1216B  $\mapsto$ {\cufont 𒅫}\par
+\noindent U+1216C  $\mapsto$ {\cufont 𒅬}\par
+\noindent U+1216D  $\mapsto$ {\cufont 𒅭}\par
+\noindent U+1216E  $\mapsto$ {\cufont 𒅮}\par
+\noindent U+1216F  $\mapsto$ {\cufont 𒅯}\par
+\noindent U+12170  $\mapsto$ {\cufont 𒅰}\par
+\noindent U+12171  $\mapsto$ {\cufont 𒅱}\par
+\noindent U+12172  $\mapsto$ {\cufont 𒅲}\par
+\noindent U+12173  $\mapsto$ {\cufont 𒅳}\par
+\noindent U+12174  $\mapsto$ {\cufont 𒅴}\par
+\noindent U+12175  $\mapsto$ {\cufont 𒅵}\par
+\noindent U+12176  $\mapsto$ {\cufont 𒅶}\par
+\noindent U+12177  $\mapsto$ {\cufont 𒅷}\par
+\noindent U+12178  $\mapsto$ {\cufont 𒅸}\par
+\noindent U+12179  $\mapsto$ {\cufont 𒅹}\par
+\noindent U+1217A  $\mapsto$ {\cufont 𒅺}\par
+\noindent U+1217B  $\mapsto$ {\cufont 𒅻}\par
+\noindent U+1217C  $\mapsto$ {\cufont 𒅼}\par
+\noindent U+1217D  $\mapsto$ {\cufont 𒅽}\par
+\noindent U+1217E  $\mapsto$ {\cufont 𒅾}\par
+\noindent U+1217F  $\mapsto$ {\cufont 𒅿}\par
+\noindent U+12180  $\mapsto$ {\cufont 𒆀}\par
+\noindent U+12181  $\mapsto$ {\cufont 𒆁}\par
+\noindent U+12182  $\mapsto$ {\cufont 𒆂}\par
+\noindent U+12183  $\mapsto$ {\cufont 𒆃}\par
+\noindent U+12184  $\mapsto$ {\cufont 𒆄}\par
+\noindent U+12185  $\mapsto$ {\cufont 𒆅}\par
+\noindent U+12186  $\mapsto$ {\cufont 𒆆}\par
+\noindent U+12187  $\mapsto$ {\cufont 𒆇}\par
+\noindent U+12188  $\mapsto$ {\cufont 𒆈}\par
+\noindent U+12189  $\mapsto$ {\cufont 𒆉}\par
+\noindent U+1218A  $\mapsto$ {\cufont 𒆊}\par
+\noindent U+1218B  $\mapsto$ {\cufont 𒆋}\par
+\noindent U+1218C  $\mapsto$ {\cufont 𒆌}\par
+\noindent U+1218D  $\mapsto$ {\cufont 𒆍}\par
+\noindent U+1218E  $\mapsto$ {\cufont 𒆎}\par
+\noindent U+1218F  $\mapsto$ {\cufont 𒆏}\par
+\noindent U+12190  $\mapsto$ {\cufont 𒆐}\par
+\noindent U+12191  $\mapsto$ {\cufont 𒆑}\par
+\noindent U+12192  $\mapsto$ {\cufont 𒆒}\par
+\noindent U+12193  $\mapsto$ {\cufont 𒆓}\par
+\noindent U+12194  $\mapsto$ {\cufont 𒆔}\par
+\noindent U+12195  $\mapsto$ {\cufont 𒆕}\par
+\noindent U+12196  $\mapsto$ {\cufont 𒆖}\par
+\noindent U+12197  $\mapsto$ {\cufont 𒆗}\par
+\noindent U+12198  $\mapsto$ {\cufont 𒆘}\par
+\noindent U+12199  $\mapsto$ {\cufont 𒆙}\par
+\noindent U+1219A  $\mapsto$ {\cufont 𒆚}\par
+\noindent U+1219B  $\mapsto$ {\cufont 𒆛}\par
+\noindent U+1219C  $\mapsto$ {\cufont 𒆜}\par
+\noindent U+1219D  $\mapsto$ {\cufont 𒆝}\par
+\noindent U+1219E  $\mapsto$ {\cufont 𒆞}\par
+\noindent U+1219F  $\mapsto$ {\cufont 𒆟}\par
+\noindent U+121A0  $\mapsto$ {\cufont 𒆠}\par
+\noindent U+121A1  $\mapsto$ {\cufont 𒆡}\par
+\noindent U+121A2  $\mapsto$ {\cufont 𒆢}\par
+\noindent U+121A3  $\mapsto$ {\cufont 𒆣}\par
+\noindent U+121A4  $\mapsto$ {\cufont 𒆤}\par
+\noindent U+121A5  $\mapsto$ {\cufont 𒆥}\par
+\noindent U+121A6  $\mapsto$ {\cufont 𒆦}\par
+\noindent U+121A7  $\mapsto$ {\cufont 𒆧}\par
+\noindent U+121A8  $\mapsto$ {\cufont 𒆨}\par
+\noindent U+121A9  $\mapsto$ {\cufont 𒆩}\par
+\noindent U+121AA  $\mapsto$ {\cufont 𒆪}\par
+\noindent U+121AB  $\mapsto$ {\cufont 𒆫}\par
+\noindent U+121AC  $\mapsto$ {\cufont 𒆬}\par
+\noindent U+121AD  $\mapsto$ {\cufont 𒆭}\par
+\noindent U+121AE  $\mapsto$ {\cufont 𒆮}\par
+\noindent U+121AF  $\mapsto$ {\cufont 𒆯}\par
+\noindent U+121B0  $\mapsto$ {\cufont 𒆰}\par
+\noindent U+121B1  $\mapsto$ {\cufont 𒆱}\par
+\noindent U+121B2  $\mapsto$ {\cufont 𒆲}\par
+\noindent U+121B3  $\mapsto$ {\cufont 𒆳}\par
+\noindent U+121B4  $\mapsto$ {\cufont 𒆴}\par
+\noindent U+121B5  $\mapsto$ {\cufont 𒆵}\par
+\noindent U+121B6  $\mapsto$ {\cufont 𒆶}\par
+\noindent U+121B7  $\mapsto$ {\cufont 𒆷}\par
+\noindent U+121B8  $\mapsto$ {\cufont 𒆸}\par
+\noindent U+121B9  $\mapsto$ {\cufont 𒆹}\par
+\noindent U+121BA  $\mapsto$ {\cufont 𒆺}\par
+\noindent U+121BB  $\mapsto$ {\cufont 𒆻}\par
+\noindent U+121BC  $\mapsto$ {\cufont 𒆼}\par
+\noindent U+121BD  $\mapsto$ {\cufont 𒆽}\par
+\noindent U+121BE  $\mapsto$ {\cufont 𒆾}\par
+\noindent U+121BF  $\mapsto$ {\cufont 𒆿}\par
+\noindent U+121C0  $\mapsto$ {\cufont 𒇀}\par
+\noindent U+121C1  $\mapsto$ {\cufont 𒇁}\par
+\noindent U+121C2  $\mapsto$ {\cufont 𒇂}\par
+\noindent U+121C3  $\mapsto$ {\cufont 𒇃}\par
+\noindent U+121C4  $\mapsto$ {\cufont 𒇄}\par
+\noindent U+121C5  $\mapsto$ {\cufont 𒇅}\par
+\noindent U+121C6  $\mapsto$ {\cufont 𒇆}\par
+\noindent U+121C7  $\mapsto$ {\cufont 𒇇}\par
+\noindent U+121C8  $\mapsto$ {\cufont 𒇈}\par
+\noindent U+121C9  $\mapsto$ {\cufont 𒇉}\par
+\noindent U+121CA  $\mapsto$ {\cufont 𒇊}\par
+\noindent U+121CB  $\mapsto$ {\cufont 𒇋}\par
+\noindent U+121CC  $\mapsto$ {\cufont 𒇌}\par
+\noindent U+121CD  $\mapsto$ {\cufont 𒇍}\par
+\noindent U+121CE  $\mapsto$ {\cufont 𒇎}\par
+\noindent U+121CF  $\mapsto$ {\cufont 𒇏}\par
+\noindent U+121D0  $\mapsto$ {\cufont 𒇐}\par
+\noindent U+121D1  $\mapsto$ {\cufont 𒇑}\par
+\noindent U+121D2  $\mapsto$ {\cufont 𒇒}\par
+\noindent U+121D3  $\mapsto$ {\cufont 𒇓}\par
+\noindent U+121D4  $\mapsto$ {\cufont 𒇔}\par
+\noindent U+121D5  $\mapsto$ {\cufont 𒇕}\par
+\noindent U+121D6  $\mapsto$ {\cufont 𒇖}\par
+\noindent U+121D7  $\mapsto$ {\cufont 𒇗}\par
+\noindent U+121D8  $\mapsto$ {\cufont 𒇘}\par
+\noindent U+121D9  $\mapsto$ {\cufont 𒇙}\par
+\noindent U+121DA  $\mapsto$ {\cufont 𒇚}\par
+\noindent U+121DB  $\mapsto$ {\cufont 𒇛}\par
+\noindent U+121DC  $\mapsto$ {\cufont 𒇜}\par
+\noindent U+121DD  $\mapsto$ {\cufont 𒇝}\par
+\noindent U+121DE  $\mapsto$ {\cufont 𒇞}\par
+\noindent U+121DF  $\mapsto$ {\cufont 𒇟}\par
+\noindent U+121E0  $\mapsto$ {\cufont 𒇠}\par
+\noindent U+121E1  $\mapsto$ {\cufont 𒇡}\par
+\noindent U+121E2  $\mapsto$ {\cufont 𒇢}\par
+\noindent U+121E3  $\mapsto$ {\cufont 𒇣}\par
+\noindent U+121E4  $\mapsto$ {\cufont 𒇤}\par
+\noindent U+121E5  $\mapsto$ {\cufont 𒇥}\par
+\noindent U+121E6  $\mapsto$ {\cufont 𒇦}\par
+\noindent U+121E7  $\mapsto$ {\cufont 𒇧}\par
+\noindent U+121E8  $\mapsto$ {\cufont 𒇨}\par
+\noindent U+121E9  $\mapsto$ {\cufont 𒇩}\par
+\noindent U+121EA  $\mapsto$ {\cufont 𒇪}\par
+\noindent U+121EB  $\mapsto$ {\cufont 𒇫}\par
+\noindent U+121EC  $\mapsto$ {\cufont 𒇬}\par
+\noindent U+121ED  $\mapsto$ {\cufont 𒇭}\par
+\noindent U+121EE  $\mapsto$ {\cufont 𒇮}\par
+\noindent U+121EF  $\mapsto$ {\cufont 𒇯}\par
+\noindent U+121F0  $\mapsto$ {\cufont 𒇰}\par
+\noindent U+121F1  $\mapsto$ {\cufont 𒇱}\par
+\noindent U+121F2  $\mapsto$ {\cufont 𒇲}\par
+\noindent U+121F3  $\mapsto$ {\cufont 𒇳}\par
+\noindent U+121F4  $\mapsto$ {\cufont 𒇴}\par
+\noindent U+121F5  $\mapsto$ {\cufont 𒇵}\par
+\noindent U+121F6  $\mapsto$ {\cufont 𒇶}\par
+\noindent U+121F7  $\mapsto$ {\cufont 𒇷}\par
+\noindent U+121F8  $\mapsto$ {\cufont 𒇸}\par
+\noindent U+121F9  $\mapsto$ {\cufont 𒇹}\par
+\noindent U+121FA  $\mapsto$ {\cufont 𒇺}\par
+\noindent U+121FB  $\mapsto$ {\cufont 𒇻}\par
+\noindent U+121FC  $\mapsto$ {\cufont 𒇼}\par
+\noindent U+121FD  $\mapsto$ {\cufont 𒇽}\par
+\noindent U+121FE  $\mapsto$ {\cufont 𒇾}\par
+\noindent U+121FF  $\mapsto$ {\cufont 𒇿}\par
+\noindent U+12200  $\mapsto$ {\cufont 𒈀}\par
+\noindent U+12201  $\mapsto$ {\cufont 𒈁}\par
+\noindent U+12202  $\mapsto$ {\cufont 𒈂}\par
+\noindent U+12203  $\mapsto$ {\cufont 𒈃}\par
+\noindent U+12204  $\mapsto$ {\cufont 𒈄}\par
+\noindent U+12205  $\mapsto$ {\cufont 𒈅}\par
+\noindent U+12206  $\mapsto$ {\cufont 𒈆}\par
+\noindent U+12207  $\mapsto$ {\cufont 𒈇}\par
+\noindent U+12208  $\mapsto$ {\cufont 𒈈}\par
+\noindent U+12209  $\mapsto$ {\cufont 𒈉}\par
+\noindent U+1220A  $\mapsto$ {\cufont 𒈊}\par
+\noindent U+1220B  $\mapsto$ {\cufont 𒈋}\par
+\noindent U+1220C  $\mapsto$ {\cufont 𒈌}\par
+\noindent U+1220D  $\mapsto$ {\cufont 𒈍}\par
+\noindent U+1220E  $\mapsto$ {\cufont 𒈎}\par
+\noindent U+1220F  $\mapsto$ {\cufont 𒈏}\par
+\noindent U+12210  $\mapsto$ {\cufont 𒈐}\par
+\noindent U+12211  $\mapsto$ {\cufont 𒈑}\par
+\noindent U+12212  $\mapsto$ {\cufont 𒈒}\par
+\noindent U+12213  $\mapsto$ {\cufont 𒈓}\par
+\noindent U+12214  $\mapsto$ {\cufont 𒈔}\par
+\noindent U+12215  $\mapsto$ {\cufont 𒈕}\par
+\noindent U+12216  $\mapsto$ {\cufont 𒈖}\par
+\noindent U+12217  $\mapsto$ {\cufont 𒈗}\par
+\noindent U+12218  $\mapsto$ {\cufont 𒈘}\par
+\noindent U+12219  $\mapsto$ {\cufont 𒈙}\par
+\noindent U+1221A  $\mapsto$ {\cufont 𒈚}\par
+\noindent U+1221B  $\mapsto$ {\cufont 𒈛}\par
+\noindent U+1221C  $\mapsto$ {\cufont 𒈜}\par
+\noindent U+1221D  $\mapsto$ {\cufont 𒈝}\par
+\noindent U+1221E  $\mapsto$ {\cufont 𒈞}\par
+\noindent U+1221F  $\mapsto$ {\cufont 𒈟}\par
+\noindent U+12220  $\mapsto$ {\cufont 𒈠}\par
+\noindent U+12221  $\mapsto$ {\cufont 𒈡}\par
+\noindent U+12222  $\mapsto$ {\cufont 𒈢}\par
+\noindent U+12223  $\mapsto$ {\cufont 𒈣}\par
+\noindent U+12224  $\mapsto$ {\cufont 𒈤}\par
+\noindent U+12225  $\mapsto$ {\cufont 𒈥}\par
+\noindent U+12226  $\mapsto$ {\cufont 𒈦}\par
+\noindent U+12227  $\mapsto$ {\cufont 𒈧}\par
+\noindent U+12228  $\mapsto$ {\cufont 𒈨}\par
+\noindent U+12229  $\mapsto$ {\cufont 𒈩}\par
+\noindent U+1222A  $\mapsto$ {\cufont 𒈪}\par
+\noindent U+1222B  $\mapsto$ {\cufont 𒈫}\par
+\noindent U+1222C  $\mapsto$ {\cufont 𒈬}\par
+\noindent U+1222D  $\mapsto$ {\cufont 𒈭}\par
+\noindent U+1222E  $\mapsto$ {\cufont 𒈮}\par
+\noindent U+1222F  $\mapsto$ {\cufont 𒈯}\par
+\noindent U+12230  $\mapsto$ {\cufont 𒈰}\par
+\noindent U+12231  $\mapsto$ {\cufont 𒈱}\par
+\noindent U+12232  $\mapsto$ {\cufont 𒈲}\par
+\noindent U+12233  $\mapsto$ {\cufont 𒈳}\par
+\noindent U+12234  $\mapsto$ {\cufont 𒈴}\par
+\noindent U+12235  $\mapsto$ {\cufont 𒈵}\par
+\noindent U+12236  $\mapsto$ {\cufont 𒈶}\par
+\noindent U+12237  $\mapsto$ {\cufont 𒈷}\par
+\noindent U+12238  $\mapsto$ {\cufont 𒈸}\par
+\noindent U+12239  $\mapsto$ {\cufont 𒈹}\par
+\noindent U+1223A  $\mapsto$ {\cufont 𒈺}\par
+\noindent U+1223B  $\mapsto$ {\cufont 𒈻}\par
+\noindent U+1223C  $\mapsto$ {\cufont 𒈼}\par
+\noindent U+1223D  $\mapsto$ {\cufont 𒈽}\par
+\noindent U+1223E  $\mapsto$ {\cufont 𒈾}\par
+\noindent U+1223F  $\mapsto$ {\cufont 𒈿}\par
+\noindent U+12240  $\mapsto$ {\cufont 𒉀}\par
+\noindent U+12241  $\mapsto$ {\cufont 𒉁}\par
+\noindent U+12242  $\mapsto$ {\cufont 𒉂}\par
+\noindent U+12243  $\mapsto$ {\cufont 𒉃}\par
+\noindent U+12244  $\mapsto$ {\cufont 𒉄}\par
+\noindent U+12245  $\mapsto$ {\cufont 𒉅}\par
+\noindent U+12246  $\mapsto$ {\cufont 𒉆}\par
+\noindent U+12247  $\mapsto$ {\cufont 𒉇}\par
+\noindent U+12248  $\mapsto$ {\cufont 𒉈}\par
+\noindent U+12249  $\mapsto$ {\cufont 𒉉}\par
+\noindent U+1224A  $\mapsto$ {\cufont 𒉊}\par
+\noindent U+1224B  $\mapsto$ {\cufont 𒉋}\par
+\noindent U+1224C  $\mapsto$ {\cufont 𒉌}\par
+\noindent U+1224D  $\mapsto$ {\cufont 𒉍}\par
+\noindent U+1224E  $\mapsto$ {\cufont 𒉎}\par
+\noindent U+1224F  $\mapsto$ {\cufont 𒉏}\par
+\noindent U+12250  $\mapsto$ {\cufont 𒉐}\par
+\noindent U+12251  $\mapsto$ {\cufont 𒉑}\par
+\noindent U+12252  $\mapsto$ {\cufont 𒉒}\par
+\noindent U+12253  $\mapsto$ {\cufont 𒉓}\par
+\noindent U+12254  $\mapsto$ {\cufont 𒉔}\par
+\noindent U+12255  $\mapsto$ {\cufont 𒉕}\par
+\noindent U+12256  $\mapsto$ {\cufont 𒉖}\par
+\noindent U+12257  $\mapsto$ {\cufont 𒉗}\par
+\noindent U+12258  $\mapsto$ {\cufont 𒉘}\par
+\noindent U+12259  $\mapsto$ {\cufont 𒉙}\par
+\noindent U+1225A  $\mapsto$ {\cufont 𒉚}\par
+\noindent U+1225B  $\mapsto$ {\cufont 𒉛}\par
+\noindent U+1225C  $\mapsto$ {\cufont 𒉜}\par
+\noindent U+1225D  $\mapsto$ {\cufont 𒉝}\par
+\noindent U+1225E  $\mapsto$ {\cufont 𒉞}\par
+\noindent U+1225F  $\mapsto$ {\cufont 𒉟}\par
+\noindent U+12260  $\mapsto$ {\cufont 𒉠}\par
+\noindent U+12261  $\mapsto$ {\cufont 𒉡}\par
+\noindent U+12262  $\mapsto$ {\cufont 𒉢}\par
+\noindent U+12263  $\mapsto$ {\cufont 𒉣}\par
+\noindent U+12264  $\mapsto$ {\cufont 𒉤}\par
+\noindent U+12265  $\mapsto$ {\cufont 𒉥}\par
+\noindent U+12266  $\mapsto$ {\cufont 𒉦}\par
+\noindent U+12267  $\mapsto$ {\cufont 𒉧}\par
+\noindent U+12268  $\mapsto$ {\cufont 𒉨}\par
+\noindent U+12269  $\mapsto$ {\cufont 𒉩}\par
+\noindent U+1226A  $\mapsto$ {\cufont 𒉪}\par
+\noindent U+1226B  $\mapsto$ {\cufont 𒉫}\par
+\noindent U+1226C  $\mapsto$ {\cufont 𒉬}\par
+\noindent U+1226D  $\mapsto$ {\cufont 𒉭}\par
+\noindent U+1226E  $\mapsto$ {\cufont 𒉮}\par
+\noindent U+1226F  $\mapsto$ {\cufont 𒉯}\par
+\noindent U+12270  $\mapsto$ {\cufont 𒉰}\par
+\noindent U+12271  $\mapsto$ {\cufont 𒉱}\par
+\noindent U+12272  $\mapsto$ {\cufont 𒉲}\par
+\noindent U+12273  $\mapsto$ {\cufont 𒉳}\par
+\noindent U+12274  $\mapsto$ {\cufont 𒉴}\par
+\noindent U+12275  $\mapsto$ {\cufont 𒉵}\par
+\noindent U+12276  $\mapsto$ {\cufont 𒉶}\par
+\noindent U+12277  $\mapsto$ {\cufont 𒉷}\par
+\noindent U+12278  $\mapsto$ {\cufont 𒉸}\par
+\noindent U+12279  $\mapsto$ {\cufont 𒉹}\par
+\noindent U+1227A  $\mapsto$ {\cufont 𒉺}\par
+\noindent U+1227B  $\mapsto$ {\cufont 𒉻}\par
+\noindent U+1227C  $\mapsto$ {\cufont 𒉼}\par
+\noindent U+1227D  $\mapsto$ {\cufont 𒉽}\par
+\noindent U+1227E  $\mapsto$ {\cufont 𒉾}\par
+\noindent U+1227F  $\mapsto$ {\cufont 𒉿}\par
+\noindent U+12280  $\mapsto$ {\cufont 𒊀}\par
+\noindent U+12281  $\mapsto$ {\cufont 𒊁}\par
+\noindent U+12282  $\mapsto$ {\cufont 𒊂}\par
+\noindent U+12283  $\mapsto$ {\cufont 𒊃}\par
+\noindent U+12284  $\mapsto$ {\cufont 𒊄}\par
+\noindent U+12285  $\mapsto$ {\cufont 𒊅}\par
+\noindent U+12286  $\mapsto$ {\cufont 𒊆}\par
+\noindent U+12287  $\mapsto$ {\cufont 𒊇}\par
+\noindent U+12288  $\mapsto$ {\cufont 𒊈}\par
+\noindent U+12289  $\mapsto$ {\cufont 𒊉}\par
+\noindent U+1228A  $\mapsto$ {\cufont 𒊊}\par
+\noindent U+1228B  $\mapsto$ {\cufont 𒊋}\par
+\noindent U+1228C  $\mapsto$ {\cufont 𒊌}\par
+\noindent U+1228D  $\mapsto$ {\cufont 𒊍}\par
+\noindent U+1228E  $\mapsto$ {\cufont 𒊎}\par
+\noindent U+1228F  $\mapsto$ {\cufont 𒊏}\par
+\noindent U+12290  $\mapsto$ {\cufont 𒊐}\par
+\noindent U+12291  $\mapsto$ {\cufont 𒊑}\par
+\noindent U+12292  $\mapsto$ {\cufont 𒊒}\par
+\noindent U+12293  $\mapsto$ {\cufont 𒊓}\par
+\noindent U+12294  $\mapsto$ {\cufont 𒊔}\par
+\noindent U+12295  $\mapsto$ {\cufont 𒊕}\par
+\noindent U+12296  $\mapsto$ {\cufont 𒊖}\par
+\noindent U+12297  $\mapsto$ {\cufont 𒊗}\par
+\noindent U+12298  $\mapsto$ {\cufont 𒊘}\par
+\noindent U+12299  $\mapsto$ {\cufont 𒊙}\par
+\noindent U+1229A  $\mapsto$ {\cufont 𒊚}\par
+\noindent U+1229B  $\mapsto$ {\cufont 𒊛}\par
+\noindent U+1229C  $\mapsto$ {\cufont 𒊜}\par
+\noindent U+1229D  $\mapsto$ {\cufont 𒊝}\par
+\noindent U+1229E  $\mapsto$ {\cufont 𒊞}\par
+\noindent U+1229F  $\mapsto$ {\cufont 𒊟}\par
+\noindent U+122A0  $\mapsto$ {\cufont 𒊠}\par
+\noindent U+122A1  $\mapsto$ {\cufont 𒊡}\par
+\noindent U+122A2  $\mapsto$ {\cufont 𒊢}\par
+\noindent U+122A3  $\mapsto$ {\cufont 𒊣}\par
+\noindent U+122A4  $\mapsto$ {\cufont 𒊤}\par
+\noindent U+122A5  $\mapsto$ {\cufont 𒊥}\par
+\noindent U+122A6  $\mapsto$ {\cufont 𒊦}\par
+\noindent U+122A7  $\mapsto$ {\cufont 𒊧}\par
+\noindent U+122A8  $\mapsto$ {\cufont 𒊨}\par
+\noindent U+122A9  $\mapsto$ {\cufont 𒊩}\par
+\noindent U+122AA  $\mapsto$ {\cufont 𒊪}\par
+\noindent U+122AB  $\mapsto$ {\cufont 𒊫}\par
+\noindent U+122AC  $\mapsto$ {\cufont 𒊬}\par
+\noindent U+122AD  $\mapsto$ {\cufont 𒊭}\par
+\noindent U+122AE  $\mapsto$ {\cufont 𒊮}\par
+\noindent U+122AF  $\mapsto$ {\cufont 𒊯}\par
+\noindent U+122B0  $\mapsto$ {\cufont 𒊰}\par
+\noindent U+122B1  $\mapsto$ {\cufont 𒊱}\par
+\noindent U+122B2  $\mapsto$ {\cufont 𒊲}\par
+\noindent U+122B3  $\mapsto$ {\cufont 𒊳}\par
+\noindent U+122B4  $\mapsto$ {\cufont 𒊴}\par
+\noindent U+122B5  $\mapsto$ {\cufont 𒊵}\par
+\noindent U+122B6  $\mapsto$ {\cufont 𒊶}\par
+\noindent U+122B7  $\mapsto$ {\cufont 𒊷}\par
+\noindent U+122B8  $\mapsto$ {\cufont 𒊸}\par
+\noindent U+122B9  $\mapsto$ {\cufont 𒊹}\par
+\noindent U+122BA  $\mapsto$ {\cufont 𒊺}\par
+\noindent U+122BB  $\mapsto$ {\cufont 𒊻}\par
+\noindent U+122BC  $\mapsto$ {\cufont 𒊼}\par
+\noindent U+122BD  $\mapsto$ {\cufont 𒊽}\par
+\noindent U+122BE  $\mapsto$ {\cufont 𒊾}\par
+\noindent U+122BF  $\mapsto$ {\cufont 𒊿}\par
+\noindent U+122C0  $\mapsto$ {\cufont 𒋀}\par
+\noindent U+122C1  $\mapsto$ {\cufont 𒋁}\par
+\noindent U+122C2  $\mapsto$ {\cufont 𒋂}\par
+\noindent U+122C3  $\mapsto$ {\cufont 𒋃}\par
+\noindent U+122C4  $\mapsto$ {\cufont 𒋄}\par
+\noindent U+122C5  $\mapsto$ {\cufont 𒋅}\par
+\noindent U+122C6  $\mapsto$ {\cufont 𒋆}\par
+\noindent U+122C7  $\mapsto$ {\cufont 𒋇}\par
+\noindent U+122C8  $\mapsto$ {\cufont 𒋈}\par
+\noindent U+122C9  $\mapsto$ {\cufont 𒋉}\par
+\noindent U+122CA  $\mapsto$ {\cufont 𒋊}\par
+\noindent U+122CB  $\mapsto$ {\cufont 𒋋}\par
+\noindent U+122CC  $\mapsto$ {\cufont 𒋌}\par
+\noindent U+122CD  $\mapsto$ {\cufont 𒋍}\par
+\noindent U+122CE  $\mapsto$ {\cufont 𒋎}\par
+\noindent U+122CF  $\mapsto$ {\cufont 𒋏}\par
+\noindent U+122D0  $\mapsto$ {\cufont 𒋐}\par
+\noindent U+122D1  $\mapsto$ {\cufont 𒋑}\par
+\noindent U+122D2  $\mapsto$ {\cufont 𒋒}\par
+\noindent U+122D3  $\mapsto$ {\cufont 𒋓}\par
+\noindent U+122D4  $\mapsto$ {\cufont 𒋔}\par
+\noindent U+122D5  $\mapsto$ {\cufont 𒋕}\par
+\noindent U+122D6  $\mapsto$ {\cufont 𒋖}\par
+\noindent U+122D7  $\mapsto$ {\cufont 𒋗}\par
+\noindent U+122D8  $\mapsto$ {\cufont 𒋘}\par
+\noindent U+122D9  $\mapsto$ {\cufont 𒋙}\par
+\noindent U+122DA  $\mapsto$ {\cufont 𒋚}\par
+\noindent U+122DB  $\mapsto$ {\cufont 𒋛}\par
+\noindent U+122DC  $\mapsto$ {\cufont 𒋜}\par
+\noindent U+122DD  $\mapsto$ {\cufont 𒋝}\par
+\noindent U+122DE  $\mapsto$ {\cufont 𒋞}\par
+\noindent U+122DF  $\mapsto$ {\cufont 𒋟}\par
+\noindent U+122E0  $\mapsto$ {\cufont 𒋠}\par
+\noindent U+122E1  $\mapsto$ {\cufont 𒋡}\par
+\noindent U+122E2  $\mapsto$ {\cufont 𒋢}\par
+\noindent U+122E3  $\mapsto$ {\cufont 𒋣}\par
+\noindent U+122E4  $\mapsto$ {\cufont 𒋤}\par
+\noindent U+122E5  $\mapsto$ {\cufont 𒋥}\par
+\noindent U+122E6  $\mapsto$ {\cufont 𒋦}\par
+\noindent U+122E7  $\mapsto$ {\cufont 𒋧}\par
+\noindent U+122E8  $\mapsto$ {\cufont 𒋨}\par
+\noindent U+122E9  $\mapsto$ {\cufont 𒋩}\par
+\noindent U+122EA  $\mapsto$ {\cufont 𒋪}\par
+\noindent U+122EB  $\mapsto$ {\cufont 𒋫}\par
+\noindent U+122EC  $\mapsto$ {\cufont 𒋬}\par
+\noindent U+122ED  $\mapsto$ {\cufont 𒋭}\par
+\noindent U+122EE  $\mapsto$ {\cufont 𒋮}\par
+\noindent U+122EF  $\mapsto$ {\cufont 𒋯}\par
+\noindent U+122F0  $\mapsto$ {\cufont 𒋰}\par
+\noindent U+122F1  $\mapsto$ {\cufont 𒋱}\par
+\noindent U+122F2  $\mapsto$ {\cufont 𒋲}\par
+\noindent U+122F3  $\mapsto$ {\cufont 𒋳}\par
+\noindent U+122F4  $\mapsto$ {\cufont 𒋴}\par
+\noindent U+122F5  $\mapsto$ {\cufont 𒋵}\par
+\noindent U+122F6  $\mapsto$ {\cufont 𒋶}\par
+\noindent U+122F7  $\mapsto$ {\cufont 𒋷}\par
+\noindent U+122F8  $\mapsto$ {\cufont 𒋸}\par
+\noindent U+122F9  $\mapsto$ {\cufont 𒋹}\par
+\noindent U+122FA  $\mapsto$ {\cufont 𒋺}\par
+\noindent U+122FB  $\mapsto$ {\cufont 𒋻}\par
+\noindent U+122FC  $\mapsto$ {\cufont 𒋼}\par
+\noindent U+122FD  $\mapsto$ {\cufont 𒋽}\par
+\noindent U+122FE  $\mapsto$ {\cufont 𒋾}\par
+\noindent U+122FF  $\mapsto$ {\cufont 𒋿}\par
+\noindent U+12300  $\mapsto$ {\cufont 𒌀}\par
+\noindent U+12301  $\mapsto$ {\cufont 𒌁}\par
+\noindent U+12302  $\mapsto$ {\cufont 𒌂}\par
+\noindent U+12303  $\mapsto$ {\cufont 𒌃}\par
+\noindent U+12304  $\mapsto$ {\cufont 𒌄}\par
+\noindent U+12305  $\mapsto$ {\cufont 𒌅}\par
+\noindent U+12306  $\mapsto$ {\cufont 𒌆}\par
+\noindent U+12307  $\mapsto$ {\cufont 𒌇}\par
+\noindent U+12308  $\mapsto$ {\cufont 𒌈}\par
+\noindent U+12309  $\mapsto$ {\cufont 𒌉}\par
+\noindent U+1230A  $\mapsto$ {\cufont 𒌊}\par
+\noindent U+1230B  $\mapsto$ {\cufont 𒌋}\par
+\noindent U+1230C  $\mapsto$ {\cufont 𒌌}\par
+\noindent U+1230D  $\mapsto$ {\cufont 𒌍}\par
+\noindent U+1230E  $\mapsto$ {\cufont 𒌎}\par
+\noindent U+1230F  $\mapsto$ {\cufont 𒌏}\par
+\noindent U+12310  $\mapsto$ {\cufont 𒌐}\par
+\noindent U+12311  $\mapsto$ {\cufont 𒌑}\par
+\noindent U+12312  $\mapsto$ {\cufont 𒌒}\par
+\noindent U+12313  $\mapsto$ {\cufont 𒌓}\par
+\noindent U+12314  $\mapsto$ {\cufont 𒌔}\par
+\noindent U+12315  $\mapsto$ {\cufont 𒌕}\par
+\noindent U+12316  $\mapsto$ {\cufont 𒌖}\par
+\noindent U+12317  $\mapsto$ {\cufont 𒌗}\par
+\noindent U+12318  $\mapsto$ {\cufont 𒌘}\par
+\noindent U+12319  $\mapsto$ {\cufont 𒌙}\par
+\noindent U+1231A  $\mapsto$ {\cufont 𒌚}\par
+\noindent U+1231B  $\mapsto$ {\cufont 𒌛}\par
+\noindent U+1231C  $\mapsto$ {\cufont 𒌜}\par
+\noindent U+1231D  $\mapsto$ {\cufont 𒌝}\par
+\noindent U+1231E  $\mapsto$ {\cufont 𒌞}\par
+\noindent U+1231F  $\mapsto$ {\cufont 𒌟}\par
+\noindent U+12320  $\mapsto$ {\cufont 𒌠}\par
+\noindent U+12321  $\mapsto$ {\cufont 𒌡}\par
+\noindent U+12322  $\mapsto$ {\cufont 𒌢}\par
+\noindent U+12323  $\mapsto$ {\cufont 𒌣}\par
+\noindent U+12324  $\mapsto$ {\cufont 𒌤}\par
+\noindent U+12325  $\mapsto$ {\cufont 𒌥}\par
+\noindent U+12326  $\mapsto$ {\cufont 𒌦}\par
+\noindent U+12327  $\mapsto$ {\cufont 𒌧}\par
+\noindent U+12328  $\mapsto$ {\cufont 𒌨}\par
+\noindent U+12329  $\mapsto$ {\cufont 𒌩}\par
+\noindent U+1232A  $\mapsto$ {\cufont 𒌪}\par
+\noindent U+1232B  $\mapsto$ {\cufont 𒌫}\par
+\noindent U+1232C  $\mapsto$ {\cufont 𒌬}\par
+\noindent U+1232D  $\mapsto$ {\cufont 𒌭}\par
+\noindent U+1232E  $\mapsto$ {\cufont 𒌮}\par
+\noindent U+1232F  $\mapsto$ {\cufont 𒌯}\par
+\noindent U+12330  $\mapsto$ {\cufont 𒌰}\par
+\noindent U+12331  $\mapsto$ {\cufont 𒌱}\par
+\noindent U+12332  $\mapsto$ {\cufont 𒌲}\par
+\noindent U+12333  $\mapsto$ {\cufont 𒌳}\par
+\noindent U+12334  $\mapsto$ {\cufont 𒌴}\par
+\noindent U+12335  $\mapsto$ {\cufont 𒌵}\par
+\noindent U+12336  $\mapsto$ {\cufont 𒌶}\par
+\noindent U+12337  $\mapsto$ {\cufont 𒌷}\par
+\noindent U+12338  $\mapsto$ {\cufont 𒌸}\par
+\noindent U+12339  $\mapsto$ {\cufont 𒌹}\par
+\noindent U+1233A  $\mapsto$ {\cufont 𒌺}\par
+\noindent U+1233B  $\mapsto$ {\cufont 𒌻}\par
+\noindent U+1233C  $\mapsto$ {\cufont 𒌼}\par
+\noindent U+1233D  $\mapsto$ {\cufont 𒌽}\par
+\noindent U+1233E  $\mapsto$ {\cufont 𒌾}\par
+\noindent U+1233F  $\mapsto$ {\cufont 𒌿}\par
+\noindent U+12340  $\mapsto$ {\cufont 𒍀}\par
+\noindent U+12341  $\mapsto$ {\cufont 𒍁}\par
+\noindent U+12342  $\mapsto$ {\cufont 𒍂}\par
+\noindent U+12343  $\mapsto$ {\cufont 𒍃}\par
+\noindent U+12344  $\mapsto$ {\cufont 𒍄}\par
+\noindent U+12345  $\mapsto$ {\cufont 𒍅}\par
+\noindent U+12346  $\mapsto$ {\cufont 𒍆}\par
+\noindent U+12347  $\mapsto$ {\cufont 𒍇}\par
+\noindent U+12348  $\mapsto$ {\cufont 𒍈}\par
+\noindent U+12349  $\mapsto$ {\cufont 𒍉}\par
+\noindent U+1234A  $\mapsto$ {\cufont 𒍊}\par
+\noindent U+1234B  $\mapsto$ {\cufont 𒍋}\par
+\noindent U+1234C  $\mapsto$ {\cufont 𒍌}\par
+\noindent U+1234D  $\mapsto$ {\cufont 𒍍}\par
+\noindent U+1234E  $\mapsto$ {\cufont 𒍎}\par
+\noindent U+1234F  $\mapsto$ {\cufont 𒍏}\par
+\noindent U+12350  $\mapsto$ {\cufont 𒍐}\par
+\noindent U+12351  $\mapsto$ {\cufont 𒍑}\par
+\noindent U+12352  $\mapsto$ {\cufont 𒍒}\par
+\noindent U+12353  $\mapsto$ {\cufont 𒍓}\par
+\noindent U+12354  $\mapsto$ {\cufont 𒍔}\par
+\noindent U+12355  $\mapsto$ {\cufont 𒍕}\par
+\noindent U+12356  $\mapsto$ {\cufont 𒍖}\par
+\noindent U+12357  $\mapsto$ {\cufont 𒍗}\par
+\noindent U+12358  $\mapsto$ {\cufont 𒍘}\par
+\noindent U+12359  $\mapsto$ {\cufont 𒍙}\par
+\noindent U+1235A  $\mapsto$ {\cufont 𒍚}\par
+\noindent U+1235B  $\mapsto$ {\cufont 𒍛}\par
+\noindent U+1235C  $\mapsto$ {\cufont 𒍜}\par
+\noindent U+1235D  $\mapsto$ {\cufont 𒍝}\par
+\noindent U+1235E  $\mapsto$ {\cufont 𒍞}\par
+\noindent U+1235F  $\mapsto$ {\cufont 𒍟}\par
+\noindent U+12360  $\mapsto$ {\cufont 𒍠}\par
+\noindent U+12361  $\mapsto$ {\cufont 𒍡}\par
+\noindent U+12362  $\mapsto$ {\cufont 𒍢}\par
+\noindent U+12363  $\mapsto$ {\cufont 𒍣}\par
+\noindent U+12364  $\mapsto$ {\cufont 𒍤}\par
+\noindent U+12365  $\mapsto$ {\cufont 𒍥}\par
+\noindent U+12366  $\mapsto$ {\cufont 𒍦}\par
+\noindent U+12367  $\mapsto$ {\cufont 𒍧}\par
+\noindent U+12368  $\mapsto$ {\cufont 𒍨}\par
+\noindent U+12369  $\mapsto$ {\cufont 𒍩}\par
+\noindent U+1236A  $\mapsto$ {\cufont 𒍪}\par
+\noindent U+1236B  $\mapsto$ {\cufont 𒍫}\par
+\noindent U+1236C  $\mapsto$ {\cufont 𒍬}\par
+\noindent U+1236D  $\mapsto$ {\cufont 𒍭}\par
+\noindent U+1236E  $\mapsto$ {\cufont 𒍮}\par
+\noindent U+1236F  $\mapsto$ {\cufont 𒍯}\par
+\noindent U+12370  $\mapsto$ {\cufont 𒍰}\par
+\noindent U+12371  $\mapsto$ {\cufont 𒍱}\par
+\noindent U+12372  $\mapsto$ {\cufont 𒍲}\par
+\noindent U+12373  $\mapsto$ {\cufont 𒍳}\par
+\noindent U+12374  $\mapsto$ {\cufont 𒍴}\par
+\noindent U+12375  $\mapsto$ {\cufont 𒍵}\par
+\noindent U+12376  $\mapsto$ {\cufont 𒍶}\par
+\noindent U+12377  $\mapsto$ {\cufont 𒍷}\par
+\noindent U+12378  $\mapsto$ {\cufont 𒍸}\par
+\noindent U+12379  $\mapsto$ {\cufont 𒍹}\par
+\noindent U+1237A  $\mapsto$ {\cufont 𒍺}\par
+\noindent U+1237B  $\mapsto$ {\cufont 𒍻}\par
+\noindent U+1237C  $\mapsto$ {\cufont 𒍼}\par
+\noindent U+1237D  $\mapsto$ {\cufont 𒍽}\par
+\noindent U+1237E  $\mapsto$ {\cufont 𒍾}\par
+\noindent U+1237F  $\mapsto$ {\cufont 𒍿}\par
+\noindent U+12380  $\mapsto$ {\cufont 𒎀}\par
+\noindent U+12381  $\mapsto$ {\cufont 𒎁}\par
+\noindent U+12382  $\mapsto$ {\cufont 𒎂}\par
+\noindent U+12383  $\mapsto$ {\cufont 𒎃}\par
+\noindent U+12384  $\mapsto$ {\cufont 𒎄}\par
+\noindent U+12385  $\mapsto$ {\cufont 𒎅}\par
+\noindent U+12386  $\mapsto$ {\cufont 𒎆}\par
+\noindent U+12387  $\mapsto$ {\cufont 𒎇}\par
+\noindent U+12388  $\mapsto$ {\cufont 𒎈}\par
+\noindent U+12389  $\mapsto$ {\cufont 𒎉}\par
+\noindent U+1238A  $\mapsto$ {\cufont 𒎊}\par
+\noindent U+1238B  $\mapsto$ {\cufont 𒎋}\par
+\noindent U+1238C  $\mapsto$ {\cufont 𒎌}\par
+\noindent U+1238D  $\mapsto$ {\cufont 𒎍}\par
+\noindent U+1238E  $\mapsto$ {\cufont 𒎎}\par
+\noindent U+1238F  $\mapsto$ {\cufont 𒎏}\par
+\noindent U+12390  $\mapsto$ {\cufont 𒎐}\par
+\noindent U+12391  $\mapsto$ {\cufont 𒎑}\par
+\noindent U+12392  $\mapsto$ {\cufont 𒎒}\par
+\noindent U+12393  $\mapsto$ {\cufont 𒎓}\par
+\noindent U+12394  $\mapsto$ {\cufont 𒎔}\par
+\noindent U+12395  $\mapsto$ {\cufont 𒎕}\par
+\noindent U+12396  $\mapsto$ {\cufont 𒎖}\par
+\noindent U+12397  $\mapsto$ {\cufont 𒎗}\par
+\noindent U+12398  $\mapsto$ {\cufont 𒎘}\par
+\noindent U+12399  $\mapsto$ {\cufont 𒎙}\par
+}
+
+%-----   List of Unicode names
+\newcommand\cushowplainlistun{%
+%\subsection{List of Unicode names}\label{sec:listcuun}
+\noindent a $\mapsto$ {\cufont 𒀀}\par
+\noindent atimesa $\mapsto$ {\cufont 𒀁}\par
+\noindent atimesbad $\mapsto$ {\cufont 𒀂}\par
+\noindent atimesgan2tenu $\mapsto$ {\cufont 𒀃}\par
+\noindent atimesha $\mapsto$ {\cufont 𒀄}\par
+\noindent atimesigi $\mapsto$ {\cufont 𒀅}\par
+\noindent atimeslagargunu $\mapsto$ {\cufont 𒀆}\par
+\noindent atimesmush $\mapsto$ {\cufont 𒀇}\par
+\noindent atimessag $\mapsto$ {\cufont 𒀈}\par
+\noindent a2 $\mapsto$ {\cufont 𒀉}\par
+\noindent ab $\mapsto$ {\cufont 𒀊}\par
+\noindent abtimesash2 $\mapsto$ {\cufont 𒀋}\par
+\noindent abtimesdun3gunu $\mapsto$ {\cufont 𒀌}\par
+\noindent abtimesgal $\mapsto$ {\cufont 𒀍}\par
+\noindent abtimesgan2tenu $\mapsto$ {\cufont 𒀎}\par
+\noindent abtimesha $\mapsto$ {\cufont 𒀏}\par
+\noindent abtimesigigunu $\mapsto$ {\cufont 𒀐}\par
+\noindent abtimesimin $\mapsto$ {\cufont 𒀑}\par
+\noindent abtimeslagab $\mapsto$ {\cufont 𒀒}\par
+\noindent abtimesshesh $\mapsto$ {\cufont 𒀓}\par
+\noindent abtimesuplusuplusu $\mapsto$ {\cufont 𒀔}\par
+\noindent abgunu $\mapsto$ {\cufont 𒀕}\par
+\noindent ab2 $\mapsto$ {\cufont 𒀖}\par
+\noindent ab2timesbalag $\mapsto$ {\cufont 𒀗}\par
+\noindent ab2timesgan2tenu $\mapsto$ {\cufont 𒀘}\par
+\noindent ab2timesmeplusen $\mapsto$ {\cufont 𒀙}\par
+\noindent ab2timessha3 $\mapsto$ {\cufont 𒀚}\par
+\noindent ab2timestak4 $\mapsto$ {\cufont 𒀛}\par
+\noindent ad $\mapsto$ {\cufont 𒀜}\par
+\noindent ak $\mapsto$ {\cufont 𒀝}\par
+\noindent aktimeserin2 $\mapsto$ {\cufont 𒀞}\par
+\noindent aktimesshitaplusgish $\mapsto$ {\cufont 𒀟}\par
+\noindent al $\mapsto$ {\cufont 𒀠}\par
+\noindent altimesal $\mapsto$ {\cufont 𒀡}\par
+\noindent altimesdim2 $\mapsto$ {\cufont 𒀢}\par
+\noindent altimesgish $\mapsto$ {\cufont 𒀣}\par
+\noindent altimesha $\mapsto$ {\cufont 𒀤}\par
+\noindent altimeskad3 $\mapsto$ {\cufont 𒀥}\par
+\noindent altimeski $\mapsto$ {\cufont 𒀦}\par
+\noindent altimesshe $\mapsto$ {\cufont 𒀧}\par
+\noindent altimesush $\mapsto$ {\cufont 𒀨}\par
+\noindent alan $\mapsto$ {\cufont 𒀩}\par
+\noindent aleph $\mapsto$ {\cufont 𒀪}\par
+\noindent amar $\mapsto$ {\cufont 𒀫}\par
+\noindent amartimesshe $\mapsto$ {\cufont 𒀬}\par
+\noindent an $\mapsto$ {\cufont 𒀭}\par
+\noindent anoveran $\mapsto$ {\cufont 𒀮}\par
+\noindent anthreetimes $\mapsto$ {\cufont 𒀯}\par
+\noindent anplusnagaopposinganplusnaga $\mapsto$ {\cufont 𒀰}\par
+\noindent anplusnagasquared $\mapsto$ {\cufont 𒀱}\par
+\noindent anshe $\mapsto$ {\cufont 𒀲}\par
+\noindent apin $\mapsto$ {\cufont 𒀳}\par
+\noindent arad $\mapsto$ {\cufont 𒀴}\par
+\noindent aradtimeskur $\mapsto$ {\cufont 𒀵}\par
+\noindent arkab $\mapsto$ {\cufont 𒀶}\par
+\noindent asal2 $\mapsto$ {\cufont 𒀷}\par
+\noindent ash $\mapsto$ {\cufont 𒀸}\par
+\noindent ashzidatenu $\mapsto$ {\cufont 𒀹}\par
+\noindent ashkabatenu $\mapsto$ {\cufont 𒀺}\par
+\noindent ashoverashtug2overtug2tug2overtug2pap $\mapsto$ {\cufont 𒀻}\par
+\noindent ashoverashoverash $\mapsto$ {\cufont 𒀼}\par
+\noindent ashoverashoverashcrossingashoverashoverash $\mapsto$ {\cufont 𒀽}\par
+\noindent ash2 $\mapsto$ {\cufont 𒀾}\par
+\noindent ashgab $\mapsto$ {\cufont 𒀿}\par
+\noindent ba $\mapsto$ {\cufont 𒁀}\par
+\noindent bad $\mapsto$ {\cufont 𒁁}\par
+\noindent bag3 $\mapsto$ {\cufont 𒁂}\par
+\noindent bahar2 $\mapsto$ {\cufont 𒁃}\par
+\noindent bal $\mapsto$ {\cufont 𒁄}\par
+\noindent baloverbal $\mapsto$ {\cufont 𒁅}\par
+\noindent balag $\mapsto$ {\cufont 𒁆}\par
+\noindent bar $\mapsto$ {\cufont 𒁇}\par
+\noindent bara2 $\mapsto$ {\cufont 𒁈}\par
+\noindent bi $\mapsto$ {\cufont 𒁉}\par
+\noindent bitimesa $\mapsto$ {\cufont 𒁊}\par
+\noindent bitimesgar $\mapsto$ {\cufont 𒁋}\par
+\noindent bitimesigigunu $\mapsto$ {\cufont 𒁌}\par
+\noindent bu $\mapsto$ {\cufont 𒁍}\par
+\noindent buoverbuab $\mapsto$ {\cufont 𒁎}\par
+\noindent buoverbuun $\mapsto$ {\cufont 𒁏}\par
+\noindent bucrossingbu $\mapsto$ {\cufont 𒁐}\par
+\noindent bulug $\mapsto$ {\cufont 𒁑}\par
+\noindent bulugoverbulug $\mapsto$ {\cufont 𒁒}\par
+\noindent bur $\mapsto$ {\cufont 𒁓}\par
+\noindent bur2 $\mapsto$ {\cufont 𒁔}\par
+\noindent da $\mapsto$ {\cufont 𒁕}\par
+\noindent dag $\mapsto$ {\cufont 𒁖}\par
+\noindent dagkisim5timesaplusmash $\mapsto$ {\cufont 𒁗}\par
+\noindent dagkisim5timesamar $\mapsto$ {\cufont 𒁘}\par
+\noindent dagkisim5timesbalag $\mapsto$ {\cufont 𒁙}\par
+\noindent dagkisim5timesbi $\mapsto$ {\cufont 𒁚}\par
+\noindent dagkisim5timesga $\mapsto$ {\cufont 𒁛}\par
+\noindent dagkisim5timesgaplusmash $\mapsto$ {\cufont 𒁜}\par
+\noindent dagkisim5timesgi $\mapsto$ {\cufont 𒁝}\par
+\noindent dagkisim5timesgir2 $\mapsto$ {\cufont 𒁞}\par
+\noindent dagkisim5timesgud $\mapsto$ {\cufont 𒁟}\par
+\noindent dagkisim5timesha $\mapsto$ {\cufont 𒁠}\par
+\noindent dagkisim5timesir $\mapsto$ {\cufont 𒁡}\par
+\noindent dagkisim5timesirpluslu $\mapsto$ {\cufont 𒁢}\par
+\noindent dagkisim5timeskak $\mapsto$ {\cufont 𒁣}\par
+\noindent dagkisim5timesla $\mapsto$ {\cufont 𒁤}\par
+\noindent dagkisim5timeslu $\mapsto$ {\cufont 𒁥}\par
+\noindent dagkisim5timesluplusmash2 $\mapsto$ {\cufont 𒁦}\par
+\noindent dagkisim5timeslum $\mapsto$ {\cufont 𒁧}\par
+\noindent dagkisim5timesne $\mapsto$ {\cufont 𒁨}\par
+\noindent dagkisim5timespappluspap $\mapsto$ {\cufont 𒁩}\par
+\noindent dagkisim5timessi $\mapsto$ {\cufont 𒁪}\par
+\noindent dagkisim5timestak4 $\mapsto$ {\cufont 𒁫}\par
+\noindent dagkisim5timesu2plusgir2 $\mapsto$ {\cufont 𒁬}\par
+\noindent dagkisim5timesush $\mapsto$ {\cufont 𒁭}\par
+\noindent dam $\mapsto$ {\cufont 𒁮}\par
+\noindent dar $\mapsto$ {\cufont 𒁯}\par
+\noindent dara3 $\mapsto$ {\cufont 𒁰}\par
+\noindent dara4 $\mapsto$ {\cufont 𒁱}\par
+\noindent di $\mapsto$ {\cufont 𒁲}\par
+\noindent dib $\mapsto$ {\cufont 𒁳}\par
+\noindent dim $\mapsto$ {\cufont 𒁴}\par
+\noindent dimtimesshe $\mapsto$ {\cufont 𒁵}\par
+\noindent dim2 $\mapsto$ {\cufont 𒁶}\par
+\noindent din $\mapsto$ {\cufont 𒁷}\par
+\noindent dinkaskalugunudish $\mapsto$ {\cufont 𒁸}\par
+\noindent dish $\mapsto$ {\cufont 𒁹}\par
+\noindent du $\mapsto$ {\cufont 𒁺}\par
+\noindent duoverdu $\mapsto$ {\cufont 𒁻}\par
+\noindent dugunu $\mapsto$ {\cufont 𒁼}\par
+\noindent dusheshig $\mapsto$ {\cufont 𒁽}\par
+\noindent dub $\mapsto$ {\cufont 𒁾}\par
+\noindent dubtimesesh2 $\mapsto$ {\cufont 𒁿}\par
+\noindent dub2 $\mapsto$ {\cufont 𒂀}\par
+\noindent dug $\mapsto$ {\cufont 𒂁}\par
+\noindent dugud $\mapsto$ {\cufont 𒂂}\par
+\noindent duh $\mapsto$ {\cufont 𒂃}\par
+\noindent dun $\mapsto$ {\cufont 𒂄}\par
+\noindent dun3 $\mapsto$ {\cufont 𒂅}\par
+\noindent dun3gunu $\mapsto$ {\cufont 𒂆}\par
+\noindent dun3gunugunu $\mapsto$ {\cufont 𒂇}\par
+\noindent dun4 $\mapsto$ {\cufont 𒂈}\par
+\noindent dur2 $\mapsto$ {\cufont 𒂉}\par
+\noindent e $\mapsto$ {\cufont 𒂊}\par
+\noindent etimespap $\mapsto$ {\cufont 𒂋}\par
+\noindent eoverenunovernun $\mapsto$ {\cufont 𒂌}\par
+\noindent e2 $\mapsto$ {\cufont 𒂍}\par
+\noindent e2timesaplushaplusda $\mapsto$ {\cufont 𒂎}\par
+\noindent e2timesgar $\mapsto$ {\cufont 𒂏}\par
+\noindent e2timesmi $\mapsto$ {\cufont 𒂐}\par
+\noindent e2timessal $\mapsto$ {\cufont 𒂑}\par
+\noindent e2timesshe $\mapsto$ {\cufont 𒂒}\par
+\noindent e2timesu $\mapsto$ {\cufont 𒂓}\par
+\noindent edin $\mapsto$ {\cufont 𒂔}\par
+\noindent egir $\mapsto$ {\cufont 𒂕}\par
+\noindent el $\mapsto$ {\cufont 𒂖}\par
+\noindent en $\mapsto$ {\cufont 𒂗}\par
+\noindent entimesgan2 $\mapsto$ {\cufont 𒂘}\par
+\noindent entimesgan2tenu $\mapsto$ {\cufont 𒂙}\par
+\noindent entimesme $\mapsto$ {\cufont 𒂚}\par
+\noindent encrossingen $\mapsto$ {\cufont 𒂛}\par
+\noindent enopposingen $\mapsto$ {\cufont 𒂜}\par
+\noindent ensquared $\mapsto$ {\cufont 𒂝}\par
+\noindent eren $\mapsto$ {\cufont 𒂞}\par
+\noindent erin2 $\mapsto$ {\cufont 𒂟}\par
+\noindent esh2 $\mapsto$ {\cufont 𒂠}\par
+\noindent ezen $\mapsto$ {\cufont 𒂡}\par
+\noindent ezentimesa $\mapsto$ {\cufont 𒂢}\par
+\noindent ezentimesapluslal $\mapsto$ {\cufont 𒂣}\par
+\noindent ezentimesapluslaltimeslal $\mapsto$ {\cufont 𒂤}\par
+\noindent ezentimesan $\mapsto$ {\cufont 𒂥}\par
+\noindent ezentimesbad $\mapsto$ {\cufont 𒂦}\par
+\noindent ezentimesdun3gunu $\mapsto$ {\cufont 𒂧}\par
+\noindent ezentimesdun3gunugunu $\mapsto$ {\cufont 𒂨}\par
+\noindent ezentimesha $\mapsto$ {\cufont 𒂩}\par
+\noindent ezentimeshagunu $\mapsto$ {\cufont 𒂪}\par
+\noindent ezentimesigigunu $\mapsto$ {\cufont 𒂫}\par
+\noindent ezentimeskaskal $\mapsto$ {\cufont 𒂬}\par
+\noindent ezentimeskaskalsquared $\mapsto$ {\cufont 𒂭}\par
+\noindent ezentimesku3 $\mapsto$ {\cufont 𒂮}\par
+\noindent ezentimesla $\mapsto$ {\cufont 𒂯}\par
+\noindent ezentimeslaltimeslal $\mapsto$ {\cufont 𒂰}\par
+\noindent ezentimesli $\mapsto$ {\cufont 𒂱}\par
+\noindent ezentimeslu $\mapsto$ {\cufont 𒂲}\par
+\noindent ezentimesu2 $\mapsto$ {\cufont 𒂳}\par
+\noindent ezentimesud $\mapsto$ {\cufont 𒂴}\par
+\noindent ga $\mapsto$ {\cufont 𒂵}\par
+\noindent gagunu $\mapsto$ {\cufont 𒂶}\par
+\noindent ga2 $\mapsto$ {\cufont 𒂷}\par
+\noindent ga2timesaplusdaplusha $\mapsto$ {\cufont 𒂸}\par
+\noindent ga2timesaplusha $\mapsto$ {\cufont 𒂹}\par
+\noindent ga2timesaplusigi $\mapsto$ {\cufont 𒂺}\par
+\noindent ga2timesab2tenuplustab $\mapsto$ {\cufont 𒂻}\par
+\noindent ga2timesan $\mapsto$ {\cufont 𒂼}\par
+\noindent ga2timesash $\mapsto$ {\cufont 𒂽}\par
+\noindent ga2timesash2plusgal $\mapsto$ {\cufont 𒂾}\par
+\noindent ga2timesbad $\mapsto$ {\cufont 𒂿}\par
+\noindent ga2timesbarplusra $\mapsto$ {\cufont 𒃀}\par
+\noindent ga2timesbur $\mapsto$ {\cufont 𒃁}\par
+\noindent ga2timesburplusra $\mapsto$ {\cufont 𒃂}\par
+\noindent ga2timesda $\mapsto$ {\cufont 𒃃}\par
+\noindent ga2timesdi $\mapsto$ {\cufont 𒃄}\par
+\noindent ga2timesdimtimesshe $\mapsto$ {\cufont 𒃅}\par
+\noindent ga2timesdub $\mapsto$ {\cufont 𒃆}\par
+\noindent ga2timesel $\mapsto$ {\cufont 𒃇}\par
+\noindent ga2timeselplusla $\mapsto$ {\cufont 𒃈}\par
+\noindent ga2timesen $\mapsto$ {\cufont 𒃉}\par
+\noindent ga2timesentimesgan2tenu $\mapsto$ {\cufont 𒃊}\par
+\noindent ga2timesgan2tenu $\mapsto$ {\cufont 𒃋}\par
+\noindent ga2timesgar $\mapsto$ {\cufont 𒃌}\par
+\noindent ga2timesgi $\mapsto$ {\cufont 𒃍}\par
+\noindent ga2timesgi4 $\mapsto$ {\cufont 𒃎}\par
+\noindent ga2timesgi4plusa $\mapsto$ {\cufont 𒃏}\par
+\noindent ga2timesgir2plussu $\mapsto$ {\cufont 𒃐}\par
+\noindent ga2timeshaplusluplusesh2 $\mapsto$ {\cufont 𒃑}\par
+\noindent ga2timeshal $\mapsto$ {\cufont 𒃒}\par
+\noindent ga2timeshalplusla $\mapsto$ {\cufont 𒃓}\par
+\noindent ga2timeshiplusli $\mapsto$ {\cufont 𒃔}\par
+\noindent ga2timeshub2 $\mapsto$ {\cufont 𒃕}\par
+\noindent ga2timesigigunu $\mapsto$ {\cufont 𒃖}\par
+\noindent ga2timesishplushuplusash $\mapsto$ {\cufont 𒃗}\par
+\noindent ga2timeskak $\mapsto$ {\cufont 𒃘}\par
+\noindent ga2timeskaskal $\mapsto$ {\cufont 𒃙}\par
+\noindent ga2timeskid $\mapsto$ {\cufont 𒃚}\par
+\noindent ga2timeskidpluslal $\mapsto$ {\cufont 𒃛}\par
+\noindent ga2timesku3plusan $\mapsto$ {\cufont 𒃜}\par
+\noindent ga2timesla $\mapsto$ {\cufont 𒃝}\par
+\noindent ga2timesmeplusen $\mapsto$ {\cufont 𒃞}\par
+\noindent ga2timesmi $\mapsto$ {\cufont 𒃟}\par
+\noindent ga2timesnun $\mapsto$ {\cufont 𒃠}\par
+\noindent ga2timesnunovernun $\mapsto$ {\cufont 𒃡}\par
+\noindent ga2timespa $\mapsto$ {\cufont 𒃢}\par
+\noindent ga2timessal $\mapsto$ {\cufont 𒃣}\par
+\noindent ga2timessar $\mapsto$ {\cufont 𒃤}\par
+\noindent ga2timesshe $\mapsto$ {\cufont 𒃥}\par
+\noindent ga2timessheplustur $\mapsto$ {\cufont 𒃦}\par
+\noindent ga2timesshid $\mapsto$ {\cufont 𒃧}\par
+\noindent ga2timessum $\mapsto$ {\cufont 𒃨}\par
+\noindent ga2timestak4 $\mapsto$ {\cufont 𒃩}\par
+\noindent ga2timesu $\mapsto$ {\cufont 𒃪}\par
+\noindent ga2timesud $\mapsto$ {\cufont 𒃫}\par
+\noindent ga2timesudplusdu $\mapsto$ {\cufont 𒃬}\par
+\noindent ga2overga2 $\mapsto$ {\cufont 𒃭}\par
+\noindent gaba $\mapsto$ {\cufont 𒃮}\par
+\noindent gabacrossinggaba $\mapsto$ {\cufont 𒃯}\par
+\noindent gad $\mapsto$ {\cufont 𒃰}\par
+\noindent gadovergadgarovergar $\mapsto$ {\cufont 𒃱}\par
+\noindent gal $\mapsto$ {\cufont 𒃲}\par
+\noindent galgadovergadgarovergar $\mapsto$ {\cufont 𒃳}\par
+\noindent galam $\mapsto$ {\cufont 𒃴}\par
+\noindent gam $\mapsto$ {\cufont 𒃵}\par
+\noindent gan $\mapsto$ {\cufont 𒃶}\par
+\noindent gan2 $\mapsto$ {\cufont 𒃷}\par
+\noindent gan2tenu $\mapsto$ {\cufont 𒃸}\par
+\noindent gan2overgan2 $\mapsto$ {\cufont 𒃹}\par
+\noindent gan2crossinggan2 $\mapsto$ {\cufont 𒃺}\par
+\noindent gar $\mapsto$ {\cufont 𒃻}\par
+\noindent gar3 $\mapsto$ {\cufont 𒃼}\par
+\noindent gashan $\mapsto$ {\cufont 𒃽}\par
+\noindent geshtin $\mapsto$ {\cufont 𒃾}\par
+\noindent geshtintimeskur $\mapsto$ {\cufont 𒃿}\par
+\noindent gi $\mapsto$ {\cufont 𒄀}\par
+\noindent gitimese $\mapsto$ {\cufont 𒄁}\par
+\noindent gitimesu $\mapsto$ {\cufont 𒄂}\par
+\noindent gicrossinggi $\mapsto$ {\cufont 𒄃}\par
+\noindent gi4 $\mapsto$ {\cufont 𒄄}\par
+\noindent gi4overgi4 $\mapsto$ {\cufont 𒄅}\par
+\noindent gi4crossinggi4 $\mapsto$ {\cufont 𒄆}\par
+\noindent gidim $\mapsto$ {\cufont 𒄇}\par
+\noindent gir2 $\mapsto$ {\cufont 𒄈}\par
+\noindent gir2gunu $\mapsto$ {\cufont 𒄉}\par
+\noindent gir3 $\mapsto$ {\cufont 𒄊}\par
+\noindent gir3timesaplusigi $\mapsto$ {\cufont 𒄋}\par
+\noindent gir3timesgan2tenu $\mapsto$ {\cufont 𒄌}\par
+\noindent gir3timesigi $\mapsto$ {\cufont 𒄍}\par
+\noindent gir3timesluplusigi $\mapsto$ {\cufont 𒄎}\par
+\noindent gir3timespa $\mapsto$ {\cufont 𒄏}\par
+\noindent gisal $\mapsto$ {\cufont 𒄐}\par
+\noindent gish $\mapsto$ {\cufont 𒄑}\par
+\noindent gishcrossinggish $\mapsto$ {\cufont 𒄒}\par
+\noindent gishtimesbad $\mapsto$ {\cufont 𒄓}\par
+\noindent gishtimestak4 $\mapsto$ {\cufont 𒄔}\par
+\noindent gishtenu $\mapsto$ {\cufont 𒄕}\par
+\noindent gu $\mapsto$ {\cufont 𒄖}\par
+\noindent gucrossinggu $\mapsto$ {\cufont 𒄗}\par
+\noindent gu2 $\mapsto$ {\cufont 𒄘}\par
+\noindent gu2timeskak $\mapsto$ {\cufont 𒄙}\par
+\noindent gu2timeskaktimesigigunu $\mapsto$ {\cufont 𒄚}\par
+\noindent gu2timesnun $\mapsto$ {\cufont 𒄛}\par
+\noindent gu2timessalplustug2 $\mapsto$ {\cufont 𒄜}\par
+\noindent gu2gunu $\mapsto$ {\cufont 𒄝}\par
+\noindent gud $\mapsto$ {\cufont 𒄞}\par
+\noindent gudtimesapluskur $\mapsto$ {\cufont 𒄟}\par
+\noindent gudtimeskur $\mapsto$ {\cufont 𒄠}\par
+\noindent gudovergudlugal $\mapsto$ {\cufont 𒄡}\par
+\noindent gul $\mapsto$ {\cufont 𒄢}\par
+\noindent gum $\mapsto$ {\cufont 𒄣}\par
+\noindent gumtimesshe $\mapsto$ {\cufont 𒄤}\par
+\noindent gur $\mapsto$ {\cufont 𒄥}\par
+\noindent gur7 $\mapsto$ {\cufont 𒄦}\par
+\noindent gurun $\mapsto$ {\cufont 𒄧}\par
+\noindent gurush $\mapsto$ {\cufont 𒄨}\par
+\noindent ha $\mapsto$ {\cufont 𒄩}\par
+\noindent hatenu $\mapsto$ {\cufont 𒄪}\par
+\noindent hagunu $\mapsto$ {\cufont 𒄫}\par
+\noindent hal $\mapsto$ {\cufont 𒄬}\par
+\noindent hi $\mapsto$ {\cufont 𒄭}\par
+\noindent hitimesash $\mapsto$ {\cufont 𒄮}\par
+\noindent hitimesash2 $\mapsto$ {\cufont 𒄯}\par
+\noindent hitimesbad $\mapsto$ {\cufont 𒄰}\par
+\noindent hitimesdish $\mapsto$ {\cufont 𒄱}\par
+\noindent hitimesgad $\mapsto$ {\cufont 𒄲}\par
+\noindent hitimeskin $\mapsto$ {\cufont 𒄳}\par
+\noindent hitimesnun $\mapsto$ {\cufont 𒄴}\par
+\noindent hitimesshe $\mapsto$ {\cufont 𒄵}\par
+\noindent hitimesu $\mapsto$ {\cufont 𒄶}\par
+\noindent hu $\mapsto$ {\cufont 𒄷}\par
+\noindent hub2 $\mapsto$ {\cufont 𒄸}\par
+\noindent hub2timesan $\mapsto$ {\cufont 𒄹}\par
+\noindent hub2timeshal $\mapsto$ {\cufont 𒄺}\par
+\noindent hub2timeskaskal $\mapsto$ {\cufont 𒄻}\par
+\noindent hub2timeslish $\mapsto$ {\cufont 𒄼}\par
+\noindent hub2timesud $\mapsto$ {\cufont 𒄽}\par
+\noindent hul2 $\mapsto$ {\cufont 𒄾}\par
+\noindent i $\mapsto$ {\cufont 𒄿}\par
+\noindent ia $\mapsto$ {\cufont 𒅀}\par
+\noindent ib $\mapsto$ {\cufont 𒅁}\par
+\noindent idim $\mapsto$ {\cufont 𒅂}\par
+\noindent idimoveridimbur $\mapsto$ {\cufont 𒅃}\par
+\noindent idimoveridimsquared $\mapsto$ {\cufont 𒅄}\par
+\noindent ig $\mapsto$ {\cufont 𒅅}\par
+\noindent igi $\mapsto$ {\cufont 𒅆}\par
+\noindent igidib $\mapsto$ {\cufont 𒅇}\par
+\noindent igiri $\mapsto$ {\cufont 𒅈}\par
+\noindent igioverigishirovershirudoverud $\mapsto$ {\cufont 𒅉}\par
+\noindent igigunu $\mapsto$ {\cufont 𒅊}\par
+\noindent il $\mapsto$ {\cufont 𒅋}\par
+\noindent iltimesgan2tenu $\mapsto$ {\cufont 𒅌}\par
+\noindent il2 $\mapsto$ {\cufont 𒅍}\par
+\noindent im $\mapsto$ {\cufont 𒅎}\par
+\noindent imtimestak4 $\mapsto$ {\cufont 𒅏}\par
+\noindent imcrossingim $\mapsto$ {\cufont 𒅐}\par
+\noindent imopposingim $\mapsto$ {\cufont 𒅑}\par
+\noindent imsquared $\mapsto$ {\cufont 𒅒}\par
+\noindent imin $\mapsto$ {\cufont 𒅓}\par
+\noindent in $\mapsto$ {\cufont 𒅔}\par
+\noindent ir $\mapsto$ {\cufont 𒅕}\par
+\noindent ish $\mapsto$ {\cufont 𒅖}\par
+\noindent ka $\mapsto$ {\cufont 𒅗}\par
+\noindent katimesa $\mapsto$ {\cufont 𒅘}\par
+\noindent katimesad $\mapsto$ {\cufont 𒅙}\par
+\noindent katimesadplusku3 $\mapsto$ {\cufont 𒅚}\par
+\noindent katimesash2 $\mapsto$ {\cufont 𒅛}\par
+\noindent katimesbad $\mapsto$ {\cufont 𒅜}\par
+\noindent katimesbalag $\mapsto$ {\cufont 𒅝}\par
+\noindent katimesbar $\mapsto$ {\cufont 𒅞}\par
+\noindent katimesbi $\mapsto$ {\cufont 𒅟}\par
+\noindent katimeserin2 $\mapsto$ {\cufont 𒅠}\par
+\noindent katimesesh2 $\mapsto$ {\cufont 𒅡}\par
+\noindent katimesga $\mapsto$ {\cufont 𒅢}\par
+\noindent katimesgal $\mapsto$ {\cufont 𒅣}\par
+\noindent katimesgan2tenu $\mapsto$ {\cufont 𒅤}\par
+\noindent katimesgar $\mapsto$ {\cufont 𒅥}\par
+\noindent katimesgarplussha3plusa $\mapsto$ {\cufont 𒅦}\par
+\noindent katimesgi $\mapsto$ {\cufont 𒅧}\par
+\noindent katimesgir2 $\mapsto$ {\cufont 𒅨}\par
+\noindent katimesgishplussar $\mapsto$ {\cufont 𒅩}\par
+\noindent katimesgishcrossinggish $\mapsto$ {\cufont 𒅪}\par
+\noindent katimesgu $\mapsto$ {\cufont 𒅫}\par
+\noindent katimesgur7 $\mapsto$ {\cufont 𒅬}\par
+\noindent katimesigi $\mapsto$ {\cufont 𒅭}\par
+\noindent katimesim $\mapsto$ {\cufont 𒅮}\par
+\noindent katimeskak $\mapsto$ {\cufont 𒅯}\par
+\noindent katimeski $\mapsto$ {\cufont 𒅰}\par
+\noindent katimeskid $\mapsto$ {\cufont 𒅱}\par
+\noindent katimesli $\mapsto$ {\cufont 𒅲}\par
+\noindent katimeslu $\mapsto$ {\cufont 𒅳}\par
+\noindent katimesme $\mapsto$ {\cufont 𒅴}\par
+\noindent katimesmeplusdu $\mapsto$ {\cufont 𒅵}\par
+\noindent katimesmeplusgi $\mapsto$ {\cufont 𒅶}\par
+\noindent katimesmepluste $\mapsto$ {\cufont 𒅷}\par
+\noindent katimesmi $\mapsto$ {\cufont 𒅸}\par
+\noindent katimesmiplusnunuz $\mapsto$ {\cufont 𒅹}\par
+\noindent katimesne $\mapsto$ {\cufont 𒅺}\par
+\noindent katimesnun $\mapsto$ {\cufont 𒅻}\par
+\noindent katimespi $\mapsto$ {\cufont 𒅼}\par
+\noindent katimesru $\mapsto$ {\cufont 𒅽}\par
+\noindent katimessa $\mapsto$ {\cufont 𒅾}\par
+\noindent katimessar $\mapsto$ {\cufont 𒅿}\par
+\noindent katimessha $\mapsto$ {\cufont 𒆀}\par
+\noindent katimesshe $\mapsto$ {\cufont 𒆁}\par
+\noindent katimesshid $\mapsto$ {\cufont 𒆂}\par
+\noindent katimesshu $\mapsto$ {\cufont 𒆃}\par
+\noindent katimessig $\mapsto$ {\cufont 𒆄}\par
+\noindent katimessuhur $\mapsto$ {\cufont 𒆅}\par
+\noindent katimestar $\mapsto$ {\cufont 𒆆}\par
+\noindent katimesu $\mapsto$ {\cufont 𒆇}\par
+\noindent katimesu2 $\mapsto$ {\cufont 𒆈}\par
+\noindent katimesud $\mapsto$ {\cufont 𒆉}\par
+\noindent katimesumumtimespa $\mapsto$ {\cufont 𒆊}\par
+\noindent katimesush $\mapsto$ {\cufont 𒆋}\par
+\noindent katimeszi $\mapsto$ {\cufont 𒆌}\par
+\noindent ka2 $\mapsto$ {\cufont 𒆍}\par
+\noindent ka2crossingka2 $\mapsto$ {\cufont 𒆎}\par
+\noindent kab $\mapsto$ {\cufont 𒆏}\par
+\noindent kad2 $\mapsto$ {\cufont 𒆐}\par
+\noindent kad3 $\mapsto$ {\cufont 𒆑}\par
+\noindent kad4 $\mapsto$ {\cufont 𒆒}\par
+\noindent kad5 $\mapsto$ {\cufont 𒆓}\par
+\noindent kad5overkad5 $\mapsto$ {\cufont 𒆔}\par
+\noindent kak $\mapsto$ {\cufont 𒆕}\par
+\noindent kaktimesigigunu $\mapsto$ {\cufont 𒆖}\par
+\noindent kal $\mapsto$ {\cufont 𒆗}\par
+\noindent kaltimesbad $\mapsto$ {\cufont 𒆘}\par
+\noindent kalcrossingkal $\mapsto$ {\cufont 𒆙}\par
+\noindent kam2 $\mapsto$ {\cufont 𒆚}\par
+\noindent kam4 $\mapsto$ {\cufont 𒆛}\par
+\noindent kaskal $\mapsto$ {\cufont 𒆜}\par
+\noindent kaskallagabtimesuoverlagabtimesu $\mapsto$ {\cufont 𒆝}\par
+\noindent kaskaloverkaskallagabtimesuoverlagabtimesu $\mapsto$ {\cufont 𒆞}\par
+\noindent kesh2 $\mapsto$ {\cufont 𒆟}\par
+\noindent ki $\mapsto$ {\cufont 𒆠}\par
+\noindent kitimesbad $\mapsto$ {\cufont 𒆡}\par
+\noindent kitimesu $\mapsto$ {\cufont 𒆢}\par
+\noindent kitimesud $\mapsto$ {\cufont 𒆣}\par
+\noindent kid $\mapsto$ {\cufont 𒆤}\par
+\noindent kin $\mapsto$ {\cufont 𒆥}\par
+\noindent kisal $\mapsto$ {\cufont 𒆦}\par
+\noindent kish $\mapsto$ {\cufont 𒆧}\par
+\noindent kisim5 $\mapsto$ {\cufont 𒆨}\par
+\noindent kisim5overkisim5 $\mapsto$ {\cufont 𒆩}\par
+\noindent ku $\mapsto$ {\cufont 𒆪}\par
+\noindent kuoverhitimesash2kuoverhitimesash2 $\mapsto$ {\cufont 𒆫}\par
+\noindent ku3 $\mapsto$ {\cufont 𒆬}\par
+\noindent ku4 $\mapsto$ {\cufont 𒆭}\par
+\noindent ku4variantform $\mapsto$ {\cufont 𒆮}\par
+\noindent ku7 $\mapsto$ {\cufont 𒆯}\par
+\noindent kul $\mapsto$ {\cufont 𒆰}\par
+\noindent kulgunu $\mapsto$ {\cufont 𒆱}\par
+\noindent kun $\mapsto$ {\cufont 𒆲}\par
+\noindent kur $\mapsto$ {\cufont 𒆳}\par
+\noindent kuropposingkur $\mapsto$ {\cufont 𒆴}\par
+\noindent kushu2 $\mapsto$ {\cufont 𒆵}\par
+\noindent kwu318 $\mapsto$ {\cufont 𒆶}\par
+\noindent la $\mapsto$ {\cufont 𒆷}\par
+\noindent lagab $\mapsto$ {\cufont 𒆸}\par
+\noindent lagabtimesa $\mapsto$ {\cufont 𒆹}\par
+\noindent lagabtimesaplusdaplusha $\mapsto$ {\cufont 𒆺}\par
+\noindent lagabtimesaplusgar $\mapsto$ {\cufont 𒆻}\par
+\noindent lagabtimesapluslal $\mapsto$ {\cufont 𒆼}\par
+\noindent lagabtimesal $\mapsto$ {\cufont 𒆽}\par
+\noindent lagabtimesan $\mapsto$ {\cufont 𒆾}\par
+\noindent lagabtimesashzidatenu $\mapsto$ {\cufont 𒆿}\par
+\noindent lagabtimesbad $\mapsto$ {\cufont 𒇀}\par
+\noindent lagabtimesbi $\mapsto$ {\cufont 𒇁}\par
+\noindent lagabtimesdar $\mapsto$ {\cufont 𒇂}\par
+\noindent lagabtimesen $\mapsto$ {\cufont 𒇃}\par
+\noindent lagabtimesga $\mapsto$ {\cufont 𒇄}\par
+\noindent lagabtimesgar $\mapsto$ {\cufont 𒇅}\par
+\noindent lagabtimesgud $\mapsto$ {\cufont 𒇆}\par
+\noindent lagabtimesgudplusgud $\mapsto$ {\cufont 𒇇}\par
+\noindent lagabtimesha $\mapsto$ {\cufont 𒇈}\par
+\noindent lagabtimeshal $\mapsto$ {\cufont 𒇉}\par
+\noindent lagabtimeshitimesnun $\mapsto$ {\cufont 𒇊}\par
+\noindent lagabtimesigigunu $\mapsto$ {\cufont 𒇋}\par
+\noindent lagabtimesim $\mapsto$ {\cufont 𒇌}\par
+\noindent lagabtimesimplusha $\mapsto$ {\cufont 𒇍}\par
+\noindent lagabtimesimpluslu $\mapsto$ {\cufont 𒇎}\par
+\noindent lagabtimeski $\mapsto$ {\cufont 𒇏}\par
+\noindent lagabtimeskin $\mapsto$ {\cufont 𒇐}\par
+\noindent lagabtimesku3 $\mapsto$ {\cufont 𒇑}\par
+\noindent lagabtimeskul $\mapsto$ {\cufont 𒇒}\par
+\noindent lagabtimeskulplushiplusa $\mapsto$ {\cufont 𒇓}\par
+\noindent lagabtimeslagab $\mapsto$ {\cufont 𒇔}\par
+\noindent lagabtimeslish $\mapsto$ {\cufont 𒇕}\par
+\noindent lagabtimeslu $\mapsto$ {\cufont 𒇖}\par
+\noindent lagabtimeslul $\mapsto$ {\cufont 𒇗}\par
+\noindent lagabtimesme $\mapsto$ {\cufont 𒇘}\par
+\noindent lagabtimesmeplusen $\mapsto$ {\cufont 𒇙}\par
+\noindent lagabtimesmush $\mapsto$ {\cufont 𒇚}\par
+\noindent lagabtimesne $\mapsto$ {\cufont 𒇛}\par
+\noindent lagabtimessheplussum $\mapsto$ {\cufont 𒇜}\par
+\noindent lagabtimesshitaplusgishpluserin2 $\mapsto$ {\cufont 𒇝}\par
+\noindent lagabtimesshitaplusgishtenu $\mapsto$ {\cufont 𒇞}\par
+\noindent lagabtimesshu2 $\mapsto$ {\cufont 𒇟}\par
+\noindent lagabtimesshu2plusshu2 $\mapsto$ {\cufont 𒇠}\par
+\noindent lagabtimessum $\mapsto$ {\cufont 𒇡}\par
+\noindent lagabtimestag $\mapsto$ {\cufont 𒇢}\par
+\noindent lagabtimestak4 $\mapsto$ {\cufont 𒇣}\par
+\noindent lagabtimesteplusaplussuplusna $\mapsto$ {\cufont 𒇤}\par
+\noindent lagabtimesu $\mapsto$ {\cufont 𒇥}\par
+\noindent lagabtimesuplusa $\mapsto$ {\cufont 𒇦}\par
+\noindent lagabtimesuplusuplusu $\mapsto$ {\cufont 𒇧}\par
+\noindent lagabtimesu2plusash $\mapsto$ {\cufont 𒇨}\par
+\noindent lagabtimesud $\mapsto$ {\cufont 𒇩}\par
+\noindent lagabtimesush $\mapsto$ {\cufont 𒇪}\par
+\noindent lagabsquared $\mapsto$ {\cufont 𒇫}\par
+\noindent lagar $\mapsto$ {\cufont 𒇬}\par
+\noindent lagartimesshe $\mapsto$ {\cufont 𒇭}\par
+\noindent lagartimessheplussum $\mapsto$ {\cufont 𒇮}\par
+\noindent lagargunu $\mapsto$ {\cufont 𒇯}\par
+\noindent lagargunuoverlagargunushe $\mapsto$ {\cufont 𒇰}\par
+\noindent lahshu $\mapsto$ {\cufont 𒇱}\par
+\noindent lal $\mapsto$ {\cufont 𒇲}\par
+\noindent laltimeslal $\mapsto$ {\cufont 𒇳}\par
+\noindent lam $\mapsto$ {\cufont 𒇴}\par
+\noindent lamtimeskur $\mapsto$ {\cufont 𒇵}\par
+\noindent lamtimeskurplusru $\mapsto$ {\cufont 𒇶}\par
+\noindent li $\mapsto$ {\cufont 𒇷}\par
+\noindent lil $\mapsto$ {\cufont 𒇸}\par
+\noindent limmu2 $\mapsto$ {\cufont 𒇹}\par
+\noindent lish $\mapsto$ {\cufont 𒇺}\par
+\noindent lu $\mapsto$ {\cufont 𒇻}\par
+\noindent lutimesbad $\mapsto$ {\cufont 𒇼}\par
+\noindent lu2 $\mapsto$ {\cufont 𒇽}\par
+\noindent lu2timesal $\mapsto$ {\cufont 𒇾}\par
+\noindent lu2timesbad $\mapsto$ {\cufont 𒇿}\par
+\noindent lu2timesesh2 $\mapsto$ {\cufont 𒈀}\par
+\noindent lu2timesesh2tenu $\mapsto$ {\cufont 𒈁}\par
+\noindent lu2timesgan2tenu $\mapsto$ {\cufont 𒈂}\par
+\noindent lu2timeshitimesbad $\mapsto$ {\cufont 𒈃}\par
+\noindent lu2timesim $\mapsto$ {\cufont 𒈄}\par
+\noindent lu2timeskad2 $\mapsto$ {\cufont 𒈅}\par
+\noindent lu2timeskad3 $\mapsto$ {\cufont 𒈆}\par
+\noindent lu2timeskad3plusash $\mapsto$ {\cufont 𒈇}\par
+\noindent lu2timeski $\mapsto$ {\cufont 𒈈}\par
+\noindent lu2timeslaplusash $\mapsto$ {\cufont 𒈉}\par
+\noindent lu2timeslagab $\mapsto$ {\cufont 𒈊}\par
+\noindent lu2timesmeplusen $\mapsto$ {\cufont 𒈋}\par
+\noindent lu2timesne $\mapsto$ {\cufont 𒈌}\par
+\noindent lu2timesnu $\mapsto$ {\cufont 𒈍}\par
+\noindent lu2timessiplusash $\mapsto$ {\cufont 𒈎}\par
+\noindent lu2timessik2plusbu $\mapsto$ {\cufont 𒈏}\par
+\noindent lu2timestug2 $\mapsto$ {\cufont 𒈐}\par
+\noindent lu2tenu $\mapsto$ {\cufont 𒈑}\par
+\noindent lu2crossinglu2 $\mapsto$ {\cufont 𒈒}\par
+\noindent lu2opposinglu2 $\mapsto$ {\cufont 𒈓}\par
+\noindent lu2squared $\mapsto$ {\cufont 𒈔}\par
+\noindent lu2sheshig $\mapsto$ {\cufont 𒈕}\par
+\noindent lu3 $\mapsto$ {\cufont 𒈖}\par
+\noindent lugal $\mapsto$ {\cufont 𒈗}\par
+\noindent lugaloverlugal $\mapsto$ {\cufont 𒈘}\par
+\noindent lugalopposinglugal $\mapsto$ {\cufont 𒈙}\par
+\noindent lugalsheshig $\mapsto$ {\cufont 𒈚}\par
+\noindent luh $\mapsto$ {\cufont 𒈛}\par
+\noindent lul $\mapsto$ {\cufont 𒈜}\par
+\noindent lum $\mapsto$ {\cufont 𒈝}\par
+\noindent lumoverlum $\mapsto$ {\cufont 𒈞}\par
+\noindent lumoverlumgarovergar $\mapsto$ {\cufont 𒈟}\par
+\noindent ma $\mapsto$ {\cufont 𒈠}\par
+\noindent matimestak4 $\mapsto$ {\cufont 𒈡}\par
+\noindent magunu $\mapsto$ {\cufont 𒈢}\par
+\noindent ma2 $\mapsto$ {\cufont 𒈣}\par
+\noindent mah $\mapsto$ {\cufont 𒈤}\par
+\noindent mar $\mapsto$ {\cufont 𒈥}\par
+\noindent mash $\mapsto$ {\cufont 𒈦}\par
+\noindent mash2 $\mapsto$ {\cufont 𒈧}\par
+\noindent me $\mapsto$ {\cufont 𒈨}\par
+\noindent mes $\mapsto$ {\cufont 𒈩}\par
+\noindent mi $\mapsto$ {\cufont 𒈪}\par
+\noindent min $\mapsto$ {\cufont 𒈫}\par
+\noindent mu $\mapsto$ {\cufont 𒈬}\par
+\noindent muovermu $\mapsto$ {\cufont 𒈭}\par
+\noindent mug $\mapsto$ {\cufont 𒈮}\par
+\noindent muggunu $\mapsto$ {\cufont 𒈯}\par
+\noindent munsub $\mapsto$ {\cufont 𒈰}\par
+\noindent murgu2 $\mapsto$ {\cufont 𒈱}\par
+\noindent mush $\mapsto$ {\cufont 𒈲}\par
+\noindent mushtimesa $\mapsto$ {\cufont 𒈳}\par
+\noindent mushtimeskur $\mapsto$ {\cufont 𒈴}\par
+\noindent mushtimesza $\mapsto$ {\cufont 𒈵}\par
+\noindent mushovermush $\mapsto$ {\cufont 𒈶}\par
+\noindent mushovermushtimesaplusna $\mapsto$ {\cufont 𒈷}\par
+\noindent mushcrossingmush $\mapsto$ {\cufont 𒈸}\par
+\noindent mush3 $\mapsto$ {\cufont 𒈹}\par
+\noindent mush3timesa $\mapsto$ {\cufont 𒈺}\par
+\noindent mush3timesaplusdi $\mapsto$ {\cufont 𒈻}\par
+\noindent mush3timesdi $\mapsto$ {\cufont 𒈼}\par
+\noindent mush3gunu $\mapsto$ {\cufont 𒈽}\par
+\noindent na $\mapsto$ {\cufont 𒈾}\par
+\noindent na2 $\mapsto$ {\cufont 𒈿}\par
+\noindent naga $\mapsto$ {\cufont 𒉀}\par
+\noindent nagainverted $\mapsto$ {\cufont 𒉁}\par
+\noindent nagatimesshutenu $\mapsto$ {\cufont 𒉂}\par
+\noindent nagaopposingnaga $\mapsto$ {\cufont 𒉃}\par
+\noindent nagar $\mapsto$ {\cufont 𒉄}\par
+\noindent namnutillu $\mapsto$ {\cufont 𒉅}\par
+\noindent nam $\mapsto$ {\cufont 𒉆}\par
+\noindent nam2 $\mapsto$ {\cufont 𒉇}\par
+\noindent ne $\mapsto$ {\cufont 𒉈}\par
+\noindent netimesa $\mapsto$ {\cufont 𒉉}\par
+\noindent netimesud $\mapsto$ {\cufont 𒉊}\par
+\noindent nesheshig $\mapsto$ {\cufont 𒉋}\par
+\noindent ni $\mapsto$ {\cufont 𒉌}\par
+\noindent nitimese $\mapsto$ {\cufont 𒉍}\par
+\noindent ni2 $\mapsto$ {\cufont 𒉎}\par
+\noindent nim $\mapsto$ {\cufont 𒉏}\par
+\noindent nimtimesgan2tenu $\mapsto$ {\cufont 𒉐}\par
+\noindent nimtimesgarplusgan2tenu $\mapsto$ {\cufont 𒉑}\par
+\noindent ninda2 $\mapsto$ {\cufont 𒉒}\par
+\noindent ninda2timesan $\mapsto$ {\cufont 𒉓}\par
+\noindent ninda2timesash $\mapsto$ {\cufont 𒉔}\par
+\noindent ninda2timesashplusash $\mapsto$ {\cufont 𒉕}\par
+\noindent ninda2timesgud $\mapsto$ {\cufont 𒉖}\par
+\noindent ninda2timesmeplusgan2tenu $\mapsto$ {\cufont 𒉗}\par
+\noindent ninda2timesne $\mapsto$ {\cufont 𒉘}\par
+\noindent ninda2timesnun $\mapsto$ {\cufont 𒉙}\par
+\noindent ninda2timesshe $\mapsto$ {\cufont 𒉚}\par
+\noindent ninda2timessheplusaan $\mapsto$ {\cufont 𒉛}\par
+\noindent ninda2timessheplusash $\mapsto$ {\cufont 𒉜}\par
+\noindent ninda2timessheplusashplusash $\mapsto$ {\cufont 𒉝}\par
+\noindent ninda2timesu2plusash $\mapsto$ {\cufont 𒉞}\par
+\noindent ninda2timesush $\mapsto$ {\cufont 𒉟}\par
+\noindent nisag $\mapsto$ {\cufont 𒉠}\par
+\noindent nu $\mapsto$ {\cufont 𒉡}\par
+\noindent nu11 $\mapsto$ {\cufont 𒉢}\par
+\noindent nun $\mapsto$ {\cufont 𒉣}\par
+\noindent nunlagartimesgar $\mapsto$ {\cufont 𒉤}\par
+\noindent nunlagartimesmash $\mapsto$ {\cufont 𒉥}\par
+\noindent nunlagartimessal $\mapsto$ {\cufont 𒉦}\par
+\noindent nunlagartimessalovernunlagartimessal $\mapsto$ {\cufont 𒉧}\par
+\noindent nunlagartimesush $\mapsto$ {\cufont 𒉨}\par
+\noindent nuntenu $\mapsto$ {\cufont 𒉩}\par
+\noindent nunovernun $\mapsto$ {\cufont 𒉪}\par
+\noindent nuncrossingnun $\mapsto$ {\cufont 𒉫}\par
+\noindent nuncrossingnunlagaroverlagar $\mapsto$ {\cufont 𒉬}\par
+\noindent nunuz $\mapsto$ {\cufont 𒉭}\par
+\noindent nunuzab2timesashgab $\mapsto$ {\cufont 𒉮}\par
+\noindent nunuzab2timesbi $\mapsto$ {\cufont 𒉯}\par
+\noindent nunuzab2timesdug $\mapsto$ {\cufont 𒉰}\par
+\noindent nunuzab2timesgud $\mapsto$ {\cufont 𒉱}\par
+\noindent nunuzab2timesigigunu $\mapsto$ {\cufont 𒉲}\par
+\noindent nunuzab2timeskad3 $\mapsto$ {\cufont 𒉳}\par
+\noindent nunuzab2timesla $\mapsto$ {\cufont 𒉴}\par
+\noindent nunuzab2timesne $\mapsto$ {\cufont 𒉵}\par
+\noindent nunuzab2timessila3 $\mapsto$ {\cufont 𒉶}\par
+\noindent nunuzab2timesu2 $\mapsto$ {\cufont 𒉷}\par
+\noindent nunuzkisim5timesbi $\mapsto$ {\cufont 𒉸}\par
+\noindent nunuzkisim5timesbiu $\mapsto$ {\cufont 𒉹}\par
+\noindent pa $\mapsto$ {\cufont 𒉺}\par
+\noindent pad $\mapsto$ {\cufont 𒉻}\par
+\noindent pan $\mapsto$ {\cufont 𒉼}\par
+\noindent pap $\mapsto$ {\cufont 𒉽}\par
+\noindent pesh2 $\mapsto$ {\cufont 𒉾}\par
+\noindent pi $\mapsto$ {\cufont 𒉿}\par
+\noindent pitimesa $\mapsto$ {\cufont 𒊀}\par
+\noindent pitimesab $\mapsto$ {\cufont 𒊁}\par
+\noindent pitimesbi $\mapsto$ {\cufont 𒊂}\par
+\noindent pitimesbu $\mapsto$ {\cufont 𒊃}\par
+\noindent pitimese $\mapsto$ {\cufont 𒊄}\par
+\noindent pitimesi $\mapsto$ {\cufont 𒊅}\par
+\noindent pitimesib $\mapsto$ {\cufont 𒊆}\par
+\noindent pitimesu $\mapsto$ {\cufont 𒊇}\par
+\noindent pitimesu2 $\mapsto$ {\cufont 𒊈}\par
+\noindent picrossingpi $\mapsto$ {\cufont 𒊉}\par
+\noindent pirig $\mapsto$ {\cufont 𒊊}\par
+\noindent pirigtimeskal $\mapsto$ {\cufont 𒊋}\par
+\noindent pirigtimesud $\mapsto$ {\cufont 𒊌}\par
+\noindent pirigtimesza $\mapsto$ {\cufont 𒊍}\par
+\noindent pirigopposingpirig $\mapsto$ {\cufont 𒊎}\par
+\noindent ra $\mapsto$ {\cufont 𒊏}\par
+\noindent rab $\mapsto$ {\cufont 𒊐}\par
+\noindent ri $\mapsto$ {\cufont 𒊑}\par
+\noindent ru $\mapsto$ {\cufont 𒊒}\par
+\noindent sa $\mapsto$ {\cufont 𒊓}\par
+\noindent sagnutillu $\mapsto$ {\cufont 𒊔}\par
+\noindent sag $\mapsto$ {\cufont 𒊕}\par
+\noindent sagtimesa $\mapsto$ {\cufont 𒊖}\par
+\noindent sagtimesdu $\mapsto$ {\cufont 𒊗}\par
+\noindent sagtimesdub $\mapsto$ {\cufont 𒊘}\par
+\noindent sagtimesha $\mapsto$ {\cufont 𒊙}\par
+\noindent sagtimeskak $\mapsto$ {\cufont 𒊚}\par
+\noindent sagtimeskur $\mapsto$ {\cufont 𒊛}\par
+\noindent sagtimeslum $\mapsto$ {\cufont 𒊜}\par
+\noindent sagtimesmi $\mapsto$ {\cufont 𒊝}\par
+\noindent sagtimesnun $\mapsto$ {\cufont 𒊞}\par
+\noindent sagtimessal $\mapsto$ {\cufont 𒊟}\par
+\noindent sagtimesshid $\mapsto$ {\cufont 𒊠}\par
+\noindent sagtimestab $\mapsto$ {\cufont 𒊡}\par
+\noindent sagtimesu2 $\mapsto$ {\cufont 𒊢}\par
+\noindent sagtimesub $\mapsto$ {\cufont 𒊣}\par
+\noindent sagtimesum $\mapsto$ {\cufont 𒊤}\par
+\noindent sagtimesur $\mapsto$ {\cufont 𒊥}\par
+\noindent sagtimesush $\mapsto$ {\cufont 𒊦}\par
+\noindent sagoversag $\mapsto$ {\cufont 𒊧}\par
+\noindent saggunu $\mapsto$ {\cufont 𒊨}\par
+\noindent sal $\mapsto$ {\cufont 𒊩}\par
+\noindent sallagabtimesash2 $\mapsto$ {\cufont 𒊪}\par
+\noindent sanga2 $\mapsto$ {\cufont 𒊫}\par
+\noindent sar $\mapsto$ {\cufont 𒊬}\par
+\noindent sha $\mapsto$ {\cufont 𒊭}\par
+\noindent sha3 $\mapsto$ {\cufont 𒊮}\par
+\noindent sha3timesa $\mapsto$ {\cufont 𒊯}\par
+\noindent sha3timesbad $\mapsto$ {\cufont 𒊰}\par
+\noindent sha3timesgish $\mapsto$ {\cufont 𒊱}\par
+\noindent sha3timesne $\mapsto$ {\cufont 𒊲}\par
+\noindent sha3timesshu2 $\mapsto$ {\cufont 𒊳}\par
+\noindent sha3timestur $\mapsto$ {\cufont 𒊴}\par
+\noindent sha3timesu $\mapsto$ {\cufont 𒊵}\par
+\noindent sha3timesuplusa $\mapsto$ {\cufont 𒊶}\par
+\noindent sha6 $\mapsto$ {\cufont 𒊷}\par
+\noindent shab6 $\mapsto$ {\cufont 𒊸}\par
+\noindent shar2 $\mapsto$ {\cufont 𒊹}\par
+\noindent she $\mapsto$ {\cufont 𒊺}\par
+\noindent shehu $\mapsto$ {\cufont 𒊻}\par
+\noindent sheovershegadovergadgarovergar $\mapsto$ {\cufont 𒊼}\par
+\noindent sheovershetabovertabgarovergar $\mapsto$ {\cufont 𒊽}\par
+\noindent sheg9 $\mapsto$ {\cufont 𒊾}\par
+\noindent shen $\mapsto$ {\cufont 𒊿}\par
+\noindent shesh $\mapsto$ {\cufont 𒋀}\par
+\noindent shesh2 $\mapsto$ {\cufont 𒋁}\par
+\noindent sheshlam $\mapsto$ {\cufont 𒋂}\par
+\noindent shid $\mapsto$ {\cufont 𒋃}\par
+\noindent shidtimesa $\mapsto$ {\cufont 𒋄}\par
+\noindent shidtimesim $\mapsto$ {\cufont 𒋅}\par
+\noindent shim $\mapsto$ {\cufont 𒋆}\par
+\noindent shimtimesa $\mapsto$ {\cufont 𒋇}\par
+\noindent shimtimesbal $\mapsto$ {\cufont 𒋈}\par
+\noindent shimtimesbulug $\mapsto$ {\cufont 𒋉}\par
+\noindent shimtimesdin $\mapsto$ {\cufont 𒋊}\par
+\noindent shimtimesgar $\mapsto$ {\cufont 𒋋}\par
+\noindent shimtimesigi $\mapsto$ {\cufont 𒋌}\par
+\noindent shimtimesigigunu $\mapsto$ {\cufont 𒋍}\par
+\noindent shimtimeskushu2 $\mapsto$ {\cufont 𒋎}\par
+\noindent shimtimeslul $\mapsto$ {\cufont 𒋏}\par
+\noindent shimtimesmug $\mapsto$ {\cufont 𒋐}\par
+\noindent shimtimessal $\mapsto$ {\cufont 𒋑}\par
+\noindent shinig $\mapsto$ {\cufont 𒋒}\par
+\noindent shir $\mapsto$ {\cufont 𒋓}\par
+\noindent shirtenu $\mapsto$ {\cufont 𒋔}\par
+\noindent shirovershirburoverbur $\mapsto$ {\cufont 𒋕}\par
+\noindent shita $\mapsto$ {\cufont 𒋖}\par
+\noindent shu $\mapsto$ {\cufont 𒋗}\par
+\noindent shuoverinvertedshu $\mapsto$ {\cufont 𒋘}\par
+\noindent shu2 $\mapsto$ {\cufont 𒋙}\par
+\noindent shubur $\mapsto$ {\cufont 𒋚}\par
+\noindent si $\mapsto$ {\cufont 𒋛}\par
+\noindent sigunu $\mapsto$ {\cufont 𒋜}\par
+\noindent sig $\mapsto$ {\cufont 𒋝}\par
+\noindent sig4 $\mapsto$ {\cufont 𒋞}\par
+\noindent sig4oversig4shu2 $\mapsto$ {\cufont 𒋟}\par
+\noindent sik2 $\mapsto$ {\cufont 𒋠}\par
+\noindent sila3 $\mapsto$ {\cufont 𒋡}\par
+\noindent su $\mapsto$ {\cufont 𒋢}\par
+\noindent suoversu $\mapsto$ {\cufont 𒋣}\par
+\noindent sud $\mapsto$ {\cufont 𒋤}\par
+\noindent sud2 $\mapsto$ {\cufont 𒋥}\par
+\noindent suhur $\mapsto$ {\cufont 𒋦}\par
+\noindent sum $\mapsto$ {\cufont 𒋧}\par
+\noindent sumash $\mapsto$ {\cufont 𒋨}\par
+\noindent sur $\mapsto$ {\cufont 𒋩}\par
+\noindent sur9 $\mapsto$ {\cufont 𒋪}\par
+\noindent ta $\mapsto$ {\cufont 𒋫}\par
+\noindent taasterisk $\mapsto$ {\cufont 𒋬}\par
+\noindent tatimeshi $\mapsto$ {\cufont 𒋭}\par
+\noindent tatimesmi $\mapsto$ {\cufont 𒋮}\par
+\noindent tagunu $\mapsto$ {\cufont 𒋯}\par
+\noindent tab $\mapsto$ {\cufont 𒋰}\par
+\noindent tabovertabniovernidishoverdish $\mapsto$ {\cufont 𒋱}\par
+\noindent tabsquared $\mapsto$ {\cufont 𒋲}\par
+\noindent tag $\mapsto$ {\cufont 𒋳}\par
+\noindent tagtimesbi $\mapsto$ {\cufont 𒋴}\par
+\noindent tagtimesgud $\mapsto$ {\cufont 𒋵}\par
+\noindent tagtimesshe $\mapsto$ {\cufont 𒋶}\par
+\noindent tagtimesshu $\mapsto$ {\cufont 𒋷}\par
+\noindent tagtimestug2 $\mapsto$ {\cufont 𒋸}\par
+\noindent tagtimesud $\mapsto$ {\cufont 𒋹}\par
+\noindent tak4 $\mapsto$ {\cufont 𒋺}\par
+\noindent tar $\mapsto$ {\cufont 𒋻}\par
+\noindent te $\mapsto$ {\cufont 𒋼}\par
+\noindent tegunu $\mapsto$ {\cufont 𒋽}\par
+\noindent ti $\mapsto$ {\cufont 𒋾}\par
+\noindent titenu $\mapsto$ {\cufont 𒋿}\par
+\noindent til $\mapsto$ {\cufont 𒌀}\par
+\noindent tir $\mapsto$ {\cufont 𒌁}\par
+\noindent tirtimestak4 $\mapsto$ {\cufont 𒌂}\par
+\noindent tirovertir $\mapsto$ {\cufont 𒌃}\par
+\noindent tirovertirgadovergadgarovergar $\mapsto$ {\cufont 𒌄}\par
+\noindent tu $\mapsto$ {\cufont 𒌅}\par
+\noindent tug2 $\mapsto$ {\cufont 𒌆}\par
+\noindent tuk $\mapsto$ {\cufont 𒌇}\par
+\noindent tum $\mapsto$ {\cufont 𒌈}\par
+\noindent tur $\mapsto$ {\cufont 𒌉}\par
+\noindent turoverturzaoverza $\mapsto$ {\cufont 𒌊}\par
+\noindent u $\mapsto$ {\cufont 𒌋}\par
+\noindent ugud $\mapsto$ {\cufont 𒌌}\par
+\noindent uuu $\mapsto$ {\cufont 𒌍}\par
+\noindent uoverupaoverpagarovergar $\mapsto$ {\cufont 𒌎}\par
+\noindent uoverusuroversur $\mapsto$ {\cufont 𒌏}\par
+\noindent uoveruureversedoverureversed $\mapsto$ {\cufont 𒌐}\par
+\noindent u2 $\mapsto$ {\cufont 𒌑}\par
+\noindent ub $\mapsto$ {\cufont 𒌒}\par
+\noindent ud $\mapsto$ {\cufont 𒌓}\par
+\noindent udkushu2 $\mapsto$ {\cufont 𒌔}\par
+\noindent udtimesbad $\mapsto$ {\cufont 𒌕}\par
+\noindent udtimesmi $\mapsto$ {\cufont 𒌖}\par
+\noindent udtimesuplusuplusu $\mapsto$ {\cufont 𒌗}\par
+\noindent udtimesuplusuplusugunu $\mapsto$ {\cufont 𒌘}\par
+\noindent udgunu $\mapsto$ {\cufont 𒌙}\par
+\noindent udsheshig $\mapsto$ {\cufont 𒌚}\par
+\noindent udsheshigtimesbad $\mapsto$ {\cufont 𒌛}\par
+\noindent udug $\mapsto$ {\cufont 𒌜}\par
+\noindent um $\mapsto$ {\cufont 𒌝}\par
+\noindent umtimeslagab $\mapsto$ {\cufont 𒌞}\par
+\noindent umtimesmeplusda $\mapsto$ {\cufont 𒌟}\par
+\noindent umtimessha3 $\mapsto$ {\cufont 𒌠}\par
+\noindent umtimesu $\mapsto$ {\cufont 𒌡}\par
+\noindent umbin $\mapsto$ {\cufont 𒌢}\par
+\noindent umum $\mapsto$ {\cufont 𒌣}\par
+\noindent umumtimeskaskal $\mapsto$ {\cufont 𒌤}\par
+\noindent umumtimespa $\mapsto$ {\cufont 𒌥}\par
+\noindent un $\mapsto$ {\cufont 𒌦}\par
+\noindent ungunu $\mapsto$ {\cufont 𒌧}\par
+\noindent ur $\mapsto$ {\cufont 𒌨}\par
+\noindent urcrossingur $\mapsto$ {\cufont 𒌩}\par
+\noindent ursheshig $\mapsto$ {\cufont 𒌪}\par
+\noindent ur2 $\mapsto$ {\cufont 𒌫}\par
+\noindent ur2timesaplusha $\mapsto$ {\cufont 𒌬}\par
+\noindent ur2timesaplusna $\mapsto$ {\cufont 𒌭}\par
+\noindent ur2timesal $\mapsto$ {\cufont 𒌮}\par
+\noindent ur2timesha $\mapsto$ {\cufont 𒌯}\par
+\noindent ur2timesnun $\mapsto$ {\cufont 𒌰}\par
+\noindent ur2timesu2 $\mapsto$ {\cufont 𒌱}\par
+\noindent ur2timesu2plusash $\mapsto$ {\cufont 𒌲}\par
+\noindent ur2timesu2plusbi $\mapsto$ {\cufont 𒌳}\par
+\noindent ur4 $\mapsto$ {\cufont 𒌴}\par
+\noindent uri $\mapsto$ {\cufont 𒌵}\par
+\noindent uri3 $\mapsto$ {\cufont 𒌶}\par
+\noindent uru $\mapsto$ {\cufont 𒌷}\par
+\noindent urutimesa $\mapsto$ {\cufont 𒌸}\par
+\noindent urutimesashgab $\mapsto$ {\cufont 𒌹}\par
+\noindent urutimesbar $\mapsto$ {\cufont 𒌺}\par
+\noindent urutimesdun $\mapsto$ {\cufont 𒌻}\par
+\noindent urutimesga $\mapsto$ {\cufont 𒌼}\par
+\noindent urutimesgal $\mapsto$ {\cufont 𒌽}\par
+\noindent urutimesgan2tenu $\mapsto$ {\cufont 𒌾}\par
+\noindent urutimesgar $\mapsto$ {\cufont 𒌿}\par
+\noindent urutimesgu $\mapsto$ {\cufont 𒍀}\par
+\noindent urutimesha $\mapsto$ {\cufont 𒍁}\par
+\noindent urutimesigi $\mapsto$ {\cufont 𒍂}\par
+\noindent urutimesim $\mapsto$ {\cufont 𒍃}\par
+\noindent urutimesish $\mapsto$ {\cufont 𒍄}\par
+\noindent urutimeski $\mapsto$ {\cufont 𒍅}\par
+\noindent urutimeslum $\mapsto$ {\cufont 𒍆}\par
+\noindent urutimesmin $\mapsto$ {\cufont 𒍇}\par
+\noindent urutimespa $\mapsto$ {\cufont 𒍈}\par
+\noindent urutimesshe $\mapsto$ {\cufont 𒍉}\par
+\noindent urutimessig4 $\mapsto$ {\cufont 𒍊}\par
+\noindent urutimestu $\mapsto$ {\cufont 𒍋}\par
+\noindent urutimesuplusgud $\mapsto$ {\cufont 𒍌}\par
+\noindent urutimesud $\mapsto$ {\cufont 𒍍}\par
+\noindent urutimesuruda $\mapsto$ {\cufont 𒍎}\par
+\noindent uruda $\mapsto$ {\cufont 𒍏}\par
+\noindent urudatimesu $\mapsto$ {\cufont 𒍐}\par
+\noindent ush $\mapsto$ {\cufont 𒍑}\par
+\noindent ushtimesa $\mapsto$ {\cufont 𒍒}\par
+\noindent ushtimesku $\mapsto$ {\cufont 𒍓}\par
+\noindent ushtimeskur $\mapsto$ {\cufont 𒍔}\par
+\noindent ushtimestak4 $\mapsto$ {\cufont 𒍕}\par
+\noindent ushx $\mapsto$ {\cufont 𒍖}\par
+\noindent ush2 $\mapsto$ {\cufont 𒍗}\par
+\noindent ushumx $\mapsto$ {\cufont 𒍘}\par
+\noindent utuki $\mapsto$ {\cufont 𒍙}\par
+\noindent uz3 $\mapsto$ {\cufont 𒍚}\par
+\noindent uz3timeskaskal $\mapsto$ {\cufont 𒍛}\par
+\noindent uzu $\mapsto$ {\cufont 𒍜}\par
+\noindent za $\mapsto$ {\cufont 𒍝}\par
+\noindent zatenu $\mapsto$ {\cufont 𒍞}\par
+\noindent zasquaredtimeskur $\mapsto$ {\cufont 𒍟}\par
+\noindent zag $\mapsto$ {\cufont 𒍠}\par
+\noindent zamx $\mapsto$ {\cufont 𒍡}\par
+\noindent ze2 $\mapsto$ {\cufont 𒍢}\par
+\noindent zi $\mapsto$ {\cufont 𒍣}\par
+\noindent zioverzi $\mapsto$ {\cufont 𒍤}\par
+\noindent zi3 $\mapsto$ {\cufont 𒍥}\par
+\noindent zib $\mapsto$ {\cufont 𒍦}\par
+\noindent zibkabatenu $\mapsto$ {\cufont 𒍧}\par
+\noindent zig $\mapsto$ {\cufont 𒍨}\par
+\noindent ziz2 $\mapsto$ {\cufont 𒍩}\par
+\noindent zu $\mapsto$ {\cufont 𒍪}\par
+\noindent zu5 $\mapsto$ {\cufont 𒍫}\par
+\noindent zu5timesa $\mapsto$ {\cufont 𒍬}\par
+\noindent zubur $\mapsto$ {\cufont 𒍭}\par
+\noindent zum $\mapsto$ {\cufont 𒍮}\par
+\noindent kapelamite $\mapsto$ {\cufont 𒍯}\par
+\noindent abtimesnun $\mapsto$ {\cufont 𒍰}\par
+\noindent ab2timesa $\mapsto$ {\cufont 𒍱}\par
+\noindent amartimeskug $\mapsto$ {\cufont 𒍲}\par
+\noindent dagkisim5timesu2plusmash $\mapsto$ {\cufont 𒍳}\par
+\noindent dag3 $\mapsto$ {\cufont 𒍴}\par
+\noindent dishplusshu $\mapsto$ {\cufont 𒍵}\par
+\noindent dubtimesshe $\mapsto$ {\cufont 𒍶}\par
+\noindent ezentimesgud $\mapsto$ {\cufont 𒍷}\par
+\noindent ezentimesshe $\mapsto$ {\cufont 𒍸}\par
+\noindent ga2timesanpluskakplusa $\mapsto$ {\cufont 𒍹}\par
+\noindent ga2timesash2 $\mapsto$ {\cufont 𒍺}\par
+\noindent ge22 $\mapsto$ {\cufont 𒍻}\par
+\noindent gig $\mapsto$ {\cufont 𒍼}\par
+\noindent hush $\mapsto$ {\cufont 𒍽}\par
+\noindent katimesanshe $\mapsto$ {\cufont 𒍾}\par
+\noindent katimesash3 $\mapsto$ {\cufont 𒍿}\par
+\noindent katimesgish $\mapsto$ {\cufont 𒎀}\par
+\noindent katimesgud $\mapsto$ {\cufont 𒎁}\par
+\noindent katimeshitimesash2 $\mapsto$ {\cufont 𒎂}\par
+\noindent katimeslum $\mapsto$ {\cufont 𒎃}\par
+\noindent katimespa $\mapsto$ {\cufont 𒎄}\par
+\noindent katimesshul $\mapsto$ {\cufont 𒎅}\par
+\noindent katimestu $\mapsto$ {\cufont 𒎆}\par
+\noindent katimesur2 $\mapsto$ {\cufont 𒎇}\par
+\noindent lagabtimesgi $\mapsto$ {\cufont 𒎈}\par
+\noindent lu2sheshigtimesbad $\mapsto$ {\cufont 𒎉}\par
+\noindent lu2timesesh2pluslal $\mapsto$ {\cufont 𒎊}\par
+\noindent lu2timesshu $\mapsto$ {\cufont 𒎋}\par
+\noindent mesh $\mapsto$ {\cufont 𒎌}\par
+\noindent mush3timesza $\mapsto$ {\cufont 𒎍}\par
+\noindent na4 $\mapsto$ {\cufont 𒎎}\par
+\noindent nin $\mapsto$ {\cufont 𒎏}\par
+\noindent nin9 $\mapsto$ {\cufont 𒎐}\par
+\noindent ninda2timesbal $\mapsto$ {\cufont 𒎑}\par
+\noindent ninda2timesgi $\mapsto$ {\cufont 𒎒}\par
+\noindent nu11rotatedninetydegrees $\mapsto$ {\cufont 𒎓}\par
+\noindent pesh2asterisk $\mapsto$ {\cufont 𒎔}\par
+\noindent pir2 $\mapsto$ {\cufont 𒎕}\par
+\noindent sagtimesigigunu $\mapsto$ {\cufont 𒎖}\par
+\noindent ti2 $\mapsto$ {\cufont 𒎗}\par
+\noindent umtimesme $\mapsto$ {\cufont 𒎘}\par
+\noindent uu $\mapsto$ {\cufont 𒎙}\par
+}
+%%%%-----   List of Typing shortcuts
+%%%\newcommand\brshowplainlistts{%
+%%%%\subsection{List of Typing shortcuts}\label{sec:listbrts}
+%%%\noindent cb $\mapsto$ {\brfont 𑀀}\par
+%%%\noindent as $\mapsto$ {\brfont 𑀁}\par
+%%%\noindent vis $\mapsto$ {\brfont 𑀂}\par
+%%%\noindent jm $\mapsto$ {\brfont 𑀃}\par
+%%%\noindent upd $\mapsto$ {\brfont 𑀄}\par
+%%%\noindent la $\mapsto$ {\brfont 𑀅}\par
+%%%\noindent laa $\mapsto$ {\brfont 𑀆}\par
+%%%\noindent li $\mapsto$ {\brfont 𑀇}\par
+%%%\noindent lii $\mapsto$ {\brfont 𑀈}\par
+%%%\noindent lu $\mapsto$ {\brfont 𑀉}\par
+%%%\noindent luu $\mapsto$ {\brfont 𑀊}\par
+%%%\noindent lvr $\mapsto$ {\brfont 𑀋}\par
+%%%\noindent lvrr $\mapsto$ {\brfont 𑀌}\par
+%%%\noindent lvl $\mapsto$ {\brfont 𑀍}\par
+%%%\noindent lvll $\mapsto$ {\brfont 𑀎}\par
+%%%\noindent le $\mapsto$ {\brfont 𑀏}\par
+%%%\noindent lai $\mapsto$ {\brfont 𑀐}\par
+%%%\noindent lo $\mapsto$ {\brfont 𑀑}\par
+%%%\noindent lau $\mapsto$ {\brfont 𑀒}\par
+%%%\noindent k $\mapsto$ {\brfont 𑀓}\par
+%%%\noindent kh $\mapsto$ {\brfont 𑀔}\par
+%%%\noindent g $\mapsto$ {\brfont 𑀕}\par
+%%%\noindent gh $\mapsto$ {\brfont 𑀖}\par
+%%%\noindent ng $\mapsto$ {\brfont 𑀗}\par
+%%%\noindent c $\mapsto$ {\brfont 𑀘}\par
+%%%\noindent ch $\mapsto$ {\brfont 𑀙}\par
+%%%\noindent j $\mapsto$ {\brfont 𑀚}\par
+%%%\noindent jh $\mapsto$ {\brfont 𑀛}\par
+%%%\noindent ny $\mapsto$ {\brfont 𑀜}\par
+%%%\noindent tt $\mapsto$ {\brfont 𑀝}\par
+%%%\noindent tth $\mapsto$ {\brfont 𑀞}\par
+%%%\noindent dd $\mapsto$ {\brfont 𑀟}\par
+%%%\noindent ddh $\mapsto$ {\brfont 𑀠}\par
+%%%\noindent nn $\mapsto$ {\brfont 𑀡}\par
+%%%\noindent t $\mapsto$ {\brfont 𑀢}\par
+%%%\noindent th $\mapsto$ {\brfont 𑀣}\par
+%%%\noindent d $\mapsto$ {\brfont 𑀤}\par
+%%%\noindent dh $\mapsto$ {\brfont 𑀥}\par
+%%%\noindent n $\mapsto$ {\brfont 𑀦}\par
+%%%\noindent p $\mapsto$ {\brfont 𑀧}\par
+%%%\noindent ph $\mapsto$ {\brfont 𑀨}\par
+%%%\noindent b $\mapsto$ {\brfont 𑀩}\par
+%%%\noindent bh $\mapsto$ {\brfont 𑀪}\par
+%%%\noindent m $\mapsto$ {\brfont 𑀫}\par
+%%%\noindent y $\mapsto$ {\brfont 𑀬}\par
+%%%\noindent r $\mapsto$ {\brfont 𑀭}\par
+%%%\noindent l $\mapsto$ {\brfont 𑀮}\par
+%%%\noindent v $\mapsto$ {\brfont 𑀯}\par
+%%%\noindent sh $\mapsto$ {\brfont 𑀰}\par
+%%%\noindent ss $\mapsto$ {\brfont 𑀱}\par
+%%%\noindent s $\mapsto$ {\brfont 𑀲}\par
+%%%\noindent h $\mapsto$ {\brfont 𑀳}\par
+%%%\noindent ll $\mapsto$ {\brfont 𑀴}\par
+%%%\noindent otlll $\mapsto$ {\brfont 𑀵}\par
+%%%\noindent otrr $\mapsto$ {\brfont 𑀶}\par
+%%%\noindent otnnn $\mapsto$ {\brfont 𑀷}\par
+%%%\noindent aa $\mapsto$ {\brfont 𑀸}\par
+%%%\noindent bhaa $\mapsto$ {\brfont 𑀹}\par
+%%%\noindent i $\mapsto$ {\brfont 𑀺}\par
+%%%\noindent ii $\mapsto$ {\brfont 𑀻}\par
+%%%\noindent u $\mapsto$ {\brfont 𑀼}\par
+%%%\noindent uu $\mapsto$ {\brfont 𑀽}\par
+%%%\noindent vr $\mapsto$ {\brfont 𑀾}\par
+%%%\noindent vrr $\mapsto$ {\brfont 𑀿}\par
+%%%\noindent vl $\mapsto$ {\brfont 𑁀}\par
+%%%\noindent vll $\mapsto$ {\brfont 𑁁}\par
+%%%\noindent e $\mapsto$ {\brfont 𑁂}\par
+%%%\noindent ai $\mapsto$ {\brfont 𑁃}\par
+%%%\noindent o $\mapsto$ {\brfont 𑁄}\par
+%%%\noindent au $\mapsto$ {\brfont 𑁅}\par
+%%%\noindent vir $\mapsto$ {\brfont 𑁆}\par
+%%%\noindent dan $\mapsto$ {\brfont 𑁇}\par
+%%%\noindent ddam $\mapsto$ {\brfont 𑁈}\par
+%%%\noindent dot $\mapsto$ {\brfont 𑁉}\par
+%%%\noindent ddot $\mapsto$ {\brfont 𑁊}\par
+%%%\noindent line $\mapsto$ {\brfont 𑁋}\par
+%%%\noindent crbar $\mapsto$ {\brfont 𑁌}\par
+%%%\noindent lotus $\mapsto$ {\brfont 𑁍}\par
+%%%\noindent 1 $\mapsto$ {\brfont 𑁒}\par
+%%%\noindent 2 $\mapsto$ {\brfont 𑁓}\par
+%%%\noindent 3 $\mapsto$ {\brfont 𑁔}\par
+%%%\noindent 4 $\mapsto$ {\brfont 𑁕}\par
+%%%\noindent 5 $\mapsto$ {\brfont 𑁖}\par
+%%%\noindent 6 $\mapsto$ {\brfont 𑁗}\par
+%%%\noindent 7 $\mapsto$ {\brfont 𑁘}\par
+%%%\noindent 8 $\mapsto$ {\brfont 𑁙}\par
+%%%\noindent 9 $\mapsto$ {\brfont 𑁚}\par
+%%%\noindent 10 $\mapsto$ {\brfont 𑁛}\par
+%%%\noindent 20 $\mapsto$ {\brfont 𑁜}\par
+%%%\noindent 30 $\mapsto$ {\brfont 𑁝}\par
+%%%\noindent 40 $\mapsto$ {\brfont 𑁞}\par
+%%%\noindent 50 $\mapsto$ {\brfont 𑁟}\par
+%%%\noindent 60 $\mapsto$ {\brfont 𑁠}\par
+%%%\noindent 70 $\mapsto$ {\brfont 𑁡}\par
+%%%\noindent 80 $\mapsto$ {\brfont 𑁢}\par
+%%%\noindent 90 $\mapsto$ {\brfont 𑁣}\par
+%%%\noindent 100 $\mapsto$ {\brfont 𑁤}\par
+%%%\noindent 1000 $\mapsto$ {\brfont 𑁥}\par
+%%%\noindent d0 $\mapsto$ {\brfont 𑁦}\par
+%%%\noindent d1 $\mapsto$ {\brfont 𑁧}\par
+%%%\noindent d2 $\mapsto$ {\brfont 𑁨}\par
+%%%\noindent d3 $\mapsto$ {\brfont 𑁩}\par
+%%%\noindent d4 $\mapsto$ {\brfont 𑁪}\par
+%%%\noindent d5 $\mapsto$ {\brfont 𑁫}\par
+%%%\noindent d6 $\mapsto$ {\brfont 𑁬}\par
+%%%\noindent d7 $\mapsto$ {\brfont 𑁭}\par
+%%%\noindent d8 $\mapsto$ {\brfont 𑁮}\par
+%%%\noindent d9 $\mapsto$ {\brfont 𑁯}\par
+%%%\noindent joiner $\mapsto$ {\brfont 𑁿}\par
+%%%}
+%%%

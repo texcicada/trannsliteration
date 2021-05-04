@@ -11,6 +11,8 @@
 \usepackage{longtable}
 %%\usepackage{bidi}% needs xelatex
 \usepackage[bidi=basic]{babel}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
 
 
 %\usepackage{xparse}
@@ -32,7 +34,8 @@
 \newfontfamily\ahfont{Noto Sans Anatolian Hieroglyphs}[Scale=1.5]%plain font
 \newfontfamily\avfont{Noto Sans Avestan}[Scale=1.5]%plain font
 \newfontfamily\brfont{Noto Sans Brahmi}[Scale=1.5]%plain font
-
+\newfontfamily\cafont{Noto Sans Carian}[Scale=1.5]%plain font
+\newfontfamily\cufont{Noto Sans Cuneiform}[Scale=1.5]%plain font
 %\input{ugtrans_input.tex}% Ugaritic
 \input{optrans_input.tex}% Old Persian
 
@@ -53,7 +56,7 @@
 \newcommand\tablec{%
 \\\end{tabular}%
 }
-
+\newcommand\eolist{{\tiny [End of List]}\par}
 
 
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -765,8 +768,8 @@
 \input{anatohiero_input.tex}% Anatolian Hieroglyphs
 \input{avestan_input.tex}% Avestan
 \input{brahmi_input.tex}% Brahmi
-
-
+\input{carian_input.tex}% Carian
+\input{cuneiform_input.tex}
 
 
 
@@ -1613,6 +1616,14 @@ ml\tlcorner kk\trcorner
 
 \ahun{a121a127a128a149a190a207aa237a429}
 
+%\begin{multicols}{4}\noindent
+%
+%\end{multicols}
+\subsection{List of Glyphs}
+\begin{multicols}{4}\noindent
+\ahshowplainlist
+\eolist
+\end{multicols}
 
 
 %--------------------
@@ -1650,8 +1661,10 @@ The word \avwr{aap} means `water', and \avglossr{madu}{honey} is `mead'.
 
 With the \cs{avestan} environment 
 %(which calls in \codegeneral{bidi} package), 
-(which uses \codegeneral{babel}'s \codedetok{{otherlanguage} {hebrew}} environment)
-words are set RTL in RTL paragraphs, and the letter sequence in the words is RTL-reversed with \cs{\avts} internally:
+%(which uses \codegeneral{babel}'s \codedetok{{otherlanguage} {hebrew}} environment)
+(which uses \codegeneral{luatex}'s \codedetok{\pardir} and \codedetok{\textdir} directives),
+words are set RTL in RTL paragraphs, and the letter sequence in 
+the words is also reversed:%RTL-reversed with \cs{\avts} internally:
 
 
 
@@ -1667,13 +1680,14 @@ aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu
 
 
 
-
 \bigskip
 \begin{tcblisting}{title={{\sffamily Avestan environment: \bfseries\textcolor{blue!10}{avestan}}},colback=red!5!white,colframe=red!75!black,listing side text,code={\marginpar{\p}}}
 \begin{avestan}
-aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu.
+123 456 789 THE CAT SAT ON THE MAT.
 
-aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu.
+aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu.
+
+aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu.
 \end{avestan}
 \end{tcblisting}
 %%%
@@ -1685,13 +1699,41 @@ aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu
 
 %http://www.avesta.org/kanga/kanga_gathas.pdf
 
-\dolistavtransuc
+\subsection{List of Unicode codepoints}
+For command \codedetok{\avtransuc{}}.
+\begin{multicols}{4}\noindent
+\avtag
+\avshowplainlistuc
+\eolist
+\end{multicols}
+%\dolistavtransuc
 
-\dolistavtransun
+\subsection{List of Unicode names}
+For command \codedetok{\avtransun{}}.
+\begin{multicols}{4}\noindent
+\avtag
+\avshowplainlistun
+\eolist
+\end{multicols}
+%\dolistavtransun
 
-\dolistavtransts
+\subsection{List of Typing Shortcuts}
+For command \codedetok{\avtransts{}}.
+\begin{multicols}{4}\noindent
+\avtag
+\avshowplainlistts
+\eolist
+\end{multicols}
+%\dolistavtransts
 
-\dolistavtranstsst
+\subsection{List of Standard Transliteration}
+For command \codedetok{\avtransst{}}.
+\begin{multicols}{4}\noindent
+\avtag
+\avshowplainlistst
+\eolist
+\end{multicols}
+%\dolistavtranstsst
 
 \subsection{Reference table}
 
@@ -1774,6 +1816,180 @@ aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu aap madu
 \brun{kagaja kaikae kau} 
 
 \brun{sa}+\brun{ta}+\brun{e} = \brun{saviramatae}
+
+
+\subsection{List of Unicode codepoints}
+For command \codedetok{\brtransuc{}}.
+\begin{multicols}{4}\noindent
+\brtag
+\brshowplainlistuc
+\eolist
+\end{multicols}
+%\dolistavtransuc
+
+\subsection{List of Unicode names}
+For command \codedetok{\brtransun{}}.
+\begin{multicols}{4}\noindent
+\brtag
+\brshowplainlistun
+\eolist
+\end{multicols}
+%\dolistavtransun
+
+\subsection{List of Typing Shortcuts}
+For command \codedetok{\brtransts{}}.
+\begin{multicols}{4}\noindent
+\brtag
+\brshowplainlistts
+\eolist
+\end{multicols}
+%\dolistavtransts
+%
+%\subsection{List of Standard Transliteration}
+%For command \codedetok{\brtransst{}}.
+%\begin{multicols}{4}\noindent
+%\brtag
+%\brshowplainlistst
+%\eolist
+%\end{multicols}
+%%\dolistavtranstsst
+
+
+
+
+
+
+%--------------------
+\section{Carian}
+
+
+\subsection{List of Unicode codepoints}
+For command \codedetok{\catransuc{}}.
+\begin{multicols}{4}\noindent
+\catag
+\cashowplainlistuc
+\eolist
+\end{multicols}
+%\dolistavtransuc
+
+\subsection{List of Unicode names}
+For command \codedetok{\catransun{}}.
+\begin{multicols}{4}\noindent
+\catag
+\cashowplainlistun
+\eolist
+\end{multicols}
+%\dolistavtransun
+
+%\subsection{List of Typing Shortcuts}
+%For command \codedetok{\catransts{}}.
+%\begin{multicols}{4}\noindent
+%\catag
+%\cashowplainlistts
+%\eolist
+%\end{multicols}
+%%\dolistavtransts
+%
+%\subsection{List of Standard Transliteration}
+%For command \codedetok{\catransst{}}.
+%\begin{multicols}{4}\noindent
+%\catag
+%\cashowplainlistst
+%\eolist
+%\end{multicols}
+%%\dolistavtranstsst
+
+
+
+
+%--------------------
+\section{Cuneiform}
+
+\subsection{List of Unicode codepoints}
+For command \codedetok{\cutransuc{}}.
+\begin{multicols}{4}\noindent
+\cutag
+\cushowplainlistuc
+\eolist
+\end{multicols}
+%\dolistavtransuc
+
+\subsection{List of Unicode names}
+For command \codedetok{\cutransun{}}.
+\begin{multicols}{2}\noindent
+\cutag
+\cushowplainlistun
+\eolist
+\end{multicols}
+%\dolistavtransun
+
+%\subsection{List of Typing Shortcuts}
+%For command \codedetok{\cutransts{}}.
+%\begin{multicols}{4}\noindent
+%\cutag
+%\cushowplainlistts
+%\eolist
+%\end{multicols}
+%%\dolistavtransts
+%
+%\subsection{List of Standard Transliteration}
+%For command \codedetok{\cutransst{}}.
+%\begin{multicols}{4}\noindent
+%\cutag
+%\cushowplainlistst
+%\eolist
+%\end{multicols}
+%%\dolistavtranstsst
+
+
+
+
+
+%--------------------
+\section{Cypriot Syllabary}
+
+%--------------------
+\section{Early Dynasitc Cuneiform}
+
+%--------------------
+\section{Egyptian Hieroglyphs}
+
+%--------------------
+\section{Elymaic}
+
+%--------------------
+\section{Glagolitic}
+
+%--------------------
+\section{Gothic}
+
+%--------------------
+\section{Hatran}
+
+%--------------------
+\section{Imperial Aramaic}
+
+%--------------------
+\section{Inscriptional Pahlavi}
+
+%--------------------
+\section{Inscriptional Parthian}
+
+%Khatoshthi
+
+%--------------------
+\section{Linear A}
+
+%--------------------
+\section{Linear B}
+
+%--------------------
+\section{Lycian}
+
+%--------------------
+\section{Lydian}
+
+
 
 
 

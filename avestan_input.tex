@@ -1,4 +1,4 @@
-
+\newcommand\avtag{{\tiny [Avestan]\par}}
 
 \ExplSyntaxOn
 
@@ -639,14 +639,16 @@
 %\RequirePackage{bidi}
 \NewDocumentEnvironment{avestan}{ +b } 
 {
-	\begin{otherlanguage}{hebrew}%babel
+	\begingroup
+%%	\begin{otherlanguage}{hebrew}%babel
 % \begin{RTL} %bidi command
+	\pardir TRT \textdir TRT% kuatex
   \tl_set:Nn \l_myts_tl { #1 }
 	\doavtransts
   \tl_use:N \l_myts_tl 
-
+	\endgroup
 % \end{RTL}%bidi command
-	\end{otherlanguage}
+%%	\end{otherlanguage}%babel
 }
 { }
 
@@ -659,272 +661,271 @@
 
 % Lists ====================================
 
-%-----   List of Unicode codepoints
-\newcommand\dolistavtransuc{%
-\subsection{List of Unicode codepoints}\label{sec:listavuc}
-\noindent\cdr{\avtransuc{U+10B00}}\par
-\noindent\cdr{\avtransuc{U+10B01}}\par
-\noindent\cdr{\avtransuc{U+10B02}}\par
-\noindent\cdr{\avtransuc{U+10B03}}\par
-\noindent\cdr{\avtransuc{U+10B04}}\par
-\noindent\cdr{\avtransuc{U+10B05}}\par
-\noindent\cdr{\avtransuc{U+10B06}}\par
-\noindent\cdr{\avtransuc{U+10B07}}\par
-\noindent\cdr{\avtransuc{U+10B08}}\par
-\noindent\cdr{\avtransuc{U+10B09}}\par
-\noindent\cdr{\avtransuc{U+10B0A}}\par
-\noindent\cdr{\avtransuc{U+10B0B}}\par
-\noindent\cdr{\avtransuc{U+10B0C}}\par
-\noindent\cdr{\avtransuc{U+10B0D}}\par
-\noindent\cdr{\avtransuc{U+10B0E}}\par
-\noindent\cdr{\avtransuc{U+10B0F}}\par
-\noindent\cdr{\avtransuc{U+10B10}}\par
-\noindent\cdr{\avtransuc{U+10B11}}\par
-\noindent\cdr{\avtransuc{U+10B12}}\par
-\noindent\cdr{\avtransuc{U+10B13}}\par
-\noindent\cdr{\avtransuc{U+10B14}}\par
-\noindent\cdr{\avtransuc{U+10B15}}\par
-\noindent\cdr{\avtransuc{U+10B16}}\par
-\noindent\cdr{\avtransuc{U+10B17}}\par
-\noindent\cdr{\avtransuc{U+10B18}}\par
-\noindent\cdr{\avtransuc{U+10B19}}\par
-\noindent\cdr{\avtransuc{U+10B1A}}\par
-\noindent\cdr{\avtransuc{U+10B1B}}\par
-\noindent\cdr{\avtransuc{U+10B1C}}\par
-\noindent\cdr{\avtransuc{U+10B1D}}\par
-\noindent\cdr{\avtransuc{U+10B1E}}\par
-\noindent\cdr{\avtransuc{U+10B1F}}\par
-\noindent\cdr{\avtransuc{U+10B20}}\par
-\noindent\cdr{\avtransuc{U+10B21}}\par
-\noindent\cdr{\avtransuc{U+10B22}}\par
-\noindent\cdr{\avtransuc{U+10B23}}\par
-\noindent\cdr{\avtransuc{U+10B24}}\par
-\noindent\cdr{\avtransuc{U+10B25}}\par
-\noindent\cdr{\avtransuc{U+10B26}}\par
-\noindent\cdr{\avtransuc{U+10B27}}\par
-\noindent\cdr{\avtransuc{U+10B28}}\par
-\noindent\cdr{\avtransuc{U+10B29}}\par
-\noindent\cdr{\avtransuc{U+10B2A}}\par
-\noindent\cdr{\avtransuc{U+10B2B}}\par
-\noindent\cdr{\avtransuc{U+10B2C}}\par
-\noindent\cdr{\avtransuc{U+10B2D}}\par
-\noindent\cdr{\avtransuc{U+10B2E}}\par
-\noindent\cdr{\avtransuc{U+10B2F}}\par
-\noindent\cdr{\avtransuc{U+10B30}}\par
-\noindent\cdr{\avtransuc{U+10B31}}\par
-\noindent\cdr{\avtransuc{U+10B32}}\par
-\noindent\cdr{\avtransuc{U+10B33}}\par
-\noindent\cdr{\avtransuc{U+10B34}}\par
-\noindent\cdr{\avtransuc{U+10B35}}\par
-\noindent\cdr{\avtransuc{U+10B39}}\par
-\noindent\cdr{\avtransuc{U+10B3A}}\par
-\noindent\cdr{\avtransuc{U+10B3B}}\par
-\noindent\cdr{\avtransuc{U+10B3C}}\par
-\noindent\cdr{\avtransuc{U+10B3D}}\par
-\noindent\cdr{\avtransuc{U+10B3E}}\par
-\noindent\cdr{\avtransuc{U+10B3F}}\par
+\newcommand\avshowplainlistuc{%
+%\subsection{List of Unicode codepoints}\label{sec:listavuc}
+\noindent U+10B00 $\mapsto$ {\avfont 𐬀}\par
+\noindent U+10B01 $\mapsto$ {\avfont 𐬁}\par
+\noindent U+10B02 $\mapsto$ {\avfont 𐬂}\par
+\noindent U+10B03 $\mapsto$ {\avfont 𐬃}\par
+\noindent U+10B04 $\mapsto$ {\avfont 𐬄}\par
+\noindent U+10B05 $\mapsto$ {\avfont 𐬅}\par
+\noindent U+10B06 $\mapsto$ {\avfont 𐬆}\par
+\noindent U+10B07 $\mapsto$ {\avfont 𐬇}\par
+\noindent U+10B08 $\mapsto$ {\avfont 𐬈}\par
+\noindent U+10B09 $\mapsto$ {\avfont 𐬉}\par
+\noindent U+10B0A $\mapsto$ {\avfont 𐬊}\par
+\noindent U+10B0B $\mapsto$ {\avfont 𐬋}\par
+\noindent U+10B0C $\mapsto$ {\avfont 𐬌}\par
+\noindent U+10B0D $\mapsto$ {\avfont 𐬍}\par
+\noindent U+10B0E $\mapsto$ {\avfont 𐬎}\par
+\noindent U+10B0F $\mapsto$ {\avfont 𐬏}\par
+\noindent U+10B10 $\mapsto$ {\avfont 𐬐}\par
+\noindent U+10B11 $\mapsto$ {\avfont 𐬑}\par
+\noindent U+10B12 $\mapsto$ {\avfont 𐬒}\par
+\noindent U+10B13 $\mapsto$ {\avfont 𐬓}\par
+\noindent U+10B14 $\mapsto$ {\avfont 𐬔}\par
+\noindent U+10B15 $\mapsto$ {\avfont 𐬕}\par
+\noindent U+10B16 $\mapsto$ {\avfont 𐬖}\par
+\noindent U+10B17 $\mapsto$ {\avfont 𐬗}\par
+\noindent U+10B18 $\mapsto$ {\avfont 𐬘}\par
+\noindent U+10B19 $\mapsto$ {\avfont 𐬙}\par
+\noindent U+10B1A $\mapsto$ {\avfont 𐬚}\par
+\noindent U+10B1B $\mapsto$ {\avfont 𐬛}\par
+\noindent U+10B1C $\mapsto$ {\avfont 𐬜}\par
+\noindent U+10B1D $\mapsto$ {\avfont 𐬝}\par
+\noindent U+10B1E $\mapsto$ {\avfont 𐬞}\par
+\noindent U+10B1F $\mapsto$ {\avfont 𐬟}\par
+\noindent U+10B20 $\mapsto$ {\avfont 𐬠}\par
+\noindent U+10B21 $\mapsto$ {\avfont 𐬡}\par
+\noindent U+10B22 $\mapsto$ {\avfont 𐬢}\par
+\noindent U+10B23 $\mapsto$ {\avfont 𐬣}\par
+\noindent U+10B24 $\mapsto$ {\avfont 𐬤}\par
+\noindent U+10B25 $\mapsto$ {\avfont 𐬥}\par
+\noindent U+10B26 $\mapsto$ {\avfont 𐬦}\par
+\noindent U+10B27 $\mapsto$ {\avfont 𐬧}\par
+\noindent U+10B28 $\mapsto$ {\avfont 𐬨}\par
+\noindent U+10B29 $\mapsto$ {\avfont 𐬩}\par
+\noindent U+10B2A $\mapsto$ {\avfont 𐬪}\par
+\noindent U+10B2B $\mapsto$ {\avfont 𐬫}\par
+\noindent U+10B2C $\mapsto$ {\avfont 𐬬}\par
+\noindent U+10B2D $\mapsto$ {\avfont 𐬭}\par
+\noindent U+10B2E $\mapsto$ {\avfont 𐬮}\par
+\noindent U+10B2F $\mapsto$ {\avfont 𐬯}\par
+\noindent U+10B30 $\mapsto$ {\avfont 𐬰}\par
+\noindent U+10B31 $\mapsto$ {\avfont 𐬱}\par
+\noindent U+10B32 $\mapsto$ {\avfont 𐬲}\par
+\noindent U+10B33 $\mapsto$ {\avfont 𐬳}\par
+\noindent U+10B34 $\mapsto$ {\avfont 𐬴}\par
+\noindent U+10B35 $\mapsto$ {\avfont 𐬵}\par
+\noindent U+10B39 $\mapsto$ {\avfont 𐬹}\par
+\noindent U+10B3A $\mapsto$ {\avfont 𐬺}\par
+\noindent U+10B3B $\mapsto$ {\avfont 𐬻}\par
+\noindent U+10B3C $\mapsto$ {\avfont 𐬼}\par
+\noindent U+10B3D $\mapsto$ {\avfont 𐬽}\par
+\noindent U+10B3E $\mapsto$ {\avfont 𐬾}\par
+\noindent U+10B3F $\mapsto$ {\avfont 𐬿}\par
 }
 
 
 
 %-----   List of Unicode names
-\newcommand\dolistavtransun{%
-\subsection{List of Unicode names}\label{sec:listavun}
-\noindent\cdr{\avtransun{a}}\par
-\noindent\cdr{\avtransun{aa}}\par
-\noindent\cdr{\avtransun{ao}}\par
-\noindent\cdr{\avtransun{aao}}\par
-\noindent\cdr{\avtransun{an}}\par
-\noindent\cdr{\avtransun{aan}}\par
-\noindent\cdr{\avtransun{ae}}\par
-\noindent\cdr{\avtransun{aee}}\par
-\noindent\cdr{\avtransun{e}}\par
-\noindent\cdr{\avtransun{ee}}\par
-\noindent\cdr{\avtransun{o}}\par
-\noindent\cdr{\avtransun{oo}}\par
-\noindent\cdr{\avtransun{i}}\par
-\noindent\cdr{\avtransun{ii}}\par
-\noindent\cdr{\avtransun{u}}\par
-\noindent\cdr{\avtransun{uu}}\par
-\noindent\cdr{\avtransun{ke}}\par
-\noindent\cdr{\avtransun{xe}}\par
-\noindent\cdr{\avtransun{xye}}\par
-\noindent\cdr{\avtransun{xve}}\par
-\noindent\cdr{\avtransun{ge}}\par
-\noindent\cdr{\avtransun{gge}}\par
-\noindent\cdr{\avtransun{ghe}}\par
-\noindent\cdr{\avtransun{ce}}\par
-\noindent\cdr{\avtransun{je}}\par
-\noindent\cdr{\avtransun{te}}\par
-\noindent\cdr{\avtransun{the}}\par
-\noindent\cdr{\avtransun{de}}\par
-\noindent\cdr{\avtransun{dhe}}\par
-\noindent\cdr{\avtransun{tte}}\par
-\noindent\cdr{\avtransun{pe}}\par
-\noindent\cdr{\avtransun{fe}}\par
-\noindent\cdr{\avtransun{be}}\par
-\noindent\cdr{\avtransun{bhe}}\par
-\noindent\cdr{\avtransun{nge}}\par
-\noindent\cdr{\avtransun{ngye}}\par
-\noindent\cdr{\avtransun{ngve}}\par
-\noindent\cdr{\avtransun{ne}}\par
-\noindent\cdr{\avtransun{nye}}\par
-\noindent\cdr{\avtransun{nne}}\par
-\noindent\cdr{\avtransun{me}}\par
-\noindent\cdr{\avtransun{hme}}\par
-\noindent\cdr{\avtransun{yye}}\par
-\noindent\cdr{\avtransun{ye}}\par
-\noindent\cdr{\avtransun{ve}}\par
-\noindent\cdr{\avtransun{re}}\par
-\noindent\cdr{\avtransun{le}}\par
-\noindent\cdr{\avtransun{se}}\par
-\noindent\cdr{\avtransun{ze}}\par
-\noindent\cdr{\avtransun{she}}\par
-\noindent\cdr{\avtransun{zhe}}\par
-\noindent\cdr{\avtransun{shye}}\par
-\noindent\cdr{\avtransun{sshe}}\par
-\noindent\cdr{\avtransun{he}}\par
-\noindent\cdr{\avtransun{abbreviationmark}}\par
-\noindent\cdr{\avtransun{p1}}\par
-\noindent\cdr{\avtransun{p2}}\par
-\noindent\cdr{\avtransun{p3}}\par
-\noindent\cdr{\avtransun{p4}}\par
-\noindent\cdr{\avtransun{p5}}\par
-\noindent\cdr{\avtransun{p6}}\par
+\newcommand\avshowplainlistun{%
+%\subsection{List of Unicode names}\label{sec:listavun}
+\noindent a $\mapsto$ {\avfont 𐬀}\par
+\noindent aa $\mapsto$ {\avfont 𐬁}\par
+\noindent ao $\mapsto$ {\avfont 𐬂}\par
+\noindent aao $\mapsto$ {\avfont 𐬃}\par
+\noindent an $\mapsto$ {\avfont 𐬄}\par
+\noindent aan $\mapsto$ {\avfont 𐬅}\par
+\noindent ae $\mapsto$ {\avfont 𐬆}\par
+\noindent aee $\mapsto$ {\avfont 𐬇}\par
+\noindent e $\mapsto$ {\avfont 𐬈}\par
+\noindent ee $\mapsto$ {\avfont 𐬉}\par
+\noindent o $\mapsto$ {\avfont 𐬊}\par
+\noindent oo $\mapsto$ {\avfont 𐬋}\par
+\noindent i $\mapsto$ {\avfont 𐬌}\par
+\noindent ii $\mapsto$ {\avfont 𐬍}\par
+\noindent u $\mapsto$ {\avfont 𐬎}\par
+\noindent uu $\mapsto$ {\avfont 𐬏}\par
+\noindent ke $\mapsto$ {\avfont 𐬐}\par
+\noindent xe $\mapsto$ {\avfont 𐬑}\par
+\noindent xye $\mapsto$ {\avfont 𐬒}\par
+\noindent xve $\mapsto$ {\avfont 𐬓}\par
+\noindent ge $\mapsto$ {\avfont 𐬔}\par
+\noindent gge $\mapsto$ {\avfont 𐬕}\par
+\noindent ghe $\mapsto$ {\avfont 𐬖}\par
+\noindent ce $\mapsto$ {\avfont 𐬗}\par
+\noindent je $\mapsto$ {\avfont 𐬘}\par
+\noindent te $\mapsto$ {\avfont 𐬙}\par
+\noindent the $\mapsto$ {\avfont 𐬚}\par
+\noindent de $\mapsto$ {\avfont 𐬛}\par
+\noindent dhe $\mapsto$ {\avfont 𐬜}\par
+\noindent tte $\mapsto$ {\avfont 𐬝}\par
+\noindent pe $\mapsto$ {\avfont 𐬞}\par
+\noindent fe $\mapsto$ {\avfont 𐬟}\par
+\noindent be $\mapsto$ {\avfont 𐬠}\par
+\noindent bhe $\mapsto$ {\avfont 𐬡}\par
+\noindent nge $\mapsto$ {\avfont 𐬢}\par
+\noindent ngye $\mapsto$ {\avfont 𐬣}\par
+\noindent ngve $\mapsto$ {\avfont 𐬤}\par
+\noindent ne $\mapsto$ {\avfont 𐬥}\par
+\noindent nye $\mapsto$ {\avfont 𐬦}\par
+\noindent nne $\mapsto$ {\avfont 𐬧}\par
+\noindent me $\mapsto$ {\avfont 𐬨}\par
+\noindent hme $\mapsto$ {\avfont 𐬩}\par
+\noindent yye $\mapsto$ {\avfont 𐬪}\par
+\noindent ye $\mapsto$ {\avfont 𐬫}\par
+\noindent ve $\mapsto$ {\avfont 𐬬}\par
+\noindent re $\mapsto$ {\avfont 𐬭}\par
+\noindent le $\mapsto$ {\avfont 𐬮}\par
+\noindent se $\mapsto$ {\avfont 𐬯}\par
+\noindent ze $\mapsto$ {\avfont 𐬰}\par
+\noindent she $\mapsto$ {\avfont 𐬱}\par
+\noindent zhe $\mapsto$ {\avfont 𐬲}\par
+\noindent shye $\mapsto$ {\avfont 𐬳}\par
+\noindent sshe $\mapsto$ {\avfont 𐬴}\par
+\noindent he $\mapsto$ {\avfont 𐬵}\par
+\noindent abbreviationmark $\mapsto$ {\avfont 𐬹}\par
+\noindent p1 $\mapsto$ {\avfont 𐬺}\par
+\noindent p2 $\mapsto$ {\avfont 𐬻}\par
+\noindent p3 $\mapsto$ {\avfont 𐬼}\par
+\noindent p4 $\mapsto$ {\avfont 𐬽}\par
+\noindent p5 $\mapsto$ {\avfont 𐬾}\par
+\noindent p6 $\mapsto$ {\avfont 𐬿}\par
 }
 
 
 %-----   List of Typing shortcuts
-\newcommand\dolistavtransts{%
-\subsection{List of Typing shortcuts}\label{sec:listavts}
-\noindent\cdr{\avtransts{a}}\par
-\noindent\cdr{\avtransts{aa}}\par
-\noindent\cdr{\avtransts{ah}}\par
-\noindent\cdr{\avtransts{ahh}}\par
-\noindent\cdr{\avtransts{au}}\par
-\noindent\cdr{\avtransts{auu}}\par
-\noindent\cdr{\avtransts{eh}}\par
-\noindent\cdr{\avtransts{ehh}}\par
-\noindent\cdr{\avtransts{e}}\par
-\noindent\cdr{\avtransts{ee}}\par
-\noindent\cdr{\avtransts{o}}\par
-\noindent\cdr{\avtransts{oo}}\par
-\noindent\cdr{\avtransts{i}}\par
-\noindent\cdr{\avtransts{ii}}\par
-\noindent\cdr{\avtransts{u}}\par
-\noindent\cdr{\avtransts{uu}}\par
-\noindent\cdr{\avtransts{k}}\par
-\noindent\cdr{\avtransts{x}}\par
-\noindent\cdr{\avtransts{xx}}\par
-\noindent\cdr{\avtransts{xv}}\par
-\noindent\cdr{\avtransts{g}}\par
-\noindent\cdr{\avtransts{gg}}\par
-\noindent\cdr{\avtransts{gh}}\par
-\noindent\cdr{\avtransts{c}}\par
-\noindent\cdr{\avtransts{j}}\par
-\noindent\cdr{\avtransts{t}}\par
-\noindent\cdr{\avtransts{th}}\par
-\noindent\cdr{\avtransts{d}}\par
-\noindent\cdr{\avtransts{dh}}\par
-\noindent\cdr{\avtransts{tt}}\par
-\noindent\cdr{\avtransts{p}}\par
-\noindent\cdr{\avtransts{f}}\par
-\noindent\cdr{\avtransts{b}}\par
-\noindent\cdr{\avtransts{w}}\par
-\noindent\cdr{\avtransts{ng}}\par
-\noindent\cdr{\avtransts{ngj}}\par
-\noindent\cdr{\avtransts{ngw}}\par
-\noindent\cdr{\avtransts{n}}\par
-\noindent\cdr{\avtransts{ny}}\par
-\noindent\cdr{\avtransts{nny}}\par
-\noindent\cdr{\avtransts{m}}\par
-\noindent\cdr{\avtransts{mh}}\par
-\noindent\cdr{\avtransts{yy}}\par
-\noindent\cdr{\avtransts{y}}\par
-\noindent\cdr{\avtransts{v}}\par
-\noindent\cdr{\avtransts{r}}\par
-\noindent\cdr{\avtransts{l}}\par
-\noindent\cdr{\avtransts{s}}\par
-\noindent\cdr{\avtransts{z}}\par
-\noindent\cdr{\avtransts{sh}}\par
-\noindent\cdr{\avtransts{zh}}\par
-\noindent\cdr{\avtransts{ssh}}\par
-\noindent\cdr{\avtransts{ss}}\par
-\noindent\cdr{\avtransts{h}}\par
-\noindent\cdr{\avtransts{'}}\par
-\noindent\cdr{\avtransts{p1}}\par
-\noindent\cdr{\avtransts{p2}}\par
-\noindent\cdr{\avtransts{p3}}\par
-\noindent\cdr{\avtransts{p4}}\par
-\noindent\cdr{\avtransts{p5}}\par
-\noindent\cdr{\avtransts{p6}}\par
+\newcommand\avshowplainlistts{%
+%\subsection{List of Typing shortcuts}\label{sec:listavts}
+\noindent a $\mapsto$ {\avfont 𐬀}\par
+\noindent aa $\mapsto$ {\avfont 𐬁}\par
+\noindent ah $\mapsto$ {\avfont 𐬂}\par
+\noindent ahh $\mapsto$ {\avfont 𐬃}\par
+\noindent au $\mapsto$ {\avfont 𐬄}\par
+\noindent auu $\mapsto$ {\avfont 𐬅}\par
+\noindent eh $\mapsto$ {\avfont 𐬆}\par
+\noindent ehh $\mapsto$ {\avfont 𐬇}\par
+\noindent e $\mapsto$ {\avfont 𐬈}\par
+\noindent ee $\mapsto$ {\avfont 𐬉}\par
+\noindent o $\mapsto$ {\avfont 𐬊}\par
+\noindent oo $\mapsto$ {\avfont 𐬋}\par
+\noindent i $\mapsto$ {\avfont 𐬌}\par
+\noindent ii $\mapsto$ {\avfont 𐬍}\par
+\noindent u $\mapsto$ {\avfont 𐬎}\par
+\noindent uu $\mapsto$ {\avfont 𐬏}\par
+\noindent k $\mapsto$ {\avfont 𐬐}\par
+\noindent x $\mapsto$ {\avfont 𐬑}\par
+\noindent xx $\mapsto$ {\avfont 𐬒}\par
+\noindent xv $\mapsto$ {\avfont 𐬓}\par
+\noindent g $\mapsto$ {\avfont 𐬔}\par
+\noindent gg $\mapsto$ {\avfont 𐬕}\par
+\noindent gh $\mapsto$ {\avfont 𐬖}\par
+\noindent c $\mapsto$ {\avfont 𐬗}\par
+\noindent j $\mapsto$ {\avfont 𐬘}\par
+\noindent t $\mapsto$ {\avfont 𐬙}\par
+\noindent th $\mapsto$ {\avfont 𐬚}\par
+\noindent d $\mapsto$ {\avfont 𐬛}\par
+\noindent dh $\mapsto$ {\avfont 𐬜}\par
+\noindent tt $\mapsto$ {\avfont 𐬝}\par
+\noindent p $\mapsto$ {\avfont 𐬞}\par
+\noindent f $\mapsto$ {\avfont 𐬟}\par
+\noindent b $\mapsto$ {\avfont 𐬠}\par
+\noindent w $\mapsto$ {\avfont 𐬡}\par
+\noindent ng $\mapsto$ {\avfont 𐬢}\par
+\noindent ngj $\mapsto$ {\avfont 𐬣}\par
+\noindent ngw $\mapsto$ {\avfont 𐬤}\par
+\noindent n $\mapsto$ {\avfont 𐬥}\par
+\noindent ny $\mapsto$ {\avfont 𐬦}\par
+\noindent nny $\mapsto$ {\avfont 𐬧}\par
+\noindent m $\mapsto$ {\avfont 𐬨}\par
+\noindent mh $\mapsto$ {\avfont 𐬩}\par
+\noindent yy $\mapsto$ {\avfont 𐬪}\par
+\noindent y $\mapsto$ {\avfont 𐬫}\par
+\noindent v $\mapsto$ {\avfont 𐬬}\par
+\noindent r $\mapsto$ {\avfont 𐬭}\par
+\noindent l $\mapsto$ {\avfont 𐬮}\par
+\noindent s $\mapsto$ {\avfont 𐬯}\par
+\noindent z $\mapsto$ {\avfont 𐬰}\par
+\noindent sh $\mapsto$ {\avfont 𐬱}\par
+\noindent zh $\mapsto$ {\avfont 𐬲}\par
+\noindent ssh $\mapsto$ {\avfont 𐬳}\par
+\noindent ss $\mapsto$ {\avfont 𐬴}\par
+\noindent h $\mapsto$ {\avfont 𐬵}\par
+\noindent ' $\mapsto$ {\avfont 𐬹}\par
+\noindent p1 $\mapsto$ {\avfont 𐬺}\par
+\noindent p2 $\mapsto$ {\avfont 𐬻}\par
+\noindent p3 $\mapsto$ {\avfont 𐬼}\par
+\noindent p4 $\mapsto$ {\avfont 𐬽}\par
+\noindent p5 $\mapsto$ {\avfont 𐬾}\par
+\noindent p6 $\mapsto$ {\avfont 𐬿}\par
 }
 
 
 %-----   List of Standard Transliterations
-\newcommand\dolistavtranstsst{%
-\subsection{List of Standard Transliterations}\label{sec:listavtsst}
-\noindent\cdr{\avtranstsst{a}}\par
-\noindent\cdr{\avtranstsst{aa}}\par
-\noindent\cdr{\avtranstsst{ah}}\par
-\noindent\cdr{\avtranstsst{ahh}}\par
-\noindent\cdr{\avtranstsst{au}}\par
-\noindent\cdr{\avtranstsst{auu}}\par
-\noindent\cdr{\avtranstsst{eh}}\par
-\noindent\cdr{\avtranstsst{ehh}}\par
-\noindent\cdr{\avtranstsst{e}}\par
-\noindent\cdr{\avtranstsst{ee}}\par
-\noindent\cdr{\avtranstsst{o}}\par
-\noindent\cdr{\avtranstsst{oo}}\par
-\noindent\cdr{\avtranstsst{i}}\par
-\noindent\cdr{\avtranstsst{ii}}\par
-\noindent\cdr{\avtranstsst{u}}\par
-\noindent\cdr{\avtranstsst{uu}}\par
-\noindent\cdr{\avtranstsst{k}}\par
-\noindent\cdr{\avtranstsst{x}}\par
-\noindent\cdr{\avtranstsst{xx}}\par
-\noindent\cdr{\avtranstsst{xv}}\par
-\noindent\cdr{\avtranstsst{g}}\par
-\noindent\cdr{\avtranstsst{gg}}\par
-\noindent\cdr{\avtranstsst{gh}}\par
-\noindent\cdr{\avtranstsst{c}}\par
-\noindent\cdr{\avtranstsst{j}}\par
-\noindent\cdr{\avtranstsst{t}}\par
-\noindent\cdr{\avtranstsst{th}}\par
-\noindent\cdr{\avtranstsst{d}}\par
-\noindent\cdr{\avtranstsst{dh}}\par
-\noindent\cdr{\avtranstsst{tt}}\par
-\noindent\cdr{\avtranstsst{p}}\par
-\noindent\cdr{\avtranstsst{f}}\par
-\noindent\cdr{\avtranstsst{b}}\par
-\noindent\cdr{\avtranstsst{w}}\par
-\noindent\cdr{\avtranstsst{ng}}\par
-\noindent\cdr{\avtranstsst{ngj}}\par
-\noindent\cdr{\avtranstsst{ngw}}\par
-\noindent\cdr{\avtranstsst{n}}\par
-\noindent\cdr{\avtranstsst{ny}}\par
-\noindent\cdr{\avtranstsst{nny}}\par
-\noindent\cdr{\avtranstsst{m}}\par
-\noindent\cdr{\avtranstsst{mh}}\par
-\noindent\cdr{\avtranstsst{yy}}\par
-\noindent\cdr{\avtranstsst{y}}\par
-\noindent\cdr{\avtranstsst{v}}\par
-\noindent\cdr{\avtranstsst{r}}\par
-\noindent\cdr{\avtranstsst{l}}\par
-\noindent\cdr{\avtranstsst{s}}\par
-\noindent\cdr{\avtranstsst{z}}\par
-\noindent\cdr{\avtranstsst{sh}}\par
-\noindent\cdr{\avtranstsst{zh}}\par
-\noindent\cdr{\avtranstsst{ssh}}\par
-\noindent\cdr{\avtranstsst{ss}}\par
-\noindent\cdr{\avtranstsst{h}}\par
-\noindent\cdr{\avtranstsst{'}}\par
-\noindent\cdr{\avtranstsst{p1}}\par
-\noindent\cdr{\avtranstsst{p2}}\par
-\noindent\cdr{\avtranstsst{p3}}\par
-\noindent\cdr{\avtranstsst{p4}}\par
-\noindent\cdr{\avtranstsst{p5}}\par
-\noindent\cdr{\avtranstsst{p6}}\par
+\newcommand\avshowplainlistst{%
+%\subsection{List of Standard Transliterations}\label{sec:listavst}
+\noindent a $\mapsto$ a\par
+\noindent aa $\mapsto$ ā\par
+\noindent ah $\mapsto$ å\par
+\noindent ahh $\mapsto$ ā̊\par
+\noindent au $\mapsto$ ą\par
+\noindent auu $\mapsto$ ą̇\par
+\noindent eh $\mapsto$ ə\par
+\noindent ehh $\mapsto$ ə̄\par
+\noindent e $\mapsto$ e\par
+\noindent ee $\mapsto$ ē\par
+\noindent o $\mapsto$ o\par
+\noindent oo $\mapsto$ ō\par
+\noindent i $\mapsto$ i\par
+\noindent ii $\mapsto$ ī\par
+\noindent u $\mapsto$ u\par
+\noindent uu $\mapsto$ ū\par
+\noindent k $\mapsto$ k\par
+\noindent x $\mapsto$ x\par
+\noindent xx $\mapsto$ x́\par
+\noindent xv $\mapsto$ xᵛ\par
+\noindent g $\mapsto$ g\par
+\noindent gg $\mapsto$ ġ\par
+\noindent gh $\mapsto$ γ\par
+\noindent c $\mapsto$ c\par
+\noindent j $\mapsto$ j\par
+\noindent t $\mapsto$ t\par
+\noindent th $\mapsto$ ϑ\par
+\noindent d $\mapsto$ d\par
+\noindent dh $\mapsto$ δ\par
+\noindent tt $\mapsto$ t̰\par
+\noindent p $\mapsto$ p\par
+\noindent f $\mapsto$ f\par
+\noindent b $\mapsto$ b\par
+\noindent w $\mapsto$ β\par
+\noindent ng $\mapsto$ ŋ\par
+\noindent ngj $\mapsto$ ŋ́\par
+\noindent ngw $\mapsto$ ŋᵛ\par
+\noindent n $\mapsto$ n\par
+\noindent ny $\mapsto$ ń\par
+\noindent nny $\mapsto$ ṇ\par
+\noindent m $\mapsto$ m\par
+\noindent mh $\mapsto$ m̨\par
+\noindent yy $\mapsto$ ẏ\par
+\noindent y $\mapsto$ y\par
+\noindent v $\mapsto$ v\par
+\noindent r $\mapsto$ r\par
+\noindent l $\mapsto$ l\par
+\noindent s $\mapsto$ s\par
+\noindent z $\mapsto$ z\par
+\noindent sh $\mapsto$ š\par
+\noindent zh $\mapsto$ ž\par
+\noindent ssh $\mapsto$ š́\par
+\noindent ss $\mapsto$ ṣ̌\par
+\noindent h $\mapsto$ h\par
+\noindent ' $\mapsto$ '\par
+\noindent p1 $\mapsto$ p1\par
+\noindent p2 $\mapsto$ p2\par
+\noindent p3 $\mapsto$ p3\par
+\noindent p4 $\mapsto$ p4\par
+\noindent p5 $\mapsto$ p5\par
+\noindent p6 $\mapsto$ p6\par
 }
 
 
