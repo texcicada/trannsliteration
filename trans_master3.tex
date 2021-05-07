@@ -1,3 +1,27 @@
+\begin{filecontents*}[overwrite]{\jobname.bib}
+
+@xdata{jsa,title = {Studia Antiqua},subtitle = {A Student Journal for the Study of the Ancient World},publisher = {Brigham Yound University},abbreviation = {SA},}
+@xdata{joinn,title = {The Oriental Institute News \& Notes},abbreviation = {OINN},}
+@xdata{rwiki,abbreviation = {W},organization = {Wikipedia},}
+@xdata{byu,organization = {Brigham Young University},}
+
+
+@online{o1,title = {Ugarit},url = {https://en.wikipedia.org/wiki/Ugarit},keywords = {ugaritic},xdata = {rwiki},}
+
+
+@periodical{j1,date = {2010},volume = {8},number = {1},url = {https://scholarsarchive.byu.edu/studiaantiqua/vol8/iss1/4},xdata = {jsa},}
+@periodical{j2,date = {2002},number = {172},issue = {Winter},url = {https://oi.uchicago.edu/sites/oi.uchicago.edu/files/uploads/shared/docs/nn172.pdf},xdata = {joinn},}
+
+@article{a1,author = {Jed Robinson},title = {The God of the Patriarchs and the Ugaritic Texts},subtitle = {A Shared Religious and Cultural Identity},crossref = {j1},pages = {25 - 33},keywords = {ugaritic},xdata = {byu},}
+@article{a2,author = {Dennis Pardee},title = {Ugarit Ritual Texts},crossref = {j2},pages = {1 - 5},keywords = {ugaritic},}
+	
+@thesis{Adali,url = {https://ses.library.usyd.edu.au/bitstream/handle/2123/4890/sf-adali-2009-thesis.pdf},author = {Selim F Adalı},title = {Ummān-manda and its Significance in the First Millennium B.C.},type = {PhD thesis},date = {2009},institution = {University of Sydney},keywords = {cuneiform},}
+
+\end{filecontents*}
+
+
+
+
 \documentclass{article}
 %\usepackage{booktabs}
 %\usepackage{cellspace}
@@ -10,7 +34,8 @@
 \usepackage[listings]{tcolorbox}
 \usepackage{longtable}
 %%\usepackage{bidi}% needs xelatex
-\usepackage[bidi=basic]{babel}
+\usepackage[nil,english]{babel}
+\usepackage[english=british]{csquotes}
 \usepackage{multicol}
 \setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
 
@@ -36,6 +61,7 @@
 \newfontfamily\brfont{Noto Sans Brahmi}[Scale=1.5]%plain font
 \newfontfamily\cafont{Noto Sans Carian}[Scale=1.5]%plain font
 \newfontfamily\cufont{Noto Sans Cuneiform}[Scale=1.5]%plain font
+\newfontfamily\cyfont{Noto Sans Cypriot}[Scale=1.5]%plain font
 %\input{ugtrans_input.tex}% Ugaritic
 \input{optrans_input.tex}% Old Persian
 
@@ -99,6 +125,9 @@
 
 
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\newcommand\ugtag{{\tiny [Ugaritic]\par}}
+
+
 \newcommand\ugalpa{\symbol{66432}}
 \newcommand\ugbeta{\symbol{66433}}
 \newcommand\uggamla{\symbol{66434}}
@@ -769,7 +798,8 @@
 \input{avestan_input.tex}% Avestan
 \input{brahmi_input.tex}% Brahmi
 \input{carian_input.tex}% Carian
-\input{cuneiform_input.tex}
+\input{cuneiform_input.tex}% Cuneiform
+\input{cypriot_input.tex}% Cypriot
 
 
 
@@ -947,149 +977,153 @@
 %Lists
 
 %-----   List of Unicode codepoints
-\newcommand\dolistugtransuc{%
-\section{List of Unicode codepoints}\label{sec:listuc}
-\noindent\cdr{\ugtransuc{U+10380}}\par
-\noindent\cdr{\ugtransuc{U+10381}}\par
-\noindent\cdr{\ugtransuc{U+10382}}\par
-\noindent\cdr{\ugtransuc{U+10383}}\par
-\noindent\cdr{\ugtransuc{U+10384}}\par
-\noindent\cdr{\ugtransuc{U+10385}}\par
-\noindent\cdr{\ugtransuc{U+10386}}\par
-\noindent\cdr{\ugtransuc{U+10387}}\par
-\noindent\cdr{\ugtransuc{U+10388}}\par
-\noindent\cdr{\ugtransuc{U+10389}}\par
-\noindent\cdr{\ugtransuc{U+1038A}}\par
-\noindent\cdr{\ugtransuc{U+1038B}}\par
-\noindent\cdr{\ugtransuc{U+1038C}}\par
-\noindent\cdr{\ugtransuc{U+1038D}}\par
-\noindent\cdr{\ugtransuc{U+1038E}}\par
-\noindent\cdr{\ugtransuc{U+1038F}}\par
-\noindent\cdr{\ugtransuc{U+10390}}\par
-\noindent\cdr{\ugtransuc{U+10391}}\par
-\noindent\cdr{\ugtransuc{U+10392}}\par
-\noindent\cdr{\ugtransuc{U+10393}}\par
-\noindent\cdr{\ugtransuc{U+10394}}\par
-\noindent\cdr{\ugtransuc{U+10395}}\par
-\noindent\cdr{\ugtransuc{U+10396}}\par
-\noindent\cdr{\ugtransuc{U+10397}}\par
-\noindent\cdr{\ugtransuc{U+10398}}\par
-\noindent\cdr{\ugtransuc{U+10399}}\par
-\noindent\cdr{\ugtransuc{U+1039A}}\par
-\noindent\cdr{\ugtransuc{U+1039B}}\par
-\noindent\cdr{\ugtransuc{U+1039C}}\par
-\noindent\cdr{\ugtransuc{U+1039D}}\par
-\noindent\cdr{\ugtransuc{U+1039F}}\par
+\newcommand\ugshowplainlistuc{%
+%\subsection{List of Unicode codepoints}
+\label{sec:listuguc}
+\noindent U+10380 $\mapsto$ {\ugfont 𐎀}\par
+\noindent U+10381 $\mapsto$ {\ugfont 𐎁}\par
+\noindent U+10382 $\mapsto$ {\ugfont 𐎂}\par
+\noindent U+10383 $\mapsto$ {\ugfont 𐎃}\par
+\noindent U+10384 $\mapsto$ {\ugfont 𐎄}\par
+\noindent U+10385 $\mapsto$ {\ugfont 𐎅}\par
+\noindent U+10386 $\mapsto$ {\ugfont 𐎆}\par
+\noindent U+10387 $\mapsto$ {\ugfont 𐎇}\par
+\noindent U+10388 $\mapsto$ {\ugfont 𐎈}\par
+\noindent U+10389 $\mapsto$ {\ugfont 𐎉}\par
+\noindent U+1038A $\mapsto$ {\ugfont 𐎊}\par
+\noindent U+1038B $\mapsto$ {\ugfont 𐎋}\par
+\noindent U+1038C $\mapsto$ {\ugfont 𐎌}\par
+\noindent U+1038D $\mapsto$ {\ugfont 𐎍}\par
+\noindent U+1038E $\mapsto$ {\ugfont 𐎎}\par
+\noindent U+1038F $\mapsto$ {\ugfont 𐎏}\par
+\noindent U+10390 $\mapsto$ {\ugfont 𐎐}\par
+\noindent U+10391 $\mapsto$ {\ugfont 𐎑}\par
+\noindent U+10392 $\mapsto$ {\ugfont 𐎒}\par
+\noindent U+10393 $\mapsto$ {\ugfont 𐎓}\par
+\noindent U+10394 $\mapsto$ {\ugfont 𐎔}\par
+\noindent U+10395 $\mapsto$ {\ugfont 𐎕}\par
+\noindent U+10396 $\mapsto$ {\ugfont 𐎖}\par
+\noindent U+10397 $\mapsto$ {\ugfont 𐎗}\par
+\noindent U+10398 $\mapsto$ {\ugfont 𐎘}\par
+\noindent U+10399 $\mapsto$ {\ugfont 𐎙}\par
+\noindent U+1039A $\mapsto$ {\ugfont 𐎚}\par
+\noindent U+1039B $\mapsto$ {\ugfont 𐎛}\par
+\noindent U+1039C $\mapsto$ {\ugfont 𐎜}\par
+\noindent U+1039D $\mapsto$ {\ugfont 𐎝}\par
+\noindent U+1039F $\mapsto$ {\ugfont 𐎟}\par
 }
 
 
 %-----   List of Unicode names
-\newcommand\dolistugtransun{%
-\section{List of Unicode names}\label{sec:listun}
-\noindent\cdr{\ugtransun{alpa}}\par
-\noindent\cdr{\ugtransun{beta}}\par
-\noindent\cdr{\ugtransun{gamla}}\par
-\noindent\cdr{\ugtransun{kha}}\par
-\noindent\cdr{\ugtransun{delta}}\par
-\noindent\cdr{\ugtransun{ho}}\par
-\noindent\cdr{\ugtransun{wo}}\par
-\noindent\cdr{\ugtransun{zeta}}\par
-\noindent\cdr{\ugtransun{hota}}\par
-\noindent\cdr{\ugtransun{tet}}\par
-\noindent\cdr{\ugtransun{yod}}\par
-\noindent\cdr{\ugtransun{kaf}}\par
-\noindent\cdr{\ugtransun{shin}}\par
-\noindent\cdr{\ugtransun{lamda}}\par
-\noindent\cdr{\ugtransun{mem}}\par
-\noindent\cdr{\ugtransun{dhal}}\par
-\noindent\cdr{\ugtransun{nun}}\par
-\noindent\cdr{\ugtransun{zu}}\par
-\noindent\cdr{\ugtransun{samka}}\par
-\noindent\cdr{\ugtransun{ain}}\par
-\noindent\cdr{\ugtransun{pu}}\par
-\noindent\cdr{\ugtransun{sade}}\par
-\noindent\cdr{\ugtransun{qopa}}\par
-\noindent\cdr{\ugtransun{rasha}}\par
-\noindent\cdr{\ugtransun{thanna}}\par
-\noindent\cdr{\ugtransun{ghain}}\par
-\noindent\cdr{\ugtransun{to}}\par
-\noindent\cdr{\ugtransun{i}}\par
-\noindent\cdr{\ugtransun{u}}\par
-\noindent\cdr{\ugtransun{ssu}}\par
-\noindent\cdr{\ugtransun{worddivider}}\par
+\newcommand\ugshowplainlistun{%
+%\subsection{List of Unicode names}
+\label{sec:listugun}
+\noindent alpa $\mapsto$ {\ugfont 𐎀}\par
+\noindent beta $\mapsto$ {\ugfont 𐎁}\par
+\noindent gamla $\mapsto$ {\ugfont 𐎂}\par
+\noindent kha $\mapsto$ {\ugfont 𐎃}\par
+\noindent delta $\mapsto$ {\ugfont 𐎄}\par
+\noindent ho $\mapsto$ {\ugfont 𐎅}\par
+\noindent wo $\mapsto$ {\ugfont 𐎆}\par
+\noindent zeta $\mapsto$ {\ugfont 𐎇}\par
+\noindent hota $\mapsto$ {\ugfont 𐎈}\par
+\noindent tet $\mapsto$ {\ugfont 𐎉}\par
+\noindent yod $\mapsto$ {\ugfont 𐎊}\par
+\noindent kaf $\mapsto$ {\ugfont 𐎋}\par
+\noindent shin $\mapsto$ {\ugfont 𐎌}\par
+\noindent lamda $\mapsto$ {\ugfont 𐎍}\par
+\noindent mem $\mapsto$ {\ugfont 𐎎}\par
+\noindent dhal $\mapsto$ {\ugfont 𐎏}\par
+\noindent nun $\mapsto$ {\ugfont 𐎐}\par
+\noindent zu $\mapsto$ {\ugfont 𐎑}\par
+\noindent samka $\mapsto$ {\ugfont 𐎒}\par
+\noindent ain $\mapsto$ {\ugfont 𐎓}\par
+\noindent pu $\mapsto$ {\ugfont 𐎔}\par
+\noindent sade $\mapsto$ {\ugfont 𐎕}\par
+\noindent qopa $\mapsto$ {\ugfont 𐎖}\par
+\noindent rasha $\mapsto$ {\ugfont 𐎗}\par
+\noindent thanna $\mapsto$ {\ugfont 𐎘}\par
+\noindent ghain $\mapsto$ {\ugfont 𐎙}\par
+\noindent to $\mapsto$ {\ugfont 𐎚}\par
+\noindent i $\mapsto$ {\ugfont 𐎛}\par
+\noindent u $\mapsto$ {\ugfont 𐎜}\par
+\noindent ssu $\mapsto$ {\ugfont 𐎝}\par
+\noindent worddivider $\mapsto$ {\ugfont 𐎟}\par
 }
 
 
 %-----   List of Typing shortcuts
-\newcommand\dolistugtransts{%
-\section{List of Typing shortcuts}\label{sec:listts}
-\noindent\cdr{\ugtransts{a}}\par
-\noindent\cdr{\ugtransts{b}}\par
-\noindent\cdr{\ugtransts{g}}\par
-\noindent\cdr{\ugtransts{k}}\par
-\noindent\cdr{\ugtransts{d}}\par
-\noindent\cdr{\ugtransts{h}}\par
-\noindent\cdr{\ugtransts{w}}\par
-\noindent\cdr{\ugtransts{z}}\par
-\noindent\cdr{\ugtransts{hh}}\par
-\noindent\cdr{\ugtransts{t}}\par
-\noindent\cdr{\ugtransts{y}}\par
-\noindent\cdr{\ugtransts{kk}}\par
-\noindent\cdr{\ugtransts{sh}}\par
-\noindent\cdr{\ugtransts{l}}\par
-\noindent\cdr{\ugtransts{m}}\par
-\noindent\cdr{\ugtransts{dh}}\par
-\noindent\cdr{\ugtransts{n}}\par
-\noindent\cdr{\ugtransts{zz}}\par
-\noindent\cdr{\ugtransts{s}}\par
-\noindent\cdr{\ugtransts{j}}\par
-\noindent\cdr{\ugtransts{p}}\par
-\noindent\cdr{\ugtransts{ss}}\par
-\noindent\cdr{\ugtransts{q}}\par
-\noindent\cdr{\ugtransts{r}}\par
-\noindent\cdr{\ugtransts{th}}\par
-\noindent\cdr{\ugtransts{gh}}\par
-\noindent\cdr{\ugtransts{tt}}\par
-\noindent\cdr{\ugtransts{i}}\par
-\noindent\cdr{\ugtransts{u}}\par
-\noindent\cdr{\ugtransts{ssu}}\par
-\noindent\cdr{\ugtransts{div}}\par
+\newcommand\ugshowplainlistts{%
+%\subsection{List of Typing shortcuts}
+\label{sec:listugts}
+\noindent a $\mapsto$ {\ugfont 𐎀}\par
+\noindent b $\mapsto$ {\ugfont 𐎁}\par
+\noindent g $\mapsto$ {\ugfont 𐎂}\par
+\noindent k $\mapsto$ {\ugfont 𐎃}\par
+\noindent d $\mapsto$ {\ugfont 𐎄}\par
+\noindent h $\mapsto$ {\ugfont 𐎅}\par
+\noindent w $\mapsto$ {\ugfont 𐎆}\par
+\noindent z $\mapsto$ {\ugfont 𐎇}\par
+\noindent hh $\mapsto$ {\ugfont 𐎈}\par
+\noindent t $\mapsto$ {\ugfont 𐎉}\par
+\noindent y $\mapsto$ {\ugfont 𐎊}\par
+\noindent kk $\mapsto$ {\ugfont 𐎋}\par
+\noindent sh $\mapsto$ {\ugfont 𐎌}\par
+\noindent l $\mapsto$ {\ugfont 𐎍}\par
+\noindent m $\mapsto$ {\ugfont 𐎎}\par
+\noindent dh $\mapsto$ {\ugfont 𐎏}\par
+\noindent n $\mapsto$ {\ugfont 𐎐}\par
+\noindent zz $\mapsto$ {\ugfont 𐎑}\par
+\noindent s $\mapsto$ {\ugfont 𐎒}\par
+\noindent j $\mapsto$ {\ugfont 𐎓}\par
+\noindent p $\mapsto$ {\ugfont 𐎔}\par
+\noindent ss $\mapsto$ {\ugfont 𐎕}\par
+\noindent q $\mapsto$ {\ugfont 𐎖}\par
+\noindent r $\mapsto$ {\ugfont 𐎗}\par
+\noindent th $\mapsto$ {\ugfont 𐎘}\par
+\noindent gh $\mapsto$ {\ugfont 𐎙}\par
+\noindent tt $\mapsto$ {\ugfont 𐎚}\par
+\noindent i $\mapsto$ {\ugfont 𐎛}\par
+\noindent u $\mapsto$ {\ugfont 𐎜}\par
+\noindent ssu $\mapsto$ {\ugfont 𐎝}\par
+\noindent div $\mapsto$ {\ugfont 𐎟}\par
 }
 
 %-----   List of Standard Transliterations
-\newcommand\dolistugtranstsst{%
-\section{List of Standard Transliterations}\label{sec:listtsst}
-\noindent\cdr{\ugtranstsst{a}}\par
-\noindent\cdr{\ugtranstsst{b}}\par
-\noindent\cdr{\ugtranstsst{g}}\par
-\noindent\cdr{\ugtranstsst{k}}\par
-\noindent\cdr{\ugtranstsst{d}}\par
-\noindent\cdr{\ugtranstsst{h}}\par
-\noindent\cdr{\ugtranstsst{w}}\par
-\noindent\cdr{\ugtranstsst{z}}\par
-\noindent\cdr{\ugtranstsst{hh}}\par
-\noindent\cdr{\ugtranstsst{t}}\par
-\noindent\cdr{\ugtranstsst{y}}\par
-\noindent\cdr{\ugtranstsst{kk}}\par
-\noindent\cdr{\ugtranstsst{sh}}\par
-\noindent\cdr{\ugtranstsst{l}}\par
-\noindent\cdr{\ugtranstsst{m}}\par
-\noindent\cdr{\ugtranstsst{dh}}\par
-\noindent\cdr{\ugtranstsst{n}}\par
-\noindent\cdr{\ugtranstsst{zz}}\par
-\noindent\cdr{\ugtranstsst{s}}\par
-\noindent\cdr{\ugtranstsst{j}}\par
-\noindent\cdr{\ugtranstsst{p}}\par
-\noindent\cdr{\ugtranstsst{ss}}\par
-\noindent\cdr{\ugtranstsst{q}}\par
-\noindent\cdr{\ugtranstsst{r}}\par
-\noindent\cdr{\ugtranstsst{th}}\par
-\noindent\cdr{\ugtranstsst{gh}}\par
-\noindent\cdr{\ugtranstsst{tt}}\par
-\noindent\cdr{\ugtranstsst{i}}\par
-\noindent\cdr{\ugtranstsst{u}}\par
-\noindent\cdr{\ugtranstsst{ssu}}\par
-\noindent\cdr{\ugtranstsst{div}}\par
+\newcommand\ugshowplainlistst{%
+%\subsection{List of Standard Transliterations}
+\label{sec:listugst}
+\noindent a $\mapsto$ ^^^^02c0a\par
+\noindent b $\mapsto$ b\par
+\noindent g $\mapsto$ g\par
+\noindent k $\mapsto$ ^^^^1e2b\par
+\noindent d $\mapsto$ d\par
+\noindent h $\mapsto$ h\par
+\noindent w $\mapsto$ w\par
+\noindent z $\mapsto$ z\par
+\noindent hh $\mapsto$ h^^^^0323\par
+\noindent t $\mapsto$ t^^^^0323\par
+\noindent y $\mapsto$ y\par
+\noindent kk $\mapsto$ k\par
+\noindent sh $\mapsto$ s^^^^030c\par
+\noindent l $\mapsto$ l\par
+\noindent m $\mapsto$ m\par
+\noindent dh $\mapsto$ d^^^^0320\par
+\noindent n $\mapsto$ n\par
+\noindent zz $\mapsto$ z^^^^0323\par
+\noindent s $\mapsto$ s\par
+\noindent j $\mapsto$ ^^^^02e4\par
+\noindent p $\mapsto$ p\par
+\noindent ss $\mapsto$ s^^^^0323\par
+\noindent q $\mapsto$ q\par
+\noindent r $\mapsto$ r\par
+\noindent th $\mapsto$ t^^^^0320\par
+\noindent gh $\mapsto$ g^^^^0307\par
+\noindent tt $\mapsto$ t\par
+\noindent i $\mapsto$ ^^^^02c0i\par
+\noindent u $\mapsto$ ^^^^02c0u\par
+\noindent ssu $\mapsto$ s\textsubscript{2}\par
+\noindent div $\mapsto$  ~ \par
 }
 
 
@@ -1173,6 +1207,32 @@
 \end{center}
 }
 
+
+
+\newcommand\abibname{authoryear}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+%vvvvv
+%patch from:
+%https://tex.stackexchange.com/questions/528725/biblatex-formatting-online-and-incollection-bibliographic-entry-types
+\DeclareFieldFormat[online]{date}{\mkbibparens{#1}}
+\usepackage{xpatch}
+\xpatchbibdriver{online}
+  {\printtext[parens]{\usebibmacro{date}}}
+  {\usebibmacro{date}}
+  {}{}
+%^^^^^
+
+
+
+
+
+
 %===================================
 \begin{document}
 \begin{center}
@@ -1215,14 +1275,14 @@ Items may be accessed via the Unicode codepoint (in hexadecimal format). The com
 
 Short command: \cdr{\uguc{U+10380}}.
 
-See \S\ref{sec:listuc} for a list of Unicode codepoints.
+See \S\ref{sec:listuguc} for a list of Unicode codepoints.
 
 \tdemo{Unicode name}{alpa}{\ugtransun{alpa}}{\cdr{\ugtransun{alpa}}}
 Items may be accessed via a shortened form of the Unicode name. The command assumes that \cs{\ugfont} has been defined.
 
 Short command: \cdr{\ugun{alpa}}.
 
-See \S\ref{sec:listun} for a list of Unicode names.
+See \S\ref{sec:listugun} for a list of Unicode names.
 
 \tdemo{Typing shortcut}{a}{\ugtransts{a}}{\cdr{\ugtransts{a}}}
 Items may be accessed by typing arbitrarily-defined shortcuts from the keyboard. 
@@ -1233,7 +1293,7 @@ The command assumes that \cs{\ugfont} has been defined.
 
 Short command: \cdr{\ugts{a}}.
 
-See \S\ref{sec:listts} for the default list of typing shortcuts.
+See \S\ref{sec:listugts} for the default list of typing shortcuts.
 
 %%\begin{quotation}
 %%\textsc{Notes} -- For a Malayalam keyboard, for example, the letter {\mlfontb \textcolor{brown}{അ}} could be put into the regular expression instead of the letter \textcolor{brown}{a}:
@@ -1260,7 +1320,7 @@ Parsing of expressions is from left to right, with the longest shortcuts process
 
 Short command: \cdr{\ugst{ashgh}}.
 
-See \S\ref{sec:listtsst} for the list of transliterations.
+See \S\ref{sec:listugst} for the list of transliterations.
 
 \bigskip
 \subsubsection{Inline Styles}
@@ -1359,18 +1419,33 @@ shlmdivugrtt
 \subsection{Samples}
 %%{%
 %%\addfontfeatures{Colour=black,Scale=1}
-\uggloss{ugrtt}{ ^^^^0313Ugart}'s ``ruins are often called \textbf{Ras Shamra} after the headland where they lie'' -- Wikipedia.
+\uggloss{ugrtt}{ ^^^^0313Ugart}'s ``ruins are often called \textbf{Ras Shamra} after the headland where they lie'' \autocite{o1}.
 
-``The word \ugw{il} is used over five hundred times in the texts from Ugarit.'' -- Robinson, 28 % https://scholarsarchive.byu.edu/cgi/viewcontent.cgi?article=1116&context=studiaantiqua
+``The word \ugw{il} is used over five hundred times in the texts from Ugarit.'' \autocite[28]{a1}
+%-- Robinson, 28 % https://scholarsarchive.byu.edu/cgi/viewcontent.cgi?article=1116&context=studiaantiqua
 
-``The \ugw{shlmm} sacrifice, for example, appears to reflect a cultic meal in which the offerer partook of the same meal as was offered to the divinity.'' -- OIN\&N, 2002 % https://oi.uchicago.edu/sites/oi.uchicago.edu/files/uploads/shared/docs/nn172.pdf
+%Brigham Young University
+%BYU ScholarsArchive Citation Robinson, Jed. "The God of the Patriarchs and the Ugaritic Texts: A Shared Religious and Cultural Identity." Studia Antiqua8, no. 1 (2010). https://scholarsarchive.byu.edu/studiaantiqua/vol8/iss1/4
+%A Student Journal for the Study of the Ancient World
+
+``The \ugw{shlmm} sacrifice, for example, appears to reflect a cultic meal in which the offerer partook of the same meal as was offered to the divinity.'' \autocite[4]{a2}
+%-- OIN\&N, 2002 % https://oi.uchicago.edu/sites/oi.uchicago.edu/files/uploads/shared/docs/nn172.pdf p4
 
 \uggloss{sh.l.m.div.u.g.r.tt.}{well-being for Ugarit}
 
-\uggloss{sh.l.m.div.th.gh.h.}{well-being for her gates}
+\uggloss{sh.l.m.div.th.gh.h.}{well-being for her gates}\footnote{ \cite[Translation in][]{a2}; translation and transliteration in \textit{A Manual of Ugaritic}, p~216 viewed via GoogleBooks (id = 7tYNEAAAQBAJ).}
 
--- from A Manual of Ugaritic, p 216 % https://books.google.com.au/books?id=7tYNEAAAQBAJ&pg=PA216&lpg=PA216&dq=for+Ugarit,+well-being+for+her+gates&source=bl&ots=ybVOCu7sND&sig=ACfU3U1qasBzpt8dE9HjVA6Vk8zmCDysJg&hl=en&sa=X&ved=2ahUKEwjbgbvewKPwAhUHxzgGHZNqDcMQ6AEwEHoECAYQAw#v=onepage&q=for%20Ugarit%2C%20well-being%20for%20her%20gates&f=false
+%-- from A Manual of Ugaritic, p 216 % https://books.google.com.au/books?id=7tYNEAAAQBAJ&pg=PA216&lpg=PA216&dq=for+Ugarit,+well-being+for+her+gates&source=bl&ots=ybVOCu7sND&sig=ACfU3U1qasBzpt8dE9HjVA6Vk8zmCDysJg&hl=en&sa=X&ved=2ahUKEwjbgbvewKPwAhUHxzgGHZNqDcMQ6AEwEHoECAYQAw#v=onepage&q=for%20Ugarit%2C%20well-being%20for%20her%20gates&f=false
 %%}%============
+
+\printbibliography[
+	heading=subbibliography,%
+	keyword=ugaritic,
+%	title={},
+	]
+
+
+
 
 
 \section{Usage}
@@ -1461,16 +1536,51 @@ ml\tlcorner kk\trcorner
 %%
 
 %########
-\dolistugtransuc
+\subsection{List of Unicode codepoints}
+For command \codedetok{\ugtransuc{}}.
+\begin{multicols}{4}\noindent
+\ugtag
+\ugshowplainlistuc
+\eolist
+\end{multicols}
+%\dolistavtransuc
 
-%########
-\dolistugtransun
+\subsection{List of Unicode names}
+For command \codedetok{\ugtransun{}}.
+\begin{multicols}{4}\noindent
+\ugtag
+\ugshowplainlistun
+\eolist
+\end{multicols}
+%\dolistavtransun
 
-%########
-\dolistugtransts
+\subsection{List of Typing Shortcuts}
+For command \codedetok{\ugtransts{}}.
+\begin{multicols}{4}\noindent
+\ugtag
+\ugshowplainlistts
+\eolist
+\end{multicols}
+%\dolistavtransts
 
-%########
-\dolistugtranstsst
+\subsection{List of Standard Transliteration}
+For command \codedetok{\ugtransst{}}.
+\begin{multicols}{4}\noindent
+\ugtag
+\ugshowplainlistst
+\eolist
+\end{multicols}
+%\dolistavtranstsst
+%%%\dolistugtransuc
+%%%
+%%%%########
+%%%\dolistugtransun
+%%%
+%%%%########
+%%%\dolistugtransts
+%%%
+%%%%########
+%%%\dolistugtranstsst
 
 
 
@@ -1905,6 +2015,11 @@ For command \codedetok{\catransun{}}.
 %--------------------
 \section{Cuneiform}
 
+{\cufont 𒂟𒈠𒀭𒁕}, \textsc{ERI^^^^0301N} \textit{ma-an-da}, `the Umma^^^^0304n-manda', `troops of the terrain (of the distant eastern zone)'.\footnote{Transliteration and proposed translation: \fullcite{Adali}.} Mnemonic: `the humans of the mountains', mountain hordes. 
+
+\cutransun{erin2maanda}
+
+
 \subsection{List of Unicode codepoints}
 For command \codedetok{\cutransuc{}}.
 \begin{multicols}{4}\noindent
@@ -1947,6 +2062,50 @@ For command \codedetok{\cutransun{}}.
 
 %--------------------
 \section{Cypriot Syllabary}
+
+
+\subsection{List of Unicode codepoints}
+For command \codedetok{\cytransuc{}}.
+\begin{multicols}{4}\noindent
+\cytag
+\cyshowplainlistuc
+\eolist
+\end{multicols}
+%\dolistavtransuc
+
+\subsection{List of Unicode names}
+For command \codedetok{\cytransun{}}.
+\begin{multicols}{4}\noindent
+\cytag
+\cyshowplainlistun
+\eolist
+\end{multicols}
+%\dolistavtransun
+
+%\subsection{List of Typing Shortcuts}
+%For command \codedetok{\cytransts{}}.
+%\begin{multicols}{4}\noindent
+%\cytag
+%\cyshowplainlistts
+%\eolist
+%\end{multicols}
+%%\dolistavtransts
+%
+%\subsection{List of Standard Transliteration}
+%For command \codedetok{\cytransst{}}.
+%\begin{multicols}{4}\noindent
+%\cytag
+%\cyshowplainlistst
+%\eolist
+%\end{multicols}
+%%\dolistavtranstsst
+
+
+
+
+
+
+
 
 %--------------------
 \section{Early Dynasitc Cuneiform}
