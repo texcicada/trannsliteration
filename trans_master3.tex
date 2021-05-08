@@ -7,6 +7,8 @@
 
 
 @online{o1,title = {Ugarit},url = {https://en.wikipedia.org/wiki/Ugarit},keywords = {ugaritic},xdata = {rwiki},}
+@online{o2,title = {Dingir},url = {https://en.wikipedia.org/wiki/Dingir},keywords = {cuneiform},xdata = {rwiki},}
+@online{o3,title = {Cuneiform transliteration},url = {https://sumer.fandom.com/wiki/Cuneiform_transliteration},keywords = {cuneiform},}
 
 
 @periodical{j1,date = {2010},volume = {8},number = {1},url = {https://scholarsarchive.byu.edu/studiaantiqua/vol8/iss1/4},xdata = {jsa},}
@@ -46,6 +48,7 @@
 
 \newfontfamily\markerfont{Noto Sans Symbols}[Scale=1.5]
 \newfontfamily\markerfontb{Noto Sans}[Scale=1.5]
+\newfontface\symbolfont{Noto Sans Symbols2}[Scale=1.5]
 
 \newfontfamily\ugfont{Noto Sans Ugaritic}[Colour=blue,Scale=1.5]
 \newfontfamily\ugfontb{Noto Sans Ugaritic}%plain font
@@ -62,6 +65,12 @@
 \newfontfamily\cafont{Noto Sans Carian}[Scale=1.5]%plain font
 \newfontfamily\cufont{Noto Sans Cuneiform}[Scale=1.5]%plain font
 \newfontfamily\cyfont{Noto Sans Cypriot}[Scale=1.5]%plain font
+\newfontfamily\cdmfont{Noto Serif}
+\newcommand\cdmformat{\cdmfont}
+%
+\newfontfamily\neoassyrianfont{Assurbanipal}
+
+
 %\input{ugtrans_input.tex}% Ugaritic
 \input{optrans_input.tex}% Old Persian
 
@@ -240,7 +249,6 @@
 %\tl_new:N \l_myun_tl
 %-----   Unicode name
 \newcommand\dougtransun{%
-
 \regex_replace_all:nnN { worddivider } { \cB\{ \c{ugfont}𐎟 \cE\}  } \l_myun_tl
 \regex_replace_all:nnN { thanna } { \cB\{ \c{ugfont}𐎘 \cE\}  } \l_myun_tl
 \regex_replace_all:nnN { gamla } { \cB\{ \c{ugfont}𐎂 \cE\}  } \l_myun_tl
@@ -800,6 +808,7 @@
 \input{carian_input.tex}% Carian
 \input{cuneiform_input.tex}% Cuneiform
 \input{cypriot_input.tex}% Cypriot
+\input{cdm_input.tex}% Combining Diacritical Marks; commands
 
 
 
@@ -2017,8 +2026,46 @@ For command \codedetok{\catransun{}}.
 
 {\cufont 𒂟𒈠𒀭𒁕}, \textsc{ERI^^^^0301N} \textit{ma-an-da}, `the Umma^^^^0304n-manda', `troops of the terrain (of the distant eastern zone)'.\footnote{Transliteration and proposed translation: \fullcite{Adali}.} Mnemonic: `the humans of the mountains', mountain hordes. 
 
-\cutransun{erin2maanda}
+{
+\setlength{\tabcolsep}{5pt} 
+\begin{tabular}{ll}
+Codepoints & \small\cdr{\cutransuc{U+1209FU+12220U+1202DU+12055}}\\
+Names & \cdr{\cutransun{erin2maanda}}\\
+Shortcuts & \cdr{\cutransts{erin2maanda}}\\
+\end{tabular}
+}
 
+
+{\symbolfont ✍🗊} Transliteration will be complicated. ``A transliterated document \ldots\ presents the reading preferred by the transliterating scholar as well as an opportunity to reconstruct the original text.''\footnote{\fullcite{o3}} For example,with \cuun{an}, AN, DINGIR, superscript \textsuperscript{d}, \textit{an}, \textit{il} (amongst others) are available, because\footnote{\fullcite[Following][]{o2}}: 
+
+\bigskip
+{
+\begin{center}
+\setlength{\tabcolsep}{5pt} 
+\begin{tabular}{llll}
+\bfseries Function & \bfseries Sumerian & \bfseries Akkadian & \bfseries Hittite \\
+\hline 
+picture & star \cuun{an} &\neoassyrianfont\symbol{73773} & \\
+idea & \textit{an}, `sky, heaven' & & \\
+word &\textit{dig^^^^0302ir}, `god, goddess' &\textit{ilum}, \textit{il-} & \\
+word && \textit{s\cdmcaron amu\cdmcircum}, `sky' & \\
+preposition && ``at'', ``to'' & \\
+name & \textit{An}, supreme deity & & \\
+syllable & /an/ & /an/, /il/ & /an/ \\
+determinative & religious, divine & & \\
+\hline \\
+\end{tabular}
+\end{center}
+}
+%\cuun{an} = star $rightarrow$ Sumerian \textit{an}, `sky, heaven'
+%
+%= \textit{dig^^^^0302ir} = DINGIR = `god, goddess' = supreme deity \textit{An} = religious determinative `divine'
+%
+%= Sumerian syllable \textit{an}
+%
+%= Akkadian \texit{ilum} = syllable \textit{il}
+%
+%= Hittite syllable \textit{an}
 
 \subsection{List of Unicode codepoints}
 For command \codedetok{\cutransuc{}}.
@@ -2038,14 +2085,14 @@ For command \codedetok{\cutransun{}}.
 \end{multicols}
 %\dolistavtransun
 
-%\subsection{List of Typing Shortcuts}
-%For command \codedetok{\cutransts{}}.
-%\begin{multicols}{4}\noindent
-%\cutag
-%\cushowplainlistts
-%\eolist
-%\end{multicols}
-%%\dolistavtransts
+\subsection{List of Typing Shortcuts}
+For command \codedetok{\cutransts{}}.
+\begin{multicols}{4}\noindent
+\cutag
+\cushowplainlistts
+\eolist
+\end{multicols}
+%\dolistavtransts
 %
 %\subsection{List of Standard Transliteration}
 %For command \codedetok{\cutransst{}}.

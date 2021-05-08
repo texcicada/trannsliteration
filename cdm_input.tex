@@ -1,0 +1,659 @@
+%vvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+%\newfontfamily\cdmfont{Noto Serif}
+%\newcommand\cdmformat{\cdmfont}
+\newcommand\cdmtag{{\tiny [Combining\ Diacritical\ Marks]\par}}
+%\newcommand\eolist{{\tiny [End of List]}\par}
+
+%-----   Shortcut commands
+\newcommand\cdmgrave{^^^^0300}
+\newcommand\cdmacute{^^^^0301}
+\newcommand\cdmcircum{^^^^0302}
+\newcommand\cdmtilde{^^^^0303}
+\newcommand\cdmmacron{^^^^0304}
+\newcommand\cdmoverl{^^^^0305}
+\newcommand\cdmbreve{^^^^0306}
+\newcommand\cdmdot{^^^^0307}
+\newcommand\cdmdiaeresis{^^^^0308}
+\newcommand\cdmhook{^^^^0309}
+\newcommand\cdmring{^^^^030a}
+\newcommand\cdmdacute{^^^^030b}
+\newcommand\cdmcaron{^^^^030c}
+\newcommand\cdmvl{^^^^030d}
+\newcommand\cdmdvl{^^^^030e}
+\newcommand\cdmdgrave{^^^^030f}
+\newcommand\cdmcrabindu{^^^^0310}
+\newcommand\cdminvbreve{^^^^0311}
+\newcommand\cdmtcomma{^^^^0312}
+\newcommand\cdmcomma{^^^^0313}
+\newcommand\cdmrevcomma{^^^^0314}
+\newcommand\cdmcommaright{^^^^0315}
+\newcommand\cdmgraveb{^^^^0316}
+\newcommand\cdmacuteb{^^^^0317}
+\newcommand\cdmlefttackb{^^^^0318}
+\newcommand\cdmrighttackb{^^^^0319}
+\newcommand\cdmleftangle{^^^^031a}
+\newcommand\cdmhorn{^^^^031b}
+\newcommand\cdmlefthalfringb{^^^^031c}
+\newcommand\cdmuptackb{^^^^031d}
+\newcommand\cdmdowntackb{^^^^031e}
+\newcommand\cdmplussignb{^^^^031f}
+\newcommand\cdmminussignb{^^^^0320}
+\newcommand\cdmpalatalizedhookb{^^^^0321}
+\newcommand\cdmretroflexhookb{^^^^0322}
+\newcommand\cdmdotb{^^^^0323}
+\newcommand\cdmdiaeresisb{^^^^0324}
+\newcommand\cdmringb{^^^^0325}
+\newcommand\cdmcommab{^^^^0326}
+\newcommand\cdmcedilla{^^^^0327}
+\newcommand\cdmogonek{^^^^0328}
+\newcommand\cdmvlb{^^^^0329}
+\newcommand\cdmbridgeb{^^^^032a}
+\newcommand\cdminvdarchb{^^^^032b}
+\newcommand\cdmcaronb{^^^^032c}
+\newcommand\cdmcircumb{^^^^032d}
+\newcommand\cdmbreveb{^^^^032e}
+\newcommand\cdminvbreveb{^^^^032f}
+\newcommand\cdmtildeb{^^^^0330}
+\newcommand\cdmmacronb{^^^^0331}
+\newcommand\cdmlowl{^^^^0332}
+\newcommand\cdmdlowl{^^^^0333}
+\newcommand\cdmtildeo{^^^^0334}
+\newcommand\cdmshortstrokeo{^^^^0335}
+\newcommand\cdmlongstrokeo{^^^^0336}
+\newcommand\cdmshortsoliduso{^^^^0337}
+\newcommand\cdmlongsoliduso{^^^^0338}
+\newcommand\cdmrighthalfringb{^^^^0339}
+\newcommand\cdminvbridgeb{^^^^033a}
+\newcommand\cdmsquareb{^^^^033b}
+\newcommand\cdmseagullb{^^^^033c}
+\newcommand\cdmx{^^^^033d}
+\newcommand\cdmvtilde{^^^^033e}
+\newcommand\cdmdoverl{^^^^033f}
+\newcommand\cdmgravetonemark{^^^^0340}
+\newcommand\cdmacutetonemark{^^^^0341}
+\newcommand\cdmgreekperispomeni{^^^^0342}
+\newcommand\cdmgreekkoronis{^^^^0343}
+\newcommand\cdmgreekdialytikatonos{^^^^0344}
+\newcommand\cdmgreekypogegrammeni{^^^^0345}
+\newcommand\cdmbridge{^^^^0346}
+\newcommand\cdmequalssignb{^^^^0347}
+\newcommand\cdmdvlb{^^^^0348}
+\newcommand\cdmleftangleb{^^^^0349}
+\newcommand\cdmnottilde{^^^^034a}
+\newcommand\cdmhomothetic{^^^^034b}
+\newcommand\cdmalmostequalto{^^^^034c}
+\newcommand\cdmleftrightab{^^^^034d}
+\newcommand\cdmupwardsab{^^^^034e}
+\newcommand\cdmgraphemejoiner{^^^^034f}
+\newcommand\cdmrighta{^^^^0350}
+\newcommand\cdmlefthalfring{^^^^0351}
+\newcommand\cdmfermata{^^^^0352}
+\newcommand\cdmxb{^^^^0353}
+\newcommand\cdmleftab{^^^^0354}
+\newcommand\cdmrightab{^^^^0355}
+\newcommand\cdmrightaupab{^^^^0356}
+\newcommand\cdmrighthalfring{^^^^0357}
+\newcommand\cdmdotright{^^^^0358}
+\newcommand\cdmasteriskb{^^^^0359}
+\newcommand\cdmdringb{^^^^035a}
+\newcommand\cdmzigzag{^^^^035b}
+\newcommand\cdmdbreveb{^^^^035c}
+\newcommand\cdmdbreve{^^^^035d}
+\newcommand\cdmdmacron{^^^^035e}
+\newcommand\cdmdmacronb{^^^^035f}
+\newcommand\cdmdtilde{^^^^0360}
+\newcommand\cdmdinvbreve{^^^^0361}
+\newcommand\cdmdrightwardsab{^^^^0362}
+\newcommand\cdmlettera{^^^^0363}
+\newcommand\cdmlettere{^^^^0364}
+\newcommand\cdmletteri{^^^^0365}
+\newcommand\cdmlettero{^^^^0366}
+\newcommand\cdmletteru{^^^^0367}
+\newcommand\cdmletterc{^^^^0368}
+\newcommand\cdmletterd{^^^^0369}
+\newcommand\cdmletterh{^^^^036a}
+\newcommand\cdmletterm{^^^^036b}
+\newcommand\cdmletterr{^^^^036c}
+\newcommand\cdmlettert{^^^^036d}
+\newcommand\cdmletterv{^^^^036e}
+\newcommand\cdmletterx{^^^^036f}
+
+
+
+%-----   List of Unicode codepoints
+\newcommand\cdmshowplainlistuc{%
+\noindent U+0300  $\mapsto$ {\cdmformat ò}\par
+\noindent U+0301  $\mapsto$ {\cdmformat ó}\par
+\noindent U+0302  $\mapsto$ {\cdmformat ô}\par
+\noindent U+0303  $\mapsto$ {\cdmformat õ}\par
+\noindent U+0304  $\mapsto$ {\cdmformat ō}\par
+\noindent U+0305  $\mapsto$ {\cdmformat o̅}\par
+\noindent U+0306  $\mapsto$ {\cdmformat ŏ}\par
+\noindent U+0307  $\mapsto$ {\cdmformat ȯ}\par
+\noindent U+0308  $\mapsto$ {\cdmformat ö}\par
+\noindent U+0309  $\mapsto$ {\cdmformat ỏ}\par
+\noindent U+030A  $\mapsto$ {\cdmformat o̊}\par
+\noindent U+030B  $\mapsto$ {\cdmformat ő}\par
+\noindent U+030C  $\mapsto$ {\cdmformat ǒ}\par
+\noindent U+030D  $\mapsto$ {\cdmformat o̍}\par
+\noindent U+030E  $\mapsto$ {\cdmformat o̎}\par
+\noindent U+030F  $\mapsto$ {\cdmformat ȍ}\par
+\noindent U+0310  $\mapsto$ {\cdmformat o̐}\par
+\noindent U+0311  $\mapsto$ {\cdmformat ȏ}\par
+\noindent U+0312  $\mapsto$ {\cdmformat o̒}\par
+\noindent U+0313  $\mapsto$ {\cdmformat o̓}\par
+\noindent U+0314  $\mapsto$ {\cdmformat o̔}\par
+\noindent U+0315  $\mapsto$ {\cdmformat o̕}\par
+\noindent U+0316  $\mapsto$ {\cdmformat o̖}\par
+\noindent U+0317  $\mapsto$ {\cdmformat o̗}\par
+\noindent U+0318  $\mapsto$ {\cdmformat o̘}\par
+\noindent U+0319  $\mapsto$ {\cdmformat o̙}\par
+\noindent U+031A  $\mapsto$ {\cdmformat o̚}\par
+\noindent U+031B  $\mapsto$ {\cdmformat ơ}\par
+\noindent U+031C  $\mapsto$ {\cdmformat o̜}\par
+\noindent U+031D  $\mapsto$ {\cdmformat o̝}\par
+\noindent U+031E  $\mapsto$ {\cdmformat o̞}\par
+\noindent U+031F  $\mapsto$ {\cdmformat o̟}\par
+\noindent U+0320  $\mapsto$ {\cdmformat o̠}\par
+\noindent U+0321  $\mapsto$ {\cdmformat o̡}\par
+\noindent U+0322  $\mapsto$ {\cdmformat o̢}\par
+\noindent U+0323  $\mapsto$ {\cdmformat ọ}\par
+\noindent U+0324  $\mapsto$ {\cdmformat o̤}\par
+\noindent U+0325  $\mapsto$ {\cdmformat o̥}\par
+\noindent U+0326  $\mapsto$ {\cdmformat o̦}\par
+\noindent U+0327  $\mapsto$ {\cdmformat o̧}\par
+\noindent U+0328  $\mapsto$ {\cdmformat ǫ}\par
+\noindent U+0329  $\mapsto$ {\cdmformat o̩}\par
+\noindent U+032A  $\mapsto$ {\cdmformat o̪}\par
+\noindent U+032B  $\mapsto$ {\cdmformat o̫}\par
+\noindent U+032C  $\mapsto$ {\cdmformat o̬}\par
+\noindent U+032D  $\mapsto$ {\cdmformat o̭}\par
+\noindent U+032E  $\mapsto$ {\cdmformat o̮}\par
+\noindent U+032F  $\mapsto$ {\cdmformat o̯}\par
+\noindent U+0330  $\mapsto$ {\cdmformat o̰}\par
+\noindent U+0331  $\mapsto$ {\cdmformat o̱}\par
+\noindent U+0332  $\mapsto$ {\cdmformat o̲}\par
+\noindent U+0333  $\mapsto$ {\cdmformat o̳}\par
+\noindent U+0334  $\mapsto$ {\cdmformat o̴}\par
+\noindent U+0335  $\mapsto$ {\cdmformat o̵}\par
+\noindent U+0336  $\mapsto$ {\cdmformat o̶}\par
+\noindent U+0337  $\mapsto$ {\cdmformat o̷}\par
+\noindent U+0338  $\mapsto$ {\cdmformat o̸}\par
+\noindent U+0339  $\mapsto$ {\cdmformat o̹}\par
+\noindent U+033A  $\mapsto$ {\cdmformat o̺}\par
+\noindent U+033B  $\mapsto$ {\cdmformat o̻}\par
+\noindent U+033C  $\mapsto$ {\cdmformat o̼}\par
+\noindent U+033D  $\mapsto$ {\cdmformat o̽}\par
+\noindent U+033E  $\mapsto$ {\cdmformat o̾}\par
+\noindent U+033F  $\mapsto$ {\cdmformat o̿}\par
+\noindent U+0340  $\mapsto$ {\cdmformat ò}\par
+\noindent U+0341  $\mapsto$ {\cdmformat ó}\par
+\noindent U+0342  $\mapsto$ {\cdmformat o͂}\par
+\noindent U+0343  $\mapsto$ {\cdmformat o̓}\par
+\noindent U+0344  $\mapsto$ {\cdmformat ö́}\par
+\noindent U+0345  $\mapsto$ {\cdmformat oͅ}\par
+\noindent U+0346  $\mapsto$ {\cdmformat o͆}\par
+\noindent U+0347  $\mapsto$ {\cdmformat o͇}\par
+\noindent U+0348  $\mapsto$ {\cdmformat o͈}\par
+\noindent U+0349  $\mapsto$ {\cdmformat o͉}\par
+\noindent U+034A  $\mapsto$ {\cdmformat o͊}\par
+\noindent U+034B  $\mapsto$ {\cdmformat o͋}\par
+\noindent U+034C  $\mapsto$ {\cdmformat o͌}\par
+\noindent U+034D  $\mapsto$ {\cdmformat o͍}\par
+\noindent U+034E  $\mapsto$ {\cdmformat o͎}\par
+\noindent U+034F  $\mapsto$ {\cdmformat o͏}\par
+\noindent U+0350  $\mapsto$ {\cdmformat o͐}\par
+\noindent U+0351  $\mapsto$ {\cdmformat o͑}\par
+\noindent U+0352  $\mapsto$ {\cdmformat o͒}\par
+\noindent U+0353  $\mapsto$ {\cdmformat o͓}\par
+\noindent U+0354  $\mapsto$ {\cdmformat o͔}\par
+\noindent U+0355  $\mapsto$ {\cdmformat o͕}\par
+\noindent U+0356  $\mapsto$ {\cdmformat o͖}\par
+\noindent U+0357  $\mapsto$ {\cdmformat o͗}\par
+\noindent U+0358  $\mapsto$ {\cdmformat o͘}\par
+\noindent U+0359  $\mapsto$ {\cdmformat o͙}\par
+\noindent U+035A  $\mapsto$ {\cdmformat o͚}\par
+\noindent U+035B  $\mapsto$ {\cdmformat o͛}\par
+\noindent U+035C  $\mapsto$ {\cdmformat o͜}\par
+\noindent U+035D  $\mapsto$ {\cdmformat o͝}\par
+\noindent U+035E  $\mapsto$ {\cdmformat o͞}\par
+\noindent U+035F  $\mapsto$ {\cdmformat o͟}\par
+\noindent U+0360  $\mapsto$ {\cdmformat o͠}\par
+\noindent U+0361  $\mapsto$ {\cdmformat o͡}\par
+\noindent U+0362  $\mapsto$ {\cdmformat o͢}\par
+\noindent U+0363  $\mapsto$ {\cdmformat oͣ}\par
+\noindent U+0364  $\mapsto$ {\cdmformat oͤ}\par
+\noindent U+0365  $\mapsto$ {\cdmformat oͥ}\par
+\noindent U+0366  $\mapsto$ {\cdmformat oͦ}\par
+\noindent U+0367  $\mapsto$ {\cdmformat oͧ}\par
+\noindent U+0368  $\mapsto$ {\cdmformat oͨ}\par
+\noindent U+0369  $\mapsto$ {\cdmformat oͩ}\par
+\noindent U+036A  $\mapsto$ {\cdmformat oͪ}\par
+\noindent U+036B  $\mapsto$ {\cdmformat oͫ}\par
+\noindent U+036C  $\mapsto$ {\cdmformat oͬ}\par
+\noindent U+036D  $\mapsto$ {\cdmformat oͭ}\par
+\noindent U+036E  $\mapsto$ {\cdmformat oͮ}\par
+\noindent U+036F  $\mapsto$ {\cdmformat oͯ}\par
+}
+%-----   List of Unicode names
+\newcommand\cdmshowplainlistun{%
+\noindent graveaccent $\mapsto$ {\cdmformat ò}\par
+\noindent acuteaccent $\mapsto$ {\cdmformat ó}\par
+\noindent circumflexaccent $\mapsto$ {\cdmformat ô}\par
+\noindent tilde $\mapsto$ {\cdmformat õ}\par
+\noindent macron $\mapsto$ {\cdmformat ō}\par
+\noindent overline $\mapsto$ {\cdmformat o̅}\par
+\noindent breve $\mapsto$ {\cdmformat ŏ}\par
+\noindent dotabove $\mapsto$ {\cdmformat ȯ}\par
+\noindent diaeresis $\mapsto$ {\cdmformat ö}\par
+\noindent hookabove $\mapsto$ {\cdmformat ỏ}\par
+\noindent ringabove $\mapsto$ {\cdmformat o̊}\par
+\noindent doubleacuteaccent $\mapsto$ {\cdmformat ő}\par
+\noindent caron $\mapsto$ {\cdmformat ǒ}\par
+\noindent verticallineabove $\mapsto$ {\cdmformat o̍}\par
+\noindent doubleverticallineabove $\mapsto$ {\cdmformat o̎}\par
+\noindent doublegraveaccent $\mapsto$ {\cdmformat ȍ}\par
+\noindent candrabindu $\mapsto$ {\cdmformat o̐}\par
+\noindent invertedbreve $\mapsto$ {\cdmformat ȏ}\par
+\noindent turnedcommaabove $\mapsto$ {\cdmformat o̒}\par
+\noindent commaabove $\mapsto$ {\cdmformat o̓}\par
+\noindent reversedcommaabove $\mapsto$ {\cdmformat o̔}\par
+\noindent commaaboveright $\mapsto$ {\cdmformat o̕}\par
+\noindent graveaccentbelow $\mapsto$ {\cdmformat o̖}\par
+\noindent acuteaccentbelow $\mapsto$ {\cdmformat o̗}\par
+\noindent lefttackbelow $\mapsto$ {\cdmformat o̘}\par
+\noindent righttackbelow $\mapsto$ {\cdmformat o̙}\par
+\noindent leftangleabove $\mapsto$ {\cdmformat o̚}\par
+\noindent horn $\mapsto$ {\cdmformat ơ}\par
+\noindent lefthalfringbelow $\mapsto$ {\cdmformat o̜}\par
+\noindent uptackbelow $\mapsto$ {\cdmformat o̝}\par
+\noindent downtackbelow $\mapsto$ {\cdmformat o̞}\par
+\noindent plussignbelow $\mapsto$ {\cdmformat o̟}\par
+\noindent minussignbelow $\mapsto$ {\cdmformat o̠}\par
+\noindent palatalizedhookbelow $\mapsto$ {\cdmformat o̡}\par
+\noindent retroflexhookbelow $\mapsto$ {\cdmformat o̢}\par
+\noindent dotbelow $\mapsto$ {\cdmformat ọ}\par
+\noindent diaeresisbelow $\mapsto$ {\cdmformat o̤}\par
+\noindent ringbelow $\mapsto$ {\cdmformat o̥}\par
+\noindent commabelow $\mapsto$ {\cdmformat o̦}\par
+\noindent cedilla $\mapsto$ {\cdmformat o̧}\par
+\noindent ogonek $\mapsto$ {\cdmformat ǫ}\par
+\noindent verticallinebelow $\mapsto$ {\cdmformat o̩}\par
+\noindent bridgebelow $\mapsto$ {\cdmformat o̪}\par
+\noindent inverteddoublearchbelow $\mapsto$ {\cdmformat o̫}\par
+\noindent caronbelow $\mapsto$ {\cdmformat o̬}\par
+\noindent circumflexaccentbelow $\mapsto$ {\cdmformat o̭}\par
+\noindent brevebelow $\mapsto$ {\cdmformat o̮}\par
+\noindent invertedbrevebelow $\mapsto$ {\cdmformat o̯}\par
+\noindent tildebelow $\mapsto$ {\cdmformat o̰}\par
+\noindent macronbelow $\mapsto$ {\cdmformat o̱}\par
+\noindent lowline $\mapsto$ {\cdmformat o̲}\par
+\noindent doublelowline $\mapsto$ {\cdmformat o̳}\par
+\noindent tildeoverlay $\mapsto$ {\cdmformat o̴}\par
+\noindent shortstrokeoverlay $\mapsto$ {\cdmformat o̵}\par
+\noindent longstrokeoverlay $\mapsto$ {\cdmformat o̶}\par
+\noindent shortsolidusoverlay $\mapsto$ {\cdmformat o̷}\par
+\noindent longsolidusoverlay $\mapsto$ {\cdmformat o̸}\par
+\noindent righthalfringbelow $\mapsto$ {\cdmformat o̹}\par
+\noindent invertedbridgebelow $\mapsto$ {\cdmformat o̺}\par
+\noindent squarebelow $\mapsto$ {\cdmformat o̻}\par
+\noindent seagullbelow $\mapsto$ {\cdmformat o̼}\par
+\noindent xabove $\mapsto$ {\cdmformat o̽}\par
+\noindent verticaltilde $\mapsto$ {\cdmformat o̾}\par
+\noindent doubleoverline $\mapsto$ {\cdmformat o̿}\par
+\noindent gravetonemark $\mapsto$ {\cdmformat ò}\par
+\noindent acutetonemark $\mapsto$ {\cdmformat ó}\par
+\noindent greekperispomeni $\mapsto$ {\cdmformat o͂}\par
+\noindent greekkoronis $\mapsto$ {\cdmformat o̓}\par
+\noindent greekdialytikatonos $\mapsto$ {\cdmformat ö́}\par
+\noindent greekypogegrammeni $\mapsto$ {\cdmformat oͅ}\par
+\noindent bridgeabove $\mapsto$ {\cdmformat o͆}\par
+\noindent equalssignbelow $\mapsto$ {\cdmformat o͇}\par
+\noindent doubleverticallinebelow $\mapsto$ {\cdmformat o͈}\par
+\noindent leftanglebelow $\mapsto$ {\cdmformat o͉}\par
+\noindent nottildeabove $\mapsto$ {\cdmformat o͊}\par
+\noindent homotheticabove $\mapsto$ {\cdmformat o͋}\par
+\noindent almostequaltoabove $\mapsto$ {\cdmformat o͌}\par
+\noindent leftrightarrowbelow $\mapsto$ {\cdmformat o͍}\par
+\noindent upwardsarrowbelow $\mapsto$ {\cdmformat o͎}\par
+\noindent graphemejoiner $\mapsto$ {\cdmformat o͏}\par
+\noindent rightarrowheadabove $\mapsto$ {\cdmformat o͐}\par
+\noindent lefthalfringabove $\mapsto$ {\cdmformat o͑}\par
+\noindent fermata $\mapsto$ {\cdmformat o͒}\par
+\noindent xbelow $\mapsto$ {\cdmformat o͓}\par
+\noindent leftarrowheadbelow $\mapsto$ {\cdmformat o͔}\par
+\noindent rightarrowheadbelow $\mapsto$ {\cdmformat o͕}\par
+\noindent rightarrowheadanduparrowheadbelow $\mapsto$ {\cdmformat o͖}\par
+\noindent righthalfringabove $\mapsto$ {\cdmformat o͗}\par
+\noindent dotaboveright $\mapsto$ {\cdmformat o͘}\par
+\noindent asteriskbelow $\mapsto$ {\cdmformat o͙}\par
+\noindent doubleringbelow $\mapsto$ {\cdmformat o͚}\par
+\noindent zigzagabove $\mapsto$ {\cdmformat o͛}\par
+\noindent doublebrevebelow $\mapsto$ {\cdmformat o͜}\par
+\noindent doublebreve $\mapsto$ {\cdmformat o͝}\par
+\noindent doublemacron $\mapsto$ {\cdmformat o͞}\par
+\noindent doublemacronbelow $\mapsto$ {\cdmformat o͟}\par
+\noindent doubletilde $\mapsto$ {\cdmformat o͠}\par
+\noindent doubleinvertedbreve $\mapsto$ {\cdmformat o͡}\par
+\noindent doublerightwardsarrowbelow $\mapsto$ {\cdmformat o͢}\par
+\noindent latinsmalllettera $\mapsto$ {\cdmformat oͣ}\par
+\noindent latinsmalllettere $\mapsto$ {\cdmformat oͤ}\par
+\noindent latinsmallletteri $\mapsto$ {\cdmformat oͥ}\par
+\noindent latinsmalllettero $\mapsto$ {\cdmformat oͦ}\par
+\noindent latinsmallletteru $\mapsto$ {\cdmformat oͧ}\par
+\noindent latinsmallletterc $\mapsto$ {\cdmformat oͨ}\par
+\noindent latinsmallletterd $\mapsto$ {\cdmformat oͩ}\par
+\noindent latinsmallletterh $\mapsto$ {\cdmformat oͪ}\par
+\noindent latinsmallletterm $\mapsto$ {\cdmformat oͫ}\par
+\noindent latinsmallletterr $\mapsto$ {\cdmformat oͬ}\par
+\noindent latinsmalllettert $\mapsto$ {\cdmformat oͭ}\par
+\noindent latinsmallletterv $\mapsto$ {\cdmformat oͮ}\par
+\noindent latinsmallletterx $\mapsto$ {\cdmformat oͯ}\par
+}
+
+%-----   List of Typing shortcuts
+\newcommand\cdmshowplainlistts{%
+\noindent cdmgrave $\mapsto$ {\cdmformat ò}\par
+\noindent cdmacute $\mapsto$ {\cdmformat ó}\par
+\noindent cdmcircum $\mapsto$ {\cdmformat ô}\par
+\noindent cdmtilde $\mapsto$ {\cdmformat õ}\par
+\noindent cdmmacron $\mapsto$ {\cdmformat ō}\par
+\noindent cdmoverl $\mapsto$ {\cdmformat o̅}\par
+\noindent cdmbreve $\mapsto$ {\cdmformat ŏ}\par
+\noindent cdmdot $\mapsto$ {\cdmformat ȯ}\par
+\noindent cdmdiaeresis $\mapsto$ {\cdmformat ö}\par
+\noindent cdmhook $\mapsto$ {\cdmformat ỏ}\par
+\noindent cdmring $\mapsto$ {\cdmformat o̊}\par
+\noindent cdmdacute $\mapsto$ {\cdmformat ő}\par
+\noindent cdmcaron $\mapsto$ {\cdmformat ǒ}\par
+\noindent cdmvl $\mapsto$ {\cdmformat o̍}\par
+\noindent cdmdvl $\mapsto$ {\cdmformat o̎}\par
+\noindent cdmdgrave $\mapsto$ {\cdmformat ȍ}\par
+\noindent cdmcrabindu $\mapsto$ {\cdmformat o̐}\par
+\noindent cdminvbreve $\mapsto$ {\cdmformat ȏ}\par
+\noindent cdmtcomma $\mapsto$ {\cdmformat o̒}\par
+\noindent cdmcomma $\mapsto$ {\cdmformat o̓}\par
+\noindent cdmrevcomma $\mapsto$ {\cdmformat o̔}\par
+\noindent cdmcommaright $\mapsto$ {\cdmformat o̕}\par
+\noindent cdmgraveb $\mapsto$ {\cdmformat o̖}\par
+\noindent cdmacuteb $\mapsto$ {\cdmformat o̗}\par
+\noindent cdmlefttackb $\mapsto$ {\cdmformat o̘}\par
+\noindent cdmrighttackb $\mapsto$ {\cdmformat o̙}\par
+\noindent cdmleftangle $\mapsto$ {\cdmformat o̚}\par
+\noindent cdmhorn $\mapsto$ {\cdmformat ơ}\par
+\noindent cdmlefthalfringb $\mapsto$ {\cdmformat o̜}\par
+\noindent cdmuptackb $\mapsto$ {\cdmformat o̝}\par
+\noindent cdmdowntackb $\mapsto$ {\cdmformat o̞}\par
+\noindent cdmplussignb $\mapsto$ {\cdmformat o̟}\par
+\noindent cdmminussignb $\mapsto$ {\cdmformat o̠}\par
+\noindent cdmpalatalizedhookb $\mapsto$ {\cdmformat o̡}\par
+\noindent cdmretroflexhookb $\mapsto$ {\cdmformat o̢}\par
+\noindent cdmdotb $\mapsto$ {\cdmformat ọ}\par
+\noindent cdmdiaeresisb $\mapsto$ {\cdmformat o̤}\par
+\noindent cdmringb $\mapsto$ {\cdmformat o̥}\par
+\noindent cdmcommab $\mapsto$ {\cdmformat o̦}\par
+\noindent cdmcedilla $\mapsto$ {\cdmformat o̧}\par
+\noindent cdmogonek $\mapsto$ {\cdmformat ǫ}\par
+\noindent cdmvlb $\mapsto$ {\cdmformat o̩}\par
+\noindent cdmbridgeb $\mapsto$ {\cdmformat o̪}\par
+\noindent cdminvdarchb $\mapsto$ {\cdmformat o̫}\par
+\noindent cdmcaronb $\mapsto$ {\cdmformat o̬}\par
+\noindent cdmcircumb $\mapsto$ {\cdmformat o̭}\par
+\noindent cdmbreveb $\mapsto$ {\cdmformat o̮}\par
+\noindent cdminvbreveb $\mapsto$ {\cdmformat o̯}\par
+\noindent cdmtildeb $\mapsto$ {\cdmformat o̰}\par
+\noindent cdmmacronb $\mapsto$ {\cdmformat o̱}\par
+\noindent cdmlowl $\mapsto$ {\cdmformat o̲}\par
+\noindent cdmdlowl $\mapsto$ {\cdmformat o̳}\par
+\noindent cdmtildeo $\mapsto$ {\cdmformat o̴}\par
+\noindent cdmshortstrokeo $\mapsto$ {\cdmformat o̵}\par
+\noindent cdmlongstrokeo $\mapsto$ {\cdmformat o̶}\par
+\noindent cdmshortsoliduso $\mapsto$ {\cdmformat o̷}\par
+\noindent cdmlongsoliduso $\mapsto$ {\cdmformat o̸}\par
+\noindent cdmrighthalfringb $\mapsto$ {\cdmformat o̹}\par
+\noindent cdminvbridgeb $\mapsto$ {\cdmformat o̺}\par
+\noindent cdmsquareb $\mapsto$ {\cdmformat o̻}\par
+\noindent cdmseagullb $\mapsto$ {\cdmformat o̼}\par
+\noindent cdmx $\mapsto$ {\cdmformat o̽}\par
+\noindent cdmvtilde $\mapsto$ {\cdmformat o̾}\par
+\noindent cdmdoverl $\mapsto$ {\cdmformat o̿}\par
+\noindent cdmgravetonemark $\mapsto$ {\cdmformat ò}\par
+\noindent cdmacutetonemark $\mapsto$ {\cdmformat ó}\par
+\noindent cdmgreekperispomeni $\mapsto$ {\cdmformat o͂}\par
+\noindent cdmgreekkoronis $\mapsto$ {\cdmformat o̓}\par
+\noindent cdmgreekdialytikatonos $\mapsto$ {\cdmformat ö́}\par
+\noindent cdmgreekypogegrammeni $\mapsto$ {\cdmformat oͅ}\par
+\noindent cdmbridge $\mapsto$ {\cdmformat o͆}\par
+\noindent cdmequalssignb $\mapsto$ {\cdmformat o͇}\par
+\noindent cdmdvlb $\mapsto$ {\cdmformat o͈}\par
+\noindent cdmleftangleb $\mapsto$ {\cdmformat o͉}\par
+\noindent cdmnottilde $\mapsto$ {\cdmformat o͊}\par
+\noindent cdmhomothetic $\mapsto$ {\cdmformat o͋}\par
+\noindent cdmalmostequalto $\mapsto$ {\cdmformat o͌}\par
+\noindent cdmleftrightab $\mapsto$ {\cdmformat o͍}\par
+\noindent cdmupwardsab $\mapsto$ {\cdmformat o͎}\par
+\noindent cdmgraphemejoiner $\mapsto$ {\cdmformat o͏}\par
+\noindent cdmrighta $\mapsto$ {\cdmformat o͐}\par
+\noindent cdmlefthalfring $\mapsto$ {\cdmformat o͑}\par
+\noindent cdmfermata $\mapsto$ {\cdmformat o͒}\par
+\noindent cdmxb $\mapsto$ {\cdmformat o͓}\par
+\noindent cdmleftab $\mapsto$ {\cdmformat o͔}\par
+\noindent cdmrightab $\mapsto$ {\cdmformat o͕}\par
+\noindent cdmrightaupab $\mapsto$ {\cdmformat o͖}\par
+\noindent cdmrighthalfring $\mapsto$ {\cdmformat o͗}\par
+\noindent cdmdotright $\mapsto$ {\cdmformat o͘}\par
+\noindent cdmasteriskb $\mapsto$ {\cdmformat o͙}\par
+\noindent cdmdringb $\mapsto$ {\cdmformat o͚}\par
+\noindent cdmzigzag $\mapsto$ {\cdmformat o͛}\par
+\noindent cdmdbreveb $\mapsto$ {\cdmformat o͜}\par
+\noindent cdmdbreve $\mapsto$ {\cdmformat o͝}\par
+\noindent cdmdmacron $\mapsto$ {\cdmformat o͞}\par
+\noindent cdmdmacronb $\mapsto$ {\cdmformat o͟}\par
+\noindent cdmdtilde $\mapsto$ {\cdmformat o͠}\par
+\noindent cdmdinvbreve $\mapsto$ {\cdmformat o͡}\par
+\noindent cdmdrightwardsab $\mapsto$ {\cdmformat o͢}\par
+\noindent cdmlettera $\mapsto$ {\cdmformat oͣ}\par
+\noindent cdmlettere $\mapsto$ {\cdmformat oͤ}\par
+\noindent cdmletteri $\mapsto$ {\cdmformat oͥ}\par
+\noindent cdmlettero $\mapsto$ {\cdmformat oͦ}\par
+\noindent cdmletteru $\mapsto$ {\cdmformat oͧ}\par
+\noindent cdmletterc $\mapsto$ {\cdmformat oͨ}\par
+\noindent cdmletterd $\mapsto$ {\cdmformat oͩ}\par
+\noindent cdmletterh $\mapsto$ {\cdmformat oͪ}\par
+\noindent cdmletterm $\mapsto$ {\cdmformat oͫ}\par
+\noindent cdmletterr $\mapsto$ {\cdmformat oͬ}\par
+\noindent cdmlettert $\mapsto$ {\cdmformat oͭ}\par
+\noindent cdmletterv $\mapsto$ {\cdmformat oͮ}\par
+\noindent cdmletterx $\mapsto$ {\cdmformat oͯ}\par
+}
+\newcommand\testcdm[1]{%
+CDM test using [#1]:\par
+\begin{quotation}
+#1\cdmgrave\ 
+#1\cdmacute\ 
+#1\cdmcircum\ 
+#1\cdmtilde\ 
+#1\cdmmacron\ 
+#1\cdmoverl\ 
+#1\cdmbreve\ 
+#1\cdmdot\ 
+\textcolor{red}{#1\cdmdiaeresis}\ 
+#1\cdmhook\ 
+#1\cdmring\ 
+#1\cdmdacute\ 
+#1\cdmcaron\ 
+#1\cdmvl\ 
+#1\cdmdvl\ 
+#1\cdmdgrave\ 
+#1\cdmcrabindu\ 
+#1\cdminvbreve\ 
+#1\cdmtcomma\ 
+#1\cdmcomma\ 
+#1\cdmrevcomma\ 
+#1\cdmcommaright\ 
+#1\cdmgraveb\ 
+#1\cdmacuteb\ 
+#1\cdmlefttackb\ 
+#1\cdmrighttackb\ 
+#1\cdmleftangle\ 
+#1\cdmhorn\ 
+#1\cdmlefthalfringb\ 
+#1\cdmuptackb\ 
+#1\cdmdowntackb\ 
+#1\cdmplussignb\ 
+#1\cdmminussignb\ 
+#1\cdmpalatalizedhookb\ 
+#1\cdmretroflexhookb\ 
+#1\cdmdotb\ 
+#1\cdmdiaeresisb\ 
+#1\cdmringb\ 
+#1\cdmcommab\ 
+#1\cdmcedilla\ 
+#1\cdmogonek\ 
+#1\cdmvlb\ 
+#1\cdmbridgeb\ 
+#1\cdminvdarchb\ 
+#1\cdmcaronb\ 
+#1\cdmcircumb\ 
+#1\cdmbreveb\ 
+#1\cdminvbreveb\ 
+#1\cdmtildeb\ 
+#1\cdmmacronb\ 
+#1\cdmlowl\ 
+#1\cdmdlowl\ 
+#1\cdmtildeo\ 
+#1\cdmshortstrokeo\ 
+#1\cdmlongstrokeo\ 
+#1\cdmshortsoliduso\ 
+#1\cdmlongsoliduso\ 
+#1\cdmrighthalfringb\ 
+#1\cdminvbridgeb\ 
+#1\cdmsquareb\ 
+#1\cdmseagullb\ 
+#1\cdmx\ 
+#1\cdmvtilde\ 
+#1\cdmdoverl\ 
+#1\cdmgravetonemark\ 
+#1\cdmacutetonemark\ 
+#1\cdmgreekperispomeni\ 
+#1\cdmgreekkoronis\ 
+#1\cdmgreekdialytikatonos\ 
+#1\cdmgreekypogegrammeni\ 
+#1\cdmbridge\ 
+#1\cdmequalssignb\ 
+#1\cdmdvlb\ 
+#1\cdmleftangleb\ 
+#1\cdmnottilde\ 
+#1\cdmhomothetic\ 
+#1\cdmalmostequalto\ 
+#1\cdmleftrightab\ 
+#1\cdmupwardsab\ 
+#1\cdmgraphemejoiner\ 
+#1\cdmrighta\ 
+#1\cdmlefthalfring\ 
+#1\cdmfermata\ 
+#1\cdmxb\ 
+#1\cdmleftab\ 
+#1\cdmrightab\ 
+#1\cdmrightaupab\ 
+#1\cdmrighthalfring\ 
+#1\cdmdotright\ 
+#1\cdmasteriskb\ 
+#1\cdmdringb\ 
+#1\cdmzigzag\ 
+#1\cdmdbreveb\ 
+#1\cdmdbreve\ 
+#1\cdmdmacron\ 
+#1\cdmdmacronb\ 
+#1\cdmdtilde\ 
+#1\cdmdinvbreve\ 
+#1\cdmdrightwardsab\ 
+#1\cdmlettera\ 
+#1\cdmlettere\ 
+#1\cdmletteri\ 
+#1\cdmlettero\ 
+#1\cdmletteru\ 
+#1\cdmletterc\ 
+#1\cdmletterd\ 
+#1\cdmletterh\ 
+#1\cdmletterm\ 
+#1\cdmletterr\ 
+#1\cdmlettert\ 
+#1\cdmletterv\ 
+#1\cdmletterx\ 
+\end{quotation}
+}
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+%%%
+%%%\begin{document}
+%%%
+%%%{
+%%%
+%%%\noindent θ + a combining diacritical mark
+%%%
+%%%\noindent \verb|θ^^^^0308| $\mapsto$ θ^^^^0308
+%%%
+%%%\bigskip
+%%%It would be handy to have a set of commands with (relatively) short-names to access these combining diacritical marks rather than having to type in the codepoints or the mark directly, such that, for example, \colorbox{blue!5}{\color{blue}\ttfamily a\textbackslash cdmacute} produces {\color{blue}a\cdmacute}, \colorbox{blue!5}{\color{blue}\ttfamily a\textbackslash cdmdotb} produces {\color{blue}a\cdmdotb}, and so on.
+%%%
+%%%
+%%%
+%%%
+%%%\testcdm{o}
+%%%
+%%%
+%%%
+%%%\section{Combining Diacritical Marks}
+%%%\subsection{List of Unicode codepoints}
+%%%\begin{multicols}{4}\noindent
+%%%\cdmtag
+%%%\cdmshowplainlistuc
+%%%\eolist
+%%%\end{multicols}
+%%%
+%%%\subsection{List of Unicode names}
+%%%\begin{multicols}{2}\noindent
+%%%\cdmtag
+%%%\cdmshowplainlistun
+%%%\eolist
+%%%\end{multicols}
+%%%
+%%%\subsection{List of Typing Shortcuts}
+%%%\begin{multicols}{3}\noindent
+%%%\cdmtag
+%%%\cdmshowplainlistts
+%%%\eolist
+%%%\end{multicols}
+%%%
+%%%\bigskip
+%%%The naming convention for the shortcuts is based on the Unicode name, with some abbreviating:
+%%%
+%%%\begin{center}
+%%%\begin{tabular}{ll}
+%%%\bfseries String & \bfseries Replaced with \\ 
+%%%\hline
+%%%above &  \\ 
+%%%accent &  \\ 
+%%%and &  \\ 
+%%%arrow & a \\ 
+%%%below & b \\ 
+%%%circumflex & circum \\ 
+%%%combining & cdm \\ 
+%%%double & d \\ 
+%%%head &  \\ 
+%%%inverted & inv \\ 
+%%%latin small &  \\ 
+%%%line & l \\ 
+%%%overlay & o \\ 
+%%%reversed & rev \\ 
+%%%turned & t \\ 
+%%%vertical & v \\ 
+%%%\hline
+%%%\end{tabular}
+%%%\end{center}
+
+
+
+%\end{document}
+%
+%https://tex.stackexchange.com/questions/595697/greek-letter-with-two-dots-over-in-text-mode
