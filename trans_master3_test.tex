@@ -1,0 +1,1623 @@
+\begin{filecontents*}[overwrite]{\jobname.bib}
+
+@xdata{jsa,title = {Studia Antiqua},subtitle = {A Student Journal for the Study of the Ancient World},publisher = {Brigham Yound University},abbreviation = {SA},}
+@xdata{joinn,title = {The Oriental Institute News \& Notes},abbreviation = {OINN},}
+@xdata{rwiki,abbreviation = {W},organization = {Wikipedia},}
+@xdata{byu,organization = {Brigham Young University},}
+
+
+@online{o1,title = {Ugarit},url = {https://en.wikipedia.org/wiki/Ugarit},keywords = {ugaritic},xdata = {rwiki},}
+@online{o2,title = {Dingir},url = {https://en.wikipedia.org/wiki/Dingir},keywords = {cuneiform},xdata = {rwiki},}
+@online{o3,title = {Cuneiform transliteration},url = {https://sumer.fandom.com/wiki/Cuneiform_transliteration},keywords = {cuneiform},}
+
+
+@periodical{j1,date = {2010},volume = {8},number = {1},url = {https://scholarsarchive.byu.edu/studiaantiqua/vol8/iss1/4},xdata = {jsa},}
+@periodical{j2,date = {2002},number = {172},issue = {Winter},url = {https://oi.uchicago.edu/sites/oi.uchicago.edu/files/uploads/shared/docs/nn172.pdf},xdata = {joinn},}
+
+@article{a1,author = {Jed Robinson},title = {The God of the Patriarchs and the Ugaritic Texts},subtitle = {A Shared Religious and Cultural Identity},crossref = {j1},pages = {25 - 33},keywords = {ugaritic},xdata = {byu},}
+@article{a2,author = {Dennis Pardee},title = {Ugarit Ritual Texts},crossref = {j2},pages = {1 - 5},keywords = {ugaritic},}
+	
+@thesis{Adali,url = {https://ses.library.usyd.edu.au/bitstream/handle/2123/4890/sf-adali-2009-thesis.pdf},author = {Selim F Adalı},title = {Ummān-manda and its Significance in the First Millennium B.C.},type = {PhD thesis},date = {2009},institution = {University of Sydney},keywords = {cuneiform},}
+
+\end{filecontents*}
+
+
+
+
+\documentclass{article}
+%\usepackage{booktabs}
+%\usepackage{cellspace}
+%\setlength{\cellspacetoplimit}{3pt}
+
+\usepackage[table]{xcolor}
+\pagecolor{green!3}
+\newcommand\theadercolour{red!20!yellow}
+\usepackage{fontspec}
+\usepackage[listings]{tcolorbox}
+\usepackage{longtable}
+%%\usepackage{bidi}% needs xelatex
+\usepackage[nil,english]{babel}
+\usepackage[english=british]{csquotes}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
+
+%\usepackage{linguex}%gb4e}%expex}%for \tglossX
+
+
+%\usepackage{xparse}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+
+\newfontfamily\markerfont{Noto Sans Symbols}[Scale=1.5]
+\newfontfamily\markerfontb{Noto Sans}[Scale=1.5]
+\newfontface\symbolfont{Noto Sans Symbols2}[Scale=1.5]
+\newfontface\symbolfontb{Segoe UI Symbol}[Scale=1.5]
+\newfontface\symbolfontc{FreeSerif}[Scale=1.5]
+
+
+\newfontface\arfont{Noto Sans Armenian}
+
+
+\newfontfamily\ugfont{Noto Sans Ugaritic}[Colour=blue,Scale=1.5]
+\newfontfamily\ugfontb{Noto Sans Ugaritic}%plain font
+
+\newfontfamily\opfont{NotoSansOldPersian-Regular.ttf}%Noto Sans OldPersian}[Colour=blue,Scale=1.5]
+\newfontfamily\opfontb{NotoSansOldPersian-Regular.ttf}%Noto Sans OldPersian}%plain font
+
+\newfontface\mlfont{Noto Sans Malayalam}[Colour=blue,Scale=1.5]
+\newfontface\mlfontb{Noto Sans Malayalam}
+
+\newfontfamily\ahfont{Noto Sans Anatolian Hieroglyphs}[Scale=1.5]%plain font
+\newfontfamily\avfont{Noto Sans Avestan}[Scale=1.5]%plain font
+\newfontfamily\brfont{Noto Sans Brahmi}[Scale=1.5]%plain font
+\newfontfamily\cafont{Noto Sans Carian}[Scale=1.5]%plain font
+\newfontfamily\cufont{Noto Sans Cuneiform}[Scale=1.5]%plain font
+\newfontfamily\cyfont{Noto Sans Cypriot}[Scale=1.5]%plain font
+\newfontfamily\cdmfont{Noto Serif}
+\newcommand\cdmformat{\cdmfont}
+%
+\newfontface\neoassyrianfont{Assurbanipal}
+\newfontface\nafont{Assurbanipal}
+
+
+% font-based
+\newcommand\furu{\textcolor{red}{\textsuperscript{{\ahfont\ahun{a237}}}}}% URU 𒌷 "city"
+
+\newcommand\ftown{{\symbolfontb\color{red}\textsuperscript{\symbol{127960}}}}% town
+
+\newcommand\fclay{{\cufont\color{red}\textsuperscript{\symbol{74062}}}} % IM 𒅎 "clay" 1214E
+
+\newcommand\fking{{\symbolfontc\color{red}\textsuperscript{\symbol{9813}}}} %♕ = chess queeen
+
+\newcommand\fdet[1]{{\symbolfontc\color{red}\textsuperscript{#1}}}
+
+\newcommand\fdetgen[1]{{\color{red}\textsuperscript{#1}}}
+
+
+%==============================
+
+
+
+
+
+
+
+
+%\input{ugtrans_input.tex}% Ugaritic
+\input{optrans_input.tex}% Old Persian
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+%Common code: plain
+\newcommand\translitformat{\color{red}\bfseries}
+\newcommand\tablea{%
+\setlength{\tabcolsep}{-0.5pt}%
+\begin{tabular}[b]{c}
+\scriptsize 
+}
+\newcommand\tableb{%
+\\ \rule{0pt}{1.8ex} 
+}
+\newcommand\tablec{%
+\\\end{tabular}%
+}
+\newcommand\eolist{{\tiny [End of List]}\par}
+
+\newcommand\tdoubtful{??}
+\newcommand\tseenote{See n 20}
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\newcommand\sbucl{{\mdseries\markerfont\symbol{9121}}}% ⎡
+\newcommand\sbbcl{{\mdseries\markerfont\symbol{9123}}}% ⎣
+\newcommand\sbucr{{\mdseries\markerfont\symbol{9124}}}% ⎤
+\newcommand\sbbcr{{\mdseries\markerfont\symbol{9126}}}% ⎦
+\newcommand\tlcorner{{\mdseries\markerfont\symbol{8988}}}% ⌜
+\newcommand\trcorner{{\mdseries\markerfont\symbol{8989}}}% ⌝
+\newcommand\blcorner{{\mdseries\markerfont\symbol{8990}}}% ⌞
+\newcommand\brcorner{{\mdseries\markerfont\symbol{8991}}}% ⌟
+\newcommand\lbracket{{\mdseries\markerfontb\symbol{91}}}% [
+\newcommand\rbracket{{\mdseries\markerfontb\symbol{93}}}% ]
+
+
+% Common code
+\ExplSyntaxOn
+
+\tl_new:N \l_myuc_tl
+\tl_new:N \l_myun_tl
+\tl_new:N \l_myts_tl
+\tl_new:N \l_myb_tl
+\tl_new:N \l_myx_tl
+\tl_new:N \l_myy_tl
+\tl_new:N \l_myz_tl
+\tl_new:N \l_myzz_tl
+\tl_new:N \l_myrev_tl
+
+\NewDocumentCommand{\transrev}{ m }{
+
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+		\tl_use:N \l_myrev_tl
+}
+\NewDocumentCommand{\transrevonly}{ m }{
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+%		\tl_use:N \l_myrev_tl
+}
+
+% Generic ruby text
+\NewDocumentCommand { \truby } { m m m } {
+\tl_set:Nn \l_myx_tl { #1 } % font switch
+\tl_set:Nn \l_myy_tl { #2 } % base character
+\tl_set:Nn \l_myz_tl { #3 }  % ruby text
+
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+\scriptsize \tl_use:N \l_myz_tl  \\
+\rule{0pt}{1.8ex} \tl_use:N \l_myx_tl \tl_use:N \l_myy_tl \\
+\end{tabular} 
+}
+}
+
+
+% Generic gloss
+\NewDocumentCommand { \tgloss } { O{inline} m m m m } {
+%\tl_set:Nn \l_myx_tl { #2 } % format for script
+%\tl_set:Nn \l_myy_tl { #3 } % script
+%\tl_set:Nn \l_myz_tl { #4 }  % transliteration
+%\tl_set:Nn \l_myzz_tl { #5 }  % gloss
+				\cs:w tgloss#1 \cs_end: {#2}{#3}{#4}{#5}
+%inline/list/expex
+}
+
+\NewDocumentCommand { \tglossinline } { m m m m } {
+\tl_set:Nn \l_myx_tl { #1 } % format for script
+\tl_set:Nn \l_myy_tl { #2 } % script
+\tl_set:Nn \l_myz_tl { #3 } % transliteration
+\tl_set:Nn \l_myzz_tl { #4 }  % gloss
+
+
+				{ \tl_use:N \l_myx_tl \tl_use:N \l_myy_tl } 
+				~ 
+				( \textit{\tl_use:N \l_myz_tl } 
+%				\tl_if_empty:NTF 
+%								 \l_myzz_tl  
+%								{ } 
+%								{ ,~ ` \tl_use:N \l_myzz_tl ' }
+			\exp_args:No
+				\tl_if_single:nTF 
+								{ \l_myzz_tl } 
+								{ , ~ \tl_use:N \l_myzz_tl } 
+								{ 
+								\tl_if_empty:NTF 
+												 \l_myzz_tl  
+												{ } 
+												{ , ~ ` \tl_use:N \l_myzz_tl ' }
+            }
+      )
+						
+}
+
+
+
+\newcommand\expexa{%
+\ex\begingl\gla}
+\newcommand\expexb{%
+// \glb}
+\newcommand\expexc{%
+// \glc `}
+\newcommand\expexd{%
+' // %\glft xxx //
+	\endgl
+	\xe
+}
+
+
+
+\NewDocumentCommand { \tglossexpex } { m m m m } {
+\tl_set:Nn \l_myx_tl { #1 } % format for script
+\tl_set:Nn \l_myy_tl { #2 } % script
+\tl_set:Nn \l_myz_tl { #3 } % transliteration
+\tl_set:Nn \l_myzz_tl { #4 }  % gloss
+
+			\exp_args:No
+				\tl_if_single:nTF 
+								{ \l_myzz_tl } 
+								{ %true single start 
+									x
+%									\ex
+%									\begingl
+%									\gla { \tl_use:N \l_myx_tl \tl_use:N \l_myy_tl } \\
+%									\glb \tl_use:N \l_myz_tl \\
+%										\glc \tl_use:N \l_myzz_tl \\ 
+%										%\glft xxx //
+%										\endgl
+%										\xe
+								} %true single finish
+								{ %false single start
+								\tl_if_empty:NTF 
+												 \l_myzz_tl  
+												{ } 
+												{ 
+													y
+%														\cs:w ex \cs_end:
+%														\cs:w begingl \cs_end: [everygla=\upshape]
+%														\cs:w gla  \cs_end: \tl_use:N \l_myx_tl \tl_use:N \l_myy_tl //
+%														\cs:w glb \cs_end: \tl_use:N \l_myz_tl //
+%														\cs:w glc \cs_end:  ` \tl_use:N \l_myzz_tl ' // 
+%													%\glft xxx //
+%													\cs:w endgl \cs_end:
+%													\cs:w xe \cs_end:
+%%														\ex 
+%%														\begingl[everygl=]
+%%														\gla A //
+%%														\glb  B //
+%%														\glc   `C' // 
+%%													%\glft xxx //
+%%													\endgl 
+%%													\xe 
+%%%%\expexa A \expexb B \expexc C \expexd
+%%				\begin{exe}
+%%				\ex
+%%				\gll Wenn jemand in die W\"uste zieht ... \\
+%%				If someone in the desert draws and lives ... \\
+%%				\trans `if one retreats to the desert and ... '
+%%				\end{exe}
+%%%						\exg. A~ B~ C~ D~ E~ F~ \\
+%%%						          The~ cat~ sat~ on~ the~ mat.~ \\ 
+%%%						          \par ~\par
+												}
+            } % false single finish
+}
+
+
+
+
+
+% Generic ruby transliteration text, + gloss
+\NewDocumentCommand { \tglossruby } { m m m m } {
+\tl_set:Nn \l_myx_tl { #1 } % font switch
+\tl_set:Nn \l_myy_tl { #2 } % base character
+\tl_set:Nn \l_myz_tl { #3 }  % ruby text
+\tl_set:Nn \l_myzz_tl { #4 }  % gloss
+
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+\scriptsize \tl_use:N \l_myz_tl  \\
+\rule{0pt}{1.8ex} \tl_use:N \l_myx_tl \tl_use:N \l_myy_tl \\
+\end{tabular} 
+
+			\exp_args:No
+				\tl_if_single:nTF 
+								{ \l_myzz_tl } 
+								{ ~ ( \tl_use:N \l_myzz_tl ) } 
+								{ 
+								\tl_if_empty:NTF 
+												 \l_myzz_tl  
+												{ } 
+												{ ~ (` \tl_use:N \l_myzz_tl ') }
+            }
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+\ExplSyntaxOff
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\newcommand\ugtag{{\tiny [Ugaritic]\par}}
+
+
+\newcommand\ugalpa{\symbol{66432}}
+\newcommand\ugbeta{\symbol{66433}}
+\newcommand\uggamla{\symbol{66434}}
+\newcommand\ugkha{\symbol{66435}}
+\newcommand\ugdelta{\symbol{66436}}
+\newcommand\ugho{\symbol{66437}}
+\newcommand\ugwo{\symbol{66438}}
+\newcommand\ugzeta{\symbol{66439}}
+\newcommand\ughota{\symbol{66440}}
+\newcommand\ugtet{\symbol{66441}}
+\newcommand\ugyod{\symbol{66442}}
+\newcommand\ugkaf{\symbol{66443}}
+\newcommand\ugshin{\symbol{66444}}
+\newcommand\uglamda{\symbol{66445}}
+\newcommand\ugmem{\symbol{66446}}
+\newcommand\ugdhal{\symbol{66447}}
+\newcommand\ugnun{\symbol{66448}}
+\newcommand\ugzu{\symbol{66449}}
+\newcommand\ugsamka{\symbol{66450}}
+\newcommand\ugain{\symbol{66451}}
+\newcommand\ugpu{\symbol{66452}}
+\newcommand\ugsade{\symbol{66453}}
+\newcommand\ugqopa{\symbol{66454}}
+\newcommand\ugrasha{\symbol{66455}}
+\newcommand\ugthanna{\symbol{66456}}
+\newcommand\ugghain{\symbol{66457}}
+\newcommand\ugto{\symbol{66458}}
+\newcommand\ugi{\symbol{66459}}
+\newcommand\ugu{\symbol{66460}}
+\newcommand\ugssu{\symbol{66461}}
+\newcommand\ugworddivider{\symbol{66463}}
+
+
+
+%
+%\newcommand\uga{\symbol{66432}}
+%\newcommand\ugb{\symbol{66433}}
+%\newcommand\ugg{\symbol{66434}}
+%\newcommand\ugkh{\symbol{66435}}
+%\newcommand\ugd{\symbol{66436}}
+%\newcommand\ugh{\symbol{66437}}
+%\newcommand\ugw{\symbol{66438}}
+%\newcommand\ugz{\symbol{66439}}
+%\newcommand\ughh{\symbol{66440}}
+%\newcommand\ugt{\symbol{66441}}
+%\newcommand\ugy{\symbol{66442}}
+%\newcommand\ugk{\symbol{66443}}
+%\newcommand\ugsh{\symbol{66444}}
+%\newcommand\ugl{\symbol{66445}}
+%\newcommand\ugm{\symbol{66446}}
+%\newcommand\ugdh{\symbol{66447}}
+%\newcommand\ugn{\symbol{66448}}
+%\newcommand\ugzz{\symbol{66449}}
+%\newcommand\ugss{\symbol{66450}}
+%\newcommand\ugj{\symbol{66451}}
+%\newcommand\ugp{\symbol{66452}}
+%\newcommand\ugs{\symbol{66453}}
+%\newcommand\ugq{\symbol{66454}}
+%\newcommand\ugr{\symbol{66455}}
+%\newcommand\ugth{\symbol{66456}}
+%\newcommand\uggh{\symbol{66457}}
+%\newcommand\ugtt{\symbol{66458}}
+%\newcommand\ugi{\symbol{66459}}
+%\newcommand\ugu{\symbol{66460}}
+%\newcommand\ugssu{\symbol{66461}}
+%\newcommand\ugdiv{\symbol{66463}}
+
+%&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+\ExplSyntaxOn
+
+%\tl_new:N \l_myuc_tl
+%-----   Unicode codepoint
+\newcommand\dougtransuc{%
+%
+\regex_replace_all:nnN { U\+10380 } { \cB\{ \c{ugfont}𐎀 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10381 } { \cB\{ \c{ugfont}𐎁 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10382 } { \cB\{ \c{ugfont}𐎂 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10383 } { \cB\{ \c{ugfont}𐎃 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10384 } { \cB\{ \c{ugfont}𐎄 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10385 } { \cB\{ \c{ugfont}𐎅 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10386 } { \cB\{ \c{ugfont}𐎆 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10387 } { \cB\{ \c{ugfont}𐎇 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10388 } { \cB\{ \c{ugfont}𐎈 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10389 } { \cB\{ \c{ugfont}𐎉 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1038A } { \cB\{ \c{ugfont}𐎊 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1038B } { \cB\{ \c{ugfont}𐎋 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1038C } { \cB\{ \c{ugfont}𐎌 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1038D } { \cB\{ \c{ugfont}𐎍 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1038E } { \cB\{ \c{ugfont}𐎎 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1038F } { \cB\{ \c{ugfont}𐎏 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10390 } { \cB\{ \c{ugfont}𐎐 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10391 } { \cB\{ \c{ugfont}𐎑 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10392 } { \cB\{ \c{ugfont}𐎒 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10393 } { \cB\{ \c{ugfont}𐎓 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10394 } { \cB\{ \c{ugfont}𐎔 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10395 } { \cB\{ \c{ugfont}𐎕 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10396 } { \cB\{ \c{ugfont}𐎖 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10397 } { \cB\{ \c{ugfont}𐎗 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10398 } { \cB\{ \c{ugfont}𐎘 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+10399 } { \cB\{ \c{ugfont}𐎙 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1039A } { \cB\{ \c{ugfont}𐎚 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1039B } { \cB\{ \c{ugfont}𐎛 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1039C } { \cB\{ \c{ugfont}𐎜 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1039D } { \cB\{ \c{ugfont}𐎝 \cE\}  } \l_myuc_tl
+\regex_replace_all:nnN { U\+1039F } { \cB\{ \c{ugfont}𐎟 \cE\}  } \l_myuc_tl
+}
+%
+
+%\tl_new:N \l_myun_tl
+%-----   Unicode name
+\newcommand\dougtransun{%
+\regex_replace_all:nnN { worddivider } { \cB\{ \c{ugfont}𐎟 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { thanna } { \cB\{ \c{ugfont}𐎘 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { gamla } { \cB\{ \c{ugfont}𐎂 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { delta } { \cB\{ \c{ugfont}𐎄 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { lamda } { \cB\{ \c{ugfont}𐎍 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { samka } { \cB\{ \c{ugfont}𐎒 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { rasha } { \cB\{ \c{ugfont}𐎗 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ghain } { \cB\{ \c{ugfont}𐎙 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { alpa } { \cB\{ \c{ugfont}𐎀 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { beta } { \cB\{ \c{ugfont}𐎁 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { zeta } { \cB\{ \c{ugfont}𐎇 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { hota } { \cB\{ \c{ugfont}𐎈 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { shin } { \cB\{ \c{ugfont}𐎌 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { dhal } { \cB\{ \c{ugfont}𐎏 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { sade } { \cB\{ \c{ugfont}𐎕 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { qopa } { \cB\{ \c{ugfont}𐎖 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { kha } { \cB\{ \c{ugfont}𐎃 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { tet } { \cB\{ \c{ugfont}𐎉 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { yod } { \cB\{ \c{ugfont}𐎊 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { kaf } { \cB\{ \c{ugfont}𐎋 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { mem } { \cB\{ \c{ugfont}𐎎 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { nun } { \cB\{ \c{ugfont}𐎐 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ain } { \cB\{ \c{ugfont}𐎓 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ssu } { \cB\{ \c{ugfont}𐎝 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { ho } { \cB\{ \c{ugfont}𐎅 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { wo } { \cB\{ \c{ugfont}𐎆 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { zu } { \cB\{ \c{ugfont}𐎑 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { pu } { \cB\{ \c{ugfont}𐎔 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { to } { \cB\{ \c{ugfont}𐎚 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { i } { \cB\{ \c{ugfont}𐎛 \cE\}  } \l_myun_tl
+\regex_replace_all:nnN { u } { \cB\{ \c{ugfont}𐎜 \cE\}  } \l_myun_tl
+}
+
+
+%\tl_new:N \l_myts_tl
+%-----   Typing shortcut
+\newcommand\dougtransts{%
+%
+\regex_replace_all:nnN { ssu } { \cB\{ \c{ugfont}𐎝 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { div } { \cB\{ \c{ugfont}𐎟 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { hh } { \cB\{ \c{ugfont}𐎈 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { kk } { \cB\{ \c{ugfont}𐎋 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { sh } { \cB\{ \c{ugfont}𐎌 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { dh } { \cB\{ \c{ugfont}𐎏 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { zz } { \cB\{ \c{ugfont}𐎑 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { ss } { \cB\{ \c{ugfont}𐎕 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { th } { \cB\{ \c{ugfont}𐎘 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { gh } { \cB\{ \c{ugfont}𐎙 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { tt } { \cB\{ \c{ugfont}𐎚 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { a } { \cB\{ \c{ugfont}𐎀 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { b } { \cB\{ \c{ugfont}𐎁 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { g } { \cB\{ \c{ugfont}𐎂 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { k } { \cB\{ \c{ugfont}𐎃 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { d } { \cB\{ \c{ugfont}𐎄 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { h } { \cB\{ \c{ugfont}𐎅 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { w } { \cB\{ \c{ugfont}𐎆 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { z } { \cB\{ \c{ugfont}𐎇 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { t } { \cB\{ \c{ugfont}𐎉 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { y } { \cB\{ \c{ugfont}𐎊 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { l } { \cB\{ \c{ugfont}𐎍 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { m } { \cB\{ \c{ugfont}𐎎 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { n } { \cB\{ \c{ugfont}𐎐 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { s } { \cB\{ \c{ugfont}𐎒 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { j } { \cB\{ \c{ugfont}𐎓 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { p } { \cB\{ \c{ugfont}𐎔 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { q } { \cB\{ \c{ugfont}𐎖 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { r } { \cB\{ \c{ugfont}𐎗 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { i } { \cB\{ \c{ugfont}𐎛 \cE\}  } \l_myts_tl
+\regex_replace_all:nnN { u } { \cB\{ \c{ugfont}𐎜 \cE\}  } \l_myts_tl
+}
+
+%-----   Scholarly transliteration
+\newcommand\dougtranstsst[1]{%
+%
+\tl_set:Nn \l_myz_tl { #1 }
+%-----   Ruby Part 2a
+\regex_replace_all:nnN { ssu } { 10.  } \l_myz_tl
+\regex_replace_all:nnN { div } { 11.  } \l_myz_tl
+\regex_replace_all:nnN { hh } { 12.  } \l_myz_tl
+\regex_replace_all:nnN { kk } { 13.  } \l_myz_tl
+\regex_replace_all:nnN { sh } { 14.  } \l_myz_tl
+\regex_replace_all:nnN { dh } { 15.  } \l_myz_tl
+\regex_replace_all:nnN { zz } { 16.  } \l_myz_tl
+\regex_replace_all:nnN { ss } { 17.  } \l_myz_tl
+\regex_replace_all:nnN { th } { 18.  } \l_myz_tl
+\regex_replace_all:nnN { gh } { 19.  } \l_myz_tl
+\regex_replace_all:nnN { tt } { 20.  } \l_myz_tl
+\regex_replace_all:nnN { a } { 21.  } \l_myz_tl
+\regex_replace_all:nnN { b } { 22.  } \l_myz_tl
+\regex_replace_all:nnN { g } { 23.  } \l_myz_tl
+\regex_replace_all:nnN { k } { 24.  } \l_myz_tl
+\regex_replace_all:nnN { d } { 25.  } \l_myz_tl
+\regex_replace_all:nnN { h } { 26.  } \l_myz_tl
+\regex_replace_all:nnN { w } { 27.  } \l_myz_tl
+\regex_replace_all:nnN { z } { 28.  } \l_myz_tl
+\regex_replace_all:nnN { t } { 29.  } \l_myz_tl
+\regex_replace_all:nnN { y } { 30.  } \l_myz_tl
+\regex_replace_all:nnN { l } { 31.  } \l_myz_tl
+\regex_replace_all:nnN { m } { 32.  } \l_myz_tl
+\regex_replace_all:nnN { n } { 33.  } \l_myz_tl
+\regex_replace_all:nnN { s } { 34.  } \l_myz_tl
+\regex_replace_all:nnN { j } { 35.  } \l_myz_tl
+\regex_replace_all:nnN { p } { 36.  } \l_myz_tl
+\regex_replace_all:nnN { q } { 37.  } \l_myz_tl
+\regex_replace_all:nnN { r } { 38.  } \l_myz_tl
+\regex_replace_all:nnN { i } { 39.  } \l_myz_tl
+\regex_replace_all:nnN { u } { 40.  } \l_myz_tl
+%-----   Ruby Part 2b
+\regex_replace_all:nnN { 10. } { s \c{textsubscript} \cB\{ 2 \cE\}  } \l_myz_tl
+\regex_replace_all:nnN { 11. } {  \    } \l_myz_tl
+\regex_replace_all:nnN { 12. } { h^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 13. } { k  } \l_myz_tl
+\regex_replace_all:nnN { 14. } { s^^^^030c  } \l_myz_tl
+\regex_replace_all:nnN { 15. } { d^^^^0320  } \l_myz_tl
+\regex_replace_all:nnN { 16. } { z^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 17. } { s^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 18. } { t^^^^0320  } \l_myz_tl
+\regex_replace_all:nnN { 19. } { g^^^^0307  } \l_myz_tl
+\regex_replace_all:nnN { 20. } { t  } \l_myz_tl
+\regex_replace_all:nnN { 21. } { ^^^^02c0a  } \l_myz_tl
+\regex_replace_all:nnN { 22. } { b  } \l_myz_tl
+\regex_replace_all:nnN { 23. } { g  } \l_myz_tl
+\regex_replace_all:nnN { 24. } { ^^^^1e2b  } \l_myz_tl
+\regex_replace_all:nnN { 25. } { d  } \l_myz_tl
+\regex_replace_all:nnN { 26. } { h  } \l_myz_tl
+\regex_replace_all:nnN { 27. } { w  } \l_myz_tl
+\regex_replace_all:nnN { 28. } { z  } \l_myz_tl
+\regex_replace_all:nnN { 29. } { t^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 30. } { y  } \l_myz_tl
+\regex_replace_all:nnN { 31. } { l  } \l_myz_tl
+\regex_replace_all:nnN { 32. } { m  } \l_myz_tl
+\regex_replace_all:nnN { 33. } { n  } \l_myz_tl
+\regex_replace_all:nnN { 34. } { s  } \l_myz_tl
+\regex_replace_all:nnN { 35. } { ^^^^02e4  } \l_myz_tl
+\regex_replace_all:nnN { 36. } { p  } \l_myz_tl
+\regex_replace_all:nnN { 37. } { q  } \l_myz_tl
+\regex_replace_all:nnN { 38. } { r  } \l_myz_tl
+\regex_replace_all:nnN { 39. } { ^^^^02c0i  } \l_myz_tl
+\regex_replace_all:nnN { 40. } { ^^^^02c0u  } \l_myz_tl
+{ \translitformat \tl_use:N \l_myz_tl }
+}
+
+\newcommand\dougword{%
+\dougtransts
+%ugword+trans
+\regex_replace_all:nnN { \. } {  } \l_myts_tl
+ \tl_use:N \l_myts_tl  \ ( 
+				%\ugtranstsst { \tl_use:N \l_myb_tl }
+				\exp_args:No 
+										\ugtranstsst
+										{ \l_myb_tl }
+				 )
+}
+
+
+\newcommand\douggloss[1]{%
+\dougtransts
+%ugword+trans
+\regex_replace_all:nnN { \. } {  } \l_myts_tl
+\tl_use:N \l_myts_tl  \ ( 
+				%\ugtranstsst { \tl_use:N \l_myb_tl }
+				\exp_args:No 
+										\ugtranstsst
+										{ \l_myb_tl }
+			  , \ `#1'
+				 )
+}
+
+
+%\tl_new:N \l_myy_tl
+%\tl_new:N \l_myz_tl
+\newcommand\dougtranstsruby[1]{%
+\tl_set:Nn \l_myy_tl { #1 }
+\tl_set:Nn \l_myz_tl { #1 }
+
+\regex_replace_all:nnN { ssu } { 𐎝  } \l_myy_tl
+\regex_replace_all:nnN { div } { 𐎟  } \l_myy_tl
+\regex_replace_all:nnN { hh } { 𐎈  } \l_myy_tl
+\regex_replace_all:nnN { kk } { 𐎋  } \l_myy_tl
+\regex_replace_all:nnN { sh } { 𐎌  } \l_myy_tl
+\regex_replace_all:nnN { dh } { 𐎏  } \l_myy_tl
+\regex_replace_all:nnN { zz } { 𐎑  } \l_myy_tl
+\regex_replace_all:nnN { ss } { 𐎕  } \l_myy_tl
+\regex_replace_all:nnN { th } { 𐎘  } \l_myy_tl
+\regex_replace_all:nnN { gh } { 𐎙  } \l_myy_tl
+\regex_replace_all:nnN { tt } { 𐎚  } \l_myy_tl
+\regex_replace_all:nnN { a } { 𐎀  } \l_myy_tl
+\regex_replace_all:nnN { b } { 𐎁  } \l_myy_tl
+\regex_replace_all:nnN { g } { 𐎂  } \l_myy_tl
+\regex_replace_all:nnN { k } { 𐎃  } \l_myy_tl
+\regex_replace_all:nnN { d } { 𐎄  } \l_myy_tl
+\regex_replace_all:nnN { h } { 𐎅  } \l_myy_tl
+\regex_replace_all:nnN { w } { 𐎆  } \l_myy_tl
+\regex_replace_all:nnN { z } { 𐎇  } \l_myy_tl
+\regex_replace_all:nnN { t } { 𐎉  } \l_myy_tl
+\regex_replace_all:nnN { y } { 𐎊  } \l_myy_tl
+\regex_replace_all:nnN { l } { 𐎍  } \l_myy_tl
+\regex_replace_all:nnN { m } { 𐎎  } \l_myy_tl
+\regex_replace_all:nnN { n } { 𐎐  } \l_myy_tl
+\regex_replace_all:nnN { s } { 𐎒  } \l_myy_tl
+\regex_replace_all:nnN { j } { 𐎓  } \l_myy_tl
+\regex_replace_all:nnN { p } { 𐎔  } \l_myy_tl
+\regex_replace_all:nnN { q } { 𐎖  } \l_myy_tl
+\regex_replace_all:nnN { r } { 𐎗  } \l_myy_tl
+\regex_replace_all:nnN { i } { 𐎛  } \l_myy_tl
+\regex_replace_all:nnN { u } { 𐎜  } \l_myy_tl
+%======
+%-----   Ruby Part 2a
+\regex_replace_all:nnN { ssu } { 10.  } \l_myz_tl
+\regex_replace_all:nnN { div } { 11.  } \l_myz_tl
+\regex_replace_all:nnN { hh } { 12.  } \l_myz_tl
+\regex_replace_all:nnN { kk } { 13.  } \l_myz_tl
+\regex_replace_all:nnN { sh } { 14.  } \l_myz_tl
+\regex_replace_all:nnN { dh } { 15.  } \l_myz_tl
+\regex_replace_all:nnN { zz } { 16.  } \l_myz_tl
+\regex_replace_all:nnN { ss } { 17.  } \l_myz_tl
+\regex_replace_all:nnN { th } { 18.  } \l_myz_tl
+\regex_replace_all:nnN { gh } { 19.  } \l_myz_tl
+\regex_replace_all:nnN { tt } { 20.  } \l_myz_tl
+\regex_replace_all:nnN { a } { 21.  } \l_myz_tl
+\regex_replace_all:nnN { b } { 22.  } \l_myz_tl
+\regex_replace_all:nnN { g } { 23.  } \l_myz_tl
+\regex_replace_all:nnN { k } { 24.  } \l_myz_tl
+\regex_replace_all:nnN { d } { 25.  } \l_myz_tl
+\regex_replace_all:nnN { h } { 26.  } \l_myz_tl
+\regex_replace_all:nnN { w } { 27.  } \l_myz_tl
+\regex_replace_all:nnN { z } { 28.  } \l_myz_tl
+\regex_replace_all:nnN { t } { 29.  } \l_myz_tl
+\regex_replace_all:nnN { y } { 30.  } \l_myz_tl
+\regex_replace_all:nnN { l } { 31.  } \l_myz_tl
+\regex_replace_all:nnN { m } { 32.  } \l_myz_tl
+\regex_replace_all:nnN { n } { 33.  } \l_myz_tl
+\regex_replace_all:nnN { s } { 34.  } \l_myz_tl
+\regex_replace_all:nnN { j } { 35.  } \l_myz_tl
+\regex_replace_all:nnN { p } { 36.  } \l_myz_tl
+\regex_replace_all:nnN { q } { 37.  } \l_myz_tl
+\regex_replace_all:nnN { r } { 38.  } \l_myz_tl
+\regex_replace_all:nnN { i } { 39.  } \l_myz_tl
+\regex_replace_all:nnN { u } { 40.  } \l_myz_tl
+%-----   Ruby Part 2b
+\regex_replace_all:nnN { 10. } { s \c{textsubscript} \cB\{ 2 \cE\}  } \l_myz_tl
+\regex_replace_all:nnN { 11. } {  ~   } \l_myz_tl
+\regex_replace_all:nnN { 12. } { h^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 13. } { k  } \l_myz_tl
+\regex_replace_all:nnN { 14. } { s^^^^030c  } \l_myz_tl
+\regex_replace_all:nnN { 15. } { d^^^^0320  } \l_myz_tl
+\regex_replace_all:nnN { 16. } { z^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 17. } { s^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 18. } { t^^^^0320  } \l_myz_tl
+\regex_replace_all:nnN { 19. } { g^^^^0307  } \l_myz_tl
+\regex_replace_all:nnN { 20. } { t  } \l_myz_tl
+\regex_replace_all:nnN { 21. } { ^^^^02c0a  } \l_myz_tl
+\regex_replace_all:nnN { 22. } { b  } \l_myz_tl
+\regex_replace_all:nnN { 23. } { g  } \l_myz_tl
+\regex_replace_all:nnN { 24. } { ^^^^1e2b  } \l_myz_tl
+\regex_replace_all:nnN { 25. } { d  } \l_myz_tl
+\regex_replace_all:nnN { 26. } { h  } \l_myz_tl
+\regex_replace_all:nnN { 27. } { w  } \l_myz_tl
+\regex_replace_all:nnN { 28. } { z  } \l_myz_tl
+\regex_replace_all:nnN { 29. } { t^^^^0323  } \l_myz_tl
+\regex_replace_all:nnN { 30. } { y  } \l_myz_tl
+\regex_replace_all:nnN { 31. } { l  } \l_myz_tl
+\regex_replace_all:nnN { 32. } { m  } \l_myz_tl
+\regex_replace_all:nnN { 33. } { n  } \l_myz_tl
+\regex_replace_all:nnN { 34. } { s  } \l_myz_tl
+\regex_replace_all:nnN { 35. } { ^^^^02e4  } \l_myz_tl
+\regex_replace_all:nnN { 36. } { p  } \l_myz_tl
+\regex_replace_all:nnN { 37. } { q  } \l_myz_tl
+\regex_replace_all:nnN { 38. } { r  } \l_myz_tl
+\regex_replace_all:nnN { 39. } { ^^^^02c0i  } \l_myz_tl
+\regex_replace_all:nnN { 40. } { ^^^^02c0u  } \l_myz_tl
+%
+{
+\setlength{\tabcolsep}{-0.5pt} 
+\begin{tabular}[b]{c}
+\scriptsize \tl_use:N \l_myz_tl  \\
+\rule{0pt}{1.8ex} \ugfont \tl_use:N \l_myy_tl \\
+\end{tabular} 
+}
+}
+
+
+%=====
+%\setlength{\tabcolsep}{-0.5pt} 
+%\begin{tabular}[b]{c}
+%\scriptsize \tl_use:N \l_myz_tl  \\
+%\rule{0pt}{1.8ex} \ugfont \tl_use:N \l_myy_tl \\
+%\end{tabular} 
+%---
+%\setlength{\tabcolsep}{-0.5pt} 
+%\begin{tabular}[b]{c}
+%\scriptsize 
+%		\tl_use:N \l_myz_tl  
+%\\ \rule{0pt}{1.8ex} \ugfont 
+%		\tl_use:N \l_myy_tl 
+%\\\end{tabular} 
+%---
+%%\c{setlength} \cB\{ \c{tabcolsep} \cE\}  \cB\{ -0.5pt \cE\}  
+%%\c{begin} \cB\{ tabular \cE\} [b] \cB\{ c \cE\} 
+%%\c{scriptsize} 
+%%		\tl_use:N \l_myz_tl  
+%%\\\\ \c{rule} \cB\{ 0pt \cE\}  \cB\{ 1.8ex \cE\}  \c{ugfont} 
+%%		\tl_use:N \l_myy_tl 
+%%\\\\\c{end} \cB\{ tabular \cE\}  
+
+%%\newcommand\tablea{%
+%%\setlength{\tabcolsep}{-0.5pt} 
+%%\begin{tabular}[b]{c}
+%%\scriptsize 
+%%}
+%%\newcommand\tableb{%
+%%\\ \rule{0pt}{1.8ex} 
+%%}
+%%\newcommand\tablec{%
+%%\\\end{tabular} 
+%%}
+%%
+
+
+
+\newcommand\dougtranstsrubye[1]{%
+\tl_set:Nn \l_myy_tl { #1 }
+%\tl_set:Nn \l_myz_tl { #1 }
+%a:
+\regex_replace_all:nnN {ssu} { 39. } \l_myy_tl
+\regex_replace_all:nnN {div} { 40. } \l_myy_tl
+\regex_replace_all:nnN {hh} { 18. } \l_myy_tl
+\regex_replace_all:nnN {kk} { 21. } \l_myy_tl
+\regex_replace_all:nnN {sh} { 22. } \l_myy_tl
+\regex_replace_all:nnN {dh} { 25. } \l_myy_tl
+\regex_replace_all:nnN {zz} { 27. } \l_myy_tl
+\regex_replace_all:nnN {ss} { 31. } \l_myy_tl
+\regex_replace_all:nnN {th} { 34. } \l_myy_tl
+\regex_replace_all:nnN {gh} { 35. } \l_myy_tl
+\regex_replace_all:nnN {tt} { 36. } \l_myy_tl
+\regex_replace_all:nnN {a} { 10. } \l_myy_tl
+\regex_replace_all:nnN {b} { 11. } \l_myy_tl
+\regex_replace_all:nnN {g} { 12. } \l_myy_tl
+\regex_replace_all:nnN {k} { 13. } \l_myy_tl
+\regex_replace_all:nnN {d} { 14. } \l_myy_tl
+\regex_replace_all:nnN {h} { 15. } \l_myy_tl
+\regex_replace_all:nnN {w} { 16. } \l_myy_tl
+\regex_replace_all:nnN {z} { 17. } \l_myy_tl
+\regex_replace_all:nnN {t} { 19. } \l_myy_tl
+\regex_replace_all:nnN {y} { 20. } \l_myy_tl
+\regex_replace_all:nnN {l} { 23. } \l_myy_tl
+\regex_replace_all:nnN {m} { 24. } \l_myy_tl
+\regex_replace_all:nnN {n} { 26. } \l_myy_tl
+\regex_replace_all:nnN {s} { 28. } \l_myy_tl
+\regex_replace_all:nnN {j} { 29. } \l_myy_tl
+\regex_replace_all:nnN {p} { 30. } \l_myy_tl
+\regex_replace_all:nnN {q} { 32. } \l_myy_tl
+\regex_replace_all:nnN {r} { 33. } \l_myy_tl
+\regex_replace_all:nnN {i} { 37. } \l_myy_tl
+\regex_replace_all:nnN {u} { 38. } \l_myy_tl
+%	b:
+\regex_replace_all:nnN {39.} { \c{tablea}s \c{textsubscript} \cB\{ 2 \cE\}\c{tableb} \cB\{ \c{ugfont}𐎝\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {40.} { \c{tablea} ~ \c{tableb} \cB\{ \c{ugfont}𐎟\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {18.} { \c{tablea}h^^^^0323\c{tableb} \cB\{ \c{ugfont}𐎈\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {21.} { \c{tablea}k\c{tableb} \cB\{ \c{ugfont}𐎋\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {22.} { \c{tablea}s^^^^030c\c{tableb} \cB\{ \c{ugfont}𐎌\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {25.} { \c{tablea}d^^^^0320\c{tableb} \cB\{ \c{ugfont}𐎏\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {27.} { \c{tablea}z^^^^0323\c{tableb} \cB\{ \c{ugfont}𐎑\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {31.} { \c{tablea}s^^^^0323\c{tableb} \cB\{ \c{ugfont}𐎕\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {34.} { \c{tablea}t^^^^0320\c{tableb} \cB\{ \c{ugfont}𐎘\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {35.} { \c{tablea}g^^^^0307\c{tableb} \cB\{ \c{ugfont}𐎙\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {36.} { \c{tablea}t\c{tableb} \cB\{ \c{ugfont}𐎚\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {10.} { \c{tablea}^^^^02c0a\c{tableb} \cB\{ \c{ugfont}𐎀\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {11.} { \c{tablea}b\c{tableb} \cB\{ \c{ugfont}𐎁\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {12.} { \c{tablea}g\c{tableb} \cB\{ \c{ugfont}𐎂\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {13.} { \c{tablea}^^^^1e2b\c{tableb} \cB\{ \c{ugfont}𐎃\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {14.} { \c{tablea}d\c{tableb} \cB\{ \c{ugfont}𐎄\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {15.} { \c{tablea}h\c{tableb} \cB\{ \c{ugfont}𐎅\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {16.} { \c{tablea}w\c{tableb} \cB\{ \c{ugfont}𐎆\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {17.} { \c{tablea}z\c{tableb} \cB\{ \c{ugfont}𐎇\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {19.} { \c{tablea}t^^^^0323\c{tableb} \cB\{ \c{ugfont}𐎉\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {20.} { \c{tablea}y\c{tableb} \cB\{ \c{ugfont}𐎊\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {23.} { \c{tablea}l\c{tableb} \cB\{ \c{ugfont}𐎍\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {24.} { \c{tablea}m\c{tableb} \cB\{ \c{ugfont}𐎎\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {26.} { \c{tablea}n\c{tableb} \cB\{ \c{ugfont}𐎐\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {28.} { \c{tablea}s\c{tableb} \cB\{ \c{ugfont}𐎒\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {29.} { \c{tablea}^^^^02e4\c{tableb} \cB\{ \c{ugfont}𐎓\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {30.} { \c{tablea}p\c{tableb} \cB\{ \c{ugfont}𐎔\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {32.} { \c{tablea}q\c{tableb} \cB\{ \c{ugfont}𐎖\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {33.} { \c{tablea}r\c{tableb} \cB\{ \c{ugfont}𐎗\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {37.} { \c{tablea}^^^^02c0i\c{tableb} \cB\{ \c{ugfont}𐎛\cE\} \c{tablec} } \l_myy_tl
+\regex_replace_all:nnN {38.} { \c{tablea}^^^^02c0u\c{tableb} \cB\{ \c{ugfont}𐎜\cE\} \c{tablec} } \l_myy_tl
+	
+%	c:
+			\tl_use:N \l_myy_tl
+
+}
+
+
+
+
+
+
+%=====================================
+%us
+%un
+%ts - default
+%tsst
+\NewDocumentCommand { \ugtrans } { O{ts} m } {%
+	\cs:w ugtrans#1 \cs_end: {#2}
+}
+
+%w - default
+%%gloss
+%ruby
+\NewDocumentCommand { \ugtext } { O{w} m } {%
+	\cs:w ug#1 \cs_end: {#2}
+}
+
+
+
+
+
+\NewDocumentCommand { \uguc } { m } {	\ugtransuc {#1} }
+
+\NewDocumentCommand { \ugtransuc } { m } {%
+\tl_set:Nn \l_myuc_tl { #1 }
+ \dougtransuc 
+{ \ugfont \tl_use:N \l_myuc_tl }
+}
+
+
+\NewDocumentCommand { \ugun } { m } {	\ugtransun {#1} }
+\NewDocumentCommand { \ugtransun } { m } {%
+\tl_set:Nn \l_myun_tl { #1 }
+ \dougtransun 
+ \tl_use:N \l_myun_tl 
+}
+
+\NewDocumentCommand { \ugts } { m } {	\ugtransts {#1} }
+\NewDocumentCommand { \ugtransts } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+ \dougtransts 
+  \tl_use:N \l_myts_tl 
+}
+
+%\NewDocumentCommand { \ugtranstsst } { m } {%
+%\tl_set:Nn \l_myug_tl { #1 }
+% \dougtranstsst 
+%{ \tl_use:N \l_myug_tl }
+%}
+
+\NewDocumentCommand { \ugst } { m } {	\ugtranstsst {#1} }
+\NewDocumentCommand{\ugtranstsst}{ > { \SplitList { . } } m }{%
+  \ProcessList {#1 } { \dougtranstsst }
+}
+
+
+\NewDocumentCommand { \ugw } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\tl_set:Nn \l_myb_tl { #1 }
+ \dougword 
+%{ \ugfont \tl_use:N \l_myug_tl }
+}
+
+\NewDocumentCommand { \uggloss } { m m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\tl_set:Nn \l_myb_tl { #1 }
+ \douggloss {#2}
+}
+
+
+
+%demo only
+\newcommand\dougtranstsml{%
+\regex_replace_all:nnN { അ } { 𐎀 } \l_myug_tl
+}
+
+\NewDocumentCommand { \ugtranstsml } { m } {%
+\tl_set:Nn \l_myug_tl { #1 }
+ \dougtranstsml 
+{ \ugfont \tl_use:N \l_myug_tl }
+}
+
+
+
+\NewDocumentCommand{\ugruby}{ > { \SplitList { . } } m }{%
+  \ProcessList {#1 } { \dougtranstsruby }
+}
+%\NewDocumentCommand{\ugruby}{ m }{
+%\tl_set:Nn \l_myy_tl { #1 }
+%\tl_set:Nn \l_myz_tl { #1 }
+%			 \dougtranstsruby
+%}
+
+%\NewDocumentCommand{\ugrubyb}{ > { \SplitList { } } m }{%
+%  \ProcessList {#1 } { \dougtranstsrubyb }
+%}
+
+
+
+
+%---- Environments
+\NewDocumentEnvironment{ugtransuce}{ +b } 
+{
+  \tl_set:Nn \l_myuc_tl { #1 }
+	\dougtransuc
+	\tl_use:N \l_myuc_tl 
+}
+{ }
+
+\NewDocumentEnvironment{ugtransune}{ +b } 
+{
+  \tl_set:Nn \l_myun_tl { #1 }
+	\dougtransun
+  \tl_use:N \l_myun_tl 
+}
+{ }
+
+\NewDocumentEnvironment{ugtranstse}{ +b } 
+{
+  \tl_set:Nn \l_myts_tl { #1 }
+	\dougtransts
+  \tl_use:N \l_myts_tl 
+}
+{ }
+
+
+\NewDocumentEnvironment{ugtranstsste}{ +b } 
+{
+%  \tl_set:Nn \l_myug_tl { #1 }
+	\dougtranstsst {#1}
+%{ \ugfont \tl_use:N \l_myug_tl }
+}
+{ }
+
+
+\NewDocumentEnvironment{ugrubye}{ +b } 
+{
+%  \tl_set:Nn \l_myug_tl { #1 }
+	\dougtranstsrubye {#1}
+%{ \ugfont \tl_use:N \l_myug_tl }
+}
+{ }
+
+
+
+\NewDocumentEnvironment{ugtableture}{ +b } 
+{
+	\begin{quotation}
+%	{\raggedright
+%	\begin{tabular}{|l|}
+%	\hline
+%	\rowcolor{blue!5}
+	\begin{ugtranstse}
+	#1
+	\end{ugtranstse} 			
+%					\\
+%	\rowcolor{red!5}
+\par
+
+\bigskip
+	\begin{ugtranstsste}
+		#1
+		\end{ugtranstsste} 
+%					\\
+%	\hline
+%	\end{tabular}
+%		}
+	\end{quotation}
+}
+{ }
+
+
+
+\ExplSyntaxOff
+
+\input{anatohiero_input.tex}% Anatolian Hieroglyphs
+\input{avestan_input.tex}% Avestan
+\input{brahmi_input.tex}% Brahmi
+\input{carian_input.tex}% Carian
+\input{cuneiform_input.tex}% Cuneiform
+\input{cypriot_input.tex}% Cypriot
+\input{cdm_input.tex}% Combining Diacritical Marks; commands
+
+
+
+
+
+
+%-----------------------------------------
+%subset of helper meta-commands:
+\ExplSyntaxOn
+%cs: print the command name
+%cdr: print and run the command
+%cdpr: print with formatted argument and run
+%codedetok: print (unemphasized)
+
+%------------------------------- control sequence
+\NewDocumentCommand{\cs}{ m }{%
+  {\bfseries\sffamily\color{blue}
+  \token_to_str:N #1 % If you already have a token
+  }
+}%
+%------------------------------- print and run #1
+
+\NewDocumentCommand{\cdr}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+}%
+
+%\tl_new:N \l_my_tl
+%\tl_new:N \l_myb_tl
+%\tl_new:N \l_myc_tl
+%\tl_new:N \l_myd_tl
+
+%------------------------------- print and run command+argumentt separately
+\NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \textbackslash \detokenize{#2} % command
+  \{ 
+  		{
+  		\tl_use:N \l_my_tl % formatting
+  		\detokenize{#3}       % argument
+  		}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+\cs:w \tl_use:N \l_myb_tl \cs_end: {  
+									#3 % argument
+									 }
+}%
+
+%------------------------------- print and run command+argument separately, command formatted
+\NewDocumentCommand{\cdprr}{ o o m m }{%1=print format,2=command format,3=command,4=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	\tl_set:Nn \l_myd_tl { #4 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \textbackslash \detokenize{#3} % command
+  \{ 
+  		{
+  		\tl_use:N \l_my_tl % formatting
+  		\detokenize{#4}       % argument
+  		}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myb_tl %command format
+\cs:w \tl_use:N \l_myc_tl \cs_end: {  
+									#4 % argument
+									 }
+		}
+}%
+
+%------------------------------- print and run command (no argument_ separately, command formatted
+\NewDocumentCommand{\cdprrn}{ o o m }{%1=print format,2=command format,3=command
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+
+  \textbackslash \detokenize{#3} % command
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myb_tl %command format
+\cs:w \tl_use:N \l_myc_tl \cs_end: 
+		}
+}%
+
+
+%------------------------------- print and run command (no argument_ separately, command formatted, print with wrapper
+\NewDocumentCommand{\cdprrnw}{ o o o m }{%1,2=print format wrapper,3=command format,4=command
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	\tl_set:Nn \l_myd_tl { #4 }
+	
+	{ \ttfamily\color{blue}
+%  \token_to_st`r:N #1
+		{ 
+			\tl_use:N \l_my_tl %wrapper begin
+  \textbackslash \detokenize{#4} % command
+     \tl_use:N \l_myb_tl % wrapper end
+  	}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  { \tl_use:N \l_myc_tl %command format
+\cs:w \tl_use:N \l_myd_tl \cs_end: 
+		}
+}%
+
+
+%------------------------------- just print #1 as code, custom format
+\NewDocumentCommand{\cdrdcustom}{ o m }{%1=format code,2=cs
+			% the o must match with incoming [ ]
+ 			{ #1
+			  \detokenize{#2}
+			  }
+}	%
+
+
+
+%------------------------------- just print #1 as plain detok code
+\NewDocumentCommand{\codedetok}{ o m }{
+ 
+			{%true 
+			    {
+						\ttfamily
+					  															\detokenize{#2}
+						}
+			  }
+}%
+
+
+%------------------------------- just print as plain code
+\NewDocumentCommand{\codegeneral}{ o m }{
+ 
+			{%true 
+			    {
+						\ttfamily
+					  															#2
+						}
+			  }
+}%
+
+\ExplSyntaxOff
+
+
+
+
+
+
+
+
+%Lists
+
+%-----   List of Unicode codepoints
+\newcommand\ugshowplainlistuc{%
+%\subsection{List of Unicode codepoints}
+\label{sec:listuguc}
+\noindent U+10380 $\mapsto$ {\ugfont 𐎀}\par
+\noindent U+10381 $\mapsto$ {\ugfont 𐎁}\par
+\noindent U+10382 $\mapsto$ {\ugfont 𐎂}\par
+\noindent U+10383 $\mapsto$ {\ugfont 𐎃}\par
+\noindent U+10384 $\mapsto$ {\ugfont 𐎄}\par
+\noindent U+10385 $\mapsto$ {\ugfont 𐎅}\par
+\noindent U+10386 $\mapsto$ {\ugfont 𐎆}\par
+\noindent U+10387 $\mapsto$ {\ugfont 𐎇}\par
+\noindent U+10388 $\mapsto$ {\ugfont 𐎈}\par
+\noindent U+10389 $\mapsto$ {\ugfont 𐎉}\par
+\noindent U+1038A $\mapsto$ {\ugfont 𐎊}\par
+\noindent U+1038B $\mapsto$ {\ugfont 𐎋}\par
+\noindent U+1038C $\mapsto$ {\ugfont 𐎌}\par
+\noindent U+1038D $\mapsto$ {\ugfont 𐎍}\par
+\noindent U+1038E $\mapsto$ {\ugfont 𐎎}\par
+\noindent U+1038F $\mapsto$ {\ugfont 𐎏}\par
+\noindent U+10390 $\mapsto$ {\ugfont 𐎐}\par
+\noindent U+10391 $\mapsto$ {\ugfont 𐎑}\par
+\noindent U+10392 $\mapsto$ {\ugfont 𐎒}\par
+\noindent U+10393 $\mapsto$ {\ugfont 𐎓}\par
+\noindent U+10394 $\mapsto$ {\ugfont 𐎔}\par
+\noindent U+10395 $\mapsto$ {\ugfont 𐎕}\par
+\noindent U+10396 $\mapsto$ {\ugfont 𐎖}\par
+\noindent U+10397 $\mapsto$ {\ugfont 𐎗}\par
+\noindent U+10398 $\mapsto$ {\ugfont 𐎘}\par
+\noindent U+10399 $\mapsto$ {\ugfont 𐎙}\par
+\noindent U+1039A $\mapsto$ {\ugfont 𐎚}\par
+\noindent U+1039B $\mapsto$ {\ugfont 𐎛}\par
+\noindent U+1039C $\mapsto$ {\ugfont 𐎜}\par
+\noindent U+1039D $\mapsto$ {\ugfont 𐎝}\par
+\noindent U+1039F $\mapsto$ {\ugfont 𐎟}\par
+}
+
+
+%-----   List of Unicode names
+\newcommand\ugshowplainlistun{%
+%\subsection{List of Unicode names}
+\label{sec:listugun}
+\noindent alpa $\mapsto$ {\ugfont 𐎀}\par
+\noindent beta $\mapsto$ {\ugfont 𐎁}\par
+\noindent gamla $\mapsto$ {\ugfont 𐎂}\par
+\noindent kha $\mapsto$ {\ugfont 𐎃}\par
+\noindent delta $\mapsto$ {\ugfont 𐎄}\par
+\noindent ho $\mapsto$ {\ugfont 𐎅}\par
+\noindent wo $\mapsto$ {\ugfont 𐎆}\par
+\noindent zeta $\mapsto$ {\ugfont 𐎇}\par
+\noindent hota $\mapsto$ {\ugfont 𐎈}\par
+\noindent tet $\mapsto$ {\ugfont 𐎉}\par
+\noindent yod $\mapsto$ {\ugfont 𐎊}\par
+\noindent kaf $\mapsto$ {\ugfont 𐎋}\par
+\noindent shin $\mapsto$ {\ugfont 𐎌}\par
+\noindent lamda $\mapsto$ {\ugfont 𐎍}\par
+\noindent mem $\mapsto$ {\ugfont 𐎎}\par
+\noindent dhal $\mapsto$ {\ugfont 𐎏}\par
+\noindent nun $\mapsto$ {\ugfont 𐎐}\par
+\noindent zu $\mapsto$ {\ugfont 𐎑}\par
+\noindent samka $\mapsto$ {\ugfont 𐎒}\par
+\noindent ain $\mapsto$ {\ugfont 𐎓}\par
+\noindent pu $\mapsto$ {\ugfont 𐎔}\par
+\noindent sade $\mapsto$ {\ugfont 𐎕}\par
+\noindent qopa $\mapsto$ {\ugfont 𐎖}\par
+\noindent rasha $\mapsto$ {\ugfont 𐎗}\par
+\noindent thanna $\mapsto$ {\ugfont 𐎘}\par
+\noindent ghain $\mapsto$ {\ugfont 𐎙}\par
+\noindent to $\mapsto$ {\ugfont 𐎚}\par
+\noindent i $\mapsto$ {\ugfont 𐎛}\par
+\noindent u $\mapsto$ {\ugfont 𐎜}\par
+\noindent ssu $\mapsto$ {\ugfont 𐎝}\par
+\noindent worddivider $\mapsto$ {\ugfont 𐎟}\par
+}
+
+
+%-----   List of Typing shortcuts
+\newcommand\ugshowplainlistts{%
+%\subsection{List of Typing shortcuts}
+\label{sec:listugts}
+\noindent a $\mapsto$ {\ugfont 𐎀}\par
+\noindent b $\mapsto$ {\ugfont 𐎁}\par
+\noindent g $\mapsto$ {\ugfont 𐎂}\par
+\noindent k $\mapsto$ {\ugfont 𐎃}\par
+\noindent d $\mapsto$ {\ugfont 𐎄}\par
+\noindent h $\mapsto$ {\ugfont 𐎅}\par
+\noindent w $\mapsto$ {\ugfont 𐎆}\par
+\noindent z $\mapsto$ {\ugfont 𐎇}\par
+\noindent hh $\mapsto$ {\ugfont 𐎈}\par
+\noindent t $\mapsto$ {\ugfont 𐎉}\par
+\noindent y $\mapsto$ {\ugfont 𐎊}\par
+\noindent kk $\mapsto$ {\ugfont 𐎋}\par
+\noindent sh $\mapsto$ {\ugfont 𐎌}\par
+\noindent l $\mapsto$ {\ugfont 𐎍}\par
+\noindent m $\mapsto$ {\ugfont 𐎎}\par
+\noindent dh $\mapsto$ {\ugfont 𐎏}\par
+\noindent n $\mapsto$ {\ugfont 𐎐}\par
+\noindent zz $\mapsto$ {\ugfont 𐎑}\par
+\noindent s $\mapsto$ {\ugfont 𐎒}\par
+\noindent j $\mapsto$ {\ugfont 𐎓}\par
+\noindent p $\mapsto$ {\ugfont 𐎔}\par
+\noindent ss $\mapsto$ {\ugfont 𐎕}\par
+\noindent q $\mapsto$ {\ugfont 𐎖}\par
+\noindent r $\mapsto$ {\ugfont 𐎗}\par
+\noindent th $\mapsto$ {\ugfont 𐎘}\par
+\noindent gh $\mapsto$ {\ugfont 𐎙}\par
+\noindent tt $\mapsto$ {\ugfont 𐎚}\par
+\noindent i $\mapsto$ {\ugfont 𐎛}\par
+\noindent u $\mapsto$ {\ugfont 𐎜}\par
+\noindent ssu $\mapsto$ {\ugfont 𐎝}\par
+\noindent div $\mapsto$ {\ugfont 𐎟}\par
+}
+
+%-----   List of Standard Transliterations
+\newcommand\ugshowplainlistst{%
+%\subsection{List of Standard Transliterations}
+\label{sec:listugst}
+\noindent a $\mapsto$ ^^^^02c0a\par
+\noindent b $\mapsto$ b\par
+\noindent g $\mapsto$ g\par
+\noindent k $\mapsto$ ^^^^1e2b\par
+\noindent d $\mapsto$ d\par
+\noindent h $\mapsto$ h\par
+\noindent w $\mapsto$ w\par
+\noindent z $\mapsto$ z\par
+\noindent hh $\mapsto$ h^^^^0323\par
+\noindent t $\mapsto$ t^^^^0323\par
+\noindent y $\mapsto$ y\par
+\noindent kk $\mapsto$ k\par
+\noindent sh $\mapsto$ s^^^^030c\par
+\noindent l $\mapsto$ l\par
+\noindent m $\mapsto$ m\par
+\noindent dh $\mapsto$ d^^^^0320\par
+\noindent n $\mapsto$ n\par
+\noindent zz $\mapsto$ z^^^^0323\par
+\noindent s $\mapsto$ s\par
+\noindent j $\mapsto$ ^^^^02e4\par
+\noindent p $\mapsto$ p\par
+\noindent ss $\mapsto$ s^^^^0323\par
+\noindent q $\mapsto$ q\par
+\noindent r $\mapsto$ r\par
+\noindent th $\mapsto$ t^^^^0320\par
+\noindent gh $\mapsto$ g^^^^0307\par
+\noindent tt $\mapsto$ t\par
+\noindent i $\mapsto$ ^^^^02c0i\par
+\noindent u $\mapsto$ ^^^^02c0u\par
+\noindent ssu $\mapsto$ s\textsubscript{2}\par
+\noindent div $\mapsto$  ~ \par
+}
+
+
+
+
+
+%================================
+%\begin{center}
+%\begin{tabular}{|c|}
+%\rowcolor{black}\color{blue!3}\sffamily\bfseries\large Heading1 \\
+%\begin{tabular}{c|c}
+%Item2 & Item3 \\
+%\end{tabular}\\
+%\hline
+%\rowcolor{blue!5}
+%data4 \\
+%\hline
+%\end{tabular}
+%\end{center}
+
+
+% command-display numbering
+\newcounter{dispno}
+\renewcommand{\thedispno}{\arabic{dispno}}
+\newcommand{\p}{\refstepcounter{dispno}%
+(\thedispno)\ %
+}
+
+
+
+\def\arraystretch{1.3}%
+
+\newcommand\tdemo[4]{%1=heading,2=itemIn,3=itemOut,4=example
+\begin{center}
+\begin{tabular}{|c|}
+\rowcolor{black}\color{blue!3}\sffamily\bfseries\large #1 \\
+\begin{tabular}{c|c}
+#2 & #3 \\
+\end{tabular}\\
+\hline
+\rowcolor{blue!5}
+#4 \\
+\hline
+\end{tabular}
+\marginpar{\p}%display numbering
+\end{center}
+}
+
+%%\newcommand\tdemo[4]{%1=heading,2=itemIn,3=itemOut,4=example
+%%\begin{center}
+%%\begin{tabular}{|c|c|}
+%%\rowcolor{black}
+%%\multicolumn{2}{c}{\color{blue!3}\sffamily\bfseries\large #1 }\\
+%%%\begin{tabular}{c|c}
+%%#2 & #3 \\
+%%%\end{tabular}\\
+%%\hline
+%%\rowcolor{blue!5}
+%%\multicolumn{2}{c}{#4} \\
+%%\hline
+%%\end{tabular}
+%%\marginpar{\p}%display numbering
+%%\end{center}
+%%}
+
+
+
+\newcommand\tdemob[2]{%1=heading,2=example
+\begin{center}
+\begin{tabular}{|c|}
+\rowcolor{black}\color{blue!3}\sffamily\bfseries\large #1 \\
+%\begin{tabular}{c|c}
+%%#2 & #3 \\
+%\end{tabular}\\
+%\hline
+\rowcolor{blue!5}
+#2 \\
+\hline
+\end{tabular}
+\marginpar{\p}%display numbering
+\end{center}
+}
+
+
+
+\newcommand\abibname{authoryear}
+\newcommand\abibstyle{style=\abibname}
+\usepackage[
+	\abibstyle , 
+		]{biblatex}
+
+\addbibresource{\jobname.bib}
+
+%vvvvv
+%patch from:
+%https://tex.stackexchange.com/questions/528725/biblatex-formatting-online-and-incollection-bibliographic-entry-types
+\DeclareFieldFormat[online]{date}{\mkbibparens{#1}}
+\usepackage{xpatch}
+\xpatchbibdriver{online}
+  {\printtext[parens]{\usebibmacro{date}}}
+  {\usebibmacro{date}}
+  {}{}
+%^^^^^
+
+
+
+
+
+
+%===================================
+\begin{document}
+
+\truby{\color{red}}{base}{ruby}
+
+``Determiners are Sumerograms that are not pronounced but indicate the class or nature of a noun for clarity, e.g. in \textsuperscript{URU}\textit{Ḫa-at-tu-ša} ({\cufont 𒌷𒄩𒀜𒌅𒊭}); the URU is a determiner marking the name of a city, and the pronunciation is simply /hattusa/.''
+
+%https://en.wikipedia.org/wiki/Hittite_cuneiform
+
+%𒌷𒄩𒀜𒌅𒊭
+%12337 URU
+%12129 HA
+%1201C AD
+%12305 TU
+%122AD SHA
+
+In the Hittite capital,
+\truby{\cufont\color{red}}{\cuuc{U+12337}}{URU}
+\truby{\cufont}{\cuuc{U+12129}}{\textit{ha}}
+\truby{\cufont}{\cuuc{U+1201C}}{\textit{ad}}
+\truby{\cufont}{\cuuc{U+12305}}{\textit{tu}}
+\truby{\cufont}{\cuuc{U+122AD}}{\textit{sha}}
+=
+\furu Hattusa,
+near modern \ftown Boğazkale,
+%🏙 🌆 ⾥village 🏘
+%IM 𒅎 "clay"
+lots of \fclay writing, \textit{Keilschriften}, was found.
+\fking Muwatalli II moved the capital to \furu Tarhuntassa.
+%. 𒀭𒅎𒋫𒀸𒊭 dIM-ta-aš-ša "City of Tarhunt"
+Its location is unknown.
+ Hieroglyphic Luwian: {\ahfont 𔖖𔓢𔕙𔑯𔗦} (DEUS)TONITRUS-hu-ta-sá) 
+ 
+% Wilusa, (Hittite: 𒌷𒃾𒇻𒊭 URUwi5-lu-ša) or Wilusiya
+% https://en.wikipedia.org/wiki/Wilusa
+
+\cuuc{U+12337} = ?{\ahun{a244}}
+
+\truby{}{\ahun{a244}}{AEDIFICIUM}
+
+
+\cuuc{U+1214E}
+
+\begin{tabular}{ll>{\itshape}ll}
+Type & Sumerian & \upshape Akkadian & Hittite \\
+\hline
+phonetic & IM &  em, im & \\
+`clay' && t\cdmdotb it\cdmdotb t\cdmdotb u(m) & \\
+`wind' && s\cdmcaron a\cdmmacron ru(m) & \\
+\textsuperscript{d}Tarh\cdmbreveb unnas\cdmcaron *&&& \textsuperscript{d}IŠKUR \\
+\hline
+\end{tabular}
+
+* Anatolian storm god
+
+Proto-Anatolian *tr̥Hʷánts
+%From Proto-Indo-European *tr̥h₂-w-ént-s. Cognate with Sanskrit तूर्वन्त्- (tūrvánt-). 
+
+%Hittite: {\cufont 𒅎} (dIŠKUR)
+
+Luwian: Cuneiform: {\cufont 𒋻𒄷𒌦𒍝} (tar-hu-un-za)
+{\nafont 𒋻𒄷𒌦𒍝}
+
+\truby{\nafont}{𒋻}{tar}
+\truby{\nafont}{𒄷}{hu}
+\truby{\nafont}{𒌦}{un}
+\truby{\nafont}{𒍝}{za}
+
+Lycian: [script] (Trqqñt-)
+
+? Old Armenian: {\arfont Տորք} (Torkʿ)
+%?? Tarquin
+
+\bigskip
+\begin{tabular}{|l|l|}
+\hline
+\fdet{\cufont\symbol{74062}}writing  &
+\begin{tabular}{l}
+\fdet{\cufont\symbol{74062}}song \\
+\fdet{\cufont\symbol{74062}}chimes \\
+\fdet{\cufont\symbol{74062}}bag \\
+\end{tabular} \\
+\hline
+\end{tabular}
+
+%Hadad (Ugaritic: 𐎅𐎄 Haddu), Adad, Haddad (Akkadian: 𒀭𒅎) or Iškur (Sumerian) was the storm and rain god in the Canaanite and ancient Mesopotamian religions. He was attested in Ebla as "Hadda" in c. 2500 BCE.[1][2] From the Levant, Hadad was introduced to Mesopotamia by the Amorites, where he became known as the Akkadian (Assyrian-Babylonian) god Adad.[3][4][5][6] Adad and Iškur are usually written with the logogram 𒀭𒅎 dIM[7]—the same symbol used for the Hurrian god Teshub.[8] Hadad was also called Pidar, Rapiu, Baal-Zephon,[9] or often simply Baʿal (Lord), but this title was also used for other gods. The bull was the symbolic animal of Hadad. He appeared bearded,[10][11] often holding a club and thunderbolt while wearing a bull-horned headdress.[12][13] Hadad was equated with the Greek god Zeus; the Roman god Jupiter, as Jupiter Dolichenus; the Hittite storm-god Teshub; the Egyptian god Set.[citation needed] 
+
+%Teshub (also written Teshup, Teššup, or Tešup; cuneiform dIM; hieroglyphic Luwian (DEUS)TONITRUS, read as Tarhunzas[1]) was the Hurrian god of sky, thunder, and storms. Taru was the name of a similar Hattic Storm God, whose mythology and worship as a primary deity continued and evolved through descendant Luwian and Hittite cultures. In these two, Taru was known as Tarhun / Tarhunt- / Tarhuwant- / Tarhunta, names derived from the Anatolian root *tarh "to defeat, conquer".[3][4] Taru/Tarhun/Tarhunt was ultimately assimilated into and identified with the Hurrian Teshub around the time of the religious reforms of Muwatalli II, ruler of the Hittite New Kingdom in the early 13th century BCE.[5] These reforms can generally be categorized as an official incorporation of Hurrian deities into the Hittite pantheon, with a smaller number of important Hurrian gods (like Teshub) being explicitly identified with preexisting major Hittite deities (like Taru). Teshub reappears in the post-Hurrian cultural successor kingdom of Urartu as Tesheba, one of their chief gods; in Urartian art he is depicted standing on a bull.[5] 
+
+{\ahfont \fdetgen{𔖖𔓢}𔕙𔑯𔗦}
+
+{\ahfont 𔑯} tarkasna- ``donkey''
+
+Hittite MUNUS-za `woman' = *kwanz \textasciitilde queen
+
+LÚDUB.SAR.GIŠ (‘scribe-on-wood’) 
+
+\cdr{\ugtrans{dltt}} 
+
+\cdr{\ugtrans[uc]{U+10380}} 
+
+\cdr{\ugtrans[un]{alpa}} 
+
+\cdr{\ugtrans[ts]{a}} (ts=default)
+
+\cdr{\ugtrans[tsst]{a}} 
+
+\cdr{\ugtext{dltt}} 
+
+\cdr{\ugtext[w]{dltt}} (w=default)
+
+\cdr{\ugtext[ruby]{d.l.tt.}}
+
+\cdr{\uggloss{dltt}{palace guard post}}
+
+\bigskip
+Generic glosses
+
+Inline/gloss
+\begin{tabular}{|ll}
+\hline
+with gloss & 
+\tgloss{\ahfont}{\ahun{a100}}{ta < targasna-}{donkey} \\
+0 gloss &
+\tgloss{\ahfont}{\ahun{a100}}{ta}{} \\
+1 item* &
+\tgloss{\ahfont}{\ahun{a100}}{ta}{?}
+\tgloss{\ahfont}{\ahun{a100}}{ta}{\tdoubtful}
+\tgloss{\ahfont}{\ahun{a100}}{ta}{\tseenote} \\
+\hline
+\end{tabular}
+
+\bigskip
+Ruby/gloss
+\begin{tabular}{|ll}
+\hline
+rubytext+gloss &
+\tgloss[ruby]{\ahfont}{\ahun{a100}}{ta}{donkey} \\
+rubytext+0gloss &
+\tgloss[ruby]{\ahfont}{\ahun{a100}}{ta}{}\\
+rubytext+1item* &
+\tgloss[ruby]{\ahfont}{\ahun{a100}}{ta}{?}
+\tgloss[ruby]{\ahfont}{\ahun{a100}}{ta}{\tdoubtful}
+\tgloss[ruby]{\ahfont}{\ahun{a100}}{ta}{\tseenote} \\
+\hline
+\end{tabular}
+
+* 1 item  = one character, or a 0-argument command.
+%\bigskip
+%ExPex
+%
+%\tgloss[expex]{\ahfont}{\ahun{a100}}{ta}{donkey} 
+
+\end{document}
