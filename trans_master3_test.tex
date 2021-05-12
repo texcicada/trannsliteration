@@ -185,6 +185,43 @@
 }
 
 
+% Generic ruby text: for ruby sequence: tabcolsep setting
+\NewDocumentCommand { \trubyb } { m m m } {
+\tl_set:Nn \l_myx_tl { #1 } % font switch
+\tl_set:Nn \l_myy_tl { #2 } % base character
+\tl_set:Nn \l_myz_tl { #3 }  % ruby text
+
+{
+\setlength{\tabcolsep}{2pt} 
+\begin{tabular}[b]{c}
+\scriptsize \tl_use:N \l_myz_tl  \\
+\rule{0pt}{1.8ex} \tl_use:N \l_myx_tl \tl_use:N \l_myy_tl \\
+\end{tabular} 
+}
+}
+
+
+
+
+
+% Generic ruby sequence
+%\seq_new:N \l_ruby_seq
+%record
+\NewDocumentCommand { \trubyseq }{ > { \SplitList { ; } } m } {
+  \ProcessList { #1 } { \trubyseqb }
+}
+
+%field sequence
+\NewDocumentCommand { \trubyseqb } { > { \SplitArgument { 1 } { . } } m } {
+		\trubyseqc #1
+}	
+
+%field set
+\NewDocumentCommand { \trubyseqc } { m m } {
+		\trubyb{}{#1}{#2}
+}	
+
+
 % Generic gloss
 \NewDocumentCommand { \tgloss } { O{inline} m m m m } {
 %\tl_set:Nn \l_myx_tl { #2 } % format for script
@@ -1619,5 +1656,30 @@ rubytext+1item* &
 %ExPex
 %
 %\tgloss[expex]{\ahfont}{\ahun{a100}}{ta}{donkey} 
+
+\bigskip
+\trubyseq{{\nafont 𒋻}.ta;{\nafont 𒄷}.hu;{\nafont 𒌦}.un;{\nafont 𒍝}.za}
+
+\truby{\cufont\color{red}}{\cuuc{U+12337}}{URU}
+\truby{\cufont}{\cuuc{U+12129}}{\textit{ha}}
+\truby{\cufont}{\cuuc{U+1201C}}{\textit{ad}}
+\truby{\cufont}{\cuuc{U+12305}}{\textit{tu}}
+\truby{\cufont}{\cuuc{U+122AD}}{\textit{sha}}
+
+\trubyseq{%
+{\cufont\color{red}\cuuc{U+12337}}.URU;
+{\cufont\cuuc{U+12129}}.\textit{ha};
+{\cufont\cuuc{U+1201C}}.\textit{ad};
+{\cellcolor{yellow}\cufont\cuuc{U+12305}}.\textit{tu};
+{\cufont\cuuc{U+122AD}}.\textit{sha}
+}
+
+\trubyseq{%
+{\ahfont \fdetgen{𔖖}} .\truby{\scshape}{DEUS}{god};
+{\ahfont \fdetgen{𔓢}} .\truby{\scshape}{TONITRUS}{thunder};
+{\ahfont 𔕙} .hu;
+{\ahfont 𔑯} .ta;
+{\ahfont 𔗦} .sa\cdmacute
+} : Tarhuntassa : (Thunderer City)
 
 \end{document}
