@@ -143,6 +143,7 @@
 \newcommand\lbracket{{\mdseries\markerfontb\symbol{91}}}% [
 \newcommand\rbracket{{\mdseries\markerfontb\symbol{93}}}% ]
 
+\input{metacs_input.tex}
 
 % Common code
 \ExplSyntaxOn
@@ -150,7 +151,7 @@
 \tl_new:N \l_myuc_tl
 \tl_new:N \l_myun_tl
 \tl_new:N \l_myts_tl
-\tl_new:N \l_myb_tl
+%\tl_new:N \l_myb_tl %defined in metacs.tex
 \tl_new:N \l_myx_tl
 \tl_new:N \l_myy_tl
 \tl_new:N \l_myz_tl
@@ -1078,165 +1079,165 @@
 
 
 %-----------------------------------------
-%subset of helper meta-commands:
-\ExplSyntaxOn
-%cs: print the command name
-%cdr: print and run the command
-%cdpr: print with formatted argument and run
-%codedetok: print (unemphasized)
-
-%------------------------------- control sequence
-\NewDocumentCommand{\cs}{ m }{%
-  {\bfseries\sffamily\color{blue}
-  \token_to_str:N #1 % If you already have a token
-  }
-}%
-%------------------------------- print and run #1
-
-\NewDocumentCommand{\cdr}{ m }{%
-	\tl_set:Nn \l_my_tl { #1 }
-	{ \ttfamily\color{blue}
-%  \token_to_str:N #1
-  \detokenize{#1}
-  }
-  
-  \enspace $\mapsto$ \enspace
-  
-  \tl_use:N \l_my_tl
-}%
-
-%\tl_new:N \l_my_tl
-%\tl_new:N \l_myb_tl
-%\tl_new:N \l_myc_tl
-%\tl_new:N \l_myd_tl
-
-%------------------------------- print and run command+argumentt separately
-\NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
-	\tl_set:Nn \l_my_tl { #1 }
-	\tl_set:Nn \l_myb_tl { #2 }
-	\tl_set:Nn \l_myc_tl { #3 }
-	{ \ttfamily\color{blue}
-%  \token_to_str:N #1
-  \textbackslash \detokenize{#2} % command
-  \{ 
-  		{
-  		\tl_use:N \l_my_tl % formatting
-  		\detokenize{#3}       % argument
-  		}
-  \}
-  }
-  
-  \enspace $\mapsto$ \enspace
-  
-\cs:w \tl_use:N \l_myb_tl \cs_end: {  
-									#3 % argument
-									 }
-}%
-
-%------------------------------- print and run command+argument separately, command formatted
-\NewDocumentCommand{\cdprr}{ o o m m }{%1=print format,2=command format,3=command,4=argument
-	\tl_set:Nn \l_my_tl { #1 }
-	\tl_set:Nn \l_myb_tl { #2 }
-	\tl_set:Nn \l_myc_tl { #3 }
-	\tl_set:Nn \l_myd_tl { #4 }
-	{ \ttfamily\color{blue}
-%  \token_to_str:N #1
-  \textbackslash \detokenize{#3} % command
-  \{ 
-  		{
-  		\tl_use:N \l_my_tl % formatting
-  		\detokenize{#4}       % argument
-  		}
-  \}
-  }
-  
-  \enspace $\mapsto$ \enspace
-  
-  { \tl_use:N \l_myb_tl %command format
-\cs:w \tl_use:N \l_myc_tl \cs_end: {  
-									#4 % argument
-									 }
-		}
-}%
-
-%------------------------------- print and run command (no argument_ separately, command formatted
-\NewDocumentCommand{\cdprrn}{ o o m }{%1=print format,2=command format,3=command
-	\tl_set:Nn \l_my_tl { #1 }
-	\tl_set:Nn \l_myb_tl { #2 }
-	\tl_set:Nn \l_myc_tl { #3 }
-
-	{ \ttfamily\color{blue}
-%  \token_to_str:N #1
-
-  \textbackslash \detokenize{#3} % command
-  }
-  
-  \enspace $\mapsto$ \enspace
-  
-  { \tl_use:N \l_myb_tl %command format
-\cs:w \tl_use:N \l_myc_tl \cs_end: 
-		}
-}%
-
-
-%------------------------------- print and run command (no argument_ separately, command formatted, print with wrapper
-\NewDocumentCommand{\cdprrnw}{ o o o m }{%1,2=print format wrapper,3=command format,4=command
-	\tl_set:Nn \l_my_tl { #1 }
-	\tl_set:Nn \l_myb_tl { #2 }
-	\tl_set:Nn \l_myc_tl { #3 }
-	\tl_set:Nn \l_myd_tl { #4 }
-	
-	{ \ttfamily\color{blue}
-%  \token_to_st`r:N #1
-		{ 
-			\tl_use:N \l_my_tl %wrapper begin
-  \textbackslash \detokenize{#4} % command
-     \tl_use:N \l_myb_tl % wrapper end
-  	}
-  }
-  
-  \enspace $\mapsto$ \enspace
-  
-  { \tl_use:N \l_myc_tl %command format
-\cs:w \tl_use:N \l_myd_tl \cs_end: 
-		}
-}%
-
-
-%------------------------------- just print #1 as code, custom format
-\NewDocumentCommand{\cdrdcustom}{ o m }{%1=format code,2=cs
-			% the o must match with incoming [ ]
- 			{ #1
-			  \detokenize{#2}
-			  }
-}	%
-
-
-
-%------------------------------- just print #1 as plain detok code
-\NewDocumentCommand{\codedetok}{ o m }{
- 
-			{%true 
-			    {
-						\ttfamily
-					  															\detokenize{#2}
-						}
-			  }
-}%
-
-
-%------------------------------- just print as plain code
-\NewDocumentCommand{\codegeneral}{ o m }{
- 
-			{%true 
-			    {
-						\ttfamily
-					  															#2
-						}
-			  }
-}%
-
-\ExplSyntaxOff
+%%%%%%subset of helper meta-commands:
+%%%%%\ExplSyntaxOn
+%%%%%%cs: print the command name
+%%%%%%cdr: print and run the command
+%%%%%%cdpr: print with formatted argument and run
+%%%%%%codedetok: print (unemphasized)
+%%%%%
+%%%%%%------------------------------- control sequence
+%%%%%\NewDocumentCommand{\cs}{ m }{%
+%%%%%  {\bfseries\sffamily\color{blue}
+%%%%%  \token_to_str:N #1 % If you already have a token
+%%%%%  }
+%%%%%}%
+%%%%%%------------------------------- print and run #1
+%%%%%
+%%%%%\NewDocumentCommand{\cdr}{ m }{%
+%%%%%	\tl_set:Nn \l_my_tl { #1 }
+%%%%%	{ \ttfamily\color{blue}
+%%%%%%  \token_to_str:N #1
+%%%%%  \detokenize{#1}
+%%%%%  }
+%%%%%  
+%%%%%  \enspace $\mapsto$ \enspace
+%%%%%  
+%%%%%  \tl_use:N \l_my_tl
+%%%%%}%
+%%%%%
+%%%%%%\tl_new:N \l_my_tl
+%%%%%%\tl_new:N \l_myb_tl
+%%%%%%\tl_new:N \l_myc_tl
+%%%%%%\tl_new:N \l_myd_tl
+%%%%%
+%%%%%%------------------------------- print and run command+argumentt separately
+%%%%%\NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
+%%%%%	\tl_set:Nn \l_my_tl { #1 }
+%%%%%	\tl_set:Nn \l_myb_tl { #2 }
+%%%%%	\tl_set:Nn \l_myc_tl { #3 }
+%%%%%	{ \ttfamily\color{blue}
+%%%%%%  \token_to_str:N #1
+%%%%%  \textbackslash \detokenize{#2} % command
+%%%%%  \{ 
+%%%%%  		{
+%%%%%  		\tl_use:N \l_my_tl % formatting
+%%%%%  		\detokenize{#3}       % argument
+%%%%%  		}
+%%%%%  \}
+%%%%%  }
+%%%%%  
+%%%%%  \enspace $\mapsto$ \enspace
+%%%%%  
+%%%%%\cs:w \tl_use:N \l_myb_tl \cs_end: {  
+%%%%%									#3 % argument
+%%%%%									 }
+%%%%%}%
+%%%%%
+%%%%%%------------------------------- print and run command+argument separately, command formatted
+%%%%%\NewDocumentCommand{\cdprr}{ o o m m }{%1=print format,2=command format,3=command,4=argument
+%%%%%	\tl_set:Nn \l_my_tl { #1 }
+%%%%%	\tl_set:Nn \l_myb_tl { #2 }
+%%%%%	\tl_set:Nn \l_myc_tl { #3 }
+%%%%%	\tl_set:Nn \l_myd_tl { #4 }
+%%%%%	{ \ttfamily\color{blue}
+%%%%%%  \token_to_str:N #1
+%%%%%  \textbackslash \detokenize{#3} % command
+%%%%%  \{ 
+%%%%%  		{
+%%%%%  		\tl_use:N \l_my_tl % formatting
+%%%%%  		\detokenize{#4}       % argument
+%%%%%  		}
+%%%%%  \}
+%%%%%  }
+%%%%%  
+%%%%%  \enspace $\mapsto$ \enspace
+%%%%%  
+%%%%%  { \tl_use:N \l_myb_tl %command format
+%%%%%\cs:w \tl_use:N \l_myc_tl \cs_end: {  
+%%%%%									#4 % argument
+%%%%%									 }
+%%%%%		}
+%%%%%}%
+%%%%%
+%%%%%%------------------------------- print and run command (no argument_ separately, command formatted
+%%%%%\NewDocumentCommand{\cdprrn}{ o o m }{%1=print format,2=command format,3=command
+%%%%%	\tl_set:Nn \l_my_tl { #1 }
+%%%%%	\tl_set:Nn \l_myb_tl { #2 }
+%%%%%	\tl_set:Nn \l_myc_tl { #3 }
+%%%%%
+%%%%%	{ \ttfamily\color{blue}
+%%%%%%  \token_to_str:N #1
+%%%%%
+%%%%%  \textbackslash \detokenize{#3} % command
+%%%%%  }
+%%%%%  
+%%%%%  \enspace $\mapsto$ \enspace
+%%%%%  
+%%%%%  { \tl_use:N \l_myb_tl %command format
+%%%%%\cs:w \tl_use:N \l_myc_tl \cs_end: 
+%%%%%		}
+%%%%%}%
+%%%%%
+%%%%%
+%%%%%%------------------------------- print and run command (no argument_ separately, command formatted, print with wrapper
+%%%%%\NewDocumentCommand{\cdprrnw}{ o o o m }{%1,2=print format wrapper,3=command format,4=command
+%%%%%	\tl_set:Nn \l_my_tl { #1 }
+%%%%%	\tl_set:Nn \l_myb_tl { #2 }
+%%%%%	\tl_set:Nn \l_myc_tl { #3 }
+%%%%%	\tl_set:Nn \l_myd_tl { #4 }
+%%%%%	
+%%%%%	{ \ttfamily\color{blue}
+%%%%%%  \token_to_st`r:N #1
+%%%%%		{ 
+%%%%%			\tl_use:N \l_my_tl %wrapper begin
+%%%%%  \textbackslash \detokenize{#4} % command
+%%%%%     \tl_use:N \l_myb_tl % wrapper end
+%%%%%  	}
+%%%%%  }
+%%%%%  
+%%%%%  \enspace $\mapsto$ \enspace
+%%%%%  
+%%%%%  { \tl_use:N \l_myc_tl %command format
+%%%%%\cs:w \tl_use:N \l_myd_tl \cs_end: 
+%%%%%		}
+%%%%%}%
+%%%%%
+%%%%%
+%%%%%%------------------------------- just print #1 as code, custom format
+%%%%%\NewDocumentCommand{\cdrdcustom}{ o m }{%1=format code,2=cs
+%%%%%			% the o must match with incoming [ ]
+%%%%% 			{ #1
+%%%%%			  \detokenize{#2}
+%%%%%			  }
+%%%%%}	%
+%%%%%
+%%%%%
+%%%%%
+%%%%%%------------------------------- just print #1 as plain detok code
+%%%%%\NewDocumentCommand{\codedetok}{ o m }{
+%%%%% 
+%%%%%			{%true 
+%%%%%			    {
+%%%%%						\ttfamily
+%%%%%					  															\detokenize{#2}
+%%%%%						}
+%%%%%			  }
+%%%%%}%
+%%%%%
+%%%%%
+%%%%%%------------------------------- just print as plain code
+%%%%%\NewDocumentCommand{\codegeneral}{ o m }{
+%%%%% 
+%%%%%			{%true 
+%%%%%			    {
+%%%%%						\ttfamily
+%%%%%					  															#2
+%%%%%						}
+%%%%%			  }
+%%%%%}%
+%%%%%
+%%%%%\ExplSyntaxOff
 
 
 
@@ -1682,4 +1683,94 @@ rubytext+1item* &
 {\ahfont 𔗦} .sa\cdmacute
 } : Tarhuntassa : (Thunderer City)
 
+
+\section{Commands}
+\subsection{Named macros}
+Named macro to script glyph.
+
+\cdrdhead{\ugNAME}
+
+\noindent \cdr{{\ugfont\ugalpa}}
+
+\subsection{Shortforms}
+\cdrdhead{\ugXX}
+
+\noindent Unicode codepoint: \cdr{\uguc{U+10380}}
+
+\noindent Unicode name: \cdr{\ugun{alpa}}
+
+\noindent Typing shortcut: \cdr{\ugts{a}}
+
+\noindent TS to standard transliteration: \cdr{\ugst{a}}
+
+\subsection{Longforms}
+\cdrdhead{\ugtransXX}
+
+\noindent Unicode codepoint: \cdr{\ugtransuc{U+10380}}
+
+\noindent Unicode name: \cdr{\ugtransun{alpa}}
+
+\noindent Typing shortcut: \cdr{\ugtransts{a}}
+
+\noindent TS to standard transliteration: \cdr{\ugtranstsst{a}}
+
+\subsection{Word}
+Typing shortcut to script+transliteration.
+
+\cdrdhead{\ugw}
+
+\noindent \cdr{\ugw{dltt}}
+
+\cdrdhead{\ugtext[w]}
+
+\noindent \cdr{\ugtext[w]{dltt}}
+
+\subsection{Ruby text}
+Typing shortcut to script+rubytext transliteration.
+
+\cdrdhead{\ugruby}
+
+\noindent \cdr{\ugruby{a.b.g.}}
+
+\cdrdhead{\ugtext[ruby]}
+
+\noindent \cdr{\ugtext[ruby]{d.l.tt.}}
+
+\noindent \cdr{\ugtext[ruby]{dltt.div.ugrtt.}}
+
+\subsection{Ruby text -- generic}
+\cdrdhead{\truby{}{}{}}
+
+\noindent\cdr{\truby{\itshape}{X}{Y}}
+
+\noindent\cdr{\truby{\ugfont}{\ugts{a}}{\ugst{a}}}
+
+\noindent\cdr{\truby{\ahfont}{\ahun{a100}}{ta}}
+
+%\trubyseq
+
+
+\subsection{Gloss}
+\cdrdhead{\uggloss}
+
+\noindent \cdr{\uggloss{dltt}{(palace) door}}
+
+\cdrdhead{\ugtext[gloss]}
+
+\noindent \cdr{\ugtext[gloss]{dltt}{(palace) door}}
+
+\subsection{Gloss -- generic}
+\noindent \cdr{\tglossinline{}{\ugts{dltt}}{\ugst{dltt}}{(palace) door}}
+
+\noindent \cdr{\tgloss[inline]{}{\ugts{dltt}}{\ugst{dltt}}{(palace) door}}
+
+\noindent \cdr{\tglossruby{}{\ugts{dltt}}{\ugst{dltt}}{(palace) door}}
+
+\noindent \cdr{\tgloss[ruby]{}{\ugts{dltt}}{\ugst{dltt}}{(palace) door}}
+
+\noindent \cdr{\tgloss[ruby]{\ahfont}{\ahun{a100}}{ta}{donkey}}
+
+\cs{\tgloss}\oarg{type}\marg{glyphfont}\marg{glyph}\marg{transliteration}\marg{gloss}
+
+Option \meta{type} can be \codegeneral{inline} or \codegeneral{ruby}.
 \end{document}

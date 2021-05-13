@@ -1,0 +1,146 @@
+\documentclass{article}
+%\usepackage{booktabs}
+%\usepackage{cellspace}
+%\setlength{\cellspacetoplimit}{3pt}
+
+\usepackage[table]{xcolor}
+\pagecolor{green!3}
+\newcommand\theadercolour{red!20!yellow}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
+
+
+\newfontfamily\cafont{Noto Sans Carian}[Scale=1.5]%plain font
+
+
+%==============================
+
+
+
+
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+%Common code: plain
+\newcommand\translitformat{\color{red}\bfseries}
+\newcommand\tablea{%
+\setlength{\tabcolsep}{-0.5pt}%
+\begin{tabular}[b]{c}
+\scriptsize 
+}
+\newcommand\tableb{%
+\\ \rule{0pt}{1.8ex} 
+}
+\newcommand\tablec{%
+\\\end{tabular}%
+}
+\newcommand\eolist{{\tiny [End of List]}\par}
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\newcommand\sbucl{{\mdseries\markerfont\symbol{9121}}}% ⎡
+\newcommand\sbbcl{{\mdseries\markerfont\symbol{9123}}}% ⎣
+\newcommand\sbucr{{\mdseries\markerfont\symbol{9124}}}% ⎤
+\newcommand\sbbcr{{\mdseries\markerfont\symbol{9126}}}% ⎦
+\newcommand\tlcorner{{\mdseries\markerfont\symbol{8988}}}% ⌜
+\newcommand\trcorner{{\mdseries\markerfont\symbol{8989}}}% ⌝
+\newcommand\blcorner{{\mdseries\markerfont\symbol{8990}}}% ⌞
+\newcommand\brcorner{{\mdseries\markerfont\symbol{8991}}}% ⌟
+\newcommand\lbracket{{\mdseries\markerfontb\symbol{91}}}% [
+\newcommand\rbracket{{\mdseries\markerfontb\symbol{93}}}% ]
+
+\input{metacs_input.tex}
+
+% Common code
+\ExplSyntaxOn
+
+\tl_new:N \l_myuc_tl
+\tl_new:N \l_myun_tl
+\tl_new:N \l_myts_tl
+%\tl_new:N \l_myb_tl %defined in metacs.tex
+\tl_new:N \l_myx_tl
+\tl_new:N \l_myy_tl
+\tl_new:N \l_myz_tl
+\tl_new:N \l_myzz_tl
+\tl_new:N \l_myrev_tl
+
+\NewDocumentCommand{\transrev}{ m }{
+
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+		\tl_use:N \l_myrev_tl
+}
+\NewDocumentCommand{\transrevonly}{ m }{
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+%		\tl_use:N \l_myrev_tl
+}
+
+
+
+
+
+\ExplSyntaxOff
+
+\input{carian_input.tex}
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
+
+
+
+%===================================
+\begin{document}
+\cdr{\cauc{U+102A0U+102A1U+102A2U+102A3}}
+
+\cdr{\caun{ap2dl}}
+
+\cdr{\cats{ap2dl}}
+
+\cdr{\cast{ap2dl}}
+
+
+\section{List of Unicode codepoints}\label{sec:listcauc}
+\begin{multicols}{4}\noindent
+\catag
+\cashowplainlistuc
+\eolist
+\end{multicols}
+
+\section{List of Unicode names}\label{sec:listcaun}
+\begin{multicols}{4}\noindent
+\catag
+\cashowplainlistun
+\eolist
+\end{multicols}
+
+
+\section{List of Typing shortcuts}\label{sec:listcats}
+\begin{multicols}{4}\noindent
+\catag
+\cashowplainlistts
+\eolist
+\end{multicols}
+
+\section{List of Standard transliterations}\label{sec:listcast}
+\begin{multicols}{4}\noindent
+\catag
+\cashowplainlistst
+\eolist
+\end{multicols}
+
+
+
+\end{document}
