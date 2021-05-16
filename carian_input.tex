@@ -6,729 +6,747 @@
 
 
 
+%=====================================
+%us
+%un
+%ts - default
+%st
+\NewDocumentCommand { \catrans } { O{ts} m } {%
+\cs:w catrans#1 \cs_end: {#2}
+}
+%w - default
+%%gloss
+%ruby
+\NewDocumentCommand { \catext } { O{w} m } {%
+\cs:w ca#1 \cs_end: {#2}
+}
+\tl_new:N \l_mycauc_tl 
+\NewDocumentCommand { \cauc } { m } { \catransuc {#1} }
+\NewDocumentCommand { \catransuc } { m } {%
+\tl_set:Nn \l_mycauc_tl { #1 }
+\docatransuc
+\tl_use:N \l_mycauc_tl
+}
+\tl_new:N \l_mycaun_tl 
+\NewDocumentCommand { \caun } { m } { \catransun {#1} }
+\NewDocumentCommand { \catransun } { m } {%
+\tl_set:Nn \l_mycaun_tl { #1 }
+\docatransun
+\tl_use:N \l_mycaun_tl
+}
+\tl_new:N \l_mycats_tl 
+\NewDocumentCommand { \cats } { m } { \catransts {#1} }
+\NewDocumentCommand { \catransts } { m } {%
+\tl_set:Nn \l_mycats_tl { #1 }
+\docatransts
+\tl_use:N \l_mycats_tl
+}
+\NewDocumentCommand { \cast } { m } { \catransst {#1} }
+\NewDocumentCommand{\catransst}{ > { \SplitList { . } } m }{%
+\ProcessList { #1 } { \docatransst }
+}
+\tl_new:N \l_mycab_tl
+\NewDocumentCommand { \caw } { m } {%
+\tl_set:Nn \l_mycats_tl { #1 }
+\tl_set:Nn \l_mycab_tl { #1 }
+\docaword
+%{ \cafont \tl_use:N \l_myca_tl }
+}
+\NewDocumentCommand { \cagloss } { m m } {%
+\tl_set:Nn \l_mycats_tl { #1 }
+\tl_set:Nn \l_mycab_tl { #1 }
+\docagloss {#2}
+}
+\NewDocumentCommand{\caruby}{ > { \SplitList { . } } m }{%
+\ProcessList {#1 } { \docatranstsruby }
+}
+
+
+%AX:
+\newcommand\docarubye{%
+\tl_replace_all:Nnn  \l_mycay_tl { uuuu } { \tablea ý \tableb { \ftcafont 𐊻 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { uuu2 } { \tablea y2 \tableb { \ftcafont 𐋈 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { uuu3 } { \tablea y3 \tableb { \ftcafont 𐋐 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { uuu } { \tablea y \tableb { \ftcafont 𐊤 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { sh2 } { \tablea š3 \tableb { \ftcafont 𐊯 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { c18 } { \tablea 18 \tableb { \ftcafont 𐊱 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { tt2 } { \tablea τ2 \tableb { \ftcafont 𐊶 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { st2 } { \tablea Í \tableb { \ftcafont 𐋃 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { c39 } { \tablea 39 \tableb { \ftcafont 𐋆 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { mb2 } { \tablea β3 \tableb { \ftcafont 𐋋 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { mb3 } { \tablea β4 \tableb { \ftcafont 𐋌 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { mb4 } { \tablea β5 \tableb { \ftcafont 𐋍 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { ld2 } { \tablea λ3 \tableb { \ftcafont 𐋎 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { p2 } { \tablea β2 \tableb { \ftcafont 𐊡 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { ld } { \tablea λ \tableb { \ftcafont 𐊦 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { a2 } { \tablea e2 \tableb { \ftcafont 𐊧 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { d2 } { \tablea t2 \tableb { \ftcafont 𐊬 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { sh } { \tablea š2 \tableb { \ftcafont 𐊮 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { nn } { \tablea ñ \tableb { \ftcafont 𐊳 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { ss } { \tablea ś \tableb { \ftcafont 𐊸 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { k2 } { \tablea k2 \tableb { \ftcafont 𐊽 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { nd } { \tablea δ \tableb { \ftcafont 𐊾 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { uu } { \tablea w \tableb { \ftcafont 𐊿 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { g2 } { \tablea γ2 \tableb { \ftcafont 𐋁 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { st } { \tablea z \tableb { \ftcafont 𐋂 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { ng } { \tablea ŋ \tableb { \ftcafont 𐋄 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { ii } { \tablea j \tableb { \ftcafont 𐋅 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { tt } { \tablea τ \tableb { \ftcafont 𐋇 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { rr } { \tablea Í2 \tableb { \ftcafont 𐋉 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { mb } { \tablea β \tableb { \ftcafont 𐋊 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { e2 } { \tablea λ2 \tableb { \ftcafont 𐋏 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { a } { \tablea a \tableb { \ftcafont 𐊠 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { d } { \tablea d \tableb { \ftcafont 𐊢 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { l } { \tablea l \tableb { \ftcafont 𐊣 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { r } { \tablea r \tableb { \ftcafont 𐊥 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { q } { \tablea q \tableb { \ftcafont 𐊨 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { b } { \tablea b \tableb { \ftcafont 𐊩 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { m } { \tablea m \tableb { \ftcafont 𐊪 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { o } { \tablea o \tableb { \ftcafont 𐊫 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { t } { \tablea t \tableb { \ftcafont 𐊭 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { s } { \tablea s \tableb { \ftcafont 𐊰 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { u } { \tablea u \tableb { \ftcafont 𐊲 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { x } { \tablea k̂ \tableb { \ftcafont 𐊴 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { n } { \tablea n \tableb { \ftcafont 𐊵 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { p } { \tablea p \tableb { \ftcafont 𐊷 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { i } { \tablea i \tableb { \ftcafont 𐊹 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { e } { \tablea e \tableb { \ftcafont 𐊺 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { k } { \tablea k \tableb { \ftcafont 𐊼 } \tablec } 
+\tl_replace_all:Nnn  \l_mycay_tl { g } { \tablea γ \tableb { \ftcafont 𐋀 } \tablec } 
+}
+
+%\NewDocumentCommand{\carubysplit}{ > { \SplitList { . } } m }{%
+%  \ProcessList {#1 } { \docaruby }
+%}
+
+
+%---- Environments
+\NewDocumentEnvironment{catransuce}{ +b }
+{
+\tl_set:Nn \l_mycauc_tl { #1 }
+\docatransuc
+\tl_use:N \l_mycauc_tl
+}
+{ }
+\NewDocumentEnvironment{catransune}{ +b }
+{
+\tl_set:Nn \l_mycaun_tl { #1 }
+\docatransun
+\tl_use:N \l_mycaun_tl
+}
+{ }
+\NewDocumentEnvironment{catranstse}{ +b }
+{
+\tl_set:Nn \l_mycats_tl { #1 }
+\docatransts
+\tl_use:N \l_mycats_tl
+}
+{ }
+\NewDocumentEnvironment{catransste}{ +b }
+{
+% \tl_set:Nn \l_myca_tl { #1 }
+\docatransst {#1}
+%{ \cafont \tl_use:N \l_myca_tl }
+}
+{ }
+\NewDocumentEnvironment{carubye}{ +b }
+{
+ \tl_set:Nn \l_mycay_tl { #1 }
+ \docarubye
+   { \tl_use:N \l_mycay_tl }
+}
+{ }
+\NewDocumentEnvironment{catableture}{ +b }
+{
+\begin{quotation}\noindent
+\begin{catranstse}
+#1
+\end{catranstse}
+\par
+
+\bigskip
+\begin{catransste}
+#1
+\end{catransste}
+\end{quotation}
+}
+{ }
+
+
+%=========================== Commands
+\newcommand\docaword{%
+\docatransts
+%caword+trans
+\regex_replace_all:nnN { \. } { } \l_mycats_tl
+\tl_use:N \l_mycats_tl \ (
+%\catransst { \tl_use:N \l_mycab_tl }
+\exp_args:No
+\catransst
+{ \l_mycab_tl }
+)
+}
+
+\newcommand\docagloss[1]{%
+\docatransts
+%caword+trans
+\regex_replace_all:nnN { \. } { } \l_mycats_tl
+\tl_use:N \l_mycats_tl \ (
+%\catransst { \tl_use:N \l_mycab_tl }
+\exp_args:No
+\catransst
+{ \l_mycab_tl }
+, \ `#1'
+)
+}
+
+
+\newcommand\docatranstsruby[1]{%
+\tl_set:Nn \l_mycats_tl { #1 }
+%\tl_set:Nn \l_myz_tl { #1 }
+\docatransts
+%
+{
+\setlength{\tabcolsep}{-0.5pt}
+\begin{tabular}[b]{c}
+\scriptsize \docatransst { #1 } \\
+\rule{0pt}{1.8ex} \ftcafont \tl_use:N \l_mycats_tl \\
+\end{tabular}
+}
+}
+
+
+
+
+
+
 %-----   Unicode codepoint
 \newcommand\docatransuc{%
-%
-\regex_replace_all:nnN { U\+102A0 } { \cB\{ \c{cafont}𐊠 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A1 } { \cB\{ \c{cafont}𐊡 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A2 } { \cB\{ \c{cafont}𐊢 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A3 } { \cB\{ \c{cafont}𐊣 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A4 } { \cB\{ \c{cafont}𐊤 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A5 } { \cB\{ \c{cafont}𐊥 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A6 } { \cB\{ \c{cafont}𐊦 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A7 } { \cB\{ \c{cafont}𐊧 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A8 } { \cB\{ \c{cafont}𐊨 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102A9 } { \cB\{ \c{cafont}𐊩 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102AA } { \cB\{ \c{cafont}𐊪 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102AB } { \cB\{ \c{cafont}𐊫 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102AC } { \cB\{ \c{cafont}𐊬 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102AD } { \cB\{ \c{cafont}𐊭 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102AE } { \cB\{ \c{cafont}𐊮 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102AF } { \cB\{ \c{cafont}𐊯 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B0 } { \cB\{ \c{cafont}𐊰 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B1 } { \cB\{ \c{cafont}𐊱 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B2 } { \cB\{ \c{cafont}𐊲 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B3 } { \cB\{ \c{cafont}𐊳 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B4 } { \cB\{ \c{cafont}𐊴 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B5 } { \cB\{ \c{cafont}𐊵 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B6 } { \cB\{ \c{cafont}𐊶 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B7 } { \cB\{ \c{cafont}𐊷 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B8 } { \cB\{ \c{cafont}𐊸 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102B9 } { \cB\{ \c{cafont}𐊹 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102BA } { \cB\{ \c{cafont}𐊺 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102BB } { \cB\{ \c{cafont}𐊻 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102BC } { \cB\{ \c{cafont}𐊼 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102BD } { \cB\{ \c{cafont}𐊽 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102BE } { \cB\{ \c{cafont}𐊾 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102BF } { \cB\{ \c{cafont}𐊿 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C0 } { \cB\{ \c{cafont}𐋀 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C1 } { \cB\{ \c{cafont}𐋁 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C2 } { \cB\{ \c{cafont}𐋂 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C3 } { \cB\{ \c{cafont}𐋃 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C4 } { \cB\{ \c{cafont}𐋄 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C5 } { \cB\{ \c{cafont}𐋅 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C6 } { \cB\{ \c{cafont}𐋆 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C7 } { \cB\{ \c{cafont}𐋇 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C8 } { \cB\{ \c{cafont}𐋈 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102C9 } { \cB\{ \c{cafont}𐋉 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102CA } { \cB\{ \c{cafont}𐋊 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102CB } { \cB\{ \c{cafont}𐋋 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102CC } { \cB\{ \c{cafont}𐋌 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102CD } { \cB\{ \c{cafont}𐋍 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102CE } { \cB\{ \c{cafont}𐋎 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102CF } { \cB\{ \c{cafont}𐋏 \cE\}  } \l_myuc_tl
-\regex_replace_all:nnN { U\+102D0 } { \cB\{ \c{cafont}𐋐 \cE\}  } \l_myuc_tl
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A0 }  {  { \ftcafont 𐊠 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A1 }  {  { \ftcafont 𐊡 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A2 }  {  { \ftcafont 𐊢 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A3 }  {  { \ftcafont 𐊣 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A4 }  {  { \ftcafont 𐊤 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A5 }  {  { \ftcafont 𐊥 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A6 }  {  { \ftcafont 𐊦 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A7 }  {  { \ftcafont 𐊧 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A8 }  {  { \ftcafont 𐊨 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102A9 }  {  { \ftcafont 𐊩 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102AA }  {  { \ftcafont 𐊪 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102AB }  {  { \ftcafont 𐊫 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102AC }  {  { \ftcafont 𐊬 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102AD }  {  { \ftcafont 𐊭 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102AE }  {  { \ftcafont 𐊮 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102AF }  {  { \ftcafont 𐊯 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B0 }  {  { \ftcafont 𐊰 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B1 }  {  { \ftcafont 𐊱 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B2 }  {  { \ftcafont 𐊲 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B3 }  {  { \ftcafont 𐊳 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B4 }  {  { \ftcafont 𐊴 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B5 }  {  { \ftcafont 𐊵 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B6 }  {  { \ftcafont 𐊶 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B7 }  {  { \ftcafont 𐊷 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B8 }  {  { \ftcafont 𐊸 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102B9 }  {  { \ftcafont 𐊹 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102BA }  {  { \ftcafont 𐊺 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102BB }  {  { \ftcafont 𐊻 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102BC }  {  { \ftcafont 𐊼 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102BD }  {  { \ftcafont 𐊽 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102BE }  {  { \ftcafont 𐊾 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102BF }  {  { \ftcafont 𐊿 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C0 }  {  { \ftcafont 𐋀 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C1 }  {  { \ftcafont 𐋁 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C2 }  {  { \ftcafont 𐋂 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C3 }  {  { \ftcafont 𐋃 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C4 }  {  { \ftcafont 𐋄 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C5 }  {  { \ftcafont 𐋅 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C6 }  {  { \ftcafont 𐋆 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C7 }  {  { \ftcafont 𐋇 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C8 }  {  { \ftcafont 𐋈 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102C9 }  {  { \ftcafont 𐋉 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102CA }  {  { \ftcafont 𐋊 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102CB }  {  { \ftcafont 𐋋 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102CC }  {  { \ftcafont 𐋌 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102CD }  {  { \ftcafont 𐋍 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102CE }  {  { \ftcafont 𐋎 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102CF }  {  { \ftcafont 𐋏 }  } 
+\tl_replace_all:Nnn \l_mycauc_tl { U+102D0 }  {  { \ftcafont 𐋐 }  } 
 }
 %-----   Unicode name
 \newcommand\docatransun{%
 %
-\regex_replace_all:nnN { uuuu } { \cB\{ \c{cafont}𐊻 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { uuu2 } { \cB\{ \c{cafont}𐋈 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { uuu3 } { \cB\{ \c{cafont}𐋐 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { uuu } { \cB\{ \c{cafont}𐊤 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { sh2 } { \cB\{ \c{cafont}𐊯 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { c18 } { \cB\{ \c{cafont}𐊱 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { tt2 } { \cB\{ \c{cafont}𐊶 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { st2 } { \cB\{ \c{cafont}𐋃 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { c39 } { \cB\{ \c{cafont}𐋆 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { mb2 } { \cB\{ \c{cafont}𐋋 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { mb3 } { \cB\{ \c{cafont}𐋌 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { mb4 } { \cB\{ \c{cafont}𐋍 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { ld2 } { \cB\{ \c{cafont}𐋎 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { p2 } { \cB\{ \c{cafont}𐊡 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { ld } { \cB\{ \c{cafont}𐊦 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { a2 } { \cB\{ \c{cafont}𐊧 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { d2 } { \cB\{ \c{cafont}𐊬 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { sh } { \cB\{ \c{cafont}𐊮 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { nn } { \cB\{ \c{cafont}𐊳 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { ss } { \cB\{ \c{cafont}𐊸 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { k2 } { \cB\{ \c{cafont}𐊽 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { nd } { \cB\{ \c{cafont}𐊾 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { uu } { \cB\{ \c{cafont}𐊿 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { g2 } { \cB\{ \c{cafont}𐋁 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { st } { \cB\{ \c{cafont}𐋂 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { ng } { \cB\{ \c{cafont}𐋄 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { ii } { \cB\{ \c{cafont}𐋅 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { tt } { \cB\{ \c{cafont}𐋇 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { rr } { \cB\{ \c{cafont}𐋉 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { mb } { \cB\{ \c{cafont}𐋊 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { e2 } { \cB\{ \c{cafont}𐋏 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { a } { \cB\{ \c{cafont}𐊠 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { d } { \cB\{ \c{cafont}𐊢 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { l } { \cB\{ \c{cafont}𐊣 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { r } { \cB\{ \c{cafont}𐊥 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { q } { \cB\{ \c{cafont}𐊨 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { b } { \cB\{ \c{cafont}𐊩 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { m } { \cB\{ \c{cafont}𐊪 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { o } { \cB\{ \c{cafont}𐊫 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { t } { \cB\{ \c{cafont}𐊭 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { s } { \cB\{ \c{cafont}𐊰 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { u } { \cB\{ \c{cafont}𐊲 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { x } { \cB\{ \c{cafont}𐊴 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { n } { \cB\{ \c{cafont}𐊵 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { p } { \cB\{ \c{cafont}𐊷 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { i } { \cB\{ \c{cafont}𐊹 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { e } { \cB\{ \c{cafont}𐊺 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { k } { \cB\{ \c{cafont}𐊼 \cE\}  } \l_myun_tl
-\regex_replace_all:nnN { g } { \cB\{ \c{cafont}𐋀 \cE\}  } \l_myun_tl
+\tl_replace_all:Nnn \l_mycaun_tl { uuuu }  {  { \ftcafont 𐊻 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { uuu2 }  {  { \ftcafont 𐋈 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { uuu3 }  {  { \ftcafont 𐋐 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { uuu }  {  { \ftcafont 𐊤 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { sh2 }  {  { \ftcafont 𐊯 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { c18 }  {  { \ftcafont 𐊱 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { tt2 }  {  { \ftcafont 𐊶 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { st2 }  {  { \ftcafont 𐋃 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { c39 }  {  { \ftcafont 𐋆 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { mb2 }  {  { \ftcafont 𐋋 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { mb3 }  {  { \ftcafont 𐋌 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { mb4 }  {  { \ftcafont 𐋍 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { ld2 }  {  { \ftcafont 𐋎 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { p2 }  {  { \ftcafont 𐊡 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { ld }  {  { \ftcafont 𐊦 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { a2 }  {  { \ftcafont 𐊧 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { d2 }  {  { \ftcafont 𐊬 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { sh }  {  { \ftcafont 𐊮 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { nn }  {  { \ftcafont 𐊳 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { ss }  {  { \ftcafont 𐊸 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { k2 }  {  { \ftcafont 𐊽 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { nd }  {  { \ftcafont 𐊾 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { uu }  {  { \ftcafont 𐊿 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { g2 }  {  { \ftcafont 𐋁 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { st }  {  { \ftcafont 𐋂 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { ng }  {  { \ftcafont 𐋄 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { ii }  {  { \ftcafont 𐋅 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { tt }  {  { \ftcafont 𐋇 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { rr }  {  { \ftcafont 𐋉 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { mb }  {  { \ftcafont 𐋊 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { e2 }  {  { \ftcafont 𐋏 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { a }  {  { \ftcafont 𐊠 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { d }  {  { \ftcafont 𐊢 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { l }  {  { \ftcafont 𐊣 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { r }  {  { \ftcafont 𐊥 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { q }  {  { \ftcafont 𐊨 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { b }  {  { \ftcafont 𐊩 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { m }  {  { \ftcafont 𐊪 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { o }  {  { \ftcafont 𐊫 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { t }  {  { \ftcafont 𐊭 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { s }  {  { \ftcafont 𐊰 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { u }  {  { \ftcafont 𐊲 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { x }  {  { \ftcafont 𐊴 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { n }  {  { \ftcafont 𐊵 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { p }  {  { \ftcafont 𐊷 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { i }  {  { \ftcafont 𐊹 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { e }  {  { \ftcafont 𐊺 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { k }  {  { \ftcafont 𐊼 }  } 
+\tl_replace_all:Nnn \l_mycaun_tl { g }  {  { \ftcafont 𐋀 }  } 
 }
 
 %-----   Typing shortcut
 \newcommand\docatransts{%
 %
-\regex_replace_all:nnN { uuuu } { \cB\{ \c{cafont}𐊻 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { uuu2 } { \cB\{ \c{cafont}𐋈 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { uuu3 } { \cB\{ \c{cafont}𐋐 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { uuu } { \cB\{ \c{cafont}𐊤 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { sh2 } { \cB\{ \c{cafont}𐊯 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { c18 } { \cB\{ \c{cafont}𐊱 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { tt2 } { \cB\{ \c{cafont}𐊶 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { st2 } { \cB\{ \c{cafont}𐋃 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { c39 } { \cB\{ \c{cafont}𐋆 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { mb2 } { \cB\{ \c{cafont}𐋋 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { mb3 } { \cB\{ \c{cafont}𐋌 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { mb4 } { \cB\{ \c{cafont}𐋍 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { ld2 } { \cB\{ \c{cafont}𐋎 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { p2 } { \cB\{ \c{cafont}𐊡 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { ld } { \cB\{ \c{cafont}𐊦 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { a2 } { \cB\{ \c{cafont}𐊧 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { d2 } { \cB\{ \c{cafont}𐊬 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { sh } { \cB\{ \c{cafont}𐊮 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { nn } { \cB\{ \c{cafont}𐊳 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { ss } { \cB\{ \c{cafont}𐊸 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { k2 } { \cB\{ \c{cafont}𐊽 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { nd } { \cB\{ \c{cafont}𐊾 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { uu } { \cB\{ \c{cafont}𐊿 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { g2 } { \cB\{ \c{cafont}𐋁 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { st } { \cB\{ \c{cafont}𐋂 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { ng } { \cB\{ \c{cafont}𐋄 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { ii } { \cB\{ \c{cafont}𐋅 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { tt } { \cB\{ \c{cafont}𐋇 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { rr } { \cB\{ \c{cafont}𐋉 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { mb } { \cB\{ \c{cafont}𐋊 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { e2 } { \cB\{ \c{cafont}𐋏 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { a } { \cB\{ \c{cafont}𐊠 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { d } { \cB\{ \c{cafont}𐊢 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { l } { \cB\{ \c{cafont}𐊣 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { r } { \cB\{ \c{cafont}𐊥 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { q } { \cB\{ \c{cafont}𐊨 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { b } { \cB\{ \c{cafont}𐊩 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { m } { \cB\{ \c{cafont}𐊪 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { o } { \cB\{ \c{cafont}𐊫 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { t } { \cB\{ \c{cafont}𐊭 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { s } { \cB\{ \c{cafont}𐊰 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { u } { \cB\{ \c{cafont}𐊲 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { x } { \cB\{ \c{cafont}𐊴 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { n } { \cB\{ \c{cafont}𐊵 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { p } { \cB\{ \c{cafont}𐊷 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { i } { \cB\{ \c{cafont}𐊹 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { e } { \cB\{ \c{cafont}𐊺 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { k } { \cB\{ \c{cafont}𐊼 \cE\}  } \l_myts_tl
-\regex_replace_all:nnN { g } { \cB\{ \c{cafont}𐋀 \cE\}  } \l_myts_tl
+\tl_replace_all:Nnn \l_mycats_tl { uuuu }  {  { \ftcafont 𐊻 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { uuu2 }  {  { \ftcafont 𐋈 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { uuu3 }  {  { \ftcafont 𐋐 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { uuu }  {  { \ftcafont 𐊤 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { sh2 }  {  { \ftcafont 𐊯 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { c18 }  {  { \ftcafont 𐊱 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { tt2 }  {  { \ftcafont 𐊶 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { st2 }  {  { \ftcafont 𐋃 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { c39 }  {  { \ftcafont 𐋆 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { mb2 }  {  { \ftcafont 𐋋 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { mb3 }  {  { \ftcafont 𐋌 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { mb4 }  {  { \ftcafont 𐋍 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { ld2 }  {  { \ftcafont 𐋎 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { p2 }  {  { \ftcafont 𐊡 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { ld }  {  { \ftcafont 𐊦 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { a2 }  {  { \ftcafont 𐊧 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { d2 }  {  { \ftcafont 𐊬 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { sh }  {  { \ftcafont 𐊮 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { nn }  {  { \ftcafont 𐊳 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { ss }  {  { \ftcafont 𐊸 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { k2 }  {  { \ftcafont 𐊽 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { nd }  {  { \ftcafont 𐊾 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { uu }  {  { \ftcafont 𐊿 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { g2 }  {  { \ftcafont 𐋁 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { st }  {  { \ftcafont 𐋂 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { ng }  {  { \ftcafont 𐋄 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { ii }  {  { \ftcafont 𐋅 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { tt }  {  { \ftcafont 𐋇 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { rr }  {  { \ftcafont 𐋉 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { mb }  {  { \ftcafont 𐋊 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { e2 }  {  { \ftcafont 𐋏 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { a }  {  { \ftcafont 𐊠 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { d }  {  { \ftcafont 𐊢 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { l }  {  { \ftcafont 𐊣 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { r }  {  { \ftcafont 𐊥 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { q }  {  { \ftcafont 𐊨 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { b }  {  { \ftcafont 𐊩 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { m }  {  { \ftcafont 𐊪 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { o }  {  { \ftcafont 𐊫 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { t }  {  { \ftcafont 𐊭 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { s }  {  { \ftcafont 𐊰 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { u }  {  { \ftcafont 𐊲 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { x }  {  { \ftcafont 𐊴 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { n }  {  { \ftcafont 𐊵 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { p }  {  { \ftcafont 𐊷 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { i }  {  { \ftcafont 𐊹 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { e }  {  { \ftcafont 𐊺 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { k }  {  { \ftcafont 𐊼 }  } 
+\tl_replace_all:Nnn \l_mycats_tl { g }  {  { \ftcafont 𐋀 }  } 
 }
 
-\NewDocumentCommand { \cauc } { m } {	\catransuc {#1} }
-
-\NewDocumentCommand { \catransuc } { m } {%
-\tl_set:Nn \l_myuc_tl { #1 }
- \docatransuc 
-  \tl_use:N \l_myuc_tl 
-}
-
-
-
-%-----   Scholarly transliteration
-\newcommand\docatransst{%
-%
+%AI:
+\newcommand\docatransst[1]{%
+\tl_set:Nn \l_myz_tl { #1 }
 %-----   Ruby Part 2a
-\regex_replace_all:nnN { uuuu } { 蝤  } \l_myz_tl
-\regex_replace_all:nnN { uuu2 } { 蝱  } \l_myz_tl
-\regex_replace_all:nnN { uuu3 } { 蝹  } \l_myz_tl
-\regex_replace_all:nnN { uuu } { 蝍  } \l_myz_tl
-\regex_replace_all:nnN { sh2 } { 蝘  } \l_myz_tl
-\regex_replace_all:nnN { c18 } { 蝚  } \l_myz_tl
-\regex_replace_all:nnN { tt2 } { 蝟  } \l_myz_tl
-\regex_replace_all:nnN { st2 } { 蝬  } \l_myz_tl
-\regex_replace_all:nnN { c39 } { 蝯  } \l_myz_tl
-\regex_replace_all:nnN { mb2 } { 蝴  } \l_myz_tl
-\regex_replace_all:nnN { mb3 } { 蝵  } \l_myz_tl
-\regex_replace_all:nnN { mb4 } { 蝶  } \l_myz_tl
-\regex_replace_all:nnN { ld2 } { 蝷  } \l_myz_tl
-\regex_replace_all:nnN { p2 } { 蝊  } \l_myz_tl
-\regex_replace_all:nnN { ld } { 蝏  } \l_myz_tl
-\regex_replace_all:nnN { a2 } { 蝐  } \l_myz_tl
-\regex_replace_all:nnN { d2 } { 蝕  } \l_myz_tl
-\regex_replace_all:nnN { sh } { 蝗  } \l_myz_tl
-\regex_replace_all:nnN { nn } { 蝜  } \l_myz_tl
-\regex_replace_all:nnN { ss } { 蝡  } \l_myz_tl
-\regex_replace_all:nnN { k2 } { 蝦  } \l_myz_tl
-\regex_replace_all:nnN { nd } { 蝧  } \l_myz_tl
-\regex_replace_all:nnN { uu } { 蝨  } \l_myz_tl
-\regex_replace_all:nnN { g2 } { 蝪  } \l_myz_tl
-\regex_replace_all:nnN { st } { 蝫  } \l_myz_tl
-\regex_replace_all:nnN { ng } { 蝭  } \l_myz_tl
-\regex_replace_all:nnN { ii } { 蝮  } \l_myz_tl
-\regex_replace_all:nnN { tt } { 蝰  } \l_myz_tl
-\regex_replace_all:nnN { rr } { 蝲  } \l_myz_tl
-\regex_replace_all:nnN { mb } { 蝳  } \l_myz_tl
-\regex_replace_all:nnN { e2 } { 蝸  } \l_myz_tl
-\regex_replace_all:nnN { a } { 蝉  } \l_myz_tl
-\regex_replace_all:nnN { d } { 蝋  } \l_myz_tl
-\regex_replace_all:nnN { l } { 蝌  } \l_myz_tl
-\regex_replace_all:nnN { r } { 蝎  } \l_myz_tl
-\regex_replace_all:nnN { q } { 蝑  } \l_myz_tl
-\regex_replace_all:nnN { b } { 蝒  } \l_myz_tl
-\regex_replace_all:nnN { m } { 蝓  } \l_myz_tl
-\regex_replace_all:nnN { o } { 蝔  } \l_myz_tl
-\regex_replace_all:nnN { t } { 蝖  } \l_myz_tl
-\regex_replace_all:nnN { s } { 蝙  } \l_myz_tl
-\regex_replace_all:nnN { u } { 蝛  } \l_myz_tl
-\regex_replace_all:nnN { x } { 蝝  } \l_myz_tl
-\regex_replace_all:nnN { n } { 蝞  } \l_myz_tl
-\regex_replace_all:nnN { p } { 蝠  } \l_myz_tl
-\regex_replace_all:nnN { i } { 蝢  } \l_myz_tl
-\regex_replace_all:nnN { e } { 蝣  } \l_myz_tl
-\regex_replace_all:nnN { k } { 蝥  } \l_myz_tl
-\regex_replace_all:nnN { g } { 蝩  } \l_myz_tl
+\tl_replace_all:Nnn \l_myz_tl { uuuu }  { 蝤 } 
+\tl_replace_all:Nnn \l_myz_tl { uuu2 }  { 蝱 } 
+\tl_replace_all:Nnn \l_myz_tl { uuu3 }  { 蝹 } 
+\tl_replace_all:Nnn \l_myz_tl { uuu }  { 蝍 } 
+\tl_replace_all:Nnn \l_myz_tl { sh2 }  { 蝘 } 
+\tl_replace_all:Nnn \l_myz_tl { c18 }  { 蝚 } 
+\tl_replace_all:Nnn \l_myz_tl { tt2 }  { 蝟 } 
+\tl_replace_all:Nnn \l_myz_tl { st2 }  { 蝬 } 
+\tl_replace_all:Nnn \l_myz_tl { c39 }  { 蝯 } 
+\tl_replace_all:Nnn \l_myz_tl { mb2 }  { 蝴 } 
+\tl_replace_all:Nnn \l_myz_tl { mb3 }  { 蝵 } 
+\tl_replace_all:Nnn \l_myz_tl { mb4 }  { 蝶 } 
+\tl_replace_all:Nnn \l_myz_tl { ld2 }  { 蝷 } 
+\tl_replace_all:Nnn \l_myz_tl { p2 }  { 蝊 } 
+\tl_replace_all:Nnn \l_myz_tl { ld }  { 蝏 } 
+\tl_replace_all:Nnn \l_myz_tl { a2 }  { 蝐 } 
+\tl_replace_all:Nnn \l_myz_tl { d2 }  { 蝕 } 
+\tl_replace_all:Nnn \l_myz_tl { sh }  { 蝗 } 
+\tl_replace_all:Nnn \l_myz_tl { nn }  { 蝜 } 
+\tl_replace_all:Nnn \l_myz_tl { ss }  { 蝡 } 
+\tl_replace_all:Nnn \l_myz_tl { k2 }  { 蝦 } 
+\tl_replace_all:Nnn \l_myz_tl { nd }  { 蝧 } 
+\tl_replace_all:Nnn \l_myz_tl { uu }  { 蝨 } 
+\tl_replace_all:Nnn \l_myz_tl { g2 }  { 蝪 } 
+\tl_replace_all:Nnn \l_myz_tl { st }  { 蝫 } 
+\tl_replace_all:Nnn \l_myz_tl { ng }  { 蝭 } 
+\tl_replace_all:Nnn \l_myz_tl { ii }  { 蝮 } 
+\tl_replace_all:Nnn \l_myz_tl { tt }  { 蝰 } 
+\tl_replace_all:Nnn \l_myz_tl { rr }  { 蝲 } 
+\tl_replace_all:Nnn \l_myz_tl { mb }  { 蝳 } 
+\tl_replace_all:Nnn \l_myz_tl { e2 }  { 蝸 } 
+\tl_replace_all:Nnn \l_myz_tl { a }  { 蝉 } 
+\tl_replace_all:Nnn \l_myz_tl { d }  { 蝋 } 
+\tl_replace_all:Nnn \l_myz_tl { l }  { 蝌 } 
+\tl_replace_all:Nnn \l_myz_tl { r }  { 蝎 } 
+\tl_replace_all:Nnn \l_myz_tl { q }  { 蝑 } 
+\tl_replace_all:Nnn \l_myz_tl { b }  { 蝒 } 
+\tl_replace_all:Nnn \l_myz_tl { m }  { 蝓 } 
+\tl_replace_all:Nnn \l_myz_tl { o }  { 蝔 } 
+\tl_replace_all:Nnn \l_myz_tl { t }  { 蝖 } 
+\tl_replace_all:Nnn \l_myz_tl { s }  { 蝙 } 
+\tl_replace_all:Nnn \l_myz_tl { u }  { 蝛 } 
+\tl_replace_all:Nnn \l_myz_tl { x }  { 蝝 } 
+\tl_replace_all:Nnn \l_myz_tl { n }  { 蝞 } 
+\tl_replace_all:Nnn \l_myz_tl { p }  { 蝠 } 
+\tl_replace_all:Nnn \l_myz_tl { i }  { 蝢 } 
+\tl_replace_all:Nnn \l_myz_tl { e }  { 蝣 } 
+\tl_replace_all:Nnn \l_myz_tl { k }  { 蝥 } 
+\tl_replace_all:Nnn \l_myz_tl { g }  { 蝩 } 
 %-----   Ruby Part 2b
-\regex_replace_all:nnN { 蝉 } { a  } \l_myz_tl
-\regex_replace_all:nnN { 蝊 } { β2  } \l_myz_tl
-\regex_replace_all:nnN { 蝋 } { d  } \l_myz_tl
-\regex_replace_all:nnN { 蝌 } { l  } \l_myz_tl
-\regex_replace_all:nnN { 蝍 } { y  } \l_myz_tl
-\regex_replace_all:nnN { 蝎 } { r  } \l_myz_tl
-\regex_replace_all:nnN { 蝏 } { λ  } \l_myz_tl
-\regex_replace_all:nnN { 蝐 } { e2  } \l_myz_tl
-\regex_replace_all:nnN { 蝑 } { q  } \l_myz_tl
-\regex_replace_all:nnN { 蝒 } { b  } \l_myz_tl
-\regex_replace_all:nnN { 蝓 } { m  } \l_myz_tl
-\regex_replace_all:nnN { 蝔 } { o  } \l_myz_tl
-\regex_replace_all:nnN { 蝕 } { t2  } \l_myz_tl
-\regex_replace_all:nnN { 蝖 } { t  } \l_myz_tl
-\regex_replace_all:nnN { 蝗 } { š2  } \l_myz_tl
-\regex_replace_all:nnN { 蝘 } { š3  } \l_myz_tl
-\regex_replace_all:nnN { 蝙 } { s  } \l_myz_tl
-\regex_replace_all:nnN { 蝚 } { 18  } \l_myz_tl
-\regex_replace_all:nnN { 蝛 } { u  } \l_myz_tl
-\regex_replace_all:nnN { 蝜 } { ñ  } \l_myz_tl
-\regex_replace_all:nnN { 蝝 } { k̂  } \l_myz_tl
-\regex_replace_all:nnN { 蝞 } { n  } \l_myz_tl
-\regex_replace_all:nnN { 蝟 } { τ2  } \l_myz_tl
-\regex_replace_all:nnN { 蝠 } { p  } \l_myz_tl
-\regex_replace_all:nnN { 蝡 } { ś  } \l_myz_tl
-\regex_replace_all:nnN { 蝢 } { i  } \l_myz_tl
-\regex_replace_all:nnN { 蝣 } { e  } \l_myz_tl
-\regex_replace_all:nnN { 蝤 } { ý  } \l_myz_tl
-\regex_replace_all:nnN { 蝥 } { k  } \l_myz_tl
-\regex_replace_all:nnN { 蝦 } { k2  } \l_myz_tl
-\regex_replace_all:nnN { 蝧 } { δ  } \l_myz_tl
-\regex_replace_all:nnN { 蝨 } { w  } \l_myz_tl
-\regex_replace_all:nnN { 蝩 } { γ  } \l_myz_tl
-\regex_replace_all:nnN { 蝪 } { γ2  } \l_myz_tl
-\regex_replace_all:nnN { 蝫 } { z  } \l_myz_tl
-\regex_replace_all:nnN { 蝬 } { Í  } \l_myz_tl
-\regex_replace_all:nnN { 蝭 } { ŋ  } \l_myz_tl
-\regex_replace_all:nnN { 蝮 } { j  } \l_myz_tl
-\regex_replace_all:nnN { 蝯 } { 39  } \l_myz_tl
-\regex_replace_all:nnN { 蝰 } { τ  } \l_myz_tl
-\regex_replace_all:nnN { 蝱 } { y2  } \l_myz_tl
-\regex_replace_all:nnN { 蝲 } { Í2  } \l_myz_tl
-\regex_replace_all:nnN { 蝳 } { β  } \l_myz_tl
-\regex_replace_all:nnN { 蝴 } { β3  } \l_myz_tl
-\regex_replace_all:nnN { 蝵 } { β4  } \l_myz_tl
-\regex_replace_all:nnN { 蝶 } { β5  } \l_myz_tl
-\regex_replace_all:nnN { 蝷 } { λ3  } \l_myz_tl
-\regex_replace_all:nnN { 蝸 } { λ2  } \l_myz_tl
-\regex_replace_all:nnN { 蝹 } { y3  } \l_myz_tl
-{ \tl_use:N \l_myz_tl }
+\tl_replace_all:Nnn \l_myz_tl { 蝉 }  { a } 
+\tl_replace_all:Nnn \l_myz_tl { 蝊 }  { β2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝋 }  { d } 
+\tl_replace_all:Nnn \l_myz_tl { 蝌 }  { l } 
+\tl_replace_all:Nnn \l_myz_tl { 蝍 }  { y } 
+\tl_replace_all:Nnn \l_myz_tl { 蝎 }  { r } 
+\tl_replace_all:Nnn \l_myz_tl { 蝏 }  { λ } 
+\tl_replace_all:Nnn \l_myz_tl { 蝐 }  { e2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝑 }  { q } 
+\tl_replace_all:Nnn \l_myz_tl { 蝒 }  { b } 
+\tl_replace_all:Nnn \l_myz_tl { 蝓 }  { m } 
+\tl_replace_all:Nnn \l_myz_tl { 蝔 }  { o } 
+\tl_replace_all:Nnn \l_myz_tl { 蝕 }  { t2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝖 }  { t } 
+\tl_replace_all:Nnn \l_myz_tl { 蝗 }  { š2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝘 }  { š3 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝙 }  { s } 
+\tl_replace_all:Nnn \l_myz_tl { 蝚 }  { 18 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝛 }  { u } 
+\tl_replace_all:Nnn \l_myz_tl { 蝜 }  { ñ } 
+\tl_replace_all:Nnn \l_myz_tl { 蝝 }  { k̂ } 
+\tl_replace_all:Nnn \l_myz_tl { 蝞 }  { n } 
+\tl_replace_all:Nnn \l_myz_tl { 蝟 }  { τ2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝠 }  { p } 
+\tl_replace_all:Nnn \l_myz_tl { 蝡 }  { ś } 
+\tl_replace_all:Nnn \l_myz_tl { 蝢 }  { i } 
+\tl_replace_all:Nnn \l_myz_tl { 蝣 }  { e } 
+\tl_replace_all:Nnn \l_myz_tl { 蝤 }  { ý } 
+\tl_replace_all:Nnn \l_myz_tl { 蝥 }  { k } 
+\tl_replace_all:Nnn \l_myz_tl { 蝦 }  { k2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝧 }  { δ } 
+\tl_replace_all:Nnn \l_myz_tl { 蝨 }  { w } 
+\tl_replace_all:Nnn \l_myz_tl { 蝩 }  { γ } 
+\tl_replace_all:Nnn \l_myz_tl { 蝪 }  { γ2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝫 }  { z } 
+\tl_replace_all:Nnn \l_myz_tl { 蝬 }  { Í } 
+\tl_replace_all:Nnn \l_myz_tl { 蝭 }  { ŋ } 
+\tl_replace_all:Nnn \l_myz_tl { 蝮 }  { j } 
+\tl_replace_all:Nnn \l_myz_tl { 蝯 }  { 39 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝰 }  { τ } 
+\tl_replace_all:Nnn \l_myz_tl { 蝱 }  { y2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝲 }  { Í2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝳 }  { β } 
+\tl_replace_all:Nnn \l_myz_tl { 蝴 }  { β3 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝵 }  { β4 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝶 }  { β5 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝷 }  { λ3 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝸 }  { λ2 } 
+\tl_replace_all:Nnn \l_myz_tl { 蝹 }  { y3 } 
+%
+\tl_use:N \l_myz_tl 
 }
 
-
-\NewDocumentCommand { \caun } { m } {	\catransun {#1} }
-\NewDocumentCommand { \catransun } { m } {%
-\tl_set:Nn \l_myun_tl { #1 }
- \docatransun 
- \tl_use:N \l_myun_tl 
-}
-
-\NewDocumentCommand { \cats } { m } {	\catransts {#1} }
-\NewDocumentCommand { \catransts } { m } {%
-\tl_set:Nn \l_myts_tl { #1 }
- \docatransts 
-  \tl_use:N \l_myts_tl 
-}
-
-\NewDocumentCommand { \cast } { m } {	\catransst {#1} }
-\NewDocumentCommand { \catransst } { m } {%
-\tl_set:Nn \l_myz_tl { #1 }
- \docatransst 
-  \tl_use:N \l_myz_tl 
-}
-
-%---- Environments
-\NewDocumentEnvironment{catransuce}{ +b } 
-{
-  \tl_set:Nn \l_myuc_tl { #1 }
-	\docatransuc
-	\tl_use:N \l_myuc_tl 
-}
-{ }
-
-\NewDocumentEnvironment{catransune}{ +b } 
-{
-  \tl_set:Nn \l_myun_tl { #1 }
-	\docatransun
-  \tl_use:N \l_myun_tl 
-}
-{ }
-
-\NewDocumentEnvironment{catranstse}{ +b } 
-{
-  \tl_set:Nn \l_myts_tl { #1 }
-	\docatransts
-  \tl_use:N \l_myts_tl 
-}
-{ }
-
-
-\NewDocumentEnvironment{catransste}{ +b } 
-{
-\tl_set:Nn \l_myz_tl { #1 }
-\docatransst 
-{ \tl_use:N \l_myz_tl }
-}
-{ }
-
-%%%%%
-%%%%%\NewDocumentEnvironment{brrubye}{ +b } 
-%%%%%{
-%%%%%%  \tl_set:Nn \l_myug_tl { #1 }
-%%%%%	\dobrtranstsrubye {#1}
-%%%%%%{ \ugfont \tl_use:N \l_myug_tl }
-%%%%%}
-%%%%%{ }
-%%%%%
-%%%%%
-%%%%%
-%%%%%\NewDocumentEnvironment{brtableture}{ +b } 
-%%%%%{
-%%%%%	\begin{quotation}
-%%%%%%	{\raggedright
-%%%%%%	\begin{tabular}{|l|}
-%%%%%%	\hline
-%%%%%%	\rowcolor{blue!5}
-%%%%%	\begin{brtranstse}
-%%%%%	#1
-%%%%%	\end{brtranstse} 			
-%%%%%%					\\
-%%%%%%	\rowcolor{red!5}
-%%%%%\par
-%%%%%
-%%%%%\bigskip
-%%%%%	\begin{brtranstsste}
-%%%%%		#1
-%%%%%		\end{brtranstsste} 
-%%%%%%					\\
-%%%%%%	\hline
-%%%%%%	\end{tabular}
-%%%%%%		}
-%%%%%	\end{quotation}
-%%%%%}
-%%%%%{ }
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%
+%\NewDocumentCommand { \cats } { m } {	\catransts {#1} }
+%\NewDocumentCommand { \catransts } { m } {%
+%\tl_set:Nn \l_myts_tl { #1 }
+% \docatransts 
+%  \tl_use:N \l_myts_tl 
+%}
+%
+%%---- Environments
+%\NewDocumentEnvironment{catransuce}{ +b } 
+%{
+%  \tl_set:Nn \l_myuc_tl { #1 }
+%	\docatransuc
+%	\tl_use:N \l_myuc_tl 
+%}
+%{ }
+%
+%\NewDocumentEnvironment{catransune}{ +b } 
+%{
+%  \tl_set:Nn \l_myun_tl { #1 }
+%	\docatransun
+%  \tl_use:N \l_myun_tl 
+%}
+%{ }
+%
+%\NewDocumentEnvironment{catranstse}{ +b } 
+%{
+%  \tl_set:Nn \l_myts_tl { #1 }
+%	\docatransts
+%  \tl_use:N \l_myts_tl 
+%}
+%{ }
+%
+%
+%\NewDocumentEnvironment{catransste}{ +b } 
+%{
+%\tl_set:Nn \l_myz_tl { #1 }
+%\docatransst 
+%{ \tl_use:N \l_myz_tl }
+%}
+%{ }
+%
+%%%%%%
+%%%%%%\NewDocumentEnvironment{brrubye}{ +b } 
+%%%%%%{
+%%%%%%%  \tl_set:Nn \l_myug_tl { #1 }
+%%%%%%	\dobrtranstsrubye {#1}
+%%%%%%%{ \ugfont \tl_use:N \l_myug_tl }
+%%%%%%}
+%%%%%%{ }
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%\NewDocumentEnvironment{brtableture}{ +b } 
+%%%%%%{
+%%%%%%	\begin{quotation}
+%%%%%%%	{\raggedright
+%%%%%%%	\begin{tabular}{|l|}
+%%%%%%%	\hline
+%%%%%%%	\rowcolor{blue!5}
+%%%%%%	\begin{brtranstse}
+%%%%%%	#1
+%%%%%%	\end{brtranstse} 			
+%%%%%%%					\\
+%%%%%%%	\rowcolor{red!5}
+%%%%%%\par
+%%%%%%
+%%%%%%\bigskip
+%%%%%%	\begin{brtranstsste}
+%%%%%%		#1
+%%%%%%		\end{brtranstsste} 
+%%%%%%%					\\
+%%%%%%%	\hline
+%%%%%%%	\end{tabular}
+%%%%%%%		}
+%%%%%%	\end{quotation}
+%%%%%%}
+%%%%%%{ }
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
 \ExplSyntaxOff
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%%%%%%
+%
 
+%BA:
 %-----   List of Unicode codepoints
 \newcommand\cashowplainlistuc{%
 %\subsection{List of Unicode codepoints}\label{sec:listcauc}
-\noindent U+102A0 $\mapsto$ {\cafont 𐊠}\par
-\noindent U+102A1 $\mapsto$ {\cafont 𐊡}\par
-\noindent U+102A2 $\mapsto$ {\cafont 𐊢}\par
-\noindent U+102A3 $\mapsto$ {\cafont 𐊣}\par
-\noindent U+102A4 $\mapsto$ {\cafont 𐊤}\par
-\noindent U+102A5 $\mapsto$ {\cafont 𐊥}\par
-\noindent U+102A6 $\mapsto$ {\cafont 𐊦}\par
-\noindent U+102A7 $\mapsto$ {\cafont 𐊧}\par
-\noindent U+102A8 $\mapsto$ {\cafont 𐊨}\par
-\noindent U+102A9 $\mapsto$ {\cafont 𐊩}\par
-\noindent U+102AA $\mapsto$ {\cafont 𐊪}\par
-\noindent U+102AB $\mapsto$ {\cafont 𐊫}\par
-\noindent U+102AC $\mapsto$ {\cafont 𐊬}\par
-\noindent U+102AD $\mapsto$ {\cafont 𐊭}\par
-\noindent U+102AE $\mapsto$ {\cafont 𐊮}\par
-\noindent U+102AF $\mapsto$ {\cafont 𐊯}\par
-\noindent U+102B0 $\mapsto$ {\cafont 𐊰}\par
-\noindent U+102B1 $\mapsto$ {\cafont 𐊱}\par
-\noindent U+102B2 $\mapsto$ {\cafont 𐊲}\par
-\noindent U+102B3 $\mapsto$ {\cafont 𐊳}\par
-\noindent U+102B4 $\mapsto$ {\cafont 𐊴}\par
-\noindent U+102B5 $\mapsto$ {\cafont 𐊵}\par
-\noindent U+102B6 $\mapsto$ {\cafont 𐊶}\par
-\noindent U+102B7 $\mapsto$ {\cafont 𐊷}\par
-\noindent U+102B8 $\mapsto$ {\cafont 𐊸}\par
-\noindent U+102B9 $\mapsto$ {\cafont 𐊹}\par
-\noindent U+102BA $\mapsto$ {\cafont 𐊺}\par
-\noindent U+102BB $\mapsto$ {\cafont 𐊻}\par
-\noindent U+102BC $\mapsto$ {\cafont 𐊼}\par
-\noindent U+102BD $\mapsto$ {\cafont 𐊽}\par
-\noindent U+102BE $\mapsto$ {\cafont 𐊾}\par
-\noindent U+102BF $\mapsto$ {\cafont 𐊿}\par
-\noindent U+102C0 $\mapsto$ {\cafont 𐋀}\par
-\noindent U+102C1 $\mapsto$ {\cafont 𐋁}\par
-\noindent U+102C2 $\mapsto$ {\cafont 𐋂}\par
-\noindent U+102C3 $\mapsto$ {\cafont 𐋃}\par
-\noindent U+102C4 $\mapsto$ {\cafont 𐋄}\par
-\noindent U+102C5 $\mapsto$ {\cafont 𐋅}\par
-\noindent U+102C6 $\mapsto$ {\cafont 𐋆}\par
-\noindent U+102C7 $\mapsto$ {\cafont 𐋇}\par
-\noindent U+102C8 $\mapsto$ {\cafont 𐋈}\par
-\noindent U+102C9 $\mapsto$ {\cafont 𐋉}\par
-\noindent U+102CA $\mapsto$ {\cafont 𐋊}\par
-\noindent U+102CB $\mapsto$ {\cafont 𐋋}\par
-\noindent U+102CC $\mapsto$ {\cafont 𐋌}\par
-\noindent U+102CD $\mapsto$ {\cafont 𐋍}\par
-\noindent U+102CE $\mapsto$ {\cafont 𐋎}\par
-\noindent U+102CF $\mapsto$ {\cafont 𐋏}\par
-\noindent U+102D0 $\mapsto$ {\cafont 𐋐}\par
+\noindent U+102A0 $\mapsto$ {\ftcafont 𐊠}\par
+\noindent U+102A1 $\mapsto$ {\ftcafont 𐊡}\par
+\noindent U+102A2 $\mapsto$ {\ftcafont 𐊢}\par
+\noindent U+102A3 $\mapsto$ {\ftcafont 𐊣}\par
+\noindent U+102A4 $\mapsto$ {\ftcafont 𐊤}\par
+\noindent U+102A5 $\mapsto$ {\ftcafont 𐊥}\par
+\noindent U+102A6 $\mapsto$ {\ftcafont 𐊦}\par
+\noindent U+102A7 $\mapsto$ {\ftcafont 𐊧}\par
+\noindent U+102A8 $\mapsto$ {\ftcafont 𐊨}\par
+\noindent U+102A9 $\mapsto$ {\ftcafont 𐊩}\par
+\noindent U+102AA $\mapsto$ {\ftcafont 𐊪}\par
+\noindent U+102AB $\mapsto$ {\ftcafont 𐊫}\par
+\noindent U+102AC $\mapsto$ {\ftcafont 𐊬}\par
+\noindent U+102AD $\mapsto$ {\ftcafont 𐊭}\par
+\noindent U+102AE $\mapsto$ {\ftcafont 𐊮}\par
+\noindent U+102AF $\mapsto$ {\ftcafont 𐊯}\par
+\noindent U+102B0 $\mapsto$ {\ftcafont 𐊰}\par
+\noindent U+102B1 $\mapsto$ {\ftcafont 𐊱}\par
+\noindent U+102B2 $\mapsto$ {\ftcafont 𐊲}\par
+\noindent U+102B3 $\mapsto$ {\ftcafont 𐊳}\par
+\noindent U+102B4 $\mapsto$ {\ftcafont 𐊴}\par
+\noindent U+102B5 $\mapsto$ {\ftcafont 𐊵}\par
+\noindent U+102B6 $\mapsto$ {\ftcafont 𐊶}\par
+\noindent U+102B7 $\mapsto$ {\ftcafont 𐊷}\par
+\noindent U+102B8 $\mapsto$ {\ftcafont 𐊸}\par
+\noindent U+102B9 $\mapsto$ {\ftcafont 𐊹}\par
+\noindent U+102BA $\mapsto$ {\ftcafont 𐊺}\par
+\noindent U+102BB $\mapsto$ {\ftcafont 𐊻}\par
+\noindent U+102BC $\mapsto$ {\ftcafont 𐊼}\par
+\noindent U+102BD $\mapsto$ {\ftcafont 𐊽}\par
+\noindent U+102BE $\mapsto$ {\ftcafont 𐊾}\par
+\noindent U+102BF $\mapsto$ {\ftcafont 𐊿}\par
+\noindent U+102C0 $\mapsto$ {\ftcafont 𐋀}\par
+\noindent U+102C1 $\mapsto$ {\ftcafont 𐋁}\par
+\noindent U+102C2 $\mapsto$ {\ftcafont 𐋂}\par
+\noindent U+102C3 $\mapsto$ {\ftcafont 𐋃}\par
+\noindent U+102C4 $\mapsto$ {\ftcafont 𐋄}\par
+\noindent U+102C5 $\mapsto$ {\ftcafont 𐋅}\par
+\noindent U+102C6 $\mapsto$ {\ftcafont 𐋆}\par
+\noindent U+102C7 $\mapsto$ {\ftcafont 𐋇}\par
+\noindent U+102C8 $\mapsto$ {\ftcafont 𐋈}\par
+\noindent U+102C9 $\mapsto$ {\ftcafont 𐋉}\par
+\noindent U+102CA $\mapsto$ {\ftcafont 𐋊}\par
+\noindent U+102CB $\mapsto$ {\ftcafont 𐋋}\par
+\noindent U+102CC $\mapsto$ {\ftcafont 𐋌}\par
+\noindent U+102CD $\mapsto$ {\ftcafont 𐋍}\par
+\noindent U+102CE $\mapsto$ {\ftcafont 𐋎}\par
+\noindent U+102CF $\mapsto$ {\ftcafont 𐋏}\par
+\noindent U+102D0 $\mapsto$ {\ftcafont 𐋐}\par
 }
 
+%BB:
 %-----   List of Unicode names
 \newcommand\cashowplainlistun{%
 %\subsection{List of Unicode names}\label{sec:listcaun}
-\noindent a $\mapsto$ {\cafont 𐊠}\par
-\noindent p2 $\mapsto$ {\cafont 𐊡}\par
-\noindent d $\mapsto$ {\cafont 𐊢}\par
-\noindent l $\mapsto$ {\cafont 𐊣}\par
-\noindent uuu $\mapsto$ {\cafont 𐊤}\par
-\noindent r $\mapsto$ {\cafont 𐊥}\par
-\noindent ld $\mapsto$ {\cafont 𐊦}\par
-\noindent a2 $\mapsto$ {\cafont 𐊧}\par
-\noindent q $\mapsto$ {\cafont 𐊨}\par
-\noindent b $\mapsto$ {\cafont 𐊩}\par
-\noindent m $\mapsto$ {\cafont 𐊪}\par
-\noindent o $\mapsto$ {\cafont 𐊫}\par
-\noindent d2 $\mapsto$ {\cafont 𐊬}\par
-\noindent t $\mapsto$ {\cafont 𐊭}\par
-\noindent sh $\mapsto$ {\cafont 𐊮}\par
-\noindent sh2 $\mapsto$ {\cafont 𐊯}\par
-\noindent s $\mapsto$ {\cafont 𐊰}\par
-\noindent c18 $\mapsto$ {\cafont 𐊱}\par
-\noindent u $\mapsto$ {\cafont 𐊲}\par
-\noindent nn $\mapsto$ {\cafont 𐊳}\par
-\noindent x $\mapsto$ {\cafont 𐊴}\par
-\noindent n $\mapsto$ {\cafont 𐊵}\par
-\noindent tt2 $\mapsto$ {\cafont 𐊶}\par
-\noindent p $\mapsto$ {\cafont 𐊷}\par
-\noindent ss $\mapsto$ {\cafont 𐊸}\par
-\noindent i $\mapsto$ {\cafont 𐊹}\par
-\noindent e $\mapsto$ {\cafont 𐊺}\par
-\noindent uuuu $\mapsto$ {\cafont 𐊻}\par
-\noindent k $\mapsto$ {\cafont 𐊼}\par
-\noindent k2 $\mapsto$ {\cafont 𐊽}\par
-\noindent nd $\mapsto$ {\cafont 𐊾}\par
-\noindent uu $\mapsto$ {\cafont 𐊿}\par
-\noindent g $\mapsto$ {\cafont 𐋀}\par
-\noindent g2 $\mapsto$ {\cafont 𐋁}\par
-\noindent st $\mapsto$ {\cafont 𐋂}\par
-\noindent st2 $\mapsto$ {\cafont 𐋃}\par
-\noindent ng $\mapsto$ {\cafont 𐋄}\par
-\noindent ii $\mapsto$ {\cafont 𐋅}\par
-\noindent c39 $\mapsto$ {\cafont 𐋆}\par
-\noindent tt $\mapsto$ {\cafont 𐋇}\par
-\noindent uuu2 $\mapsto$ {\cafont 𐋈}\par
-\noindent rr $\mapsto$ {\cafont 𐋉}\par
-\noindent mb $\mapsto$ {\cafont 𐋊}\par
-\noindent mb2 $\mapsto$ {\cafont 𐋋}\par
-\noindent mb3 $\mapsto$ {\cafont 𐋌}\par
-\noindent mb4 $\mapsto$ {\cafont 𐋍}\par
-\noindent ld2 $\mapsto$ {\cafont 𐋎}\par
-\noindent e2 $\mapsto$ {\cafont 𐋏}\par
-\noindent uuu3 $\mapsto$ {\cafont 𐋐}\par
+\noindent a $\mapsto$ {\ftcafont 𐊠}\par
+\noindent p2 $\mapsto$ {\ftcafont 𐊡}\par
+\noindent d $\mapsto$ {\ftcafont 𐊢}\par
+\noindent l $\mapsto$ {\ftcafont 𐊣}\par
+\noindent uuu $\mapsto$ {\ftcafont 𐊤}\par
+\noindent r $\mapsto$ {\ftcafont 𐊥}\par
+\noindent ld $\mapsto$ {\ftcafont 𐊦}\par
+\noindent a2 $\mapsto$ {\ftcafont 𐊧}\par
+\noindent q $\mapsto$ {\ftcafont 𐊨}\par
+\noindent b $\mapsto$ {\ftcafont 𐊩}\par
+\noindent m $\mapsto$ {\ftcafont 𐊪}\par
+\noindent o $\mapsto$ {\ftcafont 𐊫}\par
+\noindent d2 $\mapsto$ {\ftcafont 𐊬}\par
+\noindent t $\mapsto$ {\ftcafont 𐊭}\par
+\noindent sh $\mapsto$ {\ftcafont 𐊮}\par
+\noindent sh2 $\mapsto$ {\ftcafont 𐊯}\par
+\noindent s $\mapsto$ {\ftcafont 𐊰}\par
+\noindent c18 $\mapsto$ {\ftcafont 𐊱}\par
+\noindent u $\mapsto$ {\ftcafont 𐊲}\par
+\noindent nn $\mapsto$ {\ftcafont 𐊳}\par
+\noindent x $\mapsto$ {\ftcafont 𐊴}\par
+\noindent n $\mapsto$ {\ftcafont 𐊵}\par
+\noindent tt2 $\mapsto$ {\ftcafont 𐊶}\par
+\noindent p $\mapsto$ {\ftcafont 𐊷}\par
+\noindent ss $\mapsto$ {\ftcafont 𐊸}\par
+\noindent i $\mapsto$ {\ftcafont 𐊹}\par
+\noindent e $\mapsto$ {\ftcafont 𐊺}\par
+\noindent uuuu $\mapsto$ {\ftcafont 𐊻}\par
+\noindent k $\mapsto$ {\ftcafont 𐊼}\par
+\noindent k2 $\mapsto$ {\ftcafont 𐊽}\par
+\noindent nd $\mapsto$ {\ftcafont 𐊾}\par
+\noindent uu $\mapsto$ {\ftcafont 𐊿}\par
+\noindent g $\mapsto$ {\ftcafont 𐋀}\par
+\noindent g2 $\mapsto$ {\ftcafont 𐋁}\par
+\noindent st $\mapsto$ {\ftcafont 𐋂}\par
+\noindent st2 $\mapsto$ {\ftcafont 𐋃}\par
+\noindent ng $\mapsto$ {\ftcafont 𐋄}\par
+\noindent ii $\mapsto$ {\ftcafont 𐋅}\par
+\noindent c39 $\mapsto$ {\ftcafont 𐋆}\par
+\noindent tt $\mapsto$ {\ftcafont 𐋇}\par
+\noindent uuu2 $\mapsto$ {\ftcafont 𐋈}\par
+\noindent rr $\mapsto$ {\ftcafont 𐋉}\par
+\noindent mb $\mapsto$ {\ftcafont 𐋊}\par
+\noindent mb2 $\mapsto$ {\ftcafont 𐋋}\par
+\noindent mb3 $\mapsto$ {\ftcafont 𐋌}\par
+\noindent mb4 $\mapsto$ {\ftcafont 𐋍}\par
+\noindent ld2 $\mapsto$ {\ftcafont 𐋎}\par
+\noindent e2 $\mapsto$ {\ftcafont 𐋏}\par
+\noindent uuu3 $\mapsto$ {\ftcafont 𐋐}\par
 }
 
-%%%%-----   List of Typing shortcuts
-%%%\newcommand\brshowplainlistts{%
-%%%%\subsection{List of Typing shortcuts}\label{sec:listbrts}
-%%%\noindent cb $\mapsto$ {\brfont 𑀀}\par
-%%%\noindent as $\mapsto$ {\brfont 𑀁}\par
-%%%\noindent vis $\mapsto$ {\brfont 𑀂}\par
-%%%\noindent jm $\mapsto$ {\brfont 𑀃}\par
-%%%\noindent upd $\mapsto$ {\brfont 𑀄}\par
-%%%\noindent la $\mapsto$ {\brfont 𑀅}\par
-%%%\noindent laa $\mapsto$ {\brfont 𑀆}\par
-%%%\noindent li $\mapsto$ {\brfont 𑀇}\par
-%%%\noindent lii $\mapsto$ {\brfont 𑀈}\par
-%%%\noindent lu $\mapsto$ {\brfont 𑀉}\par
-%%%\noindent luu $\mapsto$ {\brfont 𑀊}\par
-%%%\noindent lvr $\mapsto$ {\brfont 𑀋}\par
-%%%\noindent lvrr $\mapsto$ {\brfont 𑀌}\par
-%%%\noindent lvl $\mapsto$ {\brfont 𑀍}\par
-%%%\noindent lvll $\mapsto$ {\brfont 𑀎}\par
-%%%\noindent le $\mapsto$ {\brfont 𑀏}\par
-%%%\noindent lai $\mapsto$ {\brfont 𑀐}\par
-%%%\noindent lo $\mapsto$ {\brfont 𑀑}\par
-%%%\noindent lau $\mapsto$ {\brfont 𑀒}\par
-%%%\noindent k $\mapsto$ {\brfont 𑀓}\par
-%%%\noindent kh $\mapsto$ {\brfont 𑀔}\par
-%%%\noindent g $\mapsto$ {\brfont 𑀕}\par
-%%%\noindent gh $\mapsto$ {\brfont 𑀖}\par
-%%%\noindent ng $\mapsto$ {\brfont 𑀗}\par
-%%%\noindent c $\mapsto$ {\brfont 𑀘}\par
-%%%\noindent ch $\mapsto$ {\brfont 𑀙}\par
-%%%\noindent j $\mapsto$ {\brfont 𑀚}\par
-%%%\noindent jh $\mapsto$ {\brfont 𑀛}\par
-%%%\noindent ny $\mapsto$ {\brfont 𑀜}\par
-%%%\noindent tt $\mapsto$ {\brfont 𑀝}\par
-%%%\noindent tth $\mapsto$ {\brfont 𑀞}\par
-%%%\noindent dd $\mapsto$ {\brfont 𑀟}\par
-%%%\noindent ddh $\mapsto$ {\brfont 𑀠}\par
-%%%\noindent nn $\mapsto$ {\brfont 𑀡}\par
-%%%\noindent t $\mapsto$ {\brfont 𑀢}\par
-%%%\noindent th $\mapsto$ {\brfont 𑀣}\par
-%%%\noindent d $\mapsto$ {\brfont 𑀤}\par
-%%%\noindent dh $\mapsto$ {\brfont 𑀥}\par
-%%%\noindent n $\mapsto$ {\brfont 𑀦}\par
-%%%\noindent p $\mapsto$ {\brfont 𑀧}\par
-%%%\noindent ph $\mapsto$ {\brfont 𑀨}\par
-%%%\noindent b $\mapsto$ {\brfont 𑀩}\par
-%%%\noindent bh $\mapsto$ {\brfont 𑀪}\par
-%%%\noindent m $\mapsto$ {\brfont 𑀫}\par
-%%%\noindent y $\mapsto$ {\brfont 𑀬}\par
-%%%\noindent r $\mapsto$ {\brfont 𑀭}\par
-%%%\noindent l $\mapsto$ {\brfont 𑀮}\par
-%%%\noindent v $\mapsto$ {\brfont 𑀯}\par
-%%%\noindent sh $\mapsto$ {\brfont 𑀰}\par
-%%%\noindent ss $\mapsto$ {\brfont 𑀱}\par
-%%%\noindent s $\mapsto$ {\brfont 𑀲}\par
-%%%\noindent h $\mapsto$ {\brfont 𑀳}\par
-%%%\noindent ll $\mapsto$ {\brfont 𑀴}\par
-%%%\noindent otlll $\mapsto$ {\brfont 𑀵}\par
-%%%\noindent otrr $\mapsto$ {\brfont 𑀶}\par
-%%%\noindent otnnn $\mapsto$ {\brfont 𑀷}\par
-%%%\noindent aa $\mapsto$ {\brfont 𑀸}\par
-%%%\noindent bhaa $\mapsto$ {\brfont 𑀹}\par
-%%%\noindent i $\mapsto$ {\brfont 𑀺}\par
-%%%\noindent ii $\mapsto$ {\brfont 𑀻}\par
-%%%\noindent u $\mapsto$ {\brfont 𑀼}\par
-%%%\noindent uu $\mapsto$ {\brfont 𑀽}\par
-%%%\noindent vr $\mapsto$ {\brfont 𑀾}\par
-%%%\noindent vrr $\mapsto$ {\brfont 𑀿}\par
-%%%\noindent vl $\mapsto$ {\brfont 𑁀}\par
-%%%\noindent vll $\mapsto$ {\brfont 𑁁}\par
-%%%\noindent e $\mapsto$ {\brfont 𑁂}\par
-%%%\noindent ai $\mapsto$ {\brfont 𑁃}\par
-%%%\noindent o $\mapsto$ {\brfont 𑁄}\par
-%%%\noindent au $\mapsto$ {\brfont 𑁅}\par
-%%%\noindent vir $\mapsto$ {\brfont 𑁆}\par
-%%%\noindent dan $\mapsto$ {\brfont 𑁇}\par
-%%%\noindent ddam $\mapsto$ {\brfont 𑁈}\par
-%%%\noindent dot $\mapsto$ {\brfont 𑁉}\par
-%%%\noindent ddot $\mapsto$ {\brfont 𑁊}\par
-%%%\noindent line $\mapsto$ {\brfont 𑁋}\par
-%%%\noindent crbar $\mapsto$ {\brfont 𑁌}\par
-%%%\noindent lotus $\mapsto$ {\brfont 𑁍}\par
-%%%\noindent 1 $\mapsto$ {\brfont 𑁒}\par
-%%%\noindent 2 $\mapsto$ {\brfont 𑁓}\par
-%%%\noindent 3 $\mapsto$ {\brfont 𑁔}\par
-%%%\noindent 4 $\mapsto$ {\brfont 𑁕}\par
-%%%\noindent 5 $\mapsto$ {\brfont 𑁖}\par
-%%%\noindent 6 $\mapsto$ {\brfont 𑁗}\par
-%%%\noindent 7 $\mapsto$ {\brfont 𑁘}\par
-%%%\noindent 8 $\mapsto$ {\brfont 𑁙}\par
-%%%\noindent 9 $\mapsto$ {\brfont 𑁚}\par
-%%%\noindent 10 $\mapsto$ {\brfont 𑁛}\par
-%%%\noindent 20 $\mapsto$ {\brfont 𑁜}\par
-%%%\noindent 30 $\mapsto$ {\brfont 𑁝}\par
-%%%\noindent 40 $\mapsto$ {\brfont 𑁞}\par
-%%%\noindent 50 $\mapsto$ {\brfont 𑁟}\par
-%%%\noindent 60 $\mapsto$ {\brfont 𑁠}\par
-%%%\noindent 70 $\mapsto$ {\brfont 𑁡}\par
-%%%\noindent 80 $\mapsto$ {\brfont 𑁢}\par
-%%%\noindent 90 $\mapsto$ {\brfont 𑁣}\par
-%%%\noindent 100 $\mapsto$ {\brfont 𑁤}\par
-%%%\noindent 1000 $\mapsto$ {\brfont 𑁥}\par
-%%%\noindent d0 $\mapsto$ {\brfont 𑁦}\par
-%%%\noindent d1 $\mapsto$ {\brfont 𑁧}\par
-%%%\noindent d2 $\mapsto$ {\brfont 𑁨}\par
-%%%\noindent d3 $\mapsto$ {\brfont 𑁩}\par
-%%%\noindent d4 $\mapsto$ {\brfont 𑁪}\par
-%%%\noindent d5 $\mapsto$ {\brfont 𑁫}\par
-%%%\noindent d6 $\mapsto$ {\brfont 𑁬}\par
-%%%\noindent d7 $\mapsto$ {\brfont 𑁭}\par
-%%%\noindent d8 $\mapsto$ {\brfont 𑁮}\par
-%%%\noindent d9 $\mapsto$ {\brfont 𑁯}\par
-%%%\noindent joiner $\mapsto$ {\brfont 𑁿}\par
-%%%}
-%%%
-
-
-
-
-
-
-%-----   List of Unicode codepoints
-\newcommand\dolistcatransuc{%
-\section{List of Unicode codepoints}\label{sec:listcauc}
-\noindent\cdr{\catransuc{U+102A0}}\par
-\noindent\cdr{\catransuc{U+102A1}}\par
-\noindent\cdr{\catransuc{U+102A2}}\par
-\noindent\cdr{\catransuc{U+102A3}}\par
-\noindent\cdr{\catransuc{U+102A4}}\par
-\noindent\cdr{\catransuc{U+102A5}}\par
-\noindent\cdr{\catransuc{U+102A6}}\par
-\noindent\cdr{\catransuc{U+102A7}}\par
-\noindent\cdr{\catransuc{U+102A8}}\par
-\noindent\cdr{\catransuc{U+102A9}}\par
-\noindent\cdr{\catransuc{U+102AA}}\par
-\noindent\cdr{\catransuc{U+102AB}}\par
-\noindent\cdr{\catransuc{U+102AC}}\par
-\noindent\cdr{\catransuc{U+102AD}}\par
-\noindent\cdr{\catransuc{U+102AE}}\par
-\noindent\cdr{\catransuc{U+102AF}}\par
-\noindent\cdr{\catransuc{U+102B0}}\par
-\noindent\cdr{\catransuc{U+102B1}}\par
-\noindent\cdr{\catransuc{U+102B2}}\par
-\noindent\cdr{\catransuc{U+102B3}}\par
-\noindent\cdr{\catransuc{U+102B4}}\par
-\noindent\cdr{\catransuc{U+102B5}}\par
-\noindent\cdr{\catransuc{U+102B6}}\par
-\noindent\cdr{\catransuc{U+102B7}}\par
-\noindent\cdr{\catransuc{U+102B8}}\par
-\noindent\cdr{\catransuc{U+102B9}}\par
-\noindent\cdr{\catransuc{U+102BA}}\par
-\noindent\cdr{\catransuc{U+102BB}}\par
-\noindent\cdr{\catransuc{U+102BC}}\par
-\noindent\cdr{\catransuc{U+102BD}}\par
-\noindent\cdr{\catransuc{U+102BE}}\par
-\noindent\cdr{\catransuc{U+102BF}}\par
-\noindent\cdr{\catransuc{U+102C0}}\par
-\noindent\cdr{\catransuc{U+102C1}}\par
-\noindent\cdr{\catransuc{U+102C2}}\par
-\noindent\cdr{\catransuc{U+102C3}}\par
-\noindent\cdr{\catransuc{U+102C4}}\par
-\noindent\cdr{\catransuc{U+102C5}}\par
-\noindent\cdr{\catransuc{U+102C6}}\par
-\noindent\cdr{\catransuc{U+102C7}}\par
-\noindent\cdr{\catransuc{U+102C8}}\par
-\noindent\cdr{\catransuc{U+102C9}}\par
-\noindent\cdr{\catransuc{U+102CA}}\par
-\noindent\cdr{\catransuc{U+102CB}}\par
-\noindent\cdr{\catransuc{U+102CC}}\par
-\noindent\cdr{\catransuc{U+102CD}}\par
-\noindent\cdr{\catransuc{U+102CE}}\par
-\noindent\cdr{\catransuc{U+102CF}}\par
-\noindent\cdr{\catransuc{U+102D0}}\par
-}
-
-
+%BC:
 %-----   List of Typing shortcuts
 \newcommand\cashowplainlistts{%
 %\subsection{List of Typing shortcuts}\label{sec:listcats}
-\noindent a $\mapsto$ {\cafont 𐊠}\par
-\noindent p2 $\mapsto$ {\cafont 𐊡}\par
-\noindent d $\mapsto$ {\cafont 𐊢}\par
-\noindent l $\mapsto$ {\cafont 𐊣}\par
-\noindent uuu $\mapsto$ {\cafont 𐊤}\par
-\noindent r $\mapsto$ {\cafont 𐊥}\par
-\noindent ld $\mapsto$ {\cafont 𐊦}\par
-\noindent a2 $\mapsto$ {\cafont 𐊧}\par
-\noindent q $\mapsto$ {\cafont 𐊨}\par
-\noindent b $\mapsto$ {\cafont 𐊩}\par
-\noindent m $\mapsto$ {\cafont 𐊪}\par
-\noindent o $\mapsto$ {\cafont 𐊫}\par
-\noindent d2 $\mapsto$ {\cafont 𐊬}\par
-\noindent t $\mapsto$ {\cafont 𐊭}\par
-\noindent sh $\mapsto$ {\cafont 𐊮}\par
-\noindent sh2 $\mapsto$ {\cafont 𐊯}\par
-\noindent s $\mapsto$ {\cafont 𐊰}\par
-\noindent c18 $\mapsto$ {\cafont 𐊱}\par
-\noindent u $\mapsto$ {\cafont 𐊲}\par
-\noindent nn $\mapsto$ {\cafont 𐊳}\par
-\noindent x $\mapsto$ {\cafont 𐊴}\par
-\noindent n $\mapsto$ {\cafont 𐊵}\par
-\noindent tt2 $\mapsto$ {\cafont 𐊶}\par
-\noindent p $\mapsto$ {\cafont 𐊷}\par
-\noindent ss $\mapsto$ {\cafont 𐊸}\par
-\noindent i $\mapsto$ {\cafont 𐊹}\par
-\noindent e $\mapsto$ {\cafont 𐊺}\par
-\noindent uuuu $\mapsto$ {\cafont 𐊻}\par
-\noindent k $\mapsto$ {\cafont 𐊼}\par
-\noindent k2 $\mapsto$ {\cafont 𐊽}\par
-\noindent nd $\mapsto$ {\cafont 𐊾}\par
-\noindent uu $\mapsto$ {\cafont 𐊿}\par
-\noindent g $\mapsto$ {\cafont 𐋀}\par
-\noindent g2 $\mapsto$ {\cafont 𐋁}\par
-\noindent st $\mapsto$ {\cafont 𐋂}\par
-\noindent st2 $\mapsto$ {\cafont 𐋃}\par
-\noindent ng $\mapsto$ {\cafont 𐋄}\par
-\noindent ii $\mapsto$ {\cafont 𐋅}\par
-\noindent c39 $\mapsto$ {\cafont 𐋆}\par
-\noindent tt $\mapsto$ {\cafont 𐋇}\par
-\noindent uuu2 $\mapsto$ {\cafont 𐋈}\par
-\noindent rr $\mapsto$ {\cafont 𐋉}\par
-\noindent mb $\mapsto$ {\cafont 𐋊}\par
-\noindent mb2 $\mapsto$ {\cafont 𐋋}\par
-\noindent mb3 $\mapsto$ {\cafont 𐋌}\par
-\noindent mb4 $\mapsto$ {\cafont 𐋍}\par
-\noindent ld2 $\mapsto$ {\cafont 𐋎}\par
-\noindent e2 $\mapsto$ {\cafont 𐋏}\par
-\noindent uuu3 $\mapsto$ {\cafont 𐋐}\par
+\noindent a $\mapsto$ {\ftcafont 𐊠}\par
+\noindent p2 $\mapsto$ {\ftcafont 𐊡}\par
+\noindent d $\mapsto$ {\ftcafont 𐊢}\par
+\noindent l $\mapsto$ {\ftcafont 𐊣}\par
+\noindent uuu $\mapsto$ {\ftcafont 𐊤}\par
+\noindent r $\mapsto$ {\ftcafont 𐊥}\par
+\noindent ld $\mapsto$ {\ftcafont 𐊦}\par
+\noindent a2 $\mapsto$ {\ftcafont 𐊧}\par
+\noindent q $\mapsto$ {\ftcafont 𐊨}\par
+\noindent b $\mapsto$ {\ftcafont 𐊩}\par
+\noindent m $\mapsto$ {\ftcafont 𐊪}\par
+\noindent o $\mapsto$ {\ftcafont 𐊫}\par
+\noindent d2 $\mapsto$ {\ftcafont 𐊬}\par
+\noindent t $\mapsto$ {\ftcafont 𐊭}\par
+\noindent sh $\mapsto$ {\ftcafont 𐊮}\par
+\noindent sh2 $\mapsto$ {\ftcafont 𐊯}\par
+\noindent s $\mapsto$ {\ftcafont 𐊰}\par
+\noindent c18 $\mapsto$ {\ftcafont 𐊱}\par
+\noindent u $\mapsto$ {\ftcafont 𐊲}\par
+\noindent nn $\mapsto$ {\ftcafont 𐊳}\par
+\noindent x $\mapsto$ {\ftcafont 𐊴}\par
+\noindent n $\mapsto$ {\ftcafont 𐊵}\par
+\noindent tt2 $\mapsto$ {\ftcafont 𐊶}\par
+\noindent p $\mapsto$ {\ftcafont 𐊷}\par
+\noindent ss $\mapsto$ {\ftcafont 𐊸}\par
+\noindent i $\mapsto$ {\ftcafont 𐊹}\par
+\noindent e $\mapsto$ {\ftcafont 𐊺}\par
+\noindent uuuu $\mapsto$ {\ftcafont 𐊻}\par
+\noindent k $\mapsto$ {\ftcafont 𐊼}\par
+\noindent k2 $\mapsto$ {\ftcafont 𐊽}\par
+\noindent nd $\mapsto$ {\ftcafont 𐊾}\par
+\noindent uu $\mapsto$ {\ftcafont 𐊿}\par
+\noindent g $\mapsto$ {\ftcafont 𐋀}\par
+\noindent g2 $\mapsto$ {\ftcafont 𐋁}\par
+\noindent st $\mapsto$ {\ftcafont 𐋂}\par
+\noindent st2 $\mapsto$ {\ftcafont 𐋃}\par
+\noindent ng $\mapsto$ {\ftcafont 𐋄}\par
+\noindent ii $\mapsto$ {\ftcafont 𐋅}\par
+\noindent c39 $\mapsto$ {\ftcafont 𐋆}\par
+\noindent tt $\mapsto$ {\ftcafont 𐋇}\par
+\noindent uuu2 $\mapsto$ {\ftcafont 𐋈}\par
+\noindent rr $\mapsto$ {\ftcafont 𐋉}\par
+\noindent mb $\mapsto$ {\ftcafont 𐋊}\par
+\noindent mb2 $\mapsto$ {\ftcafont 𐋋}\par
+\noindent mb3 $\mapsto$ {\ftcafont 𐋌}\par
+\noindent mb4 $\mapsto$ {\ftcafont 𐋍}\par
+\noindent ld2 $\mapsto$ {\ftcafont 𐋎}\par
+\noindent e2 $\mapsto$ {\ftcafont 𐋏}\par
+\noindent uuu3 $\mapsto$ {\ftcafont 𐋐}\par
 }
 
+%BD:
 %-----   List of Standard Transliterations
 \newcommand\cashowplainlistst{%
 %\subsection{List of Standard Transliterations}\label{sec:listcast}

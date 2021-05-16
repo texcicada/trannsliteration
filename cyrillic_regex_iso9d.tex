@@ -1,0 +1,776 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}[Colour=red]
+\newfontfamily\fcyrtrans{Noto Serif}%[Colour=blue]
+\newfontfamily\forig{Noto Serif}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
+
+
+\ExplSyntaxOn
+
+
+%-----   transliteration
+\tl_new:N \l_mycy_tl
+\NewDocumentCommand { \cyrtrans } { m } {
+\tl_set:Nn \l_mycy_tl { #1 }
+ \docyrtrans 
+ \tl_use:N \l_mycy_tl
+}
+
+\NewDocumentEnvironment{cyrtranse}{ +b } 
+{
+\tl_set:Nn \l_mycy_tl { #1 }
+\docyrtrans 
+{ \tl_use:N \l_mycy_tl }
+}
+{ }
+
+
+\newcommand\docyrtrans{%
+\tl_replace_all:Nnn \l_mycy_tl { о̄̈ } { { \fcyrtrans ọ̈}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӓ̄ } { { \fcyrtrans Ạ̈}}
+\tl_replace_all:Nnn \l_mycy_tl { А̄ } { { \fcyrtrans Ā}}
+\tl_replace_all:Nnn \l_mycy_tl { А́ } { { \fcyrtrans Á}}
+\tl_replace_all:Nnn \l_mycy_tl { А̊ } { { \fcyrtrans Å}}
+\tl_replace_all:Nnn \l_mycy_tl { И́ } { { \fcyrtrans Í}}
+\tl_replace_all:Nnn \l_mycy_tl { І̄ } { { \fcyrtrans Ǐ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ј̵ } { { \fcyrtrans J́}}
+\tl_replace_all:Nnn \l_mycy_tl { К̨ } { { \fcyrtrans K̀}}
+\tl_replace_all:Nnn \l_mycy_tl { Н̄ } { { \fcyrtrans N̄}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӧ̄ } { { \fcyrtrans Ọ̈}}
+\tl_replace_all:Nnn \l_mycy_tl { О́ } { { \fcyrtrans Ó}}
+\tl_replace_all:Nnn \l_mycy_tl { О̄ } { { \fcyrtrans Ō}}
+\tl_replace_all:Nnn \l_mycy_tl { С̀ } { { \fcyrtrans S̀}}
+\tl_replace_all:Nnn \l_mycy_tl { Т̌ } { { \fcyrtrans Ť}}
+\tl_replace_all:Nnn \l_mycy_tl { У́ } { { \fcyrtrans Ú}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӱ̄ } { { \fcyrtrans Ụ̈}}
+\tl_replace_all:Nnn \l_mycy_tl { Ч̀ } { { \fcyrtrans C̀}}
+\tl_replace_all:Nnn \l_mycy_tl { Ы̄ } { { \fcyrtrans Ȳ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ю̄ } { { \fcyrtrans Û̄}}
+\tl_replace_all:Nnn \l_mycy_tl { ӓ̄ } { { \fcyrtrans ạ̈}}
+\tl_replace_all:Nnn \l_mycy_tl { а̄ } { { \fcyrtrans ā}}
+\tl_replace_all:Nnn \l_mycy_tl { а́ } { { \fcyrtrans á}}
+\tl_replace_all:Nnn \l_mycy_tl { а̊ } { { \fcyrtrans å}}
+\tl_replace_all:Nnn \l_mycy_tl { и́ } { { \fcyrtrans í}}
+\tl_replace_all:Nnn \l_mycy_tl { і̄ } { { \fcyrtrans ǐ}}
+\tl_replace_all:Nnn \l_mycy_tl { ј̵ } { { \fcyrtrans j́}}
+\tl_replace_all:Nnn \l_mycy_tl { к̨ } { { \fcyrtrans k̀}}
+\tl_replace_all:Nnn \l_mycy_tl { н̄ } { { \fcyrtrans n̄}}
+\tl_replace_all:Nnn \l_mycy_tl { о́ } { { \fcyrtrans ó}}
+\tl_replace_all:Nnn \l_mycy_tl { о̄ } { { \fcyrtrans ō}}
+\tl_replace_all:Nnn \l_mycy_tl { с̀ } { { \fcyrtrans s̀}}
+\tl_replace_all:Nnn \l_mycy_tl { т̌ } { { \fcyrtrans ť}}
+\tl_replace_all:Nnn \l_mycy_tl { у́ } { { \fcyrtrans ú}}
+\tl_replace_all:Nnn \l_mycy_tl { ӱ̄ } { { \fcyrtrans ụ̈}}
+\tl_replace_all:Nnn \l_mycy_tl { ч̀ } { { \fcyrtrans c̀}}
+\tl_replace_all:Nnn \l_mycy_tl { ы̄ } { { \fcyrtrans ȳ}}
+\tl_replace_all:Nnn \l_mycy_tl { ю̄ } { { \fcyrtrans û̄}}
+\tl_replace_all:Nnn \l_mycy_tl { А } { { \fcyrtrans A}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӓ } { { \fcyrtrans Ä}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӑ } { { \fcyrtrans Ă}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӕ } { { \fcyrtrans Æ}}
+\tl_replace_all:Nnn \l_mycy_tl { Б } { { \fcyrtrans B}}
+\tl_replace_all:Nnn \l_mycy_tl { В } { { \fcyrtrans V}}
+\tl_replace_all:Nnn \l_mycy_tl { Г } { { \fcyrtrans G}}
+\tl_replace_all:Nnn \l_mycy_tl { Ѓ } { { \fcyrtrans Ǵ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ғ } { { \fcyrtrans Ġ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҕ } { { \fcyrtrans Ğ}}
+\tl_replace_all:Nnn \l_mycy_tl { Һ } { { \fcyrtrans Ḥ}}
+\tl_replace_all:Nnn \l_mycy_tl { Д } { { \fcyrtrans D}}
+\tl_replace_all:Nnn \l_mycy_tl { Ђ } { { \fcyrtrans Đ}}
+\tl_replace_all:Nnn \l_mycy_tl { Е } { { \fcyrtrans E}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӗ } { { \fcyrtrans Ĕ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ё } { { \fcyrtrans Ë}}
+\tl_replace_all:Nnn \l_mycy_tl { Є } { { \fcyrtrans Ê}}
+\tl_replace_all:Nnn \l_mycy_tl { Ж } { { \fcyrtrans Ž}}
+\tl_replace_all:Nnn \l_mycy_tl { Җ } { { \fcyrtrans Ž̦}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӝ } { { \fcyrtrans Z̄}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӂ } { { \fcyrtrans Z̆}}
+\tl_replace_all:Nnn \l_mycy_tl { З } { { \fcyrtrans Z}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӟ } { { \fcyrtrans Z̈}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӡ } { { \fcyrtrans Ź}}
+\tl_replace_all:Nnn \l_mycy_tl { Ѕ } { { \fcyrtrans Ẑ}}
+\tl_replace_all:Nnn \l_mycy_tl { И } { { \fcyrtrans I}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӣ } { { \fcyrtrans Ī}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӥ } { { \fcyrtrans Î}}
+\tl_replace_all:Nnn \l_mycy_tl { Й } { { \fcyrtrans J}}
+\tl_replace_all:Nnn \l_mycy_tl { І } { { \fcyrtrans Ì}}
+\tl_replace_all:Nnn \l_mycy_tl { Ї } { { \fcyrtrans Ï}}
+\tl_replace_all:Nnn \l_mycy_tl { Ј } { { \fcyrtrans J̌}}
+\tl_replace_all:Nnn \l_mycy_tl { К } { { \fcyrtrans K}}
+\tl_replace_all:Nnn \l_mycy_tl { Ќ } { { \fcyrtrans Ḱ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӄ } { { \fcyrtrans Ḳ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҝ } { { \fcyrtrans K̂}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҡ } { { \fcyrtrans Ǩ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҟ } { { \fcyrtrans K̄}}
+\tl_replace_all:Nnn \l_mycy_tl { Қ } { { \fcyrtrans K̦}}
+\tl_replace_all:Nnn \l_mycy_tl { Ԛ } { { \fcyrtrans Q}}
+\tl_replace_all:Nnn \l_mycy_tl { Л } { { \fcyrtrans L}}
+\tl_replace_all:Nnn \l_mycy_tl { Љ } { { \fcyrtrans L̂}}
+\tl_replace_all:Nnn \l_mycy_tl { Ԡ } { { \fcyrtrans L̦}}
+\tl_replace_all:Nnn \l_mycy_tl { М } { { \fcyrtrans M}}
+\tl_replace_all:Nnn \l_mycy_tl { Н } { { \fcyrtrans N}}
+\tl_replace_all:Nnn \l_mycy_tl { Њ } { { \fcyrtrans N̂}}
+\tl_replace_all:Nnn \l_mycy_tl { Ң } { { \fcyrtrans N̦}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӊ } { { \fcyrtrans Ṇ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҥ } { { \fcyrtrans Ṅ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ԋ } { { \fcyrtrans Ǹ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ԣ } { { \fcyrtrans Ń}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӈ } { { \fcyrtrans Ň}}
+\tl_replace_all:Nnn \l_mycy_tl { О } { { \fcyrtrans O}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӧ } { { \fcyrtrans Ö}}
+\tl_replace_all:Nnn \l_mycy_tl { Ө } { { \fcyrtrans Ô}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӫ } { { \fcyrtrans Ő}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҩ } { { \fcyrtrans Ò}}
+\tl_replace_all:Nnn \l_mycy_tl { Œ } { { \fcyrtrans Œ}}
+\tl_replace_all:Nnn \l_mycy_tl { П } { { \fcyrtrans P}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҧ } { { \fcyrtrans Ṕ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ԥ } { { \fcyrtrans P̀}}
+\tl_replace_all:Nnn \l_mycy_tl { Р } { { \fcyrtrans R}}
+\tl_replace_all:Nnn \l_mycy_tl { С } { { \fcyrtrans S}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҫ } { { \fcyrtrans Ș}}
+\tl_replace_all:Nnn \l_mycy_tl { Т } { { \fcyrtrans T}}
+\tl_replace_all:Nnn \l_mycy_tl { Ћ } { { \fcyrtrans Ć}}
+\tl_replace_all:Nnn \l_mycy_tl { Ԏ } { { \fcyrtrans T̀}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҭ } { { \fcyrtrans Ț}}
+\tl_replace_all:Nnn \l_mycy_tl { У } { { \fcyrtrans U}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӱ } { { \fcyrtrans Ü}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӯ } { { \fcyrtrans Ū}}
+\tl_replace_all:Nnn \l_mycy_tl { Ў } { { \fcyrtrans Ŭ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӳ } { { \fcyrtrans Ű}}
+\tl_replace_all:Nnn \l_mycy_tl { Ү } { { \fcyrtrans Ù}}
+\tl_replace_all:Nnn \l_mycy_tl { Ұ } { { \fcyrtrans U̇}}
+\tl_replace_all:Nnn \l_mycy_tl { Ԝ } { { \fcyrtrans W}}
+\tl_replace_all:Nnn \l_mycy_tl { Ф } { { \fcyrtrans F}}
+\tl_replace_all:Nnn \l_mycy_tl { Х } { { \fcyrtrans H}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҳ } { { \fcyrtrans H̦}}
+\tl_replace_all:Nnn \l_mycy_tl { Ц } { { \fcyrtrans C}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҵ } { { \fcyrtrans C̄}}
+\tl_replace_all:Nnn \l_mycy_tl { Џ } { { \fcyrtrans D̂}}
+\tl_replace_all:Nnn \l_mycy_tl { Ч } { { \fcyrtrans Č}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҷ } { { \fcyrtrans C̦}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӌ } { { \fcyrtrans C̣}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӵ } { { \fcyrtrans C̈}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҹ } { { \fcyrtrans Ĉ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҽ } { { \fcyrtrans C̆}}
+\tl_replace_all:Nnn \l_mycy_tl { Ҿ } { { \fcyrtrans C̨̆}}
+\tl_replace_all:Nnn \l_mycy_tl { Ш } { { \fcyrtrans Š}}
+\tl_replace_all:Nnn \l_mycy_tl { Щ } { { \fcyrtrans Ŝ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ъ } { { \fcyrtrans ʺ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ы } { { \fcyrtrans Y}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӹ } { { \fcyrtrans Ÿ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ь } { { \fcyrtrans ʹ}}
+\tl_replace_all:Nnn \l_mycy_tl { Э } { { \fcyrtrans È}}
+\tl_replace_all:Nnn \l_mycy_tl { Ә } { { \fcyrtrans A̋}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӛ } { { \fcyrtrans À}}
+\tl_replace_all:Nnn \l_mycy_tl { Ю } { { \fcyrtrans Û}}
+\tl_replace_all:Nnn \l_mycy_tl { Я } { { \fcyrtrans Â}}
+\tl_replace_all:Nnn \l_mycy_tl { Ґ } { { \fcyrtrans G̀}}
+\tl_replace_all:Nnn \l_mycy_tl { Ѣ } { { \fcyrtrans Ě}}
+\tl_replace_all:Nnn \l_mycy_tl { Ѫ } { { \fcyrtrans Ǎ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ѳ } { { \fcyrtrans F̀}}
+\tl_replace_all:Nnn \l_mycy_tl { Ѵ } { { \fcyrtrans Ỳ}}
+\tl_replace_all:Nnn \l_mycy_tl { Ӏ } { { \fcyrtrans ‡}}
+\tl_replace_all:Nnn \l_mycy_tl { ʼ } { { \fcyrtrans ʼ}}
+\tl_replace_all:Nnn \l_mycy_tl { ˮ } { { \fcyrtrans ˮ}}
+\tl_replace_all:Nnn \l_mycy_tl { а } { { \fcyrtrans a}}
+\tl_replace_all:Nnn \l_mycy_tl { ӓ } { { \fcyrtrans ä}}
+\tl_replace_all:Nnn \l_mycy_tl { ӑ } { { \fcyrtrans ă}}
+\tl_replace_all:Nnn \l_mycy_tl { ӕ } { { \fcyrtrans æ}}
+\tl_replace_all:Nnn \l_mycy_tl { б } { { \fcyrtrans b}}
+\tl_replace_all:Nnn \l_mycy_tl { в } { { \fcyrtrans v}}
+\tl_replace_all:Nnn \l_mycy_tl { г } { { \fcyrtrans g}}
+\tl_replace_all:Nnn \l_mycy_tl { ѓ } { { \fcyrtrans ǵ}}
+\tl_replace_all:Nnn \l_mycy_tl { ғ } { { \fcyrtrans ġ}}
+\tl_replace_all:Nnn \l_mycy_tl { ҕ } { { \fcyrtrans ğ}}
+\tl_replace_all:Nnn \l_mycy_tl { һ } { { \fcyrtrans ḥ}}
+\tl_replace_all:Nnn \l_mycy_tl { д } { { \fcyrtrans d}}
+\tl_replace_all:Nnn \l_mycy_tl { ђ } { { \fcyrtrans đ}}
+\tl_replace_all:Nnn \l_mycy_tl { е } { { \fcyrtrans e}}
+\tl_replace_all:Nnn \l_mycy_tl { ӗ } { { \fcyrtrans ĕ}}
+\tl_replace_all:Nnn \l_mycy_tl { ё } { { \fcyrtrans ë}}
+\tl_replace_all:Nnn \l_mycy_tl { є } { { \fcyrtrans ê}}
+\tl_replace_all:Nnn \l_mycy_tl { ж } { { \fcyrtrans ž}}
+\tl_replace_all:Nnn \l_mycy_tl { җ } { { \fcyrtrans ž̦}}
+\tl_replace_all:Nnn \l_mycy_tl { ӝ } { { \fcyrtrans z̄}}
+\tl_replace_all:Nnn \l_mycy_tl { ӂ } { { \fcyrtrans z̆}}
+\tl_replace_all:Nnn \l_mycy_tl { з } { { \fcyrtrans z}}
+\tl_replace_all:Nnn \l_mycy_tl { ӟ } { { \fcyrtrans z̈}}
+\tl_replace_all:Nnn \l_mycy_tl { ӡ } { { \fcyrtrans ź}}
+\tl_replace_all:Nnn \l_mycy_tl { ѕ } { { \fcyrtrans ẑ}}
+\tl_replace_all:Nnn \l_mycy_tl { и } { { \fcyrtrans i}}
+\tl_replace_all:Nnn \l_mycy_tl { ӣ } { { \fcyrtrans ī}}
+\tl_replace_all:Nnn \l_mycy_tl { ӥ } { { \fcyrtrans î}}
+\tl_replace_all:Nnn \l_mycy_tl { й } { { \fcyrtrans j}}
+\tl_replace_all:Nnn \l_mycy_tl { і } { { \fcyrtrans ì}}
+\tl_replace_all:Nnn \l_mycy_tl { ї } { { \fcyrtrans ï}}
+\tl_replace_all:Nnn \l_mycy_tl { ј } { { \fcyrtrans ǰ}}
+\tl_replace_all:Nnn \l_mycy_tl { к } { { \fcyrtrans k}}
+\tl_replace_all:Nnn \l_mycy_tl { ќ } { { \fcyrtrans ḱ}}
+\tl_replace_all:Nnn \l_mycy_tl { ӄ } { { \fcyrtrans ḳ}}
+\tl_replace_all:Nnn \l_mycy_tl { ҝ } { { \fcyrtrans k̂}}
+\tl_replace_all:Nnn \l_mycy_tl { ҡ } { { \fcyrtrans ǩ}}
+\tl_replace_all:Nnn \l_mycy_tl { ҟ } { { \fcyrtrans k̄}}
+\tl_replace_all:Nnn \l_mycy_tl { қ } { { \fcyrtrans k̦}}
+\tl_replace_all:Nnn \l_mycy_tl { ԛ } { { \fcyrtrans q}}
+\tl_replace_all:Nnn \l_mycy_tl { л } { { \fcyrtrans l}}
+\tl_replace_all:Nnn \l_mycy_tl { љ } { { \fcyrtrans l̂}}
+\tl_replace_all:Nnn \l_mycy_tl { ԡ } { { \fcyrtrans l̦}}
+\tl_replace_all:Nnn \l_mycy_tl { м } { { \fcyrtrans m}}
+\tl_replace_all:Nnn \l_mycy_tl { н } { { \fcyrtrans n}}
+\tl_replace_all:Nnn \l_mycy_tl { њ } { { \fcyrtrans n̂}}
+\tl_replace_all:Nnn \l_mycy_tl { ң } { { \fcyrtrans n̦}}
+\tl_replace_all:Nnn \l_mycy_tl { ӊ } { { \fcyrtrans ṇ}}
+\tl_replace_all:Nnn \l_mycy_tl { ҥ } { { \fcyrtrans ṅ}}
+\tl_replace_all:Nnn \l_mycy_tl { ԋ } { { \fcyrtrans ǹ}}
+\tl_replace_all:Nnn \l_mycy_tl { ԣ } { { \fcyrtrans ń}}
+\tl_replace_all:Nnn \l_mycy_tl { ӈ } { { \fcyrtrans ň}}
+\tl_replace_all:Nnn \l_mycy_tl { о } { { \fcyrtrans o}}
+\tl_replace_all:Nnn \l_mycy_tl { ӧ } { { \fcyrtrans ö}}
+\tl_replace_all:Nnn \l_mycy_tl { ө } { { \fcyrtrans ô}}
+\tl_replace_all:Nnn \l_mycy_tl { ӫ } { { \fcyrtrans ő}}
+\tl_replace_all:Nnn \l_mycy_tl { ҩ } { { \fcyrtrans ò}}
+\tl_replace_all:Nnn \l_mycy_tl { œ } { { \fcyrtrans œ}}
+\tl_replace_all:Nnn \l_mycy_tl { п } { { \fcyrtrans p}}
+\tl_replace_all:Nnn \l_mycy_tl { ҧ } { { \fcyrtrans ṕ}}
+\tl_replace_all:Nnn \l_mycy_tl { ԥ } { { \fcyrtrans p̀}}
+\tl_replace_all:Nnn \l_mycy_tl { р } { { \fcyrtrans r}}
+\tl_replace_all:Nnn \l_mycy_tl { с } { { \fcyrtrans s}}
+\tl_replace_all:Nnn \l_mycy_tl { ҫ } { { \fcyrtrans ș}}
+\tl_replace_all:Nnn \l_mycy_tl { т } { { \fcyrtrans t}}
+\tl_replace_all:Nnn \l_mycy_tl { ћ } { { \fcyrtrans ć}}
+\tl_replace_all:Nnn \l_mycy_tl { ԏ } { { \fcyrtrans t̀}}
+\tl_replace_all:Nnn \l_mycy_tl { ҭ } { { \fcyrtrans ț}}
+\tl_replace_all:Nnn \l_mycy_tl { у } { { \fcyrtrans u}}
+\tl_replace_all:Nnn \l_mycy_tl { ӱ } { { \fcyrtrans ü}}
+\tl_replace_all:Nnn \l_mycy_tl { ӯ } { { \fcyrtrans ū}}
+\tl_replace_all:Nnn \l_mycy_tl { ў } { { \fcyrtrans ŭ}}
+\tl_replace_all:Nnn \l_mycy_tl { ӳ } { { \fcyrtrans ű}}
+\tl_replace_all:Nnn \l_mycy_tl { ү } { { \fcyrtrans ù}}
+\tl_replace_all:Nnn \l_mycy_tl { ұ } { { \fcyrtrans u̇}}
+\tl_replace_all:Nnn \l_mycy_tl { ԝ } { { \fcyrtrans w}}
+\tl_replace_all:Nnn \l_mycy_tl { ф } { { \fcyrtrans f}}
+\tl_replace_all:Nnn \l_mycy_tl { х } { { \fcyrtrans h}}
+\tl_replace_all:Nnn \l_mycy_tl { ҳ } { { \fcyrtrans h̦}}
+\tl_replace_all:Nnn \l_mycy_tl { ц } { { \fcyrtrans c}}
+\tl_replace_all:Nnn \l_mycy_tl { ҵ } { { \fcyrtrans c̄}}
+\tl_replace_all:Nnn \l_mycy_tl { џ } { { \fcyrtrans d̂}}
+\tl_replace_all:Nnn \l_mycy_tl { ч } { { \fcyrtrans č}}
+\tl_replace_all:Nnn \l_mycy_tl { ҷ } { { \fcyrtrans c̦}}
+\tl_replace_all:Nnn \l_mycy_tl { ӌ } { { \fcyrtrans c̣}}
+\tl_replace_all:Nnn \l_mycy_tl { ӵ } { { \fcyrtrans c̈}}
+\tl_replace_all:Nnn \l_mycy_tl { ҹ } { { \fcyrtrans ĉ}}
+\tl_replace_all:Nnn \l_mycy_tl { ҽ } { { \fcyrtrans c̆}}
+\tl_replace_all:Nnn \l_mycy_tl { ҿ } { { \fcyrtrans c̨̆}}
+\tl_replace_all:Nnn \l_mycy_tl { ш } { { \fcyrtrans š}}
+\tl_replace_all:Nnn \l_mycy_tl { щ } { { \fcyrtrans ŝ}}
+\tl_replace_all:Nnn \l_mycy_tl { ъ } { { \fcyrtrans }}
+\tl_replace_all:Nnn \l_mycy_tl { ы } { { \fcyrtrans y}}
+\tl_replace_all:Nnn \l_mycy_tl { ӹ } { { \fcyrtrans ÿ}}
+\tl_replace_all:Nnn \l_mycy_tl { ь } { { \fcyrtrans }}
+\tl_replace_all:Nnn \l_mycy_tl { э } { { \fcyrtrans è}}
+\tl_replace_all:Nnn \l_mycy_tl { ә } { { \fcyrtrans a̋}}
+\tl_replace_all:Nnn \l_mycy_tl { ӛ } { { \fcyrtrans à}}
+\tl_replace_all:Nnn \l_mycy_tl { ю } { { \fcyrtrans û}}
+\tl_replace_all:Nnn \l_mycy_tl { я } { { \fcyrtrans â}}
+\tl_replace_all:Nnn \l_mycy_tl { ґ } { { \fcyrtrans g̀}}
+\tl_replace_all:Nnn \l_mycy_tl { ѣ } { { \fcyrtrans ě}}
+\tl_replace_all:Nnn \l_mycy_tl { ѫ } { { \fcyrtrans ǎ}}
+\tl_replace_all:Nnn \l_mycy_tl { ѳ } { { \fcyrtrans f̀}}
+\tl_replace_all:Nnn \l_mycy_tl { ѵ } { { \fcyrtrans ỳ}}
+\tl_replace_all:Nnn \l_mycy_tl { X } { { \fcyrtrans X}}
+\tl_replace_all:Nnn \l_mycy_tl { I } { { \fcyrtrans I}}
+\tl_replace_all:Nnn \l_mycy_tl { Æ } { { \fcyrtrans Æ}}
+\tl_replace_all:Nnn \l_mycy_tl { æ } { { \fcyrtrans æ}}
+}
+
+\ExplSyntaxOff
+
+\newcommand\testcyrtrans{%
+\noindent А (\cyrtrans{А})\par
+\noindent Ӓ (\cyrtrans{Ӓ})\par
+\noindent Ӓ̄ (\cyrtrans{Ӓ̄})\par
+\noindent Ӑ (\cyrtrans{Ӑ})\par
+\noindent А̄ (\cyrtrans{А̄})\par
+\noindent Ӕ (\cyrtrans{Ӕ})\par
+\noindent А́ (\cyrtrans{А́})\par
+\noindent А̊ (\cyrtrans{А̊})\par
+\noindent Б (\cyrtrans{Б})\par
+\noindent В (\cyrtrans{В})\par
+\noindent Г (\cyrtrans{Г})\par
+\noindent Ѓ (\cyrtrans{Ѓ})\par
+\noindent Ғ (\cyrtrans{Ғ})\par
+\noindent Ҕ (\cyrtrans{Ҕ})\par
+\noindent Һ (\cyrtrans{Һ})\par
+\noindent Д (\cyrtrans{Д})\par
+\noindent Ђ (\cyrtrans{Ђ})\par
+\noindent Е (\cyrtrans{Е})\par
+\noindent Ӗ (\cyrtrans{Ӗ})\par
+\noindent Ё (\cyrtrans{Ё})\par
+\noindent Є (\cyrtrans{Є})\par
+\noindent Ж (\cyrtrans{Ж})\par
+\noindent Җ (\cyrtrans{Җ})\par
+%
+\noindent Ӝ (\cyrtrans{Ӝ})\par
+\noindent Ӂ (\cyrtrans{Ӂ})\par
+\noindent З (\cyrtrans{З})\par
+\noindent Ӟ (\cyrtrans{Ӟ})\par
+\noindent Ӡ (\cyrtrans{Ӡ})\par
+\noindent Ѕ (\cyrtrans{Ѕ})\par
+\noindent И (\cyrtrans{И})\par
+\noindent Ӣ (\cyrtrans{Ӣ})\par
+\noindent И́ (\cyrtrans{И́})\par
+\noindent Ӥ (\cyrtrans{Ӥ})\par
+\noindent Й (\cyrtrans{Й})\par
+\noindent І (\cyrtrans{І})\par
+\noindent Ї (\cyrtrans{Ї})\par
+\noindent І̄ (\cyrtrans{І̄})\par
+\noindent Ј (\cyrtrans{Ј})\par
+\noindent Ј̵ (\cyrtrans{Ј̵})\par
+\noindent К (\cyrtrans{К})\par
+\noindent Ќ (\cyrtrans{Ќ})\par
+\noindent Ӄ (\cyrtrans{Ӄ})\par
+\noindent Ҝ (\cyrtrans{Ҝ})\par
+\noindent Ҡ (\cyrtrans{Ҡ})\par
+\noindent Ҟ (\cyrtrans{Ҟ})\par
+\noindent Қ (\cyrtrans{Қ})\par
+%
+\noindent К̨ (\cyrtrans{К̨})\par
+\noindent Ԛ (\cyrtrans{Ԛ})\par
+\noindent Л (\cyrtrans{Л})\par
+\noindent Љ (\cyrtrans{Љ})\par
+\noindent Ԡ (\cyrtrans{Ԡ})\par
+%
+\noindent М (\cyrtrans{М})\par
+\noindent Н (\cyrtrans{Н})\par
+\noindent Њ (\cyrtrans{Њ})\par
+\noindent Ң (\cyrtrans{Ң})\par
+%
+\noindent Ӊ (\cyrtrans{Ӊ})\par
+\noindent Ҥ (\cyrtrans{Ҥ})\par
+\noindent Ԋ (\cyrtrans{Ԋ})\par
+\noindent Ԣ (\cyrtrans{Ԣ})\par
+\noindent Ӈ (\cyrtrans{Ӈ})\par
+\noindent Н̄ (\cyrtrans{Н̄})\par
+\noindent О (\cyrtrans{О})\par
+\noindent Ӧ (\cyrtrans{Ӧ})\par
+\noindent Ө (\cyrtrans{Ө})\par
+\noindent Ӫ (\cyrtrans{Ӫ})\par
+\noindent Ӧ̄ (\cyrtrans{Ӧ̄})\par
+\noindent Ҩ (\cyrtrans{Ҩ})\par
+\noindent О́ (\cyrtrans{О́})\par
+\noindent О̄ (\cyrtrans{О̄})\par
+\noindent Œ (\cyrtrans{Œ})\par
+\noindent П (\cyrtrans{П})\par
+\noindent Ҧ (\cyrtrans{Ҧ})\par
+\noindent Ԥ (\cyrtrans{Ԥ})\par
+\noindent Р (\cyrtrans{Р})\par
+\noindent С (\cyrtrans{С})\par
+\noindent Ҫ (\cyrtrans{Ҫ})\par
+%
+\noindent С̀ (\cyrtrans{С̀})\par
+\noindent Т (\cyrtrans{Т})\par
+\noindent Ћ (\cyrtrans{Ћ})\par
+\noindent Ԏ (\cyrtrans{Ԏ})\par
+\noindent Т̌ (\cyrtrans{Т̌})\par
+\noindent Ҭ (\cyrtrans{Ҭ})\par
+%
+\noindent У (\cyrtrans{У})\par
+\noindent Ӱ (\cyrtrans{Ӱ})\par
+\noindent Ӯ (\cyrtrans{Ӯ})\par
+\noindent Ў (\cyrtrans{Ў})\par
+\noindent Ӳ (\cyrtrans{Ӳ})\par
+\noindent У́ (\cyrtrans{У́})\par
+\noindent Ӱ̄ (\cyrtrans{Ӱ̄})\par
+%
+\noindent Ү (\cyrtrans{Ү})\par
+\noindent Ұ (\cyrtrans{Ұ})\par
+\noindent Ԝ (\cyrtrans{Ԝ})\par
+\noindent Ф (\cyrtrans{Ф})\par
+\noindent Х (\cyrtrans{Х})\par
+\noindent Ҳ (\cyrtrans{Ҳ})\par
+%
+\noindent Ц (\cyrtrans{Ц})\par
+\noindent Ҵ (\cyrtrans{Ҵ})\par
+\noindent Џ (\cyrtrans{Џ})\par
+\noindent Ч (\cyrtrans{Ч})\par
+\noindent Ҷ (\cyrtrans{Ҷ})\par
+%
+\noindent Ӌ (\cyrtrans{Ӌ})\par
+\noindent Ӵ (\cyrtrans{Ӵ})\par
+\noindent Ҹ (\cyrtrans{Ҹ})\par
+\noindent Ч̀ (\cyrtrans{Ч̀})\par
+\noindent Ҽ (\cyrtrans{Ҽ})\par
+\noindent Ҿ (\cyrtrans{Ҿ})\par
+\noindent Ш (\cyrtrans{Ш})\par
+\noindent Щ (\cyrtrans{Щ})\par
+\noindent Ъ (\cyrtrans{Ъ})\par
+\noindent Ы (\cyrtrans{Ы})\par
+\noindent Ӹ (\cyrtrans{Ӹ})\par
+\noindent Ы̄ (\cyrtrans{Ы̄})\par
+\noindent Ь (\cyrtrans{Ь})\par
+\noindent Э (\cyrtrans{Э})\par
+\noindent Ә (\cyrtrans{Ә})\par
+\noindent Ӛ (\cyrtrans{Ӛ})\par
+\noindent Ю (\cyrtrans{Ю})\par
+\noindent Ю̄ (\cyrtrans{Ю̄})\par
+\noindent Я (\cyrtrans{Я})\par
+\noindent Ґ (\cyrtrans{Ґ})\par
+\noindent Ѣ (\cyrtrans{Ѣ})\par
+\noindent Ѫ (\cyrtrans{Ѫ})\par
+\noindent Ѳ (\cyrtrans{Ѳ})\par
+\noindent Ѵ (\cyrtrans{Ѵ})\par
+\noindent Ӏ (\cyrtrans{Ӏ})\par
+\noindent ʼ (\cyrtrans{ʼ})\par
+\noindent ˮ (\cyrtrans{ˮ})\par
+\noindent а (\cyrtrans{а})\par
+\noindent ӓ (\cyrtrans{ӓ})\par
+\noindent ӓ̄ (\cyrtrans{ӓ̄})\par
+\noindent ӑ (\cyrtrans{ӑ})\par
+\noindent а̄ (\cyrtrans{а̄})\par
+\noindent ӕ (\cyrtrans{ӕ})\par
+\noindent а́ (\cyrtrans{а́})\par
+\noindent а̊ (\cyrtrans{а̊})\par
+\noindent б (\cyrtrans{б})\par
+\noindent в (\cyrtrans{в})\par
+\noindent г (\cyrtrans{г})\par
+\noindent ѓ (\cyrtrans{ѓ})\par
+\noindent ғ (\cyrtrans{ғ})\par
+\noindent ҕ (\cyrtrans{ҕ})\par
+\noindent һ (\cyrtrans{һ})\par
+\noindent д (\cyrtrans{д})\par
+\noindent ђ (\cyrtrans{ђ})\par
+\noindent е (\cyrtrans{е})\par
+\noindent ӗ (\cyrtrans{ӗ})\par
+\noindent ё (\cyrtrans{ё})\par
+\noindent є (\cyrtrans{є})\par
+\noindent ж (\cyrtrans{ж})\par
+\noindent җ (\cyrtrans{җ})\par
+%
+\noindent ӝ (\cyrtrans{ӝ})\par
+\noindent ӂ (\cyrtrans{ӂ})\par
+\noindent з (\cyrtrans{з})\par
+\noindent ӟ (\cyrtrans{ӟ})\par
+\noindent ӡ (\cyrtrans{ӡ})\par
+\noindent ѕ (\cyrtrans{ѕ})\par
+\noindent и (\cyrtrans{и})\par
+\noindent ӣ (\cyrtrans{ӣ})\par
+\noindent и́ (\cyrtrans{и́})\par
+\noindent ӥ (\cyrtrans{ӥ})\par
+\noindent й (\cyrtrans{й})\par
+\noindent і (\cyrtrans{і})\par
+\noindent ї (\cyrtrans{ї})\par
+\noindent і̄ (\cyrtrans{і̄})\par
+\noindent ј (\cyrtrans{ј})\par
+\noindent ј̵ (\cyrtrans{ј̵})\par
+\noindent к (\cyrtrans{к})\par
+\noindent ќ (\cyrtrans{ќ})\par
+\noindent ӄ (\cyrtrans{ӄ})\par
+\noindent ҝ (\cyrtrans{ҝ})\par
+\noindent ҡ (\cyrtrans{ҡ})\par
+\noindent ҟ (\cyrtrans{ҟ})\par
+\noindent қ (\cyrtrans{қ})\par
+%
+\noindent к̨ (\cyrtrans{к̨})\par
+\noindent ԛ (\cyrtrans{ԛ})\par
+\noindent л (\cyrtrans{л})\par
+\noindent љ (\cyrtrans{љ})\par
+\noindent ԡ (\cyrtrans{ԡ})\par
+%
+\noindent м (\cyrtrans{м})\par
+\noindent н (\cyrtrans{н})\par
+\noindent њ (\cyrtrans{њ})\par
+\noindent ң (\cyrtrans{ң})\par
+%
+\noindent ӊ (\cyrtrans{ӊ})\par
+\noindent ҥ (\cyrtrans{ҥ})\par
+\noindent ԋ (\cyrtrans{ԋ})\par
+\noindent ԣ (\cyrtrans{ԣ})\par
+\noindent ӈ (\cyrtrans{ӈ})\par
+\noindent н̄ (\cyrtrans{н̄})\par
+\noindent о (\cyrtrans{о})\par
+\noindent ӧ (\cyrtrans{ӧ})\par
+\noindent ө (\cyrtrans{ө})\par
+\noindent ӫ (\cyrtrans{ӫ})\par
+\noindent о̄̈ (\cyrtrans{о̄̈})\par
+\noindent ҩ (\cyrtrans{ҩ})\par
+\noindent о́ (\cyrtrans{о́})\par
+\noindent о̄ (\cyrtrans{о̄})\par
+\noindent œ (\cyrtrans{œ})\par
+\noindent п (\cyrtrans{п})\par
+\noindent ҧ (\cyrtrans{ҧ})\par
+\noindent ԥ (\cyrtrans{ԥ})\par
+\noindent р (\cyrtrans{р})\par
+\noindent с (\cyrtrans{с})\par
+\noindent ҫ (\cyrtrans{ҫ})\par
+%
+\noindent с̀ (\cyrtrans{с̀})\par
+\noindent т (\cyrtrans{т})\par
+\noindent ћ (\cyrtrans{ћ})\par
+\noindent ԏ (\cyrtrans{ԏ})\par
+\noindent т̌ (\cyrtrans{т̌})\par
+\noindent ҭ (\cyrtrans{ҭ})\par
+%
+\noindent у (\cyrtrans{у})\par
+\noindent ӱ (\cyrtrans{ӱ})\par
+\noindent ӯ (\cyrtrans{ӯ})\par
+\noindent ў (\cyrtrans{ў})\par
+\noindent ӳ (\cyrtrans{ӳ})\par
+\noindent у́ (\cyrtrans{у́})\par
+\noindent ӱ̄ (\cyrtrans{ӱ̄})\par
+%
+\noindent ү (\cyrtrans{ү})\par
+\noindent ұ (\cyrtrans{ұ})\par
+\noindent ԝ (\cyrtrans{ԝ})\par
+\noindent ф (\cyrtrans{ф})\par
+\noindent х (\cyrtrans{х})\par
+\noindent ҳ (\cyrtrans{ҳ})\par
+%
+\noindent ц (\cyrtrans{ц})\par
+\noindent ҵ (\cyrtrans{ҵ})\par
+\noindent џ (\cyrtrans{џ})\par
+\noindent ч (\cyrtrans{ч})\par
+\noindent ҷ (\cyrtrans{ҷ})\par
+%
+\noindent ӌ (\cyrtrans{ӌ})\par
+\noindent ӵ (\cyrtrans{ӵ})\par
+\noindent ҹ (\cyrtrans{ҹ})\par
+\noindent ч̀ (\cyrtrans{ч̀})\par
+\noindent ҽ (\cyrtrans{ҽ})\par
+\noindent ҿ (\cyrtrans{ҿ})\par
+\noindent ш (\cyrtrans{ш})\par
+\noindent щ (\cyrtrans{щ})\par
+\noindent ъ (\cyrtrans{ъ})\par
+\noindent ы (\cyrtrans{ы})\par
+\noindent ӹ (\cyrtrans{ӹ})\par
+\noindent ы̄ (\cyrtrans{ы̄})\par
+\noindent ь (\cyrtrans{ь})\par
+\noindent э (\cyrtrans{э})\par
+\noindent ә (\cyrtrans{ә})\par
+\noindent ӛ (\cyrtrans{ӛ})\par
+\noindent ю (\cyrtrans{ю})\par
+\noindent ю̄ (\cyrtrans{ю̄})\par
+\noindent я (\cyrtrans{я})\par
+\noindent ґ (\cyrtrans{ґ})\par
+\noindent ѣ (\cyrtrans{ѣ})\par
+\noindent ѫ (\cyrtrans{ѫ})\par
+\noindent ѳ (\cyrtrans{ѳ})\par
+\noindent ѵ (\cyrtrans{ѵ})\par
+\noindent X (\cyrtrans{X})\par
+\noindent I (\cyrtrans{I})\par
+\noindent Æ (\cyrtrans{Æ})\par
+\noindent æ (\cyrtrans{æ})\par
+}
+
+
+
+
+\begin{document}
+
+{\forig Солнечная система -- \bfseries inline transliteration: } 
+\cyrtrans{Солнечная система}
+
+{\forig 
+Implementing a GOST 7.79-2000, ISO9:1995, transliteration scheme.
+
+Extract is from Wikipedia article on the solar system, in some Cyrillic-using languages: Russian, Ingush, Komi etc. Red is original untransliterated text.
+}
+
+\bigskip
+{\forig \bfseries Environment: Russian ru русский язык }
+
+\begin{cyrtranse}
+
+Со́лнечная систе́ма — планетная система, включает в себя центральную звезду — Солнце — и все естественные космические объекты, вращающиеся вокруг Солнца. Она сформировалась путём гравитационного сжатия газопылевого облака примерно 4,57 млрд лет назад[2].
+
+Общая масса Солнечной системы составляет около 1,0014 M☉. Бо́льшая часть её приходится на Солнце; оставшаяся часть практически полностью содержится в восьми отдалённых друг от друга планетах, имеющих близкие к круговым орбиты, лежащие почти в одной плоскости — плоскости эклиптики. Из-за этого наблюдается противоречащее ожидаемому распределение момента импульса между Солнцем и планетами (так называемая «проблема моментов»): всего 2 \% общего момента системы приходится на долю Солнца, масса которого в ~740 раз больше общей массы планет, а остальные 98 \% — на \textasciitilde 0,001 общей массы Солнечной системы[18]. 
+
+\end{cyrtranse}
+%-------------------------------------------------
+
+
+%\bigskip
+%{\forig \bfseries Environment: ccc}\par
+%\begin{cyrtranse}
+%\end{cyrtranse}
+%%-------------------------------------------------
+
+%\bigskip
+%{\forig \bfseries Environment: ccc}\par
+%\begin{cyrtranse}
+%\end{cyrtranse}
+%%-------------------------------------------------
+
+
+
+\bigskip
+{\forig \bfseries Environment: Tajik tg тоҷикӣ}\par
+\begin{cyrtranse}
+Манзумаи офтобӣ
+Системаи офтобӣ
+
+    Офтоб
+    Уторид
+    Зуҳра
+    Замин
+    Моҳ
+    Миррих
+    Муштарӣ
+    Сатурн
+    Уран
+    Нептун
+
+    Серера
+    Плутон
+    
+    Офтоб ё Хуршед (аз оф — ҷирм ва тоб тобанда, тобоӣ), Шамс, Меҳр, Xуршед (астр. ☉) — наздиктарин ситораест, ки дар маркази манзумаи хуршедӣ воқеъ буда, аз плазмаи тафсон таркиб ёфтааст. Аломати астрономиаш Офтоб. Массаи Офтоб 1,990*1030 килограмм буда, аз массаи Замин 332958 маротиба зиёд аст ва 99,866 \% -и массаи ҷирмҳои манзумаи хуршедиро ташкил медиҳад. Масофаи байни Офтоб ва Замни дар давоми сол аз 147,1 миллион километр (январ) то 152,1 миллион километр (июл) тағйир меёбад. Қимати миёнааш 149,6 миллион километр аст, ки онро чун воҳиди астрономӣ қабул кардаанд. Зичии миёнаи моддаи Офтоб 1,41-10® килограмм/метрэ. Тезшавии қувваи вазнинӣ дар сатҳи Офтоб 273,98 м/ооп2. Ҳарорати сатди Офтоб, ки аз рӯи афканиши пурраи он мувофиқи қонуни афканишоти Стефану Болс­ман муайян карда мешавад, ба 57ТО К баробар аст.
+
+Баъд аз ихтирои телескоп мушоҳидаи Офтоб характери илмӣ пайдо кард. Доғҳои Офтоб кашф ва даври чархзании он дар атрофи меҳвараш муайян карда шуд. Соли 1843 астрономи немис Г. Швабе даврияти хурӯҷи Офтобро ошкор кард. Соли 1814 Й. Фра­унгофер дар спектри Офтоб хатҳои тираи фурӯбурдро дарёфт. Аз соли 1836 ин ҷониб гирифти Офтобро мунтазам мушоҳида мекунанд. Дар натиҷа дар Офтоб тоҷ, хромосфера, инчунин протӯберансҳо ошкор гарди­данд. Соли 1913 астрономи америкоӣ Ҷ. Ҳенл спектри доғдои Офтобро омӯхта дар Офтоб мавҷуд будани майдони магнитиро исбот кард. Дар ибтидои солҳои 40 садаи XX радиоафканишоти Офтобро кашф карданд. Дар нимаи дуюми садаи XX инкишофи гидродинамика ва физикаи плазма боиси пешравии физикаи Офтоб шуд. Ҳоло бо ёрии мушакҳо, расадхонаҳои автоматии маҳорӣ, лабораторияҳои кайҳонии пилотдор афканишоти ултрабунафш ва рентгении Офтобро тадқиқ мекунанд.
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Komi kv Коми кыв}\par
+\begin{cyrtranse}
+Шонді ылдӧс
+Перейти к навигации
+Перейти к поиску
+
+Шонді ылдӧс (рочӧн Солнечная система) — планетаяслӧн система, кытчӧ пырӧны медшӧр кодзув — Шонді — да сы гӧгӧр бергалысь космос объектъяс. Сійӧ артмис кӧнкӧ 4,57 миллиард во сайын бус да ру сора кымӧрлӧн гравитационнӧй коллапс отсӧгӧн.
+
+Шонді.
+
+Планет: Меркурий, Венера, Му, Марс, Юпитер, Сатурн, Уран, Нептун.
+
+Карлик планета: Плутон, Церера, Эрида, Макемаке, Хаумеа.
+
+Тӧлысь. 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Ossetian os Ирон æвзаг}\par
+\begin{cyrtranse}
+Хуры системæ
+Сæрибар энциклопеди Википедийы æрмæг.
+Перейти к навигации
+Перейти к поиску
+Хуры системæйы планетæтæ
+
+Хуры системæ[1] у планетæты системæ галактикæ Æрфæныфæды. 
+
+Æрфæныфæд
+Сæрибар энциклопеди Википедийы æрмæг.
+Перейти к навигации
+Перейти к поиску
+Æрфæныфæд (компьютерон ныв)
+
+Æрфæныфæд (гр. {\forig Γαλαξίας}, лат. {\forig Via Lactea}, уырыс. Млечный Путь) у дун-дунейы галактикæтæй иу. Æрфæныфæды ис Хуры системæ.
+
+Æндæр варианттæ сты — чыс.ныхас. Саг æмæ галы фæд[1]; дыгурон диалект Дон.[2]
+Ирон мифологийы
+Æрфæн-æрвон — Нарты кадджытæм æрвон бæхты мыггагæй, уыд Нарты хистæр Уырызмæджы æмбисонды бæхы ном. Уый хонынц зæххон бæхты фыдæл, уымæй, дам, равзæрдысты. Ирд æхсæвы арвы астæу иу кæронæй иннæмæ цы урсбын фæтæн тæлм фæзыны, уый дæр уымæ гæсгæ ирон адæм хонынц «Æрфæны фæд». 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Ingush inh ГӀалгӀай мотт}\par
+\begin{cyrtranse}
+Маьлха ков
+Перейти к навигации
+Перейти к поиску
+Маьлха ковна дуненаш
+
+Маьлха ков (лат: {\forig Systema solare}, эрс: Со́лнечная систе́ма, ингал: {\forig Solar system}) — дунений ража я шийна чулоацаш юкъера седкъа — Малх а — цун гоннахьа кхесташ йола шоаш хьахинна айлама объекташ а. Маьлха ков хьахиннад газ-дема хьисапе морхах гравитационни вIашкатаIар хинна 4,57 млрд шу хьалха[1]. 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Bulgarian bg български език}\par
+\begin{cyrtranse}
+Слънчевата система е група астрономически обекти, включваща Слънцето и небесните тела, обикалящи около него – планети, планети-джуджета, спътници, астероиди, комети, междупланетен прах и газ. Всички те са образувани при разпадането на молекулярен облак преди около 4,6 милиарда години.
+
+Най-масивни след Слънцето са осемте планети. Техните орбити са почти кръгови и лежат приблизително в една равнина – равнината на еклиптиката. 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Belarusian be Беларуская мова}\par
+\begin{cyrtranse}
+Сонечная сістэма — зорная сістэма, якая складаецца з Сонца і яго планетнай сістэмы, і якая ўключае ў сябе ўсе натуральныя касмічныя аб'екты, якія абарочваюцца вакол Сонца: планеты і іх спадарожнікі, а таксама малыя целы — астэроіды, метэароіды, каметы, касмічны пыл.
+
+У Сонцы сканцэнтравана пераважная частка ўсёй масы сістэмы (каля 99,866 \%), яно ўтрымлівае сваім прыцягненнем планеты і іншыя целы, якія належаць да Сонечнай сістэмы. Чатыры найбуйнейшыя аб'екты — газавыя гіганты — складаюць 99 \% астатняй масы (пры гэтым большая частка прыпадае на Юпітэр і Сатурн — каля 90 \%). 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Karachay-Balkar krc Къарачай-Малкъар тил}\par
+\begin{cyrtranse}
+Кюн система
+Перейти к навигации
+Перейти к поиску
+Кюн система (масштабы сакъланмагъанды)
+
+Кюн низам — орта джулдузу Кюнден эмда аны тёгерегинде бурулгъан табигъат алам объектледен къуралгъан планета низамды.
+
+Ауетлик себебли Кюн бла байламлы болгъан объектлени ауурлугъуну кёбюсю, шартха кёре энчи тургъан, хазна къалмай тёгерек чорхлары болгъан, эмда хазна къалмай джассы дискни — эклиптиканы джассылыгъыны ичинде тургъан планеталадады.
+
+Тёрт гитчерек ич планетала: Атархан, Тандыса, Джер эмда Мырых, джер къауумну планеталары деген ат бла да белиги болгъанла, кёбюсюне силикатла бла темирден къураладыла. Тёрт тыш планетала: Юпитер, Сатурн, Уран эмда Нептун, газ гигантла деген ат бла да белгили болгъанла, иги кесегине водород бла гелийден къураладыла эмда джер къауумну планеталарындан эсе уллу эм ауурладыла.
+
+Кюн низамда гитче затладан толуб тургъан эки бёлге барды. Мырых бла Юпитерни арасында болгъан астероидлени бели, силикатла бла темирледен къуралгъаны себели къурамына кёре джер къауумну планеталарына ушайды. Астероидлени белини эм уллу объектлери Церера, Паллада эм Юнонады. Нептунну орбитасыны артында бузлагъан суудан, аммиакдан эмда метандан къуралгъан транснептун объектле орналыбдыла, аланы эм уллулары Плутон, Седна, Хаумеа, Макемаке эмда Эридады. Бу эки бёлгеде мингле бла гитче затлагъа къошакъгъа башха тюрлю гитче затла да, сёз ючюн, къуйрукълу джулдузла, учхан джулдузла эмда алам букъу, Кюн низамны ичинде айланадыла.
+
+Планеталаны сегизинден алтысы эмда юч шылаб планета, табигъат дженгерле бла къуршаланыбдыла. Тыш планеталаны хар бириси да букъу бла башха миндеуледен тогъайла бла къуршаланыбдыла.
+
+Кюн низам, Къой Джол мырытны къурамына киреди. 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Lezghian lez Лезги чӏал}\par
+\begin{cyrtranse}
+Ракъинин систе́ма — юкьван гъед тир Рагъ ва Ракъинилай элкъвезвай вири тӀебиатдин космосдин объектар кьазвай планетдин система я. Рагъ галаз гравитациядалди алакъа авай объектрин массадин чӀехи пай муьжуьд нисби тир хелветда гьахьнавай ва саки элкъвей цӀарцӀин орбитаяр авай планетрин къене ава; и планетаяр саки кьулу дискдин сергьятра — эклиптикадин кьулувиле ава:
+
+Кьуд мадни гъвечӀи къенепатан планетаяр: Меркурий, Венера, Ччилни Марс (ибуруз гьакӀни Ччилин кӀеретӀдин планетаярни лугьуда) асул гьисабдалди силикатрикайни металликай ибарат жезва. Кьуд къецепатан планетаяр: Юпитер, Сатурн, Уран ва Нептун (ибуруз гьакӀни газдин гигантарни лугьуда) асул гьисабдалди гьидрогендикайни гьелийдикай ибарат жезва ва Ччилин кӀеретӀдин планетайрилай массив я.
+
+Ракъинин системада гъвечӀи телойрив ацӀурнавай кьве област ава. Марсни Юпитердин арада авай Астероидрин чIул квай затӀариз килигна Ччилин кӀеретӀдин планетаяр галаз сад я, вучиз лагьайтӀа, силикатрикайни металликай ибарат я. Астероидрин чӀулдин виридалайни чӀехи объектар Церера, Паллада ва Веста я. Нептундин орбиталай анихъ муркӀади кьунвай цикай, аммиакдикайни метандикай ибарат тир транснептундин объектар ава, ва и объектрикай виридалайни чӀехи Плутон, Седна, Хаумеа, Макемаке ва Эрида я. И кьве областда агъзурралди гъвечӀи телойриз алава яз, инал гъвечӀи телойрин жуьреба-жуьре популяцияр ава — астероидар, планетрин квазиспутникарни троянар, ччилин мукьва авай астероидар, кентаврар, дамоклоидар, ва гьакӀни Ракъинин системада элячӀна юзазвай кометаяр, метеороидарни космосдин руг. 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Ukrainian uk Українська мова}\par
+\begin{cyrtranse}
+Со́нячна систе́ма — планетна система, що включає в себе центральну зорю — Сонце, і всі природні космічні об'єкти (планети, астероїди, комети, потоки сонячного вітру тощо), які об'єднуються гравітаційною взаємодією[6]. Сонячна система є частиною значно більшого комплексу, який складається із зірок і міжзоряної речовини — галактики Чумацький Шлях[7].
+
+Сонце складає ≈99,85 \% маси Сонячної системи; газові планети-гіганти (Юпітер, Сатурн, Уран і Нептун) складають 99 \% залишкової маси[8]. Як і в інших зір, у надрах Сонця ефективно відбуваються термоядерні реакції з виділенням енергії[9]. Планети за фізичними характеристиками поділяють на дві групи. Ближче до Сонця розташовані планети земної групи: Меркурій, Венера, Земля, Марс; далі від Сонця розташувались планети-гіганти: Юпітер, Сатурн, Уран, Нептун[10]. Планети земної групи порівняно невеликі, їхня густина ≈5 г/см³; вони складаються переважно з важких хімічних елементів; мають гаряче металеве ядро, оточене мантією із силікатних порід, і верхній шар — кору[11]. Планети-гіганти не мають твердої поверхні, бо за хімічним складом (99 \% гідрогену і гелію) і густиною (≈1 г/см³) вони нагадують зорі, а їхня велика маса спричиняє нагрівання ядер до температури понад +10 000 °С[12].
+
+Окрім Сонця й планет, до складу Сонячної системи входять також карликові планети, супутники планет, астероїди, комети, метеорна речовина[13]. 
+\end{cyrtranse}
+%-------------------------------------------------
+
+\bigskip
+{\forig \bfseries Environment: Udmurt udm удмурт кыл}\par
+\begin{cyrtranse}
+Шунды система — Шундылэсь но со котыртӥ ас спутникъёсынызы бергась 8 бадӟым планетаослэсь, дасо сюрсъёсын пичи планетаослэсь (астероидъёслэсь), быжо кизилиослэсь но метеоръёслэсь кылдэм инмысь система. Со кылдэмын 4,57 млрд пала аръёс талэсь азьло, газ-тузон пилемез гравитациен шымыртыса.
+
+Шунды системалэн ваньмыз массаез луэ ог 1,0014 M☉. Солэн бадӟымез люкетэз Шундылы усе.
+
+Шунды система пыре Лудӟазегсюрес галактикае. 
+\end{cyrtranse}
+%-------------------------------------------------
+
+%%
+
+Transliteration test:
+
+\begin{multicols}{8}
+\testcyrtrans
+\end{multicols}
+
+\end{document}
+
+
+
+
+https://tex.stackexchange.com/questions/285610/create-a-mapping-for-transliteration-from-cyrillic-to-latin-in-lualatex/597036#597036
