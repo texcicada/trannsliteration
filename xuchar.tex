@@ -1,0 +1,481 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\pagecolor{green!3}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+%\usepackage{etoolbox}
+
+%============================== Font
+\newfontfamily\ftmon{Noto Sans Mongolian}[Script=Mongolian,Renderer=HarfBuzz]
+%Renderer= option is for lualatex; remove for xelatex.
+\newfontfamily\ffonta{Noto Serif}[Colour=brown,Scale=1.3]
+\newfontface\ftcarian{Noto Sans Carian}
+\newfontface\ftcafont{Noto Sans Carian}
+\newfontface\ftlinearb{Noto Sans Linear B}
+\newfontface\ftlycian{Noto Sans Lycian}
+\newfontface\fthiero{Noto Sans Egyptian Hieroglyphs}
+\newfontface\ftcyrillic{Noto Serif}
+\newfontface\ftmiscsym{FreeSerif}
+
+%==============================
+
+\input{metacs_input.tex}
+\input{carian_input.tex}
+
+\newcommand\formatqdeconа{%
+		\ffonta%
+}
+\newcommand\formatcarian{%
+		\ftcarian%
+}
+\newcommand\formatlinearb{%
+		\ftlinearb\color{blue}%
+}
+\newcommand\formatlycian{%
+		\ftlycian\color{blue}%
+}
+
+\newcommand\formathiero{%
+		\fthiero 
+		\addfontfeatures{Colour=brown,Scale=2}%
+}
+\newcommand\formatcyrillic{%
+		\ftcyrillic%
+		\color{red}%
+}
+\newcommand\formatmiscsym{%
+		\ftmiscsym%
+		\color{blue}%
+}
+
+%========================
+\ExplSyntaxOn
+
+\tl_new:N \l_myxuchar_tl 
+
+%---- Environments
+\NewDocumentEnvironment{xuchare}{ +b }
+{ 
+ \tl_set:Nn \l_myxuchar_tl  { #1 }
+\doxuchar
+\tl_use:N \l_myxuchar_tl 
+}
+{ }
+
+
+
+\newcommand\doxuchar{
+					\regex_replace_all:nnN 
+										{ qdecona } 
+										{ \c{formatqdeconа} } 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN 
+										{ qdeconb } 
+										{ \c{normalfont} } 
+										\l_myxuchar_tl 
+										
+%%\regex_replace_all:nnN %first word on line
+%%										{ 
+%%%												(^[𐊠-𐋐]{1})	 
+%%												(\A[𐊠-𐋐]*\Z)
+%%%												(^[𐊠-𐋐]{1})	 
+%%												} 										
+%%										{ 
+%%%											\1
+%%											\cB\{ 
+%%											\c{formatcarian}
+%%											\c{color} \cB\{ red \cE\}  
+%%%											\2  
+%%											\1
+%%											\cE\} 
+%%%											\3
+%%											} 
+%%										\l_myxuchar_tl 
+
+
+%					Carian
+%					\regex_replace_all:nnN %
+%										{ 
+%												(\c{par}[𐊠-𐋐]{1})
+%												} 										
+%										{ 
+%											\c{phantom}
+%											\cB\{ 
+%											\cE\} 
+%											\ 
+%											\0  
+%											} 
+%										\l_myxuchar_tl 
+%										\tl_show:N \l_myxuchar_tl
+
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{par}\s\(\[\`\cB.]{1})
+												([𐊠-𐋐]*)
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatcarian}
+											\c{color} \cB\{ red \cE\}  
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s]{1})
+												([𐊠-𐋐]*)
+												([\s\.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatcarian}
+											\c{color} \cB\{ red \cE\}  
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+										
+										
+%					Linear B
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{par}\s\(\[\`\cB.]{1})
+												([𐂀-𐃺]*)
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatlinearb}
+%											\c{color} \cB\{ red \cE\}  
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s]{1})
+												([𐂀-𐃺]*)
+												([\s\.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatlinearb}
+											\c{color} \cB\{ red \cE\}  
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+
+%					Lycian
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{par}\s\(\[\`\cB.]{1})
+												([𐊀-𐊜]*)
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatlycian}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s]{1})
+												([𐊀-𐊜]*)
+												([\s\.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatlycian}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+
+%					Egyptian Hieroglyphics
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{par}\s\(\[\`\'\''\cB.]{1})
+												([𓀀-𓐸]*)
+												([\s\.\,\?\!\)\]\`\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formathiero}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s]{1})
+												([𓀀-𓐸]*)
+												([\s\.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formathiero}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+
+
+%					Cyrillic
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{par}\s\(\[\`\cB.\']{1})
+												([\-Ѐ-ԯⷠ-ⷿꙀ-ꚟᲀ-ᲈԀ-ԯ́]*) %Latin: Ææ
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatcyrillic}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s\']{1})
+												([\-Ѐ-ԯⷠ-ⷿꙀ-ꚟᲀ-ᲈԀ-ԯ́]*) %Latin: Ææ
+												([\s\.\,\:\[\)\']{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatcyrillic}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+
+%					Miscellaneous Symbols
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{par}\s\(\[\`\cB.\']{1})
+												([☀-⛿]*)
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatmiscsym}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s\']{1})
+												([☀-⛿]*)
+												([\s\.\,\:\[\)\']{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatmiscsym}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+										
+}
+
+
+\ExplSyntaxOff
+
+\newcommand\testtext{𐊠𐊡𐊢𐊣𐋐}
+
+
+%\BeforeBeginEnvironment{document}{\begin{xuchare}}
+%\AfterEndEnvironment{document}{\end{xuchare}}
+
+
+
+
+
+
+
+%Glyphs entered as codepoints
+%so as to be independent of the editor setup.
+\newcommand\bdtest[1]{%
+\rotatebox{-90}{{\ftmon   ^^^^182a^^^^200d{\color{red}^^^^200d#1^^^^200d}^^^^200d^^^^1833}}}
+
+\newcommand\rb[1]{\rotatebox[origin=c]{-90}{{\ftmon #1}}}
+
+
+
+%===================================
+\begin{document}
+\begin{xuchare}
+
+Using ZWJ to treat the parts separately.
+
+\bigskip
+\begin{tabular}{cccc}
+\hline
+ & \itshape b & \itshape a & \itshape d\\
+ \hline
+initial &
+ \color{red}\rb{^^^^182a^^^^200d}&
+ \rb{^^^^1820^^^^200d}&
+ \rb{^^^^1833^^^^200d}
+\\
+medial&
+ \rb{^^^^200d^^^^182a^^^^200d} &
+ \color{red}\rb{^^^^200d^^^^1820^^^^200d}&
+ \rb{^^^^200d^^^^1833^^^^200d}
+\\
+final &
+ \rb{^^^^200d^^^^182a}&
+ \rb{^^^^200d^^^^1820}&
+ \color{red}\rb{^^^^200d^^^^1833}
+\\
+\hline
+\end{tabular}
+
+
+
+
+
+
+\bigskip
+\begin{tabular}{cccccccc}
+\rowcolor{blue!7}a & e & i & o & u & oe & ue & ee\\
+\rb{^^^^1820} &
+\rb{^^^^1821} &
+\rb{^^^^1822} &
+\rb{^^^^1823} &
+\rb{^^^^1824} &
+\rb{^^^^1825} &
+\rb{^^^^1826} &
+\rb{^^^^1827}
+\\ 
+\bdtest{^^^^1820} & 
+\bdtest{^^^^1821} & 
+\bdtest{^^^^1822} & 
+\bdtest{^^^^1823} & 
+\bdtest{^^^^1824} & 
+\bdtest{^^^^1825} & 
+\bdtest{^^^^1826} & 
+\bdtest{^^^^1827}  
+ \\
+\hline
+\end{tabular}
+
+\bigskip
+abc wqer qdecona xyz qwerty qdeconb
+
+Carian: 𐊠𐊡𐊢𐊣𐋐 :: xyz
+𐊠𐊡𐊢𐊣𐋐
+
+xxx
+𐊠𐊡𐊢𐊣𐋐 𐊠𐊡𐊢𐊣𐋐 𐊢𐊣𐋐 𐊢𐊣𐋐.w `𐊠𐊡𐊢𐊣𐋐'w [𐊠𐊡𐊢𐊣𐋐]e (𐊠𐊡𐊢𐊣𐋐)r 𐊠𐊡𐊢𐊣𐋐. 𐊠𐊡𐊢𐊣𐋐, ``𐊠𐊡𐊢𐊣𐋐'' 
+ 𐊠𐊡𐊢𐊣𐋐? 𐊠𐊡𐊢𐊣𐋐! 𐊠𐊡𐊢𐊣𐋐 xxx
+ 
+𐊠𐊡𐊢𐊣𐋐 \fbox{𐊠𐊡𐊢𐊣𐋐} \underline{ 𐊢𐊣𐋐 } 𐊢𐊣𐋐 {\ftcafont 𐊢𐊣𐋐}. 𐊢𐊣𐋐. 𐊢𐊣𐋐. 𐊢𐊣𐋐. 
+
+\cdr{\cats{abg}}
+
+Unexpanded macro: \cdr{\testtext}
+
+====
+
+Linear B: 𐂀𐂁𐂂𐂃 :: xyz
+𐂀𐂁𐂂𐂃
+
+xxx
+𐂀𐂁𐂂𐂃 𐂀𐂁𐂂𐂃 𐂀𐂁𐂂𐂃 𐂀𐂁𐂂𐂃.w `𐂀𐂁𐂂𐂃'w [𐂀𐂁𐂂𐂃]e (𐂀𐂁𐂂𐂃)r 𐂀𐂁𐂂𐂃. 𐂀𐂁𐂂𐂃, ``𐂀𐂁𐂂𐂃'' 
+ 𐂀𐂁𐂂𐂃? 𐂀𐂁𐂂𐂃! 𐂀𐂁𐂂𐂃 xxx
+ 
+𐂀𐂁𐂂𐂃 \fbox{𐂀𐂁𐂂𐂃} \underline{ 𐂀𐂁𐂂𐂃 } 𐂀𐂁𐂂𐂃 𐂀𐂁𐂂𐂃. 𐂀𐂁𐂂𐂃. 𐂃. 𐂃. 
+
+𐊁𐊂𐊃𐊄𐊅𐊀 Lycian 𐊁𐊂𐊃𐊄𐊅𐊀
+
+𓍦𓍠𓈤𓆔𓆣𓆤``𓃲''𓀀 Egyptian Hieroglyphs 𓍦𓍠𓈤𓆔𓆣𓆤𓃲𓀀
+
+xyz
+
+Cyrillc:
+
+Russian ru русский язык: 
+
+Со́лнечная систе́ма — планетная система, включает в себя центральную звезду — Солнце — и все естественные космические объекты, вращающиеся вокруг Солнца.
+
+Tajik tg тоҷикӣ: 
+   
+Офтоб ё Хуршед (аз оф — ҷирм ва тоб тобанда, тобоӣ), Шамс, Меҳр, Xуршед (астр. ☉) — наздиктарин ситораест, ки дар маркази манзумаи хуршедӣ воқеъ буда, Note: the X in Xуршед is Latin; it should be Х, to give Хуршед.
+
+Komi kv Коми кыв:
+
+Шонді ылдӧс (рочӧн Солнечная система) — планетаяслӧн система, кытчӧ пырӧны медшӧр кодзув — Шонді — да сы гӧгӧр бергалысь космос объектъяс.
+
+Ossetian os Ирон æвзаг:
+
+Хуры системæ[1] у планетæты системæ галактикæ Æрфæныфæды. 
+Æрфæныфæд, уырыс. Млечный Путь) у дун-дунейы галактикæтæй иу. Æрфæныфæды ис Хуры системæ. 
+
+For Ossetian, the Wikipedia entry consistently uses Latin Æ and æ for Cyrillic Ӕ and ӕ. Because the fonts can be different, thus affecting other scripts, the corrected entry is: Хуры системӕ[1] у планетӕты системӕ галактикӕ Ӕрфӕныфӕды. 
+Ӕрфӕныфӕд, уырыс. Млечный Путь) у дун-дунейы галактикӕтӕй иу. Ӕрфӕныфӕды ис Хуры системӕ. 
+
+
+Ingush inh ГӀалгӀай мотт:
+
+Маьлха ков, эрс: Со́лнечная систе́ма — дунений ража я шийна чулоацаш юкъера седкъа — Малх а — цун гоннахьа кхесташ йола шоаш хьахинна айлама объекташ а.
+
+Bulgarian bg български език:
+
+Слънчевата система е група астрономически обекти, включваща Слънцето и небесните тела, обикалящи около него – планети, планети-джуджета, спътници, астероиди, комети, междупланетен прах и газ.
+
+Belarusian be Беларуская мова:
+
+Сонечная сістэма — зорная сістэма, якая складаецца з Сонца і яго планетнай сістэмы, і якая ўключае ў сябе ўсе натуральныя касмічныя аб'екты, якія абарочваюцца вакол Сонца: планеты і іх спадарожнікі, а таксама малыя целы — астэроіды, метэароіды, каметы, касмічны пыл.
+
+Karachay-Balkar krc Къарачай-Малкъар тил:
+
+Кюн низам — орта джулдузу Кюнден эмда аны тёгерегинде бурулгъан табигъат алам объектледен къуралгъан планета низамды.
+
+Lezghian lez Лезги чӏал:
+
+Ракъинин систе́ма — юкьван гъед тир Рагъ ва Ракъинилай элкъвезвай вири тӀебиатдин космосдин объектар кьазвай планетдин система я.
+
+Ukrainian uk Українська мова:
+
+Со́нячна систе́ма — планетна система, що включає в себе центральну зорю — Сонце, і всі природні космічні об'єкти (планети, астероїди, комети, потоки сонячного вітру тощо), які об'єднуються гравітаційною взаємодією.
+
+Udmurt udm удмурт кыл:
+
+Шунды система — Шундылэсь но со котыртӥ ас спутникъёсынызы бергась 8 бадӟым планетаослэсь, дасо сюрсъёсын пичи планетаослэсь (астероидъёслэсь), быжо кизилиослэсь но метеоръёслэсь кылдэм инмысь система.
+
+
+
+\end{xuchare}
+\end{document}
+
