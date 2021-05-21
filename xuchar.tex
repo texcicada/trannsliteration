@@ -11,13 +11,16 @@
 %Renderer= option is for lualatex; remove for xelatex.
 \newfontfamily\ffonta{Noto Serif}[Colour=brown,Scale=1.3]
 \newfontface\ftcarian{Noto Sans Carian}
-\newfontface\ftcafont{Noto Sans Carian}
+\newfontface\ftcafont{Noto Sans Carian}% for transliteration
 \newfontface\ftlinearb{Noto Sans Linear B}
 \newfontface\ftlycian{Noto Sans Lycian}
 \newfontface\fthiero{Noto Sans Egyptian Hieroglyphs}
-\newfontface\ftcyrillic{Noto Serif}
+\newfontfamily\ftcyrillic{Noto Serif}
 \newfontface\ftmiscsym{FreeSerif}
-
+\newfontface\ftbamum{Noto Sans Bamum}
+\newfontface\ftboxdrawing{Noto Sans Mono}
+\newfontface\fthebrew{FreeSerif}
+\newfontface\ftdevanagari{Noto Serif Devanagari}[Script=Devanagari,Renderer=HarfBuzz]
 %==============================
 
 \input{metacs_input.tex}
@@ -49,17 +52,63 @@
 		\color{blue}%
 }
 
+\newcommand\formatbamum{%
+		\ftbamum%
+		\color{red}%
+}
+
+\newcommand\formatboxdrawing{%
+		\ftboxdrawing%
+		\color{violet}%
+}
+
+\newcommand\formathebrew{%
+		\fthebrew%
+		\color{violet}%
+		\textdir TRT 
+		\pardir TRT
+}
+\newcommand\formatdevanagari{%
+		\ftdevanagari%
+		\color{red}%
+}
+
+
+%========================
+\newtoggle{xucharon}
+\toggletrue{xucharon}
+
+
+
+
+
+
+
+
+
+
 %========================
 \ExplSyntaxOn
 
 \tl_new:N \l_myxuchar_tl 
+%\regex_new:N \l_mya_regex
+%\regex_set:Nn \l_mya_regex { ([\c{[A-Za-z]*}\s\(\[\`\cB.\']{1}) }
+%\regex_const:Nn \l_myb_regex { ([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1}) }
+%\regex_const:Nn \l_myc_regex { ([\s\']{1}) }
+%\regex_const:Nn \l_myd_regex { ([\s\.\,\:\[\)\']{1}) }
+
+
+
 
 %---- Environments
 \NewDocumentEnvironment{xuchare}{ +b }
 { 
- \tl_set:Nn \l_myxuchar_tl  { #1 }
-\doxuchar
-\tl_use:N \l_myxuchar_tl 
+	\iftoggle{xucharon}{
+				 \tl_set:Nn \l_myxuchar_tl  { #1 }
+					\doxuchar
+					\tl_use:N \l_myxuchar_tl 
+					}
+					{#1}
 }
 { }
 
@@ -70,9 +119,13 @@
 										{ qdecona } 
 										{ \c{formatqdeconа} } 
 										\l_myxuchar_tl 
+										
 					\regex_replace_all:nnN 
 										{ qdeconb } 
-										{ \c{normalfont} } 
+										{ \c{normalfont} 
+											\c{normalsize}
+											\c{normalcolor}
+										} 
 										\l_myxuchar_tl 
 										
 %%\regex_replace_all:nnN %first word on line
@@ -95,24 +148,11 @@
 
 
 %					Carian
-%					\regex_replace_all:nnN %
-%										{ 
-%												(\c{par}[𐊠-𐋐]{1})
-%												} 										
-%										{ 
-%											\c{phantom}
-%											\cB\{ 
-%											\cE\} 
-%											\ 
-%											\0  
-%											} 
-%										\l_myxuchar_tl 
-%										\tl_show:N \l_myxuchar_tl
-
 					\regex_replace_all:nnN % most combinations
 										{ 
 												([\c{par}\s\(\[\`\cB.]{1})
-												([𐊠-𐋐]*)
+												([𐊠-𐋐]+)
+%												([\x{102A0}-\x{102D0}]+)
 												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
 												} 										
 										{ 
@@ -128,7 +168,8 @@
 					\regex_replace_all:nnN %inter-sentence (2nd) words
 										{ 
 												([\s]{1})
-												([𐊠-𐋐]*)
+												([𐊠-𐋐]+)
+%												([\x{102A0}-\x{102D0}]+)
 												([\s\.]{1})	 
 												} 										
 										{ 
@@ -147,7 +188,8 @@
 					\regex_replace_all:nnN % most combinations
 										{ 
 												([\c{par}\s\(\[\`\cB.]{1})
-												([𐂀-𐃺]*)
+												([𐂀-𐃺]+)
+%												([\x{10080}-\x{100FA}]+)
 												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
 												} 										
 										{ 
@@ -163,14 +205,15 @@
 					\regex_replace_all:nnN %inter-sentence (2nd) words
 										{ 
 												([\s]{1})
-												([𐂀-𐃺]*)
+												([𐂀-𐃺]+)
+%												([\x{10080}-\x{100FA}]+)
 												([\s\.]{1})	 
 												} 										
 										{ 
 											\1
 											\cB\{ 
 											\c{formatlinearb}
-											\c{color} \cB\{ red \cE\}  
+%											\c{color} \cB\{ red \cE\}  
 											\2  
 											\cE\} 
 											\3
@@ -181,7 +224,8 @@
 					\regex_replace_all:nnN % most combinations
 										{ 
 												([\c{par}\s\(\[\`\cB.]{1})
-												([𐊀-𐊜]*)
+												([𐊀-𐊜]+)
+%												([\x{10280}-\x{1029C}]+)
 												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
 												} 										
 										{ 
@@ -196,7 +240,8 @@
 					\regex_replace_all:nnN %inter-sentence (2nd) words
 										{ 
 												([\s]{1})
-												([𐊀-𐊜]*)
+												([𐊀-𐊜]+)
+%												([\x{10280}-\x{1029C}]+)
 												([\s\.]{1})	 
 												} 										
 										{ 
@@ -209,12 +254,16 @@
 											} 
 										\l_myxuchar_tl 
 
+
 %					Egyptian Hieroglyphics
 					\regex_replace_all:nnN % most combinations
 										{ 
-												([\c{par}\s\(\[\`\'\''\cB.]{1})
-												([𓀀-𓐸]*)
-												([\s\.\,\?\!\)\]\`\'\''\;\:\cE.]{1})	 
+%												([\x{13000}-\x{13438}+)
+												([\cC.\s\(\[\`\'\''\cB.]{1})
+%												(^[𓀀-𓐸])
+												([𓀀-𓐸]+)
+%												(^[𓀀-𓐸])
+												([\s\.\,\?\!\)\]\`\'\''\;\:\cE.\cC.]{1})	 
 												} 										
 										{ 
 											\1
@@ -227,9 +276,10 @@
 										\l_myxuchar_tl 
 					\regex_replace_all:nnN %inter-sentence (2nd) words
 										{ 
-												([\s]{1})
-												([𓀀-𓐸]*)
-												([\s\.]{1})	 
+												([\s\cB.\cE.]{1})
+												([𓀀-𓐸]+)
+%												([\x{13000}-\x{13438}]+)
+												([\s\.\cB.\cE.]{1})	 
 												} 										
 										{ 
 											\1
@@ -246,7 +296,8 @@
 					\regex_replace_all:nnN % most combinations
 										{ 
 												([\c{par}\s\(\[\`\cB.\']{1})
-												([\-Ѐ-ԯⷠ-ⷿꙀ-ꚟᲀ-ᲈԀ-ԯ́]*) %Latin: Ææ
+%												([\-Ѐ-ԯⷠ-ⷿꙀ-ꚟᲀ-ᲈԀ-ԯ́]+) %Latin: Ææ
+												([\-Ѐ-ԯⷠ-ⷿꙀ-ꚟᲀ-ᲈԀ-ԯ́]+) %Latin: Ææ
 												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
 												} 										
 										{ 
@@ -261,7 +312,7 @@
 					\regex_replace_all:nnN %inter-sentence (2nd) words
 										{ 
 												([\s\']{1})
-												([\-Ѐ-ԯⷠ-ⷿꙀ-ꚟᲀ-ᲈԀ-ԯ́]*) %Latin: Ææ
+												([\-Ѐ-ԯⷠ-ⷿꙀ-ꚟᲀ-ᲈԀ-ԯ́]+) %Latin: Ææ
 												([\s\.\,\:\[\)\']{1})	 
 												} 										
 										{ 
@@ -278,7 +329,7 @@
 					\regex_replace_all:nnN % most combinations
 										{ 
 												([\c{par}\s\(\[\`\cB.\']{1})
-												([☀-⛿]*)
+												([☀-⛿]+)
 												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
 												} 										
 										{ 
@@ -293,7 +344,7 @@
 					\regex_replace_all:nnN %inter-sentence (2nd) words
 										{ 
 												([\s\']{1})
-												([☀-⛿]*)
+												([☀-⛿]+)
 												([\s\.\,\:\[\)\']{1})	 
 												} 										
 										{ 
@@ -306,7 +357,149 @@
 											} 
 										\l_myxuchar_tl 
 										
-}
+%					Bamum
+%%\regex_show:N \l_mya_regex
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{[A-Za-z]*}\s\(\[\`\cB.\']{1})
+%													\l_mya_regex
+												([\x{A6A0}-\x{A6FF}\x{16800}-\x{16A3F}]+) %\Uchar42656-\Uchar42751\Uchar92160-\Uchar92735
+												%												([\u{\Uchar42656-\Uchar42751\Uchar92160-\Uchar92735}]+) %\Uchar42656-\Uchar42751\Uchar92160-\Uchar92735
+%												([ꚠ-꛿𖠀-𖨿]+) %A6A0-A6FF, 16800-16A3F
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+%													\l_myb_regex												
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatbamum}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s\']{1})
+%												\l_myc_regex
+												([ꚠ-꛿𖠀-𖨿]+) 
+												([\s\.\,\:\[\)\']{1})	 
+%	 												\l_myd_regex												
+ 											} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatbamum}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+
+										
+%					Box drawing
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{[A-Za-z]*}\s\(\[\`\cB.\']{1})
+												([─-╿]+) 
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatboxdrawing}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s\']{1})
+												([─-╿]+) 
+												([\s\.\,\:\[\)\']{1})	 
+ 											} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatboxdrawing}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+										
+
+%					Hebrew
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{[A-Za-z]*}\s\(\[\`\cB.\']{1})
+												([֐-׿]+) 
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formathebrew}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s\']{1})
+												([֐-׿]+) 
+												([\s\.\,\:\[\)\']{1})	 
+ 											} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formathebrew}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+
+%					Hebrew
+					\regex_replace_all:nnN % most combinations
+										{ 
+												([\c{[A-Za-z]*}\s\(\[\`\cB.\']{1})
+												([ऀ-ॿ꣠-ꣿ]+) 
+												([\s\.\,\?\!\)\]\'\''\;\:\cE.]{1})	 
+												} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatdevanagari}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+					\regex_replace_all:nnN %inter-sentence (2nd) words
+										{ 
+												([\s\']{1})
+												([ऀ-ॿ꣠-ꣿ]+) 
+												([\s\.\,\:\[\)\']{1})	 
+ 											} 										
+										{ 
+											\1
+											\cB\{ 
+											\c{formatdevanagari}
+											\2  
+											\cE\} 
+											\3
+											} 
+										\l_myxuchar_tl 
+
+
+
+
+
+										
+}%=========================
 
 
 \ExplSyntaxOff
@@ -391,7 +584,7 @@ final &
 \end{tabular}
 
 \bigskip
-abc wqer qdecona xyz qwerty qdeconb
+abc wqer qdecona xyz qwerty qdeconb xxx 
 
 Carian: 𐊠𐊡𐊢𐊣𐋐 :: xyz
 𐊠𐊡𐊢𐊣𐋐
@@ -419,7 +612,9 @@ xxx
 
 𐊁𐊂𐊃𐊄𐊅𐊀 Lycian 𐊁𐊂𐊃𐊄𐊅𐊀
 
+%\global\togglefalse{xucharon}	
 𓍦𓍠𓈤𓆔𓆣𓆤``𓃲''𓀀 Egyptian Hieroglyphs 𓍦𓍠𓈤𓆔𓆣𓆤𓃲𓀀
+
 
 xyz
 
@@ -474,6 +669,32 @@ Udmurt udm удмурт кыл:
 
 Шунды система — Шундылэсь но со котыртӥ ас спутникъёсынызы бергась 8 бадӟым планетаослэсь, дасо сюрсъёсын пичи планетаослэсь (астероидъёслэсь), быжо кизилиослэсь но метеоръёслэсь кылдэм инмысь система.
 
+ꚠꚡꚢꚣꚤ Bamum ꚠꚡꚢꚣꚤ  \ttfamily 𖦳𖦴𖧣𖠳𖡒   This should be in tt.
+
+╔╗╚╝  box drawing ╔╗╚╝
+
+╚╝╔╗
+
+\rmfamily
+
+  רשתאבג  Hebrew   רשתאבג  
+
+xxx\par
+
+אב גד הו זח טי ך כל אב גד הו זח טי ך כל אב גד הו זח טי ך כל אב גד הו זח טי ך כל אב גד הו זח טי ך כל אב גד הו זח טי ך כל אב גד הו זח טי ך כל אב גד הו זח טי ך כל אב גד הו זח טי ך כל.
+
+xxx
+
+
+ऄआ कूल्बनन Devanagari ऄआ कूल्बनन ``कूल्बनन''
+
+\renewcommand\formathiero{ 	\fthiero 
+\addfontfeatures{Colour=violet} }
+With \detokenize{\renewcommand\formathiero{	\fthiero \addfontfeatures{Colour=violet}}}, the hieroglyphs have a different format:
+
+𓍦𓍠𓈤𓆔𓆣𓆤``𓃲''𓀀 Egyptian Hieroglyphs 𓍦𓍠𓈤𓆔𓆣\fbox{𓆤}𓃲𓀀 x\textit{italic}
+
+𓅃𓇃𓆧𓃔𓃬𓃰𓃠 ``𓅃𓇃𓆧𓃔𓃬𓃰𓃠'' `𓅃𓇃𓆧𓃔𓃬𓃰𓃠' (𓅃𓇃𓆧𓃔𓃬𓃰𓃠) [𓅃𓇃𓆧𓃔𓃬𓃰𓃠] \{𓅃𓇃𓆧𓃔𓃬𓃰𓃠\}\underline{𓅃𓇃𓆧𓃔𓃬𓃰𓃠} 𓅃𓇃𓆧𓃔𓃬𓃰𓃠, 𓅃𓇃𓆧𓃔𓃬𓃰𓃠; 𓅃𓇃𓆧𓃔𓃬𓃰𓃠: 𓅃𓇃𓆧𓃔𓃬𓃰𓃠. 𓅃𓇃𓆧𓃔𓃬𓃰𓃠! 𓅃𓇃𓆧𓃔𓃬𓃰𓃠? {*}𓅃𓇃𓆧𓃔𓃬𓃰𓃠
 
 
 \end{xuchare}
