@@ -168,7 +168,7 @@
 \newbibmacro{getcasename}{%
 %\ifciteseen{\ifciteibid{SEENIBID}{SEEN}}{}%
 \iffootnote{%
-\ifciteseen{\ifciteibid{}{\usebibmacro{getcaseshortname}}}{%
+\ifciteseen{\ifciteibid{\textcolor{red}{BB}}{\usebibmacro{getcaseshortname}\textcolor{red}{AA}}}{%
 \iffieldundef{shipname}{\usebibmacro{getpartynamesa}%
 \iffieldundef{partyb}{}%
 {\addspace\usebibmacro{getpartysep}\addspace%
@@ -368,6 +368,8 @@ xxx}%
 %\addspace
 }
 
+\newtoggle{supranoteused}
+\togglefalse{supranoteused}
 
 \newbibmacro{getibidsupra}{%
 		  \iftoggle{ibidsupraon}{%
@@ -376,6 +378,7 @@ xxx}%
 			%		  italic
 					  \mkbibemph{\bibstring{ibidsupra}}}%
 					  {\bibstring{ibidsupra}}%
+					  \addspace%
 			}
 			{		  \iftoggle{ibidsupraitalic}{%
 			%		  italic
@@ -386,24 +389,28 @@ xxx}%
 %=========== getibidsupranote: 5 settings
 \newbibmacro{getibidsupranote}{%
 %,
+%\togglefalse{supranoteused}
 \iftoggle{ibidsupracomma}{\addcomma}{}%
 %
- \addspace
+ \addspace 
 %()
  \iftoggle{ibidsuprabrackets}{%
   \mkbibparens{%
-		  \usebibmacro{getibidsupra}
+		  \iftoggle{ibidsupraon}{\usebibmacro{getibidsupra}}{}%
 %		  note
-		  \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}
+		  \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}%
 		  {\bibstring{ibidsupran}}%
 				\addspace\ref{cfn:\thefield{entrykey}}%
+				\toggletrue{supranoteused}%
 		  }%parens
 		  }%
-			{		  \usebibmacro{getibidsupra}
+			{%
+			\iftoggle{ibidsupraon}{\usebibmacro{getibidsupra}}{}%
 %		  note
-		  \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}
+		  \iftoggle{ibidsupranotelong}{\bibstring{ibidsupranote}}%
 		  {\bibstring{ibidsupran}}%
 				\addspace\ref{cfn:\thefield{entrykey}}%
+				\toggletrue{supranoteused}%
 				}%no parens
 %%%  no ()
 %%  {\iftoggle{ibidsupraon}{%
@@ -414,6 +421,7 @@ xxx}%
 %  
 %===  
 %  \addcomma\addspace\mkbibemph{\bibstring{ibidsupra}} \bibstring{ibidsupranote} \ref{cfn:\thefield{entrykey}}%
+%\iftoggle{supranoteused}{\textcolor{red}{AA}}{}
 }
 
 
@@ -500,9 +508,12 @@ xxx}%
  }
 	 
 
+\newtoggle{usedibid}
+\togglefalse{usedibid}
 
 %===== casenameref
 \newbibmacro{getcasenameref}{%
+ \togglefalse{usedibid}
  \ifboolexpr{%
  not test {\iffootnote}
  }%
@@ -512,7 +523,7 @@ xxx}%
   and
   test {\ifciteibid}
   }%
-  {\usebibmacro{getibid}\usebibmacro{postnote}}{%
+  {\toggletrue{usedibid}\usebibmacro{getibid}\usebibmacro{postnote}}{%
  \ifboolexpr{%
   test {\ifcitation}
   and
@@ -524,8 +535,9 @@ xxx}%
 %  \addspace\mkbibparens{n \ref{cfn:\thefield{entrykey}}%
 %  }%
 %  \addcomma\addspace\mkbibemph{supra} note \ref{cfn:\thefield{entrykey}}%
-  \usebibmacro{getibidsupranote}
-  \usebibmacro{postnote}}{%
+  \usebibmacro{getibidsupranote}\usebibmacro{postnote}%
+  \toggletrue{supranoteused}%
+  }{%
  \usebibmacro{getcasename}%
 % \iftoggle{casenamecomma}{\setunit*{\addcomma\addspace}}{\setunit*{\addspace}}%
  \ifboolexpr{%
@@ -550,7 +562,7 @@ xxx}%
   and
   not test {\ifciteibid}
   }%
-	{\label{cfn:\thefield{entrykey}}}{} 
+	{\label{cfn:\thefield{entrykey}}}{}%
 }}
 
 
@@ -1063,6 +1075,18 @@ xxx}%
 
 
 \newbibmacro{notmnc:postnote}{%
+  \ifboolexpr{%
+%  test {\ifcitation}
+%  and
+%  test {\ifciteibid}
+%  and
+%  test {\ifciteseen}
+%  and
+%  test {\iffootnote}
+		test {\iftoggle{usedibid}}
+  }%
+				{}% ibid tracker works perfectly
+				{%
  \ifboolexpr{%
   not test {\iffieldundef{casenumber}}%if there is MNC
   and
@@ -1071,7 +1095,12 @@ xxx}%
 %  don't print anything in the postnote position
  {}%
  % otherwise print the postnote in the postnote postion
- {\usebibmacro{postnote}}%
+% if it is not an ibid/supra note reference
+ {%
+\iftoggle{supranoteused}{}{%
+			\usebibmacro{postnote}}%
+				}%
+ }%
 }
 
 
@@ -1082,6 +1111,40 @@ xxx}%
 \NewDocumentCommand\getblcommand { m }
 {
 	\tl_set:Nx \l_myscriptname_tl { #1 }
+
+	\regex_replace_all:nnN 
+							{ given\-family	 } 
+							{ 
+										\c{DeclareNameAlias} [book]
+										\cB\{ author\cE\}
+										\cB\{ given-family \cE\}
+							} 
+							\l_myscriptname_tl
+	
+
+	\regex_replace_all:nnN 
+							{ itcolon } 
+							{ 
+										\c{textit} \cB\{ \c{addcolon} \cE\}
+							} 
+							\l_myscriptname_tl
+
+	\regex_replace_all:nnN 
+							{ isubtitle } 
+							{ 
+										isubxxx
+							} 
+							\l_myscriptname_tl
+
+	
+	\regex_replace_all:nnN 
+							{ subtitle } 
+							{ 
+										subxxx
+							} 
+							\l_myscriptname_tl
+
+	
 	\regex_replace_all:nnN 
 							{ dot } 
 							{ 
@@ -1187,6 +1250,29 @@ xxx}%
 							} 
 							\l_myscriptname_tl
 							
+	\regex_replace_all:nnN 
+							{ note } 
+							{ 
+										\c{thefield} \cB\{ note \cE\}
+							} 
+							\l_myscriptname_tl
+							
+
+	\regex_replace_all:nnN 
+							{ isubxxx } 
+							{ 
+										\c{printfield} [emph] \cB\{ subtitle \cE\}
+							} 
+							\l_myscriptname_tl
+							
+	\regex_replace_all:nnN 
+							{ subxxx } 
+							{ 
+										\c{printfield} \cB\{ subtitle \cE\}
+							} 
+							\l_myscriptname_tl
+							
+							
 		\tl_use:N \l_myscriptname_tl
 }
 
@@ -1219,6 +1305,225 @@ x#1;;
 
 
 
+
+%aglc -------------------
+\DeclareFieldFormat[case]{aglc:case:item:titlepart:partya:format}{\mkbibitalic{#1}}
+\DeclareFieldFormat[case]{aglc:case:item:titlepart:partya:delim}{\addspace}
+\DeclareFieldFormat[case]{aglc:case:item:titlepart:partysep:format}{\mkbibitalic{#1}}
+\DeclareFieldFormat[case]{aglc:case:item:titlepart:partysep:delim}{\addspace}
+\DeclareFieldFormat[case]{aglc:case:item:titlepart:partyb:format}{\mkbibitalic{#1}}
+\DeclareFieldFormat[case]{aglc:case:item:titlepart:partyb:delim}{\addspace}
+%-
+\DeclareFieldFormat[case]{aglc:case:item:refmnc:year:format}{\mkbibbrackets{#1}}
+\DeclareFieldFormat[case]{aglc:case:item:refmnc:year:delim}{\addspace}
+\DeclareFieldFormat[case]{aglc:case:item:refmnc:courtname:format}{#1}
+\DeclareFieldFormat[case]{aglc:case:item:refmnc:courtname:delim}{\addspace}
+\DeclareFieldFormat[case]{aglc:case:item:refmnc:casenumber:format}{#1}
+\DeclareFieldFormat[case]{aglc:case:item:refmnc:casenumber:delim}{}
+%
+\DeclareFieldFormat[case]{aglc:case:item:report:reportyear:format}{\iffieldundef{volyearneeded}{\mkbibparens{#1}}{\mkbibbrackets{#1}}}
+\DeclareFieldFormat[case]{aglc:case:item:report:reportyear:delim}{\addspace}
+\DeclareFieldFormat[case]{aglc:case:item:report:reportvolume:format}{#1}
+\DeclareFieldFormat[case]{aglc:case:item:report:reportvolume:delim}{\addspace}
+\DeclareFieldFormat[case]{aglc:case:item:report:reportseries:format}{#1}
+\DeclareFieldFormat[case]{aglc:case:item:report:reportseries:delim}{\addspace}
+\DeclareFieldFormat[case]{aglc:case:item:report:reportpage:format}{#1}
+\DeclareFieldFormat[case]{aglc:case:item:report:reportpage:delim}{}
+\DeclareFieldFormat[case]{aglc:case:item:postnoteprelim}{\addcomma}%
+
+
+%mcgill -------------------
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partya:format}{\mkbibitalic{#1}}
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partya:delim}{\addspace}
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partysep:format}{\mkbibitalic{#1}}
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partysep:delim}{\addspace}
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partyb:format}{\mkbibitalic{#1}}
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partyb:delim}{\addcomma\addspace}
+%-
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:year:format}{#1}
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:year:delim}{\addspace}
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:courtname:format}{#1}
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:courtname:delim}{\addspace}
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:casenumber:format}{#1}
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:casenumber:delim}{}
+%
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportyear:format}{#1}
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportyear:delim}{\addspace}
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportvolume:format}{#1}
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportvolume:delim}{\addspace}
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportseries:format}{#1}
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportseries:delim}{\addspace}
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportpage:format}{#1}
+\DeclareFieldFormat[case]{mcgill:case:item:report:reportpage:delim}{}
+\DeclareFieldFormat[case]{mcgill:case:item:postnoteprelim}{}%
+
+
+
+
+%=============
+\newcommand\mcdelim{}
+
+\newbibmacro{set:multidelim}{%
+ \ifboolexpr{%
+  not test {\iffirstcitekey}%if 2nd+ cite
+  and
+  not test {\iffieldundef{prenote}}%and a prenote
+  }%
+	{%
+%	\renewcommand\mcdelim{\multicitedelim}
+%	\renewcommand{\multicitedelim}{\adddot\addspace}%
+	\adddot\addspace
+	}%
+	{%
+%	\renewcommand{\multicitedelim}{\addsemicolon\addspace}%
+	}%
+}
+
+
+\newbibmacro{yy:case:partya}{%
+%if new sentence in multicites:
+\iffieldundef{partya}{}{%
+\printfield[\lguide :case:item:titlepart:partya:format]{partya}%
+\printfield[\lguide :case:item:titlepart:partya:delim]{partya}%
+}%
+}
+
+\newbibmacro{yy:case:partyb}{%
+\iffieldundef{partyb}{}{%
+\iffieldundef{partysep}{%default partysep
+\printtext[\lguide :case:item:titlepart:partysep:format]{\bibstring{versus}\addspace}%
+}{%
+\printfield[\lguide :case:item:titlepart:partysep:format]{partysep}%
+\printfield[\lguide :case:item:titlepart:partysep:delim]{partysep}%
+}%end partysep
+\printfield[\lguide :case:item:titlepart:partyb:format]{partyb}%
+\printfield[\lguide :case:item:titlepart:partyb:delim]{partyb}%
+}%end partyb
+}
+
+
+\newbibmacro{yycore:mnc:caseyear}{%
+\printfield[\lguide :case:item:refmnc:year:format]{caseyear}%
+\printfield[\lguide :case:item:refmnc:year:delim]{caseyear}%
+}
+
+\newbibmacro{yycore:mnc:courtname}{%
+\printfield[\lguide :case:item:refmnc:courtname:format]{
+courtname}%
+\printfield[\lguide :case:item:refmnc:courtname:delim]{courtname}%}%
+}
+
+\newbibmacro{yycore:mnc:casenumber}{%
+\printfield[\lguide :case:item:refmnc:casenumber:format]{casenumber}%
+\printfield[\lguide :case:item:refmnc:casenumber:delim]{casenumber}%
+}
+
+
+
+
+\newbibmacro{yy:case:mnc}{%
+\iffieldundef{casenumber}{}{%
+\usebibmacro{yycore:mnc:seq}%
+}%end mnc
+}
+
+
+\newbibmacro{yy:case:report}{%
+\iffieldundef{reportpage}{}{%
+\usebibmacro{yycore:report:seq}%
+}%end report
+}
+
+
+\newbibmacro{yycore:report:reportyear}{%
+\printfield[\lguide :case:item:report:reportyear:format]{reportyear}%
+\printfield[\lguide :case:item:report:reportyear:delim]{reportyear}%
+}
+\newbibmacro{yycore:report:reportvolume}{%
+\printfield[\lguide :case:item:report:reportvolume:format]{reportvolume}%
+\printfield[\lguide :case:item:report:reportvolume:delim]{reportvolume}%
+}
+\newbibmacro{yycore:report:reportseries}{%
+\printfield[\lguide :case:item:report:reportseries:format]{reportseries}%
+\printfield[\lguide :case:item:report:reportseries:delim]{reportseries}%
+}
+\newbibmacro{yycore:report:reportpage}{%
+\printfield[\lguide :case:item:report:reportpage:format]{reportpage}%
+\printfield[\lguide :case:item:report:reportpage:delim]{reportpage}%
+}
+
+
+\newbibmacro{yycore:report:seq}{%
+\usebibmacro{yycore:report:reportyear}%
+\usebibmacro{yycore:report:reportvolume}%
+\usebibmacro{yycore:report:reportseries}%
+\usebibmacro{yycore:report:reportpage}%
+}
+
+
+
+\newbibmacro{yycore:mnc:seq}{%
+\usebibmacro{yycore:mnc:caseyear}%
+\usebibmacro{yycore:mnc:courtname}%
+\usebibmacro{yycore:mnc:casenumber}%
+}
+
+\newbibmacro{yycore:seq}{%
+\usebibmacro{yy:case:partya}%
+\usebibmacro{yy:case:partyb}%
+\usebibmacro{yy:case:mnc}%
+\usebibmacro{yy:case:report}%	
+}
+
+\newbibmacro{yycore:postnoteprelim}{%
+\iffieldundef{postnote}{}{%
+\iflastcitekey{%
+\printtext[\lguide :case:item:postnoteprelim]{\usebibmacro{postnote}}%
+}{}%
+}%
+}
+
+\newbibmacro{yycore}{%
+%\usebibmacro{set:multidelim}%
+\usebibmacro{yycore:seq}%
+\usebibmacro{yycore:postnoteprelim}%
+}
+
+
+\newcommand\lguide{}
+
+\DeclareCiteCommand{yycite}%
+{\usebibmacro{prenote}}%
+{%
+\usebibmacro{yycore}%
+}%
+{%
+\multicitedelim%
+}%
+{\usebibmacro{postnote}}
+
+
+
+\DeclareCiteCommand{yyfootcite}[\mkbibfootnote]%
+{\usebibmacro{prenote}}%
+{%
+\usebibmacro{yycore}%
+}%
+{%
+\multicitedelim%
+}%
+{\usebibmacro{postnote}}
+
+
+\DeclareCiteCommand{yyparencite}[\mkbibparens]%
+{\usebibmacro{prenote}}%
+{%
+\usebibmacro{yycore}%
+}%
+{%
+\multicitedelim%
+}%
+{\usebibmacro{postnote}}
 
 
 
@@ -1314,12 +1619,15 @@ test {\ifentrytype{statute}}%
 %%	    otherwise if mnc:pn then {}
 %				\iftoggle{pinpointaftermnc}{PPAMNC}{%
 %%	    otherwise:
+%%\iftoggle{usedibid}{\textcolor{red}{AA}}{%
  \ifcase\thereftypemode \or%
  \usebibmacro{postnote}% inline
  \or% prenote goes inline for this variation, footnote has the case ref.
  \or% postnote is already in the footnote
- \or\usebibmacro{postnote}
+ \or \usebibmacro{postnote}
  \fi%
+%% }%end: ibid used
+%% \togglefalse{usedibid}%\textcolor{red}{AA}
 % }%end: not mnc:pn
 % }%end: not ibid
 }%not statute
@@ -2669,6 +2977,8 @@ test {\ifentrytype{case}}%
 \DeclareMultiCiteCommand{\lawcitesinlinerr}{lcinlinerr}{\iftoggle{multicitecomma}{\multicitecommadelim}{\multicitedelim}}%same case, different reports
 \DeclareMultiCiteCommand{\lawcitesfoot}[\mkbibfootnote]{lcfoot}{\multicitedelim}
 \DeclareMultiCiteCommand{\lawcitesfootrr}[\mkbibfootnote]{lcfootrr}{\multicitedelim}
+%
+\DeclareMultiCiteCommand{\yycites}{yycite}{\multicitedelim}
 %
 %%\DeclareMultiCiteCommand{\lawcitesinline}{lcinline}{\multicitedelim}%different cases
 

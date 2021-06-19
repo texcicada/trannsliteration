@@ -2,6 +2,114 @@
 
 \begin{filecontents*}[overwrite]{\jobname.bib}
 
+
+
+
+@case{davies,	partya =  {Davies},	partyb =  {Gertig \lcpara{No 2}},	caseshortname =  {Davies},	reportyear =  {2002},	reportvolume =  {83},		reportseries =  {SASR},	reportpage =  {521},		}
+@case{kenman,	partya =  {Kenman Kandy Australia Pty Ltd},	partyb =  {Registrar of Trademarks},	caseshortname =  {Kenman},	reportyear =  {2002},	reportvolume =  {122},		reportseries =  {FCR},	reportpage =  {494},		}
+
+@case{spratt,	partya =  {Spratt},	partyb =  {Hermes},	caseshortname =  {Spratt},	reportyear =  {1965},	reportvolume =  {114},		reportseries =  {CLR},	reportpage =  {226},		}
+@case{capital,	partya =  {Capital TV \& Appliances Pty Ltd},	partyb =  {Falconer},	caseshortname =  {Capital TV},	reportyear =  {1971},	reportvolume =  {125},		reportseries =  {CLR},	reportpage =  {591},		}
+@case{kruger,	partya =  {Kruger},	partyb =  {Commonwealth},	caseshortname =  {Kruger},	reportyear =  {1997},	reportvolume =  {190},		reportseries =  {CLR},	reportpage =  {1},		}
+@case{bernasconi,	partya =  {R},	partyb =  {Bernasconi},	caseshortname =  {Bernasconi},	reportyear =  {1915},	reportvolume =  {19},		reportseries =  {CLR},	reportpage =  {629},		}
+
+
+@case{bryson,
+  partya = {Bryson}, 
+  partyb = {Bryant},
+  caseshortname = {Bryson},
+%MNC
+%  caseyear = {1996},
+%  courtname = {ABCA},
+%  casenumber = {274},
+%  pagination = {atparagraph},
+%paper
+  reportyear={1992},
+  reportvolume = {29},
+%  volyearneeded = {true},
+  reportseries = {NSWLR},
+  reportpage = {188},
+	}
+
+
+
+
+
+@case{baumgartner,
+  partya = {Baumgartner}, 
+  partyb = {Baumgartner},
+  caseshortname = {Baumgartner},
+%MNC
+%  caseyear = {1996},
+%  courtname = {ABCA},
+%  casenumber = {274},
+%  pagination = {atparagraph},
+%paper
+  reportyear={1987},
+  reportvolume = {164},
+%  volyearneeded = {true},
+  reportseries = {CLR},
+  reportpage = {137},
+	}
+
+
+
+
+@case{muschinski,
+  partya = {Muschinski}, 
+  partyb = {Dodds},
+  caseshortname = {Muschinski},
+%MNC
+%  caseyear = {1996},
+%  courtname = {ABCA},
+%  casenumber = {274},
+%  pagination = {atparagraph},
+%paper
+  reportyear={1985},
+  reportvolume = {160},
+%  volyearneeded = {true},
+  reportseries = {CLR},
+  reportpage = {583},
+	}
+
+
+@case{mueller,
+  partya = {Mueller \& Co}, 
+  partyb = {Commonwealth},
+  caseshortname = {Mueller},
+%MNC
+%  caseyear = {1996},
+%  courtname = {ABCA},
+%  casenumber = {274},
+%  pagination = {atparagraph},
+%paper
+  reportyear={2004},
+  reportvolume = {109},
+%  volyearneeded = {true},
+  reportseries = {FCR},
+  reportpage = {156},
+	}
+
+
+@case{croome,
+  partya = {Croome}, 
+  partyb = {Tasmania},
+  caseshortname = {Croome},
+%MNC
+%  caseyear = {1996},
+%  courtname = {ABCA},
+%  casenumber = {274},
+%  pagination = {atparagraph},
+%paper
+  reportyear={1997},
+  reportvolume = {191},
+%  volyearneeded = {true},
+  reportseries = {CLR},
+  reportpage = {119},
+	}
+
+
+
 %UAlberta examples:
 @statute{ualbertastatute,
 citeref = {canleg},
@@ -74,6 +182,47 @@ space,
 volume,
 dot},
 }
+
+
+
+@book{ualbertabookstokes,
+author={Simon Stokes},
+title={Digital Copyright},
+subtitle = {Law and Practice},
+edition = {4},
+%volume = {1},
+publisher={Hart},
+location = {Oxford},
+date={2014},
+note = {Bloomsbury},
+keywords = {lawbook},
+yoptions = {given-family,
+name,
+comma,
+space,
+title,
+itcolon,
+space,
+isubtitle,
+comma,
+space,
+edition,
+space,
+lparen, 
+location,
+colon,
+space,
+publisher,
+comma,
+space,
+year,
+rparen,
+space,
+lparen,
+note,
+rparen},
+}
+
 
 
 
@@ -1158,6 +1307,34 @@ options={skipbib=true,},
 %\DeclareNameAlias[book]{author}{given-family}
 %%\renewcommand*\finentrypunct{}
 
+\newcommand\markercolour{red}
+\newcommand\markera{\textcolor{\markercolour}{.}}
+\newcommand\markerb{\textcolor{\markercolour}{:}}
+
+\newcommand\citecompare[1]{%
+\par\bigskip inline cite: \renewcommand\lguide{aglc}\marginpar{\scriptsize\cmd{yycite}}
+\markera\yycite{#1}\markera
+>>
+\renewcommand\lguide{mcgill}
+\markerb\yycite{#1}\markerb
+
+\medskip parencite: \renewcommand\lguide{aglc}\marginpar{\scriptsize\cmd{yyparencite}}
+\markera\yyparencite{#1}\markera
+>>
+\renewcommand\lguide{mcgill}
+\markerb\yyparencite{#1}\markerb
+
+\medskip footcite: \renewcommand\lguide{aglc}\marginpar{\scriptsize\cmd{yyfootcite}}
+\markera x\yyfootcite{#1}\markera
+>>
+\renewcommand\lguide{mcgill}
+\markerb x\yyfootcite{#1}\markerb
+}
+\newcommand\aglcd[1]{\colorbox{blue!15}{\textsc{AGLC}\textsuperscript{4}~\textsf{#1}}}
+
+
+
+
 %------------------
 \begin{document}
 %%%%\lcsetdemoon
@@ -2075,6 +2252,22 @@ y\lawcite[45]{lchousen2002}
 z\lawcite[46]{lchousen2002}
 zz\lawcite{lchousen2002}
 
+{
+\lcsetstyleaglc
+
+Oz: short (n X) ppt
+
+x\lawcite[\nopp 227]{spratt}
+
+x\lawcite{capital}
+
+x\lawcite[\nopp 228]{spratt}
+
+x\lawcite[\nopp 228]{spratt}
+
+}
+
+
 
 \section{Dalhousie Examples}
 
@@ -2122,6 +2315,187 @@ volume & dot &  \\
 
 
 \ycite{ualbertabook}
+
+
+\begin{verbatim}
+Croome v Tasmania (1997) 191 CLR 119, 125 
+(Brennan CJ, Dawson and Toohey JJ). 
+
+guide=aglc
+ citetype=case
+ items
+ 	item:title
+ 	  itemtitlepart:partya
+ 	    itemtitlepart:partya:format=italic
+ 	    itemtitlepart:partya:delim=space
+ 	  itemtitlepart:partysep
+ 	    itemtitlepart:partysep:text:default=v
+ 	    itemtitlepart:partysep:format=italic
+ 	    itemtitlepart:partysep:delim=space
+ 	  itemtitlepart:partyb
+  	    itemtitlepart:partyb:format=italic
+ 	     itemtitlepart:partya:delim=none
+ 	item:title:format=none
+  item:title:delim=space
+   	item:refmnc
+   	   item:refmnc:year
+   	      item:refmnc:year:format=brackets
+   	      item:refmnc:year:delim=space   	      
+   	   item:refmnc:courtname
+   	      item:refmnc:courtname:format=none
+   	      item:refmnc:courtname:delim=space 
+   	   item:refmnc:casenumber
+   	      item:refmnc:casenumber:format=none
+   	      item:refmnc:casenumber:delim=none
+
+\end{verbatim}
+
+
+\ycite[42]{ualbertabookstokes}
+
+{
+\renewcommand\lguide{aglc}
+
+\yycite[125 (Brennan CJ, Dawson and Toohey JJ)]{croome}
+
+\yycite[\nopp 125]{croome}
+
+\yycite[157 (Federal Court of Australia)]{mueller}
+
+
+\aglcd{1.1.1} When to footnote
+
+\aglcd{1.1.2} Footnote numbers: after punctuation
+
+\aglcd{1.1.3a} Multiple sources: separated by semicolon:
+
+\yycite{muschinski, baumgartner, bryson}
+
+With pinpoint on last: \yycite[\nopp 194-5]{muschinski, baumgartner, bryson}
+
+Manual multi, each with pinpoint: \yycite[\nopp 584]{muschinski}; \yycite[\nopp 138]{baumgartner}; \yycite[\nopp 194-5]{bryson}.
+
+Auto multi, with pinpoints: \yycites[\nopp 584]{muschinski}[\nopp 138]{baumgartner}[\nopp 194-5]{bryson}.
+
+
+\aglcd{1.1.3b} Multiple sources: new sentence if different intro signal:
+
+Multi cites with new sentence: \yycite{spratt,capital,kruger}. \yycite[Cf][]{bernasconi}.
+
+\aglcd{1.1.4} Closing punctuation for footnote.
+
+\aglcd{1.1.5} Discursive text in footnotes.
+
+\aglcd{1.1.6a} Pinpoint references: immediately follow the citation
+
+\aglcd{1.1.6b} Pinpoint references: not preceeded by `p'
+
+\aglcd{1.1.6c} Pinpoint references: not preceeded by `@'*
+
+\aglcd{1.1.6d} Pinpoint references: paras are `[paragraph]'
+
+\aglcd{1.1.6e} Pinpoint references: `page [paragraph]'
+
+\aglcd{1.1.6f} Pinpoint references: `n note'
+
+\aglcd{1.1.6g} Pinpoint references: comma separated, `x, x'
+
+xxx
+
+
+\yycite[528 \lcpara{57} n6, 529 \lcpara{64}]{davies}
+
+\yycite[59 \lcpara{43} (French J), 529--30 \lcpara{137} (Stone J)]{kenman}
+
+\aglcd{1.1.7} Span of pinpoint references: p--p, [para]--[para], etc.
+
+νομοφυλαξ
+
+}$\leftarrow$ end of aglc formatting
+
+%\renewcommand\lguide{aglc}
+%\markera\yycite{ualbertacase}\markera
+%>>
+%\renewcommand\lguide{mcgill}
+%\markerb\yycite{ualbertacase}\markerb
+%
+%\renewcommand\lguide{aglc}
+%\markera\yyparencite{ualbertacase}\markera
+%>>
+%\renewcommand\lguide{mcgill}
+%\markerb\yyparencite{ualbertacase}\markerb
+%
+%\renewcommand\lguide{aglc}
+%\markera x\yyfootcite{ualbertacase}\markera
+%>>
+%\renewcommand\lguide{mcgill}
+%\markerb x\yyfootcite{ualbertacase}\markerb
+
+\citecompare{ualbertacase}
+
+\bigskip\textsc{Three Cite Types}
+
+\citecompare{cassie}
+
+
+\renewbibmacro{yycore:seq}{%
+\usebibmacro{yy:case:mnc}%
+\addcomma\addspace%
+\usebibmacro{yy:case:partyb}%
+\addcomma\addspace%
+\usebibmacro{yy:case:partya}%
+\adddot%
+}
+
+\bigskip\textsc{Fields Rearranged}
+
+\citecompare{ualbertacase}
+
+\begin{verbatim}
+\renewbibmacro{yycore:seq}{%
+\usebibmacro{yy:case:mnc}%
+\addcomma\addspace%
+\usebibmacro{yy:case:partyb}%
+\addcomma\addspace%
+\usebibmacro{yy:case:partya}%
+\adddot%
+}
+\end{verbatim}
+
+\bigskip\textsc{MNC contents rearranged}
+
+\renewbibmacro{yycore:mnc:seq}{%
+\usebibmacro{yycore:mnc:casenumber}%
+\usebibmacro{yycore:mnc:caseyear}%
+\usebibmacro{yycore:mnc:courtname}%
+}
+
+
+\citecompare{ualbertacase}
+
+\begin{verbatim}
+\renewbibmacro{yycore:mnc:seq}{%
+\usebibmacro{yycore:mnc:casenumber}%
+\usebibmacro{yycore:mnc:caseyear}%
+\usebibmacro{yycore:mnc:courtname}%
+}
+\end{verbatim}
+
+\bigskip\textsc{Formatting Changed}
+
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partyb:format}{\mkbibitalic{{\Large\color{brown}#1}}}
+
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:year:format}{/{\sffamily\bfseries\color{blue}#1}}
+\citecompare{ualbertacase}
+
+\begin{verbatim}
+\DeclareFieldFormat[case]{mcgill:case:item:titlepart:partyb:format}
+{\mkbibitalic{{\Large\color{brown}#1}}}
+
+\DeclareFieldFormat[case]{mcgill:case:item:refmnc:year:format}
+{/{\sffamily\bfseries\color{blue}#1}}
+\end{verbatim}
+
 
 \bigskip
 \hfill ----oooOooo---- \hfill\ 
