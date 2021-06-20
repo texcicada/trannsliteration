@@ -2,7 +2,12 @@
 
 \begin{filecontents*}[overwrite]{\jobname.bib}
 
+@ljarticle{otis,	author =  {Ghislain Otis},	title =  {Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé~},	subtitle =  {le cas de l’industrie extractive},	mncyear =  {2019},	mncname =  {CanLIIDocs},	mncnumber =  {4154},	date =  {2019},	volume =  {62},	number =  {2},	journaltitle =  {Les Cahiers de droit},	pages =  {451},	url =  {http://www.canlii.org/t/xkhr},	shortname =  {Otis},		}
 
+@ljarticle{fric,	author =  {Agathon Fric},	title =  {Popping the Question},	subtitle =  {What the Questionnaire for Federal Judicial Appointments Reveals about the Pursuit of Justice, Diversity, and the Commitment to Transparency},	mncyear =  {2020},	mncname =  {CanLIIDocs},	mncnumber =  {1656},	date =  {2020},	volume =  {43},	number =  {1},	journaltitle =  {Dalhousie Law Journal},	pages =  {1},	url =  {http://www.canlii.org/t/svcn},	shortname =  {Fric},		}
+
+
+@ljarticle{callaghan,	author =  {Geoffrey D Callaghan},	title =  {Intervenors at the Supreme Court of Canada},		mncyear =  {2020},	mncname =  {CanLIIDocs},	mncnumber =  {544},	date =  {2020},	volume =  {43},	number =  {1},	journaltitle =  {Dalhousie Law Journal},	pages =  {1},	url =  {https://canlii.ca/t/srcl},		shortname =  {Callaghan},	}
 
 
 @case{davies,	partya =  {Davies},	partyb =  {Gertig \lcpara{No 2}},	caseshortname =  {Davies},	reportyear =  {2002},	reportvolume =  {83},		reportseries =  {SASR},	reportpage =  {521},		}
@@ -155,6 +160,10 @@ pagination = {section},
   note = {WL Can},
   keywords = {nobracketssecondref},
 }
+
+
+@case{vader,	partya =  {R},	partyb =  {Vader},	caseshortname =  {Vader},	caseyear =  {2019},	courtname =  {ABCA},	casenumber =  {488},	pagination =  {atparagraph}, url =  {https://www.canlii.org/en/ab/abca/doc/2019/2019abca488/2019abca488.html},	linkname =  {CanLII},		}
+
 
 @book{ualbertabook,
 author={Kevin P McGuinness},
@@ -1295,8 +1304,8 @@ options={skipbib=true,},
 \usepackage[
 				final=true,
 				bookmarks,
+%            allcolors = black,  
             colorlinks=true,        
-            allcolors = black,  
             citecolor=blue, 
             hyperindex=false,       
 ]{hyperref}
@@ -2253,7 +2262,9 @@ z\lawcite[46]{lchousen2002}
 zz\lawcite{lchousen2002}
 
 {
+AGLC style starts here $\rightarrow$
 \lcsetstyleaglc
+%\DeclareFieldFormat{postnote}{#1}%
 
 Oz: short (n X) ppt
 
@@ -2264,6 +2275,10 @@ x\lawcite{capital}
 x\lawcite[\nopp 228]{spratt}
 
 x\lawcite[\nopp 228]{spratt}
+
+x\lawcite{capital}
+
+x\lawcite[\nopp 229]{spratt}
 
 }
 
@@ -2496,6 +2511,21 @@ xxx
 {/{\sffamily\bfseries\color{blue}#1}}
 \end{verbatim}
 
+\section{Examples}
+\hfill{\itshape Of making many books there is no end}\par
+
+\bigskip
+``the question of whether, when, and which third parties ought to be granted leave to intervene at the highest judicial level remains unsettled''\ljfootcite[\nopp 3]{callaghan}
+
+``the Court’s approach to intervention allows it to strike a reasonable balance among competing democratic considerations, none of which are automatically more valuable than any other in the context of judicial decision-making''\ljfootcite[\nopp 27]{callaghan}
+
+x\ljfootcite{fric} 
+
+x\ljfootcite{callaghan}
+
+``le droit privé québécois aura un rôle à jouer dans la protection des droits ancestraux des peuples autochtones sur la terre et les ressources''\ljfootcite[489]{otis}
+
+``The maximum sentence for an offence is not to be reserved for the most serious circumstances imaginable, but for very serious circumstances.''\lawcite[25]{vader}
 
 \bigskip
 \hfill ----oooOooo---- \hfill\ 
@@ -2593,12 +2623,12 @@ xxx
 
 
 
-Popping the Question: What the Questionnaire for Federal Judicial Appointments Reveals about the Pursuit of Justice, Diversity, and the Commitment to Transparency, 2020 CanLIIDocs 1656
-Author(s) : 	Agathon Fric
-Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
-Copyright : 	© 2020, Dalhousie Law Journal
-License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
-Citation : 	Agathon Fric, Popping the Question: What the Questionnaire for Federal Judicial Appointments Reveals about the Pursuit of Justice, Diversity, and the Commitment to Transparency, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 1656, <http://www.canlii.org/t/svcn>, retr
+%Popping the Question: What the Questionnaire for Federal Judicial Appointments Reveals about the Pursuit of Justice, Diversity, and the Commitment to Transparency, 2020 CanLIIDocs 1656
+%Author(s) : 	Agathon Fric
+%Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+%Copyright : 	© 2020, Dalhousie Law Journal
+%License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+%Citation : 	Agathon Fric, Popping the Question: What the Questionnaire for Federal Judicial Appointments Reveals about the Pursuit of Justice, Diversity, and the Commitment to Transparency, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 1656, <http://www.canlii.org/t/svcn>, retr
 
 
 
@@ -2612,12 +2642,12 @@ Citation : 	Kathleen Hammond, Searching for a Summary Judgment Equivalent in Que
 
 
 
-Intervenors at the Supreme Court of Canada, 2020 CanLIIDocs 544
-Author(s) : 	Geoffrey D Callaghan
-Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
-Copyright : 	© 2020, Dalhousie Law Journal
-License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
-Citation : 	Geoffrey D Callaghan, Intervenors at the Supreme Court of Canada, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 544, <http://www.canlii.org/t/srcl>, retrieved on 2
+%Intervenors at the Supreme Court of Canada, 2020 CanLIIDocs 544
+%Author(s) : 	Geoffrey D Callaghan
+%Publisher(s) : 	Dalhousie Law Journal (www.dal.ca/faculty/law/research/publications/dalhousie-law-journal.html)
+%Copyright : 	© 2020, Dalhousie Law Journal
+%License : 	This work is subject to a specific license that is described in its text or on the copyright holder's website.
+%Citation : 	Geoffrey D Callaghan, Intervenors at the Supreme Court of Canada, 2020 43-1 Dalhousie Law Journal 1, 2020 CanLIIDocs 544, <http://www.canlii.org/t/srcl>, retrieved on 2
 
 
 
@@ -2691,12 +2721,12 @@ License : 	This work is licensed under the CanLII user license which includes th
 Citation : 	Wayne Courtney, Good Faith and Termination: The English and Australian Experience, 2019 1-1 Journal of Commonwealth Law 1, 2019 CanLIIDocs 1764, <http://www.canlii.org/t/sjb6>, retrieved on 2020-08-2
 
 
-Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé : le cas de l’industrie extractive, 2019 CanLIIDocs 4154
-Auteur(s) : 	Ghislain Otis
-Éditeur(s) : 	Les Cahiers de droit (www.erudit.org/fr/revues/cd1)
-Droit d'auteur : 	© 2019, Les Cahiers de droit
-Licence : 	Cette œuvre est soumise à la Licence d’utilisation de CanLII qui comporte le droit pour l’Utilisateur de faire des copies de l’œuvre aux fins de recherche juridique, dans la pratique du droit ou l’exercice de ses droits.
-Référence : 	Ghislain Otis, Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé : le cas de l’industrie extractive, 2019 60-2 Les Cahiers de droit 451, 2019 CanLIIDocs 4154, <http://www.canlii.org/t/xkhr>, consulté le 2020-08-24
+%Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé : le cas de l’industrie extractive, 2019 CanLIIDocs 4154
+%Auteur(s) : 	Ghislain Otis
+%Éditeur(s) : 	Les Cahiers de droit (www.erudit.org/fr/revues/cd1)
+%Droit d'auteur : 	© 2019, Les Cahiers de droit
+%Licence : 	Cette œuvre est soumise à la Licence d’utilisation de CanLII qui comporte le droit pour l’Utilisateur de faire des copies de l’œuvre aux fins de recherche juridique, dans la pratique du droit ou l’exercice de ses droits.
+%Référence : 	Ghislain Otis, Les droits ancestraux des peuples autochtones au carrefour du droit public et du droit privé : le cas de l’industrie extractive, 2019 60-2 Les Cahiers de droit 451, 2019 CanLIIDocs 4154, <http://www.canlii.org/t/xkhr>, consulté le 2020-08-24
 
 
 Report on the Proliferation of Prostitution in Winnipeg, 2019 CanLIIDocs 4185
@@ -2740,15 +2770,15 @@ Citation : 	Matthew Renaud, From Reading Courses to Robson Hall: The Development
 
 
 
-To do:
-static parallel references: parallel={},: done
-useljjournaaltitleabbrev, e.g., MLR
-
-
-https://www.kjvsayings.com/phrase/of-making-many-books-there-is-no-end
-
-“Of making many books there is no end”
-Source:
-
-This phrase has its origins in Ecclesiastes 12:12 of the King James Version of the Bible
+%To do:
+%static parallel references: parallel={},: done
+%useljjournaaltitleabbrev, e.g., MLR
+%
+%
+%https://www.kjvsayings.com/phrase/of-making-many-books-there-is-no-end
+%
+%“Of making many books there is no end”
+%Source:
+%
+%This phrase has its origins in Ecclesiastes 12:12 of the King James Version of the Bible
 

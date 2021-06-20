@@ -75,6 +75,9 @@ parallel,
   courtlist,
   courtjurisdiction,
   courtcasenumber,%in-progress, the docket
+%link
+	linkname,
+	url,
 %general
   note,
   caseshortname,
@@ -104,6 +107,7 @@ svjy,
 mncyear,
 mncname,
 mncnumber,
+shortname,
 }
 
 \DeclareDatamodelEntryfields[case]{%
@@ -119,6 +123,8 @@ icaseyear,caseshortname,casenickname,decisionyear,parallel,
   courtlist,
   courtjurisdiction,
   courtcasenumber,
+	linkname,
+	url,
 }
 
 
@@ -143,6 +149,8 @@ fulldate,%
 gazette,%
 %
 svjy,%
+	linkname,
+	url,
 }
 
 \DeclareDatamodelEntryfields[ljarticle]{%
@@ -157,6 +165,7 @@ journaltitle,
 pages,
 keywords,
 note,
+shortname,
 }
 
 \DeclareLanguageMapping{english}{english-lawcite}

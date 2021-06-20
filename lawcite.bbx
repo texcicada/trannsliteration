@@ -1,6 +1,9 @@
 \ProvidesFile{lawcite.bbx}[2020/04/11 v1.0 biblatex bibliography style]
 \RequireBibliographyStyle{ext-authortitle-ibid}
 %%%%%%%%% case
+\newtoggle{ibidpostdelimcomma}
+\togglefalse{ibidpostdelimcomma}
+%
 \newtoggle{scndrefbrackets}
 \togglefalse{scndrefbrackets}
 %
@@ -83,6 +86,11 @@
 %=======================================
 
 
+\DeclareBibliographyOption[boolean]{ibid-comma-postnote}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{ibidpostdelimcomma}}
+{\togglefalse{ibidpostdelimcomma}}%
+}
 
 \DeclareBibliographyOption[boolean]{second-case-ref-brackets}[true]{%
 \ifstrequal{#1}{true}
@@ -458,7 +466,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{ibidsupraon}
 		\togglefalse{ibidsupraitalic}
 		\togglefalse{ibidsupranotelong}
-		\togglefalse{bookauthorgiven}   \setlccurrentstyletag{\lcstyletagdefault}%
+		\togglefalse{bookauthorgiven}   		
+		\togglefalse{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+\setlccurrentstyletag{\lcstyletagdefault}%
 }
 
 
@@ -492,7 +503,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{ibidsupraon}
 		\togglefalse{ibidsupraitalic}
 		\togglefalse{ibidsupranotelong}
-		\togglefalse{bookauthorgiven}     \setlccurrentstyletag{\lcstyletagaglc}%
+		\togglefalse{bookauthorgiven}     		
+		\togglefalse{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+\setlccurrentstyletag{\lcstyletagaglc}%
 }
 
 
@@ -524,7 +538,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{ibidsupraon}
 		\togglefalse{ibidsupraitalic}
 		\togglefalse{ibidsupranotelong}
-		\togglefalse{bookauthorgiven}     \setlccurrentstyletag{\lcstyletagmlr}%
+		\togglefalse{bookauthorgiven}     				   
+		\toggletrue{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+\setlccurrentstyletag{\lcstyletagmlr}%
 }
 
 
@@ -561,6 +578,8 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\toggletrue{ibidsupraitalic}
 		\toggletrue{ibidsupranotelong}
 		\toggletrue{bookauthorgiven}
+		\togglefalse{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
    \setlccurrentstyletag{\lcstyletagmcgill}%
 }
 
@@ -592,7 +611,10 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{ibidsupraon}
 		\togglefalse{ibidsupraitalic}
 		\togglefalse{ibidsupranotelong}
-		\togglefalse{bookauthorgiven}     \setlccurrentstyletag{\lcstyletagindigo}%
+		\togglefalse{bookauthorgiven}     		
+		\toggletrue{ibidpostdelimcomma}
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+\setlccurrentstyletag{\lcstyletagindigo}%
 }
 
 

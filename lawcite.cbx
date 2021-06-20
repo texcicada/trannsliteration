@@ -168,7 +168,7 @@
 \newbibmacro{getcasename}{%
 %\ifciteseen{\ifciteibid{SEENIBID}{SEEN}}{}%
 \iffootnote{%
-\ifciteseen{\ifciteibid{\textcolor{red}{BB}}{\usebibmacro{getcaseshortname}\textcolor{red}{AA}}}{%
+\ifciteseen{\ifciteibid{\textcolor{red}{BB}}{\usebibmacro{getcaseshortname}}}{%
 \iffieldundef{shipname}{\usebibmacro{getpartynamesa}%
 \iffieldundef{partyb}{}%
 {\addspace\usebibmacro{getpartysep}\addspace%
@@ -360,7 +360,10 @@ xxx}%
 % if postnote different:
 % delimiter
  \ifcase\theibiddelimmode \or%none
- \or\addcomma%
+ \or%
+% \textcolor{red}{CC}%
+ \addcomma%
+% \textcolor{red}{DD}%
  \or\addcolon%
  \or\adddot%
 	\fi
@@ -390,7 +393,9 @@ xxx}%
 \newbibmacro{getibidsupranote}{%
 %,
 %\togglefalse{supranoteused}
+%\textcolor{red}{AA}%
 \iftoggle{ibidsupracomma}{\addcomma}{}%
+%\textcolor{red}{BB}%
 %
  \addspace 
 %()
@@ -421,7 +426,6 @@ xxx}%
 %  
 %===  
 %  \addcomma\addspace\mkbibemph{\bibstring{ibidsupra}} \bibstring{ibidsupranote} \ref{cfn:\thefield{entrykey}}%
-%\iftoggle{supranoteused}{\textcolor{red}{AA}}{}
 }
 
 
@@ -513,7 +517,8 @@ xxx}%
 
 %===== casenameref
 \newbibmacro{getcasenameref}{%
- \togglefalse{usedibid}
+ \togglefalse{usedibid}%
+ \togglefalse{supranoteused}%
  \ifboolexpr{%
  not test {\iffootnote}
  }%
@@ -523,7 +528,17 @@ xxx}%
   and
   test {\ifciteibid}
   }%
-  {\toggletrue{usedibid}\usebibmacro{getibid}\usebibmacro{postnote}}{%
+  {%
+  \toggletrue{usedibid}%
+  \usebibmacro{getibid}%
+%  \textcolor{red}{AA}%
+  \iftoggle{ibidpostdelimcomma}%
+  {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
+  {\DeclareDelimFormat{postnotedelim}{\space}}%
+  \usebibmacro{postnote}%actual ibid
+  \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
+%  \textcolor{red}{BB}%
+  }{%
  \ifboolexpr{%
   test {\ifcitation}
   and
@@ -535,8 +550,15 @@ xxx}%
 %  \addspace\mkbibparens{n \ref{cfn:\thefield{entrykey}}%
 %  }%
 %  \addcomma\addspace\mkbibemph{supra} note \ref{cfn:\thefield{entrykey}}%
-  \usebibmacro{getibidsupranote}\usebibmacro{postnote}%
-  \toggletrue{supranoteused}%
+  \usebibmacro{getibidsupranote}\toggletrue{supranoteused}%
+%  \textcolor{red}{AA}%
+  \iftoggle{ibidpostdelimcomma}%
+  {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
+  {\DeclareDelimFormat{postnotedelim}{\space}}%
+  \usebibmacro{postnote}%
+%  \textcolor{red}{BB}%
+  \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
+  %
   }{%
  \usebibmacro{getcasename}%
 % \iftoggle{casenamecomma}{\setunit*{\addcomma\addspace}}{\setunit*{\addspace}}%
@@ -551,6 +573,7 @@ xxx}%
  {\setunit*{\addspace}}%false
  \usebibmacro{getcaseref}%
  \usebibmacro{getparallelreports}%
+\iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}% 
 % \usebibmacro{getnote}%
 %    \finentry
  }}%ifciteibid false
@@ -1098,11 +1121,20 @@ xxx}%
 % if it is not an ibid/supra note reference
  {%
 \iftoggle{supranoteused}{}{%
-			\usebibmacro{postnote}}%
+%\textcolor{red}{CC}%
+%	\printfield[emph]{postnote}%
+			\usebibmacro{postnote}%
+%			\textcolor{red}{DD}%
+			}%
 				}%
  }%
 }
 
+\newbibmacro*{nocomma:postnote}{%
+  \iffieldundef{postnote}
+    {}
+    {\setunit{\printdelim{postnotedelim}}%
+     \printfield{postnote}}}
 
 
 \ExplSyntaxOn
@@ -1604,6 +1636,9 @@ test {\ifentrytype{statute}}%
 }%
 %@@@@@@@@@@@@@@@@ postnote
 {%
+%%	: general setup:
+%		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+%
 \ifboolexpr{%
 test {\ifentrytype{statute}}%
 }%
@@ -2115,6 +2150,7 @@ test {\ifentrytype{case}}%
 \DeclareFieldFormat{quotes}{\mkbibquote{#1}}
 \DeclareFieldFormat{parens}{\mkbibparens{#1}}
 \DeclareFieldFormat{emph}{\mkbibemph{#1}}
+\DeclareFieldFormat{angles}{<#1>}
 \DeclareFieldFormat{plain}{#1}
 
 \DeclareNameFormat{authorinbib}{%
@@ -2296,6 +2332,120 @@ test {\ifentrytype{case}}%
 %}
 
 
+
+\newbibmacro{getcaseurl}%
+{%
+\iffieldundef{url}{}{%
+  \ifhyperref
+    {%
+    		\iffieldundef{linkname}{%
+				    \url{\thefield{url}}
+    				}%
+    				{\href{\thefield{url}}{%
+    												\thefield{linkname}%
+    																					}}%
+    }%
+    {\nolinkurl{\thefield{url}}}%
+}%
+}
+
+
+\newbibmacro{getljarticleurl}%
+{%
+\iffieldundef{url}{}{%
+  \ifhyperref
+    {%
+    		\iffieldundef{mncnumber}{%
+				    \url{\thefield{url}}
+    				}%
+    				{\href{\thefield{url}}{%
+    												\thefield{mncyear}\addspace%
+    												\thefield{mncname}\addspace%
+    												\thefield{mncnumber}%
+    																					}}%
+    }%
+    {\nolinkurl{\thefield{url}}}%
+}%
+}
+
+
+
+
+\DeclareFieldFormat{shortname}{#1}
+
+
+
+
+\newbibmacro{getljartshortname}{%
+\iffieldundef{shortname}{}{\printfield{shortname}}%
+}
+
+
+
+\newtoggle{artibidtemp}
+\togglefalse{artibidtemp}
+
+\newbibmacro{getljarticle:ibid}{%
+  \togglefalse{artibidtemp}%
+ \togglefalse{usedibid}%
+ \togglefalse{supranoteused}%
+ \ifboolexpr{%
+ not test {\iffootnote}
+ }%
+ {\usebibmacro{getljartshortname}}{%
+ \ifboolexpr{%
+  test {\ifcitation}
+  and
+  test {\ifciteibid}
+  }%
+  {%
+  \toggletrue{usedibid}%
+  \usebibmacro{getibid}%
+%  \textcolor{red}{AA}%
+  \iftoggle{ibidpostdelimcomma}%
+  {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
+  {\DeclareDelimFormat{postnotedelim}{\space}}%
+%%  \textcolor{red}{AA}%
+  \toggletrue{artibidtemp}%
+  \usebibmacro{postnote}%actual ibid
+%%  \textcolor{red}{BB}%
+  \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
+%  \textcolor{red}{BB}%
+  }{%
+ \ifboolexpr{%
+  test {\ifcitation}
+  and
+  test {\ifciteseen}
+  and
+  not test {\ifciteibid}
+  }%
+  {\usebibmacro{getljartshortname}%
+  \usebibmacro{getibidsupranote}\toggletrue{supranoteused}%
+%  \textcolor{red}{AA}%
+  \iftoggle{ibidpostdelimcomma}%
+  {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
+  {\DeclareDelimFormat{postnotedelim}{\space}}%
+  \usebibmacro{postnote}%
+%  \textcolor{red}{BB}%
+  \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
+  %
+  }{%
+ \usebibmacro{getljarticle}%
+ %
+ %true
+ %false
+ }}%ifciteibid false
+ % label
+ \ifboolexpr{%
+  test {\ifcitation}
+  and
+  not test {\ifciteseen}
+  and
+  not test {\ifciteibid}
+  }%
+	{\label{cfn:\thefield{entrykey}}}{}%
+}}
+
 \newbibmacro{getljarticle}{%
 \usebibmacro{getljarticleauthor}%
 \ifbibliography{\adddot\space}{\addcomma\addspace}%
@@ -2309,6 +2459,7 @@ test {\ifentrytype{case}}%
 \addspace%
 \usebibmacro{getljarticlepage}%
 \iffieldundef{related}{}{\addspace\usebibmacro{related}}%
+\iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getljarticleurl}}}%
 \newunit\newblock%
 }
 
@@ -2698,6 +2849,35 @@ test {\ifentrytype{case}}%
 %@@@@@@@@@@@@@@@@ postnote
 {\usebibmacro{postnote}\iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
 }
+
+
+%============= ljfootcite
+\DeclareCiteCommand{ljfootcite}[\mkbibfootnote]%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getljarticle:ibid}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{%
+ \ifboolexpr{%
+    test {\iftoggle{artibidtemp}}
+%  test {\ifcitation}
+%  and
+%  test {\ifciteibid}
+  }%
+  {}%nothing
+  {%if not ibid, then:
+%%  \textcolor{red}{CC}%
+  \usebibmacro{postnote}%
+%%  \textcolor{red}{DD}%
+  \iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
+		}%
+}
+
 
 
 %============= lcpostnote
@@ -3403,6 +3583,13 @@ test {\ifentrytype{jurisdiction}}%
 \renewcommand\myhyperref[1]{\hyperpage{##1}}%
 \renewcommand\lcparnumrefsencap{|myhyperref}%
 }%end false
+}
+
+\newcommand\setpostnotedelimoff{%
+\DeclareFieldFormat{postnote}{##1}%
+}
+\newcommand\setpostnotedelimon{%
+\DeclareFieldFormat{postnote}{\mkpageprefix[pagination][\mknormrange]{##1}}%
 }
 
 
