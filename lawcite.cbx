@@ -229,7 +229,8 @@
 %======== caseyear
 \newbibmacro{getcaseyear}{%
 \iffieldundef{caseyear}{}%
-{\addspace\printfield{caseyear}}%
+{\iffieldundef{mncurl}{\addspace\printfield{caseyear}}}%
+{\printfield{caseyear}}%
 }
 
 %======== courtname
@@ -335,9 +336,24 @@ xxx}%
 
 %======== getcaseref
 \newbibmacro{getcaseref}{%
+	\iffieldundef{mncurl}{%
  \usebibmacro{getcaseyear}%
  \usebibmacro{getcourtname}%
  \usebibmacro{getcasenumber}%
+ }{%
+  \ifhyperref
+    {%
+    		\iffieldundef{casenumber}{%
+				    \url{\thefield{mncurl}}
+    				}%
+    				{\href{\thefield{mncurl}}{%
+								 \usebibmacro{getcaseyear}%
+								 \usebibmacro{getcourtname}%
+								 \usebibmacro{getcasenumber}%
+    																					}}%
+    }%
+    {\nolinkurl{\thefield{mncurl}}}%
+}%
  \usebibmacro{mnc:postnote}%
 %
 %   \newunit
@@ -532,11 +548,18 @@ xxx}%
   \toggletrue{usedibid}%
   \usebibmacro{getibid}%
 %  \textcolor{red}{AA}%
+%%if current postnote = previous postnote, then nothing; else:
+%%%\ifdefstrequal{\ibidprevpintemp}{\thefield{postnote}}%
+%%%{}%do nothing extra
+%%%{%otherwise:
   \iftoggle{ibidpostdelimcomma}%
   {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
   {\DeclareDelimFormat{postnotedelim}{\space}}%
   \usebibmacro{postnote}%actual ibid
+%%%  \textcolor{red}{xx\ibidprevpintemp}%
   \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
+%%%  \renewcommand{\ibidprevpintemp}{\thefield{postnote}}%
+%%%}%
 %  \textcolor{red}{BB}%
   }{%
  \ifboolexpr{%
@@ -571,6 +594,8 @@ xxx}%
 % {\lcparentchilddelim}%
  {\iftoggle{casenamecomma}{\setunit*{\addcomma\addspace}}{\setunit*{\addspace}}}%true
  {\setunit*{\addspace}}%false
+%%\iffieldundef{mncurl}{\usebibmacro{getcaseref}}{\addspace\printtext[angles]{\usebibmacro{getcaseref}}}%
+	\iffieldundef{casenumber}{}{\addcomma}%
  \usebibmacro{getcaseref}%
  \usebibmacro{getparallelreports}%
 \iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getcaseurl}}}% 
@@ -2384,6 +2409,11 @@ test {\ifentrytype{case}}%
 
 \newtoggle{artibidtemp}
 \togglefalse{artibidtemp}
+
+\newcommand{\ibidprevpintemp}{}
+
+
+
 
 \newbibmacro{getljarticle:ibid}{%
   \togglefalse{artibidtemp}%

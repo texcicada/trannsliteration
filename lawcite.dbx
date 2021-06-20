@@ -78,6 +78,7 @@ parallel,
 %link
 	linkname,
 	url,
+	mncurl,
 %general
   note,
   caseshortname,
@@ -125,6 +126,7 @@ icaseyear,caseshortname,casenickname,decisionyear,parallel,
   courtcasenumber,
 	linkname,
 	url,
+	mncurl,
 }
 
 
@@ -151,6 +153,7 @@ gazette,%
 svjy,%
 	linkname,
 	url,
+	mncurl,% court link
 }
 
 \DeclareDatamodelEntryfields[ljarticle]{%
