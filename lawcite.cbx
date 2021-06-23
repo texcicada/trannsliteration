@@ -56,8 +56,12 @@
 % fieldformats: case
 \DeclareFieldFormat{partya}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
 \DeclareFieldFormat{partyb}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
-\DeclareFieldFormat{shipname}{\mkbibemph{#1}}
-\DeclareFieldFormat{caseshortname}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
+\DeclareFieldFormat{shipname}{\mkbibemph{#1}}%
+\DeclareFieldFormat{caseshortname}{%
+		\iftoggle{partynamesitalic}%
+		{\mkbibemph{#1}}%
+		{#1}%
+		}
 \DeclareFieldFormat{casenickname}{\mkbibquote{#1\addspace\bibstring{case}}}
 
 \DeclareFieldFormat{partyasn}{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}
@@ -65,6 +69,7 @@
 \DeclareFieldFormat{partyajur}{\mkbibparens{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}}
 \DeclareFieldFormat{partybjur}{\mkbibparens{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}}
 
+\DeclareFieldFormat{quotetext}{\mkbibquote{#1}}
 
 
 
@@ -214,9 +219,13 @@
 
 %======== caseshortname
 \newbibmacro{getcaseshortname}{%
-\iffieldundef{shipname}{\iffieldundef{caseshortname}{}{\printfield{caseshortname}}}%
+\iffieldundef{shipname}{\iffieldundef{caseshortname}{}{\printfield{caseshortname}}}%==printfield adds space
 {\printfield{shipname}}%
 }
+
+%\mkbibemph{\thefield{caseshortname}}
+
+
 
 %======== casenickname
 \newbibmacro{getcasenickname}{%
@@ -531,6 +540,15 @@ xxx}%
 \newtoggle{usedibid}
 \togglefalse{usedibid}
 
+
+
+\newcommand{\itemlabelset}[2]{%key+labeltag: if cs exists,, label has been created
+\expandafter\newcommand\csname #1#2\endcsname{#2}%
+}
+
+
+
+
 %===== casenameref
 \newbibmacro{getcasenameref}{%
  \togglefalse{usedibid}%
@@ -568,8 +586,11 @@ xxx}%
   test {\ifciteseen}
   and
   not test {\ifciteibid}
+  and
+  test {\ifcsdef{\thefield{entrykey}label}}
   }%
-  {\usebibmacro{getcaseshortname}%
+  {%\textcolor{red}{AA}%
+\usebibmacro{getcaseshortname}%
 %  \addspace\mkbibparens{n \ref{cfn:\thefield{entrykey}}%
 %  }%
 %  \addcomma\addspace\mkbibemph{supra} note \ref{cfn:\thefield{entrykey}}%
@@ -603,14 +624,23 @@ xxx}%
 %    \finentry
  }}%ifciteibid false
  % label
+%% \ifcsdef{\thefield{entrykey}label}{\textcolor{red}{XX}}{}%
+% \csname\thefield{entrykey}label\endcsname%
+%% \thefield{entrykey}label%
  \ifboolexpr{%
   test {\ifcitation}
   and
   not test {\ifciteseen}
   and
   not test {\ifciteibid}
+  and
+  test {\iffootnote}
+  and
+  not test {\ifcsdef{\thefield{entrykey}label}}
   }%
-	{\label{cfn:\thefield{entrykey}}}{}%
+	{\label{cfn:\thefield{entrykey}}%
+	\itemlabelset{\thefield{entrykey}}{label}%
+	}{}%
 }}
 
 
@@ -1348,6 +1378,49 @@ x#1;;
 \ifstrequal{#1}{location}{\printlist{location}}{}
 \ifstrequal{#1}{publisher}{\printfield{publisher}}{}
 }%
+
+
+\DeclareCiteCommand{qcite}%
+{\usebibmacro{prenote}}%
+{%
+\printfield{quotetext}%
+\addspace\textemdash\addspace{%
+\DeclareNameAlias[quote]{author}{given-family}%
+\printnames{author}%
+}%
+%\printnames{editor}%
+\addcomma\addspace\printfield{title}%
+}%
+{%
+\multicitedelim%
+}%
+{\iffieldundef{postnote}{}{\addcomma\addspace\usebibmacro{postnote}\adddot}}
+
+
+
+%formatted epigraph quote:
+\DeclareCiteCommand{qqcite}%
+{\usebibmacro{prenote}}%
+{%
+\hfill\parbox{0.4\textwidth}{\raggedright%
+\printfield{quotetext}\par%
+\smallskip\hrule\par%
+\medskip{%
+\DeclareNameAlias[quote]{author}{given-family}%
+\hfill\textemdash\addspace\printnames{author}%
+}\par%
+%\printnames{editor}%
+\printfield{title}%
+\iffieldundef{postnote}{}{\addcomma\addspace\usebibmacro{postnote}\adddot}%
+}%end parbox
+}%
+{%
+%\multicitedelim%
+}%
+{}
+
+
+
 
 
 \DeclareCiteCommand{ycite}%

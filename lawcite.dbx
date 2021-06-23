@@ -41,7 +41,7 @@
 
 
 
-\DeclareDatamodelEntrytypes{case,statute,ljarticle}
+\DeclareDatamodelEntrytypes{case,statute,ljarticle,quote}
 
 \DeclareDatamodelFields[type=list, datatype=literal]{%
 parallel,
@@ -109,6 +109,8 @@ mncyear,
 mncname,
 mncnumber,
 shortname,
+%quote
+quotetext,
 }
 
 \DeclareDatamodelEntryfields[case]{%
@@ -170,6 +172,11 @@ keywords,
 note,
 shortname,
 }
+
+\DeclareDatamodelEntryfields[quote]{%
+quotetext,
+}
+
 
 \DeclareLanguageMapping{english}{english-lawcite}
 
