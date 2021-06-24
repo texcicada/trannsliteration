@@ -11,6 +11,9 @@
 \renewcommand\mncreportdelimiter{\addcomma\addspace}}
 
 
+%for tracing
+\newcommand\ttt{\textcolor{red}{AA}}
+
 %====================================================
 %\DeclareListFormat{location}{%
 %#1%
@@ -219,11 +222,9 @@
 
 %======== caseshortname
 \newbibmacro{getcaseshortname}{%
-\iffieldundef{shipname}{\iffieldundef{caseshortname}{}{\printfield{caseshortname}}}%==printfield adds space
+\iffieldundef{shipname}{\iffieldundef{caseshortname}{}{\printfield{caseshortname}}}%
 {\printfield{shipname}}%
 }
-
-%\mkbibemph{\thefield{caseshortname}}
 
 
 
@@ -352,6 +353,7 @@ xxx}%
  }{%
   \ifhyperref
     {%
+    		\printtext{\addspace}%clear the puncuation buffer = no comma in link
     		\iffieldundef{casenumber}{%
 				    \url{\thefield{mncurl}}
     				}%
@@ -1402,16 +1404,20 @@ x#1;;
 \DeclareCiteCommand{qqcite}%
 {\usebibmacro{prenote}}%
 {%
-\hfill\parbox{0.4\textwidth}{\raggedright%
+\hfill\parbox{\iffieldundef{partya}{0.4}{0.48}\textwidth}{\raggedright%
 \printfield{quotetext}\par%
 \smallskip\hrule\par%
 \medskip{%
 \DeclareNameAlias[quote]{author}{given-family}%
-\hfill\textemdash\addspace\printnames{author}%
-}\par%
+\iffieldundef{partya}{\hfill}{}\textemdash\addspace\printnames{author}%
+}\iffieldundef{author}{}{\par}%
 %\printnames{editor}%
-\printfield{title}%
-\iffieldundef{postnote}{}{\addcomma\addspace\usebibmacro{postnote}\adddot}%
+\printfield{title}%if there is one
+\iffieldundef{partya}{}{{\small\usebibmacro{getcasenameref}}}%if it's a case
+\iffieldundef{postnote}{}{%
+\iffieldundef{partya}{%
+\addcomma\addspace\usebibmacro{postnote}}{}%
+\adddot}%
 }%end parbox
 }%
 {%
@@ -2887,7 +2893,7 @@ test {\ifentrytype{case}}%
 %@@@@@@@@@@@@@@@@ delim
 {\multicitedelim}%
 %@@@@@@@@@@@@@@@@ postnote
-{\usebibmacro{postnote}}
+{\usebibmacro{notmnc:postnote}}
 
 
 %============= lcfootrr
