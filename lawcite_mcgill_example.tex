@@ -9,6 +9,26 @@
 
 @quote{q9,	quotetext =  { In this appeal, the Court is called upon to answer the age-old question:  If a tree falls in the forest and you are not around to replant it, how does it affect your taxes? },	crossref =  {dmi},				options={skipbib=true},}
 
+@quote{q10,	quotetext =  {We are entitled to assume that lawyers have not only some general background in law, but that they have some general background in obtaining information from electronic data bases and are using appropriate means to acquire that information.},	crossref =  {kelly},				options={skipbib=true},}
+
+@quote{q11,	quotetext =  {Sitting judges swear an oath that they will decide cases on the law and the evidence themselves, not blindly accept the say-so of others or abdicate the decision to others. As well, for many other reasons, retired judges’ opinions do not have as much influence on sitting judges as some might suppose.},	crossref =  {coldwater},				options={skipbib=true},}
+
+@quote{q12,	quotetext =  {Admissible evidence that is given no weight is just as useless as inadmissible evidence.},	crossref =  {coldwater},				options={skipbib=true},}
+
+
+
+
+
+
+@case{araujo,	partya =  {R},	partyb =  {Araujo},	caseshortname =  {Araujo},	caseyear =  {2000},	courtname =  {SCC},	casenumber =  {65},	pagination =  {atparagraph},	reportyear =  {2000},	reportvolume =  {2},		reportseries =  {SCR},	reportpage =  {992},	url =  {https://canlii.ca/t/5231},	linkname =  {CanLII},		mncurl =  {https://decisions.scc-csc.ca/scc-csc/scc-csc/en/item/1830/index.do},					volyearneeded =  {true}, 				}
+
+@case{coldwater,	partya =  {Coldwater First Nation},	partyb =  {Canada (Attorney General)},	caseshortname =  {Coldwater First Nation},	caseyear =  {2019},	courtname =  {FCA},	casenumber =  {292},	pagination =  {atparagraph},						url =  {https://canlii.ca/t/j3mj2},	linkname =  {CanLII},	mncurl =  {https://decisions.fca-caf.gc.ca/fca-caf/decisions/en/453414/1/document.do},								}
+
+
+@case{atkinson,	partya =  {Atkinson},	partyb =  {McGregor (3)},	caseshortname =  {Atkinson},	caseyear =  {1998},	courtname =  {ABQB},	casenumber =  {629},		reportyear =  {1998},	reportvolume =  {66},		reportseries =  {Alta LR (3rd)},	reportpage =  {289},	url =  {https://canlii.ca/t/5q4d},	linkname =  {CanLII},pagination =  {atparagraph},}
+
+
+@case{kelly,	partya =  {Kelly},	partyb =  {Lundgard},	caseshortname =  {Kelly Costs Memorandum},															casestatus =  {unreported, Memorandum as to costs for computer charges, 1997},	courtfullname =  {Alberta Court of Queen's Bench},	attribution =  {Veit J},			}
 
 @book{litlaw,	author =  {Kieran Dolin},		title =  {Fiction and the Law},	subtitle =  {Legal Discourse in Victorian and Modernist Literature},			date =  {1999},	isbn =  {9780521623322},			xdata =  {cup},		}
 
@@ -1218,6 +1238,8 @@ options={skipbib=true,},
 \setmainfont{Noto Serif}
 \setsansfont{TeX Gyre Schola}[Scale=1.2]%Gentium Plus}
 \setmonofont{Noto Sans Mono}%[Colour=blue]
+\newfontface\fcircnum{DejaVu Sans}[Colour=blue]
+\newcommand\circnum[1]{{\fcircnum#1}}
 %------------------
 \usepackage[british]{babel}
 \usepackage{csquotes}
@@ -1227,6 +1249,11 @@ options={skipbib=true,},
 \usepackage{abstract}
 \usepackage{microtype}
 %\usepackage{makecell}
+\usepackage{minitoc}
+\dosecttoc
+%\usepackage{booktabs}
+
+\newcommand\theadcolour{\rowcolor{blue!80!green!20!yellow}}
 
 \newcommand\note[1]{(\texttt{#1})}
 
@@ -1406,29 +1433,190 @@ options={skipbib=true,},
 \bigskip
 \hfill\rulesep\hfill\ %\hrule
 \bigskip
+\newpage
 \section{\cmd{lawcite}}
 \qqcite[1]{q9}
 
 
-\section{Getting Ready}
-\subsection{What you will need}
-\subsection{Installing the files}
-Place the lawcite Biblatex definition files (lawcite.dbx, lawcite.bbx, lawcite.cbx, english-lawcite.lbx), and an index style file for SplitIndex to use (e.g., plain.ist), in a location where \TeX\ can find them, for example, in the current folder.
+\newpage
+\section{Up and Running}
+\
 
-McGill-style is activated via option settings when calling the Biblatex package.
+\bigskip
+{\small
+\secttoc
+}
+
+\bigskip{\renewcommand{\qqcitecasewidth}{0.68}
+\qqcitefn{q10}\footnotetext{\lcinline[Quoted in][17]{atkinson}.}
+}
+
+\bigskip
+Getting up and running requires installing some files (the \texttt{lawcite} definition files), setting some options for Biblatex (\texttt{mcgill} lawcitestyle), choosing which components and associated code and toolchain to use (e.g. Tables of Cases; Numbered Paragraphs), and a bibliography (\texttt{.bib}) file.
+\subsection{Installing the lawcite Biblatex files}
+Currently, installing the lawcite Biblatex support files is done manually.
+
+Copy the files to a location where \TeX\ can find them, for example, the current project folder.
+
+\medskip
+\begin{tabular}{ll}
+\hline
+\theadcolour File & Contents \\
+\hline
+lawcite.dbx & Datamodel fields \\
+lawcite.bbx & Bibliography driver \\
+lawcite.cbx &  Citation commands \\
+english-lawcite.lbx & Language localization strings \\
+plain.ist & index style file (optional)\\
+\hline
+\end{tabular}
+
+
+
+\subsection{Biblatex option settings}
+In the \texttt{.tex} document file, McGill-style citation is activated via option settings when calling the Biblatex package in the preamble of the document.
 
 \begin{verbatim}
 \usepackage[
 	style=lawcite, 
 	lawcitestyle=mcgill,
-   use-toc-parnumrefs=false,
 	...
 		]{biblatex}
 \end{verbatim}
 
-Settings used by \texttt{lawcite} may be changed inside the document, as well.
+Settings used by \texttt{lawcite} may be changed inside the document itself, in the course of the text, as well.
 
-\subsection{The Workflow}
+\subsection{The \texttt{.bib} file}
+
+\subsubsection{bibentries}
+\texttt{lawcite} is built on the \texttt{ext-authortitle-ibid} style that comes with Biblatex. All the commands and drivers in that style are available for use.
+
+For legal referencing, \texttt{lawcite} defines three additional bibentry types: \texttt{@case}, \texttt{@statute}, and \texttt{@ljarticle}.
+
+A typical @case bibentry looks like the following. 
+
+This particular bibentry has its compulsory unique key \circnum{➀}, and contains the information to construct the case name \circnum{➁}, the medium neutral citation \circnum{➂}, one printed report \circnum{➃}, and some hyperlinking data.
+
+\bigskip
+{
+\small
+%\begin{verbatim}
+\ttfamily
+\obeylines
+@case\{araujo,	\circnum{➀}
+			partya =  \{R\},	 \circnum{➁}
+			partyb =  \{Araujo\},	 \circnum{➁}
+			caseshortname =  \{Araujo\},	
+			caseyear =  \{2000\},	 \circnum{➂}
+			courtname =  \{SCC\},	 \circnum{➂}
+			casenumber =  \{65\},	\circnum{➂}
+			pagination =  \{atparagraph\},	\circnum{➂}
+			mncurl =  \{https://decisions.scc-csc.ca/scc-csc/scc-csc/en/item/1830/index.do\},
+			reportyear =  \{2000\},	 \circnum{➃}
+			volyearneeded =  \{true\},  \circnum{➃}
+			reportvolume =  \{2\},		\circnum{➃}
+			reportseries =  \{SCR\}, \circnum{➃}	
+			reportpage =  \{992\},	   \circnum{➃}
+			url =  \{https://canlii.ca/t/5231\},	
+			linkname =  \{CanLII\},									
+			\}
+%\end{verbatim}
+}
+
+\bigskip
+In the \texttt{.tex} file, a reference to paragraph 21 of the decision could look like this:
+
+\begin{verbatim}
+``Wiretapping is highly intrusive.''\lawcite[21]{araujo}
+\end{verbatim}
+
+Compiling with latex, then biber, then latex again, will produce a footnote like this when McGill-style is active:
+
+\bigskip
+\fbox{\begin{minipage}{0.8\textwidth}
+``Wiretapping is highly intrusive.''\lawcite[21]{araujo}
+\end{minipage}}
+
+
+\bigskip
+Legal monographs are \texttt{@book} entry types, with \texttt{lawbook} as a keyword so that the bibliography driver can identify them:
+
+\begin{verbatim}
+@book{...,
+      ...,
+      keywords = {lawbook},
+      ...,
+}
+\end{verbatim}
+
+
+
+
+\subsubsection{Bibliography management}
+x
+\subsubsection{Calling the \texttt{.bib} file(s)}
+\texttt{.bib} files are called in with the \texttt{addbibresource} command after the biblatex package. For example:
+\begin{verbatim}
+\addbibresource{\jobname.bib}
+\addbibresource{./main.bib}
+\end{verbatim}
+
+
+\subsection{Numbered Paragraphs}
+\p For convenience, \texttt{lawcite} has a numbering mechanism using the \cmd{p} command for numbering (logical) paragraphs.
+
+\p This is a paragraph. \label{mypar:example} It has been manually labelled for cross-referencing purposes.
+
+\p This is also a paragraph. It makes a cross-reference: see para \ref{mypar:example}.
+
+\p A pair of helper wrapper macros have also been defined: \cmd{paradef} can be used instead of \cmd{label} -- \texttt{\textbackslash paradef\{eg:b\}} is the same as typing \texttt{\textbackslash label\{eg:b\}} -- \paradef{eg:b}and \cmd{pararef} to do a ``para \cmd{ref}'' -- so that \texttt{\textbackslash pararef\{eg:b\}} is the same as typing \texttt{para \textbackslash ref\{eg:b\}}.
+
+\p See \pararef{eg:b}. The reference paragraph format is sensitive to the lawcitestyle.
+
+\setnumparshiftleft{\kern-2em}
+\p Independently of the lawcitestyle, paragraph numbers are formatted via a dozen or so settings. For example, \cmd{setnumparshiftleft}\{\textbackslash kern-2em\} moves the paragraph number 2em to the left.
+
+\setnumparfillright{\hspace{3em}}
+\p And \cmd{setnumparfillright}\{\textbackslash hspace\{3em\}\} inserts 3em of space after the parnum (or parnum delimiter, if any). And so on.
+
+\p All numbered paragraphs are also automatically labelled, so that paragraph numbers instead of page numbers can be used in the Table of Cases and the index, if desired.
+
+\subsection{Citation Commands - An Overiew}
+{\renewcommand{\qqcitecasewidth}{0.68}
+\qqcite[32]{q11}
+}
+
+
+\subsection{Bibliography Sections}
+x
+\subsection{Table of Cases}
+x
+\subsection{Index}
+x
+
+%\begin{itemize}
+%\item Installing the lawcite Biblatex files
+%\item Biblatex option settings
+%\item The \texttt{.bib} file
+%			\begin{itemize}
+%			\item bibentries
+%			\item Bibliography management
+%			\item Calling the \texttt{.bib} file(s)
+%			\end{itemize}
+%\item Numbered Paragraphs
+%\item Citation Commands
+%\item Bibliography Sections
+%\item Table of Cases
+%\item Index
+%\end{itemize}
+
+%\subsection{What you will need}
+%\subsection{Installing the files}
+%Place the lawcite Biblatex definition files (lawcite.dbx, lawcite.bbx, lawcite.cbx, english-lawcite.lbx), and an index style file for SplitIndex to use (e.g., plain.ist), in a location where \TeX\ can find them, for example, in the current folder.
+
+
+\subsection{Putting it all together}
+Sample document
 To compile a file \textit{foo.tex}, do:
 \begin{itemize}
 \item xelatex/lualatex/pdflatex

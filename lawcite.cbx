@@ -73,6 +73,8 @@
 \DeclareFieldFormat{partybjur}{\mkbibparens{\iftoggle{partynamesitalic}{\mkbibemph{#1}}{#1}}}
 
 \DeclareFieldFormat{quotetext}{\mkbibquote{#1}}
+\DeclareFieldFormat[case]{casestatus}{#1}
+\DeclareFieldFormat[case]{courtfullname}{#1}
 
 
 
@@ -1399,12 +1401,10 @@ x#1;;
 {\iffieldundef{postnote}{}{\addcomma\addspace\usebibmacro{postnote}\adddot}}
 
 
+\newcommand\qqcitecasewidth{0.48}
 
-%formatted epigraph quote:
-\DeclareCiteCommand{qqcite}%
-{\usebibmacro{prenote}}%
-{%
-\hfill\parbox{\iffieldundef{partya}{0.4}{0.48}\textwidth}{\raggedright%
+\newbibmacro{qqcitebox}{%
+\hfill\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
 \printfield{quotetext}\par%
 \smallskip\hrule\par%
 \medskip{%
@@ -1414,11 +1414,21 @@ x#1;;
 %\printnames{editor}%
 \printfield{title}%if there is one
 \iffieldundef{partya}{}{{\small\usebibmacro{getcasenameref}}}%if it's a case
+\iffieldundef{casestatus}{}{\printtext{\addcomma\addspace\printfield{casestatus}}}%
+\iffieldundef{courtfullname}{}{\printtext{\addcomma\addspace\printfield{courtfullname}}}%
 \iffieldundef{postnote}{}{%
 \iffieldundef{partya}{%
 \addcomma\addspace\usebibmacro{postnote}}{}%
 \adddot}%
 }%end parbox
+}
+
+
+%formatted epigraph quote:
+\DeclareCiteCommand{qqcite}%
+{\usebibmacro{prenote}}%
+{%
+\usebibmacro{qqcitebox}%
 }%
 {%
 %\multicitedelim%
@@ -1428,6 +1438,33 @@ x#1;;
 
 
 
+%formatted epigraph quote: with footnote mark
+\DeclareCiteCommand{qqcitefn}%
+{\usebibmacro{prenote}}%
+{%
+\hfill\parbox{\iffieldundef{partya}{0.4}{\qqcitecasewidth}\textwidth}{\raggedright%
+\printfield{quotetext}\par%
+\smallskip\hrule\par%
+\medskip{%
+\DeclareNameAlias[quote]{author}{given-family}%
+\iffieldundef{partya}{\hfill}{}\textemdash\addspace\printnames{author}%
+}\iffieldundef{author}{}{\par}%
+%\printnames{editor}%
+\printfield{title}%if there is one
+\iffieldundef{partya}{}{{\small\usebibmacro{getcasenameref}}}%if it's a case
+\iffieldundef{casestatus}{}{\printtext{\addcomma\addspace\printfield{casestatus}}}%
+\iffieldundef{courtfullname}{}{\printtext{\addcomma\addspace\printfield{courtfullname}}}%
+\iffieldundef{postnote}{}{%
+\iffieldundef{partya}{%
+\addcomma\addspace\usebibmacro{postnote}}{}%
+\adddot}%
+\footnotemark
+}%end parbox
+}%
+{%
+%\multicitedelim%
+}%
+{}
 
 \DeclareCiteCommand{ycite}%
 {\usebibmacro{prenote}}%
@@ -3669,7 +3706,8 @@ test {\ifentrytype{jurisdiction}}%
 %numbered paragraphs cross-referencing method
 \newcommand\definname{para}
 \newcommand{\paradef}[1]{\label{#1}}
-\newcommand\pararef[1]{\definname\ [\ref{#1}]}
+%\newcommand\pararef[1]{\definname\ [\ref{#1}]}
+\newcommand\pararef[1]{\definname\ \iftoggle{parabrackets}{[\ref{#1}]}{\ref{#1}}}
 
 %user bib commands
 \newcommand\lcsec[1]{\bibstring{section}~#1}

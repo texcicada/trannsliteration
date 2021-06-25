@@ -75,6 +75,9 @@ parallel,
   courtlist,
   courtjurisdiction,
   courtcasenumber,%in-progress, the docket
+  casestatus, %unreported, etc
+  attribution, % J for the Court, for quote (qqcite)
+  courtfullname, % for when unreported etc
 %link
 	linkname,
 	url,
@@ -126,6 +129,9 @@ icaseyear,caseshortname,casenickname,decisionyear,parallel,
   courtlist,
   courtjurisdiction,
   courtcasenumber,
+  casestatus, %unreported, etc
+  attribution, % J for the Court, for quote (qqcite)
+  courtfullname, % for when unreported etc
 	linkname,
 	url,
 	mncurl,

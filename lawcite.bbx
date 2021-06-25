@@ -1,6 +1,10 @@
 \ProvidesFile{lawcite.bbx}[2020/04/11 v1.0 biblatex bibliography style]
 \RequireBibliographyStyle{ext-authortitle-ibid}
 %%%%%%%%% case
+%
+\newtoggle{parabrackets}
+\toggletrue{parabrackets}
+%
 \newtoggle{ibidpostdelimcomma}
 \togglefalse{ibidpostdelimcomma}
 %
@@ -91,6 +95,15 @@
 {\toggletrue{ibidpostdelimcomma}}
 {\togglefalse{ibidpostdelimcomma}}%
 }
+
+
+
+\DeclareBibliographyOption[boolean]{paragraph-number-brackets}[true]{%
+\ifstrequal{#1}{true}
+{\toggletrue{parabrackets}}
+{\togglefalse{parabrackets}}%
+}
+
 
 \DeclareBibliographyOption[boolean]{second-case-ref-brackets}[true]{%
 \ifstrequal{#1}{true}
@@ -469,6 +482,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{bookauthorgiven}   		
 		\togglefalse{ibidpostdelimcomma}
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
 \setlccurrentstyletag{\lcstyletagdefault}%
 }
 
@@ -506,6 +520,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{bookauthorgiven}     		
 		\togglefalse{ibidpostdelimcomma}
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
 \setlccurrentstyletag{\lcstyletagaglc}%
 }
 
@@ -541,6 +556,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{bookauthorgiven}     				   
 		\toggletrue{ibidpostdelimcomma}
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
 \setlccurrentstyletag{\lcstyletagmlr}%
 }
 
@@ -580,6 +596,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\toggletrue{bookauthorgiven}
 		\togglefalse{ibidpostdelimcomma}
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\togglefalse{parabrackets}
    \setlccurrentstyletag{\lcstyletagmcgill}%
 }
 
@@ -614,6 +631,7 @@ lccurrentstyle <\thelccurrentstyletag =\lccurrentstyle>%
 		\togglefalse{bookauthorgiven}     		
 		\toggletrue{ibidpostdelimcomma}
 %		\iftoggle{ibidpostdelimcomma}{\setpostnotedelimon}{\setpostnotedelimoff}
+		\toggletrue{parabrackets}
 \setlccurrentstyletag{\lcstyletagindigo}%
 }
 
