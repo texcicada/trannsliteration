@@ -117,9 +117,25 @@ quotetext,
 }
 
 \DeclareDatamodelEntryfields[case]{%
-partya,partyb,partysep,partysepx,caseyear,reportyear,reportvolume,%
-volyearneeded,reportseries,reportpage,courtname,casenumber,note,shipname,%
-icaseyear,caseshortname,casenickname,decisionyear,parallel,
+partya,
+partyb,
+partysep,
+partysepx,
+caseyear,
+reportyear,
+reportvolume,%
+volyearneeded,
+reportseries,
+reportpage,
+courtname,
+casenumber,
+note,
+shipname,%
+icaseyear,
+caseshortname,
+casenickname,
+decisionyear,
+parallel,
   partyasn,%party short name, eg: DPP
   partybsn,
   partyajur,%party jurisdiction

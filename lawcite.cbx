@@ -224,7 +224,10 @@
 
 %======== caseshortname
 \newbibmacro{getcaseshortname}{%
-\iffieldundef{shipname}{\iffieldundef{caseshortname}{}{\printfield{caseshortname}}}%
+\iffieldundef{shipname}{\iffieldundef{caseshortname}{%
+%if no caseshortname, use partya (if there is one)
+\iffieldundef{partya}{}{\printfield{partya}}%
+}{\printfield{caseshortname}}}%
 {\printfield{shipname}}%
 }
 
@@ -335,9 +338,19 @@
 \iffieldundef{note}
 {}%
 {%false
+%print note if not ibid:
+ \ifboolexpr{%
+  test {\ifcitation}
+  and
+  test {\ifciteseen}
+  and
+  test {\ifciteibid}
+  }%
+	{}{%not an ibid
  \setunit*{\addspace}%
  \printtext[parens]{%
  \printfield{note}%
+ }
 }}}
 
 
@@ -546,8 +559,9 @@ xxx}%
 
 
 
-\newcommand{\itemlabelset}[2]{%key+labeltag: if cs exists,, label has been created
-\expandafter\newcommand\csname #1#2\endcsname{#2}%
+\newcommand{\itemlabelset}[3]{%key+labeltag: if cs exists,, label has been created
+%\expandafter\newcommand\csname #1#2\endcsname{#1#2#3}%
+\global\csdef{#1#2}{#1#2#3}%
 }
 
 
@@ -577,6 +591,7 @@ xxx}%
   \iftoggle{ibidpostdelimcomma}%
   {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
   {\DeclareDelimFormat{postnotedelim}{\space}}%
+%	\textcolor{red}{BB}%
   \usebibmacro{postnote}%actual ibid
 %%%  \textcolor{red}{xx\ibidprevpintemp}%
   \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
@@ -594,7 +609,11 @@ xxx}%
   test {\ifcsdef{\thefield{entrykey}label}}
   }%
   {%\textcolor{red}{AA}%
-\usebibmacro{getcaseshortname}%
+  %if no shortname, use full name
+%%  \iffieldundef{caseshortname}{%start no shortname
+%%  \usebibmacro{getcasename}}{%
+\usebibmacro{getcaseshortname}
+%%}%end no shortname
 %  \addspace\mkbibparens{n \ref{cfn:\thefield{entrykey}}%
 %  }%
 %  \addcomma\addspace\mkbibemph{supra} note \ref{cfn:\thefield{entrykey}}%
@@ -633,8 +652,8 @@ xxx}%
 %% \thefield{entrykey}label%
  \ifboolexpr{%
   test {\ifcitation}
-  and
-  not test {\ifciteseen}
+%  and
+%  not test {\ifciteseen}
   and
   not test {\ifciteibid}
   and
@@ -643,8 +662,18 @@ xxx}%
   not test {\ifcsdef{\thefield{entrykey}label}}
   }%
 	{\label{cfn:\thefield{entrykey}}%
-	\itemlabelset{\thefield{entrykey}}{label}%
+	\itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%
+%	\textcolor{red}{AA}%
 	}{}%
+% \ifboolexpr{%
+%  test {\iffootnote}
+%  and
+%  not test {\ifcsdef{\thefield{entrykey}label}}
+%  }%
+%	{\label{cfn:\thefield{entrykey}}%
+%	\itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%
+%	>>\textcolor{red}{AA\csname \thefield{entrykey}label\endcsname}<<%
+%	}{}%
 }}
 
 
@@ -1384,6 +1413,27 @@ x#1;;
 }%
 
 
+
+\DeclareCiteCommand{qcitetextnoqq}%
+{\usebibmacro{prenote}}%
+{%
+\printfield[plain]{quotetext}%
+}%
+{}%
+{\usebibmacro{postnote}}%
+
+
+\DeclareCiteCommand{qcitetext}%
+{\usebibmacro{prenote}}%
+{%
+\printfield{quotetext}%
+}%
+{}%
+{\usebibmacro{postnote}}%
+
+
+
+
 \DeclareCiteCommand{qcite}%
 {\usebibmacro{prenote}}%
 {%
@@ -1410,7 +1460,7 @@ x#1;;
 \medskip{%
 \DeclareNameAlias[quote]{author}{given-family}%
 \iffieldundef{partya}{\hfill}{}\textemdash\addspace\printnames{author}%
-}\iffieldundef{author}{}{\par}%
+}\ifnameundef{author}{}{\par}%
 %\printnames{editor}%
 \printfield{title}%if there is one
 \iffieldundef{partya}{}{{\small\usebibmacro{getcasenameref}}}%if it's a case
@@ -2605,7 +2655,12 @@ test {\ifentrytype{case}}%
 \addspace%
 \usebibmacro{getljarticlepage}%
 \iffieldundef{related}{}{\addspace\usebibmacro{related}}%
-\iffieldundef{url}{}{\addspace\printtext[angles]{\usebibmacro{getljarticleurl}}}%
+\iffieldundef{url}{}{%
+%put postnote before url:
+\iffieldundef{postnote}{}{%
+\DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
+\usebibmacro{postnote}%
+\addspace\printtext[angles]{\usebibmacro{getljarticleurl}}}}%
 \newunit\newblock%
 }
 
@@ -3018,7 +3073,10 @@ test {\ifentrytype{case}}%
   {}%nothing
   {%if not ibid, then:
 %%  \textcolor{red}{CC}%
+		%if url, then postnote has already been printed
+		\iffieldundef{url}{%
   \usebibmacro{postnote}%
+  }{}%
 %%  \textcolor{red}{DD}%
   \iffieldundef{note}{}{\addspace\printfield[parens]{note}}%
 		}%
