@@ -588,6 +588,8 @@ xxx}%
 %%%\ifdefstrequal{\ibidprevpintemp}{\thefield{postnote}}%
 %%%{}%do nothing extra
 %%%{%otherwise:
+\ifloccit{}%end loccit true
+  {%start loccit false
   \iftoggle{ibidpostdelimcomma}%
   {\DeclareDelimFormat{postnotedelim}{\addcomma\space}}%
   {\DeclareDelimFormat{postnotedelim}{\space}}%
@@ -595,6 +597,7 @@ xxx}%
   \usebibmacro{postnote}%actual ibid
 %%%  \textcolor{red}{xx\ibidprevpintemp}%
   \DeclareDelimFormat{postnotedelim}{\addcomma\space}%restore
+}%end loccit false
 %%%  \renewcommand{\ibidprevpintemp}{\thefield{postnote}}%
 %%%}%
 %  \textcolor{red}{BB}%
@@ -662,7 +665,7 @@ xxx}%
   not test {\ifcsdef{\thefield{entrykey}label}}
   }%
 	{\label{cfn:\thefield{entrykey}}%
-	\itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%
+	\itemlabelset{\thefield{entrykey}}{label}{\thefootnote}%tracking
 %	\textcolor{red}{AA}%
 	}{}%
 % \ifboolexpr{%
@@ -3365,6 +3368,96 @@ test {\ifentrytype{case}}%
 \DeclareMultiCiteCommand{\yycites}{yycite}{\multicitedelim}
 %
 %%\DeclareMultiCiteCommand{\lawcitesinline}{lcinline}{\multicitedelim}%different cases
+
+
+
+
+
+\newbibmacro{getlcdcase}{%
+{%
+\ttfamily\ \par
+@\thefield{entrytype}\{\thefield{entrykey},\par%
+\noindent\iffieldundef{attribution}{}{attribution =  \{\thefield{attribution}\},\par}%
+\noindent\iffieldundef{author}{}{author =  \{\thefield{author}\},\par}%
+\noindent\iffieldundef{casename}{}{casename =  \{\thefield{casename}\},\par}%
+\noindent\iffieldundef{casenickname}{}{casenickname =  \{\thefield{casenickname}\},\par}%
+\noindent\iffieldundef{casenumber}{}{casenumber =  \{\thefield{casenumber}\},\par}%
+\noindent\iffieldundef{caseshortname}{}{caseshortname =  \{\thefield{caseshortname}\},\par}%
+\noindent\iffieldundef{casestatus}{}{casestatus =  \{\thefield{casestatus}\},\par}%
+\noindent\iffieldundef{caseyear}{}{caseyear =  \{\thefield{caseyear}\},\par}%
+\noindent\iffieldundef{chapter}{}{chapter =  \{\thefield{chapter}\},\par}%
+\noindent\iffieldundef{citeref}{}{citeref =  \{\thefield{citeref}\},\par}%
+\noindent\iffieldundef{courtcasenumber}{}{courtcasenumber =  \{\thefield{courtcasenumber}\},\par}%
+\noindent\iffieldundef{courtdivision}{}{courtdivision =  \{\thefield{courtdivision}\},\par}%
+\noindent\iffieldundef{courtfullname}{}{courtfullname =  \{\thefield{courtfullname}\},\par}%
+\noindent\iffieldundef{courtjurisdiction}{}{courtjurisdiction =  \{\thefield{courtjurisdiction}\},\par}%
+\noindent\iffieldundef{courtlist}{}{courtlist =  \{\thefield{courtlist}\},\par}%
+\noindent\iffieldundef{courtname}{}{courtname =  \{\thefield{courtname}\},\par}%
+\noindent\iffieldundef{date}{}{date =  \{\thefield{date}\},\par}%
+\noindent\iffieldundef{decisionyear}{}{decisionyear =  \{\thefield{decisionyear}\},\par}%
+\noindent\iffieldundef{fulldate}{}{fulldate =  \{\thefield{fulldate}\},\par}%
+\noindent\iffieldundef{gazette}{}{gazette =  \{\thefield{gazette}\},\par}%
+\noindent\iffieldundef{icaseyear}{}{icaseyear =  \{\thefield{icaseyear}\},\par}%
+\noindent\iffieldundef{journaltitle}{}{journaltitle =  \{\thefield{journaltitle}\},\par}%
+\noindent\iffieldundef{keywords}{}{keywords =  \{\thefield{keywords}\},\par}%
+\noindent\iffieldundef{linkname}{}{linkname =  \{\thefield{linkname}\},\par}%
+\noindent\iffieldundef{mncname}{}{mncname =  \{\thefield{mncname}\},\par}%
+\noindent\iffieldundef{mncnumber}{}{mncnumber =  \{\thefield{mncnumber}\},\par}%
+\noindent\iffieldundef{mncurl}{}{mncurl =  \{\thefield{mncurl}\},\par}%
+\noindent\iffieldundef{mncyear}{}{mncyear =  \{\thefield{mncyear}\},\par}%
+\noindent\iffieldundef{note}{}{note =  \{\thefield{note}\},\par}%
+\noindent\iffieldundef{pages}{}{pages =  \{\thefield{pages}\},\par}%
+\noindent\iffieldundef{parallel}{}{parallel =  \{\thefield{parallel}\},\par}%
+\noindent\iffieldundef{partya}{}{partya =  \{\thefield{partya}\},\par}%
+\noindent\iffieldundef{partyajur}{}{partyajur =  \{\thefield{partyajur}\},\par}%
+\noindent\iffieldundef{partyasn}{}{partyasn =  \{\thefield{partyasn}\},\par}%
+\noindent\iffieldundef{partyb}{}{partyb =  \{\thefield{partyb}\},\par}%
+\noindent\iffieldundef{partybjur}{}{partybjur =  \{\thefield{partybjur}\},\par}%
+\noindent\iffieldundef{partybsn}{}{partybsn =  \{\thefield{partybsn}\},\par}%
+\noindent\iffieldundef{partysep}{}{partysep =  \{\thefield{partysep}\},\par}%
+\noindent\iffieldundef{partysepx}{}{partysepx =  \{\thefield{partysepx}\},\par}%
+\noindent\iffieldundef{regnum}{}{regnum =  \{\thefield{regnum}\},\par}%
+\noindent\iffieldundef{reportpage}{}{reportpage =  \{\thefield{reportpage}\},\par}%
+\noindent\iffieldundef{reportseries}{}{reportseries =  \{\thefield{reportseries}\},\par}%
+\noindent\iffieldundef{reportvolume}{}{reportvolume =  \{\thefield{reportvolume}\},\par}%
+\noindent\iffieldundef{reportyear}{}{reportyear =  \{\thefield{reportyear}\},\par}%
+\noindent\iffieldundef{shipname}{}{shipname =  \{\thefield{shipname}\},\par}%
+\noindent\iffieldundef{shortname}{}{shortname =  \{\thefield{shortname}\},\par}%
+\noindent\iffieldundef{statutechapter}{}{statutechapter =  \{\thefield{statutechapter}\},\par}%
+\noindent\iffieldundef{statutejurisdiction}{}{statutejurisdiction =  \{\thefield{statutejurisdiction}\},\par}%
+\noindent\iffieldundef{statutelongtitle}{}{statutelongtitle =  \{\thefield{statutelongtitle}\},\par}%
+\noindent\iffieldundef{statutenickname}{}{statutenickname =  \{\thefield{statutenickname}\},\par}%
+\noindent\iffieldundef{statuteregnalyear}{}{statuteregnalyear =  \{\thefield{statuteregnalyear}\},\par}%
+\noindent\iffieldundef{statuteshorttitle}{}{statuteshorttitle =  \{\thefield{statuteshorttitle}\},\par}%
+\noindent\iffieldundef{statutetitle}{}{statutetitle =  \{\thefield{statutetitle}\},\par}%
+\noindent\iffieldundef{statutetitleyear}{}{statutetitleyear =  \{\thefield{statutetitleyear}\},\par}%
+\noindent\iffieldundef{statutevolume}{}{statutevolume =  \{\thefield{statutevolume}\},\par}%
+\noindent\iffieldundef{statuteyear}{}{statuteyear =  \{\thefield{statuteyear}\},\par}%
+\noindent\iffieldundef{svjy}{}{svjy =  \{\thefield{svjy}\},\par}%
+\noindent\iffieldundef{title}{}{title =  \{\thefield{title}\},\par}%
+\noindent\iffieldundef{url}{}{url =  \{\thefield{url}\},\par}%
+\noindent\iffieldundef{volume}{}{volume =  \{\thefield{volume}\},\par}%
+\noindent\iffieldundef{volyearneeded}{}{volyearneeded =  \{\thefield{volyearneeded}\},\par}%
+\noindent\iffieldundef{year}{}{year =  \{\thefield{year}\},\par}%
+\noindent\iffieldundef{crossref}{}{crossref =  \{\thefield{crossref}\},\par}%
+\noindent\iffieldundef{xdata}{}{xdata =  \{\thefield{xdata}\},\par}%
+\noindent\iffieldundef{related}{}{related =  \{\thefield{related}\},\par}%
+}}
+
+%============= lcdcase
+\DeclareCiteCommand{lcdcase}%
+%@@@@@@@@@@@@@@@@ prenote
+{\usebibmacro{prenote}}%
+%@@@@@@@@@@@@@@@@ item
+{%
+\usebibmacro{getlcdcase}%
+}%end item
+%@@@@@@@@@@@@@@@@ delim
+{\multicitedelim}%
+%@@@@@@@@@@@@@@@@ postnote
+{\usebibmacro{postnote}}%
+
+
 
 
 % sundry commands
