@@ -1,0 +1,2122 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\newfontfamily\fipa[Colour=blue]{Noto Serif}
+\newfontfamily\ipafont[Colour=violet]{Noto Serif}
+%=====
+\input{metacs_input.tex}
+
+% Common code
+\ExplSyntaxOn
+
+\tl_new:N \l_myuc_tl
+\tl_new:N \l_myun_tl
+\tl_new:N \l_myts_tl
+%\tl_new:N \l_myb_tl %defined in metacs.tex
+\tl_new:N \l_myx_tl
+\tl_new:N \l_myy_tl
+\tl_new:N \l_myz_tl
+\tl_new:N \l_myzz_tl
+\tl_new:N \l_myrev_tl
+
+
+%-----   Unicode codepoint
+\newcommand\doipatransuc{%
+%
+\tl_replace_all:Nnn \l_myuc_tl  { // } { ሴ𒓡𒓢}
+\tl_replace_all:Nnn \l_myuc_tl  { / }  {  } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0250 }  { ɐ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0251 }  { ɑ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0252 }  { ɒ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0253 }  { ɓ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0254 }  { ɔ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0255 }  { ɕ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0256 }  { ɖ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0257 }  { ɗ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0258 }  { ɘ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0259 }  { ə } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+025A }  { ɚ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+025B }  { ɛ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+025C }  { ɜ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+025D }  { ɝ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+025E }  { ɞ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+025F }  { ɟ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0260 }  { ɠ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0261 }  { ɡ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0262 }  { ɢ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0263 }  { ɣ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0264 }  { ɤ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0265 }  { ɥ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0266 }  { ɦ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0267 }  { ɧ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0268 }  { ɨ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0269 }  { ɩ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+026A }  { ɪ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+026B }  { ɫ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+026C }  { ɬ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+026D }  { ɭ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+026E }  { ɮ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+026F }  { ɯ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0270 }  { ɰ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0271 }  { ɱ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0272 }  { ɲ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0273 }  { ɳ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0274 }  { ɴ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0275 }  { ɵ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0276 }  { ɶ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0277 }  { ɷ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0278 }  { ɸ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0279 }  { ɹ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+027A }  { ɺ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+027B }  { ɻ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+027C }  { ɼ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+027D }  { ɽ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+027E }  { ɾ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+027F }  { ɿ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0280 }  { ʀ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0281 }  { ʁ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0282 }  { ʂ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0283 }  { ʃ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0284 }  { ʄ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0285 }  { ʅ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0286 }  { ʆ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0287 }  { ʇ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0288 }  { ʈ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0289 }  { ʉ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+028A }  { ʊ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+028B }  { ʋ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+028C }  { ʌ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+028D }  { ʍ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+028E }  { ʎ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+028F }  { ʏ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0290 }  { ʐ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0291 }  { ʑ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0292 }  { ʒ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0293 }  { ʓ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0294 }  { ʔ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0295 }  { ʕ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0296 }  { ʖ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0297 }  { ʗ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0298 }  { ʘ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+0299 }  { ʙ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+029A }  { ʚ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+029B }  { ʛ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+029C }  { ʜ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+029D }  { ʝ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+029E }  { ʞ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+029F }  { ʟ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A0 }  { ʠ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A1 }  { ʡ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A2 }  { ʢ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A3 }  { ʣ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A4 }  { ʤ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A5 }  { ʥ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A6 }  { ʦ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A7 }  { ʧ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A8 }  { ʨ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02A9 }  { ʩ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02AA }  { ʪ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02AB }  { ʫ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02AC }  { ʬ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02AD }  { ʭ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02AE }  { ʮ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02AF }  { ʯ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B0 }  { ʰ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B1 }  { ʱ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B2 }  { ʲ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B3 }  { ʳ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B4 }  { ʴ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B5 }  { ʵ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B6 }  { ʶ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B7 }  { ʷ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B8 }  { ʸ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02B9 }  { ʹ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02BA }  { ʺ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02BB }  { ʻ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02BC }  { ʼ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02BD }  { ʽ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02BE }  { ʾ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02BF }  { ʿ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C0 }  { ˀ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C1 }  { ˁ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C2 }  { ˂ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C3 }  { ˃ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C4 }  { ˄ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C5 }  { ˅ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C6 }  { ˆ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C7 }  { ˇ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C8 }  { ˈ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02C9 }  { ˉ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02CA }  { ˊ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02CB }  { ˋ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02CC }  { ˌ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02CD }  { ˍ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02CE }  { ˎ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02CF }  { ˏ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D0 }  { ː } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D1 }  { ˑ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D2 }  { ˒ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D3 }  { ˓ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D4 }  { ˔ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D5 }  { ˕ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D6 }  { ˖ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D7 }  { ˗ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D8 }  { ˘ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02D9 }  { ˙ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02DA }  { ˚ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02DB }  { ˛ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02DC }  { ˜ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02DD }  { ˝ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02DE }  { ˞ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02DF }  { ˟ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E0 }  { ˠ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E1 }  { ˡ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E2 }  { ˢ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E3 }  { ˣ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E4 }  { ˤ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E5 }  { ˥ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E6 }  { ˦ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E7 }  { ˧ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E8 }  { ˨ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02E9 }  { ˩ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02EA }  { ˪ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02EB }  { ˫ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02EC }  { ˬ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02ED }  { ˭ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02EE }  { ˮ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02EF }  { ˯ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F0 }  { ˰ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F1 }  { ˱ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F2 }  { ˲ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F3 }  { ˳ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F4 }  { ˴ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F5 }  { ˵ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F6 }  { ˶ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F7 }  { ˷ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F8 }  { ˸ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02F9 }  { ˹ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02FA }  { ˺ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02FB }  { ˻ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02FC }  { ˼ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02FD }  { ˽ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02FE }  { ˾ } 
+\tl_replace_all:Nnn \l_myuc_tl  { U+02FF }  { ˿ } 
+%
+\tl_replace_all:Nnn \l_myuc_tl { ሴ𒓡𒓢} { / } 
+}
+%---
+%-----   Unicode name
+\newcommand\doipatransun{%
+\tl_replace_all:Nnn \l_myun_tl  { // } { ሴ𒓡𒓢}
+\tl_replace_all:Nnn \l_myun_tl { / }  {  } 
+\tl_replace_all:Nnn \l_myun_tl { reversedglottalstopwithstroke }  { ʢ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedhwithfishhookandtail }  { ʯ } 
+\tl_replace_all:Nnn \l_myun_tl { mlsmallreversedglottalstop }  { ˤ } 
+\tl_replace_all:Nnn \l_myun_tl { dotlessjwithstrokeandhook }  { ʄ } 
+\tl_replace_all:Nnn \l_myun_tl { pharyngealvoicedfricative }  { ʕ } 
+\tl_replace_all:Nnn \l_myun_tl { mlmiddledoublegraveaccent }  { ˵ } 
+\tl_replace_all:Nnn \l_myun_tl { mlmiddledoubleacuteaccent }  { ˶ } 
+\tl_replace_all:Nnn \l_myun_tl { mlyangdepartingtonemark }  { ˫ } 
+\tl_replace_all:Nnn \l_myun_tl { mlcentredrighthalfring }  { ˒ } 
+\tl_replace_all:Nnn \l_myun_tl { mlyindepartingtonemark }  { ˪ } 
+\tl_replace_all:Nnn \l_myun_tl { reversedopenewithhook }  { ɝ } 
+\tl_replace_all:Nnn \l_myun_tl { reversedrwithfishhook }  { ɿ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitalinvertedr }  { ʁ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitalgwithhook }  { ʛ } 
+\tl_replace_all:Nnn \l_myun_tl { glottalstopwithstroke }  { ʡ } 
+\tl_replace_all:Nnn \l_myun_tl { mlreversedglottalstop }  { ˁ } 
+\tl_replace_all:Nnn \l_myun_tl { mlhalftriangularcolon }  { ˑ } 
+\tl_replace_all:Nnn \l_myun_tl { mlcentredlefthalfring }  { ˓ } 
+\tl_replace_all:Nnn \l_myun_tl { closedreversedopene }  { ɞ } 
+\tl_replace_all:Nnn \l_myun_tl { invertedglottalstop }  { ʖ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedhwithfishhook }  { ʮ } 
+\tl_replace_all:Nnn \l_myun_tl { mldoubleacuteaccent }  { ˝ } 
+\tl_replace_all:Nnn \l_myun_tl { mlextra-hightonebar }  { ˥ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowrightarrowhead }  { ˲ } 
+\tl_replace_all:Nnn \l_myun_tl { mlmiddlegraveaccent }  { ˴ } 
+\tl_replace_all:Nnn \l_myun_tl { dotlessjwithstroke }  { ɟ } 
+\tl_replace_all:Nnn \l_myun_tl { lwithretroflexhook }  { ɭ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedmwithlongleg }  { ɰ } 
+\tl_replace_all:Nnn \l_myun_tl { nwithretroflexhook }  { ɳ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedrwithlongleg }  { ɺ } 
+\tl_replace_all:Nnn \l_myun_tl { twithretroflexhook }  { ʈ } 
+\tl_replace_all:Nnn \l_myun_tl { zwithretroflexhook }  { ʐ } 
+\tl_replace_all:Nnn \l_myun_tl { bilabialpercussive }  { ʬ } 
+\tl_replace_all:Nnn \l_myun_tl { bidentalpercussive }  { ʭ } 
+\tl_replace_all:Nnn \l_myun_tl { mlcapitalinvertedr }  { ʶ } 
+\tl_replace_all:Nnn \l_myun_tl { mlcircumflexaccent }  { ˆ } 
+\tl_replace_all:Nnn \l_myun_tl { mlextra-lowtonebar }  { ˩ } 
+\tl_replace_all:Nnn \l_myun_tl { mldoubleapostrophe }  { ˮ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowdownarrowhead }  { ˯ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowleftarrowhead }  { ˱ } 
+\tl_replace_all:Nnn \l_myun_tl { jwithcrossed-tail }  { ʝ } 
+\tl_replace_all:Nnn \l_myun_tl { dzdigraphwithcurl }  { ʥ } 
+\tl_replace_all:Nnn \l_myun_tl { tcdigraphwithcurl }  { ʨ } 
+\tl_replace_all:Nnn \l_myun_tl { mlturnedrwithhook }  { ʵ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowverticalline }  { ˌ } 
+\tl_replace_all:Nnn \l_myun_tl { mltriangularcolon }  { ː } 
+\tl_replace_all:Nnn \l_myun_tl { lwithmiddletilde }  { ɫ } 
+\tl_replace_all:Nnn \l_myun_tl { squatreversedesh }  { ʅ } 
+\tl_replace_all:Nnn \l_myun_tl { mlrightarrowhead }  { ˃ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowgraveaccent }  { ˎ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowacuteaccent }  { ˏ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowuparrowhead }  { ˰ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedrwithhook }  { ɻ } 
+\tl_replace_all:Nnn \l_myun_tl { mlreversedcomma }  { ʽ } 
+\tl_replace_all:Nnn \l_myun_tl { mlrighthalfring }  { ʾ } 
+\tl_replace_all:Nnn \l_myun_tl { mlleftarrowhead }  { ˂ } 
+\tl_replace_all:Nnn \l_myun_tl { mldownarrowhead }  { ˅ } 
+\tl_replace_all:Nnn \l_myun_tl { mlbeginhightone }  { ˹ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitaloe }  { ɶ } 
+\tl_replace_all:Nnn \l_myun_tl { mllefthalfring }  { ʿ } 
+\tl_replace_all:Nnn \l_myun_tl { mlverticalline }  { ˈ } 
+\tl_replace_all:Nnn \l_myun_tl { mlbeginlowtone }  { ˻ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowleftarrow }  { ˿ } 
+\tl_replace_all:Nnn \l_myun_tl { schwawithhook }  { ɚ } 
+\tl_replace_all:Nnn \l_myun_tl { reversedopene }  { ɜ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitalg }  { ɢ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitali }  { ɪ } 
+\tl_replace_all:Nnn \l_myun_tl { nwithlefthook }  { ɲ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitaln }  { ɴ } 
+\tl_replace_all:Nnn \l_myun_tl { rwithfishhook }  { ɾ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitalr }  { ʀ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitaly }  { ʏ } 
+\tl_replace_all:Nnn \l_myun_tl { bilabialclick }  { ʘ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitalb }  { ʙ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitalh }  { ʜ } 
+\tl_replace_all:Nnn \l_myun_tl { smallcapitall }  { ʟ } 
+\tl_replace_all:Nnn \l_myun_tl { mldoubleprime }  { ʺ } 
+\tl_replace_all:Nnn \l_myun_tl { mlturnedcomma }  { ʻ } 
+\tl_replace_all:Nnn \l_myun_tl { mlglottalstop }  { ˀ } 
+\tl_replace_all:Nnn \l_myun_tl { mluparrowhead }  { ˄ } 
+\tl_replace_all:Nnn \l_myun_tl { mlacuteaccent }  { ˊ } 
+\tl_replace_all:Nnn \l_myun_tl { mlgraveaccent }  { ˋ } 
+\tl_replace_all:Nnn \l_myun_tl { mlcrossaccent }  { ˟ } 
+\tl_replace_all:Nnn \l_myun_tl { mlhightonebar }  { ˦ } 
+\tl_replace_all:Nnn \l_myun_tl { mlunaspirated }  { ˭ } 
+\tl_replace_all:Nnn \l_myun_tl { mlraisedcolon }  { ˸ } 
+\tl_replace_all:Nnn \l_myun_tl { mlendhightone }  { ˺ } 
+\tl_replace_all:Nnn \l_myun_tl { hengwithhook }  { ɧ } 
+\tl_replace_all:Nnn \l_myun_tl { rwithlongleg }  { ɼ } 
+\tl_replace_all:Nnn \l_myun_tl { mlapostrophe }  { ʼ } 
+\tl_replace_all:Nnn \l_myun_tl { mlsmalltilde }  { ˜ } 
+\tl_replace_all:Nnn \l_myun_tl { mlrhotichook }  { ˞ } 
+\tl_replace_all:Nnn \l_myun_tl { mlsmallgamma }  { ˠ } 
+\tl_replace_all:Nnn \l_myun_tl { mlmidtonebar }  { ˧ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowtonebar }  { ˨ } 
+\tl_replace_all:Nnn \l_myun_tl { mlendlowtone }  { ˼ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedalpha }  { ɒ } 
+\tl_replace_all:Nnn \l_myun_tl { iwithstroke }  { ɨ } 
+\tl_replace_all:Nnn \l_myun_tl { closedomega }  { ɷ } 
+\tl_replace_all:Nnn \l_myun_tl { eshwithcurl }  { ʆ } 
+\tl_replace_all:Nnn \l_myun_tl { ezhwithcurl }  { ʓ } 
+\tl_replace_all:Nnn \l_myun_tl { glottalstop }  { ʔ } 
+\tl_replace_all:Nnn \l_myun_tl { closedopene }  { ʚ } 
+\tl_replace_all:Nnn \l_myun_tl { dezhdigraph }  { ʤ } 
+\tl_replace_all:Nnn \l_myun_tl { teshdigraph }  { ʧ } 
+\tl_replace_all:Nnn \l_myun_tl { fengdigraph }  { ʩ } 
+\tl_replace_all:Nnn \l_myun_tl { mlhwithhook }  { ʱ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowmacron }  { ˍ } 
+\tl_replace_all:Nnn \l_myun_tl { mlminussign }  { ˗ } 
+\tl_replace_all:Nnn \l_myun_tl { mlringabove }  { ˚ } 
+\tl_replace_all:Nnn \l_myun_tl { mlopenshelf }  { ˾ } 
+\tl_replace_all:Nnn \l_myun_tl { stretchedc }  { ʗ } 
+\tl_replace_all:Nnn \l_myun_tl { mldowntack }  { ˕ } 
+\tl_replace_all:Nnn \l_myun_tl { mlplussign }  { ˖ } 
+\tl_replace_all:Nnn \l_myun_tl { mldotabove }  { ˙ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowtilde }  { ˷ } 
+\tl_replace_all:Nnn \l_myun_tl { bwithhook }  { ɓ } 
+\tl_replace_all:Nnn \l_myun_tl { cwithcurl }  { ɕ } 
+\tl_replace_all:Nnn \l_myun_tl { dwithtail }  { ɖ } 
+\tl_replace_all:Nnn \l_myun_tl { dwithhook }  { ɗ } 
+\tl_replace_all:Nnn \l_myun_tl { reversede }  { ɘ } 
+\tl_replace_all:Nnn \l_myun_tl { gwithhook }  { ɠ } 
+\tl_replace_all:Nnn \l_myun_tl { hwithhook }  { ɦ } 
+\tl_replace_all:Nnn \l_myun_tl { lwithbelt }  { ɬ } 
+\tl_replace_all:Nnn \l_myun_tl { mwithhook }  { ɱ } 
+\tl_replace_all:Nnn \l_myun_tl { rwithtail }  { ɽ } 
+\tl_replace_all:Nnn \l_myun_tl { swithhook }  { ʂ } 
+\tl_replace_all:Nnn \l_myun_tl { vwithhook }  { ʋ } 
+\tl_replace_all:Nnn \l_myun_tl { zwithcurl }  { ʑ } 
+\tl_replace_all:Nnn \l_myun_tl { qwithhook }  { ʠ } 
+\tl_replace_all:Nnn \l_myun_tl { dzdigraph }  { ʣ } 
+\tl_replace_all:Nnn \l_myun_tl { tsdigraph }  { ʦ } 
+\tl_replace_all:Nnn \l_myun_tl { lsdigraph }  { ʪ } 
+\tl_replace_all:Nnn \l_myun_tl { lzdigraph }  { ʫ } 
+\tl_replace_all:Nnn \l_myun_tl { mlturnedr }  { ʴ } 
+\tl_replace_all:Nnn \l_myun_tl { mlvoicing }  { ˬ } 
+\tl_replace_all:Nnn \l_myun_tl { mllowring }  { ˳ } 
+\tl_replace_all:Nnn \l_myun_tl { ramshorn }  { ɤ } 
+\tl_replace_all:Nnn \l_myun_tl { mlmacron }  { ˉ } 
+\tl_replace_all:Nnn \l_myun_tl { mluptack }  { ˔ } 
+\tl_replace_all:Nnn \l_myun_tl { mlogonek }  { ˛ } 
+\tl_replace_all:Nnn \l_myun_tl { mlsmalll }  { ˡ } 
+\tl_replace_all:Nnn \l_myun_tl { mlsmalls }  { ˢ } 
+\tl_replace_all:Nnn \l_myun_tl { mlsmallx }  { ˣ } 
+\tl_replace_all:Nnn \l_myun_tl { turneda }  { ɐ } 
+\tl_replace_all:Nnn \l_myun_tl { scriptg }  { ɡ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedh }  { ɥ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedm }  { ɯ } 
+\tl_replace_all:Nnn \l_myun_tl { barredo }  { ɵ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedr }  { ɹ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedt }  { ʇ } 
+\tl_replace_all:Nnn \l_myun_tl { upsilon }  { ʊ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedv }  { ʌ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedw }  { ʍ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedy }  { ʎ } 
+\tl_replace_all:Nnn \l_myun_tl { turnedk }  { ʞ } 
+\tl_replace_all:Nnn \l_myun_tl { mlprime }  { ʹ } 
+\tl_replace_all:Nnn \l_myun_tl { mlcaron }  { ˇ } 
+\tl_replace_all:Nnn \l_myun_tl { mlbreve }  { ˘ } 
+\tl_replace_all:Nnn \l_myun_tl { mlshelf }  { ˽ } 
+\tl_replace_all:Nnn \l_myun_tl { alpha }  { ɑ } 
+\tl_replace_all:Nnn \l_myun_tl { openo }  { ɔ } 
+\tl_replace_all:Nnn \l_myun_tl { schwa }  { ə } 
+\tl_replace_all:Nnn \l_myun_tl { opene }  { ɛ } 
+\tl_replace_all:Nnn \l_myun_tl { gamma }  { ɣ } 
+\tl_replace_all:Nnn \l_myun_tl { iota }  { ɩ } 
+\tl_replace_all:Nnn \l_myun_tl { lezh }  { ɮ } 
+\tl_replace_all:Nnn \l_myun_tl { ubar }  { ʉ } 
+\tl_replace_all:Nnn \l_myun_tl { phi }  { ɸ } 
+\tl_replace_all:Nnn \l_myun_tl { esh }  { ʃ } 
+\tl_replace_all:Nnn \l_myun_tl { ezh }  { ʒ } 
+\tl_replace_all:Nnn \l_myun_tl { mlh }  { ʰ } 
+\tl_replace_all:Nnn \l_myun_tl { mlj }  { ʲ } 
+\tl_replace_all:Nnn \l_myun_tl { mlr }  { ʳ } 
+\tl_replace_all:Nnn \l_myun_tl { mlw }  { ʷ } 
+\tl_replace_all:Nnn \l_myun_tl { mly }  { ʸ } 
+%
+\tl_replace_all:Nnn \l_myun_tl { ሴ𒓡𒓢} { / } 
+}
+%-----
+%-----   Typing shortcut
+\newcommand\doipatransts{%
+%
+\tl_replace_all:Nnn \l_myts_tl  { // } { ሴ𒓡𒓢}\tl_replace_all:Nnn \l_myts_tl { / }  {  } 
+\tl_replace_all:Nnn \l_myts_tl { eopenreverseclose }  { ɞ } 
+\tl_replace_all:Nnn \l_myts_tl { hturnfishhooktail }  { ʯ } 
+\tl_replace_all:Nnn \l_myts_tl { mlrsmallcapinvert }  { ʶ } 
+\tl_replace_all:Nnn \l_myts_tl { eopenreversehook }  { ɝ } 
+\tl_replace_all:Nnn \l_myts_tl { rreversefishhook }  { ɿ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgsreversesmall }  { ˤ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhrightlow }  { ˲ } 
+\tl_replace_all:Nnn \l_myts_tl { rinvertsmallcap }  { ʁ } 
+\tl_replace_all:Nnn \l_myts_tl { jdotlessbarhook }  { ʄ } 
+\tl_replace_all:Nnn \l_myts_tl { eshreversesquat }  { ʅ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhdownlow }  { ˯ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhleftlow }  { ˱ } 
+\tl_replace_all:Nnn \l_myts_tl { mlcommareverse }  { ʽ } 
+\tl_replace_all:Nnn \l_myts_tl { mltricolonhalf }  { ˑ } 
+\tl_replace_all:Nnn \l_myts_tl { mlacutedmiddle }  { ˶ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowleftlow }  { ˿ } 
+\tl_replace_all:Nnn \l_myts_tl { ghooksmallcap }  { ʛ } 
+\tl_replace_all:Nnn \l_myts_tl { hturnfishhook }  { ʮ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhright }  { ˃ } 
+\tl_replace_all:Nnn \l_myts_tl { mlacutedouble }  { ˝ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhuplow }  { ˰ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgravemiddle }  { ˴ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgravedouble }  { ˵ } 
+\tl_replace_all:Nnn \l_myts_tl { mlcolonraised }  { ˸ } 
+\tl_replace_all:Nnn \l_myts_tl { eopenreverse }  { ɜ } 
+\tl_replace_all:Nnn \l_myts_tl { rturnlongleg }  { ɺ } 
+\tl_replace_all:Nnn \l_myts_tl { gsreversebar }  { ʢ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhleft }  { ˂ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhdown }  { ˅ } 
+\tl_replace_all:Nnn \l_myts_tl { mlringrightc }  { ˒ } 
+\tl_replace_all:Nnn \l_myts_tl { mlhookrhotic }  { ˞ } 
+\tl_replace_all:Nnn \l_myts_tl { jdotlessbar }  { ɟ } 
+\tl_replace_all:Nnn \l_myts_tl { mlrturnhook }  { ʵ } 
+\tl_replace_all:Nnn \l_myts_tl { mlcommaturn }  { ʻ } 
+\tl_replace_all:Nnn \l_myts_tl { mlringright }  { ʾ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgsreverse }  { ˁ } 
+\tl_replace_all:Nnn \l_myts_tl { mlmacronlow }  { ˍ } 
+\tl_replace_all:Nnn \l_myts_tl { mlringleftc }  { ˓ } 
+\tl_replace_all:Nnn \l_myts_tl { mlringabove }  { ˚ } 
+\tl_replace_all:Nnn \l_myts_tl { mlhighbegin }  { ˹ } 
+\tl_replace_all:Nnn \l_myts_tl { mlshelfopen }  { ˾ } 
+\tl_replace_all:Nnn \l_myts_tl { mtulongleg }  { ɰ } 
+\tl_replace_all:Nnn \l_myts_tl { oesmallcap }  { ɶ } 
+\tl_replace_all:Nnn \l_myts_tl { omegaclose }  { ɷ } 
+\tl_replace_all:Nnn \l_myts_tl { eopenclose }  { ʚ } 
+\tl_replace_all:Nnn \l_myts_tl { jcrosstail }  { ʝ } 
+\tl_replace_all:Nnn \l_myts_tl { blibalperc }  { ʬ } 
+\tl_replace_all:Nnn \l_myts_tl { bidentperc }  { ʭ } 
+\tl_replace_all:Nnn \l_myts_tl { mlringleft }  { ʿ } 
+\tl_replace_all:Nnn \l_myts_tl { mlarrowhup }  { ˄ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgravelow }  { ˎ } 
+\tl_replace_all:Nnn \l_myts_tl { mlacutelow }  { ˏ } 
+\tl_replace_all:Nnn \l_myts_tl { mltricolon }  { ː } 
+\tl_replace_all:Nnn \l_myts_tl { mltackdown }  { ˕ } 
+\tl_replace_all:Nnn \l_myts_tl { mldotabove }  { ˙ } 
+\tl_replace_all:Nnn \l_myts_tl { mltoneyang }  { ˫ } 
+\tl_replace_all:Nnn \l_myts_tl { mltildelow }  { ˷ } 
+\tl_replace_all:Nnn \l_myts_tl { mllowbegin }  { ˻ } 
+\tl_replace_all:Nnn \l_myts_tl { alphaturn }  { ɒ } 
+\tl_replace_all:Nnn \l_myts_tl { schwahook }  { ɚ } 
+\tl_replace_all:Nnn \l_myts_tl { gsmallcap }  { ɢ } 
+\tl_replace_all:Nnn \l_myts_tl { ismallcap }  { ɪ } 
+\tl_replace_all:Nnn \l_myts_tl { nlefthook }  { ɲ } 
+\tl_replace_all:Nnn \l_myts_tl { nsmallcap }  { ɴ } 
+\tl_replace_all:Nnn \l_myts_tl { rturnhook }  { ɻ } 
+\tl_replace_all:Nnn \l_myts_tl { rfishhook }  { ɾ } 
+\tl_replace_all:Nnn \l_myts_tl { rsmallcap }  { ʀ } 
+\tl_replace_all:Nnn \l_myts_tl { ysmallcap }  { ʏ } 
+\tl_replace_all:Nnn \l_myts_tl { bsmallcap }  { ʙ } 
+\tl_replace_all:Nnn \l_myts_tl { hsmallcap }  { ʜ } 
+\tl_replace_all:Nnn \l_myts_tl { lsmallcap }  { ʟ } 
+\tl_replace_all:Nnn \l_myts_tl { mlvertlow }  { ˌ } 
+\tl_replace_all:Nnn \l_myts_tl { mltoneyin }  { ˪ } 
+\tl_replace_all:Nnn \l_myts_tl { mlhighend }  { ˺ } 
+\tl_replace_all:Nnn \l_myts_tl { ereverse }  { ɘ } 
+\tl_replace_all:Nnn \l_myts_tl { henghook }  { ɧ } 
+\tl_replace_all:Nnn \l_myts_tl { rlongleg }  { ɼ } 
+\tl_replace_all:Nnn \l_myts_tl { gsinvert }  { ʖ } 
+\tl_replace_all:Nnn \l_myts_tl { cstretch }  { ʗ } 
+\tl_replace_all:Nnn \l_myts_tl { mldprime }  { ʺ } 
+\tl_replace_all:Nnn \l_myts_tl { mlcircum }  { ˆ } 
+\tl_replace_all:Nnn \l_myts_tl { mlmacron }  { ˉ } 
+\tl_replace_all:Nnn \l_myts_tl { mltackup }  { ˔ } 
+\tl_replace_all:Nnn \l_myts_tl { mlogonek }  { ˛ } 
+\tl_replace_all:Nnn \l_myts_tl { mltoneeh }  { ˥ } 
+\tl_replace_all:Nnn \l_myts_tl { mltoneel }  { ˩ } 
+\tl_replace_all:Nnn \l_myts_tl { mllowend }  { ˼ } 
+\tl_replace_all:Nnn \l_myts_tl { gscript }  { ɡ } 
+\tl_replace_all:Nnn \l_myts_tl { eshcurl }  { ʆ } 
+\tl_replace_all:Nnn \l_myts_tl { upsilon }  { ʊ } 
+\tl_replace_all:Nnn \l_myts_tl { ezhcurl }  { ʓ } 
+\tl_replace_all:Nnn \l_myts_tl { mlhhook }  { ʱ } 
+\tl_replace_all:Nnn \l_myts_tl { mlrturn }  { ʴ } 
+\tl_replace_all:Nnn \l_myts_tl { mlprime }  { ʹ } 
+\tl_replace_all:Nnn \l_myts_tl { mlcaron }  { ˇ } 
+\tl_replace_all:Nnn \l_myts_tl { mlacute }  { ˊ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgrave }  { ˋ } 
+\tl_replace_all:Nnn \l_myts_tl { mlminus }  { ˗ } 
+\tl_replace_all:Nnn \l_myts_tl { mlbreve }  { ˘ } 
+\tl_replace_all:Nnn \l_myts_tl { mltilde }  { ˜ } 
+\tl_replace_all:Nnn \l_myts_tl { mlcross }  { ˟ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgamma }  { ˠ } 
+\tl_replace_all:Nnn \l_myts_tl { mltoneh }  { ˦ } 
+\tl_replace_all:Nnn \l_myts_tl { mltonem }  { ˧ } 
+\tl_replace_all:Nnn \l_myts_tl { mltonel }  { ˨ } 
+\tl_replace_all:Nnn \l_myts_tl { mlvoice }  { ˬ } 
+\tl_replace_all:Nnn \l_myts_tl { mlunasp }  { ˭ } 
+\tl_replace_all:Nnn \l_myts_tl { mlshelf }  { ˽ } 
+\tl_replace_all:Nnn \l_myts_tl { ltilde }  { ɫ } 
+\tl_replace_all:Nnn \l_myts_tl { lrhook }  { ɭ } 
+\tl_replace_all:Nnn \l_myts_tl { nrhook }  { ɳ } 
+\tl_replace_all:Nnn \l_myts_tl { trhook }  { ʈ } 
+\tl_replace_all:Nnn \l_myts_tl { zrhook }  { ʐ } 
+\tl_replace_all:Nnn \l_myts_tl { bclick }  { ʘ } 
+\tl_replace_all:Nnn \l_myts_tl { dzcurl }  { ʥ } 
+\tl_replace_all:Nnn \l_myts_tl { tccurl }  { ʨ } 
+\tl_replace_all:Nnn \l_myts_tl { mlvert }  { ˈ } 
+\tl_replace_all:Nnn \l_myts_tl { mlplus }  { ˖ } 
+\tl_replace_all:Nnn \l_myts_tl { mldapo }  { ˮ } 
+\tl_replace_all:Nnn \l_myts_tl { mlring }  { ˳ } 
+\tl_replace_all:Nnn \l_myts_tl { aturn }  { ɐ } 
+\tl_replace_all:Nnn \l_myts_tl { alpha }  { ɑ } 
+\tl_replace_all:Nnn \l_myts_tl { bhook }  { ɓ } 
+\tl_replace_all:Nnn \l_myts_tl { oopen }  { ɔ } 
+\tl_replace_all:Nnn \l_myts_tl { ccurl }  { ɕ } 
+\tl_replace_all:Nnn \l_myts_tl { dtail }  { ɖ } 
+\tl_replace_all:Nnn \l_myts_tl { dhook }  { ɗ } 
+\tl_replace_all:Nnn \l_myts_tl { schwa }  { ə } 
+\tl_replace_all:Nnn \l_myts_tl { eopen }  { ɛ } 
+\tl_replace_all:Nnn \l_myts_tl { ghook }  { ɠ } 
+\tl_replace_all:Nnn \l_myts_tl { gamma }  { ɣ } 
+\tl_replace_all:Nnn \l_myts_tl { hturn }  { ɥ } 
+\tl_replace_all:Nnn \l_myts_tl { hhook }  { ɦ } 
+\tl_replace_all:Nnn \l_myts_tl { lbelt }  { ɬ } 
+\tl_replace_all:Nnn \l_myts_tl { mturn }  { ɯ } 
+\tl_replace_all:Nnn \l_myts_tl { mhook }  { ɱ } 
+\tl_replace_all:Nnn \l_myts_tl { rturn }  { ɹ } 
+\tl_replace_all:Nnn \l_myts_tl { rtail }  { ɽ } 
+\tl_replace_all:Nnn \l_myts_tl { shook }  { ʂ } 
+\tl_replace_all:Nnn \l_myts_tl { tturn }  { ʇ } 
+\tl_replace_all:Nnn \l_myts_tl { vhook }  { ʋ } 
+\tl_replace_all:Nnn \l_myts_tl { vturn }  { ʌ } 
+\tl_replace_all:Nnn \l_myts_tl { wturn }  { ʍ } 
+\tl_replace_all:Nnn \l_myts_tl { yturn }  { ʎ } 
+\tl_replace_all:Nnn \l_myts_tl { zcurl }  { ʑ } 
+\tl_replace_all:Nnn \l_myts_tl { kturn }  { ʞ } 
+\tl_replace_all:Nnn \l_myts_tl { qhook }  { ʠ } 
+\tl_replace_all:Nnn \l_myts_tl { gsbar }  { ʡ } 
+\tl_replace_all:Nnn \l_myts_tl { mlapo }  { ʼ } 
+\tl_replace_all:Nnn \l_myts_tl { ibar }  { ɨ } 
+\tl_replace_all:Nnn \l_myts_tl { iota }  { ɩ } 
+\tl_replace_all:Nnn \l_myts_tl { lezh }  { ɮ } 
+\tl_replace_all:Nnn \l_myts_tl { obar }  { ɵ } 
+\tl_replace_all:Nnn \l_myts_tl { ubar }  { ʉ } 
+\tl_replace_all:Nnn \l_myts_tl { phar }  { ʕ } 
+\tl_replace_all:Nnn \l_myts_tl { dezh }  { ʤ } 
+\tl_replace_all:Nnn \l_myts_tl { tesh }  { ʧ } 
+\tl_replace_all:Nnn \l_myts_tl { feng }  { ʩ } 
+\tl_replace_all:Nnn \l_myts_tl { mlgs }  { ˀ } 
+\tl_replace_all:Nnn \l_myts_tl { ram }  { ɤ } 
+\tl_replace_all:Nnn \l_myts_tl { phi }  { ɸ } 
+\tl_replace_all:Nnn \l_myts_tl { esh }  { ʃ } 
+\tl_replace_all:Nnn \l_myts_tl { ezh }  { ʒ } 
+\tl_replace_all:Nnn \l_myts_tl { mlh }  { ʰ } 
+\tl_replace_all:Nnn \l_myts_tl { mlj }  { ʲ } 
+\tl_replace_all:Nnn \l_myts_tl { mlr }  { ʳ } 
+\tl_replace_all:Nnn \l_myts_tl { mlw }  { ʷ } 
+\tl_replace_all:Nnn \l_myts_tl { mly }  { ʸ } 
+\tl_replace_all:Nnn \l_myts_tl { mll }  { ˡ } 
+\tl_replace_all:Nnn \l_myts_tl { mls }  { ˢ } 
+\tl_replace_all:Nnn \l_myts_tl { mlx }  { ˣ } 
+\tl_replace_all:Nnn \l_myts_tl { gs }  { ʔ } 
+\tl_replace_all:Nnn \l_myts_tl { dz }  { ʣ } 
+\tl_replace_all:Nnn \l_myts_tl { ts }  { ʦ } 
+\tl_replace_all:Nnn \l_myts_tl { ls }  { ʪ } 
+\tl_replace_all:Nnn \l_myts_tl { lz }  { ʫ } 
+%
+\tl_replace_all:Nnn \l_myts_tl { ሴ𒓡𒓢} { / } 
+}
+
+%=====
+\NewDocumentCommand { \ipauc } { m } {	\ipatransuc {#1} }
+
+\NewDocumentCommand { \ipatransuc } { m } {%
+\tl_set:Nn \l_myuc_tl { #1 }
+ \doipatransuc 
+{ \ipafont \tl_use:N \l_myuc_tl }
+}
+%---
+
+\NewDocumentCommand { \ipaun } { m } {	\ipatransun {#1} }
+\NewDocumentCommand { \ipatransun } { m } {%
+\tl_set:Nn \l_myun_tl { #1 }
+ \doipatransun 
+ \tl_use:N \l_myun_tl 
+}
+%---
+\NewDocumentCommand { \ipats } { m } {	\ipatransts {#1} }
+\NewDocumentCommand { \ipatransts } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+ \doipatransts 
+  \tl_use:N \l_myts_tl 
+}
+
+
+%---- Environments
+\NewDocumentEnvironment{ipatransuce}{ +b } 
+{
+  \tl_set:Nn \l_myuc_tl { #1 }
+	\doipatransuc
+	\tl_use:N \l_myuc_tl 
+}
+{ }
+
+\NewDocumentEnvironment{ipatransune}{ +b } 
+{
+  \tl_set:Nn \l_myun_tl { #1 }
+	\doipatransun
+  \tl_use:N \l_myun_tl 
+}
+{ }
+
+\NewDocumentEnvironment{ipatranstse}{ +b } 
+{
+  \tl_set:Nn \l_myts_tl { #1 }
+	\doipatransts
+  \tl_use:N \l_myts_tl 
+}
+{ }
+
+
+
+
+
+\ExplSyntaxOff
+
+
+%=====
+%-----   List of Unicode codepoints
+\newcommand\dolistipatransuc{%
+\section{List of Unicode codepoints}\label{sec:listuc}
+\noindent\cdr{\ipatransuc{U+0250}}\par
+\noindent\cdr{\ipatransuc{U+0251}}\par
+\noindent\cdr{\ipatransuc{U+0252}}\par
+\noindent\cdr{\ipatransuc{U+0253}}\par
+\noindent\cdr{\ipatransuc{U+0254}}\par
+\noindent\cdr{\ipatransuc{U+0255}}\par
+\noindent\cdr{\ipatransuc{U+0256}}\par
+\noindent\cdr{\ipatransuc{U+0257}}\par
+\noindent\cdr{\ipatransuc{U+0258}}\par
+\noindent\cdr{\ipatransuc{U+0259}}\par
+\noindent\cdr{\ipatransuc{U+025A}}\par
+\noindent\cdr{\ipatransuc{U+025B}}\par
+\noindent\cdr{\ipatransuc{U+025C}}\par
+\noindent\cdr{\ipatransuc{U+025D}}\par
+\noindent\cdr{\ipatransuc{U+025E}}\par
+\noindent\cdr{\ipatransuc{U+025F}}\par
+\noindent\cdr{\ipatransuc{U+0260}}\par
+\noindent\cdr{\ipatransuc{U+0261}}\par
+\noindent\cdr{\ipatransuc{U+0262}}\par
+\noindent\cdr{\ipatransuc{U+0263}}\par
+\noindent\cdr{\ipatransuc{U+0264}}\par
+\noindent\cdr{\ipatransuc{U+0265}}\par
+\noindent\cdr{\ipatransuc{U+0266}}\par
+\noindent\cdr{\ipatransuc{U+0267}}\par
+\noindent\cdr{\ipatransuc{U+0268}}\par
+\noindent\cdr{\ipatransuc{U+0269}}\par
+\noindent\cdr{\ipatransuc{U+026A}}\par
+\noindent\cdr{\ipatransuc{U+026B}}\par
+\noindent\cdr{\ipatransuc{U+026C}}\par
+\noindent\cdr{\ipatransuc{U+026D}}\par
+\noindent\cdr{\ipatransuc{U+026E}}\par
+\noindent\cdr{\ipatransuc{U+026F}}\par
+\noindent\cdr{\ipatransuc{U+0270}}\par
+\noindent\cdr{\ipatransuc{U+0271}}\par
+\noindent\cdr{\ipatransuc{U+0272}}\par
+\noindent\cdr{\ipatransuc{U+0273}}\par
+\noindent\cdr{\ipatransuc{U+0274}}\par
+\noindent\cdr{\ipatransuc{U+0275}}\par
+\noindent\cdr{\ipatransuc{U+0276}}\par
+\noindent\cdr{\ipatransuc{U+0277}}\par
+\noindent\cdr{\ipatransuc{U+0278}}\par
+\noindent\cdr{\ipatransuc{U+0279}}\par
+\noindent\cdr{\ipatransuc{U+027A}}\par
+\noindent\cdr{\ipatransuc{U+027B}}\par
+\noindent\cdr{\ipatransuc{U+027C}}\par
+\noindent\cdr{\ipatransuc{U+027D}}\par
+\noindent\cdr{\ipatransuc{U+027E}}\par
+\noindent\cdr{\ipatransuc{U+027F}}\par
+\noindent\cdr{\ipatransuc{U+0280}}\par
+\noindent\cdr{\ipatransuc{U+0281}}\par
+\noindent\cdr{\ipatransuc{U+0282}}\par
+\noindent\cdr{\ipatransuc{U+0283}}\par
+\noindent\cdr{\ipatransuc{U+0284}}\par
+\noindent\cdr{\ipatransuc{U+0285}}\par
+\noindent\cdr{\ipatransuc{U+0286}}\par
+\noindent\cdr{\ipatransuc{U+0287}}\par
+\noindent\cdr{\ipatransuc{U+0288}}\par
+\noindent\cdr{\ipatransuc{U+0289}}\par
+\noindent\cdr{\ipatransuc{U+028A}}\par
+\noindent\cdr{\ipatransuc{U+028B}}\par
+\noindent\cdr{\ipatransuc{U+028C}}\par
+\noindent\cdr{\ipatransuc{U+028D}}\par
+\noindent\cdr{\ipatransuc{U+028E}}\par
+\noindent\cdr{\ipatransuc{U+028F}}\par
+\noindent\cdr{\ipatransuc{U+0290}}\par
+\noindent\cdr{\ipatransuc{U+0291}}\par
+\noindent\cdr{\ipatransuc{U+0292}}\par
+\noindent\cdr{\ipatransuc{U+0293}}\par
+\noindent\cdr{\ipatransuc{U+0294}}\par
+\noindent\cdr{\ipatransuc{U+0295}}\par
+\noindent\cdr{\ipatransuc{U+0296}}\par
+\noindent\cdr{\ipatransuc{U+0297}}\par
+\noindent\cdr{\ipatransuc{U+0298}}\par
+\noindent\cdr{\ipatransuc{U+0299}}\par
+\noindent\cdr{\ipatransuc{U+029A}}\par
+\noindent\cdr{\ipatransuc{U+029B}}\par
+\noindent\cdr{\ipatransuc{U+029C}}\par
+\noindent\cdr{\ipatransuc{U+029D}}\par
+\noindent\cdr{\ipatransuc{U+029E}}\par
+\noindent\cdr{\ipatransuc{U+029F}}\par
+\noindent\cdr{\ipatransuc{U+02A0}}\par
+\noindent\cdr{\ipatransuc{U+02A1}}\par
+\noindent\cdr{\ipatransuc{U+02A2}}\par
+\noindent\cdr{\ipatransuc{U+02A3}}\par
+\noindent\cdr{\ipatransuc{U+02A4}}\par
+\noindent\cdr{\ipatransuc{U+02A5}}\par
+\noindent\cdr{\ipatransuc{U+02A6}}\par
+\noindent\cdr{\ipatransuc{U+02A7}}\par
+\noindent\cdr{\ipatransuc{U+02A8}}\par
+\noindent\cdr{\ipatransuc{U+02A9}}\par
+\noindent\cdr{\ipatransuc{U+02AA}}\par
+\noindent\cdr{\ipatransuc{U+02AB}}\par
+\noindent\cdr{\ipatransuc{U+02AC}}\par
+\noindent\cdr{\ipatransuc{U+02AD}}\par
+\noindent\cdr{\ipatransuc{U+02AE}}\par
+\noindent\cdr{\ipatransuc{U+02AF}}\par
+\noindent\cdr{o\ipatransuc{U+02B0}}\par
+\noindent\cdr{o\ipatransuc{U+02B1}}\par
+\noindent\cdr{o\ipatransuc{U+02B2}}\par
+\noindent\cdr{o\ipatransuc{U+02B3}}\par
+\noindent\cdr{o\ipatransuc{U+02B4}}\par
+\noindent\cdr{o\ipatransuc{U+02B5}}\par
+\noindent\cdr{o\ipatransuc{U+02B6}}\par
+\noindent\cdr{o\ipatransuc{U+02B7}}\par
+\noindent\cdr{o\ipatransuc{U+02B8}}\par
+\noindent\cdr{o\ipatransuc{U+02B9}}\par
+\noindent\cdr{o\ipatransuc{U+02BA}}\par
+\noindent\cdr{o\ipatransuc{U+02BB}}\par
+\noindent\cdr{o\ipatransuc{U+02BC}}\par
+\noindent\cdr{o\ipatransuc{U+02BD}}\par
+\noindent\cdr{o\ipatransuc{U+02BE}}\par
+\noindent\cdr{o\ipatransuc{U+02BF}}\par
+\noindent\cdr{o\ipatransuc{U+02C0}}\par
+\noindent\cdr{o\ipatransuc{U+02C1}}\par
+\noindent\cdr{o\ipatransuc{U+02C2}}\par
+\noindent\cdr{o\ipatransuc{U+02C3}}\par
+\noindent\cdr{o\ipatransuc{U+02C4}}\par
+\noindent\cdr{o\ipatransuc{U+02C5}}\par
+\noindent\cdr{o\ipatransuc{U+02C6}}\par
+\noindent\cdr{o\ipatransuc{U+02C7}}\par
+\noindent\cdr{o\ipatransuc{U+02C8}}\par
+\noindent\cdr{o\ipatransuc{U+02C9}}\par
+\noindent\cdr{o\ipatransuc{U+02CA}}\par
+\noindent\cdr{o\ipatransuc{U+02CB}}\par
+\noindent\cdr{o\ipatransuc{U+02CC}}\par
+\noindent\cdr{o\ipatransuc{U+02CD}}\par
+\noindent\cdr{o\ipatransuc{U+02CE}}\par
+\noindent\cdr{o\ipatransuc{U+02CF}}\par
+\noindent\cdr{o\ipatransuc{U+02D0}}\par
+\noindent\cdr{o\ipatransuc{U+02D1}}\par
+\noindent\cdr{o\ipatransuc{U+02D2}}\par
+\noindent\cdr{o\ipatransuc{U+02D3}}\par
+\noindent\cdr{o\ipatransuc{U+02D4}}\par
+\noindent\cdr{o\ipatransuc{U+02D5}}\par
+\noindent\cdr{o\ipatransuc{U+02D6}}\par
+\noindent\cdr{o\ipatransuc{U+02D7}}\par
+\noindent\cdr{o\ipatransuc{U+02D8}}\par
+\noindent\cdr{o\ipatransuc{U+02D9}}\par
+\noindent\cdr{o\ipatransuc{U+02DA}}\par
+\noindent\cdr{o\ipatransuc{U+02DB}}\par
+\noindent\cdr{o\ipatransuc{U+02DC}}\par
+\noindent\cdr{o\ipatransuc{U+02DD}}\par
+\noindent\cdr{o\ipatransuc{U+02DE}}\par
+\noindent\cdr{o\ipatransuc{U+02DF}}\par
+\noindent\cdr{o\ipatransuc{U+02E0}}\par
+\noindent\cdr{o\ipatransuc{U+02E1}}\par
+\noindent\cdr{o\ipatransuc{U+02E2}}\par
+\noindent\cdr{o\ipatransuc{U+02E3}}\par
+\noindent\cdr{o\ipatransuc{U+02E4}}\par
+\noindent\cdr{o\ipatransuc{U+02E5}}\par
+\noindent\cdr{o\ipatransuc{U+02E6}}\par
+\noindent\cdr{o\ipatransuc{U+02E7}}\par
+\noindent\cdr{o\ipatransuc{U+02E8}}\par
+\noindent\cdr{o\ipatransuc{U+02E9}}\par
+\noindent\cdr{o\ipatransuc{U+02EA}}\par
+\noindent\cdr{o\ipatransuc{U+02EB}}\par
+\noindent\cdr{o\ipatransuc{U+02EC}}\par
+\noindent\cdr{o\ipatransuc{U+02ED}}\par
+\noindent\cdr{o\ipatransuc{U+02EE}}\par
+\noindent\cdr{o\ipatransuc{U+02EF}}\par
+\noindent\cdr{o\ipatransuc{U+02F0}}\par
+\noindent\cdr{o\ipatransuc{U+02F1}}\par
+\noindent\cdr{o\ipatransuc{U+02F2}}\par
+\noindent\cdr{o\ipatransuc{U+02F3}}\par
+\noindent\cdr{o\ipatransuc{U+02F4}}\par
+\noindent\cdr{o\ipatransuc{U+02F5}}\par
+\noindent\cdr{o\ipatransuc{U+02F6}}\par
+\noindent\cdr{o\ipatransuc{U+02F7}}\par
+\noindent\cdr{o\ipatransuc{U+02F8}}\par
+\noindent\cdr{o\ipatransuc{U+02F9}}\par
+\noindent\cdr{o\ipatransuc{U+02FA}}\par
+\noindent\cdr{o\ipatransuc{U+02FB}}\par
+\noindent\cdr{o\ipatransuc{U+02FC}}\par
+\noindent\cdr{o\ipatransuc{U+02FD}}\par
+\noindent\cdr{o\ipatransuc{U+02FE}}\par
+\noindent\cdr{o\ipatransuc{U+02FF}}\par
+}
+%=====
+%-----   List of Unicode names
+\newcommand\dolistipatransun{%
+\section{List of Unicode names}\label{sec:listun}
+\noindent\cdr{\ipatransun{turneda}}\par
+\noindent\cdr{\ipatransun{alpha}}\par
+\noindent\cdr{\ipatransun{turnedalpha}}\par
+\noindent\cdr{\ipatransun{bwithhook}}\par
+\noindent\cdr{\ipatransun{openo}}\par
+\noindent\cdr{\ipatransun{cwithcurl}}\par
+\noindent\cdr{\ipatransun{dwithtail}}\par
+\noindent\cdr{\ipatransun{dwithhook}}\par
+\noindent\cdr{\ipatransun{reversede}}\par
+\noindent\cdr{\ipatransun{schwa}}\par
+\noindent\cdr{\ipatransun{schwawithhook}}\par
+\noindent\cdr{\ipatransun{opene}}\par
+\noindent\cdr{\ipatransun{reversedopene}}\par
+\noindent\cdr{\ipatransun{reversedopenewithhook}}\par
+\noindent\cdr{\ipatransun{closedreversedopene}}\par
+\noindent\cdr{\ipatransun{dotlessjwithstroke}}\par
+\noindent\cdr{\ipatransun{gwithhook}}\par
+\noindent\cdr{\ipatransun{scriptg}}\par
+\noindent\cdr{\ipatransun{smallcapitalg}}\par
+\noindent\cdr{\ipatransun{gamma}}\par
+\noindent\cdr{\ipatransun{ramshorn}}\par
+\noindent\cdr{\ipatransun{turnedh}}\par
+\noindent\cdr{\ipatransun{hwithhook}}\par
+\noindent\cdr{\ipatransun{hengwithhook}}\par
+\noindent\cdr{\ipatransun{iwithstroke}}\par
+\noindent\cdr{\ipatransun{iota}}\par
+\noindent\cdr{\ipatransun{smallcapitali}}\par
+\noindent\cdr{\ipatransun{lwithmiddletilde}}\par
+\noindent\cdr{\ipatransun{lwithbelt}}\par
+\noindent\cdr{\ipatransun{lwithretroflexhook}}\par
+\noindent\cdr{\ipatransun{lezh}}\par
+\noindent\cdr{\ipatransun{turnedm}}\par
+\noindent\cdr{\ipatransun{turnedmwithlongleg}}\par
+\noindent\cdr{\ipatransun{mwithhook}}\par
+\noindent\cdr{\ipatransun{nwithlefthook}}\par
+\noindent\cdr{\ipatransun{nwithretroflexhook}}\par
+\noindent\cdr{\ipatransun{smallcapitaln}}\par
+\noindent\cdr{\ipatransun{barredo}}\par
+\noindent\cdr{\ipatransun{smallcapitaloe}}\par
+\noindent\cdr{\ipatransun{closedomega}}\par
+\noindent\cdr{\ipatransun{phi}}\par
+\noindent\cdr{\ipatransun{turnedr}}\par
+\noindent\cdr{\ipatransun{turnedrwithlongleg}}\par
+\noindent\cdr{\ipatransun{turnedrwithhook}}\par
+\noindent\cdr{\ipatransun{rwithlongleg}}\par
+\noindent\cdr{\ipatransun{rwithtail}}\par
+\noindent\cdr{\ipatransun{rwithfishhook}}\par
+\noindent\cdr{\ipatransun{reversedrwithfishhook}}\par
+\noindent\cdr{\ipatransun{smallcapitalr}}\par
+\noindent\cdr{\ipatransun{smallcapitalinvertedr}}\par
+\noindent\cdr{\ipatransun{swithhook}}\par
+\noindent\cdr{\ipatransun{esh}}\par
+\noindent\cdr{\ipatransun{dotlessjwithstrokeandhook}}\par
+\noindent\cdr{\ipatransun{squatreversedesh}}\par
+\noindent\cdr{\ipatransun{eshwithcurl}}\par
+\noindent\cdr{\ipatransun{turnedt}}\par
+\noindent\cdr{\ipatransun{twithretroflexhook}}\par
+\noindent\cdr{\ipatransun{ubar}}\par
+\noindent\cdr{\ipatransun{upsilon}}\par
+\noindent\cdr{\ipatransun{vwithhook}}\par
+\noindent\cdr{\ipatransun{turnedv}}\par
+\noindent\cdr{\ipatransun{turnedw}}\par
+\noindent\cdr{\ipatransun{turnedy}}\par
+\noindent\cdr{\ipatransun{smallcapitaly}}\par
+\noindent\cdr{\ipatransun{zwithretroflexhook}}\par
+\noindent\cdr{\ipatransun{zwithcurl}}\par
+\noindent\cdr{\ipatransun{ezh}}\par
+\noindent\cdr{\ipatransun{ezhwithcurl}}\par
+\noindent\cdr{\ipatransun{glottalstop}}\par
+\noindent\cdr{\ipatransun{pharyngealvoicedfricative}}\par
+\noindent\cdr{\ipatransun{invertedglottalstop}}\par
+\noindent\cdr{\ipatransun{stretchedc}}\par
+\noindent\cdr{\ipatransun{bilabialclick}}\par
+\noindent\cdr{\ipatransun{smallcapitalb}}\par
+\noindent\cdr{\ipatransun{closedopene}}\par
+\noindent\cdr{\ipatransun{smallcapitalgwithhook}}\par
+\noindent\cdr{\ipatransun{smallcapitalh}}\par
+\noindent\cdr{\ipatransun{jwithcrossed-tail}}\par
+\noindent\cdr{\ipatransun{turnedk}}\par
+\noindent\cdr{\ipatransun{smallcapitall}}\par
+\noindent\cdr{\ipatransun{qwithhook}}\par
+\noindent\cdr{\ipatransun{glottalstopwithstroke}}\par
+\noindent\cdr{\ipatransun{reversedglottalstopwithstroke}}\par
+\noindent\cdr{\ipatransun{dzdigraph}}\par
+\noindent\cdr{\ipatransun{dezhdigraph}}\par
+\noindent\cdr{\ipatransun{dzdigraphwithcurl}}\par
+\noindent\cdr{\ipatransun{tsdigraph}}\par
+\noindent\cdr{\ipatransun{teshdigraph}}\par
+\noindent\cdr{\ipatransun{tcdigraphwithcurl}}\par
+\noindent\cdr{\ipatransun{fengdigraph}}\par
+\noindent\cdr{\ipatransun{lsdigraph}}\par
+\noindent\cdr{\ipatransun{lzdigraph}}\par
+\noindent\cdr{\ipatransun{bilabialpercussive}}\par
+\noindent\cdr{\ipatransun{bidentalpercussive}}\par
+\noindent\cdr{\ipatransun{turnedhwithfishhook}}\par
+\noindent\cdr{\ipatransun{turnedhwithfishhookandtail}}\par
+\noindent\cdr{o\ipatransun{mlh}}\par
+\noindent\cdr{o\ipatransun{mlhwithhook}}\par
+\noindent\cdr{o\ipatransun{mlj}}\par
+\noindent\cdr{o\ipatransun{mlr}}\par
+\noindent\cdr{o\ipatransun{mlturnedr}}\par
+\noindent\cdr{o\ipatransun{mlturnedrwithhook}}\par
+\noindent\cdr{o\ipatransun{mlcapitalinvertedr}}\par
+\noindent\cdr{o\ipatransun{mlw}}\par
+\noindent\cdr{o\ipatransun{mly}}\par
+\noindent\cdr{o\ipatransun{mlprime}}\par
+\noindent\cdr{o\ipatransun{mldoubleprime}}\par
+\noindent\cdr{o\ipatransun{mlturnedcomma}}\par
+\noindent\cdr{o\ipatransun{mlapostrophe}}\par
+\noindent\cdr{o\ipatransun{mlreversedcomma}}\par
+\noindent\cdr{o\ipatransun{mlrighthalfring}}\par
+\noindent\cdr{o\ipatransun{mllefthalfring}}\par
+\noindent\cdr{o\ipatransun{mlglottalstop}}\par
+\noindent\cdr{o\ipatransun{mlreversedglottalstop}}\par
+\noindent\cdr{o\ipatransun{mlleftarrowhead}}\par
+\noindent\cdr{o\ipatransun{mlrightarrowhead}}\par
+\noindent\cdr{o\ipatransun{mluparrowhead}}\par
+\noindent\cdr{o\ipatransun{mldownarrowhead}}\par
+\noindent\cdr{o\ipatransun{mlcircumflexaccent}}\par
+\noindent\cdr{o\ipatransun{mlcaron}}\par
+\noindent\cdr{o\ipatransun{mlverticalline}}\par
+\noindent\cdr{o\ipatransun{mlmacron}}\par
+\noindent\cdr{o\ipatransun{mlacuteaccent}}\par
+\noindent\cdr{o\ipatransun{mlgraveaccent}}\par
+\noindent\cdr{o\ipatransun{mllowverticalline}}\par
+\noindent\cdr{o\ipatransun{mllowmacron}}\par
+\noindent\cdr{o\ipatransun{mllowgraveaccent}}\par
+\noindent\cdr{o\ipatransun{mllowacuteaccent}}\par
+\noindent\cdr{o\ipatransun{mltriangularcolon}}\par
+\noindent\cdr{o\ipatransun{mlhalftriangularcolon}}\par
+\noindent\cdr{o\ipatransun{mlcentredrighthalfring}}\par
+\noindent\cdr{o\ipatransun{mlcentredlefthalfring}}\par
+\noindent\cdr{o\ipatransun{mluptack}}\par
+\noindent\cdr{o\ipatransun{mldowntack}}\par
+\noindent\cdr{o\ipatransun{mlplussign}}\par
+\noindent\cdr{o\ipatransun{mlminussign}}\par
+\noindent\cdr{o\ipatransun{mlbreve}}\par
+\noindent\cdr{o\ipatransun{mldotabove}}\par
+\noindent\cdr{o\ipatransun{mlringabove}}\par
+\noindent\cdr{o\ipatransun{mlogonek}}\par
+\noindent\cdr{o\ipatransun{mlsmalltilde}}\par
+\noindent\cdr{o\ipatransun{mldoubleacuteaccent}}\par
+\noindent\cdr{o\ipatransun{mlrhotichook}}\par
+\noindent\cdr{o\ipatransun{mlcrossaccent}}\par
+\noindent\cdr{o\ipatransun{mlsmallgamma}}\par
+\noindent\cdr{o\ipatransun{mlsmalll}}\par
+\noindent\cdr{o\ipatransun{mlsmalls}}\par
+\noindent\cdr{o\ipatransun{mlsmallx}}\par
+\noindent\cdr{o\ipatransun{mlsmallreversedglottalstop}}\par
+\noindent\cdr{o\ipatransun{mlextra-hightonebar}}\par
+\noindent\cdr{o\ipatransun{mlhightonebar}}\par
+\noindent\cdr{o\ipatransun{mlmidtonebar}}\par
+\noindent\cdr{o\ipatransun{mllowtonebar}}\par
+\noindent\cdr{o\ipatransun{mlextra-lowtonebar}}\par
+\noindent\cdr{o\ipatransun{mlyindepartingtonemark}}\par
+\noindent\cdr{o\ipatransun{mlyangdepartingtonemark}}\par
+\noindent\cdr{o\ipatransun{mlvoicing}}\par
+\noindent\cdr{o\ipatransun{mlunaspirated}}\par
+\noindent\cdr{o\ipatransun{mldoubleapostrophe}}\par
+\noindent\cdr{o\ipatransun{mllowdownarrowhead}}\par
+\noindent\cdr{o\ipatransun{mllowuparrowhead}}\par
+\noindent\cdr{o\ipatransun{mllowleftarrowhead}}\par
+\noindent\cdr{o\ipatransun{mllowrightarrowhead}}\par
+\noindent\cdr{o\ipatransun{mllowring}}\par
+\noindent\cdr{o\ipatransun{mlmiddlegraveaccent}}\par
+\noindent\cdr{o\ipatransun{mlmiddledoublegraveaccent}}\par
+\noindent\cdr{o\ipatransun{mlmiddledoubleacuteaccent}}\par
+\noindent\cdr{o\ipatransun{mllowtilde}}\par
+\noindent\cdr{o\ipatransun{mlraisedcolon}}\par
+\noindent\cdr{o\ipatransun{mlbeginhightone}}\par
+\noindent\cdr{o\ipatransun{mlendhightone}}\par
+\noindent\cdr{o\ipatransun{mlbeginlowtone}}\par
+\noindent\cdr{o\ipatransun{mlendlowtone}}\par
+\noindent\cdr{o\ipatransun{mlshelf}}\par
+\noindent\cdr{o\ipatransun{mlopenshelf}}\par
+\noindent\cdr{o\ipatransun{mllowleftarrow}}\par
+}
+%-----
+%-----   List of Typing shortcuts
+\newcommand\dolistipatransts{%
+\section{List of Typing shortcuts}\label{sec:listts}
+\noindent\cdr{\ipatransts{aturn}}\par
+\noindent\cdr{\ipatransts{alpha}}\par
+\noindent\cdr{\ipatransts{alphaturn}}\par
+\noindent\cdr{\ipatransts{bhook}}\par
+\noindent\cdr{\ipatransts{oopen}}\par
+\noindent\cdr{\ipatransts{ccurl}}\par
+\noindent\cdr{\ipatransts{dtail}}\par
+\noindent\cdr{\ipatransts{dhook}}\par
+\noindent\cdr{\ipatransts{ereverse}}\par
+\noindent\cdr{\ipatransts{schwa}}\par
+\noindent\cdr{\ipatransts{schwahook}}\par
+\noindent\cdr{\ipatransts{eopen}}\par
+\noindent\cdr{\ipatransts{eopenreverse}}\par
+\noindent\cdr{\ipatransts{eopenreversehook}}\par
+\noindent\cdr{\ipatransts{eopenreverseclose}}\par
+\noindent\cdr{\ipatransts{jdotlessbar}}\par
+\noindent\cdr{\ipatransts{ghook}}\par
+\noindent\cdr{\ipatransts{gscript}}\par
+\noindent\cdr{\ipatransts{gsmallcap}}\par
+\noindent\cdr{\ipatransts{gamma}}\par
+\noindent\cdr{\ipatransts{ram}}\par
+\noindent\cdr{\ipatransts{hturn}}\par
+\noindent\cdr{\ipatransts{hhook}}\par
+\noindent\cdr{\ipatransts{henghook}}\par
+\noindent\cdr{\ipatransts{ibar}}\par
+\noindent\cdr{\ipatransts{iota}}\par
+\noindent\cdr{\ipatransts{ismallcap}}\par
+\noindent\cdr{\ipatransts{ltilde}}\par
+\noindent\cdr{\ipatransts{lbelt}}\par
+\noindent\cdr{\ipatransts{lrhook}}\par
+\noindent\cdr{\ipatransts{lezh}}\par
+\noindent\cdr{\ipatransts{mturn}}\par
+\noindent\cdr{\ipatransts{mtulongleg}}\par
+\noindent\cdr{\ipatransts{mhook}}\par
+\noindent\cdr{\ipatransts{nlefthook}}\par
+\noindent\cdr{\ipatransts{nrhook}}\par
+\noindent\cdr{\ipatransts{nsmallcap}}\par
+\noindent\cdr{\ipatransts{obar}}\par
+\noindent\cdr{\ipatransts{oesmallcap}}\par
+\noindent\cdr{\ipatransts{omegaclose}}\par
+\noindent\cdr{\ipatransts{phi}}\par
+\noindent\cdr{\ipatransts{rturn}}\par
+\noindent\cdr{\ipatransts{rturnlongleg}}\par
+\noindent\cdr{\ipatransts{rturnhook}}\par
+\noindent\cdr{\ipatransts{rlongleg}}\par
+\noindent\cdr{\ipatransts{rtail}}\par
+\noindent\cdr{\ipatransts{rfishhook}}\par
+\noindent\cdr{\ipatransts{rreversefishhook}}\par
+\noindent\cdr{\ipatransts{rsmallcap}}\par
+\noindent\cdr{\ipatransts{rinvertsmallcap}}\par
+\noindent\cdr{\ipatransts{shook}}\par
+\noindent\cdr{\ipatransts{esh}}\par
+\noindent\cdr{\ipatransts{jdotlessbarhook}}\par
+\noindent\cdr{\ipatransts{eshreversesquat}}\par
+\noindent\cdr{\ipatransts{eshcurl}}\par
+\noindent\cdr{\ipatransts{tturn}}\par
+\noindent\cdr{\ipatransts{trhook}}\par
+\noindent\cdr{\ipatransts{ubar}}\par
+\noindent\cdr{\ipatransts{upsilon}}\par
+\noindent\cdr{\ipatransts{vhook}}\par
+\noindent\cdr{\ipatransts{vturn}}\par
+\noindent\cdr{\ipatransts{wturn}}\par
+\noindent\cdr{\ipatransts{yturn}}\par
+\noindent\cdr{\ipatransts{ysmallcap}}\par
+\noindent\cdr{\ipatransts{zrhook}}\par
+\noindent\cdr{\ipatransts{zcurl}}\par
+\noindent\cdr{\ipatransts{ezh}}\par
+\noindent\cdr{\ipatransts{ezhcurl}}\par
+\noindent\cdr{\ipatransts{gs}}\par
+\noindent\cdr{\ipatransts{phar}}\par
+\noindent\cdr{\ipatransts{gsinvert}}\par
+\noindent\cdr{\ipatransts{cstretch}}\par
+\noindent\cdr{\ipatransts{bclick}}\par
+\noindent\cdr{\ipatransts{bsmallcap}}\par
+\noindent\cdr{\ipatransts{eopenclose}}\par
+\noindent\cdr{\ipatransts{ghooksmallcap}}\par
+\noindent\cdr{\ipatransts{hsmallcap}}\par
+\noindent\cdr{\ipatransts{jcrosstail}}\par
+\noindent\cdr{\ipatransts{kturn}}\par
+\noindent\cdr{\ipatransts{lsmallcap}}\par
+\noindent\cdr{\ipatransts{qhook}}\par
+\noindent\cdr{\ipatransts{gsbar}}\par
+\noindent\cdr{\ipatransts{gsreversebar}}\par
+\noindent\cdr{\ipatransts{dz}}\par
+\noindent\cdr{\ipatransts{dezh}}\par
+\noindent\cdr{\ipatransts{dzcurl}}\par
+\noindent\cdr{\ipatransts{ts}}\par
+\noindent\cdr{\ipatransts{tesh}}\par
+\noindent\cdr{\ipatransts{tccurl}}\par
+\noindent\cdr{\ipatransts{feng}}\par
+\noindent\cdr{\ipatransts{ls}}\par
+\noindent\cdr{\ipatransts{lz}}\par
+\noindent\cdr{\ipatransts{blibalperc}}\par
+\noindent\cdr{\ipatransts{bidentperc}}\par
+\noindent\cdr{\ipatransts{hturnfishhook}}\par
+\noindent\cdr{\ipatransts{hturnfishhooktail}}\par
+\noindent\cdr{o\ipatransts{mlh}}\par
+\noindent\cdr{o\ipatransts{mlhhook}}\par
+\noindent\cdr{o\ipatransts{mlj}}\par
+\noindent\cdr{o\ipatransts{mlr}}\par
+\noindent\cdr{o\ipatransts{mlrturn}}\par
+\noindent\cdr{o\ipatransts{mlrturnhook}}\par
+\noindent\cdr{o\ipatransts{mlrsmallcapinvert}}\par
+\noindent\cdr{o\ipatransts{mlw}}\par
+\noindent\cdr{o\ipatransts{mly}}\par
+\noindent\cdr{o\ipatransts{mlprime}}\par
+\noindent\cdr{o\ipatransts{mldprime}}\par
+\noindent\cdr{o\ipatransts{mlcommaturn}}\par
+\noindent\cdr{o\ipatransts{mlapo}}\par
+\noindent\cdr{o\ipatransts{mlcommareverse}}\par
+\noindent\cdr{o\ipatransts{mlringright}}\par
+\noindent\cdr{o\ipatransts{mlringleft}}\par
+\noindent\cdr{o\ipatransts{mlgs}}\par
+\noindent\cdr{o\ipatransts{mlgsreverse}}\par
+\noindent\cdr{o\ipatransts{mlarrowhleft}}\par
+\noindent\cdr{o\ipatransts{mlarrowhright}}\par
+\noindent\cdr{o\ipatransts{mlarrowhup}}\par
+\noindent\cdr{o\ipatransts{mlarrowhdown}}\par
+\noindent\cdr{o\ipatransts{mlcircum}}\par
+\noindent\cdr{o\ipatransts{mlcaron}}\par
+\noindent\cdr{o\ipatransts{mlvert}}\par
+\noindent\cdr{o\ipatransts{mlmacron}}\par
+\noindent\cdr{o\ipatransts{mlacute}}\par
+\noindent\cdr{o\ipatransts{mlgrave}}\par
+\noindent\cdr{o\ipatransts{mlvertlow}}\par
+\noindent\cdr{o\ipatransts{mlmacronlow}}\par
+\noindent\cdr{o\ipatransts{mlgravelow}}\par
+\noindent\cdr{o\ipatransts{mlacutelow}}\par
+\noindent\cdr{o\ipatransts{mltricolon}}\par
+\noindent\cdr{o\ipatransts{mltricolonhalf}}\par
+\noindent\cdr{o\ipatransts{mlringrightc}}\par
+\noindent\cdr{o\ipatransts{mlringleftc}}\par
+\noindent\cdr{o\ipatransts{mltackup}}\par
+\noindent\cdr{o\ipatransts{mltackdown}}\par
+\noindent\cdr{o\ipatransts{mlplus}}\par
+\noindent\cdr{o\ipatransts{mlminus}}\par
+\noindent\cdr{o\ipatransts{mlbreve}}\par
+\noindent\cdr{o\ipatransts{mldotabove}}\par
+\noindent\cdr{o\ipatransts{mlringabove}}\par
+\noindent\cdr{o\ipatransts{mlogonek}}\par
+\noindent\cdr{o\ipatransts{mltilde}}\par
+\noindent\cdr{o\ipatransts{mlacutedouble}}\par
+\noindent\cdr{o\ipatransts{mlhookrhotic}}\par
+\noindent\cdr{o\ipatransts{mlcross}}\par
+\noindent\cdr{o\ipatransts{mlgamma}}\par
+\noindent\cdr{o\ipatransts{mll}}\par
+\noindent\cdr{o\ipatransts{mls}}\par
+\noindent\cdr{o\ipatransts{mlx}}\par
+\noindent\cdr{o\ipatransts{mlgsreversesmall}}\par
+\noindent\cdr{o\ipatransts{mltoneeh}}\par
+\noindent\cdr{o\ipatransts{mltoneh}}\par
+\noindent\cdr{o\ipatransts{mltonem}}\par
+\noindent\cdr{o\ipatransts{mltonel}}\par
+\noindent\cdr{o\ipatransts{mltoneel}}\par
+\noindent\cdr{o\ipatransts{mltoneyin}}\par
+\noindent\cdr{o\ipatransts{mltoneyang}}\par
+\noindent\cdr{o\ipatransts{mlvoice}}\par
+\noindent\cdr{o\ipatransts{mlunasp}}\par
+\noindent\cdr{o\ipatransts{mldapo}}\par
+\noindent\cdr{o\ipatransts{mlarrowhdownlow}}\par
+\noindent\cdr{o\ipatransts{mlarrowhuplow}}\par
+\noindent\cdr{o\ipatransts{mlarrowhleftlow}}\par
+\noindent\cdr{o\ipatransts{mlarrowhrightlow}}\par
+\noindent\cdr{o\ipatransts{mlring}}\par
+\noindent\cdr{o\ipatransts{mlgravemiddle}}\par
+\noindent\cdr{o\ipatransts{mlgravedouble}}\par
+\noindent\cdr{o\ipatransts{mlacutedmiddle}}\par
+\noindent\cdr{o\ipatransts{mltildelow}}\par
+\noindent\cdr{o\ipatransts{mlcolonraised}}\par
+\noindent\cdr{o\ipatransts{mlhighbegin}}\par
+\noindent\cdr{o\ipatransts{mlhighend}}\par
+\noindent\cdr{o\ipatransts{mllowbegin}}\par
+\noindent\cdr{o\ipatransts{mllowend}}\par
+\noindent\cdr{o\ipatransts{mlshelf}}\par
+\noindent\cdr{o\ipatransts{mlshelfopen}}\par
+\noindent\cdr{o\ipatransts{mlarrowleftlow}}\par
+}
+
+%=====
+\newcommand\pelettersmallcapitala{\symbol{7424}}
+\newcommand\pelettersmallcapitalae{\symbol{7425}}
+\newcommand\pesmallletterturnedae{\symbol{7426}}
+\newcommand\pelettersmallcapitalbarredb{\symbol{7427}}
+\newcommand\pelettersmallcapitalc{\symbol{7428}}
+\newcommand\pelettersmallcapitald{\symbol{7429}}
+\newcommand\pelettersmallcapitaleth{\symbol{7430}}
+\newcommand\pelettersmallcapitale{\symbol{7431}}
+\newcommand\pesmallletterturnedopene{\symbol{7432}}
+\newcommand\pesmallletterturnedi{\symbol{7433}}
+\newcommand\pelettersmallcapitalj{\symbol{7434}}
+\newcommand\pelettersmallcapitalk{\symbol{7435}}
+\newcommand\pelettersmallcapitallwithstroke{\symbol{7436}}
+\newcommand\pelettersmallcapitalm{\symbol{7437}}
+\newcommand\pelettersmallcapitalreversedn{\symbol{7438}}
+\newcommand\pelettersmallcapitalo{\symbol{7439}}
+\newcommand\pelettersmallcapitalopeno{\symbol{7440}}
+\newcommand\pesmalllettersidewayso{\symbol{7441}}
+\newcommand\pesmalllettersidewaysopeno{\symbol{7442}}
+\newcommand\pesmalllettersidewaysowithstroke{\symbol{7443}}
+\newcommand\pesmallletterturnedoe{\symbol{7444}}
+\newcommand\pelettersmallcapitalou{\symbol{7445}}
+\newcommand\pesmalllettertophalfo{\symbol{7446}}
+\newcommand\pesmallletterbottomhalfo{\symbol{7447}}
+\newcommand\pelettersmallcapitalp{\symbol{7448}}
+\newcommand\pelettersmallcapitalreversedr{\symbol{7449}}
+\newcommand\pelettersmallcapitalturnedr{\symbol{7450}}
+\newcommand\pelettersmallcapitalt{\symbol{7451}}
+\newcommand\pelettersmallcapitalu{\symbol{7452}}
+\newcommand\pesmalllettersidewaysu{\symbol{7453}}
+\newcommand\pesmalllettersidewaysdiaeresizedu{\symbol{7454}}
+\newcommand\pesmalllettersidewaysturnedm{\symbol{7455}}
+\newcommand\pelettersmallcapitalv{\symbol{7456}}
+\newcommand\pelettersmallcapitalw{\symbol{7457}}
+\newcommand\pelettersmallcapitalz{\symbol{7458}}
+\newcommand\pelettersmallcapitalezh{\symbol{7459}}
+\newcommand\pelettervoicedlaryngealspirant{\symbol{7460}}
+\newcommand\peletterain{\symbol{7461}}
+\newcommand\pegreeklettersmallcapitalgamma{\symbol{7462}}
+\newcommand\pegreeklettersmallcapitallamda{\symbol{7463}}
+\newcommand\pegreeklettersmallcapitalpi{\symbol{7464}}
+\newcommand\pegreeklettersmallcapitalrho{\symbol{7465}}
+\newcommand\pegreeklettersmallcapitalpsi{\symbol{7466}}
+\newcommand\pecyrilliclettersmallcapitalel{\symbol{7467}}
+\newcommand\pemodifierlettercapitala{\symbol{7468}}
+\newcommand\pemodifierlettercapitalae{\symbol{7469}}
+\newcommand\pemodifierlettercapitalb{\symbol{7470}}
+\newcommand\pemodifierlettercapitalbarredb{\symbol{7471}}
+\newcommand\pemodifierlettercapitald{\symbol{7472}}
+\newcommand\pemodifierlettercapitale{\symbol{7473}}
+\newcommand\pemodifierlettercapitalreversede{\symbol{7474}}
+\newcommand\pemodifierlettercapitalg{\symbol{7475}}
+\newcommand\pemodifierlettercapitalh{\symbol{7476}}
+\newcommand\pemodifierlettercapitali{\symbol{7477}}
+\newcommand\pemodifierlettercapitalj{\symbol{7478}}
+\newcommand\pemodifierlettercapitalk{\symbol{7479}}
+\newcommand\pemodifierlettercapitall{\symbol{7480}}
+\newcommand\pemodifierlettercapitalm{\symbol{7481}}
+\newcommand\pemodifierlettercapitaln{\symbol{7482}}
+\newcommand\pemodifierlettercapitalreversedn{\symbol{7483}}
+\newcommand\pemodifierlettercapitalo{\symbol{7484}}
+\newcommand\pemodifierlettercapitalou{\symbol{7485}}
+\newcommand\pemodifierlettercapitalp{\symbol{7486}}
+\newcommand\pemodifierlettercapitalr{\symbol{7487}}
+\newcommand\pemodifierlettercapitalt{\symbol{7488}}
+\newcommand\pemodifierlettercapitalu{\symbol{7489}}
+\newcommand\pemodifierlettercapitalw{\symbol{7490}}
+\newcommand\pemodifierlettersmalla{\symbol{7491}}
+\newcommand\pemodifierlettersmallturneda{\symbol{7492}}
+\newcommand\pemodifierlettersmallalpha{\symbol{7493}}
+\newcommand\pemodifierlettersmallturnedae{\symbol{7494}}
+\newcommand\pemodifierlettersmallb{\symbol{7495}}
+\newcommand\pemodifierlettersmalld{\symbol{7496}}
+\newcommand\pemodifierlettersmalle{\symbol{7497}}
+\newcommand\pemodifierlettersmallschwa{\symbol{7498}}
+\newcommand\pemodifierlettersmallopene{\symbol{7499}}
+\newcommand\pemodifierlettersmallturnedopene{\symbol{7500}}
+\newcommand\pemodifierlettersmallg{\symbol{7501}}
+\newcommand\pemodifierlettersmallturnedi{\symbol{7502}}
+\newcommand\pemodifierlettersmallk{\symbol{7503}}
+\newcommand\pemodifierlettersmallm{\symbol{7504}}
+\newcommand\pemodifierlettersmalleng{\symbol{7505}}
+\newcommand\pemodifierlettersmallo{\symbol{7506}}
+\newcommand\pemodifierlettersmallopeno{\symbol{7507}}
+\newcommand\pemodifierlettersmalltophalfo{\symbol{7508}}
+\newcommand\pemodifierlettersmallbottomhalfo{\symbol{7509}}
+\newcommand\pemodifierlettersmallp{\symbol{7510}}
+\newcommand\pemodifierlettersmallt{\symbol{7511}}
+\newcommand\pemodifierlettersmallu{\symbol{7512}}
+\newcommand\pemodifierlettersmallsidewaysu{\symbol{7513}}
+\newcommand\pemodifierlettersmallturnedm{\symbol{7514}}
+\newcommand\pemodifierlettersmallv{\symbol{7515}}
+\newcommand\pemodifierlettersmallain{\symbol{7516}}
+\newcommand\pemodifierlettersmallbeta{\symbol{7517}}
+\newcommand\pemodifierlettersmallgreekgamma{\symbol{7518}}
+\newcommand\pemodifierlettersmalldelta{\symbol{7519}}
+\newcommand\pemodifierlettersmallgreekphi{\symbol{7520}}
+\newcommand\pemodifierlettersmallchi{\symbol{7521}}
+\newcommand\pesubscriptsmallletteri{\symbol{7522}}
+\newcommand\pesubscriptsmallletterr{\symbol{7523}}
+\newcommand\pesubscriptsmallletteru{\symbol{7524}}
+\newcommand\pesubscriptsmallletterv{\symbol{7525}}
+\newcommand\pegreeksubscriptsmallletterbeta{\symbol{7526}}
+\newcommand\pegreeksubscriptsmalllettergamma{\symbol{7527}}
+\newcommand\pegreeksubscriptsmallletterrho{\symbol{7528}}
+\newcommand\pegreeksubscriptsmallletterphi{\symbol{7529}}
+\newcommand\pegreeksubscriptsmallletterchi{\symbol{7530}}
+\newcommand\pesmallletterue{\symbol{7531}}
+\newcommand\pesmallletterbwithmiddletilde{\symbol{7532}}
+\newcommand\pesmallletterdwithmiddletilde{\symbol{7533}}
+\newcommand\pesmallletterfwithmiddletilde{\symbol{7534}}
+\newcommand\pesmalllettermwithmiddletilde{\symbol{7535}}
+\newcommand\pesmallletternwithmiddletilde{\symbol{7536}}
+\newcommand\pesmallletterpwithmiddletilde{\symbol{7537}}
+\newcommand\pesmallletterrwithmiddletilde{\symbol{7538}}
+\newcommand\pesmallletterrwithfishhookandmiddletilde{\symbol{7539}}
+\newcommand\pesmallletterswithmiddletilde{\symbol{7540}}
+\newcommand\pesmalllettertwithmiddletilde{\symbol{7541}}
+\newcommand\pesmallletterzwithmiddletilde{\symbol{7542}}
+\newcommand\pesmallletterturnedg{\symbol{7543}}
+\newcommand\pemodifierlettercyrillicen{\symbol{7544}}
+\newcommand\pesmallletterinsularg{\symbol{7545}}
+\newcommand\pesmallletterthwithstrikethrough{\symbol{7546}}
+\newcommand\pesmallcapitalletteriwithstroke{\symbol{7547}}
+\newcommand\pesmallletteriotawithstroke{\symbol{7548}}
+\newcommand\pesmallletterpwithstroke{\symbol{7549}}
+\newcommand\pesmallcapitalletteruwithstroke{\symbol{7550}}
+\newcommand\pesmallletterupsilonwithstroke{\symbol{7551}}
+%=====
+\newcommand\ipasmallletterturneda{\symbol{592}}
+\newcommand\ipasmallletteralpha{\symbol{593}}
+\newcommand\ipasmallletterturnedalpha{\symbol{594}}
+\newcommand\ipasmallletterbwithhook{\symbol{595}}
+\newcommand\ipasmallletteropeno{\symbol{596}}
+\newcommand\ipasmalllettercwithcurl{\symbol{597}}
+\newcommand\ipasmallletterdwithtail{\symbol{598}}
+\newcommand\ipasmallletterdwithhook{\symbol{599}}
+\newcommand\ipasmallletterreversede{\symbol{600}}
+\newcommand\ipasmallletterschwa{\symbol{601}}
+\newcommand\ipasmallletterschwawithhook{\symbol{602}}
+\newcommand\ipasmallletteropene{\symbol{603}}
+\newcommand\ipasmallletterreversedopene{\symbol{604}}
+\newcommand\ipasmallletterreversedopenewithhook{\symbol{605}}
+\newcommand\ipasmallletterclosedreversedopene{\symbol{606}}
+\newcommand\ipasmallletterdotlessjwithstroke{\symbol{607}}
+\newcommand\ipasmalllettergwithhook{\symbol{608}}
+\newcommand\ipasmallletterscriptg{\symbol{609}}
+\newcommand\ipalettersmallcapitalg{\symbol{610}}
+\newcommand\ipasmalllettergamma{\symbol{611}}
+\newcommand\ipasmallletterramshorn{\symbol{612}}
+\newcommand\ipasmallletterturnedh{\symbol{613}}
+\newcommand\ipasmallletterhwithhook{\symbol{614}}
+\newcommand\ipasmallletterhengwithhook{\symbol{615}}
+\newcommand\ipasmallletteriwithstroke{\symbol{616}}
+\newcommand\ipasmallletteriota{\symbol{617}}
+\newcommand\ipalettersmallcapitali{\symbol{618}}
+\newcommand\ipasmallletterlwithmiddletilde{\symbol{619}}
+\newcommand\ipasmallletterlwithbelt{\symbol{620}}
+\newcommand\ipasmallletterlwithretroflexhook{\symbol{621}}
+\newcommand\ipasmallletterlezh{\symbol{622}}
+\newcommand\ipasmallletterturnedm{\symbol{623}}
+\newcommand\ipasmallletterturnedmwithlongleg{\symbol{624}}
+\newcommand\ipasmalllettermwithhook{\symbol{625}}
+\newcommand\ipasmallletternwithlefthook{\symbol{626}}
+\newcommand\ipasmallletternwithretroflexhook{\symbol{627}}
+\newcommand\ipalettersmallcapitaln{\symbol{628}}
+\newcommand\ipasmallletterbarredo{\symbol{629}}
+\newcommand\ipalettersmallcapitaloe{\symbol{630}}
+\newcommand\ipasmallletterclosedomega{\symbol{631}}
+\newcommand\ipasmallletterphi{\symbol{632}}
+\newcommand\ipasmallletterturnedr{\symbol{633}}
+\newcommand\ipasmallletterturnedrwithlongleg{\symbol{634}}
+\newcommand\ipasmallletterturnedrwithhook{\symbol{635}}
+\newcommand\ipasmallletterrwithlongleg{\symbol{636}}
+\newcommand\ipasmallletterrwithtail{\symbol{637}}
+\newcommand\ipasmallletterrwithfishhook{\symbol{638}}
+\newcommand\ipasmallletterreversedrwithfishhook{\symbol{639}}
+\newcommand\ipalettersmallcapitalr{\symbol{640}}
+\newcommand\ipalettersmallcapitalinvertedr{\symbol{641}}
+\newcommand\ipasmallletterswithhook{\symbol{642}}
+\newcommand\ipasmallletteresh{\symbol{643}}
+\newcommand\ipasmallletterdotlessjwithstrokeandhook{\symbol{644}}
+\newcommand\ipasmalllettersquatreversedesh{\symbol{645}}
+\newcommand\ipasmalllettereshwithcurl{\symbol{646}}
+\newcommand\ipasmallletterturnedt{\symbol{647}}
+\newcommand\ipasmalllettertwithretroflexhook{\symbol{648}}
+\newcommand\ipasmallletterubar{\symbol{649}}
+\newcommand\ipasmallletterupsilon{\symbol{650}}
+\newcommand\ipasmalllettervwithhook{\symbol{651}}
+\newcommand\ipasmallletterturnedv{\symbol{652}}
+\newcommand\ipasmallletterturnedw{\symbol{653}}
+\newcommand\ipasmallletterturnedy{\symbol{654}}
+\newcommand\ipalettersmallcapitaly{\symbol{655}}
+\newcommand\ipasmallletterzwithretroflexhook{\symbol{656}}
+\newcommand\ipasmallletterzwithcurl{\symbol{657}}
+\newcommand\ipasmallletterezh{\symbol{658}}
+\newcommand\ipasmallletterezhwithcurl{\symbol{659}}
+\newcommand\ipaletterglottalstop{\symbol{660}}
+\newcommand\ipaletterpharyngealvoicedfricative{\symbol{661}}
+\newcommand\ipaletterinvertedglottalstop{\symbol{662}}
+\newcommand\ipaletterstretchedc{\symbol{663}}
+\newcommand\ipaletterbilabialclick{\symbol{664}}
+\newcommand\ipalettersmallcapitalb{\symbol{665}}
+\newcommand\ipasmallletterclosedopene{\symbol{666}}
+\newcommand\ipalettersmallcapitalgwithhook{\symbol{667}}
+\newcommand\ipalettersmallcapitalh{\symbol{668}}
+\newcommand\ipasmallletterjwithcrossedtail{\symbol{669}}
+\newcommand\ipasmallletterturnedk{\symbol{670}}
+\newcommand\ipalettersmallcapitall{\symbol{671}}
+\newcommand\ipasmallletterqwithhook{\symbol{672}}
+\newcommand\ipaletterglottalstopwithstroke{\symbol{673}}
+\newcommand\ipaletterreversedglottalstopwithstroke{\symbol{674}}
+\newcommand\ipasmallletterdzdigraph{\symbol{675}}
+\newcommand\ipasmallletterdezhdigraph{\symbol{676}}
+\newcommand\ipasmallletterdzdigraphwithcurl{\symbol{677}}
+\newcommand\ipasmalllettertsdigraph{\symbol{678}}
+\newcommand\ipasmallletterteshdigraph{\symbol{679}}
+\newcommand\ipasmalllettertcdigraphwithcurl{\symbol{680}}
+\newcommand\ipasmallletterfengdigraph{\symbol{681}}
+\newcommand\ipasmallletterlsdigraph{\symbol{682}}
+\newcommand\ipasmallletterlzdigraph{\symbol{683}}
+\newcommand\ipaletterbilabialpercussive{\symbol{684}}
+\newcommand\ipaletterbidentalpercussive{\symbol{685}}
+\newcommand\ipasmallletterturnedhwithfishhook{\symbol{686}}
+\newcommand\ipasmallletterturnedhwithfishhookandtail{\symbol{687}}
+%=====
+\newcommand\pessmallletterbwithpalatalhook{\symbol{7552}}
+\newcommand\pessmallletterdwithpalatalhook{\symbol{7553}}
+\newcommand\pessmallletterfwithpalatalhook{\symbol{7554}}
+\newcommand\pessmalllettergwithpalatalhook{\symbol{7555}}
+\newcommand\pessmallletterkwithpalatalhook{\symbol{7556}}
+\newcommand\pessmallletterlwithpalatalhook{\symbol{7557}}
+\newcommand\pessmalllettermwithpalatalhook{\symbol{7558}}
+\newcommand\pessmallletternwithpalatalhook{\symbol{7559}}
+\newcommand\pessmallletterpwithpalatalhook{\symbol{7560}}
+\newcommand\pessmallletterrwithpalatalhook{\symbol{7561}}
+\newcommand\pessmallletterswithpalatalhook{\symbol{7562}}
+\newcommand\pessmalllettereshwithpalatalhook{\symbol{7563}}
+\newcommand\pessmalllettervwithpalatalhook{\symbol{7564}}
+\newcommand\pessmallletterxwithpalatalhook{\symbol{7565}}
+\newcommand\pessmallletterzwithpalatalhook{\symbol{7566}}
+\newcommand\pessmallletterawithretroflexhook{\symbol{7567}}
+\newcommand\pessmallletteralphawithretroflexhook{\symbol{7568}}
+\newcommand\pessmallletterdwithhookandtail{\symbol{7569}}
+\newcommand\pessmallletterewithretroflexhook{\symbol{7570}}
+\newcommand\pessmallletteropenewithretroflexhook{\symbol{7571}}
+\newcommand\pessmallletterreversedopenewithretroflexhook{\symbol{7572}}
+\newcommand\pessmallletterschwawithretroflexhook{\symbol{7573}}
+\newcommand\pessmallletteriwithretroflexhook{\symbol{7574}}
+\newcommand\pessmallletteropenowithretroflexhook{\symbol{7575}}
+\newcommand\pessmalllettereshwithretroflexhook{\symbol{7576}}
+\newcommand\pessmallletteruwithretroflexhook{\symbol{7577}}
+\newcommand\pessmallletterezhwithretroflexhook{\symbol{7578}}
+\newcommand\pesmodifierlettersmallturnedalpha{\symbol{7579}}
+\newcommand\pesmodifierlettersmallc{\symbol{7580}}
+\newcommand\pesmodifierlettersmallcwithcurl{\symbol{7581}}
+\newcommand\pesmodifierlettersmalleth{\symbol{7582}}
+\newcommand\pesmodifierlettersmallreversedopene{\symbol{7583}}
+\newcommand\pesmodifierlettersmallf{\symbol{7584}}
+\newcommand\pesmodifierlettersmalldotlessjwithstroke{\symbol{7585}}
+\newcommand\pesmodifierlettersmallscriptg{\symbol{7586}}
+\newcommand\pesmodifierlettersmallturnedh{\symbol{7587}}
+\newcommand\pesmodifierlettersmalliwithstroke{\symbol{7588}}
+\newcommand\pesmodifierlettersmalliota{\symbol{7589}}
+\newcommand\pesmodifierlettersmallcapitali{\symbol{7590}}
+\newcommand\pesmodifierlettersmallcapitaliwithstroke{\symbol{7591}}
+\newcommand\pesmodifierlettersmalljwithcrossedtail{\symbol{7592}}
+\newcommand\pesmodifierlettersmalllwithretroflexhook{\symbol{7593}}
+\newcommand\pesmodifierlettersmalllwithpalatalhook{\symbol{7594}}
+\newcommand\pesmodifierlettersmallcapitall{\symbol{7595}}
+\newcommand\pesmodifierlettersmallmwithhook{\symbol{7596}}
+\newcommand\pesmodifierlettersmallturnedmwithlongleg{\symbol{7597}}
+\newcommand\pesmodifierlettersmallnwithlefthook{\symbol{7598}}
+\newcommand\pesmodifierlettersmallnwithretroflexhook{\symbol{7599}}
+\newcommand\pesmodifierlettersmallcapitaln{\symbol{7600}}
+\newcommand\pesmodifierlettersmallbarredo{\symbol{7601}}
+\newcommand\pesmodifierlettersmallphi{\symbol{7602}}
+\newcommand\pesmodifierlettersmallswithhook{\symbol{7603}}
+\newcommand\pesmodifierlettersmallesh{\symbol{7604}}
+\newcommand\pesmodifierlettersmalltwithpalatalhook{\symbol{7605}}
+\newcommand\pesmodifierlettersmallubar{\symbol{7606}}
+\newcommand\pesmodifierlettersmallupsilon{\symbol{7607}}
+\newcommand\pesmodifierlettersmallcapitalu{\symbol{7608}}
+\newcommand\pesmodifierlettersmallvwithhook{\symbol{7609}}
+\newcommand\pesmodifierlettersmallturnedv{\symbol{7610}}
+\newcommand\pesmodifierlettersmallz{\symbol{7611}}
+\newcommand\pesmodifierlettersmallzwithretroflexhook{\symbol{7612}}
+\newcommand\pesmodifierlettersmallzwithcurl{\symbol{7613}}
+\newcommand\pesmodifierlettersmallezh{\symbol{7614}}
+\newcommand\pesmodifierlettersmalltheta{\symbol{7615}}
+
+
+\begin{document}
+
+\section{Named Macros}
+
+Phonetic Extensions
+
+{\fipa
+\pelettersmallcapitala\ 
+\pelettersmallcapitalae\ 
+\pesmallletterturnedae\ 
+\pelettersmallcapitalbarredb\ 
+\pelettersmallcapitalc\ 
+\pelettersmallcapitald\ 
+\pelettersmallcapitaleth\ 
+\pelettersmallcapitale\ 
+\pesmallletterturnedopene\ 
+\pesmallletterturnedi\ 
+\pelettersmallcapitalj\ 
+\pelettersmallcapitalk\ 
+\pelettersmallcapitallwithstroke\ 
+\pelettersmallcapitalm\ 
+\pelettersmallcapitalreversedn\ 
+\pelettersmallcapitalo\ 
+\pelettersmallcapitalopeno\ 
+\pesmalllettersidewayso\ 
+\pesmalllettersidewaysopeno\ 
+\pesmalllettersidewaysowithstroke\ 
+\pesmallletterturnedoe\ 
+\pelettersmallcapitalou\ 
+\pesmalllettertophalfo\ 
+\pesmallletterbottomhalfo\ 
+\pelettersmallcapitalp\ 
+\pelettersmallcapitalreversedr\ 
+\pelettersmallcapitalturnedr\ 
+\pelettersmallcapitalt\ 
+\pelettersmallcapitalu\ 
+\pesmalllettersidewaysu\ 
+\pesmalllettersidewaysdiaeresizedu\ 
+\pesmalllettersidewaysturnedm\ 
+\pelettersmallcapitalv\ 
+\pelettersmallcapitalw\ 
+\pelettersmallcapitalz\ 
+\pelettersmallcapitalezh\ 
+\pelettervoicedlaryngealspirant\ 
+\peletterain\ 
+\pegreeklettersmallcapitalgamma\ 
+\pegreeklettersmallcapitallamda\ 
+\pegreeklettersmallcapitalpi\ 
+\pegreeklettersmallcapitalrho\ 
+\pegreeklettersmallcapitalpsi\ 
+\pecyrilliclettersmallcapitalel\ 
+\pemodifierlettercapitala\ 
+\pemodifierlettercapitalae\ 
+\pemodifierlettercapitalb\ 
+\pemodifierlettercapitalbarredb\ 
+\pemodifierlettercapitald\ 
+\pemodifierlettercapitale\ 
+\pemodifierlettercapitalreversede\ 
+\pemodifierlettercapitalg\ 
+\pemodifierlettercapitalh\ 
+\pemodifierlettercapitali\ 
+\pemodifierlettercapitalj\ 
+\pemodifierlettercapitalk\ 
+\pemodifierlettercapitall\ 
+\pemodifierlettercapitalm\ 
+\pemodifierlettercapitaln\ 
+\pemodifierlettercapitalreversedn\ 
+\pemodifierlettercapitalo\ 
+\pemodifierlettercapitalou\ 
+\pemodifierlettercapitalp\ 
+\pemodifierlettercapitalr\ 
+\pemodifierlettercapitalt\ 
+\pemodifierlettercapitalu\ 
+\pemodifierlettercapitalw\ 
+\pemodifierlettersmalla\ 
+\pemodifierlettersmallturneda\ 
+\pemodifierlettersmallalpha\ 
+\pemodifierlettersmallturnedae\ 
+\pemodifierlettersmallb\ 
+\pemodifierlettersmalld\ 
+\pemodifierlettersmalle\ 
+\pemodifierlettersmallschwa\ 
+\pemodifierlettersmallopene\ 
+\pemodifierlettersmallturnedopene\ 
+\pemodifierlettersmallg\ 
+\pemodifierlettersmallturnedi\ 
+\pemodifierlettersmallk\ 
+\pemodifierlettersmallm\ 
+\pemodifierlettersmalleng\ 
+\pemodifierlettersmallo\ 
+\pemodifierlettersmallopeno\ 
+\pemodifierlettersmalltophalfo\ 
+\pemodifierlettersmallbottomhalfo\ 
+\pemodifierlettersmallp\ 
+\pemodifierlettersmallt\ 
+\pemodifierlettersmallu\ 
+\pemodifierlettersmallsidewaysu\ 
+\pemodifierlettersmallturnedm\ 
+\pemodifierlettersmallv\ 
+\pemodifierlettersmallain\ 
+\pemodifierlettersmallbeta\ 
+\pemodifierlettersmallgreekgamma\ 
+\pemodifierlettersmalldelta\ 
+\pemodifierlettersmallgreekphi\ 
+\pemodifierlettersmallchi\ 
+\pesubscriptsmallletteri\ 
+\pesubscriptsmallletterr\ 
+\pesubscriptsmallletteru\ 
+\pesubscriptsmallletterv\ 
+\pegreeksubscriptsmallletterbeta\ 
+\pegreeksubscriptsmalllettergamma\ 
+\pegreeksubscriptsmallletterrho\ 
+\pegreeksubscriptsmallletterphi\ 
+\pegreeksubscriptsmallletterchi\ 
+\pesmallletterue\ 
+\pesmallletterbwithmiddletilde\ 
+\pesmallletterdwithmiddletilde\ 
+\pesmallletterfwithmiddletilde\ 
+\pesmalllettermwithmiddletilde\ 
+\pesmallletternwithmiddletilde\ 
+\pesmallletterpwithmiddletilde\ 
+\pesmallletterrwithmiddletilde\ 
+\pesmallletterrwithfishhookandmiddletilde\ 
+\pesmallletterswithmiddletilde\ 
+\pesmalllettertwithmiddletilde\ 
+\pesmallletterzwithmiddletilde\ 
+\pesmallletterturnedg\ 
+\pemodifierlettercyrillicen\ 
+\pesmallletterinsularg\ 
+\pesmallletterthwithstrikethrough\ 
+\pesmallcapitalletteriwithstroke\ 
+\pesmallletteriotawithstroke\ 
+\pesmallletterpwithstroke\ 
+\pesmallcapitalletteruwithstroke\ 
+\pesmallletterupsilonwithstroke\ 
+}
+{\fipa
+\cdr{\pelettersmallcapitala} \par
+\cdr{\pelettersmallcapitalae} \par
+\cdr{\pesmallletterturnedae} \par
+\cdr{\pelettersmallcapitalbarredb} \par
+\cdr{\pelettersmallcapitalc} \par
+\cdr{\pelettersmallcapitald} \par
+\cdr{\pelettersmallcapitaleth} \par
+\cdr{\pelettersmallcapitale} \par
+\cdr{\pesmallletterturnedopene} \par
+\cdr{\pesmallletterturnedi} \par
+\cdr{\pelettersmallcapitalj} \par
+\cdr{\pelettersmallcapitalk} \par
+\cdr{\pelettersmallcapitallwithstroke} \par
+\cdr{\pelettersmallcapitalm} \par
+\cdr{\pelettersmallcapitalreversedn} \par
+\cdr{\pelettersmallcapitalo} \par
+\cdr{\pelettersmallcapitalopeno} \par
+\cdr{\pesmalllettersidewayso} \par
+\cdr{\pesmalllettersidewaysopeno} \par
+\cdr{\pesmalllettersidewaysowithstroke} \par
+\cdr{\pesmallletterturnedoe} \par
+\cdr{\pelettersmallcapitalou} \par
+\cdr{\pesmalllettertophalfo} \par
+\cdr{\pesmallletterbottomhalfo} \par
+\cdr{\pelettersmallcapitalp} \par
+\cdr{\pelettersmallcapitalreversedr} \par
+\cdr{\pelettersmallcapitalturnedr} \par
+\cdr{\pelettersmallcapitalt} \par
+\cdr{\pelettersmallcapitalu} \par
+\cdr{\pesmalllettersidewaysu} \par
+\cdr{\pesmalllettersidewaysdiaeresizedu} \par
+\cdr{\pesmalllettersidewaysturnedm} \par
+\cdr{\pelettersmallcapitalv} \par
+\cdr{\pelettersmallcapitalw} \par
+\cdr{\pelettersmallcapitalz} \par
+\cdr{\pelettersmallcapitalezh} \par
+\cdr{\pelettervoicedlaryngealspirant} \par
+\cdr{\peletterain} \par
+\cdr{\pegreeklettersmallcapitalgamma} \par
+\cdr{\pegreeklettersmallcapitallamda} \par
+\cdr{\pegreeklettersmallcapitalpi} \par
+\cdr{\pegreeklettersmallcapitalrho} \par
+\cdr{\pegreeklettersmallcapitalpsi} \par
+\cdr{\pecyrilliclettersmallcapitalel} \par
+\cdr{\pemodifierlettercapitala} \par
+\cdr{\pemodifierlettercapitalae} \par
+\cdr{\pemodifierlettercapitalb} \par
+\cdr{\pemodifierlettercapitalbarredb} \par
+\cdr{\pemodifierlettercapitald} \par
+\cdr{\pemodifierlettercapitale} \par
+\cdr{\pemodifierlettercapitalreversede} \par
+\cdr{\pemodifierlettercapitalg} \par
+\cdr{\pemodifierlettercapitalh} \par
+\cdr{\pemodifierlettercapitali} \par
+\cdr{\pemodifierlettercapitalj} \par
+\cdr{\pemodifierlettercapitalk} \par
+\cdr{\pemodifierlettercapitall} \par
+\cdr{\pemodifierlettercapitalm} \par
+\cdr{\pemodifierlettercapitaln} \par
+\cdr{\pemodifierlettercapitalreversedn} \par
+\cdr{\pemodifierlettercapitalo} \par
+\cdr{\pemodifierlettercapitalou} \par
+\cdr{\pemodifierlettercapitalp} \par
+\cdr{\pemodifierlettercapitalr} \par
+\cdr{\pemodifierlettercapitalt} \par
+\cdr{\pemodifierlettercapitalu} \par
+\cdr{\pemodifierlettercapitalw} \par
+\cdr{\pemodifierlettersmalla} \par
+\cdr{\pemodifierlettersmallturneda} \par
+\cdr{\pemodifierlettersmallalpha} \par
+\cdr{\pemodifierlettersmallturnedae} \par
+\cdr{\pemodifierlettersmallb} \par
+\cdr{\pemodifierlettersmalld} \par
+\cdr{\pemodifierlettersmalle} \par
+\cdr{\pemodifierlettersmallschwa} \par
+\cdr{\pemodifierlettersmallopene} \par
+\cdr{\pemodifierlettersmallturnedopene} \par
+\cdr{\pemodifierlettersmallg} \par
+\cdr{\pemodifierlettersmallturnedi} \par
+\cdr{\pemodifierlettersmallk} \par
+\cdr{\pemodifierlettersmallm} \par
+\cdr{\pemodifierlettersmalleng} \par
+\cdr{\pemodifierlettersmallo} \par
+\cdr{\pemodifierlettersmallopeno} \par
+\cdr{\pemodifierlettersmalltophalfo} \par
+\cdr{\pemodifierlettersmallbottomhalfo} \par
+\cdr{\pemodifierlettersmallp} \par
+\cdr{\pemodifierlettersmallt} \par
+\cdr{\pemodifierlettersmallu} \par
+\cdr{\pemodifierlettersmallsidewaysu} \par
+\cdr{\pemodifierlettersmallturnedm} \par
+\cdr{\pemodifierlettersmallv} \par
+\cdr{\pemodifierlettersmallain} \par
+\cdr{\pemodifierlettersmallbeta} \par
+\cdr{\pemodifierlettersmallgreekgamma} \par
+\cdr{\pemodifierlettersmalldelta} \par
+\cdr{\pemodifierlettersmallgreekphi} \par
+\cdr{\pemodifierlettersmallchi} \par
+\cdr{\pesubscriptsmallletteri} \par
+\cdr{\pesubscriptsmallletterr} \par
+\cdr{\pesubscriptsmallletteru} \par
+\cdr{\pesubscriptsmallletterv} \par
+\cdr{\pegreeksubscriptsmallletterbeta} \par
+\cdr{\pegreeksubscriptsmalllettergamma} \par
+\cdr{\pegreeksubscriptsmallletterrho} \par
+\cdr{\pegreeksubscriptsmallletterphi} \par
+\cdr{\pegreeksubscriptsmallletterchi} \par
+\cdr{\pesmallletterue} \par
+\cdr{\pesmallletterbwithmiddletilde} \par
+\cdr{\pesmallletterdwithmiddletilde} \par
+\cdr{\pesmallletterfwithmiddletilde} \par
+\cdr{\pesmalllettermwithmiddletilde} \par
+\cdr{\pesmallletternwithmiddletilde} \par
+\cdr{\pesmallletterpwithmiddletilde} \par
+\cdr{\pesmallletterrwithmiddletilde} \par
+\cdr{\pesmallletterrwithfishhookandmiddletilde} \par
+\cdr{\pesmallletterswithmiddletilde} \par
+\cdr{\pesmalllettertwithmiddletilde} \par
+\cdr{\pesmallletterzwithmiddletilde} \par
+\cdr{\pesmallletterturnedg} \par
+\cdr{\pemodifierlettercyrillicen} \par
+\cdr{\pesmallletterinsularg} \par
+\cdr{\pesmallletterthwithstrikethrough} \par
+\cdr{\pesmallcapitalletteriwithstroke} \par
+\cdr{\pesmallletteriotawithstroke} \par
+\cdr{\pesmallletterpwithstroke} \par
+\cdr{\pesmallcapitalletteruwithstroke} \par
+\cdr{\pesmallletterupsilonwithstroke} \par
+}
+\bigskip
+IPA Extensions
+
+{\fipa
+\ipasmallletterturneda\ 
+\ipasmallletteralpha\ 
+\ipasmallletterturnedalpha\ 
+\ipasmallletterbwithhook\ 
+\ipasmallletteropeno\ 
+\ipasmalllettercwithcurl\ 
+\ipasmallletterdwithtail\ 
+\ipasmallletterdwithhook\ 
+\ipasmallletterreversede\ 
+\ipasmallletterschwa\ 
+\ipasmallletterschwawithhook\ 
+\ipasmallletteropene\ 
+\ipasmallletterreversedopene\ 
+\ipasmallletterreversedopenewithhook\ 
+\ipasmallletterclosedreversedopene\ 
+\ipasmallletterdotlessjwithstroke\ 
+\ipasmalllettergwithhook\ 
+\ipasmallletterscriptg\ 
+\ipalettersmallcapitalg\ 
+\ipasmalllettergamma\ 
+\ipasmallletterramshorn\ 
+\ipasmallletterturnedh\ 
+\ipasmallletterhwithhook\ 
+\ipasmallletterhengwithhook\ 
+\ipasmallletteriwithstroke\ 
+\ipasmallletteriota\ 
+\ipalettersmallcapitali\ 
+\ipasmallletterlwithmiddletilde\ 
+\ipasmallletterlwithbelt\ 
+\ipasmallletterlwithretroflexhook\ 
+\ipasmallletterlezh\ 
+\ipasmallletterturnedm\ 
+\ipasmallletterturnedmwithlongleg\ 
+\ipasmalllettermwithhook\ 
+\ipasmallletternwithlefthook\ 
+\ipasmallletternwithretroflexhook\ 
+\ipalettersmallcapitaln\ 
+\ipasmallletterbarredo\ 
+\ipalettersmallcapitaloe\ 
+\ipasmallletterclosedomega\ 
+\ipasmallletterphi\ 
+\ipasmallletterturnedr\ 
+\ipasmallletterturnedrwithlongleg\ 
+\ipasmallletterturnedrwithhook\ 
+\ipasmallletterrwithlongleg\ 
+\ipasmallletterrwithtail\ 
+\ipasmallletterrwithfishhook\ 
+\ipasmallletterreversedrwithfishhook\ 
+\ipalettersmallcapitalr\ 
+\ipalettersmallcapitalinvertedr\ 
+\ipasmallletterswithhook\ 
+\ipasmallletteresh\ 
+\ipasmallletterdotlessjwithstrokeandhook\ 
+\ipasmalllettersquatreversedesh\ 
+\ipasmalllettereshwithcurl\ 
+\ipasmallletterturnedt\ 
+\ipasmalllettertwithretroflexhook\ 
+\ipasmallletterubar\ 
+\ipasmallletterupsilon\ 
+\ipasmalllettervwithhook\ 
+\ipasmallletterturnedv\ 
+\ipasmallletterturnedw\ 
+\ipasmallletterturnedy\ 
+\ipalettersmallcapitaly\ 
+\ipasmallletterzwithretroflexhook\ 
+\ipasmallletterzwithcurl\ 
+\ipasmallletterezh\ 
+\ipasmallletterezhwithcurl\ 
+\ipaletterglottalstop\ 
+\ipaletterpharyngealvoicedfricative\ 
+\ipaletterinvertedglottalstop\ 
+\ipaletterstretchedc\ 
+\ipaletterbilabialclick\ 
+\ipalettersmallcapitalb\ 
+\ipasmallletterclosedopene\ 
+\ipalettersmallcapitalgwithhook\ 
+\ipalettersmallcapitalh\ 
+\ipasmallletterjwithcrossedtail\ 
+\ipasmallletterturnedk\ 
+\ipalettersmallcapitall\ 
+\ipasmallletterqwithhook\ 
+\ipaletterglottalstopwithstroke\ 
+\ipaletterreversedglottalstopwithstroke\ 
+\ipasmallletterdzdigraph\ 
+\ipasmallletterdezhdigraph\ 
+\ipasmallletterdzdigraphwithcurl\ 
+\ipasmalllettertsdigraph\ 
+\ipasmallletterteshdigraph\ 
+\ipasmalllettertcdigraphwithcurl\ 
+\ipasmallletterfengdigraph\ 
+\ipasmallletterlsdigraph\ 
+\ipasmallletterlzdigraph\ 
+\ipaletterbilabialpercussive\ 
+\ipaletterbidentalpercussive\ 
+\ipasmallletterturnedhwithfishhook\ 
+\ipasmallletterturnedhwithfishhookandtail\ 
+}
+
+{\fipa 
+\cdr{\ipasmallletterturneda} \par
+\cdr{\ipasmallletteralpha} \par
+\cdr{\ipasmallletterturnedalpha} \par
+\cdr{\ipasmallletterbwithhook} \par
+\cdr{\ipasmallletteropeno} \par
+\cdr{\ipasmalllettercwithcurl} \par
+\cdr{\ipasmallletterdwithtail} \par
+\cdr{\ipasmallletterdwithhook} \par
+\cdr{\ipasmallletterreversede} \par
+\cdr{\ipasmallletterschwa} \par
+\cdr{\ipasmallletterschwawithhook} \par
+\cdr{\ipasmallletteropene} \par
+\cdr{\ipasmallletterreversedopene} \par
+\cdr{\ipasmallletterreversedopenewithhook} \par
+\cdr{\ipasmallletterclosedreversedopene} \par
+\cdr{\ipasmallletterdotlessjwithstroke} \par
+\cdr{\ipasmalllettergwithhook} \par
+\cdr{\ipasmallletterscriptg} \par
+\cdr{\ipalettersmallcapitalg} \par
+\cdr{\ipasmalllettergamma} \par
+\cdr{\ipasmallletterramshorn} \par
+\cdr{\ipasmallletterturnedh} \par
+\cdr{\ipasmallletterhwithhook} \par
+\cdr{\ipasmallletterhengwithhook} \par
+\cdr{\ipasmallletteriwithstroke} \par
+\cdr{\ipasmallletteriota} \par
+\cdr{\ipalettersmallcapitali} \par
+\cdr{\ipasmallletterlwithmiddletilde} \par
+\cdr{\ipasmallletterlwithbelt} \par
+\cdr{\ipasmallletterlwithretroflexhook} \par
+\cdr{\ipasmallletterlezh} \par
+\cdr{\ipasmallletterturnedm} \par
+\cdr{\ipasmallletterturnedmwithlongleg} \par
+\cdr{\ipasmalllettermwithhook} \par
+\cdr{\ipasmallletternwithlefthook} \par
+\cdr{\ipasmallletternwithretroflexhook} \par
+\cdr{\ipalettersmallcapitaln} \par
+\cdr{\ipasmallletterbarredo} \par
+\cdr{\ipalettersmallcapitaloe} \par
+\cdr{\ipasmallletterclosedomega} \par
+\cdr{\ipasmallletterphi} \par
+\cdr{\ipasmallletterturnedr} \par
+\cdr{\ipasmallletterturnedrwithlongleg} \par
+\cdr{\ipasmallletterturnedrwithhook} \par
+\cdr{\ipasmallletterrwithlongleg} \par
+\cdr{\ipasmallletterrwithtail} \par
+\cdr{\ipasmallletterrwithfishhook} \par
+\cdr{\ipasmallletterreversedrwithfishhook} \par
+\cdr{\ipalettersmallcapitalr} \par
+\cdr{\ipalettersmallcapitalinvertedr} \par
+\cdr{\ipasmallletterswithhook} \par
+\cdr{\ipasmallletteresh} \par
+\cdr{\ipasmallletterdotlessjwithstrokeandhook} \par
+\cdr{\ipasmalllettersquatreversedesh} \par
+\cdr{\ipasmalllettereshwithcurl} \par
+\cdr{\ipasmallletterturnedt} \par
+\cdr{\ipasmalllettertwithretroflexhook} \par
+\cdr{\ipasmallletterubar} \par
+\cdr{\ipasmallletterupsilon} \par
+\cdr{\ipasmalllettervwithhook} \par
+\cdr{\ipasmallletterturnedv} \par
+\cdr{\ipasmallletterturnedw} \par
+\cdr{\ipasmallletterturnedy} \par
+\cdr{\ipalettersmallcapitaly} \par
+\cdr{\ipasmallletterzwithretroflexhook} \par
+\cdr{\ipasmallletterzwithcurl} \par
+\cdr{\ipasmallletterezh} \par
+\cdr{\ipasmallletterezhwithcurl} \par
+\cdr{\ipaletterglottalstop} \par
+\cdr{\ipaletterpharyngealvoicedfricative} \par
+\cdr{\ipaletterinvertedglottalstop} \par
+\cdr{\ipaletterstretchedc} \par
+\cdr{\ipaletterbilabialclick} \par
+\cdr{\ipalettersmallcapitalb} \par
+\cdr{\ipasmallletterclosedopene} \par
+\cdr{\ipalettersmallcapitalgwithhook} \par
+\cdr{\ipalettersmallcapitalh} \par
+\cdr{\ipasmallletterjwithcrossedtail} \par
+\cdr{\ipasmallletterturnedk} \par
+\cdr{\ipalettersmallcapitall} \par
+\cdr{\ipasmallletterqwithhook} \par
+\cdr{\ipaletterglottalstopwithstroke} \par
+\cdr{\ipaletterreversedglottalstopwithstroke} \par
+\cdr{\ipasmallletterdzdigraph} \par
+\cdr{\ipasmallletterdezhdigraph} \par
+\cdr{\ipasmallletterdzdigraphwithcurl} \par
+\cdr{\ipasmalllettertsdigraph} \par
+\cdr{\ipasmallletterteshdigraph} \par
+\cdr{\ipasmalllettertcdigraphwithcurl} \par
+\cdr{\ipasmallletterfengdigraph} \par
+\cdr{\ipasmallletterlsdigraph} \par
+\cdr{\ipasmallletterlzdigraph} \par
+\cdr{\ipaletterbilabialpercussive} \par
+\cdr{\ipaletterbidentalpercussive} \par
+\cdr{\ipasmallletterturnedhwithfishhook} \par
+\cdr{\ipasmallletterturnedhwithfishhookandtail} \par
+}
+
+\bigskip
+Phonetic Extension Supplement
+
+{\fipa
+\pessmallletterbwithpalatalhook\ 
+\pessmallletterdwithpalatalhook\ 
+\pessmallletterfwithpalatalhook\ 
+\pessmalllettergwithpalatalhook\ 
+\pessmallletterkwithpalatalhook\ 
+\pessmallletterlwithpalatalhook\ 
+\pessmalllettermwithpalatalhook\ 
+\pessmallletternwithpalatalhook\ 
+\pessmallletterpwithpalatalhook\ 
+\pessmallletterrwithpalatalhook\ 
+\pessmallletterswithpalatalhook\ 
+\pessmalllettereshwithpalatalhook\ 
+\pessmalllettervwithpalatalhook\ 
+\pessmallletterxwithpalatalhook\ 
+\pessmallletterzwithpalatalhook\ 
+\pessmallletterawithretroflexhook\ 
+\pessmallletteralphawithretroflexhook\ 
+\pessmallletterdwithhookandtail\ 
+\pessmallletterewithretroflexhook\ 
+\pessmallletteropenewithretroflexhook\ 
+\pessmallletterreversedopenewithretroflexhook\ 
+\pessmallletterschwawithretroflexhook\ 
+\pessmallletteriwithretroflexhook\ 
+\pessmallletteropenowithretroflexhook\ 
+\pessmalllettereshwithretroflexhook\ 
+\pessmallletteruwithretroflexhook\ 
+\pessmallletterezhwithretroflexhook\ 
+\pesmodifierlettersmallturnedalpha\ 
+\pesmodifierlettersmallc\ 
+\pesmodifierlettersmallcwithcurl\ 
+\pesmodifierlettersmalleth\ 
+\pesmodifierlettersmallreversedopene\ 
+\pesmodifierlettersmallf\ 
+\pesmodifierlettersmalldotlessjwithstroke\ 
+\pesmodifierlettersmallscriptg\ 
+\pesmodifierlettersmallturnedh\ 
+\pesmodifierlettersmalliwithstroke\ 
+\pesmodifierlettersmalliota\ 
+\pesmodifierlettersmallcapitali\ 
+\pesmodifierlettersmallcapitaliwithstroke\ 
+\pesmodifierlettersmalljwithcrossedtail\ 
+\pesmodifierlettersmalllwithretroflexhook\ 
+\pesmodifierlettersmalllwithpalatalhook\ 
+\pesmodifierlettersmallcapitall\ 
+\pesmodifierlettersmallmwithhook\ 
+\pesmodifierlettersmallturnedmwithlongleg\ 
+\pesmodifierlettersmallnwithlefthook\ 
+\pesmodifierlettersmallnwithretroflexhook\ 
+\pesmodifierlettersmallcapitaln\ 
+\pesmodifierlettersmallbarredo\ 
+\pesmodifierlettersmallphi\ 
+\pesmodifierlettersmallswithhook\ 
+\pesmodifierlettersmallesh\ 
+\pesmodifierlettersmalltwithpalatalhook\ 
+\pesmodifierlettersmallubar\ 
+\pesmodifierlettersmallupsilon\ 
+\pesmodifierlettersmallcapitalu\ 
+\pesmodifierlettersmallvwithhook\ 
+\pesmodifierlettersmallturnedv\ 
+\pesmodifierlettersmallz\ 
+\pesmodifierlettersmallzwithretroflexhook\ 
+\pesmodifierlettersmallzwithcurl\ 
+\pesmodifierlettersmallezh\ 
+\pesmodifierlettersmalltheta\ 
+}
+
+{\fipa
+\cdr{\pessmallletterbwithpalatalhook} \par
+\cdr{\pessmallletterdwithpalatalhook} \par
+\cdr{\pessmallletterfwithpalatalhook} \par
+\cdr{\pessmalllettergwithpalatalhook} \par
+\cdr{\pessmallletterkwithpalatalhook} \par
+\cdr{\pessmallletterlwithpalatalhook} \par
+\cdr{\pessmalllettermwithpalatalhook} \par
+\cdr{\pessmallletternwithpalatalhook} \par
+\cdr{\pessmallletterpwithpalatalhook} \par
+\cdr{\pessmallletterrwithpalatalhook} \par
+\cdr{\pessmallletterswithpalatalhook} \par
+\cdr{\pessmalllettereshwithpalatalhook} \par
+\cdr{\pessmalllettervwithpalatalhook} \par
+\cdr{\pessmallletterxwithpalatalhook} \par
+\cdr{\pessmallletterzwithpalatalhook} \par
+\cdr{\pessmallletterawithretroflexhook} \par
+\cdr{\pessmallletteralphawithretroflexhook} \par
+\cdr{\pessmallletterdwithhookandtail} \par
+\cdr{\pessmallletterewithretroflexhook} \par
+\cdr{\pessmallletteropenewithretroflexhook} \par
+\cdr{\pessmallletterreversedopenewithretroflexhook} \par
+\cdr{\pessmallletterschwawithretroflexhook} \par
+\cdr{\pessmallletteriwithretroflexhook} \par
+\cdr{\pessmallletteropenowithretroflexhook} \par
+\cdr{\pessmalllettereshwithretroflexhook} \par
+\cdr{\pessmallletteruwithretroflexhook} \par
+\cdr{\pessmallletterezhwithretroflexhook} \par
+\cdr{\pesmodifierlettersmallturnedalpha} \par
+\cdr{\pesmodifierlettersmallc} \par
+\cdr{\pesmodifierlettersmallcwithcurl} \par
+\cdr{\pesmodifierlettersmalleth} \par
+\cdr{\pesmodifierlettersmallreversedopene} \par
+\cdr{\pesmodifierlettersmallf} \par
+\cdr{\pesmodifierlettersmalldotlessjwithstroke} \par
+\cdr{\pesmodifierlettersmallscriptg} \par
+\cdr{\pesmodifierlettersmallturnedh} \par
+\cdr{\pesmodifierlettersmalliwithstroke} \par
+\cdr{\pesmodifierlettersmalliota} \par
+\cdr{\pesmodifierlettersmallcapitali} \par
+\cdr{\pesmodifierlettersmallcapitaliwithstroke} \par
+\cdr{\pesmodifierlettersmalljwithcrossedtail} \par
+\cdr{\pesmodifierlettersmalllwithretroflexhook} \par
+\cdr{\pesmodifierlettersmalllwithpalatalhook} \par
+\cdr{\pesmodifierlettersmallcapitall} \par
+\cdr{\pesmodifierlettersmallmwithhook} \par
+\cdr{\pesmodifierlettersmallturnedmwithlongleg} \par
+\cdr{\pesmodifierlettersmallnwithlefthook} \par
+\cdr{\pesmodifierlettersmallnwithretroflexhook} \par
+\cdr{\pesmodifierlettersmallcapitaln} \par
+\cdr{\pesmodifierlettersmallbarredo} \par
+\cdr{\pesmodifierlettersmallphi} \par
+\cdr{\pesmodifierlettersmallswithhook} \par
+\cdr{\pesmodifierlettersmallesh} \par
+\cdr{\pesmodifierlettersmalltwithpalatalhook} \par
+\cdr{\pesmodifierlettersmallubar} \par
+\cdr{\pesmodifierlettersmallupsilon} \par
+\cdr{\pesmodifierlettersmallcapitalu} \par
+\cdr{\pesmodifierlettersmallvwithhook} \par
+\cdr{\pesmodifierlettersmallturnedv} \par
+\cdr{\pesmodifierlettersmallz} \par
+\cdr{\pesmodifierlettersmallzwithretroflexhook} \par
+\cdr{\pesmodifierlettersmallzwithcurl} \par
+\cdr{\pesmodifierlettersmallezh} \par
+\cdr{\pesmodifierlettersmalltheta} \par
+}
+
+\dolistipatransuc
+
+\bigskip
+\cdr{\ipauc{U+0250U+0253U+0255}}
+
+\cdr{\ipauc{/U+0250/U+0253/U+0255}}
+
+\dolistipatransun
+
+\bigskip
+\cdr{\ipaun{turnedabwithhookcwithcurl}}
+
+\cdr{\ipaun{/turneda/bwithhook/cwithcurl}}
+
+\dolistipatransts
+
+\bigskip
+\cdr{\ipats{aturnbhookccurl}}
+
+\cdr{\ipats{/aturn/bhook/ccurl}}
+
+\section{Environments}
+
+ipatransuce:
+\begin{ipatransuce}
+U+0250U+0253U+0255
+\end{ipatransuce}
+
+ipatransune:
+\begin{ipatransune}
+/turneda/bwithhook/cwithcurl
+\end{ipatransune}
+
+ipatranstse:
+\begin{ipatranstse}
+/aturn/bhook/ccurl
+\end{ipatranstse}
+
+\section{Usage}
+direct iniput: [aɪ pʰiː eɪ]
+
+transliteration: 
+
+\cdr{[\ipats{aismallcap pmlhimltricolon eismallcap}]}
+
+\cdr{\ipats{[///a/ismallcap /p/mlh/i/mltricolon e/ismallcap]}}
+
+\end{document}

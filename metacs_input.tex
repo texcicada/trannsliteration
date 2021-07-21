@@ -1,0 +1,1005 @@
+
+\ExplSyntaxOn
+\tl_new:N \l_my_tl
+\tl_new:N \l_myb_tl
+\tl_new:N \l_myc_tl
+%\tl_new:N \l_left_brace_tl
+%\tl_set:Nn \l_left_brace_tl { { }
+%\tl_new:N \l_right_brace_tl
+%\tl_set:Nn \l_right_brace_tl { { }
+
+
+
+
+
+%-------------------------- formats
+%----- marg
+\NewDocumentCommand{\csmetaformat} { } {
+      \cc{itshape}
+     	\cc{fcmu}
+}
+
+
+%----- marg
+\NewDocumentCommand{\margdelimformat} { } {
+																			\ttfamily\large\color{red}
+}
+%----- marg left format
+\NewDocumentCommand{\margdelimleftformat} { } {
+																			\margdelimformat
+}
+%----- marg left char
+\NewDocumentCommand{\margdelimleftchar} { } {
+																		  \c_left_brace_str
+}
+%----- marg left
+\NewDocumentCommand{\margdelimleft} { } {
+																			{ 
+																			\margdelimleftformat
+																		  \margdelimleftchar
+																		  }
+}
+%----- marg left reset ========================
+\NewDocumentCommand{\margdelimleftreset} { } {
+		
+\RenewDocumentCommand{\margdelimformat} { } {
+		\ttfamily\large\color{red}
+	}
+\RenewDocumentCommand{\margdelimleftformat} { } {
+																			\margdelimformat
+}
+%----- marg left char
+\RenewDocumentCommand{\margdelimleftchar} { } {
+																		  \c_left_brace_str
+}
+%----- marg left
+\RenewDocumentCommand{\margdelimleft} { } {
+																			{ 
+																			\margdelimleftformat
+																		  \margdelimleftchar
+																		  }
+}
+		
+}
+%----- marg right reset
+\NewDocumentCommand{\margdelimrightreset} { } {
+		
+\RenewDocumentCommand{\margdelimformat} { } {
+		\ttfamily\large\color{red}
+	}
+\RenewDocumentCommand{\margdelimrightformat} { } {
+																			\margdelimformat
+}
+%----- marg right char
+\RenewDocumentCommand{\margdelimrightchar} { } {
+																		  \c_right_brace_str
+}
+%----- marg right
+\RenewDocumentCommand{\margdelimright} { } {
+																			{ 
+																			\margdelimrightformat
+																		  \margdelimrightchar
+																		  }
+}
+		
+}
+
+%
+\NewDocumentCommand{\margreset} { } {
+		\margdelimleftreset
+		\margdelimrightreset		
+}
+
+
+
+
+%----- marg right format
+\NewDocumentCommand{\margdelimrightformat} { } {
+																			\margdelimformat
+}
+%----- marg right char
+\NewDocumentCommand{\margdelimrightchar} { } {
+																		  \c_right_brace_str
+}
+%----- marg right
+\NewDocumentCommand{\margdelimright} { } {
+																			{ 
+																			\margdelimrightformat
+																		  \margdelimrightchar
+																		  }
+}
+
+
+%----- oarg left reset ========================
+\NewDocumentCommand{\oargdelimleftreset} { } {
+		
+\RenewDocumentCommand{\oargdelimformat} { } {
+																			\ttfamily\large
+	}
+\RenewDocumentCommand{\oargdelimleftformat} { } {
+																			\oargdelimformat
+}
+%----- oarg left char
+\RenewDocumentCommand{\oargdelimleftchar} { } {
+																		  [
+}
+%----- oarg left
+\RenewDocumentCommand{\oargdelimleft} { } {
+																			{ 
+																			\oargdelimleftformat
+																		  \oargdelimleftchar
+																		  }
+}
+		
+}
+%----- oarg right reset
+\NewDocumentCommand{\oargdelimrightreset} { } {
+		
+\RenewDocumentCommand{\oargdelimformat} { } {
+																			\ttfamily\large
+	}
+\RenewDocumentCommand{\oargdelimrightformat} { } {
+																			\oargdelimformat
+}
+%----- oarg right char
+\RenewDocumentCommand{\oargdelimrightchar} { } {
+																		  ]
+}
+%----- oarg right
+\RenewDocumentCommand{\oargdelimright} { } {
+																			{ 
+																			\oargdelimrightformat
+																		  \oargdelimrightchar
+																		  }
+}
+		
+}
+
+%
+\NewDocumentCommand{\oargreset} { } {
+		\oargdelimleftreset
+		\oargdelimrightreset		
+}
+
+
+
+
+%----- oarg
+\NewDocumentCommand{\oargdelimformat} { } {
+																			\ttfamily\large
+}
+%----- oarg left format
+\NewDocumentCommand{\oargdelimleftformat} { } {
+																			\oargdelimformat
+}
+%----- oarg left char
+\NewDocumentCommand{\oargdelimleftchar} { } {
+																		  [
+}
+%----- oarg left
+\NewDocumentCommand{\oargdelimleft} { } {
+																			{ 
+																			\oargdelimleftformat
+																		  \oargdelimleftchar
+																		  }
+}
+%----- oarg right format
+\NewDocumentCommand{\oargdelimrightformat} { } {
+																			\oargdelimformat
+}
+%----- oarg right char
+\NewDocumentCommand{\oargdelimrightchar} { } {
+																		  ]
+}
+%----- oarg right
+\NewDocumentCommand{\oargdelimright} { } {
+																			{ 
+																			\oargdelimrightformat
+																		  \oargdelimrightchar
+																		  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+%------------------------------- control sequence
+\NewDocumentCommand{\cs}{ m }{%
+  {\bfseries\sffamily\color{blue}
+  \token_to_str:N #1 % If you already have a token
+  }
+}%
+
+
+
+
+%------------------------------- print full meta
+\NewDocumentCommand{\mcs}{ m m m m m }{% css (o|m)argcss
+%the meta
+%{ \ttfamily
+\css{#1}
+\tl_set:Nn \l_my_tl { #2 }
+\tl_if_empty:NTF  \l_my_tl  {  } { \oargcss{#2} }
+\tl_set:Nn \l_my_tl { #3 }
+\tl_if_empty:NTF  \l_my_tl {  } { \margcss{#3} }
+\tl_set:Nn \l_my_tl { #4 }
+\tl_if_empty:NTF  \l_my_tl {  } { \margcss{#4} }
+\tl_set:Nn \l_my_tl { #5 }
+\tl_if_empty:NTF  \l_my_tl {  } { \margcss{#5} }
+%}
+%$\mapsto$
+%%the command:
+%\tl_set:Nn \l_my_tl { #2 }
+%\cs:w #1 \cs_end: 
+%								 { \tl_use:N \l_my_tl }
+}%
+
+
+
+
+
+
+%------------------------------- print full meta value
+\NewDocumentCommand{\mcsv}{ m m m m m }{%
+%the meta
+%{ \ttfamily
+\css{#1}
+\tl_set:Nn \l_my_tl { #2 }
+\tl_if_empty:NTF  \l_my_tl  {  } { \oargvcss{#2} }
+\tl_set:Nn \l_my_tl { #3 }
+\tl_if_empty:NTF  \l_my_tl {  } { \margvcss{#3} }
+\tl_set:Nn \l_my_tl { #4 }
+\tl_if_empty:NTF  \l_my_tl {  } { \margvcss{#4} }
+\tl_set:Nn \l_my_tl { #5 }
+\tl_if_empty:NTF  \l_my_tl {  } { \margvcss{#5} }
+%}
+%$\mapsto$
+%%the command:
+%\tl_set:Nn \l_my_tl { #2 }
+%\cs:w #1 \cs_end: 
+%								 { \tl_use:N \l_my_tl }
+}%
+
+
+
+
+
+%------------------------------- control sequence build
+\NewDocumentCommand{\css}{ m }{%
+  \token_to_str:c #1 % adds a \, via the :c format
+}%
+
+
+%------------------------------- mandatory argument
+\NewDocumentCommand{\marg}{ m }{%
+\tl_set:Nn \l_my_tl { 
+%                              {
+%                               \ttfamily\large\color{red}
+%																		  \c_left_brace_str
+%																		  }
+																				\margdelimleft
+																		  \meta{#1}
+																				\margdelimright
+%                              {
+%                               \ttfamily\large\color{red}
+%																		  \c_right_brace_str
+%																		   }
+																		  }
+\tl_use:N \l_my_tl
+}%
+
+\providecommand\margf[1]{%
+  {\ttfamily\large\color{red}\char`\{}\meta{#1}{\ttfamily\large\color{red}\char`\}}}
+
+
+
+%------------------------------- mandatory argument, no format
+\NewDocumentCommand{\margcss}{ m }{%
+\tl_set:Nn \l_my_tl { 
+%                              {
+%                               \ttfamily\large\color{red}
+																		  \c_left_brace_str
+%																		  }
+																		  \meta{#1}
+%                              {
+%                               \ttfamily\large\color{red}
+																		  \c_right_brace_str
+%																		   }
+																		  }
+\tl_use:N \l_my_tl
+}%
+
+
+
+
+%------------------------------- optional argument
+\NewDocumentCommand{\oarg}{ m }{%
+\tl_set:Nn \l_my_tl { 
+%																		{\ttfamily\large
+%																		  [
+%																		  }
+                             \oargdelimleft
+																		  \meta{#1}
+																		  \oargdelimright
+%																			{\ttfamily\large
+%																		  ]
+%																		  }
+																		 }
+\tl_use:N \l_my_tl
+}%
+
+
+
+%------------------------------- optional argument, no value
+\NewDocumentCommand{\oargcss}{ m }{%
+\tl_set:Nn \l_my_tl { 
+%																		{\ttfamily\large
+																		  [
+%																		  }
+																		  \meta{#1}
+%																			{\ttfamily\large
+																		  ]
+%																		  }
+																		 }
+\tl_use:N \l_my_tl
+}%
+
+
+
+%------------------------------- mandatory argument value
+\NewDocumentCommand{\margv}{ m }{%
+\tl_set:Nn \l_my_tl { 
+																				\margdelimleft
+																		   #1
+																				\margdelimright
+																		  }
+\tl_use:N \l_my_tl
+}%
+
+
+
+%------------------------------- mandatory argument value, no format
+\NewDocumentCommand{\margvcss}{ m }{%
+\tl_set:Nn \l_my_tl { 
+%																			{ \ttfamily\large\color{red}
+																		  \c_left_brace_str
+%																		  }
+																		   #1
+%																			{ \ttfamily\large\color{red}
+																		  \c_right_brace_str
+%																		  }
+																		  }
+\tl_use:N \l_my_tl
+}%
+
+
+
+%------------------------------- optional argument value
+\NewDocumentCommand{\oargv}{ m }{%
+\tl_set:Nn \l_my_tl { 
+																		 \oargdelimleft
+																		  #1
+																		 \oargdelimright
+																		  }
+\tl_use:N \l_my_tl
+}%
+
+
+
+%------------------------------- optional argument value, no format
+\NewDocumentCommand{\oargvcss}{ m }{%
+\tl_set:Nn \l_my_tl { 
+%																		 {\ttfamily\large 
+																		 [ 
+%																		 }
+																		  #1
+%																		 {\ttfamily\large 
+																		 ] 
+%																		 }
+																		  }
+\tl_use:N \l_my_tl
+}%
+
+
+
+
+%------------------------------- meta left
+\NewDocumentCommand{\metaleft}{  }{%
+              \cm{\cc{langle}}
+              }
+%------------------------------- meta right
+\NewDocumentCommand{\metaright}{  }{%
+              \cm{\cc{rangle}}
+              }
+%------------------------------- meta
+\NewDocumentCommand{\meta}{ m }{%
+\tl_set:Nn \l_my_tl { 
+             {\cc{large}
+              \metaleft
+             } 
+              	{
+              	\csmetaformat
+              	#1 
+                }
+									{ \cc{large}
+									\metaright
+									}
+					}
+\tl_use:N \l_my_tl
+%%\cs:w bfseries \cs_end: xyz
+%%\cs_new:Nn \c: {\cs:w itshape \cs_end:}
+%%\cs:w c: \cs_end: qqq
+}%
+
+
+%------------------------------- switch
+\NewDocumentCommand{\cc}{ m }{%
+%%%\tl_new:N \l_mycc_tl
+%%%\tl_set:Nn \l_mycc_tl { \cs:w #1 \cs_end: }
+%%%\tl_use:N \l_mycc_tl
+%\cs_new:Nn \c: {\cs:w itshape \cs_end:}
+%\cs:w c: \cs_end: qqq
+\cs:w #1 \cs_end:
+}%
+
+
+
+%------------------------------- command + argument
+\NewDocumentCommand{\cd}{ m m }{%
+\tl_set:Nn \l_my_tl { #2 }
+\cs:w #1 \cs_end: { \tl_use:N \l_my_tl }
+}%
+
+
+
+
+
+%------------------------------- inline maths
+\NewDocumentCommand{\cm}{ m }{%
+\tl_set:Nn \l_my_tl { $ #1 $ }
+\tl_use:N \l_my_tl
+}%
+
+
+%------------------------------- display maths
+\NewDocumentCommand{\cmd}{ m }{%
+\tl_set:Nn \l_my_tl { \[ #1 \] }
+\tl_use:N \l_my_tl
+}%
+
+
+
+%------------------------------- demo: command + argument
+\NewDocumentCommand{\cssm}{ m m }{%
+%the meta
+{ \ttfamily
+\css{#1}\margvcss{#2} }
+$\mapsto$
+%the command:
+\tl_set:Nn \l_my_tl { #2 }
+\cs:w #1 \cs_end: 
+								 { \tl_use:N \l_my_tl }
+}%
+
+
+%------------------------------- demo: command + arg + arg
+\NewDocumentCommand{\cssmm}{ m m m }{%
+%the meta
+{ \ttfamily
+\css{#1}\margvcss{#2}\margvcss{#3}  }
+$\mapsto$
+%the command:
+\tl_set:Nn \l_my_tl { #2 }
+\tl_set:Nn \l_myb_tl { #3 } %2nd argument
+\cs:w #1 \cs_end: 
+								 { \tl_use:N \l_my_tl }
+								 { \tl_use:N \l_myb_tl }
+}%
+
+
+%------------------------------- demo: command + arg + arg + arg
+\NewDocumentCommand{\cssmmm}{ m m m m }{%
+%the meta
+{ \ttfamily
+\css{#1}\margvcss{#2}\margvcss{#3}\margvcss{#4}  }
+$\mapsto$
+%the command:
+\tl_set:Nn \l_my_tl { #2 }
+\tl_set:Nn \l_myb_tl { #3 } %2nd argument
+\tl_set:Nn \l_myc_tl { #4 } %3rd argument
+\cs:w #1 \cs_end: 
+								 { \tl_use:N \l_my_tl }
+								 { \tl_use:N \l_myb_tl }
+								 { \tl_use:N \l_myc_tl }
+}%
+
+%------------------------------- demo: command + option + argument
+\NewDocumentCommand{\cssom}{ m m m }{%
+%the meta
+{ \ttfamily
+	   \css{#1}\oargvcss{#2}\margvcss{#3} }
+$\mapsto$
+%the command:
+\tl_set:Nn \l_my_tl { #3 }
+\tl_set:Nn \l_myb_tl { #2 } %option
+\cs:w #1 \cs_end: 
+									[ \tl_use:N \l_myb_tl ]
+								 { \tl_use:N \l_my_tl }
+}%
+
+%\tl_new:N \l_my_tl
+%\tl_set:Nn \l_my_tl { a b c }
+%\cs:w \tl_use:N \l_my_tl \cs_end:
+%\cs_set:cpn { some-awkward-1-2-3-name } 
+
+%------------------------------- print and run #1
+\NewDocumentCommand{\cdr}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+}%
+
+%------------------------------- print and run command+argumentt separately
+\NewDocumentCommand{\cdpr}{ o m m }{%1=format,2=command,3=argument
+	\tl_set:Nn \l_my_tl { #1 }
+	\tl_set:Nn \l_myb_tl { #2 }
+	\tl_set:Nn \l_myc_tl { #3 }
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \c_backslash_str \tl_to_str:N \l_myb_tl
+%  \detokenize{ #2 }
+  \{ {
+			\tl_use:N \l_my_tl % formatting
+  		\tl_to_str:N \l_myc_tl
+%  		\detokenize{ #3 }
+			}
+  \}
+  }
+  
+  \enspace $\mapsto$ \enspace
+%  \tl_show:N \l_myb_tl
+%%		\cdr{
+			\cs:w #2 \cs_end: { { 
+									#3 % argument
+									} }
+%%				}
+}%
+
+
+
+%------------------------------- display version: print and run #1
+\NewDocumentCommand{\cdrq}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	\begin{quotation}
+	
+	{ \ttfamily\color{blue}
+%  \token_to_str:N #1
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+  
+  	\end{quotation}
+}%
+
+%------------------------------- display version: just print #1
+\NewDocumentCommand{\cdq}{ m }{%
+%	\tl_set:No \l_my_tl { #1 }
+	\begin{quotation}
+	
+	{ \ttfamily\color{blue}
+%    \tl_to_str:N \l_my_tl 
+  \detokenize{#1}
+  }
+  	\end{quotation}
+}%
+
+
+
+
+
+\tl_new:N  \l_codeformat_tl
+\tl_set:Nn \l_codeformat_tl { \cdrdplain }
+
+\keys_define:nn { codef }
+ {
+  format .choice:,
+  format / head   .code:n = \tl_set:Nn \l_codeformat_tl  { \cdrdhead },
+  format / custom   .code:n = \tl_set:Nn \l_codeformat_tl  { \cdrdcustom }, %user-code will be second optiom
+  format / section   .code:n = \tl_set:Nn \l_codeformat_tl  { \cdrdsection }, 
+  format / subsection   .code:n = \tl_set:Nn \l_codeformat_tl  { \cdrdsubsection }, 
+  format / quote   .code:n = \tl_set:Nn \l_codeformat_tl  { \cdrdquote }, 
+  format / listing   .code:n = \tl_set:Nn \l_codeformat_tl  { \cdrdlisting }, 
+  format / general   .code:n = \tl_set:Nn \l_codeformat_tl  { \codegeneral }, 
+  format / detok   .code:n = \tl_set:Nn \l_codeformat_tl  { \codedetok }, 
+   }
+
+
+
+%------------------------------- just print #1
+\NewDocumentCommand{\cdrd}{ o o m }{%1=key-value,2=format code,3=cs
+ 
+			\IfNoValueTF {#1}
+			
+			{%true 
+			    {
+						\ttfamily
+					  \color{blue}
+					  \large
+%					  \colorbox {blue!12} {%header
+					  															\detokenize{#3}
+%					  																	}
+						}
+			  }
+			{%false 
+				{ 
+%				  #1
+  \group_begin:
+  \keys_set:nn { codef } { #1 } 
+  \tl_use:N \l_codeformat_tl [ #2 ] { #3 }
+  \group_end:
+
+%			  \detokenize{#2}
+			  }
+			}			  
+}%
+
+
+%------------------------------- just print #1 as header
+\NewDocumentCommand{\cdrdhead}{ o m }{%
+			{
+			    {
+						\ttfamily
+					  \color{blue}
+					  \large
+					  \fcolorbox {black} {blue!12} {%header
+
+					  															\detokenize{#2} 
+					  																	}
+					   \par																	
+						}
+		}
+}%
+
+
+
+%------------------------------- just print #1 as plain code
+\NewDocumentCommand{\codegeneral}{ o m }{
+ 
+			{%true 
+			    {
+						\ttfamily
+					  															#2
+						}
+			  }
+}%
+
+
+
+%------------------------------- just print #1 as plain detok code
+\NewDocumentCommand{\codedetok}{ o m }{
+ 
+			{%true 
+			    {
+						\ttfamily
+					  															\detokenize{#2}
+						}
+			  }
+}%
+
+
+
+%------------------------------- just print #1 as plain string
+\NewDocumentCommand{\codedetokb}{ o m }{
+			    {
+						\ttfamily
+						\token_to_str:N #2 % If you already have a token
+						}
+}
+%------------------------------- just print #1 as plain blue string
+\NewDocumentCommand{\codedetokbb	}{ o m }{
+			    {
+						\ttfamily\color{blue}
+						\tl_to_str:n { #2 } % If you have a token list
+						}
+}
+
+
+
+
+%------------------------------- just print #1 as code
+\NewDocumentCommand{\cdrdplain}{ o m }{%option always empty
+ 
+%			\IfNoValueTF {#1}
+			{%true 
+			    {
+						\ttfamily
+					  \color{blue}
+					  \large
+%					  \colorbox {blue!12} {%header
+					  															\detokenize{#2}
+%					  																	}
+						}
+			  }
+%			{%false : never reached now
+%				{ #1
+%			  \detokenize{#2}
+%			  }
+%			}			  
+}%
+
+
+
+%------------------------------- just print #1 as code, custom format
+\NewDocumentCommand{\cdrdcustom}{ o m }{%1=format code,2=cs
+			% the o must match with incoming [ ]
+ 			{ #1
+			  \detokenize{#2}
+			  }
+}	%
+
+
+\str_new:N   \l_my_str
+
+%------------------------------- just print #1 as code, section format
+\NewDocumentCommand{\cdrdsection}{ O{} m }{%1=format code,2=cs
+			  \section{\textbackslash \detokenize{#2} \enspace -- \enspace #1}
+			  
+			  \label{sec:#2}
+
+}	%
+
+%------------------------------- just print #1 as code, subsection format
+\NewDocumentCommand{\cdrdsubsection}{ O{} m }{%1=format code,2=cs
+			  \subsection{\textbackslash \detokenize{#2} \enspace -- \enspace #1}
+			  
+			  \label{sec:#2}
+
+}	%
+
+
+%------------------------------- just print #1 as code, quotation format
+\NewDocumentCommand{\cdrdquote}{ o m }{%1=format code,2=cs
+			% the o must match with incoming [ ]
+			\begin{quotation}
+ 			{
+			  \cdrdplain{#2}
+			  }
+     \end{quotation}
+}	%
+
+%\newsavebox{\LstBox}
+%
+%\NewDocumentEnvironment { lcenv } { +b }
+%{
+%	\begin{lrbox}{\LstBox}
+%	\begin{latexcode} #1 \end{latexcode} 
+%	\end{lrbox}
+%	}
+%{}
+
+%------------------------------- just print #1 as code, listing format
+\NewDocumentCommand{\cdrdlisting}{ O{} m }{%1=format code,2=cs
+			% the o must match with incoming [ ]
+%			\begin { lcenv }
+%			
+%			\detokenize{#2} 
+%				 
+%     \end { lcenv }
+%     
+%     \usebox{LstBox}
+
+	\begin{latexcode}[escapechar=Δ]
+%	Δ\ \parΔ 
+	#2
+	Δ\ \parΔ
+	Δ\Δend{latexcodex}
+%			#2
+}	%
+
+
+
+
+
+
+
+\ExplSyntaxOff
+
+
+%-----------------------
+%latexcode env from doctools package:
+\usepackage{listings}
+
+%%% listings
+\colorlet{docxstringcolor}{green!40!black!100}
+\colorlet{docxcommentcolor}{green!50!black!100}
+\colorlet{docxnumbercolor}{white!50!black!100}
+\definecolor{docxkeywordcolor}{rgb}{0,0.35,1.0}
+\colorlet{docxdemoxbackcolor}{blue!3}%white}
+\definecolor{docxrulecolor}{rgb}{0.5,0.5,0.5}
+\lstdefinestyle{lstStyleDefault}{
+%%% appearance
+   ,basicstyle=\small\ttfamily % Standardschrift
+%%%  Space and placement
+   ,floatplacement=tbp    % is used as float place specifier
+   ,aboveskip=\medskipamount % define the space above and
+   ,belowskip=\medskipamount % below displayed listings.
+   ,lineskip=0pt          % specifies additional space between lines in listings.
+   ,boxpos=c              % c,b,t
+%%% The printed range
+   ,showlines=false       % prints empty lines at the end of listings
+%%% characters
+   ,extendedchars=true   % allows or prohibits extended characters
+                         % in listings, that means (national)
+                         % characters of codes 128-255.
+   ,upquote=true         % determines printing of quotes
+   ,tabsize=2,           % chars of tab
+   ,showtabs=false       % do not show tabs
+   ,showspaces=false     % do not show spaces
+   ,showstringspaces=false % do not show blank spaces in string
+%%% Line numbers
+   ,numbers=none         % left, right, none
+%%% Captions
+   ,numberbychapter=true %
+   ,captionpos=b         % t,b
+   ,abovecaptionskip=\smallskipamount % the vertical space respectively above
+   ,belowcaptionskip=\smallskipamount % or below each caption
+%%% Margins and line shape
+   ,linewidth=\linewidth % defines the base line width for listings.
+   ,xleftmargin=0pt      % extra margins
+   ,xrightmargin=0pt     %
+   ,resetmargins=false   % indention from list environments like enumerate
+                         % or itemize is reset, i.e. not used.
+   ,breaklines=true      % line breaking of long lines.
+   ,breakatwhitespace=false % allows line breaks only at white space.
+   ,breakindent=0pt     % is the indention of the second, third, ...
+                         % line of broken lines.
+   ,breakautoindent=true % apply intendation
+   ,columns=flexible     %
+   ,keepspaces=true      %
+}
+
+\lstset{style=lstStyleDefault}
+
+\lstdefinestyle{lstDocStyleBase}{
+%%% base style
+   ,style=lstStyleDefault
+%%% appearance
+   ,commentstyle=\slshape
+%%% Line numbers
+   ,numbers=left         % left, right, none
+   ,stepnumber=1         % seperation between numbers
+   ,numberfirstline=false % number first line always
+   ,numberstyle=\tiny\color{docxnumbercolor}    % style of numbers
+   ,numbersep=5pt        % distance to text
+   ,numberblanklines=true %
+%%% language
+   ,language = [LaTeX]TeX
+%%% commands
+   % LaTeX programming
+   ,moretexcs={setlength,usepackage,newcommand,renewcommand,providecommand,RequirePackage,SelectInputMappings,ifpdftex,ifpdfoutput,AtBeginEnvironment,ProvidesPackage},
+   % other commands
+   ,moretexcs={maketitle,text,includegraphics,chapter,section,subsection,
+     subsubsection,paragraph,textmu,enquote,blockquote,ding,mathds,ifcsdef,Bra,Ket,Braket,subcaption,lettrine,mdfsetup,captionof,listoffigures,listoftables,tableofcontents,appendix}
+   % tables
+   ,moretexcs={newcolumntype,rowfont,taburowcolors,rowcolor,rowcolors,bottomrule,
+     toprule,midrule,}
+   % hyperref
+   ,moretexcs={hypersetup}
+   % glossaries
+   ,moretexcs={gls,printglossary,glsadd,newglossaryentry,newacronym}
+   % Koma
+   ,moretexcs={mainmatter,frontmatter,geometry,KOMAoptions,setkomafont,addtokomafont}
+   % SI, unit
+   ,moretexcs={si,SI,sisetup,unit,unitfrac,micro}
+   % biblatex package
+   ,moretexcs={newblock,ExecuteBibliographyOptions,addbibresource}
+   % math packages
+   ,moretexcs={operatorname,frac,sfrac,dfrac,DeclareMathOperator,mathcal,underset}
+   % demo package
+   ,moretexcs={democodefile,package,cs,command,env,DemoError,PrintDemo}
+   % tablestyles
+   ,moretexcs={theadstart,tbody,tsubheadstart,tsubhead,tend}
+   % code section package
+   ,moretexcs={DefineCodeSection,SetCodeSection,BeginCodeSection,
+     EndCodeSection}
+   % template tools package
+   ,moretexcs={IfDefined,IfUndefined,IfElseDefined,IfElseUndefined,IfMultDefined,IfNotDraft,IfNotDraftElse,IfDraft,IfPackageLoaded,IfElsePackageLoaded,IfPackageNotLoaded,IfPackagesLoaded,IfPackagesNotLoaded,ExecuteAfterPackage,ExecuteBeforePackage,IfTikzLibraryLoaded,IfColumntypeDefined,IfColumntypesDefined,IfColorDefined,IfColorsDefined,IfMathVersionDefined,SetTemplateDefinition,UseDefinition,IfFileExists,iflanguage}
+   % tablestyles
+   ,moretexcs={setuptablefontsize,tablefontsize,setuptablestyle,tablestyle,  setuptablecolor,tablecolor,disablealternatecolors,   tablealtcolored,tbegin,tbody,tend,thead, theadstart,tsubheadstart,tsubhead,theadrow,tsubheadrow,resettablestyle,theadend,tsubheadend,tableitemize,PreserveBackslash}
+   % todonotes
+   ,moretexcs={todo,missingfigure}
+   % listings
+   ,moretexcs={lstloadlanguages,lstdefinestyle,lstset}
+   % index
+   ,moretexcs={indexsetup}
+   % glossaries
+   ,moretexcs={newglossarystyle,glossarystyle,deftranslation,newglossary}
+   % tikz
+   ,moretexcs={usetikzlibrary}
+   % color
+   ,moretexcs={definecolor,colorlet}
+   % caption
+   ,moretexcs={captionsetup,DeclareCaptionStyle}
+   % floatrow
+   ,moretexcs={floatsetup}
+   % doc.sty
+   ,moretexcs={EnableCrossrefs,DisableCrossrefs,PageIndex,CodelineIndex,CodelineNumbered}
+   % refereces
+   ,moretexcs={cref,Cref,vref,eqnref,figref,tabref,secref,chapref}
+}
+
+\lstdefinestyle{lstDemoStyleLaTeXCode}{ %
+%%% base style
+   ,style=lstDocStyleBase
+%%% Line numbers
+   ,numbers=none         % left, right, none
+%%% colors
+   ,stringstyle=\color{docxstringcolor}
+   ,keywordstyle=\color{docxkeywordcolor}
+   ,commentstyle=\color{docxcommentcolor}
+   ,backgroundcolor=\color{docxdemoxbackcolor}
+   ,rulecolor=\color{docxrulecolor}
+%%% frame
+   ,frame=single         % none, leftline, topline, bottomline, lines
+                         % single, shadowbox
+   ,framesep=3pt
+   ,rulesep=2pt          % control the space between frame and listing
+                         % and between double rules.
+   ,framerule=0.4pt      % controls the width of the rules.
+}
+
+%\colorlet{docxcodexbackcolor}{gray!5}
+%\colorlet{docxcodexkeywordcolor}{black}
+%\colorlet{docxcodexcommentcolor}{black!60}
+
+\lstdefinestyle{lstDocStyleLaTeXCode}{%
+%%% base style
+   ,style=lstDocStyleBase
+%%% colors
+   ,stringstyle=\color{docxstringcolor}
+   ,keywordstyle=\color{docxcodexkeywordcolor} %
+   ,commentstyle=\color{docxcodexcommentcolor}
+   ,backgroundcolor=\color{docxcodexbackcolor}
+   ,rulecolor=\color{docxrulecolor}
+%%% frame
+   ,frame=none         % none, leftline, topline, bottomline, lines
+                         % single, shadowbox
+   ,framesep=3pt
+   ,rulesep=2pt          % control the space between frame and listing
+                         % and between double rules.
+   ,framerule=0.4pt      % controls the width of the rules.
+%%% numbers
+   ,firstnumber=last
+}
+
+\lstloadlanguages{[LaTeX]TeX}
+
+%%% environment code examples.
+\lstnewenvironment{latexcode}{% 
+\bigskip\lstset{style=lstDemoStyleLaTeXCode}\ignorespaces}{\ignorespacesafterend}
+
+
+\newcommand\creditlatenv{%
+{\par\color{brown}\hfill \scriptsize [\textsf{\textbf{latexcode}} env from \textsc{doctools}\textsuperscript{2012} package, adapted]}%
+}
+
+\usepackage{etoolbox}
+\AtEndEnvironment{latexcode}{\creditlatenv}
+
+%------------------------------------------
