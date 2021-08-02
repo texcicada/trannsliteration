@@ -1,0 +1,509 @@
+\documentclass{article}
+\usepackage{tcolorbox}
+\tcbuselibrary{documentation}
+\usepackage{minted}
+
+%\tcbset{
+%docexample/.style={colframe=ExampleFrame,colback=ExampleBack,
+%before skip=\medskipamount,after skip=\medskipamount,
+%fontlower=\footnotesize}
+%}
+
+\hypersetup{colorlinks=true}%,allcolors=violet}
+
+\tcbset{
+docexample/.style={colframe=violet,
+bicolor,
+colback=blue!9,
+colbacklower=blue!2,
+%color hyperlink=green,
+boxrule=0.5pt,
+before skip=\medskipamount,
+after skip=\medskipamount,
+fontlower=\footnotesize}
+}
+
+
+%\tcbset{doc head command={interior style={fill,left color=red!20!white,
+%right color=blue!20!white}}}
+
+\tcbset{doc head command={interior style={fill,color=yellow!10}}}
+
+\tcbset{color definition=blue,
+}
+
+\newcommand\sqbrackets[1]{{\ttfamily [#1]}}
+
+%=========================
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\tcbuselibrary{minted,skins,breakable,xparse}
+\usetikzlibrary{positioning}
+
+\newenvironment{testlist}
+               {\list{}{\leftmargin2cm\rightmargin\leftmargin}%
+                \item\relax\footnotesize}
+               {\endlist}
+
+
+
+\definecolor{corAzulTema}{RGB}{0,66,137}
+\definecolor{corFundoCaixas}{RGB}{245,245,245}
+
+
+\tcbset{lilcode/.style={
+    listing engine=minted,
+    minted options={fontsize=\small,linenos,numbersep=3mm,breaklines},
+    colback=corFundoCaixas,
+    colframe=corAzulTema!40,
+    fonttitle=\bfseries,
+    listing only,
+    left=7mm,
+    enhanced,
+    breakable,
+    drop fuzzy shadow,
+    before skip=\baselineskip,
+%    hyperref options = {allcolors=black},
+    grow to left by=13mm,grow to right by=15mm,
+    overlay={\begin{tcbclipinterior}\fill[corAzulTema!40](frame.south west)rectangle([xshift=7mm]frame.north west);\end{tcbclipinterior}}
+}}
+
+\newtcbinputlisting[auto counter]{\latexcodefile}[3][]{%
+    listing file={#3},
+    title={\sffamily\large Listing \thetcbcounter:} \texttt{#2},
+    colframe=corAzulTema,
+    minted language=latex,
+}
+
+%                                       v = verbatim argument
+%                                       s = optional star
+%                                           \BooleanTrue or \BooleanFalse
+\DeclareTotalTCBox{\lilcode}{ s v }{
+	lilcode,
+    reset,
+    listing only,
+    on line,
+    enhanced,
+    nobeforeafter,
+    tcbox raise base,
+    boxrule=0.7pt,
+    top=1mm,
+    bottom=0mm,
+    right=1mm,
+    left=1mm,
+    boxsep=0.5pt,
+    before upper={\vphantom{dlg}},
+    colback=corFundoCaixas,
+    colframe=corAzulTema,
+    drop fuzzy shadow,
+    arc=3pt}
+{\mintinline{latex}{#2}}%
+
+%=====
+\ExplSyntaxOn
+\tl_new:N \l_my_tl
+\tl_new:N \l_myts_tl
+
+\NewDocumentCommand{\cdr}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	{ \ttfamily\color{blue}
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+}%
+
+\ExplSyntaxOff
+
+
+
+\begin{document}
+
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = bfseries,
+doc description=font,
+] {}
+Font switch to set the following text in bold face.
+\begin{dispExample}
+  text \bfseries bold text \mdseries normal text again
+\end{dispExample}
+\end{docCommands}
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = itshape,
+doc description=font,
+] {}
+Font switch to set the following text in italics.
+\begin{dispExample}
+  text \itshape italic text \upshape normal text again
+\end{dispExample}
+\end{docCommands}
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = scshape,
+doc description=font,
+] {}
+Font switch to set the following text in small caps.
+\begin{dispExample}
+  text \scshape Small Capitals \upshape normal text again
+\end{dispExample}
+\end{docCommands}
+
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = slshape,
+doc description=font,
+] {}
+Font switch to set the following text as slanted.
+\begin{dispExample}
+  \sffamily text \slshape slanted text \upshape normal text again
+\end{dispExample}
+\end{docCommands}
+
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = upshape,
+doc description=font,
+] {}
+Font switch to set the following text to upright.%, non-smallcaps.
+\begin{dispExample}
+    \itshape italic \scshape text \upshape upright text 
+\end{dispExample}
+\end{docCommands}
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = ulcshape,
+doc description=font,
+] {}
+Font switch to undo small caps.%, non-smallcaps.
+\begin{dispExample}
+    \itshape italic \scshape text \upshape upright \ulcshape text 
+\end{dispExample}
+\end{docCommands}
+
+
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = textbf,
+doc parameter = \marg{text},
+doc description=font,
+] {}
+Font command to set \meta{text} in bold face.
+\begin{dispExample}
+  text \textbf{bold text} normal text again
+\end{dispExample}
+\end{docCommands}
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = textit,
+doc parameter = \marg{text},
+doc description=font,
+] {}
+Font command to set \meta{text} as italic.
+\begin{dispExample}
+  text \textit{Felis gattus} normal text again
+\end{dispExample}
+\end{docCommands}
+If the font does not have italics, slanted is used.
+
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = textsl,
+doc parameter = \marg{text},
+doc description=font,
+] {}
+Font command to set \meta{text} as slanted.
+\begin{dispExample}
+  \sffamily text \textsl{Felis gattus} normal text again
+\end{dispExample}
+\end{docCommands}
+If the font does not have a slanted face, italics are used.
+
+\begin{docCommands}[
+doc no index, % no index entries for this example
+doc name = textulc,
+doc parameter = \marg{text},
+doc description=font,
+] {}
+Font command to set \meta{text} as non-small caps.
+\begin{dispExample}
+  \scshape text \textulc{non-small caps} and SC text again
+\end{dispExample}
+\end{docCommands}
+
+%docCommand : index + \refCom
+%docCommand* : no index entry
+
+%\begin{docCommands}[
+%doc no index, % no index entries for this example
+%doc name = newtheorem,
+%doc parameter = \marg{envname},
+%]{
+%{ },
+%{ doc parameter = \marg{envname}\oarg{numbered within} },
+%{ doc parameter = \oarg{numbered like}\marg{envname} },
+%{ doc name = newtheorem* },
+%}
+%example
+%\end{docCommands}
+
+
+%\begin{docCommands}[
+%doc no index, % no index entries for this example
+%doc name = bfseries,
+%] {
+%		{ },
+%		{ doc name = mdseries },
+%		{ doc name = itshape },
+%		{ doc name = scshape },
+%		{ doc name = upshape },		
+%}
+%Font switches to set the weight as bold face (bf), medium weight (md); the shape as italic (it), small caps (sc), or upright (up).
+%\end{docCommands}
+
+%\begin{docEnvironment}[hoptionsi]{hnamei}{hparametersi}
+%henvironment descriptioni
+%\end{docEnvironment}
+
+%docEnvironment : index + \refEnv{}
+%docEnvironment* : no index entry
+
+
+%docEnvironments
+
+%\begin{docEnvironments}[
+%doc no index, % no index entries for this example
+%doc parameter = \oarg{options}\marg{title},
+%doclang/environment content = box content,
+%]{
+%{
+%doc name = redbox,
+%doc description = a red colored box,
+%},
+%{
+%doc name = greenbox,
+%doc description = a green colored box,
+%},
+%{
+%doc name = bluebox,
+%doc description = a blue colored box,
+%},
+%{
+%doc name = custombox,
+%doc parameter = \oarg{options}\marg{color}\marg{title},
+%doc description = a colored box,
+%},
+%}
+%example
+%\end{docEnvironments}
+
+%docKey : refKey
+%docKey*
+%docKeys
+%
+%\begin{docKeys}[
+%doc no index, % no index entries for this example
+%doc keypath = mykeyroot,
+%doc parameter = {=\meta{length}},
+%]{
+%{
+%doc name = width,
+%doc description = initially \texttt{10cm},
+%},
+%{
+%doc name = height,
+%doc description = initially \texttt{7cm},
+%},
+%}
+%example
+%\end{docKeys}
+
+
+%%%docValue
+%%%docValue*
+
+%%%Counter
+%%%Length
+%%%Color
+
+%%%cs
+%%%meta
+%%%marg
+%%%oarg
+%%%brackets
+
+
+
+%\begin{docCommand}[hoptionsi]{hnamei}{hparametersi}
+%hcommand descriptioni
+%\end{docCommand}
+
+
+
+
+\begin{docCommand}[
+doc no index, % no index entries for this example
+doc name = cdr,
+doc parameter = \marg{code},
+doc description=meta,
+] {}%name
+{}%parameters
+Metacommand to print \meta{code} and then run it.
+\begin{dispExample}
+  The \cs{colorbox} command takes two parameters:\par
+  text \cdr{\colorbox{red!12!yellow!80}{text}} text
+\end{dispExample}
+\end{docCommand}
+
+
+
+
+\begin{docCommand}[
+doc no index, % no index entries for this example
+doc name = cs,
+doc parameter = \marg{control sequence name},
+doc description=meta,
+] {}%name
+{}%parameters
+Metacommand to pre-pend the escape character (\textbackslash) and print \meta{control sequence name}.
+\begin{dispExample}
+  The command \cs{textit}\marg{text} will set \meta{text} 
+  in italics.
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}[
+doc no index, % no index entries for this example
+doc name = marg,
+doc parameter = \marg{argument},
+doc description=meta,
+] {}%name
+{}%parameters
+Metacommand to print the mandatory \meta{argument} of a command in braces. See \refCom{oarg}.
+\begin{dispExample}
+  The command \cs{foo}\marg{arg1}\marg{arg2} will process 
+  \meta{arg1} and \meta{arg2} \ldots
+\end{dispExample}
+\end{docCommand}
+
+\begin{docCommand}[
+doc no index, % no index entries for this example
+doc name = oarg,
+doc parameter = \oarg{argument},
+doc description=meta,
+] {}%name
+{}%parameters
+Metacommand to print the optional \meta{argument} of a command in brackets. See \refCom{marg}.
+\begin{dispExample}
+  \cs{newcommand}\{\cs{foo}\}\sqbrackets{2}\oarg{default}
+  \marg{code} will use \meta{default} as \#1 if no optional 
+  argument \meta{oarg} is specified: \cs{foo}\oarg{oarg}
+  \marg{marg} \textit{versus} \cs{foo}\marg{marg}.
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}[
+doc no index, % no index entries for this example
+doc name = brackets,
+doc parameter = \marg{argument},
+doc description=meta,
+] {}%name
+{}%parameters
+Metacommand to print its \meta{argument} inside curly brackets (``braces''). The \meta{argument} may be empty. See \refCom{sqbrackets}.
+\begin{dispExample}
+  \cs{foo}\brackets{text} \cs{foo}\brackets{} \cs{foo}\marg{}
+\end{dispExample}
+\end{docCommand}
+
+
+\begin{docCommand}[
+doc no index, % no index entries for this example
+doc name = sqbrackets,
+doc parameter = \marg{argument},
+doc description=meta,
+] {}%name
+{}%parameters
+Metacommand to print its \meta{argument} inside square brackets (``brackets''). The \meta{argument} may be empty. See \refCom{brackets}.
+\begin{dispExample}
+  \cs{foo}\sqbrackets{text} \cs{foo}\sqbrackets{} \cs{foo}\oarg{}
+\end{dispExample}
+\end{docCommand}
+
+%%%dispExample : docexample style
+%%%dispListing : docexample style
+
+\begin{docEnvironment}[
+doc no index, % no index entries for this example
+%doc name = dispListing,
+%doc parameter = \marg{argument},
+doc description=meta,
+] {dispListing}%name
+{}%parameters
+Environment to print its contents as a code listing. See \refEnv{dispExample}.
+\begin{dispExample}
+  \begin{dispListing}
+  Some text and \cs{foo}\oarg{arg1}\marg{arg2}
+  \end{dispListing}
+\end{dispExample}
+\end{docEnvironment}
+
+
+
+
+\begin{docEnvironment}[
+doc no index, % no index entries for this example
+%doc name = dispExample,
+%doc parameter = \marg{argument},
+doc description=meta,
+] {dispExample}%name
+{}%parameters
+Environment to print its contents as a code listing and as resulting output. See \refEnv{dispListing}.
+\begin{dispListing}
+\begin{dispExample}
+  Some text, \textit{italic} \textsc{small caps}
+\end{dispExample}
+\end{dispListing}
+produces:  
+  \begin{dispExample}
+  Some text, \textit{italic} \textsc{small caps}
+	\end{dispExample}
+\end{docEnvironment}
+
+
+
+%%%asquote = abstract as quotation
+
+%%%colDef
+%%%colOpt
+%%%colFade
+
+%%%tcbdocmarginnote
+
+%%%tcbdocnew
+%%%tcbdocupdated
+
+The \lilcode{\textit{}} command has a matching switch-pair: an on-switch \lilcode{\itshape} (italic shape) and an off-switch \lilcode{\upshape} (upright shape).
+
+\latexcodefile{Example listing}{listdcoarg.tex}
+
+%\begin{testlist}
+%qwerty
+%
+%qwerty
+%\end{testlist}
+
+\end{document}

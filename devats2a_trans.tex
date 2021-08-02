@@ -1,0 +1,434 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\usepackage{fontspec}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} 
+\setlength{\columnseprule}{0.5pt}
+
+\setmainfont{Noto Serif}
+
+\newfontfamily\fdeva[Colour=blue,
+Script=Devanagari,
+Renderer=HarfBuzz]{Noto Serif Devanagari}
+%=====
+
+%------------------------------- print and run #1
+\ExplSyntaxOn
+\tl_new:N \l_my_tl
+\tl_new:N \l_myts_tl
+
+\NewDocumentCommand{\cdr}{ m }{%
+	\tl_set:Nn \l_my_tl { #1 }
+	{ \ttfamily\color{blue}
+  \detokenize{#1}
+  }
+  
+  \enspace $\mapsto$ \enspace
+  
+  \tl_use:N \l_my_tl
+}%
+
+
+%----- Typing shortcut
+\newcommand\scdvts[2]{%
+\tl_replace_all:Nnn \l_myts_tl   { #1 }   { #2} 
+}
+%===
+\newcommand\dovelthuis{%
+%
+\tl_replace_all:Nnn \l_myts_tl { ;; } { ሴ𒓡𒓢}
+\tl_replace_all:Nnn \l_myts_tl { ; } { }
+%
+\scdvts  { dcandrabvirama }   { ꣴ } 
+\scdvts  { candrabvirama }   { ꣳ } 
+\scdvts  { candabspace }   { ꣲ } 
+\scdvts  { cbavagraha }   { ꣷ } 
+\scdvts  { anudatta }   { ॒ } 
+\scdvts  { pushpika }   { ꣸ } 
+\scdvts  { yaheavy }   { ॺ } 
+\scdvts  { siddham }   { ꣼ } 
+\scdvts  { eprish }   { ॎ } 
+\scdvts  { udatta }   { ॑ } 
+\scdvts  { filler }   { ꣹ } 
+\scdvts  { nukta }   { ़ } 
+\scdvts  { grave }   { ॓ } 
+\scdvts  { acute }   { ॔ } 
+\scdvts  { caret }   { ꣺ } 
+\scdvts  { ..a= }   { ऄ } 
+\scdvts  { ..e- }   { ऎ } 
+\scdvts  { ..o- }   { ऒ } 
+\scdvts  { .kha }   { ख़ } 
+\scdvts  { ooe- }   { ॴ } 
+\scdvts  { uue- }   { ॷ } 
+\scdvts  { ddda }   { ॾ } 
+\scdvts  { cmka }   { ꣬ } 
+\scdvts  { cmna }   { ꣭ } 
+\scdvts  { cmpa }   { ꣮ } 
+\scdvts  { cmra }   { ꣯ } 
+\scdvts  { cmvi }   { ꣰ } 
+\scdvts  { cm.a }   { ꣱ } 
+\scdvts  { head }   { ꣻ } 
+\scdvts  { aa- }   { आ } 
+\scdvts  { ii- }   { ई } 
+\scdvts  { uu- }   { ऊ } 
+\scdvts  { .r- }   { ऋ } 
+\scdvts  { .l- }   { ऌ } 
+\scdvts  { ai- }   { ऐ } 
+\scdvts  { ~o- }   { ऑ } 
+\scdvts  { au- }   { औ } 
+\scdvts  { .th }   { ठ } 
+\scdvts  { .dh }   { ढ } 
+\scdvts  { nnn }   { ऩ } 
+\scdvts  { lll }   { ऴ } 
+\scdvts  { ooe }   { ऻ } 
+\scdvts  { ..e }   { ॆ } 
+\scdvts  { ..o }   { ॊ } 
+\scdvts  { ~ee }   { ॕ } 
+\scdvts  { uue }   { ॗ } 
+\scdvts  { .ga }   { ग़ } 
+\scdvts  { .Ra }   { ड़ } 
+\scdvts  { Rha }   { ढ़ } 
+\scdvts  { yya }   { य़ } 
+\scdvts  { .R- }   { ॠ } 
+\scdvts  { .L- }   { ॡ } 
+\scdvts  { ~a- }   { ॲ } 
+\scdvts  { oe- }   { ॳ } 
+\scdvts  { aw- }   { ॵ } 
+\scdvts  { ue- }   { ॶ } 
+\scdvts  { dda }   { ॸ } 
+\scdvts  { zha }   { ॹ } 
+\scdvts  { gga }   { ॻ } 
+\scdvts  { jja }   { ॼ } 
+\scdvts  { bba }   { ॿ } 
+\scdvts  { cma }   { ꣪ } 
+\scdvts  { cmu }   { ꣫ } 
+\scdvts  { cb2 }   { ꣵ } 
+\scdvts  { cb3 }   { ꣶ } 
+\scdvts  { .jo }   { ꣽ } 
+\scdvts  { ay- }   { ꣾ } 
+\scdvts  { /i }   { ऀ } 
+\scdvts  { .m }   { ं } 
+\scdvts  { .h }   { ः } 
+\scdvts  { a- }   { अ } 
+\scdvts  { i- }   { इ } 
+\scdvts  { u- }   { उ } 
+\scdvts  { ~e }   { ऍ } 
+\scdvts  { e- }   { ए } 
+\scdvts  { o- }   { ओ } 
+\scdvts  { kh }   { ख } 
+\scdvts  { gh }   { घ } 
+\scdvts  { "n }   { ङ } 
+\scdvts  { ch }   { छ } 
+\scdvts  { jh }   { झ } 
+\scdvts  { ~n }   { ञ } 
+\scdvts  { .t }   { ट } 
+\scdvts  { .d }   { ड } 
+\scdvts  { .n }   { ण } 
+\scdvts  { th }   { थ } 
+\scdvts  { dh }   { ध } 
+\scdvts  { ph }   { फ } 
+\scdvts  { bh }   { भ } 
+\scdvts  { rr }   { ऱ } 
+\scdvts  { "s }   { श } 
+\scdvts  { .s }   { ष } 
+\scdvts  { oe }   { ऺ } 
+\scdvts  { .a }   { ऽ } 
+\scdvts  { aa }   { ा } 
+\scdvts  { ii }   { ी } 
+\scdvts  { uu }   { ू } 
+\scdvts  { .r }   { ृ } 
+\scdvts  { .R }   { ॄ } 
+\scdvts  { ~a }   { ॅ } 
+\scdvts  { ai }   { ै } 
+\scdvts  { ~o }   { ॉ } 
+\scdvts  { au }   { ौ } 
+\scdvts  { \& }   { ् } 
+\scdvts  { aw }   { ॏ } 
+\scdvts  { .o }   { ॐ } 
+\scdvts  { ue }   { ॖ } 
+\scdvts  { qa }   { क़ } 
+\scdvts  { za }   { ज़ } 
+\scdvts  { fa }   { फ़ } 
+\scdvts  { .l }   { ॢ } 
+\scdvts  { .L }   { ॣ } 
+\scdvts  { || }   { ॥ } 
+\scdvts  { \# }   { ॱ } 
+\scdvts  { gs }   { ॽ } 
+\scdvts  { c0 }   { ꣠ } 
+\scdvts  { c1 }   { ꣡ } 
+\scdvts  { c2 }   { ꣢ } 
+\scdvts  { c3 }   { ꣣ } 
+\scdvts  { c4 }   { ꣤ } 
+\scdvts  { c5 }   { ꣥ } 
+\scdvts  { c6 }   { ꣦ } 
+\scdvts  { c7 }   { ꣧ } 
+\scdvts  { c8 }   { ꣨ } 
+\scdvts  { c9 }   { ꣩ } 
+\scdvts  { ay }   { ꣿ } 
+\scdvts  { / }   { ँ } 
+\scdvts  { k }   { क } 
+\scdvts  { g }   { ग } 
+\scdvts  { c }   { च } 
+\scdvts  { j }   { ज } 
+\scdvts  { t }   { त } 
+\scdvts  { d }   { द } 
+\scdvts  { n }   { न } 
+\scdvts  { p }   { प } 
+\scdvts  { b }   { ब } 
+\scdvts  { m }   { म } 
+\scdvts  { y }   { य } 
+\scdvts  { r }   { र } 
+\scdvts  { l }   { ल } 
+\scdvts  { L }   { ळ } 
+\scdvts  { v }   { व } 
+\scdvts  { s }   { स } 
+\scdvts  { h }   { ह } 
+\scdvts  { i }   { ि } 
+\scdvts  { u }   { ु } 
+\scdvts  { e }   { े } 
+\scdvts  { o }   { ो } 
+\scdvts  { | }   { । } 
+\scdvts  { || }   { ॥ } 
+\scdvts  { 0 }   { \symbol{2406} } 
+\scdvts  { 1 }   { \symbol{2407} } 
+\scdvts  { 2 }   { \symbol{2408} } 
+\scdvts  { 3 }   { \symbol{2409} } 
+\scdvts  { 4 }   { \symbol{2410} } 
+\scdvts  { 5 }   { \symbol{2411} } 
+\scdvts  { 6 }   { \symbol{2412} } 
+\scdvts  { 7 }   { \symbol{2413} } 
+\scdvts  { 8 }   { \symbol{2414} } 
+\scdvts  { 9 }   { \symbol{2415} } 
+\scdvts  { @ }   { ॰ } 
+%
+\tl_replace_all:Nnn \l_myts_tl { ሴ𒓡𒓢} { ; }
+\tl_replace_all:Nnn \l_myts_tl   { a }   {  } 
+}
+
+%=====
+\NewDocumentCommand { \vh } { m } { \trvelthuis {#1} }
+\NewDocumentCommand { \trvelthuis } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\dovelthuis
+\tl_use:N \l_myts_tl
+}
+
+%---- Environments
+
+\NewDocumentEnvironment{velthuis}{ O{\fdeva} +b }
+{
+#1
+\tl_set:Nn \l_myts_tl { #2 }
+\dovelthuis
+\tl_use:N \l_myts_tl
+}
+{ }
+
+\ExplSyntaxOff
+
+
+
+
+
+\begin{document}
+
+\section{Sample}
+\begin{tabular}{lll}
+\rowcolor{blue!7}
+Input type & Example & Result \\
+\hline
+Direct input & \fdeva देवनागरी & \fdeva देवनागरी \\
+Velthuis $l$3 & devanaagarii & \fdeva \vh{devanaagarii} \\
+\hline
+\end{tabular}
+
+\bigskip
+Use \textbackslash \& for conjuncts: 
+la + ba = {\fdeva \vh{laba}}; 
+la + \textbackslash \& + ba = {\fdeva \vh{la\&ba}}
+
+\bigskip
+\small
+\begin{multicols}{6}
+\noindent /i = {\fdeva \vh{/i}}\par
+\noindent / = {\fdeva \vh{/}}\par
+\noindent .m = {\fdeva \vh{.m}}\par
+\noindent .h = {\fdeva \vh{.h}}\par
+\noindent ..a= = {\fdeva \vh{..a=}}\par
+\noindent a- = {\fdeva \vh{a-}}\par
+\noindent aa- = {\fdeva \vh{aa-}}\par
+\noindent i- = {\fdeva \vh{i-}}\par
+\noindent ii- = {\fdeva \vh{ii-}}\par
+\noindent u- = {\fdeva \vh{u-}}\par
+\noindent uu- = {\fdeva \vh{uu-}}\par
+\noindent .r- = {\fdeva \vh{.r-}}\par
+\noindent .l- = {\fdeva \vh{.l-}}\par
+\noindent ~e = {\fdeva \vh{~e}}\par
+\noindent ..e- = {\fdeva \vh{..e-}}\par
+\noindent e- = {\fdeva \vh{e-}}\par
+\noindent ai- = {\fdeva \vh{ai-}}\par
+\noindent ~o- = {\fdeva \vh{~o-}}\par
+\noindent ..o- = {\fdeva \vh{..o-}}\par
+\noindent o- = {\fdeva \vh{o-}}\par
+\noindent au- = {\fdeva \vh{au-}}\par
+\noindent k = {\fdeva \vh{k}}\par
+\noindent kh = {\fdeva \vh{kh}}\par
+\noindent g = {\fdeva \vh{g}}\par
+\noindent gh = {\fdeva \vh{gh}}\par
+\noindent "n = {\fdeva \vh{"n}}\par
+\noindent c = {\fdeva \vh{c}}\par
+\noindent ch = {\fdeva \vh{ch}}\par
+\noindent j = {\fdeva \vh{j}}\par
+\noindent jh = {\fdeva \vh{jh}}\par
+\noindent ~n = {\fdeva \vh{~n}}\par
+\noindent .t = {\fdeva \vh{.t}}\par
+\noindent .th = {\fdeva \vh{.th}}\par
+\noindent .d = {\fdeva \vh{.d}}\par
+\noindent .dh = {\fdeva \vh{.dh}}\par
+\noindent .n = {\fdeva \vh{.n}}\par
+\noindent t = {\fdeva \vh{t}}\par
+\noindent th = {\fdeva \vh{th}}\par
+\noindent d = {\fdeva \vh{d}}\par
+\noindent dh = {\fdeva \vh{dh}}\par
+\noindent n = {\fdeva \vh{n}}\par
+\noindent nnn = {\fdeva \vh{nnn}}\par
+\noindent p = {\fdeva \vh{p}}\par
+\noindent ph = {\fdeva \vh{ph}}\par
+\noindent b = {\fdeva \vh{b}}\par
+\noindent bh = {\fdeva \vh{bh}}\par
+\noindent m = {\fdeva \vh{m}}\par
+\noindent y = {\fdeva \vh{y}}\par
+\noindent r = {\fdeva \vh{r}}\par
+\noindent rr = {\fdeva \vh{rr}}\par
+\noindent l = {\fdeva \vh{l}}\par
+\noindent L = {\fdeva \vh{L}}\par
+\noindent lll = {\fdeva \vh{lll}}\par
+\noindent v = {\fdeva \vh{v}}\par
+\noindent "s = {\fdeva \vh{"s}}\par
+\noindent .s = {\fdeva \vh{.s}}\par
+\noindent s = {\fdeva \vh{s}}\par
+\noindent h = {\fdeva \vh{h}}\par
+\noindent oe = {\fdeva \vh{oe}}\par
+\noindent ooe = {\fdeva \vh{ooe}}\par
+\noindent nukta = {\fdeva \vh{nukta}}\par
+\noindent .a = {\fdeva \vh{.a}}\par
+\noindent aa = {\fdeva \vh{aa}}\par
+\noindent i = {\fdeva \vh{i}}\par
+\noindent ii = {\fdeva \vh{ii}}\par
+\noindent u = {\fdeva \vh{u}}\par
+\noindent uu = {\fdeva \vh{uu}}\par
+\noindent .r = {\fdeva \vh{.r}}\par
+\noindent .R = {\fdeva \vh{.R}}\par
+\noindent ~a = {\fdeva \vh{~a}}\par
+\noindent ..e = {\fdeva \vh{..e}}\par
+\noindent e = {\fdeva \vh{e}}\par
+\noindent ai = {\fdeva \vh{ai}}\par
+\noindent ~o = {\fdeva \vh{~o}}\par
+\noindent ..o = {\fdeva \vh{..o}}\par
+\noindent o = {\fdeva \vh{o}}\par
+\noindent au = {\fdeva \vh{au}}\par
+\noindent \textbackslash\& = {\fdeva \vh{\&}}\par
+\noindent eprish = {\fdeva \vh{eprish}}\par
+\noindent aw = {\fdeva \vh{aw}}\par
+\noindent .o = {\fdeva \vh{.o}}\par
+\noindent udatta = {\fdeva \vh{udatta}}\par
+\noindent anudatta = {\fdeva \vh{anudatta}}\par
+\noindent grave = {\fdeva \vh{grave}}\par
+\noindent acute = {\fdeva \vh{acute}}\par
+\noindent ~ee = {\fdeva \vh{~ee}}\par
+\noindent ue = {\fdeva \vh{ue}}\par
+\noindent uue = {\fdeva \vh{uue}}\par
+\noindent qa = {\fdeva \vh{qa}}\par
+\noindent .kha = {\fdeva \vh{.kha}}\par
+\noindent .ga = {\fdeva \vh{.ga}}\par
+\noindent za = {\fdeva \vh{za}}\par
+\noindent .Ra = {\fdeva \vh{.Ra}}\par
+\noindent Rha = {\fdeva \vh{Rha}}\par
+\noindent fa = {\fdeva \vh{fa}}\par
+\noindent yya = {\fdeva \vh{yya}}\par
+\noindent .R- = {\fdeva \vh{.R-}}\par
+\noindent .L- = {\fdeva \vh{.L-}}\par
+\noindent .l = {\fdeva \vh{.l}}\par
+\noindent .L = {\fdeva \vh{.L}}\par
+\noindent | = {\fdeva \vh{|}}\par
+\noindent || = {\fdeva \vh{||}}\par
+\noindent 0 = {\fdeva \vh{0}}\par
+\noindent 1 = {\fdeva \vh{1}}\par
+\noindent 2 = {\fdeva \vh{2}}\par
+\noindent 3 = {\fdeva \vh{3}}\par
+\noindent 4 = {\fdeva \vh{4}}\par
+\noindent 5 = {\fdeva \vh{5}}\par
+\noindent 6 = {\fdeva \vh{6}}\par
+\noindent 7 = {\fdeva \vh{7}}\par
+\noindent 8 = {\fdeva \vh{8}}\par
+\noindent 9 = {\fdeva \vh{9}}\par
+\noindent @ = {\fdeva \vh{@}}\par
+\noindent \textbackslash\# = {\fdeva \vh{\#}}\par
+\noindent ~a- = {\fdeva \vh{~a-}}\par
+\noindent oe- = {\fdeva \vh{oe-}}\par
+\noindent ooe- = {\fdeva \vh{ooe-}}\par
+\noindent aw- = {\fdeva \vh{aw-}}\par
+\noindent ue- = {\fdeva \vh{ue-}}\par
+\noindent uue- = {\fdeva \vh{uue-}}\par
+\noindent dda = {\fdeva \vh{dda}}\par
+\noindent zha = {\fdeva \vh{zha}}\par
+\noindent yaheavy = {\fdeva \vh{yaheavy}}\par
+\noindent gga = {\fdeva \vh{gga}}\par
+\noindent jja = {\fdeva \vh{jja}}\par
+\noindent gs = {\fdeva \vh{gs}}\par
+\noindent ddda = {\fdeva \vh{ddda}}\par
+\noindent bba = {\fdeva \vh{bba}}\par
+\noindent c0 = {\fdeva \vh{c0}}\par
+\noindent c1 = {\fdeva \vh{c1}}\par
+\noindent c2 = {\fdeva \vh{c2}}\par
+\noindent c3 = {\fdeva \vh{c3}}\par
+\noindent c4 = {\fdeva \vh{c4}}\par
+\noindent c5 = {\fdeva \vh{c5}}\par
+\noindent c6 = {\fdeva \vh{c6}}\par
+\noindent c7 = {\fdeva \vh{c7}}\par
+\noindent c8 = {\fdeva \vh{c8}}\par
+\noindent c9 = {\fdeva \vh{c9}}\par
+\noindent cma = {\fdeva \vh{cma}}\par
+\noindent cmu = {\fdeva \vh{cmu}}\par
+\noindent cmka = {\fdeva \vh{cmka}}\par
+\noindent cmna = {\fdeva \vh{cmna}}\par
+\noindent cmpa = {\fdeva \vh{cmpa}}\par
+\noindent cmra = {\fdeva \vh{cmra}}\par
+\noindent cmvi = {\fdeva \vh{cmvi}}\par
+\noindent cm.a = {\fdeva \vh{cm.a}}\par
+\noindent candabspace = {\fdeva \vh{candabspace}}\par
+\noindent candrabvirama = {\fdeva \vh{candrabvirama}}\par
+\noindent dcandrabvirama = {\fdeva \vh{dcandrabvirama}}\par
+\noindent cb2 = {\fdeva \vh{cb2}}\par
+\noindent cb3 = {\fdeva \vh{cb3}}\par
+\noindent cbavagraha = {\fdeva \vh{cbavagraha}}\par
+\noindent pushpika = {\fdeva \vh{pushpika}}\par
+\noindent filler = {\fdeva \vh{filler}}\par
+\noindent caret = {\fdeva \vh{caret}}\par
+\noindent head = {\fdeva \vh{head}}\par
+\noindent siddham = {\fdeva \vh{siddham}}\par
+\noindent .jo = {\fdeva \vh{.jo}}\par
+\noindent ay- = {\fdeva \vh{ay-}}\par
+\noindent ay = {\fdeva \vh{ay}}\par
+\end{multicols}
+
+
+{\fdeva \vh{lL.l.L.l-.L-}}
+
+\end{document}
+
+%https://tex.stackexchange.com/questions/606769/devanagari-transliteration/606815#606815
+
+https://tex.stackexchange.com/questions/606594/i-want-to-write-devanagari-using-english-text-all-the-possible-letters-of-hindi/609125#609125
+
+
+velthuis l3 transliteration method
+https://tex.stackexchange.com/questions/606594/i-want-to-write-devanagari-using-english-text-all-the-possible-letters-of-hindi/609125#609125
+
+using dn method
+https://tex.stackexchange.com/questions/408326/using-devanagri-package-in-latex/408336#408336
+
+
+dn is old method
+https://tex.stackexchange.com/questions/609017/how-to-and-where-to-run-dn-file
+
