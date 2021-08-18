@@ -1,0 +1,53 @@
+%\documentclass[border=6pt]{standalone}
+\documentclass{article}
+\usepackage{luacode}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\setmonofont{FreeMono}
+
+\directlua {require "asciiart3"}
+\newcommand\bwasciitextshape[5]{\directlua{bwasciitextshape("#1",#2,#3,#4,"#5")}}
+\newcommand\bwasciitextshade[5]{\directlua{bwasciitextshade("#1",#2,#3,#4,"#5")}}
+\newcommand\bwascii[1]{\directlua{bwascii("#1")}}
+\newcommand\colorascii[1]{\directlua{colorascii("#1")}}
+\newcommand\bwframe[1]{\vspace*{\fill}\bwascii{#1}\vspace*{\fill}\newpage}
+\newcommand\colorframe[1]{\vspace*{\fill}\colorascii{#1}\vspace*{\fill}\newpage}
+
+\begin{document}
+\ttfamily\frenchspacing
+\newlength{\correctem}\settowidth{\correctem}{M}%to set the size of the minipage
+\newlength{\correctex}\settowidth{\correctex}{x}%to set the line height
+\pagestyle{empty}\centering
+
+%\colorframe{lenna_128x128.ppm}
+%\colorframe{lisa_150x224.ppm}
+%\colorframe{knuth_192x227.ppm}
+%\bwframe{einstein_150x206.pgm}
+%\bwframe{sfmjk.pgm}
+%%\bwascii{sfmjk.pgm}
+%%\newpage
+%\bwascii{ps.pgm}
+\fbox{%
+\bwasciitextshade{flower1.pgm}{1}{0}{256}{A flower, sometimes known as a bloom or blossom, is the reproductive structure found in flowering plants (plants of the division Magnoliophyta, also called angiosperms). The biological function of a flower is to facilitate reproduction, usually by providing a mechanism for the union of sperm with eggs. Flowers may facilitate outcrossing (fusion of sperm and eggs from different individuals in a population) resulting from cross pollination or allow selfing (fusion of sperm and egg from the same flower) when self-pollination occurs. }
+}
+\fbox{%
+\bwasciitextshade{flower1.pgm}{1}{170}{256}{A flower, sometimes known as a bloom or blossom, is the reproductive structure found in flowering plants (plants of the division Magnoliophyta, also called angiosperms). The biological function of a flower is to facilitate reproduction, usually by providing a mechanism for the union of sperm with eggs. Flowers may facilitate outcrossing (fusion of sperm and eggs from different individuals in a population) resulting from cross pollination or allow selfing (fusion of sperm and egg from the same flower) when self-pollination occurs. }
+}
+\newpage
+\fbox{%
+\bwasciitextshape{flower1.pgm}{1}{170}{256}{A flower, sometimes known as a bloom or blossom, is the reproductive structure found in flowering plants (plants of the division Magnoliophyta, also called angiosperms). The biological function of a flower is to facilitate reproduction, usually by providing a mechanism for the union of sperm with eggs. Flowers may facilitate outcrossing (fusion of sperm and eggs from different individuals in a population) resulting from cross pollination or allow selfing (fusion of sperm and egg from the same flower) when self-pollination occurs. }
+}
+\newpage
+\fbox{%
+\bwasciitextshape{flower1.pgm}{1}{0}{170}{A flower, sometimes known as a bloom or blossom, is the reproductive structure found in flowering plants (plants of the division Magnoliophyta, also called angiosperms). The biological function of a flower is to facilitate reproduction, usually by providing a mechanism for the union of sperm with eggs. Flowers may facilitate outcrossing (fusion of sperm and eggs from different individuals in a population) resulting from cross pollination or allow selfing (fusion of sperm and egg from the same flower) when self-pollination occurs. }
+}
+\newpage
+\fbox{%
+\bwascii{flower1.pgm}
+}
+
+\end{document}
+
+convert -compress none -resize ___OutputWidth___ ___InputFile___ ___output___.ppm
+convert -compress none -resize ___OutputWidth___ ___InputFile___ ___output___.pgm
