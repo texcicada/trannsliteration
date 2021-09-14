@@ -17,6 +17,7 @@
 \usetikzlibrary{arrows,snakes,shapes,trees}
 \usetikzlibrary{matrix}
 \usetikzlibrary{mindmap}
+\usetikzlibrary{backgrounds}
 \usetikzlibrary{shapes,decorations.pathmorphing,decorations.fractals}
 \usetikzlibrary {graphs,graphdrawing} 
 \usetikzlibrary{topaths}
@@ -42,6 +43,7 @@
 \usepackage{etoolbox}
 \usepackage{framed}
 \usepackage{lipsum}
+%%\usepackage{3dplot} %for 3dplot functionality
 % +++++
 % +++++
 % ===== 
@@ -254,11 +256,20 @@
 
 %======================
 %random citation:
-\NewDocumentCommand{ \tikzexlipsumr } {  } {
+\NewDocumentCommand{ \tikzexlipsumr } { O{} } {
+	\IfNoValueTF { #1}
+	{
  \int_set:Nn 
  				\l_tikzex_randompar_int 
  				{ \int_rand:n { \int_use:N \g_tikzex_parcount_int} }
 	\tikzexlipsum [ \int_use:N \l_tikzex_randompar_int ]
+	}
+	{%figure requested
+ \int_set:Nn 
+ 				\l_tikzex_randompar_int 
+ 				{ \int_rand:n { \int_use:N \g_tikzex_parcount_int} }
+	\tikzexlipsum [ \int_use:N \l_tikzex_randompar_int ] [ f ]
+		}
 }
 
 
@@ -1964,7 +1975,7 @@ end
 }
 
 
-
+%p27
 \setuptikzexlipsum
 { Commands for tikzexlipsum }
 {
@@ -2001,6 +2012,7 @@ end
   \textbackslash tikzexlipsum[2-5] \& Print items 2 to 5  \\
   \textbackslash tikzexlipsum[2-5][f] \& Print items 2 to 5 as figures \\
   \textbackslash tikzexlipsumr \& Print a random item  \\
+  \textbackslash tikzexlipsumr[f] \& Print a random figure  \\
   \textbackslash tikzexlipsumrr \& Print a random range of items  \\
   \textbackslash tikzexlipsuma\{n\} \& Print attribution \textit{n}  \\ 
   \textbackslash tikzexlipsumalist \& Print numbered attributions list  \\   
@@ -2734,25 +2746,385 @@ For testing the alignment: \fadingtext{Here is a colored sample sentence.}
 }
 
 
+
+%%\setuptikzexlipsum
+%%{ Spherical polar pots with 3dplot
+%%   Author: Jeff Hein
+%%  https://texample.net/tikz/examples/spherical-polar-pots-with-3dplot/
+%% }
+%%{
+%%\tdplotsetmaincoords{70}{135}
+%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%{sqrt(15/2)*sin(\tdplottheta)*cos(\tdplottheta)}{black}{\tdplotphi}%
+%%    {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%    {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%    {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%\end{tikzpicture}
+%%
+%%%Here's some more examples.
+%%%L = 0
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{1}{black}{0}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 1, M_L = -1
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(3/2)*sin(\tdplottheta)}{black}{-\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 1, M_L = 0
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(3)*cos(\tdplottheta)}{black}{0}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 1, M_L = +1
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(3/2)*sin(\tdplottheta)}{black}{\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = -2
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)/2*sin(\tdplottheta)^2}{black}{-2*\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = -1
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)*sin(\tdplottheta)*cos(\tdplottheta)}{black}{-\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = 0
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(5)/2*(3*cos(\tdplottheta)^2 - 1 )}{black}{-\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = 1
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)*sin(\tdplottheta)*cos(\tdplottheta)}{black}{\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = +2
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)/2*sin(\tdplottheta)^2}{black}{2*\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%
+%%%L = 3, M_L = 0
+%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%{sqrt(7)/2*(5*cos(\tdplottheta)^3 - 3*cos(\tdplottheta))}{black}{0}%
+%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%\end{tikzpicture}
+%%}
+
+\setuptikzexlipsum
+{ Scientific interactions
+   Author: Andrei Sobolevski
+  https://texample.net/tikz/examples/scientific-interactions/
+ }
+{
+\begin{tikzpicture}[mindmap,
+  level 1 concept/.append style={level distance=130,sibling angle=30},
+  extra concept/.append style={color=blue!50,text=black}]
+
+  % Applied area: computer science and its subfields
+
+  \begin{scope}[mindmap, concept color=orange, text=white]
+    \node [concept] {Informatique}[clockwise from=-5] 
+      child {node [concept] (log) {M{\'e}thodes cat{\'e}goriques}}
+      child {node [concept] (alg) {Algorithmique}}
+      child {node [concept] (cod) {Compression \& transmission}}
+      child {node [concept] (img) {Tra{\^i}tement des images}}
+      child {node [concept] (opt) {Optimisation}}
+      child {node [concept] (res) {R{\'e}seaux}};
+  \end{scope}
+
+  % Applied area: theoretical physics and its subfields
+
+  \begin{scope}[mindmap, concept color=red,text=white]
+    \node [concept] at (-5,-15) {Physique}
+      child [grow=-10, level distance=160]
+        {node [concept] (qin) {Calcul quantique}}
+      child [grow=20] 
+        {node [concept] (csm) {Astronomie \& cosmologie}}
+      child [grow=110] 
+        {node [concept] (mat) {Mati{\`e}re condens{\'e}e}};
+  \end{scope}
+
+  % Applied area: biology and its subfields
+
+  \begin{scope}[mindmap, concept color=green!50!black,text=white]
+    \node [concept] at (6.5,-15) {Biologie} 
+      child [grow=165, level distance=120] 
+        {node [concept] (med) {M{\'e}decine}}
+      child [grow=60] 
+        {node [concept] (gen) {G{\'e}nomique}};
+  \end{scope}
+
+  % Applied area: economics (one subfield)
+
+  \begin{scope}[mindmap, concept color=violet, text=white]
+    \node [concept] at (11,-14) {{\'E}conomie}
+      child [grow=70, level distance=120] 
+        {node [concept] (dec) {Choix \& prise de d{\'e}cision}};
+  \end{scope}
+
+  % Researchers listed by their main specialization in mathematics
+
+  \begin{scope}[mindmap, concept color=blue]
+
+    % Combinatorics and discrete mathematics 
+    \node [concept, text=white] at (5.2,-10.8) 
+      {Combinatoire \& math{\'e}matiques discr{\`e}tes} 
+      [clockwise from=150]
+      child [concept color=blue!50] {node [concept] (ver) {Vereschagin}}
+      child [concept color=blue!50, level distance=125] 
+        {node [concept] (kab) {Kabatyanski, Tsfasman, Rybakov, Zykin}}
+      child [concept color=blue!50] 
+        {node [concept] (kch) {Kucherov, Roytberg}}
+      child [concept color=blue!50] {node [concept] (raf) {Raffinot}}
+      child [concept color=blue!50, level distance=135]
+        {node [concept] (ksh) {Koshevoy}};
+
+    % Partial differential equations
+    \node [concept, text=white] at (-3,-11) 
+      {Equations aux d{\'e}riv{\'e}es partielles 
+        \& m{\'e}thodes num{\'e}riques}
+      child [concept color=blue!50, grow=0, level distance=140] 
+        {node [concept] (lhc) {Loh{\'e}ac}}
+      child [concept color=blue!50, grow=60, level distance=115] 
+        {node [concept] (otr) {OTARIE (Sobolevski)}}
+      child [concept color=blue!50, grow=95] {node [concept] (ndr) 
+        {Nadirashvili}};
+
+    % Probability
+    \node [concept, text=white] at (-7.2,-3.2) {Probabilit{\'e}s}
+      child [concept color=blue!50, grow=-70, level distance=120] 
+        {node [concept] (rbk) {Rybko}};
+
+    % Logic
+    \node [concept, text=white] at (11.5,-5) {Logique}
+      child [concept color=blue!50, grow=165, level distance=120] 
+        {node [concept] (sht) {Shehtman}};
+  \end{scope}
+
+  % Connections of researchers to applied subfields
+
+  \begin{pgfonlayer}{background}
+    \draw [circle connection bar]
+      (kab) edge (cod)
+      (kch) edge (alg) edge (gen)
+      (lhc) edge (med)
+      (ksh) edge (dec)
+      (ndr) edge (mat)
+      (otr) edge (opt) edge (csm) edge (img)
+      (raf) edge (alg) edge (gen)
+      (rbk) edge (res) edge (mat)
+      (sht) edge (log) edge (dec)
+      (ver) edge (qin) edge (cod);
+  \end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Pythagorean triangle with the squares of its sides and labels
+   Author: Alex Chan
+  https://texample.net/tikz/examples/pythagoras-triangle/
+ }
+{
+\ifdefined\pythagwidth\undef\pythagwidth\fi
+\newcommand{\pythagwidth}{3cm}
+\ifdefined\pythagheight\undef\pythagheight\fi
+\newcommand{\pythagheight}{2cm}
+\begin{tikzpicture}
+  \coordinate [label={below right:$A$}] (A) at (0, 0);
+  \coordinate [label={above right:$B$}] (B) at (0, \pythagheight);
+  \coordinate [label={below left:$C$}] (C) at (-\pythagwidth, 0);
+
+  \coordinate (D1) at (-\pythagheight, \pythagheight + \pythagwidth);
+  \coordinate (D2) at (-\pythagheight - \pythagwidth, \pythagwidth);
+
+  \draw [very thick] (A) -- (C) -- (B) -- (A);
+
+  \newcommand{\ranglesize}{0.3cm}
+  \draw (A) -- ++ (0, \ranglesize) -- ++ (-\ranglesize, 0) -- ++ (0, -\ranglesize);
+
+  \draw [dashed] (A) -- node [below] {$b$} ++ (-\pythagwidth, 0)
+            -- node [right] {$b$} ++ (0, -\pythagwidth)
+            -- node [above] {$b$} ++ (\pythagwidth, 0)
+            -- node [left]  {$b$} ++ (0, \pythagwidth);
+
+  \draw [dashed] (A) -- node [right] {$c$} ++ (0, \pythagheight)
+            -- node [below] {$c$} ++ (\pythagheight, 0)
+            -- node [left]  {$c$} ++ (0, -\pythagheight)
+            -- node [above] {$c$} ++ (-\pythagheight, 0);
+
+  \draw [dashed] (C) -- node [above left]  {$a$} (B)
+                     -- node [below left]  {$a$} (D1)
+                     -- node [below right] {$a$} (D2)
+                     -- node [above right] {$a$} (C);
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ Representation of a geometric series
+   Author: Jimi Oke
+  https://texample.net/tikz/examples/geometric-series/
+ }
+{
+\begin{tikzpicture}[scale=.35]\footnotesize
+ \pgfmathsetmacro{\xone}{-.4}
+ \pgfmathsetmacro{\xtwo}{ 16.4}
+ \pgfmathsetmacro{\yone}{-.4}
+ \pgfmathsetmacro{\ytwo}{16.4}
+
+\begin{scope}<+->;
+% grid
+  \draw[step=1cm,gray,very thin] (\xone,\yone) grid (\xtwo,\ytwo);
+
+% ticks
+  \foreach \x/\xtext in { 8/\frac{1}{2}, 16/1}
+  \draw[gray,xshift=\x cm] (0,.3) -- (0,0) node[below] {$\xtext$};
+  \foreach \y/\ytext in {8/\frac{1}{2},16/1}
+    \draw[gray, yshift=\y cm] (.3,0) -- (0,0)
+    node[left] {$\ytext$};
+
+% origin
+ \draw[gray] (0,0) node[anchor=north east] {$O$};
+
+% axes
+  \draw[gray,thick,<->] (\xone, 0) -- (\xtwo, 0) node[right] {$x$};
+  \draw[gray,thick,<->] (0, \yone) -- (0, \ytwo) node[above] {$y$};
+\end{scope}
+
+% function
+\begin{scope}[thick,red]
+  \foreach \x in {16, 8, 4, 2, 1,.5,.25}
+    \draw (16-\x, 16-\x) rectangle (16,16);
+
+  \foreach \x in {16, 8, 4, 2, 1,.5,.25}
+  \filldraw[thin,red,opacity=.3] (16-\x, 16-\x)
+    rectangle (16-.5*\x,16-.5*\x);
+
+\foreach \x in {16, 8, 4, 2, 1,.5,.25}{
+  \filldraw[thin,blue,opacity=.2] (16-\x, 16-.5*\x)
+    rectangle (16-.5*\x,16);
+  \filldraw[thin,blue,opacity=.2] (16-.5*\x, 16-\x)
+    rectangle (16,16-.5*\x);}
+\end{scope}
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Polar plot with grid
+   Author: Alex Chan
+  https://texample.net/tikz/examples/polar-plot/
+ }
+{
+\begin{tikzpicture}[>=latex]
+
+% Draw the lines at multiples of pi/12
+\foreach \ang in {0,...,31} {
+  \draw [lightgray] (0,0) -- (\ang * 180 / 16:4);
+}
+
+% Concentric circles and radius labels
+\foreach \s in {0, 1, 2, 3} {
+  \draw [lightgray] (0,0) circle (\s + 0.5);
+  \draw (0,0) circle (\s);
+  \node [fill=white] at (\s, 0) [below] {\scriptsize $\s$};
+}
+
+% Add the labels at multiples of pi/4
+\foreach \ang/\lab/\dir in {
+  0/0/right,
+  1/{\pi/4}/{above right},
+  2/{\pi/2}/above,
+  3/{3\pi/4}/{above left},
+  4/{\pi}/left,
+  5/{5\pi/4}/{below left},
+  7/{7\pi/4}/{below right},
+  6/{3\pi/2}/below} {
+  \draw (0,0) -- (\ang * 180 / 4:4.1);
+  \node [fill=white] at (\ang * 180 / 4:4.2) [\dir] {\scriptsize $\lab$};
+}
+
+% The double-lined circle around the whole diagram
+\draw [style=double] (0,0) circle (4);
+
+\fill [fill=red!50!black, opacity=0.5] plot [domain=-pi/2:pi/2]
+  (xy polar cs:angle=\x r, radius= {2-2*sin(\x r)});
+\draw [thick, color=red, domain=0:2*pi, samples=200, smooth]
+  plot (xy polar cs:angle=\x r, radius={2-2*sin(\x r)});
+\node [fill=white] at (2,1) {$r=2-2\sin\theta$};
+
+\end{tikzpicture} 
+}
+
+
+
+
+
 %---------------------------------------------------------
 \begin{document}
 %\tikzexmaxparcount\ items stored.\par
 
 %\tikzexlipsum
 %\tikzexlipsum[99-26]
-\tikzexlipsum[\tikzexmaxparcount][f]
+\tikzexlipsum[\tikzexmaxparcount]%[f]
 
 
 %\tikzexlipsum[21]
 %\tikzexlipsumrr
 %\tikzexlipsum[27]
-%\tikzexlipsum[27][f]
-%\tikzexlipsumalist
-
-%\tikzexlipsumr
+%%\tikzexlipsum[27][f]
+%%
+%%\tikzexlipsumr[f]
 %\tikzexlipsuma{5}\par
 %\tikzexlipsumt{5}\par
 
 %\tikzexlipsum[5-7][f]
+
+%\tikzexlipsumalist
+
+%\tikzexlipsum[14][f]% no direct lua code inside a figure environment
 
 \end{document}
