@@ -1,0 +1,3129 @@
+%% ----------------------------------------------------------------
+%% The tikzexlipsum.sty package --- TikZ pictures from TeXample as lipsum.
+%% ----------------------------------------------------------------
+%% 
+\RequirePackage{	xparse}
+\RequirePackage[usenames,dvipsnames,x11names]{xcolor}
+\RequirePackage{	graphicx}
+
+% ===== tikzex
+\RequirePackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shadows} 
+\usetikzlibrary{fadings}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc,shadows.blur,decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{math}
+\usetikzlibrary{shadings,intersections}
+\usetikzlibrary{arrows,snakes,shapes,trees}
+\usetikzlibrary{matrix}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{shapes,decorations.pathmorphing,decorations.fractals}
+\usetikzlibrary {graphs,graphdrawing} 
+\usetikzlibrary{topaths}
+\usegdlibrary {layered}
+%\usetikzlibrary{shapes.geometric,backgrounds,
+%  positioning-plus,node-families,calc}
+%%\RequirePackage{tkz-graph}
+
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{bm} % 
+\RequirePackage{smartdiagram}
+\RequirePackage{metalogo}
+%\RequirePackage{dtklogos}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.17}
+%\RequirePackage{xstring}    % needed for string manipulations
+%\RequirePackage{fmtcount}   % needed for some binary printing
+\RequirePackage{sansmath}
+%\RequirePackage{verbatim}
+\RequirePackage{ifthen}
+\RequirePackage{framed}
+\RequirePackage{lipsum}
+%%\RequirePackage{3dplot} %for 3dplot functionality
+% +++++
+\RequirePackage{etoolbox}
+% +++++
+% ===== 
+
+
+\ExplSyntaxOn
+
+
+\ProvidesExplPackage
+  {tikzexlipsum}{2021/09/14}{1.0}{TikZ pictures as lipsum}
+\@ifpackagelater { expl3 } { 2012/11/21 }
+  { }
+  {
+    \PackageError	{ tikzexlipsum } { Support~package~expl3~too~old }
+      {
+        You~need~to~update~your~installation~of~the~bundles~'l3kernel'~and~
+        'l3packages'.\MessageBreak
+        Loading~of~tikzexlipsum~will~stop.
+      }
+    \tex_endinput:D
+  }
+%%
+
+\int_new:N \l_tikzex_randompar_int 
+\int_new:N \g_tikzex_parcount_int 
+\int_new:N \c_two_int 
+\int_set:Nn \c_two_int { 2 }
+\int_new:N \l_tikzex_loopstart_int
+\int_new:N \l_tikzex_loopstop_int
+\int_new:N \l_tikzex_tempa_int
+\int_new:N \l_tikzex_tempb_int
+
+\tl_new:N \l_tikzex_mytemp_tl 
+\seq_new:N \l_tikzex_mytemp_seq
+\tl_new:N \l_tikzex_mytempa_tl 
+\tl_new:N \l_tikzex_mytempb_tl 
+
+\newcommand\tikzexdefaultsep{---}
+\newcommand\tikzexdefaultitem{5}
+
+%======================
+%the attribution:
+\newcommand\assigntikzexlipsuma[2]{
+	\expandafter\newcommand\csname tikzexlipsumattr#1\endcsname{#2}
+}
+
+%======================
+%the text of the citation:
+\newcommand\assigntikzexlipsumt[2]{
+	\expandafter\newcommand\csname tikzexlipsumcite#1\endcsname{#2}
+}
+
+%======================
+%define attribution and citation:
+\NewDocumentCommand{ \setuptikzexlipsum } { m +m } {
+	\int_gincr:N \g_tikzex_parcount_int
+	\assigntikzexlipsuma{ \int_use:N \g_tikzex_parcount_int } { #1 }
+	\assigntikzexlipsumt{ \int_use:N \g_tikzex_parcount_int } { #2 }
+}
+
+
+%======================
+%citation:
+\newcommand\tikzexprintapar[1]{
+					\mode_leave_vertical: ~ \par
+						\cs:w tikzexlipsumcite#1\cs_end:\par
+						\tikzexdefaultsep ~
+						\tikzexlipsuma{#1}
+}
+
+
+
+%======================
+%citation in float:
+\newcommand\tikzexprintaparf[1]{
+		\begin{figure}
+		\begin{center}
+						\cs:w tikzexlipsumcite#1\cs_end:\par
+		\end{center}
+						\caption { \tikzexlipsuma{#1} }
+						\label {fig:tikzex-#1}
+		\end{figure}
+}
+
+%======================
+\NewDocumentCommand{ \tikzexlipsum } { O{\tikzexdefaultitem} o } {
+
+			\tl_set:Nn 
+							\l_tikzex_mytemp_tl 
+							{#1}
+			\seq_set_split:NnV
+							\l_tikzex_mytemp_seq
+							{-}
+							{ \l_tikzex_mytemp_tl }
+
+%>>		\seq_count:N 
+%							\l_tikzex_mytemp_seq
+%<<							
+		\int_compare:nNnTF
+							{ \seq_count:N 
+										\l_tikzex_mytemp_seq
+										}
+										=
+										{ \c_one_int } % one item
+					{
+							\int_compare:nNnTF % exceeds bounds: print max
+											{ #1 }
+											>
+											{ \int_use:N \g_tikzex_parcount_int }
+											{ \IfNoValueTF{#2}{
+															\tikzexprintapar { \int_use:N \g_tikzex_parcount_int} 
+															}{
+															\tikzexprintaparf { \int_use:N \g_tikzex_parcount_int} 
+															}
+											}
+					  					{ 	
+					  											\IfNoValueTF{#2}{
+					  								\int_compare:nNnTF % exceeds bounds: print min
+																{ #1 }
+																	<
+																{ \c_one_int }
+																{ \use:c { tikzexprintapar } { \c_one_int } }
+					  										{ \use:c { tikzexprintapar } {#1} } %print as-is (in range)
+					  										}%no f
+					  										{% f
+					  								\int_compare:nNnTF % exceeds bounds
+																{ #1 }
+																	<
+																{ \c_one_int }
+																{ \use:c { tikzexprintapar#2 } { \c_one_int } }
+					  										{ \use:c { tikzexprintapar#2 } {#1} }
+					  										}%f
+					  					 }
+					}
+					{
+		\int_compare:nNnT % two only
+							{ \seq_count:N 
+										\l_tikzex_mytemp_seq
+										}
+										=
+										{ \c_two_int }
+					{
+					
+						\seq_pop_left:NN
+										\l_tikzex_mytemp_seq
+										\l_tikzex_mytempa_tl 
+						\seq_pop_left:NN
+										\l_tikzex_mytemp_seq
+										\l_tikzex_mytempb_tl 
+										
+							\int_compare:nNnT % exceeds bounds
+											{ \l_tikzex_mytempa_tl }
+											>
+											{ \int_use:N \g_tikzex_parcount_int }
+											{ \tl_set:Nn 
+															\l_tikzex_mytempa_tl
+															{ \int_use:N \g_tikzex_parcount_int }
+											 }
+										
+							\int_compare:nNnT % exceeds bounds
+											{ \l_tikzex_mytempb_tl }
+											>
+											{ \int_use:N \g_tikzex_parcount_int }
+											{ \tl_set:Nn 
+															\l_tikzex_mytempb_tl
+															{ \int_use:N \g_tikzex_parcount_int }
+											 }
+%\tl_show:N \l_tikzex_mytempa_tl										
+%\tl_show:N \l_tikzex_mytempb_tl										
+%					\tl_use:N \l_tikzex_mytempa_tl
+%					~
+%					\tl_use:N \l_tikzex_mytempb_tl
+%					:~
+%					a ~ range
+					\int_set:Nn 
+									\l_tikzex_loopstart_int 
+									{ \tl_use:N \l_tikzex_mytempa_tl 	}
+					\int_set:Nn 
+									\l_tikzex_loopstop_int					
+									{ \tl_use:N \l_tikzex_mytempb_tl 	}
+									
+							\int_compare:nNnTF
+							{ \tl_use:N \l_tikzex_mytempa_tl 	}
+										<
+							{ \tl_use:N \l_tikzex_mytempb_tl 	}
+					{ %less than
+					\IfNoValueTF{#2}{
+					\int_step_function:nnnN 
+							{ \l_tikzex_loopstart_int } 
+							{ 1 } 
+							{ \l_tikzex_loopstop_int } 
+							\tikzexprintapar 							}
+							{%2nd optional (f)
+					\int_step_function:nnnN 
+							{ \l_tikzex_loopstart_int } 
+							{ 1 } 
+							{ \l_tikzex_loopstop_int } 
+							\tikzexprintaparf 							}
+%							\use:c { tikzexprintapar#2 } 
+%>>tikzexprintapar#2
+							
+					}
+					{ %greater than
+						\IfNoValueTF{#2}{%no f
+					\int_step_function:nnnN 
+							{ \l_tikzex_loopstart_int } 
+							{ -1 } 
+							{ \l_tikzex_loopstop_int } 
+							\tikzexprintapar
+							}{% f
+					\int_step_function:nnnN 
+							{ \l_tikzex_loopstart_int } 
+							{ -1 } 
+							{ \l_tikzex_loopstop_int } 
+							\tikzexprintaparf
+							}
+													
+					}
+					
+					}					
+					}
+}
+
+
+%======================
+%random citation:
+\NewDocumentCommand{ \tikzexlipsumr } { o } {
+	\IfNoValueTF { #1}
+	{
+ \int_set:Nn 
+ 				\l_tikzex_randompar_int 
+ 				{ \int_rand:n { \int_use:N \g_tikzex_parcount_int} }
+	\tikzexlipsum [ \int_use:N \l_tikzex_randompar_int ]
+	}
+	{%figure requested
+ \int_set:Nn 
+ 				\l_tikzex_randompar_int 
+ 				{ \int_rand:n { \int_use:N \g_tikzex_parcount_int} }
+	\tikzexlipsum [ \int_use:N \l_tikzex_randompar_int ] [ f ]
+		}
+}
+
+
+%======================
+%random citations:
+\NewDocumentCommand{ \tikzexlipsumrr } {  } {
+% \int_set:Nn 
+% 				\l_tikzex_randompar_int 
+% 				{ \int_rand:n { \int_use:N \g_tikzex_parcount_int} }
+    \int_set:Nn 
+    			\l_tikzex_tempa_int
+    			{ \int_rand:n { \int_use:N \g_tikzex_parcount_int } }
+    \int_set:Nn 
+    			\l_tikzex_tempb_int
+    			{ \int_rand:n { \int_use:N \g_tikzex_parcount_int } }
+    			
+    				\int_show:N \l_tikzex_tempa_int
+    				\int_show:N \l_tikzex_tempb_int
+    				    			
+	\tikzexlipsum [
+										 \l_tikzex_tempa_int
+										 -
+										 \l_tikzex_tempb_int
+											]
+}
+
+%======================
+%attribution:
+\NewDocumentCommand{ \tikzexlipsuma } { m } {
+	\cs:w tikzexlipsumattr#1\cs_end: 
+}
+
+%attribution csname :
+\NewDocumentCommand{ \tikzexlipsumacs } { m } {
+	( #1 )
+	~
+	\cs:w tikzexlipsumattr#1\cs_end: 
+	\par
+}
+
+
+%citation:
+\NewDocumentCommand{ \tikzexlipsumt } { m } {
+	\cs:w tikzexlipsumcite#1\cs_end: 
+}
+
+%======================
+\NewDocumentCommand{ \tikzexmaxparcount } { } {
+	\int_use:N \g_tikzex_parcount_int
+}
+
+%======================
+%list numbered attributions:
+\NewDocumentCommand{ \tikzexlipsumalist } {  } {
+					\mode_leave_vertical: ~	\par\bigskip 				
+					{\bfseries\large\underline{Index}} ~  (tikzex)\par
+					\int_step_function:nnnN 
+							{ \c_one_int } 
+							{ 1 } 
+							{ \tikzexmaxparcount } 
+							\tikzexlipsumacs
+}
+
+
+\ExplSyntaxOff
+
+
+
+
+
+%The texts:
+
+\setuptikzexlipsum
+{  Horizon penetrating coordinates (vs. Schwarzschild coordinates)
+ for a black hole spacetime, with excision
+ Author: Jonah Miller: https://texample.net/tikz/examples/spacetime/ }
+{
+\tikzset{zigzag/.style={decorate, decoration=zigzag}}
+\def \L {2.}
+\definecolor{darkgreen}{HTML}{006622}
+\begin{tikzpicture}
+
+  % causal diamond
+  \draw[thick,red,zigzag] (-\L,\L) coordinate(stl) -- (\L,\L) coordinate (str);
+  \draw[thick,black] (\L,-\L) coordinate (sbr)
+    -- (0,0) coordinate (bif) -- (stl);
+  \draw[thick,black,fill=blue, fill opacity=0.2,text opacity=1] 
+    (bif) -- (str) -- (2*\L,0) node[right] (io) {$i^0$} -- (sbr);
+
+  % null labels
+  \draw[black] (1.4*\L,0.7*\L) node[right]  (scrip) {$\mathcal{I}^+$}
+               (1.5*\L,-0.6*\L) node[right] (scrip) {$\mathcal{I}^-$}
+               (0.2*\L,-0.6*\L) node[right] (scrip) {$\mathcal{H}^-$}
+               (0.5*\L,0.85*\L) node[right] (scrip) {$\mathcal{H}^+$};
+
+  % singularity label
+  \draw[thick,red,<-] (0,1.05*\L) 
+    -- (0,1.2*\L) node[above] {\color{red} singularity};
+  % Scwharzschild surface
+  \draw[thick,blue] (bif) .. controls (1.*\L,-0.35*\L) .. (2*\L,0);
+  \draw[thick,blue,<-] (1.75*\L,-0.1*\L)  -- (1.9*\L,-0.5*\L)
+    -- (2*\L,-0.5*\L) node[right,align=left]
+    {$t=$ constant\\in Schwarzschild\\coordinates};
+  % excision surface
+  \draw[thick,dashed,red] (-0.3*\L,0.3*\L) -- (0.4*\L,\L);
+  \draw[thick,red,<-] (-0.33*\L,0.3*\L) 
+    -- (-0.5*\L,0.26*\L) node[left,align=right] {excision\\surface};
+  % Kerr-Schild surface
+  \draw[darkgreen,thick] (0.325*\L,0.325*\L) .. controls (\L,0) .. (2*\L,0);
+  \draw[darkgreen,dashed,thick] (0.325*\L,0.325*\L) -- (-0.051*\L,0.5*\L);
+  % Kerr-Schild label
+  \draw[darkgreen,thick,<-] (0.95*\L,0.15*\L) -- (1.2*\L,0.5*\L)
+    -- (2*\L,0.5*\L) node[right,align=left]
+    {$\tau=$ constant\\in Kerr-Schild\\coordinates};
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{  Circumscribed Parallelepiped
+ Author: Axel Pavillet: 
+ https://texample.net/tikz/examples/parallelepiped/ }
+{
+\begin{tikzpicture}[font=\LARGE] 
+
+% Figure parameters (tta and k needs to have the same sign)
+% They can be modified at will
+\def \tta{ -10.00000000000000 } % Defines the first angle of perspective
+\def \k{    -3.00000000000000 } % Factor for second angle of perspective
+\def \l{     6.00000000000000 } % Defines the width  of the parallelepiped
+\def \d{     5.00000000000000 } % Defines the depth  of the parallelepiped
+\def \h{     7.00000000000000 } % Defines the heigth of the parallelepiped
+
+% The vertices A,B,C,D define the reference plan (vertical)
+\coordinate (A) at (0,0); 
+\coordinate (B) at ({-\h*sin(\tta)},{\h*cos(\tta)}); 
+\coordinate (C) at ({-\h*sin(\tta)-\d*sin(\k*\tta)},
+                    {\h*cos(\tta)+\d*cos(\k*\tta)}); 
+\coordinate (D) at ({-\d*sin(\k*\tta)},{\d*cos(\k*\tta)}); 
+
+% The vertices Ap,Bp,Cp,Dp define a plane translated from the 
+% reference plane by the width of the parallelepiped
+\coordinate (Ap) at (\l,0); 
+\coordinate (Bp) at ({\l-\h*sin(\tta)},{\h*cos(\tta)}); 
+\coordinate (Cp) at ({\l-\h*sin(\tta)-\d*sin(\k*\tta)},
+                     {\h*cos(\tta)+\d*cos(\k*\tta)}); 
+\coordinate (Dp) at ({\l-\d*sin(\k*\tta)},{\d*cos(\k*\tta)}); 
+
+% Marking the vertices of the tetrahedron (red)
+% and of the parallelepiped (black)
+\fill[black]  (A) circle [radius=2pt]; 
+\fill[red]    (B) circle [radius=2pt]; 
+\fill[black]  (C) circle [radius=2pt]; 
+\fill[red]    (D) circle [radius=2pt]; 
+\fill[red]   (Ap) circle [radius=2pt]; 
+\fill[black] (Bp) circle [radius=2pt]; 
+\fill[red]   (Cp) circle [radius=2pt]; 
+\fill[black] (Dp) circle [radius=2pt]; 
+
+% painting first the three visible faces of the tetrahedron
+\filldraw[draw=red,bottom color=red!50!black, top color=cyan!50]
+  (B) -- (Cp) -- (D);
+\filldraw[draw=red,bottom color=red!50!black, top color=cyan!50]
+  (B) -- (D)  -- (Ap);
+\filldraw[draw=red,bottom color=red!50!black, top color=cyan!50]
+  (B) -- (Cp) -- (Ap);
+
+% Draw the edges of the tetrahedron
+\draw[red,-,very thick] (Ap) --  (D)
+                        (Ap) --  (B)
+                        (Ap) -- (Cp)
+                        (B)  --  (D)
+                        (Cp) --  (D)
+                        (B)  -- (Cp);
+
+% Draw the visible edges of the parallelepiped
+\draw [-,thin] (B)  --  (A)
+               (Ap) -- (Bp)
+               (B)  --  (C)
+               (D)  --  (C)
+               (A)  --  (D)
+               (Ap) --  (A)
+               (Cp) --  (C)
+               (Bp) --  (B)
+               (Bp) -- (Cp);
+
+% Draw the hidden edges of the parallelepiped
+\draw [gray,-,thin] (Dp) -- (Cp);
+                    (Dp) --  (D);
+                    (Ap) -- (Dp);
+
+% Name the vertices (the names are not consistent
+%  with the node name, but it makes the programming easier)
+\draw (Ap) node [right]           {$A$}
+      (Bp) node [right, gray]     {$F$}
+      (Cp) node [right]           {$D$}
+      (C)  node [left,gray]       {$E$}
+      (D)  node [left]            {$B$}
+      (A)  node [left,gray]       {$G$}
+      (B)  node [above left=+5pt] {$C$}
+      (Dp) node [right,gray]      {$H$};
+
+% Drawing again vertex $C$, node (B) because it disappeared behind the edges.
+% Drawing again vertex $H$, node (Dp) because it disappeared behind the edges.
+\fill[red]   (B) circle [radius=2pt]; 
+\fill[gray] (Dp) circle [radius=2pt]; 
+
+% From the reference and this example one can easily draw 
+% the twin tetrahedron jointly to this one.
+% Drawing the edges of the twin tetrahedron
+% switching the p_s: A <-> Ap, etc...
+\draw[red,-,dashed, thin] (A)  -- (Dp)
+                          (A)  -- (Bp)
+                          (A)  --  (C)
+                          (Bp) -- (Dp)
+                          (C)  -- (Dp)
+                          (Bp) --  (C);
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{   Visualisation of Two's complement for a 4-bit-value
+ Author: Harald Lichtenstein: 
+ https://texample.net/tikz/examples/complement/ }
+{
+\begin{tikzpicture}[
+     auto,                % some style definitions of the elements follow
+     node distance = 0cm, % used in this picture
+     bin/.style    = {rectangle, fill=white, text=black},
+     dec/.style    = {draw=none, text=black},
+    circ/.style    = {circle, top color=white, bottom color=blue!50,
+    draw=blue, very thin, minimum size=5.25cm, drop shadow={opacity=0.5}}
+  ]
+  % draw a grid in the background
+  \draw[step=1,gray,thin] (-4,-4) grid (4,4);
+  \node[circ] (center) at (0,0)  {};
+  \node[font=\sffamily]   (4bit)   at (0,.5) {4 bit};
+
+  % Simply hand calculated angles for the positions of the bit values
+  %varound the circle
+
+  \foreach \angle / \bits in {%
+      0/0000, 22.5/0001, 45/0010, 67.5/0011, 90/0100, 112.5/0101,
+    135/0110, 157.5/0111, 180/1000, 202.5/1001, 225/1010, 247.5/1011,
+    270/1100, 292.5/1101, 315/1110, 337.5/1111}
+    \draw (\angle:3.25cm) node [bin, font=\ttfamily] {\bits};
+
+  \draw[fill=red, opacity=.25]
+    (-4,-4) -- (-4cm,.8cm) -- (4cm,-0.7cm) -- (4cm,-4cm) -- cycle;
+
+  % Simply hand calculated angles for the positions of
+  % the decimal values around the circle
+
+  \foreach \angle / \dez in {%
+    0/0, 22.5/1, 45/2, 67.5/3, 90/4, 112.5/5, 135/6, 157.5/7, 180/-8,
+    202.5/-7, 225/-6, 247.5/-5, 270/-4, 292.5/-3, 315/-2, 337.5/-1}
+    \draw (\angle:2.25cm) node [dec, font=\sffamily] {\dez};
+
+  \foreach \angle / \bits in {%
+      0/0000, 22.5/0001, 45/0010, 67.5/0011, 90/0100, 112.5/0101,
+    135/0110, 157.5/0111, 180/1000, 202.5/1001, 225/1010, 247.5/1011,
+    270/1100, 292.5/1101, 315/1110, 337.5/1111}
+    \draw (\angle:3.25cm) node [bin, fill=none, font=\ttfamily] {\bits};
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Diagram of Android activity life cycle
+ Author: Pavel Seda: 
+ https://texample.net/tikz/examples/android/ }
+{
+	\tikzset{%
+  >={Latex[width=2mm,length=2mm]},
+  % Specifications for style of nodes:
+            base/.style = {rectangle, rounded corners, draw=black,
+                           minimum width=4cm, minimum height=1cm,
+                           text centered, font=\sffamily},
+  activityStarts/.style = {base, fill=blue!30},
+       startstop/.style = {base, fill=red!30},
+    activityRuns/.style = {base, fill=green!30},
+         process/.style = {base, minimum width=2.5cm, fill=orange!15,
+                           font=\ttfamily},
+}
+% Drawing part, node distance is 1.5 cm and every node
+% is prefilled with white background
+\begin{tikzpicture}[node distance=1.5cm,
+    every node/.style={fill=white, font=\sffamily}, align=center]
+  % Specification of nodes (position, etc.)
+  \node (start)             [activityStarts]              {Activity starts};
+  \node (onCreateBlock)     [process, below of=start]          {onCreate()};
+  \node (onStartBlock)      [process, below of=onCreateBlock]   {onStart()};
+  \node (onResumeBlock)     [process, below of=onStartBlock]   {onResume()};
+  \node (activityRuns)      [activityRuns, below of=onResumeBlock]
+                                                      {Activity is running};
+  \node (onPauseBlock)      [process, below of=activityRuns, yshift=-1cm]
+                                                                {onPause()};
+  \node (onStopBlock)       [process, below of=onPauseBlock, yshift=-1cm]
+                                                                 {onStop()};
+  \node (onDestroyBlock)    [process, below of=onStopBlock, yshift=-1cm] 
+                                                              {onDestroy()};
+  \node (onRestartBlock)    [process, right of=onStartBlock, xshift=4cm]
+                                                              {onRestart()};
+  \node (ActivityEnds)      [startstop, left of=activityRuns, xshift=-4cm]
+                                                        {Process is killed};
+  \node (ActivityDestroyed) [startstop, below of=onDestroyBlock]
+                                                    {Activity is shut down};     
+  % Specification of lines between nodes specified above
+  % with aditional nodes for description 
+  \draw[->]             (start) -- (onCreateBlock);
+  \draw[->]     (onCreateBlock) -- (onStartBlock);
+  \draw[->]      (onStartBlock) -- (onResumeBlock);
+  \draw[->]     (onResumeBlock) -- (activityRuns);
+  \draw[->]      (activityRuns) -- node[text width=4cm]
+                                   {Another activity comes in
+                                    front of the activity} (onPauseBlock);
+  \draw[->]      (onPauseBlock) -- node {The activity is no longer visible}
+                                   (onStopBlock);
+  \draw[->]       (onStopBlock) -- node {The activity is shut down by
+                                   user or system} (onDestroyBlock);
+  \draw[->]    (onRestartBlock) -- (onStartBlock);
+  \draw[->]       (onStopBlock) -| node[yshift=1.25cm, text width=3cm]
+                                   {The activity comes to the foreground}
+                                   (onRestartBlock);
+  \draw[->]    (onDestroyBlock) -- (ActivityDestroyed);
+  \draw[->]      (onPauseBlock) -| node(priorityXMemory)
+                                   {higher priority $\rightarrow$ more memory}
+                                   (ActivityEnds);
+  \draw           (onStopBlock) -| (priorityXMemory);
+  \draw[->]     (ActivityEnds)  |- node [yshift=-2cm, text width=3.1cm]
+                                    {User navigates back to the activity}
+                                    (onCreateBlock);
+  \draw[->] (onPauseBlock.east) -- ++(2.6,0) -- ++(0,2) -- ++(0,2) --                
+     node[xshift=1.2cm,yshift=-1.5cm, text width=2.5cm]
+     {The activity comes to the foreground}(onResumeBlock.east);
+  \end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ Steradian cone in sphere
+ Author: Bartman: 
+ https://texample.net/tikz/examples/steradian-cone-sphere/ }
+{
+\begin{tikzpicture}[font = \sansmath]
+  \coordinate (O) at (0,0);
+
+  % ball background color
+  \shade[ball color = blue, opacity = 0.2] (0,0) circle [radius = 2cm];
+
+  % cone
+  \begin{scope}
+    \def\rx{0.71}% horizontal radius of the ellipse
+    \def\ry{0.15}% vertical radius of the ellipse
+    \def\z{0.725}% distance from center of ellipse to origin
+
+    \path [name path = ellipse]    (0,\z) ellipse ({\rx} and {\ry});
+    \path [name path = horizontal] (-\rx,\z-\ry*\ry/\z)
+                                -- (\rx,\z-\ry*\ry/\z);
+    \path [name intersections = {of = ellipse and horizontal}];
+
+    % radius to base of cone in ball
+    \draw[fill = gray!50, gray!50] (intersection-1) -- (0,0)
+      -- (intersection-2) -- cycle;
+    % base of cone in ball
+    \draw[fill = gray!30, densely dashed] (0,\z) ellipse ({\rx} and {\ry});
+  \end{scope}
+
+  % label of cone
+  \draw (0.25,0.4) -- (0.9,0.1) node at (1.05,0.0) {$q$};
+
+  % ball
+  \draw (O) circle [radius=2cm];
+  % label of ball center point
+  \filldraw (O) circle (1pt) node[below] {$P$};
+
+  % radius
+  \draw[densely dashed] (O) to [edge label = $r$] (-1.33,1.33);
+  \draw[densely dashed] (O) -- (1.33,1.33);
+
+  % cut of ball surface
+  \draw[red] (-1.35,1.47) arc [start angle = 140, end angle = 40,
+    x radius = 17.6mm, y radius = 14.75mm];
+  \draw[red, densely dashed] (-1.36,1.46) arc [start angle = 170, end angle = 10,
+    x radius = 13.8mm, y radius = 3.6mm];
+  \draw[red] (-1.29,1.52) arc [start angle=-200, end angle = 20,
+    x radius = 13.75mm, y radius = 3.15mm];
+
+  % label of cut of ball surface
+  \draw (-1.2,2.2) -- (-0.53,1.83) node at (-1.37,2.37) {$A$};
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Bar charts
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/bar-chart/ }
+{
+\begin{tikzpicture}
+  \begin{axis}[title  = Contributions per category
+                          at LaTeX-Community.org,
+    xbar,
+    y axis line style = { opacity = 0 },
+    axis x line       = none,
+    tickwidth         = 0pt,
+    enlarge y limits  = 0.2,
+    enlarge x limits  = 0.02,
+    symbolic y coords = {LaTeX, Tools, Distributions, Editors},
+    nodes near coords,
+  ]
+  \addplot coordinates { (57727,LaTeX)         (5672,Tools)
+                         (2193,Distributions)  (11106,Editors) };
+  \addplot coordinates { (14320,LaTeX)         (1615,Tools)
+                         (560,Distributions)   (3075,Editors)  };
+  \legend{Topics, Posts}
+  \end{axis}
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ A simple Tree
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/tree/ }
+{
+\begin{tikzpicture}[sibling distance=10em,
+  every node/.style = {shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=blue!20}]]
+  \node {Formulas}
+    child { node {single-line} }
+    child { node {multi-line}
+      child { node {aligned at}
+        child { node {relation sign} }
+        child { node {several places} }
+        child { node {center} } }
+      child { node {first left,\\centered,\\last right} } };
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Mindmap
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/mindmap/ }
+{
+\begin{tikzpicture}[scale=0.82]
+  \path [
+    mindmap,
+    text = white,
+    level 1 concept/.append style =
+      {font=\Large\bfseries, sibling angle=90},
+    level 2 concept/.append style =
+      {font=\normalsize\bfseries},
+    level 3 concept/.append style =
+      {font=\small\bfseries},
+    tex/.style     = {concept, ball color=blue,
+      font=\Huge\bfseries},
+    engines/.style = {concept, ball color=green!50!black},
+    formats/.style = {concept, ball color=blue!50!black},
+    systems/.style = {concept, ball color=red!90!black},
+    editors/.style = {concept, ball color=orange!90!black}
+  ]
+  node [tex] {\TeX} [clockwise from=0]
+    child[concept color=green!50!black, nodes={engines}] {
+      node {Engines} [clockwise from=90]
+        child { node {\TeX} }
+        child { node {pdf\TeX} }
+        child { node {\XeTeX} }
+        child { node {Lua\TeX} }}
+    child [concept color=blue, nodes={formats}] {
+      node {Formats} [clockwise from=300]
+        child { node {\LaTeX} }
+        child { node {Con\TeX t} }}
+    child [concept color=red, nodes={systems}] {
+      node {Systems} [clockwise from=210]
+        child { node {\TeX Live} [clockwise from=300]
+          child { node {Mac \TeX} }}
+        child { node {MiK\TeX} [clockwise from=60]
+          child { node {Pro \TeX t} }}}
+    child [concept color=orange, nodes={editors}] {
+      node {Editors} };
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ Decision tree
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/decision-tree/ }
+{
+\tikzset{
+  treenode/.style = {shape=rectangle, rounded corners,
+                     draw, align=center,
+                     top color=white, bottom color=blue!20},
+  root/.style     = {treenode, font=\Large, bottom color=red!30},
+  env/.style      = {treenode, font=\ttfamily\normalsize},
+  dummy/.style    = {circle,draw}
+}
+\begin{tikzpicture}
+  [
+    grow                    = right,
+    sibling distance        = 6em,
+    level distance          = 10em,
+    edge from parent/.style = {draw, -latex},
+    every node/.style       = {font=\footnotesize},
+    sloped
+  ]
+  \node [root] {Formula}
+    child { node [env] {equation}
+      edge from parent node [below] {single-line?} }
+    child { node [dummy] {}
+      child { node [dummy] {}
+        child { node [env] {align\\flalign}
+          edge from parent node [below] {at relation sign?} }
+        child { node [env] {alignat}
+          edge from parent node [above] {at several}
+                           node [below] {places?} }
+        child { node [env] {gather}
+                edge from parent node [above] {centered?} }
+        edge from parent node [below] {aligned?} }
+      child { node [env] {multline}
+              edge from parent node [above, align=center]
+                {first left,\\centered,}
+              node [below] {last right}}
+              edge from parent node [above] {multi-line?} };
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ A flowchart of a TeX workflow
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/smart-flowchart/ }
+{
+\smartdiagram[flow diagram:horizontal]{Edit,
+  \LaTeX, Bib\TeX/ biber, make\-index, \LaTeX}
+}
+
+
+\setuptikzexlipsum
+{ A Venn diagram with PDF blending
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/venn/ }
+{
+\begin{tikzpicture}
+  \begin{scope}[blend group = soft light]
+    \fill[red!30!white]   ( 90:1.2) circle (2);
+    \fill[green!30!white] (210:1.2) circle (2);
+    \fill[blue!30!white]  (330:1.2) circle (2);
+  \end{scope}
+  \node at ( 90:2)    {Typography};
+  \node at ( 210:2)   {Design};
+  \node at ( 330:2)   {Coding};
+  \node [font=\Large] {\LaTeX};
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ A diagram of TeX engines
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/smart-bubbles/ }
+{
+\smartdiagram[bubble diagram]{\TeX\ engines,
+  \TeX\ (dvi), pdf\TeX, \XeTeX, \LuaTeX, Con\TeX t}
+}
+
+\setuptikzexlipsum
+{  A descriptive diagram of TikZ tasks
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/smart-description/ }
+{
+\smartdiagram[descriptive diagram]{
+  {Style,{Define shapes, colors, shading,
+          and line styles for nodes and arrows}},
+  {Position, {Place nodes using a matrix,
+              relative or absolute positioning}},
+  {Relation, Insert edges or arrows
+             between selected nodes},
+  {Label, Add labels on edges or arrows}}
+}
+
+\setuptikzexlipsum
+{   Brillouin Function
+ Author: Mark Wibrow: 
+ https://texample.net/tikz/examples/brillouin-function/ }
+{
+\directlua{
+function coth (i) 
+  return math.cosh(i) / math.sinh(i)
+end
+
+function brillouin (J, x) 
+  if x == 0 then
+    return 0
+  else
+   return (2*J+1)/(2*J)*coth((2*J+1)/(2*J)*x) - 
+        1/(2*J)*coth(1/(2*J)*x)
+  end
+end
+}
+\pgfmathdeclarefunction{Brillouin}{2}{%
+  \edef\pgfmathresult{%
+     \directlua{tex.print("" .. brillouin(##1,##2))}%
+   }%  
+}
+
+\begin{tikzpicture}[
+    x                = 2cm/10,
+    scale            = 3,
+    axis/.style      = {help lines, -{Stealth[length = 1.5ex]}},
+    brillouin/.style = {domain = -5:10, samples = 100}
+  ]
+  \draw [axis] (-5,0) -- (10,0);
+  \draw [axis] (0,-1) -- (0,1.5);
+  \draw [densely dotted] (0,{ Brillouin(1, 100)} ) -- ++(10,0);
+  \draw [red]   plot [brillouin] (\x, { Brillouin(1,  \x)});
+  \draw [green] plot [brillouin] (\x, { Brillouin(5,  \x)});
+  \draw [blue]  plot [brillouin] (\x, { Brillouin(50, \x)});
+  \node [align = center, anchor = west] at (1,1.3) {%
+    $\begin{alignedat}{2}
+      B_J(x) &= \tfrac{2J + 1}{2J}
+                &&\coth \left ( \tfrac{2J + 1}{2J} x \right ) \\
+             &\quad - \tfrac{1}{2J}
+                &&\coth \left ( \tfrac{1}{2J} x \right )
+     \end{alignedat}$};
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{    Perpendicular bisectors of a triangle
+ Author: Sam Britt: 
+ https://texample.net/tikz/examples/bisector/ }
+{
+\begin{tikzpicture}
+  [
+    scale=3,
+    >=stealth,
+    point/.style = {draw, circle,  fill = black, inner sep = 1pt},
+    dot/.style   = {draw, circle,  fill = black, inner sep = .2pt},
+  ]
+
+  % the circle
+  \def\rad{1}
+  \node (origin) at (0,0) [point, label = {below right:$P_c$}]{};
+  \draw (origin) circle (\rad);
+
+  % triangle nodes: just points on the circle
+  \node (n1) at +(60:\rad) [point, label = above:$1$] {};
+  \node (n2) at +(-145:\rad) [point, label = below:$2$] {};
+  \node (n3) at +(-45:\rad) [point, label = {below right:$3$ $(0, 0, 0)$}] {};
+
+  % triangle edges: connect the vertices, and leave a node at the midpoint
+  \draw[->] (n3) -- node (a) [label = {above right:$\vec{v}_1$}] {} (n1);
+  \draw[->] (n3) -- node (b) [label = {below right:$\vec{v}_2$}] {} (n2);
+  \draw[dashed] (n2) -- (n1);
+
+  % Bisectors
+  % start at the point lying on the line from (origin) to (a), at
+  % twice that distance, and then draw a path going to the point on
+  % the line lying on the line from (a) to the (origin), at 3 times
+  % that distance.
+  \draw[dotted]
+    ($ (origin) ! 2 ! (a) $)
+    node [right] {Bisector 1}
+    -- ($(a) ! 3 ! (origin)$ );
+
+  % similarly for origin and b
+  \draw[dotted]
+    ($ (origin) ! 2 ! (b) $)
+    -- ($(b) ! 3 ! (origin)$ )
+    node [right] {Bisector 2};
+
+  % short vectors
+  \draw[->]
+    ($ (origin) ! -.7 ! (a) $)
+    -- node [below] {$\vec{u}_4$}
+    ($ (origin) ! -.1 ! (a) $);
+  \draw[->]
+    ($ (origin) ! -.1 ! (b) $)
+    -- node [right] {$\vec{u}_3$}
+    ($ (origin) ! -.7 ! (b) $);
+
+  % Right angle symbols
+  \def\ralen{.5ex}  % length of the short segment
+  \foreach \inter/\first/\last in {a/n3/origin, b/n2/origin}
+    {
+      \draw let \p1 = ($(\inter)!\ralen!(\first)$), % point along first path
+                \p2 = ($(\inter)!\ralen!(\last)$),  % point along second path
+                \p3 = ($(\p1)+(\p2)-(\inter)$)      % corner point
+            in
+              (\p1) -- (\p3) -- (\p2)               % path
+              ($(\inter)!.5!(\p3)$) node [dot] {};  % center dot
+    }
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{    Projection of circles onto a spherical surface
+ Author: Mark Wibrow: 
+ https://texample.net/tikz/examples/dome/ }
+{
+\pgfdeclarelayer{dome floor}
+\pgfdeclarelayer{dome}
+\pgfdeclarelayer{dome surface}
+\pgfsetlayers{dome floor,main,dome,dome surface}
+
+\def\addcircle##1##2##3##4{%
+    \begingroup%
+        \pgfmathparse{##1}\let\R=\pgfmathresult
+        \pgfmathparse{##2}\let\cx=\pgfmathresult
+        \pgfmathparse{##3}\let\cy=\pgfmathresult
+        \pgfmathparse{##4}\let\r=\pgfmathresult
+        \begin{pgfonlayer}{dome floor}
+            \draw [blue!45!black, fill = blue!45, fill opacity = 0.25]
+                plot [domain = 0:360, samples = 40, variable = \i] 
+                    (\cx+\r*cos \i, \cy+\r*sin \i, 0) -- cycle;
+        \end{pgfonlayer}
+        \begin{pgfonlayer}{dome surface}
+            \draw [red!75!black, fill = red!75, fill opacity = 0.25] 
+                plot [domain = 0:360, samples = 60, variable = \t] 
+                    (\cx+\r*cos \t,\cy+\r*sin \t,
+                    {sqrt(max(\R^2-(\cx+\r*cos(\t))^2-(\cy+\r*sin(\t))^2, 0))})
+                    -- cycle;
+        \end{pgfonlayer}
+    \endgroup%
+}
+\begin{tikzpicture}[x = (-30:1cm), y = (30:1cm), z = (90:1cm)]
+\def\R{6}
+
+\begin{pgfonlayer}{dome floor}
+    \draw (-\R,0,0) -- (\R,0,0);
+    \draw (0,-\R,0) -- (0,\R,0);
+    \draw plot [domain = 0:360, samples = 90, variable = \i]
+        (\R*cos \i, \R*sin \i, 0) -- cycle;
+\end{pgfonlayer}
+
+\draw (0,0,0) -- (0,0,\R);
+
+\begin{pgfonlayer}{dome surface}
+    \foreach \i in {0, 30,...,150}
+            \draw [dotted] plot [domain = -90:90, samples = 60, variable = \j]
+                (\R*cos \i*sin \j,\R*sin \i*sin \j, \R*cos \j);
+    \foreach \j in {0, 15,...,90}
+            \draw [dotted] plot [domain = 0:360, samples = 60, variable = \i]
+                    (\R*cos \i*sin \j,\R*sin \i*sin \j, \R*cos \j);
+\end{pgfonlayer}
+
+\def\r{0.5}
+\foreach \m [evaluate = {\N=max(-4, \m-7);}]in {0,...,5}{
+    \foreach \n in {0,-1,...,\N}
+        {\addcircle{\R}{\m*sin 60}{\n-mod(abs(\m),2)*\r}{\r}}}
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{    Phyllotaxy
+ Author: David Convent: 
+ https://texample.net/tikz/examples/phyllotaxy/ }
+{
+\def\nbrcircles {377}
+\def\outerradius {30mm}
+\def\deviation {.9}
+\def\fudge {.62}
+
+\newcounter{cumulArea}
+\setcounter{cumulArea}{0}
+\begin{tikzpicture}[scale=.32]
+
+\pgfmathsetmacro {\goldenRatio} {(1+sqrt(5))}
+\pgfmathsetmacro {\meanArea}
+      {pow(\outerradius * 10 / \nbrcircles, 2) * pi}
+\pgfmathsetmacro {\minArea} {\meanArea * (1 - \deviation)}
+\pgfmathsetmacro {\midArea} {\meanArea * (1 + \deviation) - \minArea}
+
+\foreach \b in {0,...,\nbrcircles}{
+    % mod() must be used in order to calculate the right angle.
+    % otherwise, when \b is greater than 28 the angle is greater
+    % than 16384 and an error is raised ('Dimension too large').
+    % -- thx Tonio for this one.
+    \pgfmathsetmacro{\angle}{mod(\goldenRatio * \b, 2) * 180}
+
+    \pgfmathsetmacro{\sratio}{\b / \nbrcircles}
+    \pgfmathsetmacro{\smArea}{\minArea + \sratio * \midArea}
+    \pgfmathsetmacro{\smRadius}{sqrt(\smArea / pi) / 2 * \fudge}
+    \addtocounter{cumulArea}{\smArea};
+
+    \pgfmathparse{sqrt(\value{cumulArea} / pi) / 2}
+    \fill[] (\angle:\pgfmathresult) circle [radius=\smRadius] ;
+}  
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ Simulating hand-drawn lines with TikZ
+ Author: percusse: 
+ https://texample.net/tikz/examples/hand-drawn-lines/ }
+{
+\pgfdeclaredecoration{penciline}{initial}{
+    \state{initial}[width=+\pgfdecoratedinputsegmentremainingdistance,
+    auto corner on length=1mm,]{
+        \pgfpathcurveto%
+        {% From
+            \pgfqpoint{\pgfdecoratedinputsegmentremainingdistance}
+                      {\pgfdecorationsegmentamplitude}
+        }
+        {%  Control 1
+        \pgfmathrand
+        \pgfpointadd{\pgfqpoint{\pgfdecoratedinputsegmentremainingdistance}{0pt}}
+                    {\pgfqpoint{-\pgfdecorationsegmentaspect
+                     \pgfdecoratedinputsegmentremainingdistance}%
+                               {\pgfmathresult\pgfdecorationsegmentamplitude}
+                    }
+        }
+        {%TO 
+        \pgfpointadd{\pgfpointdecoratedinputsegmentlast}{\pgfpoint{1pt}{1pt}}
+        }
+    }
+    \state{final}{}
+}
+
+\begin{tikzpicture}[decoration=penciline, decorate]
+  \draw[decorate,style=help lines] (-2,-2) grid[step=1cm] (4,4);
+  \draw[decorate,thick] (0,0) -- (0,3) -- (3,3);
+  \draw[decorate,ultra thick,blue] (3,3) arc (0:-90:2cm);
+        % supposed to be an arc
+  \draw[decorate,thick,pattern=north east lines] (-0.4cm,-0.8cm)
+    rectangle (1.2,-2);
+  \node[decorate,draw,inner sep=0.5cm,fill=yellow,circle] (a) at (2,0) {};
+        % That's not even an ellipse
+  \node[decorate,draw,inner sep=0.3cm,fill=red] (b) at (2,-2) {};
+  \draw[decorate] (b) to[in=-45,out=45] (a);
+        % This was supposed to be an edge
+  \node[decorate,draw,minimum height=2cm,minimum width=1cm] (c) at (-1.5,0) {};
+  \draw[decorate,->,dashed] (-0.5cm,-0.5cm) -- (-0.5cm,3.5cm)  -| (c.north);
+\end{tikzpicture}
+}
+
+
+
+\setuptikzexlipsum
+{ Graph paper
+ Author: Benjamin Abel: 
+ https://texample.net/tikz/examples/graph-paper/ }
+{
+\def\width{18}
+\def\hauteur{13}
+
+\begin{tikzpicture}[x=1cm, y=1cm, semitransparent]
+\draw[step=1mm, line width=0.1mm, black!30!white] (0,0) grid (\width,\hauteur);
+\draw[step=5mm, line width=0.2mm, black!40!white] (0,0) grid (\width,\hauteur);
+\draw[step=5cm, line width=0.5mm, black!50!white] (0,0) grid (\width,\hauteur);
+\draw[step=1cm, line width=0.3mm, black!90!white] (0,0) grid (\width,\hauteur);
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{  Rotated polygons
+ Author: Dr. rer. nat. Ismael Gutierrez Garcia: 
+ https://texample.net/tikz/examples/rotated-polygons/ }
+{
+\newcounter{density}
+\setcounter{density}{20}
+\begin{tikzpicture}
+    \def\couleur{BlueGreen}
+    \path[coordinate] (0,0)  coordinate(A)
+                ++( 120:6cm) coordinate(B)
+                ++(60:6cm) coordinate(C)
+                ++(0:6cm) coordinate(D)
+                ++(-60:6cm) coordinate(E)
+                ++(240:6cm) coordinate(F)
+                ;
+    \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- (E) -- (F)-- cycle;
+    \foreach \x in {1,...,40}{%
+        \pgfmathsetcounter{density}{\thedensity+10}
+        \setcounter{density}{\thedensity}
+        \path[coordinate] coordinate(X) at (A){};
+        \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
+                            -- (C) coordinate[pos=.10](B)
+                            -- (D) coordinate[pos=.10](C)
+                            -- (E) coordinate[pos=.10](D)
+                             -- (F) coordinate[pos=.10](E)
+                            -- (X) coordinate[pos=.10](F);
+        \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) --(E) -- (F) -- cycle;
+    }
+\end{tikzpicture}
+
+\setcounter{density}{20}
+\begin{tikzpicture}
+    \def\couleur{LimeGreen}
+    \path[coordinate] (0,0)  coordinate(A)
+                ++( 144:10cm) coordinate(B)
+                ++(72:10cm) coordinate(C)
+                ++(0:10cm) coordinate(D)
+                ++(-72:10cm) coordinate(E)
+                                ;
+    \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- (E) --  cycle;
+    \foreach \x in {1,...,40}{%
+        \pgfmathsetcounter{density}{\thedensity+10}
+        \setcounter{density}{\thedensity}
+        \path[coordinate] coordinate(X) at (A){};
+        \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
+                            -- (C) coordinate[pos=.10](B)
+                            -- (D) coordinate[pos=.10](C)
+                            -- (E) coordinate[pos=.10](D)
+                             -- (X) coordinate[pos=.10](E);
+        \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) --(E)  -- cycle;
+    }
+\end{tikzpicture}
+
+\setcounter{density}{20}
+\begin{tikzpicture}
+    \def\couleur{OrangeRed}
+    \path[coordinate] (0,0)  coordinate(A)
+                ++( 90:12cm) coordinate(B)
+                ++(0:12cm) coordinate(C)
+                ++(-90:12cm) coordinate(D);
+    \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- cycle;
+    \foreach \x in {1,...,40}{%
+        \pgfmathsetcounter{density}{\thedensity+20}
+        \setcounter{density}{\thedensity}
+        \path[coordinate] coordinate(X) at (A){};
+        \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
+                            -- (C) coordinate[pos=.10](B)
+                            -- (D) coordinate[pos=.10](C)
+                            -- (X) coordinate[pos=.10](D);
+        \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
+    }
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{  Symmetries of the plane
+ Author: Cristóbal Camarero Coterillo: 
+ https://texample.net/tikz/examples/symmetries/ }
+{
+\newsavebox{\piece}%A TeX box to store the base tile (or orbifold)
+\clearpage
+
+%*632
+%\phantomsection\addcontentsline{toc}{chapter}{*632}%Add to PDF bookmarks
+\savebox{\piece}{%We create the base tile
+\begin{tikzpicture}[overlay]
+\node[star,draw=red!50!black,inner sep=1pt] at (0.7,0.3) {};
+\node[red,anchor=base] at (0.55,0.05) {\tiny $*632$};
+\draw[thin] (0,0) -- ++(0:1) -- ++(120:0.5) --cycle;
+\end{tikzpicture}}
+\begin{center}%We replicate the tile according to the symmetry
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+%The \i loop creates a supertile which can tile by translations
+%which is done by the \a and \b loops
+	\foreach \a in {0,...,7}
+	\foreach \b in {0,...,7}
+	\foreach \i in {0,1,2,3,4,5}
+	{
+		\path (0,0)
+			++(0:\a) ++(60:\a) ++(0:\b) ++(-60:\b)
+			node[rotate=\i*60] {\usebox{\piece}}
+			node[rotate=\i*60,yscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%632
+%\phantomsection\addcontentsline{toc}{chapter}{632}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue] at (0.3,0.4) {\tiny 632};
+\draw[thin] (0,0) -- ++(0:1) -- ++(120:1) --cycle;
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,8}
+	\foreach \i in {0,1,2,3,4,5}
+	{
+		\path (0,0)
+			++(0:\a) ++(60:\a) ++(0:\b) ++(-60:\b)
+			node[rotate=\i*60] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%*442
+%\phantomsection\addcontentsline{toc}{chapter}{*442}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[arrow box,arrow box arrows={south:0.5cm,west:0.5cm},draw=red!50!black,inner sep=4pt] at (0.8,0.8) {};
+\node[red,anchor=base] at (0.4,0.05) {\tiny $*442$};
+\draw[thin] (0,0) -- ++(0:1) -- ++(90:1) --cycle;
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,7}
+	\foreach \i in {0,1,2,3}
+	{
+		\path (0,0) ++(0:2*\a) ++(90:2*\b)
+			node[rotate=\i*90] {\usebox{\piece}}
+			node[rotate=\i*90,yscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%4*2
+%\phantomsection\addcontentsline{toc}{chapter}{4*2}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[single arrow,draw,shape border rotate=90,inner sep=0pt,minimum height=.5cm] at (0.5,0.6) {\tiny up};
+\node[blue] at (0.3,0.3) {\tiny 4\color{red}$*$2};
+\draw[thin] (0,0) -- ++(0:1) -- ++(90:1) -- ++(180:1) --cycle;
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,4}
+	\foreach \b in {0,...,3}
+	\foreach \i in {0,1,2,3}
+	{
+		\path (0,0) ++(0:4*\a) ++(90:4*\b)
+			node[rotate=\i*90] {\usebox{\piece}}
+			+(2,0) node[rotate=\i*90,xscale=-1] {\usebox{\piece}}
+			+(0,2) node[rotate=\i*90,yscale=-1] {\usebox{\piece}}
+			+(2,2) node[rotate=\i*90] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%442
+%\phantomsection\addcontentsline{toc}{chapter}{442}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue] at (0.3,0.4) {\tiny 442};
+\draw[red!40!green] (1,0) -- (14/29,35/29);
+\draw[densely dotted,red] (14/29,35/29) -- (1,1);
+\draw[thin] (0,0) -- ++(0:1) -- ++(90:1) -- ++(180:1) --cycle;
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,6}
+	\foreach \i in {0,1,2,3}
+	{
+		\path (0,0) ++(0:2*\a) ++(90:2*\b)
+			node[rotate=\i*90] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%*333
+%\phantomsection\addcontentsline{toc}{chapter}{*333}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[regular polygon,regular polygon sides=3,draw=green,inner sep=2pt] at (0.5,0.55) {};
+\node[red] at (0.45,0.2) {\tiny $*333$};
+\draw[thin] (0,0) -- ++(0:1) -- ++(120:1) --cycle;
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,7}
+	\foreach \i in {0,1,2}
+	{
+		\path (0,0)
+			++(0:\a) ++(60:\a) ++(0:\b) ++(-60:\b)
+			node[rotate=\i*120] {\usebox{\piece}}
+			node[rotate=\i*120-60,xscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%3*3
+%\phantomsection\addcontentsline{toc}{chapter}{3*3}
+\pgfmathparse{sqrt(3)/3}
+\let\altitude=\pgfmathresult
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue] at (0,-0.2) {\tiny 3\color{red}$*$3};
+\draw[thin,decorate,decoration={coil,amplitude=.5pt,segment length=0.5*\altitude cm}] (0,0) -- ++(-30:\altitude);
+\draw[thin,dashed] (0,0) ++(-30:\altitude) -- ++(-1,0);
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,11}
+	\foreach \b in {0,...,12}
+	\foreach \i in {0,1,2}
+	{
+		\path (0,0)
+			++(90:\a*\altitude) ++(30:\a*\altitude) ++(-30:\b*\altitude) ++(30:\b*\altitude)
+			node[rotate=\i*120] {\usebox{\piece}}
+			+(0,-\altitude) node[rotate=\i*120,yscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%333
+%\phantomsection\addcontentsline{toc}{chapter}{333}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\draw[red] (0.2,0.17) circle (2pt);
+\draw[blue] (0.6,0.3) circle (3pt);
+\node at (-0.1,0.5) {p};
+\node[blue] at (0.3,0.7) {\tiny 333};
+\draw[thick] (0,0) -- ++(0:1) -- ++(120:1) -- ++(180:1) --cycle;
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,8}
+	\foreach \i in {0,1,2}
+	{
+		\path (0,0) ++(0:\a) ++(60:\a) ++(0:\b) ++(-60:\b)
+			node[rotate=\i*120] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%*2222
+%\phantomsection\addcontentsline{toc}{chapter}{*2222}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[arrow box,arrow box arrows={south:0.5cm,west:0.5cm},draw=red!50!black,inner sep=4pt] at (0.8,0.8) {};
+\node[red] at (0.3,0.4) {\tiny $*2222$};
+\draw[thin] (0,0) -- ++(0:1) -- ++(90:1) -- ++(180:1) --cycle;
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,9}
+	\foreach \b in {0,...,7}
+	\foreach \i in {0,1}
+	{
+		\path (0,0) ++(0:2*\a) ++(90:2*\b)
+			node[rotate=\i*180] {\usebox{\piece}}
+			node[rotate=\i*180,yscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%2*22
+%\phantomsection\addcontentsline{toc}{chapter}{2*22}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue] at (0.0,0.4) {\tiny 2\color{red}$*$22};
+\draw[very thin,red,densely dotted] (0,0) ++(0:0.5) -- ++(90:1) -- ++(180:1) -- ++(-90:1);
+\draw[very thick,decoration=Cantor set] (0,0) decorate{decorate{++(0:0.5) -- ++(90:1) -- ++(180:1) -- ++(-90:1)}};
+\draw[thin,decoration=Koch curve type 2,color=blue!60!black] decorate{decorate{decorate{(-0.5,0)--(0.5,0)}}};
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,3}
+	\foreach \i in {0,1}
+	{
+		\path (0,0) ++(0:2*\a) ++(90:4*\b)
+			node[rotate=\i*180] {\usebox{\piece}}
+			+(0,2) node[rotate=\i*180,yscale=-1] {\usebox{\piece}}
+			+(1,0) node[rotate=\i*180,xscale=-1] {\usebox{\piece}}
+			+(1,2) node[rotate=\i*180] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%22*
+%\phantomsection\addcontentsline{toc}{chapter}{22*}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue,anchor=base east] at (0.5,0.05) {\tiny 22\color{red}$*$};
+\draw[thick,blue,rounded corners] (0,0.2) -- ++(0.4,0.3) -- ++(-0.8,0.3) --(0,1);
+\draw[thin] (0,0) -- ++(0:0.5) -- ++(90:1) -- ++(180:1) -- ++(-90:1) --cycle;
+\fill[red] (-0.5,0.6) arc[start angle=90,end angle=-90,x radius=0.2cm,y radius=0.3cm];
+\fill[red] (0.5,0.6) arc[start angle=-90,end angle=90,x radius=0.17cm,y radius=0.21cm];
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,6}
+	\foreach \i in {0,1}
+	{
+		\path (0,0) ++(0:2*\a) ++(90:2*\b)
+			node[rotate=\i*180] {\usebox{\piece}}
+			+(1,0) node[rotate=\i*180,xscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%22x
+%\phantomsection\addcontentsline{toc}{chapter}{22\texttimes}
+\def\miraclelength{0.3}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue,anchor=base east] at (0.5,0.05) {\tiny 22\color{red}$\times$};
+\draw[thick,blue,rounded corners] (0,0.2) -- (0.4,0.5) -- (-0.4,0.4) --(0,1);
+\draw[thick,dashdotted,red!50!black] (0,0) ++(0:0.5) -- ++(90:1);
+\fill[red] (.1,0.7) circle (0.15cm);
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,6}
+	\foreach \i in {0,1}
+	{
+		\path (0,0) ++(0:2*\a) ++(90:2*\b)
+			node[rotate=\i*180] {\usebox{\piece}}
+			+(1,\miraclelength) node[rotate=\i*180,xscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%2222
+%\phantomsection\addcontentsline{toc}{chapter}{2222}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue,anchor=base east] at (0.5,0.05) {\tiny 2222};
+\draw[thick,blue,rounded corners] (0,0.2) -- ++(0.4,0.3) -- ++(-0.8,0.3) --(0,1);
+\draw[draw=gray,double={blue!50!green},rounded corners] (-0.5,0.5) -- (-0.3,0.3) -- (0.3,0.8) -- (0.5,0.5);
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,6}
+	\foreach \i in {0,1}
+	{
+		\pgfmathparse{-(-1)^\i}
+		\let\res=\pgfmathresult
+		\path (0,0) ++(0:2*\a) ++(90:2*\b)
+			node[rotate=\i*180] {\usebox{\piece}}
+			+(1,\res) node[rotate=\i*180] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%**
+%\phantomsection\addcontentsline{toc}{chapter}{**}
+\def\repetition{1.0}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[red,draw=red!80!black,shape=rectangle callout,anchor=center] at (0.5,0.5) {\tiny **};
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,8}
+	\foreach \b in {0,...,12}
+	\foreach \i in {0,1}
+	{
+		\path (0,0) ++(0:2*\a) ++(90:\b*\repetition)
+			node {\usebox{\piece}}
+			node[xscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%*x
+%\phantomsection\addcontentsline{toc}{chapter}{*\texttimes}
+\def\repetition{2.0}
+\def\miraclelength{0.5}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\draw[red,fill=red!10,rounded corners] (0,0) -- (1.0,1.0) arc[start angle=0,end angle=180,x radius=0.5cm,y radius=0.5cm];
+\node[red,anchor=base west] at (0.1,0.7) {\small $*\times$};
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,7}
+	\foreach \b in {0,...,5}
+	\foreach \i in {0,1}
+	{
+		\path (0,0) ++(2*\a,\miraclelength*\a) ++(90:\b*\repetition)
+			node {\usebox{\piece}}
+			node[xscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%xx
+%\phantomsection\addcontentsline{toc}{chapter}{\texttimes\texttimes}
+\def\repetition{2.0}
+\def\miraclelength{0.5}
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\draw[green,thick] (1.0,0.5) -- (0.3,0) (1.0,0.5) -- (0.8,0) (1.3,0.0) -- (1.55,0.2) -- (1.8,0.0);
+\node[draw,shape=starburst,red,starburst point height=0.3cm,inner sep=0pt] at (1.0,0.5) {\small $\times\times$};
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,7}
+	\foreach \b in {0,...,5}
+	{
+		\path (0,0) ++(0:\repetition*\a) ++(90:2*\b)
+			node {\usebox{\piece}}
+			+(0:\miraclelength) node[yscale=-1] {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+\clearpage
+
+%o
+%\phantomsection\addcontentsline{toc}{chapter}{o}
+\def\repetitionax{1.0}
+\def\repetitionay{0.2}
+\def\repetitionbx{0.5}
+\def\repetitionby{2.0}
+\pgfmathparse{0.5*(\repetitionax+\repetitionbx)}
+\let\repetitioncx=\pgfmathresult
+\pgfmathparse{0.5*(\repetitionay+\repetitionby)}
+\let\repetitioncy=\pgfmathresult
+\savebox{\piece}{%
+\begin{tikzpicture}[overlay]
+\node[blue,anchor=center] at (\repetitioncx,\repetitioncy) {\small $\circ$};
+\fill[blue!80!black] (0,0) circle (0.3cm);
+\fill[blue!80] (0.5,0.4) circle (0.2cm);
+\fill[blue!40!green] (0.2,0.8) circle (0.25cm);
+\fill[blue!60!red] (0.6,1.5) circle (0.15cm);
+\end{tikzpicture}}
+\begin{center}
+\begin{tikzpicture}[every node/.style={anchor=center,draw=none}]
+	\foreach \a in {0,...,14}
+	\foreach \b in {0,...,5}
+	{
+		\path (0,0) ++(\repetitionax*\a,\repetitionay*\a) ++(\repetitionbx*\b,\repetitionby*\b)
+			node {\usebox{\piece}};
+	}
+\end{tikzpicture}
+\end{center}
+}
+
+
+\setuptikzexlipsum
+{  A complete graph
+ Author: Quintin Jean-Noël: 
+ https://texample.net/tikz/examples/complete-graph/ }
+{
+\newcount\mycount
+\begin{tikzpicture}[transform shape]
+  %the multiplication with floats is not possible. Thus I split the loop in two.
+  \foreach \number in {1,...,8}{
+      % Computer angle:
+        \mycount=\number
+        \advance\mycount by -1
+  \multiply\mycount by 45
+        \advance\mycount by 0
+      \node[draw,circle,inner sep=0.25cm] (N-\number) at (\the\mycount:5.4cm) {};
+    }
+  \foreach \number in {9,...,16}{
+      % Computer angle:
+        \mycount=\number
+        \advance\mycount by -1
+  \multiply\mycount by 45
+        \advance\mycount by 22.5
+      \node[draw,circle,inner sep=0.25cm] (N-\number) at (\the\mycount:5.4cm) {};
+    }
+  \foreach \number in {1,...,15}{
+        \mycount=\number
+        \advance\mycount by 1
+  \foreach \numbera in {\the\mycount,...,16}{
+    \path (N-\number) edge[->,bend right=3] (N-\numbera)  edge[<-,bend
+      left=3] (N-\numbera);
+  }
+}
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{  Mandala
+ Author: Elena Botoeva: 
+ https://texample.net/tikz/examples/mandala/ }
+{
+\tikzfading[name=fade out, inner color=transparent!0,
+  outer color=transparent!100]
+
+\def\petal { 
+  [rounded corners=0.5] %
+  (-1,0)%
+  .. controls (-1,0.6) and (-0.07,0.8).. (0,1)%
+  .. controls (0.07,0.8) and (1,0.6).. (1,0)%
+  .. controls (0.7,-1) and (-0.7,-1).. (-1,0)%
+}
+
+%%%%% circles in the background %%%%%
+\def\background[##1,##2]{
+  \fill[##1] (0,0) circle (3.9);
+  \fill[##2] (0,0) circle (1);
+}
+
+%%%%% star and small circle in the center %%%%%
+\def\center[##1]{
+  \foreach \a in {51.4285,102.857,...,360} { %
+    \draw[color=yellow,rotate=\a,fill=##1]
+    (-0.08,0) -- (0,0.46) -- (0.08,0); %
+  }
+  \draw[color=yellow,fill=##1] (0,0) circle (0.1);
+}
+
+%%%%%%%%%% Mandala with fixed colouring %%%%%%%%%%
+\def \mandala {
+  \background[red!30!blue!70!black,blue!70!yellow!50];
+
+  % ysh - yshift
+  % xs - xscale
+  % ys - yscale
+  % af - first angle in foreach
+  % as - second angle in foreach
+  % y - number in the color specification after yellow
+  % b - number in the color specification before blue
+  % r - number in the color specification of the shading after red
+  % bl - number in the color specification of the shading before black
+  \foreach \ysh/\xs/\ys/\af/\as/\y/\b/\w/\r/\bl in {%
+    3.06/0.72/0.8/   25.71425/51.4285/    70/100/100/ 100/100,%
+    2.34/1/0.9/        25.71425/77.14275/   6/90/92/       80/80,%
+    1.8/0.8/0.9/       51.4285/102.857/       0/75/100/     60/70,%
+    1.5/0.6/0.6/       25.71425/77.14275/   0/55/100/     40/60,%
+    1.1/0.53/0.58/   51.4285/102.857/       0/40/100/     20/50,%
+    0.8/0.37/0.45/   25.71425/77.14275/   0/45/85/       20/40,%
+    0.53/0.1/0.24/   25.71425/77.14275/   0/10/100/     0/30,%
+    0.49/0.22/0.32/ 51.4285/102.857/       0/10/100/     0/50%
+  }
+  {
+    \foreach \a in {\af,\as,...,360}
+    {
+      \begin{scope}[rotate=\a,shift={(0,\ysh)},xscale=\xs,yscale=\ys]
+        \draw[color=yellow,fill=yellow!\y!red!\b!blue!\w] %
+        [drop shadow={shadow xshift=0.5pt, shadow yshift=-0.5pt}]
+        \petal;
+      \end{scope}
+      
+      \begin{scope}[transform canvas={rotate=\a},shift={(0,\ysh)},xscale=\xs,yscale=\ys]
+        \clip \petal; %
+        \fill[path fading=fade out,fill=red!\r!blue!\bl!black, opacity=0.7]%
+        (0,-0.35) ellipse (1.2 and 0.75);
+        \fill[path fading=fade out,fill=red!\r!blue!\bl!black, opacity=0.3]%
+        (0,-0.2) ellipse (1.2 and 0.4);
+
+        \fill[path fading=fade out,fill=red!\r!blue,opacity=0.2] %
+        (-0.4,0.6) -- (0,0.9) -- (0.4,0.6);
+      \end{scope}
+    }
+  }
+
+  \center[blue]
+}
+%%%%%%%%%% End of Mandala with fixed colouring %%%%%%%%%%
+
+%%%%% one layer of petals %%%%%
+\def\mainbody{
+  \foreach \a in {\af,\as,...,360}
+  {
+    \begin{scope}[rotate=\a,shift={(0,\ysh)},xscale=\xs,yscale=\ys]
+      \draw[color=yellow,fill=\c] %
+      [drop shadow={shadow xshift=0.5pt, shadow yshift=-0.5pt}]
+      \petal;
+    \end{scope}
+
+    % fadings
+    \begin{scope}[transform canvas={rotate=\a}, shift={(0,\ysh)},xscale=\xs,yscale=\ys]
+      \clip \petal; %
+      \fill[path fading=fade out,fill=\fc, opacity=0.7]%
+      (0,-0.35) ellipse (1.2 and 0.75);
+      \fill[path fading=fade out,fill=\fc, opacity=0.3]%
+      (0,-0.2) ellipse (1.2 and 0.4);
+      \fill[path fading=fade out,fill=\fc,opacity=0.2] %
+      (-0.4,0.6) -- (0,0.9) -- (0.4,0.6);
+    \end{scope}
+  }
+}
+
+%%%%%%%%%%% Mandalas with parametrized colouring %%%%%%%%%%
+% #1 - the color of the outer most (first) layer
+% #2 - the color of the third layer
+% #3 - the color of the fifth layer
+% #4 - the color of the seventh layer
+% #5 - the color of the fading, gets denser closer to the center
+\def \mandalac[##1,##2,##3,##4,##5]{
+  \background[##3!30!##4!70!##5,##4!70!##2!50];
+
+  % ysh - yshift
+  % xs - xscale
+  % ys - yscale
+  % af - first angle in foreach
+  % as - second angle in foreach
+  % c - color of the petal
+  % fc - color of the fading
+  \foreach \ysh/\xs/\ys/\af/\as/\c/\fc in {%
+    3.06/0.72/0.8/   25.71425/51.4285  /##1/##1!50!##2!90!##5,%
+    2.34/1/0.9/        25.71425/77.14275/##1!50!##2/##2!80!##5,%
+    1.8/0.8/0.9/       51.4285/102.857    /##2/##2!50!##3!70!##5,%
+    1.5/0.6/0.6/       25.71425/77.14275/##2!50!##3/##3!60!##5,%
+    1.1/0.53/0.58/   51.4285/102.857    /##3/##3!50!##4!50!##5,%
+    0.8/0.37/0.45/   25.71425/77.14275/##3!50!##4/##4!40!##5,%
+    0.53/0.1/0.24/   25.71425/77.14275/##4/##4!50!##5,%
+    0.49/0.22/0.32/ 51.4285/102.857    /##4/##4!50!##5%
+  }
+  {
+    \mainbody
+  }
+  \center[##4]
+}
+
+% #1 - the color of the outer most (first) layer
+% #2 - the color of the second layer
+% #3 - the color of the third layer
+% #4 - the color of the forth layer
+% #5 - the color of the fifth layer
+% #6 - the color of the sixth layer
+% #7 - the color of the seventh layer
+% #8 - the color of the fading, gets denser closer to the center
+\def \mandalab[##1,##2,##3,##4,##5,##6,##7,##8]{
+  \background[##6!30!##7!70!##8,##7!70!##4!50];
+
+  % ysh - yshift
+  % xs - xscale
+  % ys - yscale
+  % af - first angle in foreach
+  % as - second angle in foreach
+  % c - color of the petal
+  % fc - color of the fading
+  \foreach \ysh/\xs/\ys/\af/\as/\c/\fc in {%
+    3.06/0.72/0.8/   25.71425/51.4285  /##1/##2!90!##8,%
+    2.34/1/0.9/        25.71425/77.14275/##2/##3!90!##8,%
+    1.8/0.8/0.9/       51.4285/102.857    /##3/##4!80!##8,%
+    1.5/0.6/0.6/       25.71425/77.14275/##4/##5!80!##8,%
+    1.1/0.53/0.58/   51.4285/102.857    /##5/##6!70!##8,%
+    0.8/0.37/0.45/   25.71425/77.14275/##6/##7!70!##8,%
+    0.53/0.1/0.24/   25.71425/77.14275/##7/##7!50!##8,%
+    0.49/0.22/0.32/ 51.4285/102.857    /##7/##7!50!##8%
+  }
+  {
+    \mainbody
+  }
+  \center[##7]
+}
+%%%%%%%%%%% End of Mandalas with parametrized colouring %%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%
+%\setlength{\parindent}{0pt}
+\tikz\mandala;
+
+\tikz\mandalac[magenta!30!,magenta,purple,violet,];
+
+\tikz\mandalac[blue!40!black,violet,purple,pink,];
+
+\tikz\mandalac[lime!90!black,yellow!95!black,orange,red,];
+
+\tikz\mandalac[green!80!black,yellow,pink,purple!90!,red];
+
+\tikz\mandalab[green!50!black, green!60!black, green!70!black!80!, green!50!,
+  green!10!, pink!40!, red!40!,];
+
+\tikz\mandalab[blue!30!black, blue!40!black, blue!60!black, blue!70!black!80!,
+  blue!50!, yellow!40!, yellow!70!,];
+}
+
+
+\setuptikzexlipsum
+{  Arithmetic of the clock
+ Author: Juan Luis Varona: 
+ https://texample.net/tikz/examples/arithmetic-of-the-clock/ }
+{
+% Colors:
+\definecolor{clock0}{cmyk}{1,0,0,0} % cyan
+\definecolor{clock1}{cmyk}{0.75,0.25,0,0}
+\definecolor{clock2}{cmyk}{0.5,0.5,0,0}
+\definecolor{clock3}{cmyk}{0.25,0.75,0,0}
+\definecolor{clock4}{cmyk}{0,1,0,0} % magenta
+\definecolor{clock5}{cmyk}{0,0.75,0.25,0}
+\definecolor{clock6}{cmyk}{0,0.5,0.5,0}
+\definecolor{clock7}{cmyk}{0,0.25,0.75,0}
+\definecolor{clock8}{cmyk}{0,0,1,0} % yellow
+\definecolor{clock9}{cmyk}{0.25,0,0.75,0}
+\definecolor{clock10}{cmyk}{0.5,0,0.5,0}
+\definecolor{clock11}{cmyk}{0.75,0,0.25,0}
+
+\newcommand{\clock}[4]{%
+  \begin{scope}[xshift=2.25*##1cm,yshift=2.25*##2cm]
+  % \filldraw [fill=##3, line width=1.6pt] (0,0) circle (1cm); % simple fill (unused)
+  % \draw[fill] (0,0) circle (1mm); % border (unused)
+  \shadedraw [inner color=##3!30!white, outer color=##3!90!black, 
+    line width=1.6pt] (0,0) circle (1cm); % disk with shadow and border
+  \foreach \angle in {0, 30, ..., 330} 
+    \draw[line width=1pt] (\angle:0.82cm) -- (\angle:1cm);
+  \foreach \angle in {0,90,180,270}
+    \draw[line width=1.3pt] (\angle:0.75cm) -- (\angle:1cm);
+  \draw[line width=1.6pt] (0,0) -- (90-30*##4:0.6cm); % the hand 
+  \end{scope}
+}
+% Default on latex.ltx: \fboxsep = 3pt \fboxrule = .4pt
+\fboxsep = 3pt \fboxrule = 1.5pt 
+\newcounter{itimesj}
+\fbox{%
+\begin{tikzpicture}[scale=0.5]
+\begin{scope}[line cap=round]
+\foreach \i in {0,...,11}
+  \foreach \j in {0,...,11} {
+    % We use round by caution, because we are getting real numbers
+    \pgfmathparse{round(mod(\i*\j,12))} 
+    % \pgfmathresult = 3.0 gives itimesj = 3
+    \pgfmathsetcounter{itimesj}{\pgfmathresult} 
+    \clock{\i}{-\j}{clock\theitimesj}{\i*\j}; 
+  }
+\end{scope}
+\end{tikzpicture}%
+}%
+}
+
+\setuptikzexlipsum
+{ Rooty helix
+ Author: Felix Lindemann: 
+ https://texample.net/tikz/examples/rooty-helix/ }
+{
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\xdefinecolor{darkgreen}{RGB}{175, 193, 36}
+\newcounter{cntShader}
+\newcounter{cntRoot}
+\setcounter{cntShader}{20}
+\def\couleur{darkgreen}
+
+\begin{tikzpicture}[scale=0.8]%%
+    \foreach \y in {86,38,15}{
+        \setcounter{cntShader}{1}
+        \coordinate (a) at (0,0);
+        \coordinate (b) at (0:1);
+        \foreach \x in {1,...,\y}{%
+            \coordinate (c) at ($ (b)!1cm!270:(a) $);
+            \begin{pgfonlayer}{background}
+                \draw[fill=\couleur!\thecntShader] (a)--(b)--(c)--cycle;
+            \end{pgfonlayer}
+            \setcounter{cntRoot}{\x}
+            \addtocounter{cntRoot}{1}
+            \node[fill=white,draw,circle,inner sep=1pt] at (c)
+                {$\sqrt{\thecntRoot}$};
+            \coordinate (b) at (c);
+            \pgfmathsetcounter{cntShader}{\thecntShader+4}
+            \setcounter{cntShader}{\thecntShader}
+       }
+    }
+    \node[fill=white,draw,circle,inner sep=1pt] at (0:1) {$\sqrt{1}$};
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Fancy tables with TikZ
+ Author: Stefan Kottwitz: 
+ https://texample.net/tikz/examples/colorful-tables/ }
+{
+% Defining some symbols:
+\ifdefined\up\undef\up\fi
+\newcommand*\up{\textcolor{YellowGreen}{$\blacktriangle$}}
+\ifdefined\down\undef\down\fi
+\newcommand*\down{\textcolor{Red}{$\blacktriangledown$}}
+\ifdefined\const\undef\const\fi
+\newcommand*\const{\textcolor{darkgray}{\textbf{--}}}
+\ifdefined\head\undef\head\fi
+\newcommand*\head[1]{\textbf{##1}}
+% The table environment:
+\ifdefined\matrixtable\let\matrixtable\relax\let\endmatrixtable\relax\fi
+\newenvironment{matrixtable}[4]{%
+  \begin{tikzpicture}[matrix of nodes/.style={
+    execute at begin cell=\node\bgroup\strut,
+    execute at end cell=\egroup;}]
+  \matrix (m) [matrix of nodes,top color=blue!20,ampersand replacement=\&,%%
+    bottom color=blue!80,draw=white,
+    nodes={draw,top color=blue!10,bottom color=blue!35,
+    draw,inner sep=2pt,minimum height=3.1ex},
+    column sep=1ex,row sep=0.6ex,inner sep=2ex,
+    rounded corners,column 1/.style={minimum width=##1},
+    column 2/.style={minimum width=##2},
+    column 3/.style={minimum width=##3},
+    column 4/.style={minimum width=##4}]}%
+{;\end{tikzpicture}}
+%
+\begin{center}
+\begin{matrixtable}{1.2cm}{2.4cm}{1.2cm}{0.6cm}{
+  \head{Rank}   \& \head{Distribution} \& \head{Hits} \& \\
+  1 \& Ubuntu    \& 2114 \& \down  \\
+  2 \& Fedora    \& 1451 \& \up    \\
+  3 \& Mint      \& 1297 \& \const \\
+  4 \& OpenSUSE  \& 1228 \& \up    \\
+  5 \& Debian    \& 910  \& \down  \\
+  6 \& Mandriva  \& 907  \& \up    \\
+  7 \& PCLinuxOS \& 764  \& \up    \\
+  8 \& Puppy     \& 738  \& \up    \\
+  9 \& Sabayon   \& 671  \& \up    \\
+ 10 \& Arch      \& 625  \& \down  \\ }
+\end{matrixtable}
+\end{center}
+}
+
+
+%p27
+\setuptikzexlipsum
+{ Commands for tikzexlipsum }
+{
+\ifdefined\tikzexhelphead\undef\tikzexhelphead\fi
+\newcommand*\tikzexhelphead[1]{\textbf{##1}}
+% The table environment:
+\ifdefined\tikzexhelpmatrixtable\let\tikzexhelpmatrixtable\relax\let\endtikzexhelpmatrixtable\relax\fi
+\newenvironment{tikzexhelpmatrixtable}[2]{%
+  \begin{tikzpicture}[matrix of nodes/.style={
+    execute at begin cell=\node\bgroup\strut,
+    execute at end cell=\egroup;}]
+  \matrix (m) [matrix of nodes,top color=blue!20,ampersand replacement=\&,%%
+    bottom color=blue!80,draw=white,
+    nodes={draw,top color=blue!8,bottom color=blue!2,
+    draw,inner sep=2pt,minimum height=3.1ex},
+    column sep=1ex,row sep=0.6ex,inner sep=2ex,
+    rounded corners,column 1/.style={minimum width=##1},
+    column 2/.style={minimum width=##2},
+%    column 3/.style={minimum width=##3},
+%    column 4/.style={minimum width=##4}
+    ]}%
+{;\end{tikzpicture}}
+
+%
+\begin{center}
+\begin{tikzexhelpmatrixtable}{4.2cm}{6.4cm}{
+  \tikzexhelphead{Command}   \& \tikzexhelphead{Action} \\
+  \textbackslash setuptikzexlipsum\{x\}\{y\} \& Add a new item \textit{y} with attr \textit{x}    \\
+  \textbackslash tikzexmaxparcount \& Number of items stored (\tikzexmaxparcount)   \\
+  \textbackslash tikzexdefaultitem \& Default item number (\tikzexdefaultitem)   \\
+  \textbackslash tikzexlipsum \& Print default item     \\
+  \textbackslash tikzexlipsum[2] \& Print item 2   \\
+  \textbackslash tikzexlipsum[2][f] \& Print item 2 as a figure   \\
+  \textbackslash tikzexlipsum[2-5] \& Print items 2 to 5  \\
+  \textbackslash tikzexlipsum[2-5][f] \& Print items 2 to 5 as figures \\
+  \textbackslash tikzexlipsumr \& Print a random item  \\
+  \textbackslash tikzexlipsumr[f] \& Print a random figure  \\
+  \textbackslash tikzexlipsumrr \& Print a random range of items  \\
+  \textbackslash tikzexlipsuma\{n\} \& Print attribution \textit{n}  \\ 
+  \textbackslash tikzexlipsumalist \& Print numbered attributions list  \\   
+  \textbackslash tikzexlipsumt\{n\} \& Print item \textit{n}  \\
+ }
+\end{tikzexhelpmatrixtable}
+ \rotatebox{90}{{\sffamily\scriptsize Layout adapted from Stefan Kottwitz, ``Fancy tables with TikZ'' (item 26)}}
+\end{center}
+}
+
+\setuptikzexlipsum
+{ Gamma interaction
+ Author: Poul Riis 
+ https://texample.net/tikz/examples/gamma-interaction/
+ }
+{
+%\proton{xposition,yposition}
+\ifdefined\proton\else\newcommand{\proton}[1]{%
+    \shade[ball color=red] (##1) circle (.25);\draw (##1) node{$+$};
+}\fi
+
+%\neutron{xposition,yposition}
+\ifdefined\neutron\else\newcommand{\neutron}[1]{%
+    \shade[ball color=green] (##1) circle (.25);
+}\fi
+
+%\electron{xwidth,ywidth,rotation angle}
+\ifdefined\electron\else\newcommand{\electron}[3]{%
+    \draw[rotate = ##3](0,0) ellipse (##1 and ##2)[color=blue];
+    \shade[ball color=Gold2] (0,##2)[rotate=##3] circle (.1);
+}\fi
+
+\ifdefined\nucleus\else\newcommand{\nucleus}{%
+    \neutron{0.1,0.3}
+    \proton{0,0}
+    \neutron{0.3,0.2}
+    \proton{-0.2,0.1}
+    \neutron{-0.1,0.3}
+    \proton{0.2,-0.15}
+    \neutron{-0.05,-0.12}
+    \proton{0.17,0.21}
+}\fi
+
+%\photoelectron{xwidth,ywidth,rotation angle}
+\ifdefined\photoelectron\else\newcommand{\photoelectron}[3]{%
+    \draw[rotate = ##3](0,0) ellipse (##1 and ##2)[color=blue];%
+    \draw[snake=coil,%
+        line after snake=0pt, segment aspect=0,%
+        segment length=20pt,color=red!50!blue](##3:##1)-- +(-6,0)%
+        node[fill=white!70!Gold2,draw=red!80!white, above=0.2cm,pos=0.5]%
+            {Incoming $\gamma$-photon};%
+    \draw[-stealth,Gold2](##3:##1) -- ++ (5,0.625);%
+    \shade[ball color=Gold2](##3:##1)  --  ++(4,0.5)%
+        node[fill=white!70!Gold2,draw=red!80!white,%
+        text width=3cm, below right=0.2cm]%
+            {Photoelectron from an inner shell} circle(0.1);%
+    \fill  (##1,0)[rotate=##3,color=white,opaque] circle (.1);%
+    \draw  (##1,0)[rotate=##3,color=Gold2] circle (.1) ;%
+}\fi
+
+%\comptonelectron{xwidth,ywidth,rotation angle}
+\ifdefined\comptonelectron\else\newcommand{\comptonelectron}[3]{%
+    \draw[rotate = ##3](0,0) ellipse (##1 and ##2)[color=blue];%
+    \draw[snake=coil, line after snake=0pt,%
+        segment aspect=0, segment length=10pt,color=red!50!blue]%
+        (##3:##1)-- +(-6,0)%
+        node[fill=white!70!Gold2,draw=red!80!white, above=0.2cm,pos=0.5]%
+            {Incoming $\gamma$-photon};%
+    \draw[-stealth,Gold2](##3:##1) -- ++ (5,2.5);%
+    \shade[ball color=Gold2](##3:##1)  --  ++(4,2.0)%
+        node[fill=white!70!Gold2,draw=red!80!white, text width=3cm,%
+        below right=0.2cm]{Scattered electron from an outer shell} circle(0.1);%
+    \fill  (##1,0)[rotate=##3,color=white,opaque] circle (.1);%
+    \draw  (##1,0)[rotate=##3,color=Gold2] circle (.1) ;%
+    \draw[snake=coil, line after snake=1mm, segment aspect=0,%
+        segment length=15pt,color=red!50!blue,-stealth] (##3:##1)-- ++(6,-3)%
+        node[fill=white!70!Gold2,draw=red!80!white, right=1cm,pos=0.5]%
+            {Scattered $\gamma$-photon};%
+}\fi
+
+%\paircreation{impact parameter}
+\ifdefined\paircreation\else\newcommand{\paircreation}[1]{%
+    \draw[snake=coil, line after snake=0pt, segment aspect=0,%
+        segment length=5pt,color=red!50!blue] (0,##1)-- +(-6,0)%
+        node[fill=white!70!Gold2,draw=red!80!white, above=0.2cm,pos=0.5]%
+            {Incoming $\gamma$-photon};%
+    \draw[-stealth,Gold2](0,##1) -- ++ (5,2.5);%
+    \shade[ball color=Gold2](0,##1)  --  ++(4,2.0)%
+        node[fill=white!70!Gold2,draw=red!80!white, below right=0.2cm]%
+            {Positron} circle(0.1);%
+    \draw[-stealth,Gold2](0,##1) -- ++ (4,-2.0);%
+    \shade[ball color=Gold2](0,##1)  --  ++(3.2,-1.6)%
+        node[fill=white!70!Gold2!,draw=red!80!white, above right=0.2cm]%
+            {Electron} circle(0.1);%
+}\fi
+%
+%\begin{document}
+%
+%\pagestyle{empty}
+%
+%\begin{figure}
+%    \centering
+    \begin{tikzpicture}[scale=0.65]
+        \nucleus
+        \electron{1.2}{1.4}{260}
+        \electron{4}{2}{30}
+        \electron{5}{1}{60}
+        \electron{5.5}{1.5}{150}
+        \electron{4.8}{2.25}{80}
+        \photoelectron{1.5}{0.75}{80}
+    \end{tikzpicture}
+%\caption{Photoelectric effect}
+%\end{figure}
+%
+%\begin{figure}
+%    \centering
+    \begin{tikzpicture}[scale=0.65]
+        \nucleus
+        \electron{1.5}{0.75}{80}
+        \electron{1.2}{1.4}{260}
+        \electron{4}{2}{30}
+        \electron{5}{1}{60}
+        \electron{5.5}{1.5}{150}
+        \comptonelectron{4.8}{2.25}{80}
+    \end{tikzpicture}
+%    \caption{Compton scattering}
+%\end{figure}
+%
+%\begin{figure}
+%    \centering
+    \begin{tikzpicture}[scale=0.65]
+        \nucleus
+        \electron{1.5}{0.75}{80}
+        \electron{1.2}{1.4}{260}
+        \electron{4}{2}{30}
+        \electron{5}{1}{60}
+        \electron{5.5}{1.5}{150}
+        \electron{4.8}{2.25}{80}
+        \paircreation{1}
+    \end{tikzpicture}
+%    \caption{Pair creation.}
+%\end{figure}
+}
+
+
+\setuptikzexlipsum
+{ Observer/Estimator
+  Author: Dominik Haumann 
+ https://texample.net/tikz/examples/observer-estimator/
+ }
+{
+% TikZ styles for drawing
+\tikzstyle{block} = [draw,rectangle,thick,minimum height=2em,minimum width=2em]
+\tikzstyle{sum} = [draw,circle,inner sep=0mm,minimum size=2mm]
+\tikzstyle{connector} = [->,thick]
+\tikzstyle{line} = [thick]
+\tikzstyle{branch} = [circle,inner sep=0pt,minimum size=1mm,fill=black,draw=black]
+\tikzstyle{guide} = []
+\tikzstyle{snakeline} = [connector, decorate, decoration={pre length=0.2cm,
+                         post length=0.2cm, snake, amplitude=.4mm,
+                         segment length=2mm},thick, magenta, ->]
+
+\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{##1}}} % bold vectors
+\def \myneq {\skew{-2}\not =} % \neq alone skews the dash
+
+%\begin{document}
+
+  \begin{tikzpicture}[scale=1, auto, >=stealth']
+    \small
+    % node placement with matrix library: 5x4 array
+    \matrix[ampersand replacement=\&, row sep=0.2cm, column sep=0.4cm] {
+      %
+      \node[block] (F1) {$\vec{u}_i = F_i(\{\widetilde{\vec{x}}_j\}_{j=1}^N)$}; \&
+      \node[branch] (u1) {}; \&
+      \&
+      \node[block] (f1) {$\begin{matrix}
+            \dot{\vec{x}}_i =
+              f_i(\vec{x}_i,
+                  \textcolor{red}{\{\widetilde{\vec{x}}_j\}_{j \myneq i}},
+                  \vec{u}_i,
+                  t)\\
+            \vec{y}_i =
+              g_i(\vec{x}_i,
+                  \textcolor{blue}{\{\widetilde{\vec{x}}_j\}_{j \myneq i}},
+                  t)
+          \end{matrix}$}; \& \\
+
+      \&
+      \&
+      \&
+      \node[block] (L1) {$\vec{e}_i(\vec{y}_i - \widetilde{\vec{y}}_i)$};\&
+      \node [sum] (e1) {}; \\
+
+      \&
+      \&
+      \node[sum] (v1) {}; \&
+      \node[block] (o1) {$\begin{matrix}
+            \dot{\widetilde{\vec{x}}}_i =
+              \widetilde{f}_i(\widetilde{\vec{x}}_i,
+                              \textcolor{red}{\{\widetilde{\vec{x}}_j\}_{j \myneq i}},
+                              \vec{v}_i, t)\\
+              \widetilde{\vec{y}}_i =
+                g_i(\widetilde{\vec{x}}_i,
+                    \textcolor{blue}{\{\widetilde{\vec{x}}_j\}_{j \myneq i}},
+                    t)
+          \end{matrix}$};
+      \&
+      \\
+      \node[guide] (i1) {}; \& \& \& \& \\
+    };
+
+    % now link the nodes
+    \draw [line] (F1) -- (u1);
+    \draw [connector] (u1) -- node {$u_i$} (f1);
+    \draw [connector] (f1) -| node[near end] {$\vec{y}_i$} (e1);
+    \draw [connector] (e1) -- (L1);
+    \draw [connector] (L1) -| (v1);
+    \draw [connector] (v1) -- node {$\vec{v}_i$} (o1);
+    \draw [connector] (u1) |- (v1);
+    \draw [connector] (o1) -| node[pos=0.96] {$-$} node [near end, swap]
+                      {$\widetilde{\vec{y}}_i$} (e1);
+    \draw [connector] (o1.south) -- ++(0,-.5cm) -| node [near start]
+                      {$\widetilde{\vec{x}}_i$} ($(F1.south) + (0.4cm, 0em)$);
+    
+    % draw the snake lines with offset (using the calc library)
+    \draw [snakeline] ($(i1) - (0.4cm, -1cm)$) -- node
+      {$\{\widetilde{\vec{x}}_j\}_{j \myneq i}$} ($(F1.south) - (0.4cm, 0em)$);
+
+    \draw [snakeline, swap] ($(v1.east) - (1.0cm, 0.4cm)$) -- node
+      {$\{\widetilde{\vec{x}}_j\}_{j \myneq i}$} ($(o1.west) - (0cm, 0.4cm)$);
+    
+    \draw [snakeline, swap] ($(u1.east) + (0.1cm, -0.4cm)$) -- node
+      {$\{\widetilde{\vec{x}}_j\}_{j \myneq i}$} ($(f1.west) - (0cm, 0.4cm)$);
+
+  \end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ Standard model of physics
+  Author: Carsten Burgard 
+ https://texample.net/tikz/examples/model-physics/
+ }
+{
+\tikzset{%
+        brace/.style = { decorate, decoration={brace, amplitude=5pt} },
+       mbrace/.style = { decorate, decoration={brace, amplitude=5pt, mirror} },
+        label/.style = { black, midway, scale=0.5, align=center },
+     toplabel/.style = { label, above=.5em, anchor=south },
+    leftlabel/.style = { label,rotate=-90,left=.5em,anchor=north },   
+  bottomlabel/.style = { label, below=.5em, anchor=north },
+        force/.style = { rotate=-90,scale=0.4 },
+        round/.style = { rounded corners=2mm },
+       legend/.style = { right,scale=0.4 },
+        nosep/.style = { inner sep=0pt },
+   generation/.style = { anchor=base }
+}
+
+\ifdefined\particle\else\newcommand\particle[7][white]{%
+  \begin{tikzpicture}[x=1cm, y=1cm]
+    \path[fill=##1,blur shadow={shadow blur steps=5}] (0.1,0) -- (0.9,0)
+        arc (90:0:1mm) -- (1.0,-0.9) arc (0:-90:1mm) -- (0.1,-1.0)
+        arc (-90:-180:1mm) -- (0,-0.1) arc(180:90:1mm) -- cycle;
+    \ifstrempty{##7}{}{\path[fill=purple!50!white]
+        (0.6,0) --(0.7,0) -- (1.0,-0.3) -- (1.0,-0.4);}
+    \ifstrempty{##6}{}{\path[fill=green!50!black!50] (0.7,0) -- (0.9,0)
+        arc (90:0:1mm) -- (1.0,-0.3);}
+    \ifstrempty{##5}{}{\path[fill=orange!50!white] (1.0,-0.7) -- (1.0,-0.9)
+        arc (0:-90:1mm) -- (0.7,-1.0);}
+    \draw[\ifstrempty{##2}{dashed}{black}] (0.1,0) -- (0.9,0)
+        arc (90:0:1mm) -- (1.0,-0.9) arc (0:-90:1mm) -- (0.1,-1.0)
+        arc (-90:-180:1mm) -- (0,-0.1) arc(180:90:1mm) -- cycle;
+    \ifstrempty{##7}{}{\node at(0.825,-0.175) [rotate=-45,scale=0.2] {##7};}
+    \ifstrempty{##6}{}{\node at(0.9,-0.1)  [nosep,scale=0.17] {##6};}
+    \ifstrempty{##5}{}{\node at(0.9,-0.9)  [nosep,scale=0.2] {##5};}
+    \ifstrempty{##4}{}{\node at(0.1,-0.1)  [nosep,anchor=west,scale=0.25]{##4};}
+    \ifstrempty{##3}{}{\node at(0.1,-0.85) [nosep,anchor=west,scale=0.3] {##3};}
+    \ifstrempty{##2}{}{\node at(0.1,-0.5)  [nosep,anchor=west,scale=1.5] {##2};}
+  \end{tikzpicture}
+}\fi
+
+%\begin{document}
+\begin{tikzpicture}[x=1.2cm, y=1.2cm]
+  \draw[round] (-0.5,0.5) rectangle (4.4,-1.5);
+  \draw[round] (-0.6,0.6) rectangle (5.0,-2.5);
+  \draw[round] (-0.7,0.7) rectangle (5.6,-3.5);
+
+  \node at(0, 0)   {\particle[gray!20!white]
+                   {$u$}        {up}       {$2.3$ MeV}{1/2}{$2/3$}{R/G/B}};
+  \node at(0,-1)   {\particle[gray!20!white]
+                   {$d$}        {down}    {$4.8$ MeV}{1/2}{$-1/3$}{R/G/B}};
+  \node at(0,-2)   {\particle[gray!20!white]
+                   {$e$}        {electron}       {$511$ keV}{1/2}{$-1$}{}};
+  \node at(0,-3)   {\particle[gray!20!white]
+                   {$\nu_e$}    {$e$ neutrino}         {$<2$ eV}{1/2}{}{}};
+  \node at(1, 0)   {\particle
+                   {$c$}        {charm}   {$1.28$ GeV}{1/2}{$2/3$}{R/G/B}};
+  \node at(1,-1)   {\particle 
+                   {$s$}        {strange}  {$95$ MeV}{1/2}{$-1/3$}{R/G/B}};
+  \node at(1,-2)   {\particle
+                   {$\mu$}      {muon}         {$105.7$ MeV}{1/2}{$-1$}{}};
+  \node at(1,-3)   {\particle
+                   {$\nu_\mu$}  {$\mu$ neutrino}    {$<190$ keV}{1/2}{}{}};
+  \node at(2, 0)   {\particle
+                   {$t$}        {top}    {$173.2$ GeV}{1/2}{$2/3$}{R/G/B}};
+  \node at(2,-1)   {\particle
+                   {$b$}        {bottom}  {$4.7$ GeV}{1/2}{$-1/3$}{R/G/B}};
+  \node at(2,-2)   {\particle
+                   {$\tau$}     {tau}          {$1.777$ GeV}{1/2}{$-1$}{}};
+  \node at(2,-3)   {\particle
+                   {$\nu_\tau$} {$\tau$ neutrino}  {$<18.2$ MeV}{1/2}{}{}};
+  \node at(3,-3)   {\particle[orange!20!white]
+                   {$W^{\hspace{-.3ex}\scalebox{.5}{$\pm$}}$}
+                                {}              {$80.4$ GeV}{1}{$\pm1$}{}};
+  \node at(4,-3)   {\particle[orange!20!white]
+                   {$Z$}        {}                    {$91.2$ GeV}{1}{}{}};
+  \node at(3.5,-2) {\particle[green!50!black!20]
+                   {$\gamma$}   {photon}                        {}{1}{}{}};
+  \node at(3.5,-1) {\particle[purple!20!white]
+                   {$g$}        {gluon}                    {}{1}{}{color}};
+  \node at(5,0)    {\particle[gray!50!white]
+                   {$H$}        {Higgs}              {$125.1$ GeV}{0}{}{}};
+  \node at(6.1,-3) {\particle
+                   {}           {graviton}                       {}{}{}{}};
+
+  \node at(4.25,-0.5) [force]      {strong nuclear force (color)};
+  \node at(4.85,-1.5) [force]    {electromagnetic force (charge)};
+  \node at(5.45,-2.4) [force] {weak nuclear force (weak isospin)};
+  \node at(6.75,-2.5) [force]        {gravitational force (mass)};
+
+  \draw [<-] (2.5,0.3)   -- (2.7,0.3)          node [legend] {charge};
+  \draw [<-] (2.5,0.15)  -- (2.7,0.15)         node [legend] {colors};
+  \draw [<-] (2.05,0.25) -- (2.3,0) -- (2.7,0) node [legend]   {mass};
+  \draw [<-] (2.5,-0.3)  -- (2.7,-0.3)         node [legend]   {spin};
+
+  \draw [mbrace] (-0.8,0.5)  -- (-0.8,-1.5)
+                 node[leftlabel] {6 quarks\\(+6 anti-quarks)};
+  \draw [mbrace] (-0.8,-1.5) -- (-0.8,-3.5)
+                 node[leftlabel] {6 leptons\\(+6 anti-leptons)};
+  \draw [mbrace] (-0.5,-3.6) -- (2.5,-3.6)
+                 node[bottomlabel]
+                 {12 fermions\\(+12 anti-fermions)\\increasing mass $\to$};
+  \draw [mbrace] (2.5,-3.6) -- (5.5,-3.6)
+                 node[bottomlabel] {5 bosons\\(+1 opposite charge $W$)};
+
+  \draw [brace] (-0.5,.8) -- (0.5,.8) node[toplabel]         {standard matter};
+  \draw [brace] (0.5,.8)  -- (2.5,.8) node[toplabel]         {unstable matter};
+  \draw [brace] (2.5,.8)  -- (4.5,.8) node[toplabel]          {force carriers};
+  \draw [brace] (4.5,.8)  -- (5.5,.8) node[toplabel]       {Goldstone\\bosons};
+  \draw [brace] (5.5,.8)  -- (7,.8)   node[toplabel] {outside\\standard model};
+
+  \node at (0,1.2)   [generation] {1\tiny st};
+  \node at (1,1.2)   [generation] {2\tiny nd};
+  \node at (2,1.2)   [generation] {3\tiny rd};
+  \node at (2.8,1.2) [generation] {\tiny generation};
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Torn paper with matching torn edges
+   Author: Jose Luis Diaz 
+ https://texample.net/tikz/examples/torn-paper/
+ }
+{
+\newcounter{mathseed}
+\setcounter{mathseed}{3}
+\pgfmathsetseed{\arabic{mathseed}} % To have predictable results
+% Define a background layer, in which the parchment shape is drawn
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+% This is the base for the fractal decoration. It takes a random point between the start and end, and
+% raises it a random amount, thus transforming a segment into two, connected at that raised point
+% This decoration can be applied again to each one of the resulting segments and so on, in a similar
+% way of a Koch snowflake.
+\pgfdeclaredecoration{irregular fractal line}{init}
+{
+  \state{init}[width=\pgfdecoratedinputsegmentremainingdistance]
+  {
+    \pgfpathlineto{\pgfpoint{random*\pgfdecoratedinputsegmentremainingdistance}{(random*\pgfdecorationsegmentamplitude-0.02)*\pgfdecoratedinputsegmentremainingdistance}}
+    \pgfpathlineto{\pgfpoint{\pgfdecoratedinputsegmentremainingdistance}{0pt}}
+  }
+}
+
+
+% define some styles
+\tikzset{
+   paper/.style={draw=black!10, blur shadow, every shadow/.style={opacity=1, black}, %shade=bilinear interpolation,
+                 lower left=black!10, upper left=black!5, upper right=white, lower right=black!5, fill=none},
+   irregular cloudy border/.style={decoration={irregular fractal line, amplitude=0.2},
+           decorate,
+     },
+   irregular spiky border/.style={decoration={irregular fractal line, amplitude=-0.2},
+           decorate,
+     },
+   ragged border/.style={ decoration={random steps, segment length=7mm, amplitude=2mm},
+           decorate,
+   }
+}
+
+\def\tornpaper##1{%
+\ifthenelse{\isodd{\value{mathseed}}}{%
+\tikz{
+  \node[inner sep=1em] (A) {##1};  % Draw the text of the node
+  \begin{pgfonlayer}{background}  % Draw the shape behind
+  \fill[paper] % recursively decorate the bottom border
+     \pgfextra{\pgfmathsetseed{\arabic{mathseed}}\addtocounter{mathseed}{1}}%
+      {decorate[irregular cloudy border]{decorate{decorate{decorate{decorate[ragged border]{
+        (A.north west) -- (A.north east)
+      }}}}}}
+      -- (A.south east)
+     \pgfextra{\pgfmathsetseed{\arabic{mathseed}}}%
+      {decorate[irregular spiky border]{decorate{decorate{decorate{decorate[ragged border]{
+      -- (A.south west)
+      }}}}}}
+      -- (A.north west);
+  \end{pgfonlayer}}
+}{%
+\tikz{
+  \node[inner sep=1em] (A) {##1};  % Draw the text of the node
+  \begin{pgfonlayer}{background}  % Draw the shape behind
+  \fill[paper] % recursively decorate the bottom border
+     \pgfextra{\pgfmathsetseed{\arabic{mathseed}}\addtocounter{mathseed}{1}}%
+      {decorate[irregular spiky border]{decorate{decorate{decorate{decorate[ragged border]{
+        (A.north east) -- (A.north west)
+      }}}}}}
+      -- (A.south west)
+     \pgfextra{\pgfmathsetseed{\arabic{mathseed}}}%
+      {decorate[irregular cloudy border]{decorate{decorate{decorate{decorate[ragged border]{
+      -- (A.south east)
+      }}}}}}
+      -- (A.north east);
+  \end{pgfonlayer}}
+}}
+
+%\begin{document}
+\begin{center}
+\noindent
+\tornpaper{
+\parbox{.9\textwidth}{\lipsum[11]}
+}
+
+\noindent
+\tornpaper{
+\parbox{.9\textwidth}{\lipsum[15]}
+}
+
+\noindent
+\tornpaper{
+\parbox{.9\textwidth}{\lipsum[5]}
+}
+\end{center}
+}
+
+\setuptikzexlipsum
+{ Title graphics
+Author: Till Tantau
+Source: The PGF/TikZ manual
+ https://texample.net/tikz/examples/title-graphics/
+ }
+{
+\tikzstyle{level 1}=[sibling angle=120]
+\tikzstyle{level 2}=[sibling angle=60]
+\tikzstyle{level 3}=[sibling angle=30]
+\tikzstyle{every node}=[fill]
+\tikzstyle{edge from parent}=[snake=expanding waves,segment length=1mm,
+                              segment angle=10,draw]
+\begin{tikzpicture}[grow cyclic,shape=circle,very thick,level distance=13mm,
+                    cap=round]
+\node {} child [color=\A] foreach \A in {red,green,blue}
+    { node {} child [color=\A!50!\B] foreach \B in {red,green,blue}
+        { node {} child [color=\A!50!\B!50!\C] foreach \C in {black,gray,white}
+            { node {} }
+        }
+    };
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Growing wave decoration
+  Author: Nick Papior Andersen
+  https://texample.net/tikz/examples/growing-wave-decoration/
+ }
+{
+\def\pgfdecorationgrowthstart{0cm}
+\def\pgfdecorationgrowthendsizelist{0cm}
+\def\pgfdecorationgrowthwavelengthlist{0cm}
+\def\pgfdecorationgrowthendstepslist{1}
+\def\pgfdecorationgrowthendstep{1}
+\newif\ifpgfdecorationgrowthsine
+\newif\ifpgfdecorationgrowthcosine
+\newif\ifpgfdecorationonewavelength
+\pgfdecorationgrowthcosinefalse
+\pgfdecorationgrowthsinetrue
+\pgfkeys{%
+    /pgf/decoration/.cd,
+    growth start size/.initial=0.5cm,
+    growth end size/.initial=3cm,
+    growth end steps/.initial=1,
+    growth wave length/.initial=3pt,
+    growth sine/.code={\pgfdecorationgrowthsinetrue\pgfdecorationgrowthcosinefalse},
+    growth cosine/.code={\pgfdecorationgrowthsinefalse\pgfdecorationgrowthcosinetrue}
+}
+\def\pgfdecorationgrowthsetup{%
+    \global\edef\pgfdecorationgrowthstart{\pgfkeysvalueof{/pgf/decoration/growth start size}}%
+    \global\edef\pgfdecorationgrowthendsizelist{\pgfkeysvalueof{/pgf/decoration/growth end size}}%
+    \global\edef\pgfdecorationgrowthendstepslist{\pgfkeysvalueof{/pgf/decoration/growth end steps}}%
+    \global\edef\pgfdecorationgrowthwavelengthlist{\pgfkeysvalueof{/pgf/decoration/growth wave length}}%
+}
+
+\def\pgfdecorationgrowthsteps{1} % To keep track of steps from ending
+\def\pgfdecorationliststeps{2} % To keep track of list items from ending, has to start from 2
+
+\pgfdeclaredecoration{growth wave}{initial}%
+{
+    \state{initial}[width=0pt,next state=first] {%
+        \pgfdecorationgrowthsetup%
+        \pgfpathlineto{\pgfqpoint{0pt}{0pt}}%
+        \global\edef\pgfdecorationgrowthsteps{0}%
+        \global\edef\pgfdecorationliststeps{2}%
+        \foreach \endsize in \pgfdecorationgrowthendsizelist {%
+            \global\edef\pgfdecorationgrowthendsize{\endsize}%
+            \breakforeach%
+        }%
+        \foreach \growthstep in \pgfdecorationgrowthendstepslist {%
+            \global\edef\pgfdecorationgrowthendstep{\growthstep}%
+            \breakforeach%
+        }%
+        \foreach \wavelength in \pgfdecorationgrowthwavelengthlist {%
+            \global\edef\pgfdecorationgrowthwavelength{\wavelength}%
+            \breakforeach%
+        }%
+        \pgfmathparse{(\pgfdecorationgrowthendsize - \pgfdecorationgrowthstart) * 2 * %
+                \pgfdecorationgrowthwavelength / ( \pgfdecoratedremainingdistance * \pgfdecorationgrowthendstep)}%
+        \global\edef\pgfdecorationgrowth{\pgfmathresult}%
+    }%
+    
+    \state{first}[width=2*\pgfdecorationgrowthwavelength,next state=second] {%
+        \pgfdecorationgrowthstepcounters%
+        \pgfmathparse{\pgfdecorationgrowthstart + \pgfdecorationgrowthsteps * \pgfdecorationgrowth}%
+        % The wave starts
+        \ifpgfdecorationgrowthsine%
+            \pgfpathsine{\pgfqpoint{\pgfdecorationgrowthwavelength}{\pgfmathresult pt}}%
+            \pgfpathcosine{\pgfqpoint{\pgfdecorationgrowthwavelength}{-\pgfmathresult pt}}%
+        \fi%
+        \ifpgfdecorationgrowthcosine%
+            \pgfpathsine{\pgfqpoint{\pgfdecorationgrowthwavelength}{-\pgfmathresult pt}}%
+            \pgfpathcosine{\pgfqpoint{\pgfdecorationgrowthwavelength}{\pgfmathresult pt}}%
+        \fi%
+        \pgfdecorationgrowthstateend%
+    }%
+    
+    \state{second}[width=2*\pgfdecorationgrowthwavelength,next state=first] {%
+        \pgfdecorationgrowthstepcounters%
+        \pgfmathparse{\pgfdecorationgrowthstart + \pgfdecorationgrowthsteps * \pgfdecorationgrowth}%
+        % The wave continues
+        \ifpgfdecorationgrowthsine%
+            \pgfpathsine{\pgfqpoint{\pgfdecorationgrowthwavelength}{-\pgfmathresult pt}}%
+            \pgfpathcosine{\pgfqpoint{\pgfdecorationgrowthwavelength}{\pgfmathresult pt}}%
+        \fi%
+        \ifpgfdecorationgrowthcosine%
+            \pgfpathsine{\pgfqpoint{\pgfdecorationgrowthwavelength}{\pgfmathresult pt}}%
+            \pgfpathcosine{\pgfqpoint{\pgfdecorationgrowthwavelength}{-\pgfmathresult pt}}%
+        \fi%
+        \pgfdecorationgrowthstateend%
+    }
+    \state{final} {%
+        \pgfpathlineto{\pgfpointdecoratedpathlast}%
+    }%
+}
+\def\pgfdecorationgrowthstateend{%
+    \pgfmathadd{\pgfdecorationgrowthsteps}{1}%
+    \global\edef\pgfdecorationgrowthsteps{\pgfmathresult} % Redefine the steps counter, globally.
+}
+
+\def\pgfdecorationgrowthstepcounters{%
+    \pgfmathparse{\pgfdecorationgrowthendstep * \pgfdecoratedpathlength}
+    \ifdim\pgfdecoratedcompleteddistance>\pgfmathresult pt%
+        \foreach \endsize [count=\count] in \pgfdecorationgrowthendsizelist {%
+            \ifnum\count=\pgfdecorationliststeps%
+                \global\edef\pgfdecorationgrowthendsize{\endsize}%
+                \breakforeach%
+            \else%
+                \global\edef\pgfdecorationgrowthstart{\endsize}%
+            \fi%
+        }%
+        \global\edef\tempa{0}%
+        \foreach \growthstep [count=\count] in \pgfdecorationgrowthendstepslist {%
+            \ifnum\count=\pgfdecorationliststeps%
+                \global\edef\pgfdecorationgrowthendstep{\growthstep}%
+                \breakforeach%
+            \else%
+                \global\edef\tempa{\growthstep}%
+            \fi%
+        }%
+        \foreach \wavelength [count=\count] in \pgfdecorationgrowthwavelengthlist {%
+            \ifnum\count=\pgfdecorationliststeps%
+                \global\edef\pgfdecorationgrowthwavelength{\wavelength}%
+                \breakforeach%
+            \fi%
+        }%
+        \pgfmathparse{int(\pgfdecorationliststeps+1)}%
+        \global\edef\pgfdecorationliststeps{\pgfmathresult}%
+        \global\edef\pgfdecorationgrowthsteps{0}% Redefine the steps counter, globally.
+        \pgfmathparse{(\pgfdecorationgrowthendsize-\pgfdecorationgrowthstart) * 2 %
+                * \pgfdecorationgrowthwavelength / (\pgfdecoratedpathlength * (\pgfdecorationgrowthendstep -\tempa))}%
+        \global\edef\pgfdecorationgrowth{\pgfmathresult}%
+    \fi%
+}
+
+%\begin{document}
+
+\begin{tikzpicture}
+    \draw[decorate,decoration={growth wave,
+        growth start size=2pt,
+        growth end size=.5cm,
+        growth wave length=5pt,
+        growth cosine}] (0,0) -- (3,0);
+    \draw[decorate,decoration={growth wave,
+        growth start size=0pt,
+        growth end size=.5cm,
+        growth wave length=2pt,
+        growth cosine},fill,color=red] (0,-1) rectangle (4,-4);
+    \foreach \start/\end/\xstep/\ystep in {0/-10/5/-5,5/-5/10/-10,10/-10/5/-15,5/-15/0/-10} {
+        \draw[fill,color=red,decorate,decoration={growth wave, % Choose the decoration
+            growth start size=1pt,               % Sets the start amplitude of the wave
+            growth end size={1cm,3cm,1cm,1pt},   % Sets the end amplitude of the wave
+            growth end steps={0.25,.5,.75,1},    % Sets the percentual path positions where the transitions
+                                                 % should be made
+            growth wave length={1pt,3pt,3pt,1pt},% Sets the wave lengths
+            growth sine}]                        % The wave starts as a sine
+                (\start,\end) -- (\xstep,\ystep);
+
+        \draw[fill,color=blue,decorate,decoration={growth wave, % Choose the decoration
+            growth start size=1pt,              % Sets the start amplitude of the wave
+            growth end size={1cm,3cm,1cm,1pt},  % Sets the end amplitudes of the wave
+            growth end steps={0.25,.5,.75,1},   % Sets the percentual path positions where the transitions 
+                                                % should be made
+            growth wave length={1pt,3pt,3pt,1pt},% Sets the wave lengths
+            growth cosine}]                     % The wave starts as a cosine
+                (\start,\end) -- (\xstep,\ystep);
+    }
+    \draw[xshift=5cm, decorate,decoration={growth wave,
+        growth start size=1cm,
+        growth end size=1pt,
+        growth wave length=2pt,
+        growth cosine},fill,color=red] (0,0) -- (3,0);
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ Fading text
+   Author: Elke Schubert
+  https://texample.net/tikz/examples/text-fading/
+ }
+{
+\ifdefined\fadingtext\else\newcommand\fadingtext[2][]{%
+  \begin{tikzfadingfrompicture}[name = fading letter]
+    \node[text = transparent!0, inner xsep = 0pt, outer xsep = 0pt] {##2};
+  \end{tikzfadingfrompicture}%
+  \begin{tikzpicture}[baseline = (textnode.base)]
+    \node[inner sep = 0pt, outer sep = 0pt] (textnode) {\phantom{##2}}; 
+    \shade[path fading = fading letter, fading text, ##1, fit fading = false]
+    (textnode.south west) rectangle (textnode.north east);% 
+  \end{tikzpicture}% 
+}\fi
+
+%\usepackage{lipsum}
+%\begin{document}
+\tikzset{fading text/.style = {left color = red, right color = red!50!blue,
+  middle color = green}}
+\setlength\fboxsep{0pt}
+\fbox{\scalebox{4}{\fadingtext[left color = green, right color = red]{$4$}}}
+For testing the alignment: \fadingtext{Here is a colored sample sentence.} 
+
+\noindent\fadingtext[top color = orange, bottom color = purple,
+  middle color=.]{\parbox[b]{\linewidth}{\strut\lipsum[1]}}
+}
+
+\setuptikzexlipsum
+{ Borromean rings
+   Author: Dan Drake
+  https://texample.net/tikz/examples/borromean-rings/
+ }
+{
+% drawing parameters
+\newcommand{\circdist}{1}  % distance from origin to center of circles
+\newcommand{\circrad}{7/4} % radius of the circles
+\newcommand{\circlethickness}{6mm} % uh, thickness of the circles
+
+% distance from the origin to the three "interior" intersections
+\pgfmathsetmacro{\intrad}{sqrt((\circrad)^2 - 3*(\circdist)^2/4) - \circdist/2}
+
+% distance from the origin to the three "exterior" intersections
+\pgfmathsetmacro{\extrad}{sqrt((\circrad)^2 - 3*(\circdist)^2/4) + \circdist/2}
+
+% so we can just specify an angle and get the correct color for the circle
+\colorlet{180}{blue}
+\colorlet{60}{red}
+\colorlet{300}{green}
+
+% draws one of our circles
+\newcommand{\mycircle}[1]{%
+  \draw[thick, double distance=\circlethickness, double=##1]
+  (##1:\circdist) circle (\circrad);}
+
+%\begin{document}
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+  % draw the circles
+  \foreach \angle in {180, 60, 300}
+  {
+    \mycircle{\angle}
+  }
+
+  % we need to re-do two of the intersections so that the rings
+  % interlock and aren't just piled on top of one another
+  \foreach \angle/\rad in {60/\intrad, 240/\extrad}
+  {
+    \begin{scope}
+      \clip (\angle:\rad) circle (5/4*\circlethickness);
+      %                          you may need to adjust the 5/4 above so
+      %                          the clipping area is big enough
+      \mycircle{300}
+      \mycircle{180}
+    \end{scope}
+  }
+\end{tikzpicture}
+\end{center}
+}
+
+
+
+%%\setuptikzexlipsum
+%%{ Spherical polar pots with 3dplot
+%%   Author: Jeff Hein
+%%  https://texample.net/tikz/examples/spherical-polar-pots-with-3dplot/
+%% }
+%%{
+%%\tdplotsetmaincoords{70}{135}
+%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%{sqrt(15/2)*sin(\tdplottheta)*cos(\tdplottheta)}{black}{\tdplotphi}%
+%%    {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%    {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%    {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%\end{tikzpicture}
+%%
+%%%Here's some more examples.
+%%%L = 0
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{1}{black}{0}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 1, M_L = -1
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(3/2)*sin(\tdplottheta)}{black}{-\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 1, M_L = 0
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(3)*cos(\tdplottheta)}{black}{0}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 1, M_L = +1
+%%%\begin{tikzpicture}[scale=2,line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(3/2)*sin(\tdplottheta)}{black}{\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = -2
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)/2*sin(\tdplottheta)^2}{black}{-2*\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = -1
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)*sin(\tdplottheta)*cos(\tdplottheta)}{black}{-\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = 0
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(5)/2*(3*cos(\tdplottheta)^2 - 1 )}{black}{-\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = 1
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)*sin(\tdplottheta)*cos(\tdplottheta)}{black}{\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%%
+%%%L = 2, M_L = +2
+%%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%%{sqrt(15/2)/2*sin(\tdplottheta)^2}{black}{2*\tdplotphi}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%%\end{tikzpicture}
+%%
+%%%L = 3, M_L = 0
+%%\begin{tikzpicture}[line join=bevel,tdplot_main_coords, fill opacity=.7]
+%%\tdplotsphericalsurfaceplot[parametricfill]{72}{36}%
+%%{sqrt(7)/2*(5*cos(\tdplottheta)^3 - 3*cos(\tdplottheta))}{black}{0}%
+%%   {\draw[color=black,thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};}%
+%%   {\draw[color=black,thick,->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};}%
+%%   {\draw[color=black,thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};}%
+%%\end{tikzpicture}
+%%}
+
+\setuptikzexlipsum
+{ Scientific interactions
+   Author: Andrei Sobolevski
+  https://texample.net/tikz/examples/scientific-interactions/
+ }
+{
+\begin{tikzpicture}[mindmap,
+  level 1 concept/.append style={level distance=130,sibling angle=30},
+  extra concept/.append style={color=blue!50,text=black}]
+
+  % Applied area: computer science and its subfields
+
+  \begin{scope}[mindmap, concept color=orange, text=white]
+    \node [concept] {Informatique}[clockwise from=-5] 
+      child {node [concept] (log) {M{\'e}thodes cat{\'e}goriques}}
+      child {node [concept] (alg) {Algorithmique}}
+      child {node [concept] (cod) {Compression \& transmission}}
+      child {node [concept] (img) {Tra{\^i}tement des images}}
+      child {node [concept] (opt) {Optimisation}}
+      child {node [concept] (res) {R{\'e}seaux}};
+  \end{scope}
+
+  % Applied area: theoretical physics and its subfields
+
+  \begin{scope}[mindmap, concept color=red,text=white]
+    \node [concept] at (-5,-15) {Physique}
+      child [grow=-10, level distance=160]
+        {node [concept] (qin) {Calcul quantique}}
+      child [grow=20] 
+        {node [concept] (csm) {Astronomie \& cosmologie}}
+      child [grow=110] 
+        {node [concept] (mat) {Mati{\`e}re condens{\'e}e}};
+  \end{scope}
+
+  % Applied area: biology and its subfields
+
+  \begin{scope}[mindmap, concept color=green!50!black,text=white]
+    \node [concept] at (6.5,-15) {Biologie} 
+      child [grow=165, level distance=120] 
+        {node [concept] (med) {M{\'e}decine}}
+      child [grow=60] 
+        {node [concept] (gen) {G{\'e}nomique}};
+  \end{scope}
+
+  % Applied area: economics (one subfield)
+
+  \begin{scope}[mindmap, concept color=violet, text=white]
+    \node [concept] at (11,-14) {{\'E}conomie}
+      child [grow=70, level distance=120] 
+        {node [concept] (dec) {Choix \& prise de d{\'e}cision}};
+  \end{scope}
+
+  % Researchers listed by their main specialization in mathematics
+
+  \begin{scope}[mindmap, concept color=blue]
+
+    % Combinatorics and discrete mathematics 
+    \node [concept, text=white] at (5.2,-10.8) 
+      {Combinatoire \& math{\'e}matiques discr{\`e}tes} 
+      [clockwise from=150]
+      child [concept color=blue!50] {node [concept] (ver) {Vereschagin}}
+      child [concept color=blue!50, level distance=125] 
+        {node [concept] (kab) {Kabatyanski, Tsfasman, Rybakov, Zykin}}
+      child [concept color=blue!50] 
+        {node [concept] (kch) {Kucherov, Roytberg}}
+      child [concept color=blue!50] {node [concept] (raf) {Raffinot}}
+      child [concept color=blue!50, level distance=135]
+        {node [concept] (ksh) {Koshevoy}};
+
+    % Partial differential equations
+    \node [concept, text=white] at (-3,-11) 
+      {Equations aux d{\'e}riv{\'e}es partielles 
+        \& m{\'e}thodes num{\'e}riques}
+      child [concept color=blue!50, grow=0, level distance=140] 
+        {node [concept] (lhc) {Loh{\'e}ac}}
+      child [concept color=blue!50, grow=60, level distance=115] 
+        {node [concept] (otr) {OTARIE (Sobolevski)}}
+      child [concept color=blue!50, grow=95] {node [concept] (ndr) 
+        {Nadirashvili}};
+
+    % Probability
+    \node [concept, text=white] at (-7.2,-3.2) {Probabilit{\'e}s}
+      child [concept color=blue!50, grow=-70, level distance=120] 
+        {node [concept] (rbk) {Rybko}};
+
+    % Logic
+    \node [concept, text=white] at (11.5,-5) {Logique}
+      child [concept color=blue!50, grow=165, level distance=120] 
+        {node [concept] (sht) {Shehtman}};
+  \end{scope}
+
+  % Connections of researchers to applied subfields
+
+  \begin{pgfonlayer}{background}
+    \draw [circle connection bar]
+      (kab) edge (cod)
+      (kch) edge (alg) edge (gen)
+      (lhc) edge (med)
+      (ksh) edge (dec)
+      (ndr) edge (mat)
+      (otr) edge (opt) edge (csm) edge (img)
+      (raf) edge (alg) edge (gen)
+      (rbk) edge (res) edge (mat)
+      (sht) edge (log) edge (dec)
+      (ver) edge (qin) edge (cod);
+  \end{pgfonlayer}
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Pythagorean triangle with the squares of its sides and labels
+   Author: Alex Chan
+  https://texample.net/tikz/examples/pythagoras-triangle/
+ }
+{
+\ifdefined\pythagwidth\undef\pythagwidth\fi
+\newcommand{\pythagwidth}{3cm}
+\ifdefined\pythagheight\undef\pythagheight\fi
+\newcommand{\pythagheight}{2cm}
+\begin{tikzpicture}
+  \coordinate [label={below right:$A$}] (A) at (0, 0);
+  \coordinate [label={above right:$B$}] (B) at (0, \pythagheight);
+  \coordinate [label={below left:$C$}] (C) at (-\pythagwidth, 0);
+
+  \coordinate (D1) at (-\pythagheight, \pythagheight + \pythagwidth);
+  \coordinate (D2) at (-\pythagheight - \pythagwidth, \pythagwidth);
+
+  \draw [very thick] (A) -- (C) -- (B) -- (A);
+
+  \newcommand{\ranglesize}{0.3cm}
+  \draw (A) -- ++ (0, \ranglesize) -- ++ (-\ranglesize, 0) -- ++ (0, -\ranglesize);
+
+  \draw [dashed] (A) -- node [below] {$b$} ++ (-\pythagwidth, 0)
+            -- node [right] {$b$} ++ (0, -\pythagwidth)
+            -- node [above] {$b$} ++ (\pythagwidth, 0)
+            -- node [left]  {$b$} ++ (0, \pythagwidth);
+
+  \draw [dashed] (A) -- node [right] {$c$} ++ (0, \pythagheight)
+            -- node [below] {$c$} ++ (\pythagheight, 0)
+            -- node [left]  {$c$} ++ (0, -\pythagheight)
+            -- node [above] {$c$} ++ (-\pythagheight, 0);
+
+  \draw [dashed] (C) -- node [above left]  {$a$} (B)
+                     -- node [below left]  {$a$} (D1)
+                     -- node [below right] {$a$} (D2)
+                     -- node [above right] {$a$} (C);
+\end{tikzpicture}
+}
+
+
+\setuptikzexlipsum
+{ Representation of a geometric series
+   Author: Jimi Oke
+  https://texample.net/tikz/examples/geometric-series/
+ }
+{
+\begin{tikzpicture}[scale=.35]\footnotesize
+ \pgfmathsetmacro{\xone}{-.4}
+ \pgfmathsetmacro{\xtwo}{ 16.4}
+ \pgfmathsetmacro{\yone}{-.4}
+ \pgfmathsetmacro{\ytwo}{16.4}
+
+\begin{scope}<+->;
+% grid
+  \draw[step=1cm,gray,very thin] (\xone,\yone) grid (\xtwo,\ytwo);
+
+% ticks
+  \foreach \x/\xtext in { 8/\frac{1}{2}, 16/1}
+  \draw[gray,xshift=\x cm] (0,.3) -- (0,0) node[below] {$\xtext$};
+  \foreach \y/\ytext in {8/\frac{1}{2},16/1}
+    \draw[gray, yshift=\y cm] (.3,0) -- (0,0)
+    node[left] {$\ytext$};
+
+% origin
+ \draw[gray] (0,0) node[anchor=north east] {$O$};
+
+% axes
+  \draw[gray,thick,<->] (\xone, 0) -- (\xtwo, 0) node[right] {$x$};
+  \draw[gray,thick,<->] (0, \yone) -- (0, \ytwo) node[above] {$y$};
+\end{scope}
+
+% function
+\begin{scope}[thick,red]
+  \foreach \x in {16, 8, 4, 2, 1,.5,.25}
+    \draw (16-\x, 16-\x) rectangle (16,16);
+
+  \foreach \x in {16, 8, 4, 2, 1,.5,.25}
+  \filldraw[thin,red,opacity=.3] (16-\x, 16-\x)
+    rectangle (16-.5*\x,16-.5*\x);
+
+\foreach \x in {16, 8, 4, 2, 1,.5,.25}{
+  \filldraw[thin,blue,opacity=.2] (16-\x, 16-.5*\x)
+    rectangle (16-.5*\x,16);
+  \filldraw[thin,blue,opacity=.2] (16-.5*\x, 16-\x)
+    rectangle (16,16-.5*\x);}
+\end{scope}
+\end{tikzpicture}
+}
+
+\setuptikzexlipsum
+{ Polar plot with grid
+   Author: Alex Chan
+  https://texample.net/tikz/examples/polar-plot/
+ }
+{
+\begin{tikzpicture}[>=latex]
+
+% Draw the lines at multiples of pi/12
+\foreach \ang in {0,...,31} {
+  \draw [lightgray] (0,0) -- (\ang * 180 / 16:4);
+}
+
+% Concentric circles and radius labels
+\foreach \s in {0, 1, 2, 3} {
+  \draw [lightgray] (0,0) circle (\s + 0.5);
+  \draw (0,0) circle (\s);
+  \node [fill=white] at (\s, 0) [below] {\scriptsize $\s$};
+}
+
+% Add the labels at multiples of pi/4
+\foreach \ang/\lab/\dir in {
+  0/0/right,
+  1/{\pi/4}/{above right},
+  2/{\pi/2}/above,
+  3/{3\pi/4}/{above left},
+  4/{\pi}/left,
+  5/{5\pi/4}/{below left},
+  7/{7\pi/4}/{below right},
+  6/{3\pi/2}/below} {
+  \draw (0,0) -- (\ang * 180 / 4:4.1);
+  \node [fill=white] at (\ang * 180 / 4:4.2) [\dir] {\scriptsize $\lab$};
+}
+
+% The double-lined circle around the whole diagram
+\draw [style=double] (0,0) circle (4);
+
+\fill [fill=red!50!black, opacity=0.5] plot [domain=-pi/2:pi/2]
+  (xy polar cs:angle=\x r, radius= {2-2*sin(\x r)});
+\draw [thick, color=red, domain=0:2*pi, samples=200, smooth]
+  plot (xy polar cs:angle=\x r, radius={2-2*sin(\x r)});
+\node [fill=white] at (2,1) {$r=2-2\sin\theta$};
+
+\end{tikzpicture} 
+}
+
+
+
+
+
+%---------------------------------------------------------
+
+
+
+%% End of file `tikzexlipsum.sty'.
