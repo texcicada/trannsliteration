@@ -1,0 +1,152 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\newfontface\imfa{FeFlow1.otf}
+\usepackage{xparse}
+
+%\usepackage{missaali}
+\newfontfamily\fmiss{missaali}%[Language=Latin,Script=Latin]
+
+\ExplSyntaxOn
+
+\NewDocumentCommand { \fm } { o +m } {
+		{
+\keys_define:nn { fontmissal }
+{
+rare .code:n = \addfontfeatures{Ligatures=Rare},
+ss01 .code:n = \addfontfeatures{StylisticSet=1},% long a,o
+ss04 .code:n = \addfontfeatures{StylisticSet=4},
+ss14 .code:n = \addfontfeatures{StylisticSet=14},% loop
+ss18 .code:n = \addfontfeatures{StylisticSet=18},% po
+ss19 .code:n = \addfontfeatures{StylisticSet=19},% alt-z
+ss20 .code:n = \addfontfeatures{StylisticSet=20},% Lombardic initials
+ss21 .code:n = \addfontfeatures{StylisticSet=21},% dot above
+ss22 .code:n = \addfontfeatures{StylisticSet=22},% alt-G
+ss23 .code:n = \addfontfeatures{StylisticSet=23},% alt-Lombardic (some)
+hist .code:n = \addfontfeatures{Ligatures=Historic,Style=Swash},%umlaut as e
+%keyname .value_required:n = true
+}
+		
+				\fmiss
+				\IfNoValueF { #1 }
+				{ 
+						\keys_set_known:nn { fontmissal } {#1}
+						\tl_use:N \l_keys_value_tl
+				 }
+				
+				#2
+		
+		}
+}
+
+
+
+\NewDocumentCommand { \fmumhist } { m } { 	\fm[hist]{#1} }
+\NewDocumentCommand { \fmuma } { } { 	\fmumhist{ä} }
+\NewDocumentCommand { \fmumae } { } { 	\fmumhist{æ} }
+\NewDocumentCommand { \fmumo } { } { 	\fmumhist{ö} }
+\NewDocumentCommand { \fmumoe } { } { 	\fmumhist{œ} }
+
+\NewDocumentCommand { \fmlong } { m } { 	\fm[ss01]{#1} }
+\NewDocumentCommand { \fmaa } { } { 	\fmlong{aa} }
+\NewDocumentCommand { \fmao } { } { 	\fmlong{ao} }
+
+\NewDocumentCommand { \fmloopp } { m } { 	\fm[ss14]{#1} }
+\NewDocumentCommand { \fmloop } { m } { 	\fmloopp{#1} }
+\NewDocumentCommand { \fmloopl } { } { 	\fmloopp{l} }
+\NewDocumentCommand { \fmloopo } { } { 	\fmloopp{o} }
+\NewDocumentCommand { \fmloops } { } { 	\fmloopp{s} }
+
+\NewDocumentCommand { \fmredloopp } { m m } { 	\textcolor{red}{\fmloop{#1}}#2{#1} }
+%\NewDocumentCommand { \fmloop } { m } { 	\fmloopp{#1} }
+\NewDocumentCommand { \fmredloopl } { } { 	\fmredloopp{l}{\kern-0.37em} }
+\NewDocumentCommand { \fmredloopo } { } { 	\fmredloopp{o}{\kern-0.59em} }
+
+
+\NewDocumentCommand { \fmpolig } { m } { 	\fm[ss18]{#1} }
+\NewDocumentCommand { \fmpo } { } { 	\fmpolig{po} }
+
+\NewDocumentCommand { \fmalttz } { m } { 	\fm[ss19]{#1} }
+\NewDocumentCommand { \fmaltz } { } { 	\fmalttz{z} }
+
+\NewDocumentCommand { \fmlominit } { m } { 	\fm[ss20]{#1} }
+\NewDocumentCommand { \fmlom } { m } { 	\fmlominit{#1} }
+
+\NewDocumentCommand { \fmdotabove } { m } { 	\fm[ss21]{#1} }
+\NewDocumentCommand { \fmdot } { m } { 	\fmdotabove{#1} }
+
+\NewDocumentCommand { \fmreddotabove } { m } { 	\textcolor{red}{\fmdot{#1}}\llap{#1} }
+\NewDocumentCommand { \fmreddot } { m } { 	\fmreddotabove{#1} }
+
+\NewDocumentCommand { \fmalttG } { m } { 	\fm[ss22]{#1} }
+\NewDocumentCommand { \fmaltG } { } { 	\fmalttG{G} }
+
+\NewDocumentCommand { \fmlominitalt } { m } { 	\fm[ss23]{#1} }
+\NewDocumentCommand { \fmaltlomA } { } { 	\fmlominitalt{A} }
+\NewDocumentCommand { \fmaltlomD } { } { 	\fmlominitalt{D} }
+\NewDocumentCommand { \fmaltlomS } { } { 	\fmlominitalt{S} }
+
+\ExplSyntaxOff
+
+
+\begin{document}
+
+%abc \expandafter\meaning\the\font
+
+
+a b v A B C
+\huge\fmiss abc oratio Capitum i sectiones i 
+\textcolor{red}{
+Lectiones
+}
+Partiturae 
+{\addfontfeatures{Ligatures=Rare}
+bis
+}
+{\addfontfeatures{StylisticSet=4}
+a
+}
+{\addfontfeatures{Ligatures=Historic,Style=Swash}
+æ
+}
+
+\fm{abc}
+
+\fm[option]{xyz}
+
+bis : \fm[rare]{bis} : bis 
+
+a : \fm[ss04]{a} : a
+
+æ : \fm[hist]{æ} : æ Capitum Lapidum
+
+\fmuma\fmumae\fmumo\fmumoe
+
+%\umhist{ŒüÄÆÖÜ}
+
+\fmaa\fmao
+
+\fmpo\fmaltz
+
+\fmlom{ABCD EFGH IJKL MNOP QRST UVW XYZ ÄÖ}
+
+\fmaltG
+
+\fmaltlomA\fmaltlomD\fmaltlomS
+
+\fmdot{abcd efgh ijkl mnop qrst uvwx yz}
+
+\textcolor{red}{\fmdot{a}}\llap{a}
+
+\fmreddot{abcd efgh ijkl mnop qrst uvwx yz}
+
+\fmreddot{a}\fmreddot{b}\fmreddot{c}\fmreddot{d}\fmreddot{e}\fmreddot{f}\fmreddot{g}\fmreddot{h}\fmreddot{i}\fmreddot{j}\fmreddot{k}\fmreddot{l}\fmreddot{m}\fmreddot{n}\fmreddot{o}\fmreddot{p}\fmreddot{q}\fmreddot{r}\fmreddot{s}\fmreddot{t}\fmreddot{u}\fmreddot{v}\fmreddot{w}\fmreddot{x}\fmreddot{y}\fmreddot{z}
+
+%\fmloop{abcd efgh ijkl mnop qrst uvwx yz}
+
+\fmloopl\fmloopo\fmloops
+
+\fmredloopl\fmredloopo
+
+
+\end{document}
