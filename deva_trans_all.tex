@@ -1,0 +1,1628 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\usepackage{fontspec}
+%\usepackage{xparse}
+
+\usepackage[bidi=basic,english]{babel}
+
+\babelprovide[import, onchar=ids fonts]{hindi}
+\babelprovide[import, onchar=ids fonts]{kannada}
+\babelprovide[import, onchar=ids fonts]{sinhala}
+\babelprovide[import, onchar=ids fonts]{tamil}
+\babelprovide[import, onchar=ids fonts]{telugu}
+
+\defaultfontfeatures{ Scale=MatchUppercase,
+                      Ligatures=TeX,
+                      Renderer=HarfBuzz }
+
+
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} 
+\setlength{\columnseprule}{0.5pt}
+
+
+\babelfont{rm}
+          [Ligatures=Common, Scale=1.0]{Libertinus Serif}
+\babelfont[hindi]{rm}[Color=blue]
+          {Shobhika}
+\babelfont[kannada]{rm}[Color=blue]
+          {Noto Serif Kannada}          
+\babelfont[sinhala]{rm}[Color=blue]
+          {Noto Serif Sinhala}          
+\babelfont[tamil]{rm}[Color=blue]
+          {Noto Sans Tamil}          
+\babelfont[telugu]{rm}[Color=blue]
+          {Noto Serif Telugu}          
+
+\babelfont{sf}
+          [Ligatures=Common]{Libertinus Sans}
+\babelfont{tt}
+          {Libertinus Mono}
+
+
+%\setmainfont{Noto Serif}
+%
+\newfontfamily\fdeva[Colour=blue,
+Script=Devanagari,
+Renderer=HarfBuzz]{Noto Serif Devanagari}
+%
+%\newfontfamily\ftel[Colour=red,
+%Script=Telugu,
+%Renderer=HarfBuzz]{Noto Serif Telugu}
+%=====
+
+%------------------------------- print and run #1
+\ExplSyntaxOn
+\tl_new:N \l_my_tl
+\tl_new:N \l_myts_tl
+%local to their own thread (v, uc, iast)
+%\tl_new:N \l_mytsv_tl
+%\tl_new:N \l_mytsuc_tl
+%\tl_new:N \l_mytsiast_tl
+
+\cs_generate_variant:Nn 
+						\tl_to_str:n 
+						{ V }
+
+\NewDocumentCommand{\cdr}{ o o m }{ % 1=formatout, 2=formatparm,3=text
+	\tl_set:Nn \l_my_tl { #3 }
+	{ \ttfamily\color{blue}
+			\IfNoValueTF{#2}{}{#2}
+  \tl_to_str:V  \l_my_tl 
+  }
+  
+  \enspace $\mapsto$ \enspace
+
+	{
+		\IfNoValueTF{#1}{}{#1}
+  \tl_use:N \l_my_tl
+  }
+}%
+
+
+%----- Transliteration direction
+\bool_new:N 
+					\g_trans_direction_bool
+\bool_gset_true:N 
+					\g_trans_direction_bool
+
+%\cs_generate_variant:Nn 
+%						\tl_replace_all:Nnn 
+%						{ NVn }
+
+%----- Typing shortcut
+\newcommand\scdvts[2]{%
+			\bool_if:NTF
+						\g_trans_direction_bool
+%						\bool_show:N \g_trans_direction_bool
+						{ \tl_replace_all:Nnn \l_myts_tl   { #1 }   { #2} }
+						{ \tl_replace_all:Nnn \l_myts_tl   { #2 }   { #1} }
+}
+%===
+\newcommand\dodeviast{%
+%nukta
+\scdvts  { qa }   { क़ } 
+\scdvts  { k͟ha }   { ख़ } 
+\scdvts  { ġa }   { ग़ } 
+\scdvts  { za }   { ज़ } 
+\scdvts  { fa }   { फ़ } 
+\scdvts  { ṛa }   { ड़ } 
+\scdvts  { ṛha }   { ढ़ } 
+%---
+\scdvts  { a }   { अ } 
+\scdvts  { ā }   { आ } 
+\scdvts  { i }   { इ } 
+\scdvts  { ī }   { ई } 
+\scdvts  { u }   { उ } 
+\scdvts  { ū }   { ऊ } 
+\scdvts  { e }   { ए } 
+\scdvts  { ai }   { ऐ } 
+\scdvts  { o }   { ओ } 
+\scdvts  { au }   { औ } 
+\scdvts  { ṛ }   { ऋ } 
+\scdvts  { ṝ }   { ॠ } 
+\scdvts  { ḷ }   { ऌ } 
+\scdvts  { ḹ }   { ॡ } 
+\scdvts  { ṃ }   { अं } 
+\scdvts  { ḥ }   { अः } 
+\scdvts  {  }   { अँ } 
+\scdvts  { ' }   { ऽ } 
+\scdvts  { ka }   { क } 
+\scdvts  { kha }   { ख } 
+\scdvts  { ga }   { ग } 
+\scdvts  { gha }   { घ } 
+\scdvts  { ṅa }   { ङ } 
+\scdvts  { ca }   { च } 
+\scdvts  { cha }   { छ } 
+\scdvts  { ja }   { ज } 
+\scdvts  { jha }   { झ } 
+\scdvts  { ña }   { ञ } 
+\scdvts  { ṭa }   { ट } 
+\scdvts  { ṭha }   { ठ } 
+\scdvts  { ḍa }   { ड } 
+\scdvts  { ḍha }   { ढ } 
+\scdvts  { ṇa }   { ण } 
+\scdvts  { ta }   { त } 
+\scdvts  { tha }   { थ } 
+\scdvts  { da }   { द } 
+\scdvts  { dha }   { ध } 
+\scdvts  { na }   { न } 
+\scdvts  { pa }   { प } 
+\scdvts  { pha }   { फ } 
+\scdvts  { ba }   { ब } 
+\scdvts  { bha }   { भ } 
+\scdvts  { ma }   { म } 
+\scdvts  { ya }   { य } 
+\scdvts  { ra }   { र } 
+\scdvts  { la }   { ल } 
+\scdvts  { va }   { व } 
+\scdvts  { śa }   { श } 
+\scdvts  { ṣa }   { ष } 
+\scdvts  { sa }   { स } 
+\scdvts  { ha }   { ह } 
+\scdvts  { e }   { े } 
+\scdvts  { o }   { ो } 
+\scdvts  { ṛ }   { ृ } 
+\scdvts  { ṝ }   { ॄ } 
+\scdvts  { ḷ }   { ॢ } 
+\scdvts  { ḹ }   { ॣ } 
+\scdvts  { ṃ }   { ं } 
+\scdvts  { m̐ }   { ँ } 
+\scdvts  { ā }   { ा } 
+\scdvts  { i }   { ि } 
+\scdvts  { ī }   { ी } 
+\scdvts  { u }   { ु } 
+\scdvts  { ū }   { ू } 
+\scdvts  { ai }   { ऐ } 
+\scdvts  { au }   { औ } 
+\scdvts  { e }   { ॅ } 
+\scdvts  { e }   { ॆ } 
+\scdvts  { e }   { े } 
+\scdvts  { ai }   { ै } 
+\scdvts  { o }   { ॉ } 
+\scdvts  { o }   { ॊ } 
+\scdvts  { o }   { ो } 
+\scdvts  { au }   { ौ } 
+\scdvts  { / }   { ् } 
+\scdvts  { aw }   { ॏ } 
+\scdvts  { om }   { ॐ } 
+\scdvts  { X }   { ॑ } 
+\scdvts  { X }   { ॒ } 
+\scdvts  { X }   { ॓ } 
+\scdvts  { X }   { ॔ } 
+\scdvts  { X }   { ॕ } 
+\scdvts  { ue }   { ॖ } 
+\scdvts  { ūe }   { ॗ } 
+\scdvts  { ḥ }   { ः } 
+\scdvts  { | }   { । } 
+\scdvts  { || }   { ॥ } 
+\scdvts  { 0 }   { ० } %{ \symbol{2406} } 
+\scdvts  { 1 }   { १ } %{ \symbol{2407} } 
+\scdvts  { 2 }   { २ } %{ \symbol{2408} } 
+\scdvts  { 3 }   { ३ } %{ \symbol{2409} } 
+\scdvts  { 4 }   { ४ } %{ \symbol{2410} } 
+\scdvts  { 5 }   { ५ } %{ \symbol{2411} } 
+\scdvts  { 6 }   { ६ } %{ \symbol{2412} } 
+\scdvts  { 7 }   { ७ } %{ \symbol{2413} } 
+\scdvts  { 8 }   { ८ } %{ \symbol{2414} } 
+\scdvts  { 9 }   { ९ } %{ \symbol{2415} } 
+%Telugu ------------
+\scdvts  { a }   { అ } 
+\scdvts  { ā }   { ఆ } 
+\scdvts  { i }   { ఇ } 
+\scdvts  { ī }   { ఈ } 
+\scdvts  { u }   { ఉ } 
+\scdvts  { ū }   { ఊ } 
+\scdvts  { e }   { ఎ } 
+\scdvts  { ai }   { ఐ } 
+\scdvts  { o }   { ఒ } 
+\scdvts  { au }   { ఔ } 
+\scdvts  { ṛ }   { ఋ } 
+\scdvts  { ṝ }   { ౠ } 
+\scdvts  { ḷ }   { ఌ } 
+\scdvts  { ḹ }   { ౡ } 
+\scdvts  { ṃ }   { ం } 
+\scdvts  { ḥ }   { ః } 
+
+
+
+
+\scdvts  { ka }   { క } 
+\scdvts  { kha }   { ఖ } 
+\scdvts  { ga }   { గ } 
+\scdvts  { gha }   { ఘ } 
+\scdvts  { ṅa }   { ఙ } 
+\scdvts  { ca }   { చ } 
+\scdvts  { cha }   { ఛ } 
+\scdvts  { ja }   { జ } 
+\scdvts  { jha }   { ఝ } 
+\scdvts  { ña }   { ఞ } 
+\scdvts  { ṭa }   { ట } 
+\scdvts  { ṭha }   { ఠ } 
+\scdvts  { ḍa }   { డ } 
+\scdvts  { ḍha }   { ఢ } 
+\scdvts  { ṇa }   { ణ } 
+\scdvts  { ta }   { త } 
+\scdvts  { tha }   { థ } 
+\scdvts  { da }   { ద } 
+\scdvts  { dha }   { ధ } 
+\scdvts  { na }   { న } 
+\scdvts  { pa }   { ప } 
+\scdvts  { pha }   { ఫ } 
+\scdvts  { ba }   { బ } 
+\scdvts  { bha }   { భ } 
+\scdvts  { ma }   { మ } 
+\scdvts  { ya }   { య } 
+\scdvts  { ra }   { ర } 
+\scdvts  { la }   { ల } 
+\scdvts  { va }   { వ } 
+\scdvts  { śa }   { శ } 
+\scdvts  { ṣa }   { ష } 
+\scdvts  { sa }   { స } 
+\scdvts  { ha }   { హ } 
+\scdvts  { e }   { ె } 
+\scdvts  { o }   { ొ } 
+\scdvts  { ṛ }   { ృ } 
+\scdvts  { ṝ }   { ౄ } 
+\scdvts  { ḷ }   { ౢ } 
+\scdvts  { ḹ }   { ౣ } 
+
+
+\scdvts  { ā }   { ా } 
+\scdvts  { i }   { ి } 
+\scdvts  { ī }   { ీ } 
+\scdvts  { u }   { ు } 
+\scdvts  { ū }   { ూ } 
+
+
+
+
+
+\scdvts  { ai }   { ై } 
+
+
+
+\scdvts  { au }   { ౌ } 
+\scdvts  { / }   { ్ } 
+
+
+
+
+
+
+
+
+
+
+
+
+\scdvts  { 0 }   { ౦ } 
+\scdvts  { 1 }   { ౧ } 
+\scdvts  { 2 }   { ౨ } 
+\scdvts  { 3 }   { ౩ } 
+\scdvts  { 4 }   { ౪ } 
+\scdvts  { 5 }   { ౫ } 
+\scdvts  { 6 }   { ౬ } 
+\scdvts  { 7 }   { ౭ } 
+\scdvts  { 8 }   { ౮ } 
+\scdvts  { 9 }   { ౯ } 
+\scdvts  { ē }   { ే } 
+\scdvts  { ō }   { ో } 
+\scdvts  { ē }   { ఏ } 
+\scdvts  { ō }   { ఓ } 
+\scdvts  { ḷa }   { ళ } 
+%\scdvts  { X }   { ़ } 
+%Tamil-----------
+\scdvts  { a }   { அ } 
+\scdvts  { ā }   { ஆ } 
+\scdvts  { i }   { இ } 
+\scdvts  { ī }   { ஈ } 
+\scdvts  { u }   { உ } 
+\scdvts  { ū }   { ஊ } 
+\scdvts  { e }   { எ } 
+\scdvts  { ai }   { ஐ } 
+\scdvts  { o }   { ஒ } 
+\scdvts  { au }   { ஔ } 
+
+
+
+
+\scdvts  { ṃ }   { ஂ } 
+\scdvts  { ḥ }   { ஃ } 
+
+
+\scdvts  { ka }   { க } 
+
+
+
+
+\scdvts  { ca }   { ச } 
+
+\scdvts  { ja }   { ஜ } 
+
+\scdvts  { ña }   { ஞ } 
+\scdvts  { ṭa }   { ட } 
+
+
+
+\scdvts  { ṇa }   { ண } 
+\scdvts  { ta }   { த } 
+
+
+
+\scdvts  { na }   { ந } 
+\scdvts  { pa }   { ப } 
+
+
+
+\scdvts  { ma }   { ம } 
+\scdvts  { ya }   { ய } 
+\scdvts  { ra }   { ர } 
+\scdvts  { la }   { ல } 
+\scdvts  { va }   { வ } 
+\scdvts  { śa }   { ஶ } 
+\scdvts  { ṣa }   { ஷ } 
+\scdvts  { sa }   { ஸ } 
+\scdvts  { ha }   { ஹ } 
+
+
+
+
+
+
+
+
+\scdvts  { ā }   { ா } 
+\scdvts  { i }   { ி } 
+\scdvts  { ī }   { ீ } 
+\scdvts  { u }   { ு } 
+\scdvts  { ū }   { ூ } 
+
+
+
+\scdvts  { e }   { ெ } 
+
+\scdvts  { ai }   { ை } 
+
+\scdvts  { o }   { ொ } 
+
+\scdvts  { au }   { ௌ } 
+\scdvts  { / }   { ் } 
+
+\scdvts  { om }   { ௐ } 
+
+
+
+
+
+
+
+
+
+
+\scdvts  { 0 }   { ௦ } 
+\scdvts  { 1 }   { ௧ } 
+\scdvts  { 2 }   { ௨ } 
+\scdvts  { 3 }   { ௩ } 
+\scdvts  { 4 }   { ௪ } 
+\scdvts  { 5 }   { ௫ } 
+\scdvts  { 6 }   { ௬ } 
+\scdvts  { 7 }   { ௭ } 
+\scdvts  { 8 }   { ௮ } 
+\scdvts  { 9 }   { ௯ } 
+\scdvts  { ē }   { ே } 
+\scdvts  { ō }   { ோ } 
+\scdvts  { ē }   { ஏ } 
+\scdvts  { ō }   { ஓ } 
+\scdvts  { ḷa }   { ள } 
+
+
+
+
+
+
+\scdvts  { ṉa }   { ன } 
+\scdvts  { ḻa }   { ழ } 
+\scdvts  { ṟa }   { ற } 
+
+%Kannada -------
+\scdvts  { ṅ }   { ಂ } 
+\scdvts  { ḥ }   { ಃ } 
+\scdvts  { a }   { ಅ } 
+\scdvts  { ā }   { ಆ } 
+\scdvts  { i }   { ಇ } 
+\scdvts  { ī }   { ಈ } 
+\scdvts  { u }   { ಉ } 
+\scdvts  { ū }   { ಊ } 
+\scdvts  { ṛ }   { ಋ } 
+\scdvts  { ḷ }   { ಌ } 
+\scdvts  { e }   { ಎ } 
+\scdvts  { ē }   { ಏ } 
+\scdvts  { ai }   { ಐ } 
+\scdvts  { o }   { ಒ } 
+\scdvts  { ō }   { ಓ } 
+\scdvts  { au }   { ಔ } 
+\scdvts  { ka }   { ಕ } 
+\scdvts  { kha }   { ಖ } 
+\scdvts  { ga }   { ಗ } 
+\scdvts  { gha }   { ಘ } 
+\scdvts  { ṅa }   { ಙ } 
+\scdvts  { ca }   { ಚ } 
+\scdvts  { cha }   { ಛ } 
+\scdvts  { ja }   { ಜ } 
+\scdvts  { jha }   { ಝ } 
+\scdvts  { ña }   { ಞ } 
+\scdvts  { ṭa }   { ಟ } 
+\scdvts  { ṭha }   { ಠ } 
+\scdvts  { ḍa }   { ಡ } 
+\scdvts  { ḍha }   { ಢ } 
+\scdvts  { ṇa }   { ಣ } 
+\scdvts  { ta }   { ತ } 
+\scdvts  { tha }   { ಥ } 
+\scdvts  { da }   { ದ } 
+\scdvts  { dha }   { ಧ } 
+\scdvts  { na }   { ನ } 
+\scdvts  { pa }   { ಪ } 
+\scdvts  { pha }   { ಫ } 
+\scdvts  { ba }   { ಬ } 
+\scdvts  { bha }   { ಭ } 
+\scdvts  { ma }   { ಮ } 
+\scdvts  { ya }   { ಯ } 
+\scdvts  { ra }   { ರ } 
+\scdvts  { la }   { ಲ } 
+\scdvts  { ḷa }   { ಳ } 
+\scdvts  { va }   { ವ } 
+\scdvts  { śa }   { ಶ } 
+\scdvts  { ṣa }   { ಷ } 
+\scdvts  { sa }   { ಸ } 
+\scdvts  { ha }   { ಹ } 
+\scdvts  { ā }   { ಾ } 
+\scdvts  { i }   { ಿ } 
+\scdvts  { ī }   { ೀ } 
+\scdvts  { u }   { ು } 
+\scdvts  { ū }   { ೂ } 
+\scdvts  { ṛ }   { ೃ } 
+\scdvts  { ṝ }   { ೄ } 
+\scdvts  { e }   { ೆ } 
+\scdvts  { ē }   { ೇ } 
+\scdvts  { ai }   { ೈ } 
+\scdvts  { o }   { ೊ } 
+\scdvts  { ō }   { ೋ } 
+\scdvts  { au }   { ೌ } 
+\scdvts  { / }   { ್ } 
+\scdvts  { ṝ }   { ೠ } 
+\scdvts  { ḹ }   { ೡ } 
+\scdvts  { ḷ }   { ೢ } 
+\scdvts  { ḹ }   { ೣ } 
+\scdvts  { 0 }   { ೦ } 
+\scdvts  { 1 }   { ೧ } 
+\scdvts  { 2 }   { ೨ } 
+\scdvts  { 3 }   { ೩ } 
+\scdvts  { 4 }   { ೪ } 
+\scdvts  { 5 }   { ೫ } 
+\scdvts  { 6 }   { ೬ } 
+\scdvts  { 7 }   { ೭ } 
+\scdvts  { 8 }   { ೮ } 
+\scdvts  { 9 }   { ೯ } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\scdvts  { fa }   { ೞ } 
+
+
+
+
+\scdvts  { ṟa }   { ಱ } 
+
+%Sinhala---------
+\scdvts  { ā }   { ා } 
+\scdvts  { æ }   { ැ } 
+\scdvts  { ǣ }   { ෑ } 
+\scdvts  { i }   { ි } 
+\scdvts  { ī }   { ී } 
+\scdvts  { u }   { ු } 
+\scdvts  { ū }   { ූ } 
+
+\scdvts  { e }   { ෙ } 
+\scdvts  { ē }   { ේ } 
+\scdvts  { ai }   { ෛ } 
+
+\scdvts  { o }   { ො } 
+\scdvts  { ō }   { ෝ } 
+\scdvts  { au }   { ෞ } 
+\scdvts  { r̥ }   { ෘ } 
+\scdvts  { r̥̄ }   { ෲ } 
+\scdvts  { l̥ }   { ෟ } 
+\scdvts  { l̥̄ }   { ෳ } 
+\scdvts  { a }   { අ } 
+\scdvts  { ā }   { ආ } 
+\scdvts  { æ }   { ඇ } 
+\scdvts  { ǣ }   { ඈ } 
+\scdvts  { i }   { ඉ } 
+\scdvts  { ī }   { ඊ } 
+\scdvts  { u }   { උ } 
+\scdvts  { ū }   { ඌ } 
+
+\scdvts  { e }   { එ } 
+\scdvts  { ē }   { ඒ } 
+\scdvts  { ai }   { ඓ } 
+
+\scdvts  { o }   { ඔ } 
+\scdvts  { ō }   { ඕ } 
+\scdvts  { au }   { ඖ } 
+\scdvts  { r̥ }   { ඍ } 
+\scdvts  { r̥̄ }   { ඎ } 
+\scdvts  { l̥ }   { ඏ } 
+\scdvts  { l̥̄ }   { ඐ } 
+
+\scdvts  { ka }   { ක } 
+\scdvts  { kha }   { ඛ } 
+\scdvts  { ga }   { ග } 
+\scdvts  { gha }   { ඝ } 
+\scdvts  { ṅa }   { ඞ } 
+\scdvts  { ca }   { ච } 
+\scdvts  { cha }   { ඡ } 
+\scdvts  { ja }   { ජ } 
+\scdvts  { jha }   { ඣ } 
+\scdvts  { ña }   { ඤ } 
+\scdvts  { ṭa }   { ට } 
+\scdvts  { ṭha }   { ඨ } 
+\scdvts  { ḍa }   { ඩ } 
+\scdvts  { ḍha }   { ඪ } 
+\scdvts  { ṇa }   { ණ } 
+\scdvts  { ta }   { ත } 
+\scdvts  { tha }   { ථ } 
+\scdvts  { da }   { ද } 
+\scdvts  { dha }   { ධ } 
+\scdvts  { na }   { න } 
+\scdvts  { ṉa }   { න. } 
+\scdvts  { pa }   { ප } 
+\scdvts  { pha }   { ඵ } 
+\scdvts  { ba }   { බ } 
+\scdvts  { bha }   { භ } 
+\scdvts  { ma }   { ම } 
+\scdvts  { ya }   { ය } 
+\scdvts  { ra }   { ර } 
+\scdvts  { ṟa }   { ර. } 
+
+\scdvts  { la }   { ල } 
+\scdvts  { ḷa }   { ළ } 
+\scdvts  { ḻa }   { ළ. } 
+\scdvts  { va }   { ව } 
+\scdvts  { śa }   { ශ } 
+\scdvts  { ṣa }   { ෂ } 
+\scdvts  { sa }   { ස } 
+\scdvts  { ha }   { හ } 
+
+
+
+
+
+
+\scdvts  { fa }   { ෆ } 
+
+
+
+
+
+
+
+\scdvts  { / }   { ් } 
+\scdvts  { 0 }   { ෦ } 
+\scdvts  { 1 }   { ෧ } 
+\scdvts  { 2 }   { ෨ } 
+\scdvts  { 3 }   { ෩ } 
+\scdvts  { 4 }   { ෪ } 
+\scdvts  { 5 }   { ෫ } 
+\scdvts  { 6 }   { ෬ } 
+\scdvts  { 7 }   { ෭ } 
+\scdvts  { 8 }   { ෮ } 
+\scdvts  { 9 }   { ෯ } 
+\scdvts  { n̆ga }   { ඟ } 
+\scdvts  { jña }   { ඥ } 
+\scdvts  { n̆ja }   { ඦ } 
+\scdvts  { n̆ḍa }   { ඬ } 
+\scdvts  { n̆da }   { ඳ } 
+\scdvts  { m̆ba }   { ඹ } 
+\scdvts  { ṇ }   { ං } 
+\scdvts  { ḥ }   { ඃ } 
+
+%xxx-------------
+
+
+
+}
+
+
+
+%===
+\newcommand\dodevuc{%
+\scdvts  { U+0900 }   { ऀ } 
+\scdvts  { U+0901 }   { ँ } 
+\scdvts  { U+0902 }   { ं } 
+\scdvts  { U+0903 }   { ः } 
+\scdvts  { U+0904 }   { ऄ } 
+\scdvts  { U+0905 }   { अ } 
+\scdvts  { U+0906 }   { आ } 
+\scdvts  { U+0907 }   { इ } 
+\scdvts  { U+0908 }   { ई } 
+\scdvts  { U+0909 }   { उ } 
+\scdvts  { U+090A }   { ऊ } 
+\scdvts  { U+090B }   { ऋ } 
+\scdvts  { U+090C }   { ऌ } 
+\scdvts  { U+090D }   { ऍ } 
+\scdvts  { U+090E }   { ऎ } 
+\scdvts  { U+090F }   { ए } 
+\scdvts  { U+0910 }   { ऐ } 
+\scdvts  { U+0911 }   { ऑ } 
+\scdvts  { U+0912 }   { ऒ } 
+\scdvts  { U+0913 }   { ओ } 
+\scdvts  { U+0914 }   { औ } 
+\scdvts  { U+0915 }   { क } 
+\scdvts  { U+0916 }   { ख } 
+\scdvts  { U+0917 }   { ग } 
+\scdvts  { U+0918 }   { घ } 
+\scdvts  { U+0919 }   { ङ } 
+\scdvts  { U+091A }   { च } 
+\scdvts  { U+091B }   { छ } 
+\scdvts  { U+091C }   { ज } 
+\scdvts  { U+091D }   { झ } 
+\scdvts  { U+091E }   { ञ } 
+\scdvts  { U+091F }   { ट } 
+\scdvts  { U+0920 }   { ठ } 
+\scdvts  { U+0921 }   { ड } 
+\scdvts  { U+0922 }   { ढ } 
+\scdvts  { U+0923 }   { ण } 
+\scdvts  { U+0924 }   { त } 
+\scdvts  { U+0925 }   { थ } 
+\scdvts  { U+0926 }   { द } 
+\scdvts  { U+0927 }   { ध } 
+\scdvts  { U+0928 }   { न } 
+\scdvts  { U+0929 }   { ऩ } 
+\scdvts  { U+092A }   { प } 
+\scdvts  { U+092B }   { फ } 
+\scdvts  { U+092C }   { ब } 
+\scdvts  { U+092D }   { भ } 
+\scdvts  { U+092E }   { म } 
+\scdvts  { U+092F }   { य } 
+\scdvts  { U+0930 }   { र } 
+\scdvts  { U+0931 }   { ऱ } 
+\scdvts  { U+0932 }   { ल } 
+\scdvts  { U+0933 }   { ळ } 
+\scdvts  { U+0934 }   { ऴ } 
+\scdvts  { U+0935 }   { व } 
+\scdvts  { U+0936 }   { श } 
+\scdvts  { U+0937 }   { ष } 
+\scdvts  { U+0938 }   { स } 
+\scdvts  { U+0939 }   { ह } 
+\scdvts  { U+093A }   { ऺ } 
+\scdvts  { U+093B }   { ऻ } 
+\scdvts  { U+093C }   { ़ } 
+\scdvts  { U+093D }   { ऽ } 
+\scdvts  { U+093E }   { ा } 
+\scdvts  { U+093F }   { ि } 
+\scdvts  { U+0940 }   { ी } 
+\scdvts  { U+0941 }   { ु } 
+\scdvts  { U+0942 }   { ू } 
+\scdvts  { U+0943 }   { ृ } 
+\scdvts  { U+0944 }   { ॄ } 
+\scdvts  { U+0945 }   { ॅ } 
+\scdvts  { U+0946 }   { ॆ } 
+\scdvts  { U+0947 }   { े } 
+\scdvts  { U+0948 }   { ै } 
+\scdvts  { U+0949 }   { ॉ } 
+\scdvts  { U+094A }   { ॊ } 
+\scdvts  { U+094B }   { ो } 
+\scdvts  { U+094C }   { ौ } 
+\scdvts  { U+094D }   { ् } 
+\scdvts  { U+094E }   { ॎ } 
+\scdvts  { U+094F }   { ॏ } 
+\scdvts  { U+0950 }   { ॐ } 
+\scdvts  { U+0951 }   { ॑ } 
+\scdvts  { U+0952 }   { ॒ } 
+\scdvts  { U+0953 }   { ॓ } 
+\scdvts  { U+0954 }   { ॔ } 
+\scdvts  { U+0955 }   { ॕ } 
+\scdvts  { U+0956 }   { ॖ } 
+\scdvts  { U+0957 }   { ॗ } 
+\scdvts  { U+0958 }   { क़ } 
+\scdvts  { U+0959 }   { ख़ } 
+\scdvts  { U+095A }   { ग़ } 
+\scdvts  { U+095B }   { ज़ } 
+\scdvts  { U+095C }   { ड़ } 
+\scdvts  { U+095D }   { ढ़ } 
+\scdvts  { U+095E }   { फ़ } 
+\scdvts  { U+095F }   { य़ } 
+\scdvts  { U+0960 }   { ॠ } 
+\scdvts  { U+0961 }   { ॡ } 
+\scdvts  { U+0962 }   { ॢ } 
+\scdvts  { U+0963 }   { ॣ } 
+\scdvts  { U+0964 }   { । } 
+\scdvts  { U+0965 }   { ॥ } 
+\scdvts  { U+0966 }   { ० } %०१२३४५६७८९
+\scdvts  { U+0967 }   { १ } 
+\scdvts  { U+0968 }   { २ } 
+\scdvts  { U+0969 }   { ३ } 
+\scdvts  { U+096A }   { ४ } 
+\scdvts  { U+096B }   { ५ } 
+\scdvts  { U+096C }   { ६ } 
+\scdvts  { U+096D }   { ७ } 
+\scdvts  { U+096E }   { ८ } 
+\scdvts  { U+096F }   { ९ } 
+\scdvts  { U+0970 }   { ॰ } 
+\scdvts  { U+0971 }   { ॱ } 
+\scdvts  { U+0972 }   { ॲ } 
+\scdvts  { U+0973 }   { ॳ } 
+\scdvts  { U+0974 }   { ॴ } 
+\scdvts  { U+0975 }   { ॵ } 
+\scdvts  { U+0976 }   { ॶ } 
+\scdvts  { U+0977 }   { ॷ } 
+\scdvts  { U+0978 }   { ॸ } 
+\scdvts  { U+0979 }   { ॹ } 
+\scdvts  { U+097A }   { ॺ } 
+\scdvts  { U+097B }   { ॻ } 
+\scdvts  { U+097C }   { ॼ } 
+\scdvts  { U+097D }   { ॽ } 
+\scdvts  { U+097E }   { ॾ } 
+\scdvts  { U+097F }   { ॿ } 
+\scdvts  { U+A8E0 }   { ꣠ } 
+\scdvts  { U+A8E1 }   { ꣡ } 
+\scdvts  { U+A8E2 }   { ꣢ } 
+\scdvts  { U+A8E3 }   { ꣣ } 
+\scdvts  { U+A8E4 }   { ꣤ } 
+\scdvts  { U+A8E5 }   { ꣥ } 
+\scdvts  { U+A8E6 }   { ꣦ } 
+\scdvts  { U+A8E7 }   { ꣧ } 
+\scdvts  { U+A8E8 }   { ꣨ } 
+\scdvts  { U+A8E9 }   { ꣩ } 
+\scdvts  { U+A8EA }   { ꣪ } 
+\scdvts  { U+A8EB }   { ꣫ } 
+\scdvts  { U+A8EC }   { ꣬ } 
+\scdvts  { U+A8ED }   { ꣭ } 
+\scdvts  { U+A8EE }   { ꣮ } 
+\scdvts  { U+A8EF }   { ꣯ } 
+\scdvts  { U+A8F0 }   { ꣰ } 
+\scdvts  { U+A8F1 }   { ꣱ } 
+\scdvts  { U+A8F2 }   { ꣲ } 
+\scdvts  { U+A8F3 }   { ꣳ } 
+\scdvts  { U+A8F4 }   { ꣴ } 
+\scdvts  { U+A8F5 }   { ꣵ } 
+\scdvts  { U+A8F6 }   { ꣶ } 
+\scdvts  { U+A8F7 }   { ꣷ } 
+\scdvts  { U+A8F8 }   { ꣸ } 
+\scdvts  { U+A8F9 }   { ꣹ } 
+\scdvts  { U+A8FA }   { ꣺ } 
+\scdvts  { U+A8FB }   { ꣻ } 
+\scdvts  { U+A8FC }   { ꣼ } 
+\scdvts  { U+A8FD }   { ꣽ } 
+\scdvts  { U+A8FE }   { ꣾ } 
+\scdvts  { U+A8FF }   { ꣿ } 
+}
+
+%===
+\newcommand\dovelthuis{%
+%
+			\bool_if:NT
+						\g_trans_direction_bool
+						{
+\tl_replace_all:Nnn \l_myts_tl { ;; } { ሴ𒓡𒓢}
+\tl_replace_all:Nnn \l_myts_tl { ; } { }
+						}
+
+\scdvts  { dcandrabvirama }   { ꣴ } 
+\scdvts  { candrabvirama }   { ꣳ } 
+\scdvts  { candabspace }   { ꣲ } 
+\scdvts  { cbavagraha }   { ꣷ } 
+\scdvts  { anudatta }   { ॒ } 
+\scdvts  { pushpika }   { ꣸ } 
+\scdvts  { yaheavy }   { ॺ } 
+\scdvts  { siddham }   { ꣼ } 
+\scdvts  { eprish }   { ॎ } 
+\scdvts  { udatta }   { ॑ } 
+\scdvts  { filler }   { ꣹ } 
+\scdvts  { nukta }   { ़ } 
+\scdvts  { grave }   { ॓ } 
+\scdvts  { acute }   { ॔ } 
+\scdvts  { caret }   { ꣺ } 
+\scdvts  { ..a= }   { ऄ } 
+\scdvts  { ..e- }   { ऎ } 
+\scdvts  { ..o- }   { ऒ } 
+\scdvts  { .kha }   { ख़ } 
+\scdvts  { ooe- }   { ॴ } 
+\scdvts  { uue- }   { ॷ } 
+\scdvts  { ddda }   { ॾ } 
+\scdvts  { cmka }   { ꣬ } 
+\scdvts  { cmna }   { ꣭ } 
+\scdvts  { cmpa }   { ꣮ } 
+\scdvts  { cmra }   { ꣯ } 
+\scdvts  { cmvi }   { ꣰ } 
+\scdvts  { cm.a }   { ꣱ } 
+\scdvts  { head }   { ꣻ } 
+\scdvts  { aa- }   { आ } 
+\scdvts  { ii- }   { ई } 
+\scdvts  { uu- }   { ऊ } 
+\scdvts  { .r- }   { ऋ } 
+\scdvts  { .l- }   { ऌ } 
+\scdvts  { ai- }   { ऐ } 
+\scdvts  { ~o- }   { ऑ } 
+\scdvts  { au- }   { औ } 
+\scdvts  { .th }   { ठ } 
+\scdvts  { .dh }   { ढ } 
+\scdvts  { nnn }   { ऩ } 
+\scdvts  { lll }   { ऴ } 
+\scdvts  { ooe }   { ऻ } 
+\scdvts  { ..e }   { ॆ } 
+\scdvts  { ..o }   { ॊ } 
+\scdvts  { ~ee }   { ॕ } 
+\scdvts  { uue }   { ॗ } 
+\scdvts  { .ga }   { ग़ } 
+\scdvts  { .Ra }   { ड़ } 
+\scdvts  { Rha }   { ढ़ } 
+\scdvts  { yya }   { य़ } 
+\scdvts  { .R- }   { ॠ } 
+\scdvts  { .L- }   { ॡ } 
+\scdvts  { ~a- }   { ॲ } 
+\scdvts  { oe- }   { ॳ } 
+\scdvts  { aw- }   { ॵ } 
+\scdvts  { ue- }   { ॶ } 
+\scdvts  { dda }   { ॸ } 
+\scdvts  { zha }   { ॹ } 
+\scdvts  { gga }   { ॻ } 
+\scdvts  { jja }   { ॼ } 
+\scdvts  { bba }   { ॿ } 
+\scdvts  { cma }   { ꣪ } 
+\scdvts  { cmu }   { ꣫ } 
+\scdvts  { cb2 }   { ꣵ } 
+\scdvts  { cb3 }   { ꣶ } 
+\scdvts  { .jo }   { ꣽ } 
+\scdvts  { ay- }   { ꣾ } 
+\scdvts  { /i }   { ऀ } 
+\scdvts  { .m }   { ं } 
+\scdvts  { .h }   { ः } 
+\scdvts  { a- }   { अ } 
+\scdvts  { i- }   { इ } 
+\scdvts  { u- }   { उ } 
+\scdvts  { ~e }   { ऍ } 
+\scdvts  { e- }   { ए } 
+\scdvts  { o- }   { ओ } 
+\scdvts  { kh }   { ख } 
+\scdvts  { gh }   { घ } 
+\scdvts  { "n }   { ङ } 
+\scdvts  { ch }   { छ } 
+\scdvts  { jh }   { झ } 
+\scdvts  { ~n }   { ञ } 
+\scdvts  { .t }   { ट } 
+\scdvts  { .d }   { ड } 
+\scdvts  { .n }   { ण } 
+\scdvts  { th }   { थ } 
+\scdvts  { dh }   { ध } 
+\scdvts  { ph }   { फ } 
+\scdvts  { bh }   { भ } 
+\scdvts  { rr }   { ऱ } 
+\scdvts  { "s }   { श } 
+\scdvts  { .s }   { ष } 
+\scdvts  { oe }   { ऺ } 
+\scdvts  { .a }   { ऽ } 
+\scdvts  { aa }   { ा } 
+\scdvts  { ii }   { ी } 
+\scdvts  { uu }   { ू } 
+\scdvts  { .r }   { ृ } 
+\scdvts  { .R }   { ॄ } 
+\scdvts  { ~a }   { ॅ } 
+\scdvts  { ai }   { ै } 
+\scdvts  { ~o }   { ॉ } 
+\scdvts  { au }   { ौ } 
+\scdvts  { \& }   { ् } 
+\scdvts  { aw }   { ॏ } 
+\scdvts  { .o }   { ॐ } 
+\scdvts  { ue }   { ॖ } 
+\scdvts  { qa }   { क़ } 
+\scdvts  { za }   { ज़ } 
+\scdvts  { fa }   { फ़ } 
+\scdvts  { .l }   { ॢ } 
+\scdvts  { .L }   { ॣ } 
+\scdvts  { || }   { ॥ } 
+%			\bool_if:NT
+%						\g_trans_direction_bool
+%						{
+\scdvts  { \# }   { ॱ } 
+%						}
+\scdvts  { gs }   { ॽ } 
+\scdvts  { c0 }   { ꣠ } 
+\scdvts  { c1 }   { ꣡ } 
+\scdvts  { c2 }   { ꣢ } 
+\scdvts  { c3 }   { ꣣ } 
+\scdvts  { c4 }   { ꣤ } 
+\scdvts  { c5 }   { ꣥ } 
+\scdvts  { c6 }   { ꣦ } 
+\scdvts  { c7 }   { ꣧ } 
+\scdvts  { c8 }   { ꣨ } 
+\scdvts  { c9 }   { ꣩ } 
+\scdvts  { ay }   { ꣿ } 
+\scdvts  { / }   { ँ } 
+\scdvts  { k }   { क } 
+\scdvts  { g }   { ग } 
+\scdvts  { c }   { च } 
+\scdvts  { j }   { ज } 
+\scdvts  { t }   { त } 
+\scdvts  { d }   { द } 
+\scdvts  { n }   { न } 
+\scdvts  { p }   { प } 
+\scdvts  { b }   { ब } 
+\scdvts  { m }   { म } 
+\scdvts  { y }   { य } 
+\scdvts  { r }   { र } 
+\scdvts  { l }   { ल } 
+\scdvts  { L }   { ळ } 
+\scdvts  { v }   { व } 
+\scdvts  { s }   { स } 
+\scdvts  { h }   { ह } 
+\scdvts  { i }   { ि } 
+\scdvts  { u }   { ु } 
+\scdvts  { e }   { े } 
+\scdvts  { o }   { ो } 
+\scdvts  { | }   { । } 
+\scdvts  { || }   { ॥ } 
+\scdvts  { 0 }   { ० } %{ \symbol{2406} } 
+\scdvts  { 1 }   { १ } %{ \symbol{2407} } 
+\scdvts  { 2 }   { २ } %{ \symbol{2408} } 
+\scdvts  { 3 }   { ३ } %{ \symbol{2409} } 
+\scdvts  { 4 }   { ४ } %{ \symbol{2410} } 
+\scdvts  { 5 }   { ५ } %{ \symbol{2411} } 
+\scdvts  { 6 }   { ६ } %{ \symbol{2412} } 
+\scdvts  { 7 }   { ७ } %{ \symbol{2413} } 
+\scdvts  { 8 }   { ८ } %{ \symbol{2414} } 
+\scdvts  { 9 }   { ९ } %{ \symbol{2415} } 
+			\bool_if:NT
+						\g_trans_direction_bool
+						{
+\scdvts  { @ }   { ॰ } 
+						}
+
+			\bool_if:NT
+						\g_trans_direction_bool
+						{
+\tl_replace_all:Nnn \l_myts_tl { ሴ𒓡𒓢} { ; }
+\tl_replace_all:Nnn \l_myts_tl   { a }   {  } 
+						}
+}
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+%===== IAST
+\NewDocumentCommand { \iast } { m } { \trdeviast {#1} }
+\NewDocumentCommand { \trdeviast } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\dodeviast
+\tl_use:N \l_myts_tl
+}
+
+%reverse direction:
+\newcommand\dodeviastridy{ 
+% remove inherent `a' if not needed
+%vowels:
+\regex_replace_all:nnN 
+					{ ([b-df-hj-np-tv-zḍḷḹḻṇñṉṟśṣṭ]{1})a([aeiouāēīōūæ]{1}) } 
+					{ \1\2 } 
+					\l_myts_tl
+%halant:
+\regex_replace_all:nnN 
+					{ ([b-df-hj-np-tv-zḍḷḹḻṇṉṛṟśṣṭ]{1})a/ } 
+					{ \1 } 
+					\l_myts_tl
+}
+
+%=====
+\NewDocumentCommand { \iastr } { m } { \trdeviastr {#1} }
+\NewDocumentCommand { \trdeviastr } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\bool_gset_false:N 
+					\g_trans_direction_bool
+%\tl_show:N \l_myts_tl					
+\dodeviast
+\dodeviastridy
+\bool_gset_true:N 
+					\g_trans_direction_bool
+\tl_use:N \l_myts_tl
+}
+
+
+%---- Environments
+
+\NewDocumentEnvironment{enviast}{ O{\fdeva} +b }
+{
+#1
+\tl_set:Nn \l_myts_tl { #2 }
+\dodeviast
+\tl_use:N \l_myts_tl
+}
+{ }
+
+\NewDocumentEnvironment{enviastr}{ +b }
+{
+
+\tl_set:Nn \l_myts_tl { #1 }
+\bool_gset_false:N 
+					\g_trans_direction_bool
+\dodeviast
+\dodeviastridy
+\bool_gset_true:N 
+					\g_trans_direction_bool
+\tl_use:N \l_myts_tl
+}
+{ }
+
+
+%===== Unicode
+\NewDocumentCommand { \duc } { m } { \trdevuc {#1} }
+\NewDocumentCommand { \trdevuc } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\dodevuc
+\tl_use:N \l_myts_tl
+}
+
+%reverse direction:
+%=====
+\NewDocumentCommand { \ducr } { m } { \trdevucr {#1} }
+\NewDocumentCommand { \trdevucr } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\bool_gset_false:N 
+					\g_trans_direction_bool
+%\tl_show:N \l_myts_tl					
+\dodevuc
+\bool_gset_true:N 
+					\g_trans_direction_bool
+\tl_use:N \l_myts_tl
+}
+
+
+%---- Environments
+
+\NewDocumentEnvironment{envdevuc}{ O{\fdeva} +b }
+{
+#1
+\tl_set:Nn \l_myts_tl { #2 }
+\dodevuc
+\tl_use:N \l_myts_tl
+}
+{ }
+
+\NewDocumentEnvironment{envdevucr}{ +b }
+{
+
+\tl_set:Nn \l_myts_tl { #1 }
+\bool_gset_false:N 
+					\g_trans_direction_bool
+\dodevuc
+\bool_gset_true:N 
+					\g_trans_direction_bool
+\tl_use:N \l_myts_tl
+}
+{ }
+
+
+
+
+%===== Velthuis
+\NewDocumentCommand { \vh } { m } { \trvelthuis {#1} }
+\NewDocumentCommand { \trvelthuis } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\dovelthuis
+\tl_use:N \l_myts_tl
+}
+
+%reverse direction:
+%=====
+\NewDocumentCommand { \vhr } { m } { \trvelthuisr {#1} }
+\NewDocumentCommand { \trvelthuisr } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\bool_gset_false:N 
+					\g_trans_direction_bool
+%\tl_show:N \l_myts_tl					
+\dovelthuis
+\bool_gset_true:N 
+					\g_trans_direction_bool
+\tl_use:N \l_myts_tl
+}
+
+
+%---- Environments
+
+\NewDocumentEnvironment{velthuis}{ O{\fdeva} +b }
+{
+#1
+\tl_set:Nn \l_myts_tl { #2 }
+\dovelthuis
+\tl_use:N \l_myts_tl
+}
+{ }
+
+\NewDocumentEnvironment{velthuisr}{ O{\fdeva} +b }
+{
+#1
+\tl_set:Nn \l_myts_tl { #2 }
+\bool_gset_false:N 
+					\g_trans_direction_bool
+\dovelthuis
+\bool_gset_true:N 
+					\g_trans_direction_bool
+\tl_use:N \l_myts_tl
+}
+{ }
+
+
+\ExplSyntaxOff
+
+
+
+
+%====================================
+\begin{document}
+
+\section{Sample -- Velthuis}
+\begin{tabular}{llll}
+\rowcolor{blue!7}
+Input type & Example & Result & Code\\
+\hline
+Direct input & \fdeva देवनागरी & \fdeva देवनागरी & \\
+Velthuis $l$3 & devanaagarii & \fdeva \vh{devanaagarii} & \cdr[\fdeva]{\vh{ka}}\\
+%Reverse & \fdeva देवनागरी &  \vh{देवनागरी} & xxx\\
+Unicode & & & \cdr[\fdeva]{\duc{U+0915}}\\
+\hline
+\end{tabular}
+
+
+
+\textbackslash ducr\{{\fdeva क ल्ब}\} $\mapsto$ \ducr{क ल्ब}
+
+\textbackslash vhr\{{\fdeva क ल्ब}\} $\mapsto$ \vhr{क ल्ब}
+
+\ducr{{\fdeva\vh{ka}}}
+
+{\fdeva देवनागरी कूल्बनन} $\mapsto$ \iastr{देवनागरी कूल्बनन}
+
+\bigskip
+Use \textbackslash \& for conjuncts: 
+la + ba = {\fdeva \vh{laba}}; 
+la + \textbackslash \& + ba = {\fdeva \vh{la\&ba}}
+
+\bigskip
+Use U+094D for conjuncts: 
+U+0932 + U+092C = {\fdeva \duc{U+0932U+092C}}; 
+U+0932 + U+094D + U+092C = {\fdeva \duc{U+0932U+094DU+092C}}
+
+{\fdeva
+शत्रुघ्नाय अविघ्नाय विघ्नकोटि-हराय च।\\
+रक्षोघ्नाय तमोघ्नाय भूतघ्नाय नमो नमः॥१।५॥\\
+अनादिस्त्व-मनन्तस्त्व-मभूतो भूत-विग्रहः।\\
+स्तुति-स्तुत्य-स्तवप्रीतः स्तोता नेता नियामकः॥१।६॥
+}
+
+\begin{enviastr}
+शत्रुघ्नाय अविघ्नाय विघ्नकोटि-हराय च।\\
+रक्षोघ्नाय तमोघ्नाय भूतघ्नाय नमो नमः॥१।५॥\\
+अनादिस्त्व-मनन्तस्त्व-मभूतो भूत-विग्रहः।\\
+स्तुति-स्तुत्य-स्तवप्रीतः स्तोता नेता नियामकः॥१।६॥
+\end{enviastr}
+
+\bigskip
+Transliterations
+
+\bigskip
+\small
+\begin{multicols}{6}
+\noindent /i = {\fdeva \vh{/i}}\par
+\noindent / = {\fdeva \vh{/}}\par
+\noindent .m = {\fdeva \vh{.m}}\par
+\noindent .h = {\fdeva \vh{.h}}\par
+\noindent ..a= = {\fdeva \vh{..a=}}\par
+\noindent a- = {\fdeva \vh{a-}}\par
+\noindent aa- = {\fdeva \vh{aa-}}\par
+\noindent i- = {\fdeva \vh{i-}}\par
+\noindent ii- = {\fdeva \vh{ii-}}\par
+\noindent u- = {\fdeva \vh{u-}}\par
+\noindent uu- = {\fdeva \vh{uu-}}\par
+\noindent .r- = {\fdeva \vh{.r-}}\par
+\noindent .l- = {\fdeva \vh{.l-}}\par
+\noindent ~e = {\fdeva \vh{~e}}\par
+\noindent ..e- = {\fdeva \vh{..e-}}\par
+\noindent e- = {\fdeva \vh{e-}}\par
+\noindent ai- = {\fdeva \vh{ai-}}\par
+\noindent ~o- = {\fdeva \vh{~o-}}\par
+\noindent ..o- = {\fdeva \vh{..o-}}\par
+\noindent o- = {\fdeva \vh{o-}}\par
+\noindent au- = {\fdeva \vh{au-}}\par
+\noindent k = {\fdeva \vh{k}}\par
+\noindent kh = {\fdeva \vh{kh}}\par
+\noindent g = {\fdeva \vh{g}}\par
+\noindent gh = {\fdeva \vh{gh}}\par
+\noindent "n = {\fdeva \vh{"n}}\par
+\noindent c = {\fdeva \vh{c}}\par
+\noindent ch = {\fdeva \vh{ch}}\par
+\noindent j = {\fdeva \vh{j}}\par
+\noindent jh = {\fdeva \vh{jh}}\par
+\noindent ~n = {\fdeva \vh{~n}}\par
+\noindent .t = {\fdeva \vh{.t}}\par
+\noindent .th = {\fdeva \vh{.th}}\par
+\noindent .d = {\fdeva \vh{.d}}\par
+\noindent .dh = {\fdeva \vh{.dh}}\par
+\noindent .n = {\fdeva \vh{.n}}\par
+\noindent t = {\fdeva \vh{t}}\par
+\noindent th = {\fdeva \vh{th}}\par
+\noindent d = {\fdeva \vh{d}}\par
+\noindent dh = {\fdeva \vh{dh}}\par
+\noindent n = {\fdeva \vh{n}}\par
+\noindent nnn = {\fdeva \vh{nnn}}\par
+\noindent p = {\fdeva \vh{p}}\par
+\noindent ph = {\fdeva \vh{ph}}\par
+\noindent b = {\fdeva \vh{b}}\par
+\noindent bh = {\fdeva \vh{bh}}\par
+\noindent m = {\fdeva \vh{m}}\par
+\noindent y = {\fdeva \vh{y}}\par
+\noindent r = {\fdeva \vh{r}}\par
+\noindent rr = {\fdeva \vh{rr}}\par
+\noindent l = {\fdeva \vh{l}}\par
+\noindent L = {\fdeva \vh{L}}\par
+\noindent lll = {\fdeva \vh{lll}}\par
+\noindent v = {\fdeva \vh{v}}\par
+\noindent "s = {\fdeva \vh{"s}}\par
+\noindent .s = {\fdeva \vh{.s}}\par
+\noindent s = {\fdeva \vh{s}}\par
+\noindent h = {\fdeva \vh{h}}\par
+\noindent oe = {\fdeva \vh{oe}}\par
+\noindent ooe = {\fdeva \vh{ooe}}\par
+\noindent nukta = {\fdeva \vh{nukta}}\par
+\noindent .a = {\fdeva \vh{.a}}\par
+\noindent aa = {\fdeva \vh{aa}}\par
+\noindent i = {\fdeva \vh{i}}\par
+\noindent ii = {\fdeva \vh{ii}}\par
+\noindent u = {\fdeva \vh{u}}\par
+\noindent uu = {\fdeva \vh{uu}}\par
+\noindent .r = {\fdeva \vh{.r}}\par
+\noindent .R = {\fdeva \vh{.R}}\par
+\noindent ~a = {\fdeva \vh{~a}}\par
+\noindent ..e = {\fdeva \vh{..e}}\par
+\noindent e = {\fdeva \vh{e}}\par
+\noindent ai = {\fdeva \vh{ai}}\par
+\noindent ~o = {\fdeva \vh{~o}}\par
+\noindent ..o = {\fdeva \vh{..o}}\par
+\noindent o = {\fdeva \vh{o}}\par
+\noindent au = {\fdeva \vh{au}}\par
+\noindent \textbackslash\& = {\fdeva \vh{\&}}\par
+\noindent eprish = {\fdeva \vh{eprish}}\par
+\noindent aw = {\fdeva \vh{aw}}\par
+\noindent .o = {\fdeva \vh{.o}}\par
+\noindent udatta = {\fdeva \vh{udatta}}\par
+\noindent anudatta = {\fdeva \vh{anudatta}}\par
+\noindent grave = {\fdeva \vh{grave}}\par
+\noindent acute = {\fdeva \vh{acute}}\par
+\noindent ~ee = {\fdeva \vh{~ee}}\par
+\noindent ue = {\fdeva \vh{ue}}\par
+\noindent uue = {\fdeva \vh{uue}}\par
+\noindent qa = {\fdeva \vh{qa}}\par
+\noindent .kha = {\fdeva \vh{.kha}}\par
+\noindent .ga = {\fdeva \vh{.ga}}\par
+\noindent za = {\fdeva \vh{za}}\par
+\noindent .Ra = {\fdeva \vh{.Ra}}\par
+\noindent Rha = {\fdeva \vh{Rha}}\par
+\noindent fa = {\fdeva \vh{fa}}\par
+\noindent yya = {\fdeva \vh{yya}}\par
+\noindent .R- = {\fdeva \vh{.R-}}\par
+\noindent .L- = {\fdeva \vh{.L-}}\par
+\noindent .l = {\fdeva \vh{.l}}\par
+\noindent .L = {\fdeva \vh{.L}}\par
+\noindent | = {\fdeva \vh{|}}\par
+\noindent || = {\fdeva \vh{||}}\par
+\noindent 0 = {\fdeva \vh{0}}\par
+\noindent 1 = {\fdeva \vh{1}}\par
+\noindent 2 = {\fdeva \vh{2}}\par
+\noindent 3 = {\fdeva \vh{3}}\par
+\noindent 4 = {\fdeva \vh{4}}\par
+\noindent 5 = {\fdeva \vh{5}}\par
+\noindent 6 = {\fdeva \vh{6}}\par
+\noindent 7 = {\fdeva \vh{7}}\par
+\noindent 8 = {\fdeva \vh{8}}\par
+\noindent 9 = {\fdeva \vh{9}}\par
+\noindent @ = {\fdeva \vh{@}}\par
+\noindent \textbackslash\# = {\fdeva \vh{\#}}\par
+\noindent ~a- = {\fdeva \vh{~a-}}\par
+\noindent oe- = {\fdeva \vh{oe-}}\par
+\noindent ooe- = {\fdeva \vh{ooe-}}\par
+\noindent aw- = {\fdeva \vh{aw-}}\par
+\noindent ue- = {\fdeva \vh{ue-}}\par
+\noindent uue- = {\fdeva \vh{uue-}}\par
+\noindent dda = {\fdeva \vh{dda}}\par
+\noindent zha = {\fdeva \vh{zha}}\par
+\noindent yaheavy = {\fdeva \vh{yaheavy}}\par
+\noindent gga = {\fdeva \vh{gga}}\par
+\noindent jja = {\fdeva \vh{jja}}\par
+\noindent gs = {\fdeva \vh{gs}}\par
+\noindent ddda = {\fdeva \vh{ddda}}\par
+\noindent bba = {\fdeva \vh{bba}}\par
+\noindent c0 = {\fdeva \vh{c0}}\par
+\noindent c1 = {\fdeva \vh{c1}}\par
+\noindent c2 = {\fdeva \vh{c2}}\par
+\noindent c3 = {\fdeva \vh{c3}}\par
+\noindent c4 = {\fdeva \vh{c4}}\par
+\noindent c5 = {\fdeva \vh{c5}}\par
+\noindent c6 = {\fdeva \vh{c6}}\par
+\noindent c7 = {\fdeva \vh{c7}}\par
+\noindent c8 = {\fdeva \vh{c8}}\par
+\noindent c9 = {\fdeva \vh{c9}}\par
+\noindent cma = {\fdeva \vh{cma}}\par
+\noindent cmu = {\fdeva \vh{cmu}}\par
+\noindent cmka = {\fdeva \vh{cmka}}\par
+\noindent cmna = {\fdeva \vh{cmna}}\par
+\noindent cmpa = {\fdeva \vh{cmpa}}\par
+\noindent cmra = {\fdeva \vh{cmra}}\par
+\noindent cmvi = {\fdeva \vh{cmvi}}\par
+\noindent cm.a = {\fdeva \vh{cm.a}}\par
+\noindent candabspace = {\fdeva \vh{candabspace}}\par
+\noindent candrabvirama = {\fdeva \vh{candrabvirama}}\par
+\noindent dcandrabvirama = {\fdeva \vh{dcandrabvirama}}\par
+\noindent cb2 = {\fdeva \vh{cb2}}\par
+\noindent cb3 = {\fdeva \vh{cb3}}\par
+\noindent cbavagraha = {\fdeva \vh{cbavagraha}}\par
+\noindent pushpika = {\fdeva \vh{pushpika}}\par
+\noindent filler = {\fdeva \vh{filler}}\par
+\noindent caret = {\fdeva \vh{caret}}\par
+\noindent head = {\fdeva \vh{head}}\par
+\noindent siddham = {\fdeva \vh{siddham}}\par
+\noindent .jo = {\fdeva \vh{.jo}}\par
+\noindent ay- = {\fdeva \vh{ay-}}\par
+\noindent ay = {\fdeva \vh{ay}}\par
+\end{multicols}
+
+
+{\fdeva \vh{lL.l.L.l-.L-}}
+
+\newpage
+\bigskip
+\small
+\begin{multicols}{5}
+\noindent {U+0900} = {\fdeva\duc{U+0900}}\par
+\noindent {U+0901} = {\fdeva\duc{U+0901}}\par
+\noindent {U+0902} = {\fdeva\duc{U+0902}}\par
+\noindent {U+0903} = {\fdeva\duc{U+0903}}\par
+\noindent {U+0904} = {\fdeva\duc{U+0904}}\par
+\noindent {U+0905} = {\fdeva\duc{U+0905}}\par
+\noindent {U+0906} = {\fdeva\duc{U+0906}}\par
+\noindent {U+0907} = {\fdeva\duc{U+0907}}\par
+\noindent {U+0908} = {\fdeva\duc{U+0908}}\par
+\noindent {U+0909} = {\fdeva\duc{U+0909}}\par
+\noindent {U+090A} = {\fdeva\duc{U+090A}}\par
+\noindent {U+090B} = {\fdeva\duc{U+090B}}\par
+\noindent {U+090C} = {\fdeva\duc{U+090C}}\par
+\noindent {U+090D} = {\fdeva\duc{U+090D}}\par
+\noindent {U+090E} = {\fdeva\duc{U+090E}}\par
+\noindent {U+090F} = {\fdeva\duc{U+090F}}\par
+\noindent {U+0910} = {\fdeva\duc{U+0910}}\par
+\noindent {U+0911} = {\fdeva\duc{U+0911}}\par
+\noindent {U+0912} = {\fdeva\duc{U+0912}}\par
+\noindent {U+0913} = {\fdeva\duc{U+0913}}\par
+\noindent {U+0914} = {\fdeva\duc{U+0914}}\par
+\noindent {U+0915} = {\fdeva\duc{U+0915}}\par
+\noindent {U+0916} = {\fdeva\duc{U+0916}}\par
+\noindent {U+0917} = {\fdeva\duc{U+0917}}\par
+\noindent {U+0918} = {\fdeva\duc{U+0918}}\par
+\noindent {U+0919} = {\fdeva\duc{U+0919}}\par
+\noindent {U+091A} = {\fdeva\duc{U+091A}}\par
+\noindent {U+091B} = {\fdeva\duc{U+091B}}\par
+\noindent {U+091C} = {\fdeva\duc{U+091C}}\par
+\noindent {U+091D} = {\fdeva\duc{U+091D}}\par
+\noindent {U+091E} = {\fdeva\duc{U+091E}}\par
+\noindent {U+091F} = {\fdeva\duc{U+091F}}\par
+\noindent {U+0920} = {\fdeva\duc{U+0920}}\par
+\noindent {U+0921} = {\fdeva\duc{U+0921}}\par
+\noindent {U+0922} = {\fdeva\duc{U+0922}}\par
+\noindent {U+0923} = {\fdeva\duc{U+0923}}\par
+\noindent {U+0924} = {\fdeva\duc{U+0924}}\par
+\noindent {U+0925} = {\fdeva\duc{U+0925}}\par
+\noindent {U+0926} = {\fdeva\duc{U+0926}}\par
+\noindent {U+0927} = {\fdeva\duc{U+0927}}\par
+\noindent {U+0928} = {\fdeva\duc{U+0928}}\par
+\noindent {U+0929} = {\fdeva\duc{U+0929}}\par
+\noindent {U+092A} = {\fdeva\duc{U+092A}}\par
+\noindent {U+092B} = {\fdeva\duc{U+092B}}\par
+\noindent {U+092C} = {\fdeva\duc{U+092C}}\par
+\noindent {U+092D} = {\fdeva\duc{U+092D}}\par
+\noindent {U+092E} = {\fdeva\duc{U+092E}}\par
+\noindent {U+092F} = {\fdeva\duc{U+092F}}\par
+\noindent {U+0930} = {\fdeva\duc{U+0930}}\par
+\noindent {U+0931} = {\fdeva\duc{U+0931}}\par
+\noindent {U+0932} = {\fdeva\duc{U+0932}}\par
+\noindent {U+0933} = {\fdeva\duc{U+0933}}\par
+\noindent {U+0934} = {\fdeva\duc{U+0934}}\par
+\noindent {U+0935} = {\fdeva\duc{U+0935}}\par
+\noindent {U+0936} = {\fdeva\duc{U+0936}}\par
+\noindent {U+0937} = {\fdeva\duc{U+0937}}\par
+\noindent {U+0938} = {\fdeva\duc{U+0938}}\par
+\noindent {U+0939} = {\fdeva\duc{U+0939}}\par
+\noindent {U+093A} = {\fdeva\duc{U+093A}}\par
+\noindent {U+093B} = {\fdeva\duc{U+093B}}\par
+\noindent {U+093C} = {\fdeva\duc{U+093C}}\par
+\noindent {U+093D} = {\fdeva\duc{U+093D}}\par
+\noindent {U+093E} = {\fdeva\duc{U+093E}}\par
+\noindent {U+093F} = {\fdeva\duc{U+093F}}\par
+\noindent {U+0940} = {\fdeva\duc{U+0940}}\par
+\noindent {U+0941} = {\fdeva\duc{U+0941}}\par
+\noindent {U+0942} = {\fdeva\duc{U+0942}}\par
+\noindent {U+0943} = {\fdeva\duc{U+0943}}\par
+\noindent {U+0944} = {\fdeva\duc{U+0944}}\par
+\noindent {U+0945} = {\fdeva\duc{U+0945}}\par
+\noindent {U+0946} = {\fdeva\duc{U+0946}}\par
+\noindent {U+0947} = {\fdeva\duc{U+0947}}\par
+\noindent {U+0948} = {\fdeva\duc{U+0948}}\par
+\noindent {U+0949} = {\fdeva\duc{U+0949}}\par
+\noindent {U+094A} = {\fdeva\duc{U+094A}}\par
+\noindent {U+094B} = {\fdeva\duc{U+094B}}\par
+\noindent {U+094C} = {\fdeva\duc{U+094C}}\par
+\noindent {U+094D} = {\fdeva\duc{U+094D}}\par
+\noindent {U+094E} = {\fdeva\duc{U+094E}}\par
+\noindent {U+094F} = {\fdeva\duc{U+094F}}\par
+\noindent {U+0950} = {\fdeva\duc{U+0950}}\par
+\noindent {U+0951} = {\fdeva\duc{U+0951}}\par
+\noindent {U+0952} = {\fdeva\duc{U+0952}}\par
+\noindent {U+0953} = {\fdeva\duc{U+0953}}\par
+\noindent {U+0954} = {\fdeva\duc{U+0954}}\par
+\noindent {U+0955} = {\fdeva\duc{U+0955}}\par
+\noindent {U+0956} = {\fdeva\duc{U+0956}}\par
+\noindent {U+0957} = {\fdeva\duc{U+0957}}\par
+\noindent {U+0958} = {\fdeva\duc{U+0958}}\par
+\noindent {U+0959} = {\fdeva\duc{U+0959}}\par
+\noindent {U+095A} = {\fdeva\duc{U+095A}}\par
+\noindent {U+095B} = {\fdeva\duc{U+095B}}\par
+\noindent {U+095C} = {\fdeva\duc{U+095C}}\par
+\noindent {U+095D} = {\fdeva\duc{U+095D}}\par
+\noindent {U+095E} = {\fdeva\duc{U+095E}}\par
+\noindent {U+095F} = {\fdeva\duc{U+095F}}\par
+\noindent {U+0960} = {\fdeva\duc{U+0960}}\par
+\noindent {U+0961} = {\fdeva\duc{U+0961}}\par
+\noindent {U+0962} = {\fdeva\duc{U+0962}}\par
+\noindent {U+0963} = {\fdeva\duc{U+0963}}\par
+\noindent {U+0964} = {\fdeva\duc{U+0964}}\par
+\noindent {U+0965} = {\fdeva\duc{U+0965}}\par
+\noindent {U+0966} = {\fdeva\duc{U+0966}}\par
+\noindent {U+0967} = {\fdeva\duc{U+0967}}\par
+\noindent {U+0968} = {\fdeva\duc{U+0968}}\par
+\noindent {U+0969} = {\fdeva\duc{U+0969}}\par
+\noindent {U+096A} = {\fdeva\duc{U+096A}}\par
+\noindent {U+096B} = {\fdeva\duc{U+096B}}\par
+\noindent {U+096C} = {\fdeva\duc{U+096C}}\par
+\noindent {U+096D} = {\fdeva\duc{U+096D}}\par
+\noindent {U+096E} = {\fdeva\duc{U+096E}}\par
+\noindent {U+096F} = {\fdeva\duc{U+096F}}\par
+\noindent {U+0970} = {\fdeva\duc{U+0970}}\par
+\noindent {U+0971} = {\fdeva\duc{U+0971}}\par
+\noindent {U+0972} = {\fdeva\duc{U+0972}}\par
+\noindent {U+0973} = {\fdeva\duc{U+0973}}\par
+\noindent {U+0974} = {\fdeva\duc{U+0974}}\par
+\noindent {U+0975} = {\fdeva\duc{U+0975}}\par
+\noindent {U+0976} = {\fdeva\duc{U+0976}}\par
+\noindent {U+0977} = {\fdeva\duc{U+0977}}\par
+\noindent {U+0978} = {\fdeva\duc{U+0978}}\par
+\noindent {U+0979} = {\fdeva\duc{U+0979}}\par
+\noindent {U+097A} = {\fdeva\duc{U+097A}}\par
+\noindent {U+097B} = {\fdeva\duc{U+097B}}\par
+\noindent {U+097C} = {\fdeva\duc{U+097C}}\par
+\noindent {U+097D} = {\fdeva\duc{U+097D}}\par
+\noindent {U+097E} = {\fdeva\duc{U+097E}}\par
+\noindent {U+097F} = {\fdeva\duc{U+097F}}\par
+\noindent {U+A8E0} = {\fdeva\duc{U+A8E0}}\par
+\noindent {U+A8E1} = {\fdeva\duc{U+A8E1}}\par
+\noindent {U+A8E2} = {\fdeva\duc{U+A8E2}}\par
+\noindent {U+A8E3} = {\fdeva\duc{U+A8E3}}\par
+\noindent {U+A8E4} = {\fdeva\duc{U+A8E4}}\par
+\noindent {U+A8E5} = {\fdeva\duc{U+A8E5}}\par
+\noindent {U+A8E6} = {\fdeva\duc{U+A8E6}}\par
+\noindent {U+A8E7} = {\fdeva\duc{U+A8E7}}\par
+\noindent {U+A8E8} = {\fdeva\duc{U+A8E8}}\par
+\noindent {U+A8E9} = {\fdeva\duc{U+A8E9}}\par
+\noindent {U+A8EA} = {\fdeva\duc{U+A8EA}}\par
+\noindent {U+A8EB} = {\fdeva\duc{U+A8EB}}\par
+\noindent {U+A8EC} = {\fdeva\duc{U+A8EC}}\par
+\noindent {U+A8ED} = {\fdeva\duc{U+A8ED}}\par
+\noindent {U+A8EE} = {\fdeva\duc{U+A8EE}}\par
+\noindent {U+A8EF} = {\fdeva\duc{U+A8EF}}\par
+\noindent {U+A8F0} = {\fdeva\duc{U+A8F0}}\par
+\noindent {U+A8F1} = {\fdeva\duc{U+A8F1}}\par
+\noindent {U+A8F2} = {\fdeva\duc{U+A8F2}}\par
+\noindent {U+A8F3} = {\fdeva\duc{U+A8F3}}\par
+\noindent {U+A8F4} = {\fdeva\duc{U+A8F4}}\par
+\noindent {U+A8F5} = {\fdeva\duc{U+A8F5}}\par
+\noindent {U+A8F6} = {\fdeva\duc{U+A8F6}}\par
+\noindent {U+A8F7} = {\fdeva\duc{U+A8F7}}\par
+\noindent {U+A8F8} = {\fdeva\duc{U+A8F8}}\par
+\noindent {U+A8F9} = {\fdeva\duc{U+A8F9}}\par
+\noindent {U+A8FA} = {\fdeva\duc{U+A8FA}}\par
+\noindent {U+A8FB} = {\fdeva\duc{U+A8FB}}\par
+\noindent {U+A8FC} = {\fdeva\duc{U+A8FC}}\par
+\noindent {U+A8FD} = {\fdeva\duc{U+A8FD}}\par
+\noindent {U+A8FE} = {\fdeva\duc{U+A8FE}}\par
+\noindent {U+A8FF} = {\fdeva\duc{U+A8FF}}\par
+\end{multicols}
+
+\newpage
+
+Hindi
+
+आम एक प्रकार का रसीला फल होता है। इसे भारत में फलों का राजा भी बोलते हैं। इसकी मूल प्रजाति को भारतीय आम कहते हैं, जिसका वैज्ञानिक नाम मेंगीफेरा इंडिका है। आमों की प्रजाति को मेंगीफेरा कहा जाता है। इस फल की प्रजाति पहले केवल भारतीय उपमहाद्वीप में मिलती थी, इसके बाद धीरे धीरे अन्य देशों में फैलने लगी। इसका सबसे अधिक उत्पादन भारत में होता है। यह भारत, पाकिस्तान और फिलीपींस में राष्ट्रीय फल माना जाता है और बांग्लादेश में इसके पेड़ को राष्ट्रीय पेड़ का दर्जा प्राप्त है। 
+
+\iastr{आम एक प्रकार का रसीला फल होता है। इसे भारत में फलों का राजा भी बोलते हैं। इसकी मूल प्रजाति को भारतीय आम कहते हैं, जिसका वैज्ञानिक नाम मेंगीफेरा इंडिका है। आमों की प्रजाति को मेंगीफेरा कहा जाता है। इस फल की प्रजाति पहले केवल भारतीय उपमहाद्वीप में मिलती थी, इसके बाद धीरे धीरे अन्य देशों में फैलने लगी। इसका सबसे अधिक उत्पादन भारत में होता है। यह भारत, पाकिस्तान और फिलीपींस में राष्ट्रीय फल माना जाता है और बांग्लादेश में इसके पेड़ को राष्ट्रीय पेड़ का दर्जा प्राप्त है। }
+
+
+Telugu
+
+మామిడి (ఆంగ్లం: Mango) కి నాలుగు వేల సంవత్సరముల చరిత్ర ఉంది. ఇది భారతదేశపు జాతీయ ఫలం. ఇవి మాంగిఫెరా (Mangifera) ప్రజాతికి చెందిన వృక్షాలు. వీటి కాయలను ఊరగాయల తయారీలో ఉపయోగిస్తారు. మామిడిపళ్ల నుండి రసం తీసి తాగుతారు. వీటినుండి మామిడి తాండ్ర తయారు చేసి అమ్ముతారు. ఇందులో కెరోటిన్, విటమిన్ సి, కాల్షియం ఎక్కువ.దీని ఆకులను "చూత పత్రి" అని కూడా అంటారు. ఈ ఆకు పచ్చ రంగులో ఉంటుంది. ఆకారం కిరీటం ఆకారంలో ఉంటుంది. పరిమాణం పెద్దది. ఈ చెట్టు మహావృక్షంగా పెరుగుతుంది. భారతదేశంలో వంద రకాలకుపైగా మామిడిపళ్ళు దొరుకుతాయి.[1] 
+
+\iastr{మామిడి (ఆంగ్లం: Mango) కి నాలుగు వేల సంవత్సరముల చరిత్ర ఉంది. ఇది భారతదేశపు జాతీయ ఫలం. ఇవి మాంగిఫెరా (Mangifera) ప్రజాతికి చెందిన వృక్షాలు. వీటి కాయలను ఊరగాయల తయారీలో ఉపయోగిస్తారు. మామిడిపళ్ల నుండి రసం తీసి తాగుతారు. వీటినుండి మామిడి తాండ్ర తయారు చేసి అమ్ముతారు. ఇందులో కెరోటిన్, విటమిన్ సి, కాల్షియం ఎక్కువ.దీని ఆకులను "చూత పత్రి" అని కూడా అంటారు. ఈ ఆకు పచ్చ రంగులో ఉంటుంది. ఆకారం కిరీటం ఆకారంలో ఉంటుంది. పరిమాణం పెద్దది. ఈ చెట్టు మహావృక్షంగా పెరుగుతుంది. భారతదేశంలో వంద రకాలకుపైగా మామిడిపళ్ళు దొరుకుతాయి.[1] }
+
+Tamil
+
+மாம்பழம் என்பது மாமரத்தில் இருந்து பெறப்படும் ஒரு பழமாகும். இவை பழமாகவும், பழரசமாகவும் உண்ணப்படுகின்றது. மா, பலா, வாழை ஆகியவை தமிழ் இலக்கியத்தில் முக்கனிகள் என அறியப்படுகின்றன. இந்தியா மற்றும் பாக்கிஸ்தான் ஆகிய நாடுகளின் தேசியப் பழமாக மாம்பழம் உள்ளது. 
+
+\iastr{மாம்பழம் என்பது மாமரத்தில் இருந்து பெறப்படும் ஒரு பழமாகும். இவை பழமாகவும், பழரசமாகவும் உண்ணப்படுகின்றது. மா, பலா, வாழை ஆகியவை தமிழ் இலக்கியத்தில் முக்கனிகள் என அறியப்படுகின்றன. இந்தியா மற்றும் பாக்கிஸ்தான் ஆகிய நாடுகளின் தேசியப் பழமாக மாம்பழம் உள்ளது. }
+
+Kannada
+
+ಮಾವು, ಉತ್ತರ ಆಮ್ರಾ(ಮ್ಯಾಂಗಿಫೆರ ಇಂಡಿಕ)ಉಷ್ಣವಲಯದಲ್ಲಿ ಪ್ರಪಂಚದೆಲ್ಲೆಡೆ ವ್ಯಾಪಕವಾಗಿ ಕಂಡು ಬರುವ ಮರ. ಇದರ ದಾರುವಿಗಿಂತ ಹಣ್ಣೇ ಪ್ರಸಿದ್ಢ. ಇದರ '೩೦'ಕ್ಕಿಂತಲೂ ಹೆಚ್ಚು ತಳಿಗಳು ಪ್ರಚಲಿತವಿದೆ. ಇದು ಸುಮಾರು ೪೦೦೦ ವರ್ಷಗಳಿಂದಲೂ ಭಾರತದ ವ್ಯವಸಾಯ ದಲ್ಲಿದ್ದು, ಸುಮಾರು ೧೭ ಮತ್ತು ೧೮ನೇ ಶತಮಾನದಲ್ಲಿ ಯುರೋಪ್ನ ಪ್ರವಾಸಿಗರು ಇದನ್ನು ಪಶ್ಚಿಮದ ಉಷ್ಣವಲಯ ದೇಶಗಳಲ್ಲಿ ಪ್ರಸರಿಸಿದರು. 
+
+\iastr{ಮಾವು, ಉತ್ತರ ಆಮ್ರಾ(ಮ್ಯಾಂಗಿಫೆರ ಇಂಡಿಕ)ಉಷ್ಣವಲಯದಲ್ಲಿ ಪ್ರಪಂಚದೆಲ್ಲೆಡೆ ವ್ಯಾಪಕವಾಗಿ ಕಂಡು ಬರುವ ಮರ. ಇದರ ದಾರುವಿಗಿಂತ ಹಣ್ಣೇ ಪ್ರಸಿದ್ಢ. ಇದರ '೩೦'ಕ್ಕಿಂತಲೂ ಹೆಚ್ಚು ತಳಿಗಳು ಪ್ರಚಲಿತವಿದೆ. ಇದು ಸುಮಾರು ೪೦೦೦ ವರ್ಷಗಳಿಂದಲೂ ಭಾರತದ ವ್ಯವಸಾಯ ದಲ್ಲಿದ್ದು, ಸುಮಾರು ೧೭ ಮತ್ತು ೧೮ನೇ ಶತಮಾನದಲ್ಲಿ ಯುರೋಪ್ನ ಪ್ರವಾಸಿಗರು ಇದನ್ನು ಪಶ್ಚಿಮದ ಉಷ್ಣವಲಯ ದೇಶಗಳಲ್ಲಿ ಪ್ರಸರಿಸಿದರು. }
+
+Sinhala
+
+අඹ ඝර්ම කාලාපීය පලතුරකි. අඹ,ඝර්ම කලාපීය පළතුරු හටගන්නා ශාක විශේෂ 30 ක් පමණ ඇති Mangifera ගෝත්‍රයට අයත් වන්නා වූ Anacardiaceae සපුෂ්ප ශාක කුලයට අයත් ශාකයකි.අඹ වල නියම සම්භවය නොදන්නේ වුවද ,ආසියාතික ප්‍රදේශ වල ඇති ප්‍රවේණි විවිධත්වයේ විශාල පරාසය හා අවුරුදු මිලියන 25 සිට 30 දක්වා පැරණි ෆොසිල සාක්ෂ නිසා අඹ ශාකය පිලිපීනය, ,ඉන්දුනීසියාව,ඉන්දියාව,බුරුමය,ශ්‍රී ලංකාව,පකිස්ථානය,බංගලිදේශය ඇතුළු දකුණු හා ගිණිකොනදිග ආසියාතික ප්‍රදේශයට ආවේණික බව බොහෝ දෙනාගේ මතයයි. [1]
+
+\iastr{අඹ ඝර්ම කාලාපීය පලතුරකි. අඹ,ඝර්ම කලාපීය පළතුරු හටගන්නා ශාක විශේෂ 30 ක් පමණ ඇති Mangifera ගෝත්‍රයට අයත් වන්නා වූ Anacardiaceae සපුෂ්ප ශාක කුලයට අයත් ශාකයකි.අඹ වල නියම සම්භවය නොදන්නේ වුවද ,ආසියාතික ප්‍රදේශ වල ඇති ප්‍රවේණි විවිධත්වයේ විශාල පරාසය හා අවුරුදු මිලියන 25 සිට 30 දක්වා පැරණි ෆොසිල සාක්ෂ නිසා අඹ ශාකය පිලිපීනය, ,ඉන්දුනීසියාව,ඉන්දියාව,බුරුමය,ශ්‍රී ලංකාව,පකිස්ථානය,බංගලිදේශය ඇතුළු දකුණු හා ගිණිකොනදිග ආසියාතික ප්‍රදේශයට ආවේණික බව බොහෝ දෙනාගේ මතයයි. [1]}
+\end{document}
+
+%https://tex.stackexchange.com/questions/606769/devanagari-transliteration/606815#606815
+
+https://tex.stackexchange.com/questions/606594/i-want-to-write-devanagari-using-english-text-all-the-possible-letters-of-hindi/609125#609125
+
+
+velthuis l3 transliteration method
+https://tex.stackexchange.com/questions/606594/i-want-to-write-devanagari-using-english-text-all-the-possible-letters-of-hindi/609125#609125
+
+using dn method
+https://tex.stackexchange.com/questions/408326/using-devanagri-package-in-latex/408336#408336
+
+
+dn is old method
+https://tex.stackexchange.com/questions/609017/how-to-and-where-to-run-dn-file
+
+
+
+function conv ( s ) 
+   s = s:gsub ( '<U%+(.-)>' , function ( x )
+                   return '^^^^'..string.lower(x)..'{}' 
+                   end ) 
+   tex.sprint ( s )
+end
+https://tex.stackexchange.com/questions/485697/output-devanagari-hindi-from-raw-unicode-using-luatex/485699#485699
