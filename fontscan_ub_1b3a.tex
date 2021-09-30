@@ -1,0 +1,573 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\usepackage{fontspec}
+\usepackage{luacode}
+\usepackage{multicol}
+\usepackage{xparse}
+\usepackage{pgffor}
+
+
+\newcommand\myfontname{NotoSerifMyanmar-Regular}
+\newcommand\myfontextension{.ttf}
+\newfontfamily\fmyfont{\myfontname\myfontextension}
+
+\newfontfamily\flab{Noto Serif}% for labels
+\newfontfamily\ftest{AvrileSerif}
+\setmainfont{Noto Serif}[Colour=blue]
+\newfontfamily\fxirwena{Xirwena}[Colour=red]
+
+
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
+
+\let\nc\newcommand
+
+
+
+%------------------------------- print and run #1
+\ExplSyntaxOn
+\tl_new:N \l_my_tl
+\tl_new:N \l_myts_tl
+\tl_new:N \l_mytemp_tl
+\tl_new:N \l_mytempa_tl
+\tl_new:N \l_mytempb_tl
+\tl_new:N \l_mytempc_tl
+\tl_new:N \l_mytempd_tl
+\seq_new:N \g_mytempa_seq
+\seq_new:N \g_mytempb_seq
+%local to their own thread (v, uc, iast)
+%\tl_new:N \l_mytsv_tl
+%\tl_new:N \l_mytsuc_tl
+%\tl_new:N \l_mytsiast_tl
+
+\cs_generate_variant:Nn 
+						\tl_to_str:n 
+						{ V }
+
+%\cs_generate_variant:Nn 
+%						\tl_show:N
+%						{ V }
+
+\NewDocumentCommand{\cdr}{ o o m }{ % 1=formatout, 2=formatparm,3=text
+	\tl_set:Nn \l_my_tl { #3 }
+	{ \ttfamily\color{blue}
+			\IfNoValueTF{#2}{}{#2}
+  \tl_to_str:V  \l_my_tl 
+  }
+  
+  \enspace $\mapsto$ \enspace
+
+	{
+		\IfNoValueTF{#1}{}{#1}
+  \tl_use:N \l_my_tl
+  }
+}%
+
+
+%----- Transliteration direction
+\bool_new:N 
+					\g_trans_direction_bool
+\bool_gset_true:N 
+					\g_trans_direction_bool
+
+%\cs_generate_variant:Nn 
+%						\tl_replace_all:Nnn 
+%						{ NVn }
+
+%----- Typing shortcut
+\newcommand\scdvts[2]{%
+			\bool_if:NTF
+						\g_trans_direction_bool
+%						\bool_show:N \g_trans_direction_bool
+						{ \tl_replace_all:Nnn \l_myts_tl   { #1 }   { #2} }
+						{ \tl_replace_all:Nnn \l_myts_tl   { #2 }   { #1} }
+}
+
+
+%==================================================
+%==================================================
+		\cs_new:Npn 
+					\mytest_newcmd:Nn
+					#1#2
+{ \expandafter\newcommand\csname mytext#1\endcsname {\Uchar#2} }
+
+
+		\cs_new:Npn 
+					\mytest_newcmdf:Ncn
+					#1#2#3
+{ \expandafter\newcommand\csname mytext#1\endcsname {{\csname#2\endcsname\Uchar#3}} }
+
+
+%\cs_generate_variant:Nn 
+%						\mytest_newcmd:Nn 
+%						{ on }
+
+
+
+\NewDocumentCommand { \myaddseq } { m m } { 
+		\seq_gput_right:Nn
+					\g_mytempa_seq
+					{ #1 }
+		\seq_gput_right:Nn
+					\g_mytempb_seq
+					{ #2 }
+}
+
+\NewDocumentCommand { \myclearseq } { } { 
+		\seq_gclear:N
+					\g_mytempa_seq
+		\seq_gclear:N
+					\g_mytempb_seq
+}
+
+\NewDocumentCommand { \myseqdofff } { m m } { %1=fontname,2=namespace
+				\int_do_while:nNnn 
+							{			\seq_count:N
+													\g_mytempa_seq
+									} 
+							> 
+							{ 0 } 
+							{
+				\seq_gpop_right:NN	
+							\g_mytempa_seq
+							\l_mytempa_tl  %name
+							
+				\seq_gpop_right:NN	
+							\g_mytempb_seq
+							\l_mytempb_tl  %code point
+							
+					\mymakecmdff[ #1 ] %font
+								{ #2\l_mytempa_tl } %namespace+glyphname
+								{ \l_mytempb_tl }		% glyph codepoint
+							}
+%							#1 #2\l_mytempa_tl \l_mytempb_tl
+}
+
+\NewDocumentCommand { \myseqdo } { } { 
+				\int_do_while:nNnn 
+							{			\seq_count:N
+													\g_mytempa_seq
+									} 
+							> 
+							{ 0 } 
+							{
+				\seq_gpop_right:NN	
+							\g_mytempa_seq
+							\l_mytempa_tl  %name
+							
+				\seq_gpop_right:NN	
+							\g_mytempb_seq
+							\l_mytempb_tl  %code point
+							
+					\mymakecmdff
+								{ \l_mytempa_tl }
+								{ \l_mytempb_tl }		
+							}
+}
+
+
+
+\NewDocumentCommand { \mymakecmd } { m m } { 
+%1=namespace, 2=font, 3=charactername, 4=unicode codepoint
+%\cs_new:Npn \#1 hparametersi { #2 }
+				\tl_set:Nn 
+							\l_my_tl
+							{ #1 }
+							
+				\tl_remove_all:Nn 
+							\l_my_tl 
+							{.}
+				\regex_replace_all:nnN 
+							{ \_+ } 
+							{  } 
+							\l_my_tl
+%				\tl_show:N \l_my_tl
+							
+			\mytest_newcmd:Nn
+					\l_my_tl 
+					{ #2 }
+					
+%					\l_my_tl :
+%					\cs:w mytextyen\cs_end:
+ }
+
+
+\NewDocumentCommand { \mymakecmdf } { m m m } { 
+%1=font, 2=charactername, 3=unicode codepoint
+				\tl_set:Nn 
+							\l_my_tl
+							{ #2 }
+							
+				\tl_remove_all:Nn 
+							\l_my_tl 
+							{.}
+				\regex_replace_all:nnN 
+							{ \_+ } 
+							{  } 
+							\l_my_tl
+%				\tl_show:N \l_my_tl
+							
+			\mytest_newcmdf:Nnn
+					\l_my_tl %text
+					{ #1 } %font
+					{ #3 } %codepoint
+					
+ }
+
+
+
+\NewDocumentCommand { \mymakecmdff } { O{} m m } { 
+%1=font, 2=charactername, 3=unicode codepoint
+				\tl_set:Nn 
+							\l_my_tl
+							{ #2 }
+%#1;#2;#3							
+				\tl_remove_all:Nn 
+							\l_my_tl 
+							{.}
+				\regex_replace_all:nnN 
+							{ \_+ } 
+							{  } 
+							\l_my_tl
+%				\tl_show:N \l_my_tl
+							
+						\tl_set:Nn 	
+								\l_mytempc_tl
+								{ mytext }
+								
+					\tl_concat:NNN
+							\l_mytempd_tl %result C
+							\l_mytempc_tl %A
+							\l_my_tl         %B
+%							\tl_show:N \l_my_tl 
+%							\tl_show:N \l_mytempc_tl 
+%							\tl_show:N \l_mytempd_tl 
+							
+							
+%aa:							
+							\IfNoValueTF
+							{#1}
+							{
+%bb:							
+								\cs_if_free:cTF
+								  { \l_mytempd_tl }
+								  {
+											\mytest_newcmd:Nn
+													\l_my_tl 
+													{ #3 }
+%													>>\tl_use:N \l_my_tl<<
+													
+										}{}			
+
+							}
+							{
+%%							\tl_show:N \l_mytempd_tl
+%%							\tl_show:N \l_mytempa_tl
+%							cc:
+								\cs_if_free:cTF
+								  { \l_mytempd_tl }
+								  {
+										\mytest_newcmdf:Ncn
+													\l_my_tl %text
+													{ #1 } %font
+													{ #3 } %codepoint
+%\l_my_tl; #1; #3
+										}{}			
+							}
+ }
+
+
+
+
+
+\NewDocumentCommand { \iastr } { m } { \trdeviastr {#1} }
+\NewDocumentCommand { \trdeviastr } { m } {%
+\tl_set:Nn \l_myts_tl { #1 }
+\bool_gset_false:N 
+					\g_trans_direction_bool
+%\tl_show:N \l_myts_tl					
+\dodeviast
+\dodeviastridy
+\bool_gset_true:N 
+					\g_trans_direction_bool
+\tl_use:N \l_myts_tl
+}
+
+
+
+\ExplSyntaxOff
+
+
+%--------------------------------------
+%%font-cache file:
+% ["descriptions"]={
+%...
+%  [983058]={
+%   ["boundingbox"]=13,
+%   ["index"]=130,
+%   ["name"]="ka_khm",
+%   ["unicode"]=4096,
+%   ["width"]=1037,
+%  },
+%...
+%}
+
+\begin{luacode}
+	function openmyfontfile(xxx)
+		local fft = require(xxx)
+
+   	tex.sprint("\\par\\bigskip {\\flab\\section{" .. fft.metadata.familyname .. "}}\\par\\bigskip")
+
+   	tex.sprint("\\par\\bigskip {\\flab Glyph listings}\\par\\bigskip")
+
+      	tex.sprint("\\par\\bigskip {\\flab By Codepoint}\\par\\bigskip")
+  
+      	tex.sprint("\\begin{multicols}{2}")
+-- Sorting:
+-- from: https://stackoverflow.com/questions/26160327/sorting-a-lua-table-by-key
+-- get the keys in the descriptions table
+				local tkeys = {}
+-- populate the table that holds the keys
+				for k in pairs(fft.descriptions) do table.insert(tkeys, k) end
+-- sort the keys
+				table.sort(tkeys)
+-- use the keys to retrieve the values in the sorted order
+--				for _, k in ipairs(tkeys) do print(k, t[k]) end
+
+			for _, k in ipairs(tkeys) do
+--			for k, v in pairs(fft.descriptions) do
+		
+			for kk, vv in pairs(fft.descriptions[k]) do
+    	if kk == "name" then 
+    				tex.sprint("\\noindent\\begin{tabular}{|l|l|c|}")
+    				tex.sprint("\\hline")
+    				tex.sprint("{\\flab\\small " .. k .. "}&")
+    				tex.sprint("{\\flab\\small \\detokenize{"  .. vv .. "}}&")
+    				tex.sprint("\\cellcolor{blue!12}\\Uchar" .. k .."\\\\")			
+    				tex.sprint("\\hline")
+    				tex.sprint("\\end{tabular}\\par")
+--    				if k == 166 then
+    				tex.sprint("\\myaddseq{" .. vv .. "}{" .. k .. "}")
+--    				end
+			end
+			end
+			end
+		
+			tex.sprint("\\end{multicols}")
+
+-- outside of multicols:
+
+--			for _, k in ipairs(tkeys) do
+--			for kk, vv in pairs(fft.descriptions[k]) do
+--    	if kk == "name" then 
+--    				-- make a command for >ASCII
+----    				if k > 128 then
+--    				if k == 165 then
+----    						tex.sprint("{\\flab >>".. vv .. "<<}")
+----    						tex.sprint("mymakecmd>>{".. vv .. "}{" .. k .. "}<<")
+----    						tex.sprint("\\mymakecmd{".. vv .. "}{" .. k .. "}")
+----    						mmkcommands(vv, k)
+---- tex.sprint("\\directlua{mmkcommands (" .. vv .. "," .. k .. ")}")
+
+----    						tex.sprint("\\mytextyen")
+--    				end
+--			end
+--		end
+--			end
+			
+			
+--- by name
+      	tex.sprint("\\par\\bigskip {\\flab By Name}\\par\\bigskip")
+      	tex.sprint("\\begin{multicols}{2}")
+-- Sorting:
+-- from: https://stackoverflow.com/questions/26160327/sorting-a-lua-table-by-key
+-- get the keys in the descriptions table
+				local tkeysn = {}
+-- populate the table that holds the keys
+				for k in pairs(fft.descriptions) do 
+								local mm = {}
+								mm = fft.descriptions[k]
+--								if mm then
+							for kk,vv in pairs(mm) do
+								if kk == "name" then
+								table.insert(tkeysn, {
+																					name = mm[kk], -- glyph name
+																					mykey = k  -- Unicode codepoint
+																					})
+								end															
+								end						
+				end
+-- sort the keys
+				table.sort(tkeysn, function (a,b) return (a.name < b.name) end)
+-- output in name order
+--							tex.sprint("\\flab") 
+--      		tex.sprint(">>" .. #tkeysn .. "<<\\par")
+				for k,v in pairs(tkeysn) do 
+--      		tex.sprint("{\\flab\\detokenize{" .. tkeysn[k].name .. "}: " .. tkeysn[k].mykey .. "} \\Uchar" .. tkeysn[k].mykey .. "\\par")
+    				tex.sprint("\\noindent\\begin{tabular}{|l|l|c|}")
+    				tex.sprint("\\hline")
+    				tex.sprint("{\\flab\\small \\detokenize{"  .. tkeysn[k].name .. "}}&")
+    				tex.sprint("{\\flab\\small " .. tkeysn[k].mykey .. "}&")
+    				tex.sprint("\\cellcolor{blue!12}\\large\\Uchar" .. tkeysn[k].mykey .."\\\\")			
+    				tex.sprint("\\hline")
+    				tex.sprint("\\end{tabular}\\par")
+      		
+				end 
+ 
+ 
+ 
+ 
+ 		tex.sprint("\\end{multicols}")
+	
+ end
+ 
+-- function mmkcommands (aname, acode)
+--		tex.sprint("\\global\\mymakecmd{".. aname .. "}{" .. acode .. "}")
+----    						tex.sprint("\\mytextyen")
+-- end
+ 
+-- tex.sprint("\\directlua{mmkcommands (" .. '"yen"' .. "," .. 165 .. ")}")
+---- callback.register("process_input_buffer", mmkcommands)
+-- luatexbase.add_to_callback( "process_input_buffer", 
+--    mmkcommands, "get_cols" )
+\end{luacode}
+\nc\doopenff[1]{%
+{\directlua{openmyfontfile("#1")}}
+}
+
+
+\begin{luacode}
+	function openmyfontfilefff(xxx)
+		local fft = require(xxx)
+-- Sorting:
+-- from: https://stackoverflow.com/questions/26160327/sorting-a-lua-table-by-key
+-- get the keys in the descriptions table
+				local tkeys = {}
+-- populate the table that holds the keys
+				for k in pairs(fft.descriptions) do table.insert(tkeys, k) end
+-- sort the keys
+				table.sort(tkeys)
+-- use the keys to retrieve the values in the sorted order
+--				for _, k in ipairs(tkeys) do print(k, t[k]) end
+
+			for _, k in ipairs(tkeys) do
+--			for k, v in pairs(fft.descriptions) do
+		
+			for kk, vv in pairs(fft.descriptions[k]) do
+    	if kk == "name" then 
+    				if k == 166 then
+    				tex.sprint("\\myaddseq{" .. vv .. "}{" .. k .. "}")
+    				end
+			end
+			end
+			end
+		
+end
+\end{luacode}
+\nc\doopenfff[3]{%
+{%
+\myclearseq
+\directlua{openmyfontfilefff("#1")}}%
+
+}
+
+
+
+
+%===============
+
+
+
+\nc\listmyglyphs[2]{%
+\renewcommand\myfontname{#1}
+\renewcommand\myfontextension{#2}
+\renewfontfamily\fmyfont{\myfontname\myfontextension}
+\fmyfont
+\doopenff{C:/Users/epam2/Downloads/tl/texlive/2020/texmf-var/luatex-cache/generic/fonts/otl/\myfontname.lua}
+}
+
+
+\nc\listmyglyphsfff[4]{%
+\renewcommand\myfontname{#1}
+\renewcommand\myfontextension{#2}
+\renewfontfamily\fmyfont{\myfontname\myfontextension}
+\fmyfont
+%[#2 #3 #4]
+\doopenfff{C:/Users/epam2/Downloads/tl/texlive/2020/texmf-var/luatex-cache/generic/fonts/otl/\myfontname.lua}{#3}{#4}
+}
+
+
+\begin{document}
+%\fmyfont
+%\doopenff{C:/Users/epam2/Downloads/tl/texlive/2020/texmf-var/luatex-cache/generic/fonts/otl/\myfontname.lua}
+
+%\listmyglyphs{NotoSerifMyanmar-Regular}{.ttf}
+
+%				\detokenize{AdorshoLipi_20-07-2007}/.ttf,
+%				\detokenize{ae_Cortoba}/.ttf,
+%				Alice-Regular/.ttf,
+%				aneirin/.ttf
+%%				18thCtrKurTxt/.ttf, 
+%%				aakar/.ttf,
+%%				Alice-Regular/.ttf,
+%%				angkor-regular/.ttf
+
+%\foreach \x/\y in {xirwen3u/.ttf}{
+%	\listmyglyphs{\x}{\y}
+%}
+
+\foreach \x/\y/\a/\b in {xirwen3u/.ttf/fxirwena/x}{
+	\listmyglyphsfff{\x}{\y}{\a}{\b}
+}
+
+
+
+%\mymakecmdff{yen}{165}
+%\mymakecmdff[ftest]{xi}{958}
+%\mymakecmdf{ftest}{wgrave.sc}{983256}
+%\mymakecmdf{ftest}{cyrillic_otmark}{983117}
+%\mymakecmdf{ftest}{zero.slash}{983491}
+%\mymakecmdff{zacute}{378}
+%\mymakecmdf{ftest}{zigzagbelow}{7631}
+%\mymakecmdf{ftest}{upwardsancora}{11797}
+%\mymakecmdff{weierstrass}{8472}
+%\mymakecmdf{ftest}{seveneighths}{8542}
+%\mymakecmdf{ftest}{piDoubleStruck}{8508}
+%\mymakecmdf{ftest}{paragraph}{182}
+%\mymakecmdf{ftest}{reversedparagraph}{8267}
+%\mymakecmdf{ftest}{reversedquestionmark}{11822}
+%\mymakecmdf{ftest}{s_t}{64262}
+%\mymakecmdf{ftest}{longs_t}{64261}
+%\mymakecmdf{ftest}{ogonek}{731}
+%\mymakecmdff[fxirwena]{xbrokenbar}{166}
+
+
+
+%x\csname mytextyen\endcsname x
+%\mytextxi
+%\mytextwgravesc
+%\mytextcyrillicotmark
+%\mytextzeroslash
+%\mytextzacute\mytextzigzagbelow
+%\mytextupwardsancora
+%\mytextweierstrass
+%\mytextseveneighths
+%\mytextpiDoubleStruck
+%\mytextparagraph
+%\mytextreversedparagraph
+%\mytextreversedquestionmark
+%\mytextst
+%\mytextlongst
+%\mytextogonek
+
+
+%\myseqdo
+Assigning the commands has to be done outside the luacode environment (the sequence is global, but the defined commands are local).
+
+\textbackslash myseqdofff\{fxirwena\}\{x\}
+\myseqdofff{fxirwena}{x}
+
+\textbackslash mytextxbrokenbar = \mytextxbrokenbar
+
+
+\end{document}
+
