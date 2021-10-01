@@ -14,6 +14,7 @@
 \newfontfamily\flab{Noto Serif}% for labels
 \newfontfamily\ftest{AvrileSerif}
 \setmainfont{Noto Serif}[Colour=blue]
+\newfontfamily\flabblue{Noto Serif}[Colour=blue]
 \newfontfamily\fxirwena{Xirwena}[Colour=red]
 
 
@@ -94,7 +95,10 @@
 		\cs_new:Npn 
 					\mytest_newcmdf:Ncn
 					#1#2#3
-{ \expandafter\newcommand\csname mytext#1\endcsname {{\csname#2\endcsname\Uchar#3}} }
+{ \global\expandafter\newcommand\csname mytext#1\endcsname {{\csname#2\endcsname\Uchar#3}}
+%#1.#2.#3 ; ~
+%\csname mytext#1\endcsname ~
+}
 
 
 %\cs_generate_variant:Nn 
@@ -110,6 +114,12 @@
 		\seq_gput_right:Nn
 					\g_mytempb_seq
 					{ #2 }
+%[		\seq_count:N
+%					\g_mytempa_seq
+%	]				#1 -
+%	[	\seq_count:N
+%					\g_mytempb_seq
+%		]			#2 ; ~
 }
 
 \NewDocumentCommand { \myclearseq } { } { 
@@ -117,9 +127,15 @@
 					\g_mytempa_seq
 		\seq_gclear:N
 					\g_mytempb_seq
+		\tl_gclear:N \l_mytempa_tl
+		\tl_gclear:N \l_mytempb_tl
+		\tl_gclear:N \l_mytempc_tl		
+		\tl_gclear:N \l_mytempd_tl		
 }
 
 \NewDocumentCommand { \myseqdofff } { m m } { %1=fontname,2=namespace
+%							>Before> #1 ; ~ #2\l_mytempa_tl ; ~ \l_mytempb_tl <<~
+
 				\int_do_while:nNnn 
 							{			\seq_count:N
 													\g_mytempa_seq
@@ -138,8 +154,16 @@
 					\mymakecmdff[ #1 ] %font
 								{ #2\l_mytempa_tl } %namespace+glyphname
 								{ \l_mytempb_tl }		% glyph codepoint
-							}
-%							#1 #2\l_mytempa_tl \l_mytempb_tl
+								
+%								A:
+%								\seq_count:N
+%													\g_mytempa_seq << ~
+%								B:
+%								\seq_count:N
+%													\g_mytempb_seq << ~
+%							>After> #1 ; ~ #2\l_mytempa_tl ; ~ \l_mytempb_tl <<~
+								
+							} % end loop
 }
 
 \NewDocumentCommand { \myseqdo } { } { 
@@ -241,8 +265,9 @@
 %							\tl_show:N \l_my_tl 
 %							\tl_show:N \l_mytempc_tl 
 %							\tl_show:N \l_mytempd_tl 
-							
-							
+%							\tl_use:N \l_mytempd_tl ; #3 << ~
+%							
+%							
 %aa:							
 							\IfNoValueTF
 							{#1}
@@ -266,11 +291,12 @@
 								\cs_if_free:cTF
 								  { \l_mytempd_tl }
 								  {
+								  \exp_args:NNno
 										\mytest_newcmdf:Ncn
 													\l_my_tl %text
 													{ #1 } %font
-													{ #3 } %codepoint
-%\l_my_tl; #1; #3
+													{ #3 }  %codepoint
+%\l_my_tl; #1; #3 ~ = ~\csname mytext\l_my_tl\endcsname;~
 										}{}			
 							}
  }
@@ -454,8 +480,10 @@
 		
 			for kk, vv in pairs(fft.descriptions[k]) do
     	if kk == "name" then 
-    				if k == 166 then
+    						if k > 128  then
+--    				if k == 166 or k == 165 then
     				tex.sprint("\\myaddseq{" .. vv .. "}{" .. k .. "}")
+--    				tex.sprint(k .. "<" .. vv .. ">= >>\\csname mytextx" .. vv .. "\\endcsname<<  ")
     				end
 			end
 			end
@@ -491,6 +519,7 @@ end
 \renewcommand\myfontextension{#2}
 \renewfontfamily\fmyfont{\myfontname\myfontextension}
 \fmyfont
+\myclearseq
 %[#2 #3 #4]
 \doopenfff{C:/Users/epam2/Downloads/tl/texlive/2020/texmf-var/luatex-cache/generic/fonts/otl/\myfontname.lua}{#3}{#4}
 }
@@ -511,13 +540,7 @@ end
 %%				Alice-Regular/.ttf,
 %%				angkor-regular/.ttf
 
-%\foreach \x/\y in {xirwen3u/.ttf}{
-%	\listmyglyphs{\x}{\y}
-%}
-
-\foreach \x/\y/\a/\b in {xirwen3u/.ttf/fxirwena/x}{
-	\listmyglyphsfff{\x}{\y}{\a}{\b}
-}
+\listmyglyphs{Alice-Regular}{.ttf}
 
 
 
@@ -560,13 +583,86 @@ end
 %\mytextogonek
 
 
+%\foreach \x/\y in {xirwen3u/.ttf}{
+%	\listmyglyphs{\x}{\y}
+%}
 %\myseqdo
+
+\mymakecmdff{yen}{165}
+\mymakecmdff{brokenbar}{166}
+
+
 Assigning the commands has to be done outside the luacode environment (the sequence is global, but the defined commands are local).
+
+\foreach \c/\y/\a/\b in {xirwen3u/.ttf/fxirwena/x}{
+	\listmyglyphsfff{\c}{\y}{\a}{\b}
+}
 
 \textbackslash myseqdofff\{fxirwena\}\{x\}
 \myseqdofff{fxirwena}{x}
 
-\textbackslash mytextxbrokenbar = \mytextxbrokenbar
+%\meaning\mytextxbrokenbar
+\textbackslash mytextxbrokenbar = \meaning\mytextxbrokenbar \mytextxbrokenbar:
+%\csname mytextxbrokenbar\endcsname
+
+\textbackslash mytextxyen = \mytextxyen:
+
+versus current font ( \fontname\font )
+
+\textbackslash mytextbrokenbar = \mytextbrokenbar
+
+\textbackslash mytextyen = \mytextyen
+
+\cdr{\mytextxbrokenbar}
+
+\cdr{\mytextxyacute}
+
+\cdr{\mytextxparagraph}
+
+\cdr{\mytextxsection}
+
+switching current font to \flabblue \fontname\font
+
+
+\cdr{\mytextxbrokenbar}
+
+\cdr{\mytextbrokenbar}
+
+\cdr{\mytextyen}
+
+\cdr{\mytextxyacute} (No ``yacute'' name in the current font.)
+
+For auto-naming glyph commands, glyphnames are arbitrary, can be different in different fonts and versions of fonts, and can be repeated within a font (in which case, only the first one encountered is used).
+
+\par\bigskip
+Make an individual glyph command:
+
+\begin{verbatim}
+\mymakecmdff{yen}{165}
+\end{verbatim}
+
+\cdr{\mytextyen}
+
+\cdr{\mytextbrokenbar}
+
+List the glyphnames in a font, and assign plain glyph commands (they will use current font).
+
+\begin{verbatim}
+\listmyglyphs{Luatex fontcache file name}{fontfile extension}
+
+\listmyglyphs{Alice-Regular}{.ttf}
+\end{verbatim}
+
+Iterate through the glyphnames in a font without listing them, and assign a specified font to the resulting glyph commands .
+
+\begin{verbatim}
+	\listmyglyphsfff{Luatex fontcache file name}{fontfile extension}{font switch}{namespace}
+	\myseqdofff{font switch}{namespace}
+	
+	\listmyglyphsfff{xirwen3u}{.ttf}{fxirwena}{x}
+	\myseqdofff{fxirwena}{x}
+\end{verbatim}
+
 
 
 \end{document}
