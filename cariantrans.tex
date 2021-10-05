@@ -1,0 +1,208 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\pagecolor{green!3}
+\newcommand\theadercolour{red!20!yellow}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
+\usepackage[listings]{tcolorbox}
+
+\usepackage[unicode,meta,carian]{xtransliteration}
+
+%============================== Font
+\newfontfamily\ftcafont{Noto Sans Carian}[Scale=1.5]%plain font
+
+
+%==============================
+
+
+
+
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+%Common code: plain
+\newcommand\translitformat{\color{red}\bfseries}
+\newcommand\tablea{%
+\setlength{\tabcolsep}{-0.5pt}%
+\begin{tabular}[b]{c}
+\scriptsize 
+}
+\newcommand\tableb{%
+\\ \rule{0pt}{1.8ex} 
+}
+\newcommand\tablec{%
+\\\end{tabular}%
+}
+%\newcommand\eolist{{\tiny [End of List]}\par}
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\newcommand\sbucl{{\mdseries\markerfont\symbol{9121}}}% ⎡
+\newcommand\sbbcl{{\mdseries\markerfont\symbol{9123}}}% ⎣
+\newcommand\sbucr{{\mdseries\markerfont\symbol{9124}}}% ⎤
+\newcommand\sbbcr{{\mdseries\markerfont\symbol{9126}}}% ⎦
+\newcommand\tlcorner{{\mdseries\markerfont\symbol{8988}}}% ⌜
+\newcommand\trcorner{{\mdseries\markerfont\symbol{8989}}}% ⌝
+\newcommand\blcorner{{\mdseries\markerfont\symbol{8990}}}% ⌞
+\newcommand\brcorner{{\mdseries\markerfont\symbol{8991}}}% ⌟
+\newcommand\lbracket{{\mdseries\markerfontb\symbol{91}}}% [
+\newcommand\rbracket{{\mdseries\markerfontb\symbol{93}}}% ]
+
+%\input{metacs_input.tex}
+
+% Common code
+\ExplSyntaxOn
+
+\tl_new:N \l_myuc_tl
+\tl_new:N \l_myun_tl
+\tl_new:N \l_myts_tl
+%\tl_new:N \l_myb_tl %defined in metacs.tex
+\tl_new:N \l_myx_tl
+\tl_new:N \l_myy_tl
+\tl_new:N \l_myz_tl
+\tl_new:N \l_myzz_tl
+\tl_new:N \l_myrev_tl
+
+\NewDocumentCommand{\transrev}{ m }{
+
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+		\tl_use:N \l_myrev_tl
+}
+\NewDocumentCommand{\transrevonly}{ m }{
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+%		\tl_use:N \l_myrev_tl
+}
+
+
+
+
+
+\ExplSyntaxOff
+
+%\input{carian_input.tex}
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+\newcommand\bqq[1]{\begin{quotation}#1\end{quotation}}
+
+
+
+
+
+%===================================
+\begin{document}
+\begin{center}
+{\ttfamily ASCII Input Method for Carian}
+
+\rule{0.4\textwidth}{0.2pt}
+\end{center}
+
+\tableofcontents
+
+\bigskip
+\hfill\rule{0.4\textwidth}{0.2pt}\hfill\ 
+
+\section{Usage}
+Activate the transliteration commands and environments for Carian script by specifying the package option \texttt{carian} for the \texttt{xtransliteration} package:
+
+\begin{center}
+\verb|\usepackage[carian]{xtransliteration}|
+\end{center}
+
+\section{Commands and Environments}
+
+\subsection{Inline Commands}
+\subsubsection{Unicode codepoint}
+\bqq{\cdr{\cauc{U+102A0U+102A1U+102A2U+102A3}}}
+
+\subsubsection{Unicode name}
+\bqq{\cdr{\caun{ap2dl}}}
+
+\subsubsection{Typing Shortcut}
+\bqq{\cdr{\cats{ap2dl}}}
+
+\subsubsection{Standard Transliteration}
+\bqq{\cdr{\cast{ap2dl}}}
+
+\subsubsection{Word + Transliteration}
+\bqq{\cdr{\caw{kat}}}
+
+\subsubsection{Gloss}
+\bqq{\cdr{\cagloss{kat}{dog}}}
+
+\subsubsection{Ruby Text}
+\bqq{\cdr{\caruby{k.a.t.a.p2.d.l.}}}
+
+\subsection{Environments}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Unicode codepoints: \bfseries\textcolor{blue!10}{catransuce}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{catransuce}
+U+102A0 U+102A1 U+102A2 U+102A3
+
+U+102A0U+102A1U+102A2U+102A3
+\end{catransuce}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Unicode names: \bfseries\textcolor{blue!10}{catransune}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{catransune}
+ap2dl
+
+ap2dl
+\end{catransune}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Typing shortcuts: \bfseries\textcolor{blue!10}{catranstse}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{catranstse}
+ap2dl
+
+ap2dl
+\end{catranstse}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Standard transliteratioin: \bfseries\textcolor{blue!10}{catransste}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{catransste}
+ap2dl
+
+ap2dl
+\end{catransste}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Ruby text: \bfseries\textcolor{blue!10}{carubye}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{carubye}
+ap2dl
+
+ap2dl  
+
+
+\end{carubye}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Tableture: \bfseries\textcolor{blue!10}{catableture}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{catableture}
+ap2dl kat
+
+ap2dl
+\end{catableture}
+\end{tcblisting}
+
+
+\calists
+
+\end{document}

@@ -1,0 +1,42 @@
+\ProvidesPackage{xtransliteration} %
+                 [2021/10/05 v1.0 
+                 ASCII input method for various Unicode scripts]%
+
+%-------------------
+\RequirePackage{luacode}
+\RequirePackage{etoolbox}
+\RequirePackage{multicol}
+\RequirePackage{xparse}
+\RequirePackage{l3keys2e}%to process the keys
+\RequirePackage[listings]{tcolorbox}
+
+%-------------------
+
+\ExplSyntaxOn
+
+
+\NewDocumentCommand { \xtranslitoptions } { }  {
+Available ~ options ~ are: 
+				~ carian.
+}
+
+\keys_define:nn { xtransliteration }
+ {
+  carian  .code:n = { \input{carian_input} },
+  help  .code:n = { \xtranslitoptions },  
+  meta  .code:n = { \input{metacs_input} },
+  unicode  .code:n = { \input{unicode_cb} },
+ }
+
+\ProcessKeysOptions { xtransliteration } % Parses the option list
+
+
+\ExplSyntaxOff
+
+
+%-------------------
+
+
+\newcommand\eolist{{\tiny [End of List]}\par}
+
+\endinput

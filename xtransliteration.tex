@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\pagecolor{brown!4}
+%\usepackage{graphicx}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+%\usepackage{luacode}
+%\usepackage{etoolbox}
+%\usepackage{multicol}
+%\usepackage{xparse}
+
+\usepackage[unicode,meta,carian]{xtransliteration}
+%============================== Font
+\newfontfamily\ftcafont{Noto Sans Carian}[Scale=1.5]%plain font
+
+%\input{unicode_cb}
+\newfontface\fcarian{NotoSansCarian-Regular.ttf}[Colour=blue]
+\DeclareTextFontCommand\textcarian{\fcarian}
+
+\newfontface\nrffontname{NotoSansCarian-Regular.ttf}
+
+\begin{document}
+
+\section{Example Transliteration \catagb }
+\begin{quotation}
+\cdr{\cats{kat}}
+
+direct input: \textcarian{𐊨𐊣𐊠𐊦𐊹𐊸}
+
+\cdr{\caruby{q.l.a.ld.i.ss.}}
+
+\cdr{\cagloss{ted}{father}}
+
+\cdr{\cagloss{en}{mother}}
+\end{quotation}
+
+
+\textcarian{%
+\doprmbx{66208}{66271}{'Carian'}{c:/windows/fonts/NotoSansCarian-Regular.ttf}}
+
+
+%\catutorial
+
+%\section{List of Unicode codepoints}\label{sec:listcauc}
+%\begin{multicols}{4}\noindent
+%\catag
+%\cashowplainlistuc
+%\eolist
+%\end{multicols}
+
+
+\end{document}
