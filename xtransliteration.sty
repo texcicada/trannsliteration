@@ -9,21 +9,33 @@
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}%to process the keys
 \RequirePackage[listings]{tcolorbox}
+\RequirePackage{longtable}
 
 %-------------------
 
 \ExplSyntaxOn
 
 
+
+\NewDocumentCommand { \metac } { m } {
+		\texttt { #1 }
+}\NewDocumentCommand { \metacb } { m } {
+		\texttt{\textbackslash #1}
+}
+
 \NewDocumentCommand { \xtranslitoptions } { }  {
-Available ~ options ~ are: 
-				~ carian.
+Available ~ options ~ for ~ the ~\texttt{xtransliteration} ~ package ~ are: 
+				~ carian
+				, ~ lycian
+				, ~ lydian
+								.
 }
 
 \keys_define:nn { xtransliteration }
  {
   carian  .code:n = { \input{carian_input} },
-  help  .code:n = { \xtranslitoptions },  
+  lycian  .code:n = { \input{lycian_input} },
+  lydian  .code:n = { \input{lydian_input} },
   meta  .code:n = { \input{metacs_input} },
   unicode  .code:n = { \input{unicode_cb} },
  }
@@ -38,5 +50,6 @@ Available ~ options ~ are:
 
 
 \newcommand\eolist{{\tiny [End of List]}\par}
+
 
 \endinput

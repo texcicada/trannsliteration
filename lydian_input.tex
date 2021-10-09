@@ -1,0 +1,583 @@
+\newcommand\ldscripttag{Lydian}
+\newcommand\ldtag{{\tiny [\ldscripttag ]\par}}
+\newcommand\ldtagb{(\ldscripttag)}
+\newcommand\ldleftarrow{\kern-0.8em\raisebox{1.5ex}{$^\leftarrow$}}
+\ExplSyntaxOn
+%=====================================
+%uc
+%un
+%ts - default
+%st
+\NewDocumentCommand { \ldtrans } { O{ts} m } {%
+\cs:w ldtrans#1 \cs_end: {#2}
+}
+%w - default
+%%gloss
+%ruby
+\NewDocumentCommand { \ldtext } { O{w} m } {%
+\cs:w ld#1 \cs_end: {#2}
+}
+\tl_new:N \l_mylduc_tl
+\NewDocumentCommand { \lduc } { m } { \ldtransuc {#1} }
+\NewDocumentCommand { \ldtransuc } { m } {%
+\tl_set:Nn \l_mylduc_tl { #1 }
+\doldtransuc
+\tl_reverse:N  \l_mylduc_tl
+\tl_put_right:Nn \l_mylduc_tl { \ldleftarrow }
+\tl_use:N \l_mylduc_tl
+}
+\tl_new:N \l_myldun_tl
+\NewDocumentCommand { \ldun } { m } { \ldtransun {#1} }
+\NewDocumentCommand { \ldtransun } { m } {%
+\tl_set:Nn \l_myldun_tl { #1 }
+\doldtransun
+\tl_reverse:N  \l_myldun_tl
+\tl_put_right:Nn \l_myldun_tl { \ldleftarrow }
+\tl_use:N \l_myldun_tl
+}
+\tl_new:N \l_myldts_tl
+\NewDocumentCommand { \ldts } { m } { \ldtransts {#1} }
+\NewDocumentCommand { \ldtransts } { m } {%
+\tl_set:Nn \l_myldts_tl { #1 }
+\doldtransts
+\tl_reverse:N  \l_myldts_tl
+\tl_put_right:Nn \l_myldts_tl { \ldleftarrow }
+\tl_use:N \l_myldts_tl
+}
+\NewDocumentCommand { \ldst } { m } { \ldtransst {#1} }
+\NewDocumentCommand{\ldtransst}{ > { \SplitList { . } } m }{%
+\ProcessList { #1 } { \doldtransst }
+}
+\tl_new:N \l_myldb_tl
+\tl_new:N \l_myldz_tl
+\NewDocumentCommand { \ldw } { m } {%
+\tl_set:Nn \l_myldts_tl { #1 }
+\tl_set:Nn \l_myldb_tl { #1 }
+\doldword
+%{ \ldfont \tl_use:N \l_myld_tl }
+}
+\NewDocumentCommand { \ldgloss } { m m } {%
+\tl_set:Nn \l_myldts_tl { #1 }
+\tl_set:Nn \l_myldb_tl { #1 }
+\doldgloss {#2}
+}
+\NewDocumentCommand{\ldruby}{ > { \SplitList { . } } m }{%
+\ProcessList {#1 } { \doldtranstsruby }
+}
+%AX:
+\newcommand\doldrubye{%
+%yyy
+}
+%\NewDocumentCommand{\ldrubysplit}{ > { \SplitList { . } } m }{%
+% \ProcessList {#1 } { \doldruby }
+%}
+%---- Environments
+\NewDocumentEnvironment{ldtransuce}{ +b }
+{
+\tl_set:Nn \l_mylduc_tl { #1 }
+\doldtransuc
+%\tl_put_left:Nn \l_mylduc_tl { $\leftarrow$ }
+\tl_reverse:N  \l_mylduc_tl
+\tl_use:N \l_mylduc_tl
+}
+{ }
+\NewDocumentEnvironment{ldtransune}{ +b }
+{
+\tl_set:Nn \l_myldun_tl { #1 }
+\doldtransun
+\tl_reverse:N  \l_myldun_tl
+%\tl_put_right:Nn \l_myldun_tl { \ldleftarrow }
+\tl_use:N \l_myldun_tl
+}
+{ }
+\NewDocumentEnvironment{ldtranstse}{ +b }
+{
+\tl_set:Nn \l_myldts_tl { #1 }
+\doldtransts
+\tl_reverse:N  \l_myldts_tl
+%\tl_put_right:Nn \l_myldts_tl { \ldleftarrow }
+\tl_use:N \l_myldts_tl
+}
+{ }
+\NewDocumentEnvironment{ldtransste}{ +b }
+{
+% \tl_set:Nn \l_myld_tl { #1 }
+\doldtransst {#1}
+%{ \ldfont \tl_use:N \l_myld_tl }
+}
+{ }
+\NewDocumentEnvironment{ldrubye}{ +b }
+{
+\tl_set:Nn \l_myldy_tl { #1 }
+\doldrubye
+{ \tl_use:N \l_myldy_tl }
+}
+{ }
+\NewDocumentEnvironment{ldtableture}{ +b }
+{
+\begin{quotation}\noindent
+\begin{ldtranstse}
+#1
+\end{ldtranstse}
+\par
+\bigskip
+\begin{ldtransste}
+#1
+\end{ldtransste}
+\end{quotation}
+}
+{ }
+%=========================== Commands
+\newcommand\doldword{%
+\doldtransts
+%ldword+trans
+\regex_replace_all:nnN { \. } { } \l_myldts_tl
+\tl_reverse:N  \l_myldts_tl
+\tl_put_right:Nn \l_myldts_tl { \ldleftarrow }
+\tl_use:N \l_myldts_tl \ (
+%\ldtransst { \tl_use:N \l_myldb_tl }
+\exp_args:No
+\ldtransst
+{ \l_myldb_tl }
+)
+}
+\newcommand\doldgloss[1]{%
+\doldtransts
+%ldword+trans
+\regex_replace_all:nnN { \. } { } \l_myldts_tl
+\tl_reverse:N  \l_myldts_tl
+\tl_put_right:Nn \l_myldts_tl { \ldleftarrow }
+\tl_use:N \l_myldts_tl \ (
+%\ldtransst { \tl_use:N \l_myldb_tl }
+\exp_args:No
+\ldtransst
+{ \l_myldb_tl }
+, \ `#1'
+)
+}
+\newcommand\doldtranstsruby[1]{%
+\tl_set:Nn \l_myldts_tl { #1 }
+%\tl_set:Nn \l_myz_tl { #1 }
+\doldtransts
+%
+{
+\setlength{\tabcolsep}{-0.5pt}
+\begin{tabular}[b]{c}
+\scriptsize \doldtransst { #1 } \\
+\rule{0pt}{1.8ex} \ftldfont \tl_use:N \l_myldts_tl \\
+\end{tabular}
+}
+}
+%H:
+%%\tl_replace_all:Nnn \l_mylduc_tl { U+10280 } { { \ftldfont 𐊀 } }
+\newcommand\ldrepluc[2]{%
+	\tl_replace_all:Nnn 
+					\l_mylduc_tl 
+					{ #1 } 
+					{ { #2 } }
+}
+%----- Unicode codepoint
+\newcommand\doldtransuc{%
+%yyy
+\ldrepluc{U+10920}{ { \ftldfont 𐤠 } }
+\ldrepluc{U+10921}{ { \ftldfont 𐤡 } }
+\ldrepluc{U+10922}{ { \ftldfont 𐤢 } }
+\ldrepluc{U+10923}{ { \ftldfont 𐤣 } }
+\ldrepluc{U+10924}{ { \ftldfont 𐤤 } }
+\ldrepluc{U+10925}{ { \ftldfont 𐤥 } }
+\ldrepluc{U+10926}{ { \ftldfont 𐤦 } }
+\ldrepluc{U+10927}{ { \ftldfont 𐤧 } }
+\ldrepluc{U+10928}{ { \ftldfont 𐤨 } }
+\ldrepluc{U+10929}{ { \ftldfont 𐤩 } }
+\ldrepluc{U+1092A}{ { \ftldfont 𐤪 } }
+\ldrepluc{U+1092B}{ { \ftldfont 𐤫 } }
+\ldrepluc{U+1092C}{ { \ftldfont 𐤬 } }
+\ldrepluc{U+1092D}{ { \ftldfont 𐤭 } }
+\ldrepluc{U+1092E}{ { \ftldfont 𐤮 } }
+\ldrepluc{U+1092F}{ { \ftldfont 𐤯 } }
+\ldrepluc{U+10930}{ { \ftldfont 𐤰 } }
+\ldrepluc{U+10931}{ { \ftldfont 𐤱 } }
+\ldrepluc{U+10932}{ { \ftldfont 𐤲 } }
+\ldrepluc{U+10933}{ { \ftldfont 𐤳 } }
+\ldrepluc{U+10934}{ { \ftldfont 𐤴 } }
+\ldrepluc{U+10935}{ { \ftldfont 𐤵 } }
+\ldrepluc{U+10936}{ { \ftldfont 𐤶 } }
+\ldrepluc{U+10937}{ { \ftldfont 𐤷 } }
+\ldrepluc{U+10938}{ { \ftldfont 𐤸 } }
+\ldrepluc{U+10939}{ { \ftldfont 𐤹 } }
+\ldrepluc{U+1093F}{ { \ftldfont 𐤿 } }
+}
+%Q:
+%%\tl_replace_all:Nnn \l_myldun_tl { bh } { { \ftldfont 𐊃 } }
+\newcommand\ldreplun[2]{%
+	\tl_replace_all:Nnn 
+					\l_myldun_tl 
+					{ #1 } 
+					{ { #2 } }
+}
+%----- Unicode name
+\newcommand\doldtransun{%
+%
+%yyy
+\ldreplun{triangularmark}{ { \ftldfont 𐤿 } }
+\ldreplun{ss}{ { \ftldfont 𐤮 } }
+\ldreplun{tt}{ { \ftldfont 𐤴 } }
+\ldreplun{an}{ { \ftldfont 𐤵 } }
+\ldreplun{en}{ { \ftldfont 𐤶 } }
+\ldreplun{ly}{ { \ftldfont 𐤷 } }
+\ldreplun{nn}{ { \ftldfont 𐤸 } }
+\ldreplun{a}{ { \ftldfont 𐤠 } }
+\ldreplun{b}{ { \ftldfont 𐤡 } }
+\ldreplun{g}{ { \ftldfont 𐤢 } }
+\ldreplun{d}{ { \ftldfont 𐤣 } }
+\ldreplun{e}{ { \ftldfont 𐤤 } }
+\ldreplun{v}{ { \ftldfont 𐤥 } }
+\ldreplun{i}{ { \ftldfont 𐤦 } }
+\ldreplun{y}{ { \ftldfont 𐤧 } }
+\ldreplun{k}{ { \ftldfont 𐤨 } }
+\ldreplun{l}{ { \ftldfont 𐤩 } }
+\ldreplun{m}{ { \ftldfont 𐤪 } }
+\ldreplun{n}{ { \ftldfont 𐤫 } }
+\ldreplun{o}{ { \ftldfont 𐤬 } }
+\ldreplun{r}{ { \ftldfont 𐤭 } }
+\ldreplun{t}{ { \ftldfont 𐤯 } }
+\ldreplun{u}{ { \ftldfont 𐤰 } }
+\ldreplun{f}{ { \ftldfont 𐤱 } }
+\ldreplun{q}{ { \ftldfont 𐤲 } }
+\ldreplun{s}{ { \ftldfont 𐤳 } }
+\ldreplun{c}{ { \ftldfont 𐤹 } }
+}
+%V:
+%%\tl_replace_all:Nnn \l_myldts_tl { bh } { { \ftldfont 𐊃 } }
+\newcommand\ldreplts[2]{%
+	\tl_replace_all:Nnn 
+					\l_myldts_tl 
+					{ #1 } 
+					{ { #2 } }
+}
+%----- Typing shortcut
+\newcommand\doldtransts{%
+%
+%%yyy
+\ldreplts{tmark}{ { \ftldfont 𐤿 } }
+\ldreplts{ss}{ { \ftldfont 𐤮 } }
+\ldreplts{tt}{ { \ftldfont 𐤴 } }
+\ldreplts{an}{ { \ftldfont 𐤵 } }
+\ldreplts{en}{ { \ftldfont 𐤶 } }
+\ldreplts{ly}{ { \ftldfont 𐤷 } }
+\ldreplts{nn}{ { \ftldfont 𐤸 } }
+\ldreplts{a}{ { \ftldfont 𐤠 } }
+\ldreplts{b}{ { \ftldfont 𐤡 } }
+\ldreplts{g}{ { \ftldfont 𐤢 } }
+\ldreplts{d}{ { \ftldfont 𐤣 } }
+\ldreplts{e}{ { \ftldfont 𐤤 } }
+\ldreplts{v}{ { \ftldfont 𐤥 } }
+\ldreplts{i}{ { \ftldfont 𐤦 } }
+\ldreplts{y}{ { \ftldfont 𐤧 } }
+\ldreplts{k}{ { \ftldfont 𐤨 } }
+\ldreplts{l}{ { \ftldfont 𐤩 } }
+\ldreplts{m}{ { \ftldfont 𐤪 } }
+\ldreplts{n}{ { \ftldfont 𐤫 } }
+\ldreplts{o}{ { \ftldfont 𐤬 } }
+\ldreplts{r}{ { \ftldfont 𐤭 } }
+\ldreplts{t}{ { \ftldfont 𐤯 } }
+\ldreplts{u}{ { \ftldfont 𐤰 } }
+\ldreplts{f}{ { \ftldfont 𐤱 } }
+\ldreplts{q}{ { \ftldfont 𐤲 } }
+\ldreplts{s}{ { \ftldfont 𐤳 } }
+\ldreplts{c}{ { \ftldfont 𐤹 } }
+}
+%AI:
+%%\tl_replace_all:Nnn \l_myz_tl{bh}{蝌}
+\newcommand\ldreplst[2]{%
+	\tl_replace_all:Nnn 
+					\l_myldst_tl 
+					{ #1 } 
+					{ { #2 } }
+}
+
+%%\tl_replace_all:Nnn \l_myz_tl{蝒}{θ}
+\newcommand\doldtransst[1]{%
+\tl_set:Nn \l_myldst_tl { #1 }
+%----- Ruby Part 2a
+%%yyy
+\ldreplts{tmark}{蝣}
+\ldreplts{ss}{蝗}
+\ldreplts{tt}{蝝}
+\ldreplts{an}{蝞}
+\ldreplts{en}{蝟}
+\ldreplts{ly}{蝠}
+\ldreplts{nn}{蝡}
+\ldreplts{a}{蝉}
+\ldreplts{b}{蝊}
+\ldreplts{g}{蝋}
+\ldreplts{d}{蝌}
+\ldreplts{e}{蝍}
+\ldreplts{v}{蝎}
+\ldreplts{i}{蝏}
+\ldreplts{y}{蝐}
+\ldreplts{k}{蝑}
+\ldreplts{l}{蝒}
+\ldreplts{m}{蝓}
+\ldreplts{n}{蝔}
+\ldreplts{o}{蝕}
+\ldreplts{r}{蝖}
+\ldreplts{t}{蝘}
+\ldreplts{u}{蝙}
+\ldreplts{f}{蝚}
+\ldreplts{q}{蝛}
+\ldreplts{s}{蝜}
+\ldreplts{c}{蝢}
+%----- Ruby Part 2b
+%%yyy
+\ldreplts{蝉}{a}
+\ldreplts{蝊}{p}
+\ldreplts{蝋}{g}
+\ldreplts{蝌}{d}
+\ldreplts{蝍}{e}
+\ldreplts{蝎}{w}
+\ldreplts{蝏}{i}
+\ldreplts{蝐}{y}
+\ldreplts{蝑}{k}
+\ldreplts{蝒}{l}
+\ldreplts{蝓}{m}
+\ldreplts{蝔}{n}
+\ldreplts{蝕}{o}
+\ldreplts{蝖}{r}
+\ldreplts{蝗}{s}
+\ldreplts{蝘}{t}
+\ldreplts{蝙}{u}
+\ldreplts{蝚}{f}
+\ldreplts{蝛}{q}
+\ldreplts{蝜}{š}
+\ldreplts{蝝}{τ}
+\ldreplts{蝞}{ã}
+\ldreplts{蝟}{ẽ}
+\ldreplts{蝠}{λ}
+\ldreplts{蝡}{ν}
+\ldreplts{蝢}{c}
+\ldreplts{蝣}{?}
+%
+\tl_use:N \l_myldst_tl
+}
+\ExplSyntaxOff
+%%%%%%
+%
+%BA:
+%%\noindent U+10280 $\mapsto$ {\ftldfont 𐊀}\par
+\newcommand\ldmapsto[2]{%
+\noindent #1 $\mapsto$ {#2}\par
+}
+%----- List of Unicode codepoints
+\newcommand\ldshowplainlistuc{%
+%\subsection{List of Unicode codepoints}\label{sec:listlduc}
+%yyy
+\ldmapsto{U+10920}{\ftldfont 𐤠}
+\ldmapsto{U+10921}{\ftldfont 𐤡}
+\ldmapsto{U+10922}{\ftldfont 𐤢}
+\ldmapsto{U+10923}{\ftldfont 𐤣}
+\ldmapsto{U+10924}{\ftldfont 𐤤}
+\ldmapsto{U+10925}{\ftldfont 𐤥}
+\ldmapsto{U+10926}{\ftldfont 𐤦}
+\ldmapsto{U+10927}{\ftldfont 𐤧}
+\ldmapsto{U+10928}{\ftldfont 𐤨}
+\ldmapsto{U+10929}{\ftldfont 𐤩}
+\ldmapsto{U+1092A}{\ftldfont 𐤪}
+\ldmapsto{U+1092B}{\ftldfont 𐤫}
+\ldmapsto{U+1092C}{\ftldfont 𐤬}
+\ldmapsto{U+1092D}{\ftldfont 𐤭}
+\ldmapsto{U+1092E}{\ftldfont 𐤮}
+\ldmapsto{U+1092F}{\ftldfont 𐤯}
+\ldmapsto{U+10930}{\ftldfont 𐤰}
+\ldmapsto{U+10931}{\ftldfont 𐤱}
+\ldmapsto{U+10932}{\ftldfont 𐤲}
+\ldmapsto{U+10933}{\ftldfont 𐤳}
+\ldmapsto{U+10934}{\ftldfont 𐤴}
+\ldmapsto{U+10935}{\ftldfont 𐤵}
+\ldmapsto{U+10936}{\ftldfont 𐤶}
+\ldmapsto{U+10937}{\ftldfont 𐤷}
+\ldmapsto{U+10938}{\ftldfont 𐤸}
+\ldmapsto{U+10939}{\ftldfont 𐤹}
+\ldmapsto{U+1093F}{\ftldfont 𐤿}
+}
+%BB:
+%%\noindent a $\mapsto$ {\ftldfont 𐊀}\par
+%----- List of Unicode names
+\newcommand\ldshowplainlistun{%
+%\subsection{List of Unicode names}\label{sec:listldun}
+%yyy
+\ldmapsto{a}{\ftldfont 𐤠}
+\ldmapsto{b}{\ftldfont 𐤡}
+\ldmapsto{g}{\ftldfont 𐤢}
+\ldmapsto{d}{\ftldfont 𐤣}
+\ldmapsto{e}{\ftldfont 𐤤}
+\ldmapsto{v}{\ftldfont 𐤥}
+\ldmapsto{i}{\ftldfont 𐤦}
+\ldmapsto{y}{\ftldfont 𐤧}
+\ldmapsto{k}{\ftldfont 𐤨}
+\ldmapsto{l}{\ftldfont 𐤩}
+\ldmapsto{m}{\ftldfont 𐤪}
+\ldmapsto{n}{\ftldfont 𐤫}
+\ldmapsto{o}{\ftldfont 𐤬}
+\ldmapsto{r}{\ftldfont 𐤭}
+\ldmapsto{ss}{\ftldfont 𐤮}
+\ldmapsto{t}{\ftldfont 𐤯}
+\ldmapsto{u}{\ftldfont 𐤰}
+\ldmapsto{f}{\ftldfont 𐤱}
+\ldmapsto{q}{\ftldfont 𐤲}
+\ldmapsto{s}{\ftldfont 𐤳}
+\ldmapsto{tt}{\ftldfont 𐤴}
+\ldmapsto{an}{\ftldfont 𐤵}
+\ldmapsto{en}{\ftldfont 𐤶}
+\ldmapsto{ly}{\ftldfont 𐤷}
+\ldmapsto{nn}{\ftldfont 𐤸}
+\ldmapsto{c}{\ftldfont 𐤹}
+\ldmapsto{triangularmark}{\ftldfont 𐤿}
+}
+%BC:
+%%\noindent a $\mapsto$ {\ftldfont 𐊀}\par
+%----- List of Typing shortcuts
+\newcommand\ldshowplainlistts{%
+%\subsection{List of Typing shortcuts}\label{sec:listldts}
+%%yyy
+\ldmapsto{a}{\ftldfont 𐤠}
+\ldmapsto{b}{\ftldfont 𐤡}
+\ldmapsto{g}{\ftldfont 𐤢}
+\ldmapsto{d}{\ftldfont 𐤣}
+\ldmapsto{e}{\ftldfont 𐤤}
+\ldmapsto{v}{\ftldfont 𐤥}
+\ldmapsto{i}{\ftldfont 𐤦}
+\ldmapsto{y}{\ftldfont 𐤧}
+\ldmapsto{k}{\ftldfont 𐤨}
+\ldmapsto{l}{\ftldfont 𐤩}
+\ldmapsto{m}{\ftldfont 𐤪}
+\ldmapsto{n}{\ftldfont 𐤫}
+\ldmapsto{o}{\ftldfont 𐤬}
+\ldmapsto{r}{\ftldfont 𐤭}
+\ldmapsto{ss}{\ftldfont 𐤮}
+\ldmapsto{t}{\ftldfont 𐤯}
+\ldmapsto{u}{\ftldfont 𐤰}
+\ldmapsto{f}{\ftldfont 𐤱}
+\ldmapsto{q}{\ftldfont 𐤲}
+\ldmapsto{s}{\ftldfont 𐤳}
+\ldmapsto{tt}{\ftldfont 𐤴}
+\ldmapsto{an}{\ftldfont 𐤵}
+\ldmapsto{en}{\ftldfont 𐤶}
+\ldmapsto{ly}{\ftldfont 𐤷}
+\ldmapsto{nn}{\ftldfont 𐤸}
+\ldmapsto{c}{\ftldfont 𐤹}
+\ldmapsto{tmark}{\ftldfont 𐤿}
+}
+%BD:
+%%\noindent a $\mapsto$ a\par
+%----- List of Standard Transliterations
+\newcommand\ldshowplainlistst{%
+%\subsection{List of Standard Transliterations}\label{sec:listldst}
+%%yyy
+\ldmapsto{a}{a\ftldfont 𐤠}
+\ldmapsto{b}{p\ftldfont 𐤡}
+\ldmapsto{g}{g\ftldfont 𐤢}
+\ldmapsto{d}{d\ftldfont 𐤣}
+\ldmapsto{e}{e\ftldfont 𐤤}
+\ldmapsto{v}{w\ftldfont 𐤥}
+\ldmapsto{i}{i\ftldfont 𐤦}
+\ldmapsto{y}{y\ftldfont 𐤧}
+\ldmapsto{k}{k\ftldfont 𐤨}
+\ldmapsto{l}{l\ftldfont 𐤩}
+\ldmapsto{m}{m\ftldfont 𐤪}
+\ldmapsto{n}{n\ftldfont 𐤫}
+\ldmapsto{o}{o\ftldfont 𐤬}
+\ldmapsto{r}{r\ftldfont 𐤭}
+\ldmapsto{ss}{s\ftldfont 𐤮}
+\ldmapsto{t}{t\ftldfont 𐤯}
+\ldmapsto{u}{u\ftldfont 𐤰}
+\ldmapsto{f}{f\ftldfont 𐤱}
+\ldmapsto{q}{q\ftldfont 𐤲}
+\ldmapsto{s}{š\ftldfont 𐤳}
+\ldmapsto{tt}{τ\ftldfont 𐤴}
+\ldmapsto{an}{ã\ftldfont 𐤵}
+\ldmapsto{en}{ẽ\ftldfont 𐤶}
+\ldmapsto{ly}{λ\ftldfont 𐤷}
+\ldmapsto{nn}{ν\ftldfont 𐤸}
+\ldmapsto{c}{c\ftldfont 𐤹}
+\ldmapsto{tmark}{?\ftldfont 𐤿}
+}
+%------ListUC
+\newcommand\ldlistuc{%
+\section{List of Unicode codepoints \ldtagb }\label{sec:listlduc}
+\begin{multicols}{4}\noindent
+\ldtag
+\ldshowplainlistuc
+\eolist
+\end{multicols}
+}
+%------ListUN
+\newcommand\ldlistun{%
+\section{List of Unicode names \ldtagb }\label{sec:listldun}
+\begin{multicols}{4}\noindent
+\ldtag
+\ldshowplainlistun
+\eolist
+\end{multicols}
+}
+%------ListTS
+\newcommand\ldlistts{%
+\section{List of Typing shortcuts \ldtagb }\label{sec:listldts}
+\begin{multicols}{4}\noindent
+\ldtag
+\ldshowplainlistts
+\eolist
+\end{multicols}
+}
+%------ListST
+\newcommand\ldlistst{%
+\section{List of Standard transliterations \ldtagb }\label{sec:listldst}
+\begin{multicols}{4}\noindent
+\ldtag
+\ldshowplainlistst
+\eolist
+\end{multicols}
+}
+%------All lists
+\newcommand\ldlists{%
+\ldlistuc
+\par\ldlistun
+\par\ldlistts
+\par\ldlistst
+}
+%EG:
+%%U+10280 & \ftldfont 𐊀 & LETTER A & a & a & a \\
+\providecommand\theadercolour{blue!12}
+\newcommand\ldshowconspectus{%
+\section{Conspectus \ldtagb }
+\begin{longtable}[l]{lclccc}\rowcolor{\theadercolour}
+UC & Glyph & Name & UN & TS & ST \\ \hline
+%%yyy
+U+10920 & \ftldfont 𐤠 & LYDIAN LETTER A & a & a & a \\ 
+U+10921 & \ftldfont 𐤡 & LYDIAN LETTER B & b & b & p \\ 
+U+10922 & \ftldfont 𐤢 & LYDIAN LETTER G & g & g & g \\ 
+U+10923 & \ftldfont 𐤣 & LYDIAN LETTER D & d & d & d \\ 
+U+10924 & \ftldfont 𐤤 & LYDIAN LETTER E & e & e & e \\ 
+U+10925 & \ftldfont 𐤥 & LYDIAN LETTER V & v & v & w \\ 
+U+10926 & \ftldfont 𐤦 & LYDIAN LETTER I & i & i & i \\ 
+U+10927 & \ftldfont 𐤧 & LYDIAN LETTER Y & y & y & y \\ 
+U+10928 & \ftldfont 𐤨 & LYDIAN LETTER K & k & k & k \\ 
+U+10929 & \ftldfont 𐤩 & LYDIAN LETTER L & l & l & l \\ 
+U+1092A & \ftldfont 𐤪 & LYDIAN LETTER M & m & m & m \\ 
+U+1092B & \ftldfont 𐤫 & LYDIAN LETTER N & n & n & n \\ 
+U+1092C & \ftldfont 𐤬 & LYDIAN LETTER O & o & o & o \\ 
+U+1092D & \ftldfont 𐤭 & LYDIAN LETTER R & r & r & r \\ 
+U+1092E & \ftldfont 𐤮 & LYDIAN LETTER SS & ss & ss & s \\ 
+U+1092F & \ftldfont 𐤯 & LYDIAN LETTER T & t & t & t \\ 
+U+10930 & \ftldfont 𐤰 & LYDIAN LETTER U & u & u & u \\ 
+U+10931 & \ftldfont 𐤱 & LYDIAN LETTER F & f & f & f \\ 
+U+10932 & \ftldfont 𐤲 & LYDIAN LETTER Q & q & q & q \\ 
+U+10933 & \ftldfont 𐤳 & LYDIAN LETTER S & s & s & š \\ 
+U+10934 & \ftldfont 𐤴 & LYDIAN LETTER TT & tt & tt & τ \\ 
+U+10935 & \ftldfont 𐤵 & LYDIAN LETTER AN & an & an & ã \\ 
+U+10936 & \ftldfont 𐤶 & LYDIAN LETTER EN & en & en & ẽ \\ 
+U+10937 & \ftldfont 𐤷 & LYDIAN LETTER LY & ly & ly & λ \\ 
+U+10938 & \ftldfont 𐤸 & LYDIAN LETTER NN & nn & nn & ν \\ 
+U+10939 & \ftldfont 𐤹 & LYDIAN LETTER C & c & c & c \\ 
+U+1093F & \ftldfont 𐤿 & LYDIAN TRIANGULAR MARK & triangularmark & tmark & ? \\ \hline\end{longtable}
+}

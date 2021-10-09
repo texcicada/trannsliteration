@@ -1,0 +1,232 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\pagecolor{green!3}
+\newcommand\theadercolour{red!20!yellow}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
+\usepackage[listings]{tcolorbox}
+
+\usepackage[unicode,meta,lydian]{xtransliteration}
+
+%============================== Font
+\newfontfamily\ftldfont{Noto Sans Lydian}[Scale=1.5]%plain font
+
+
+%==============================
+
+
+
+
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+%Common code: plain
+\newcommand\translitformat{\color{red}\bfseries}
+\newcommand\tablea{%
+\setlength{\tabcolsep}{-0.5pt}%
+\begin{tabular}[b]{c}
+\scriptsize 
+}
+\newcommand\tableb{%
+\\ \rule{0pt}{1.8ex} 
+}
+\newcommand\tablec{%
+\\\end{tabular}%
+}
+%\newcommand\eolist{{\tiny [End of List]}\par}
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\newcommand\sbucl{{\mdseries\markerfont\symbol{9121}}}% ⎡
+\newcommand\sbbcl{{\mdseries\markerfont\symbol{9123}}}% ⎣
+\newcommand\sbucr{{\mdseries\markerfont\symbol{9124}}}% ⎤
+\newcommand\sbbcr{{\mdseries\markerfont\symbol{9126}}}% ⎦
+\newcommand\tlcorner{{\mdseries\markerfont\symbol{8988}}}% ⌜
+\newcommand\trcorner{{\mdseries\markerfont\symbol{8989}}}% ⌝
+\newcommand\blcorner{{\mdseries\markerfont\symbol{8990}}}% ⌞
+\newcommand\brcorner{{\mdseries\markerfont\symbol{8991}}}% ⌟
+\newcommand\lbracket{{\mdseries\markerfontb\symbol{91}}}% [
+\newcommand\rbracket{{\mdseries\markerfontb\symbol{93}}}% ]
+
+%\input{metacs_input.tex}
+
+% Common code
+\ExplSyntaxOn
+
+\tl_new:N \l_myuc_tl
+\tl_new:N \l_myun_tl
+\tl_new:N \l_myts_tl
+%\tl_new:N \l_myb_tl %defined in metacs.tex
+\tl_new:N \l_myx_tl
+\tl_new:N \l_myy_tl
+\tl_new:N \l_myz_tl
+\tl_new:N \l_myzz_tl
+\tl_new:N \l_myrev_tl
+
+\NewDocumentCommand{\transrev}{ m }{
+
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+		\tl_use:N \l_myrev_tl
+}
+\NewDocumentCommand{\transrevonly}{ m }{
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+%		\tl_use:N \l_myrev_tl
+}
+
+
+
+
+
+\ExplSyntaxOff
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+\newcommand\bqq[1]{\begin{quotation}#1\end{quotation}}
+
+
+
+
+
+%===================================
+\begin{document}
+\begin{center}
+{\ttfamily ASCII Input Method for Lydian}
+
+\rule{0.4\textwidth}{0.2pt}
+\end{center}
+
+\tableofcontents
+
+\bigskip
+\hfill\rule{0.4\textwidth}{0.2pt}\hfill\ 
+
+\section{Usage}
+Activate the transliteration commands and environments for Lydian script by specifying the package option \texttt{lydian} for the \texttt{xtransliteration} package:
+
+\begin{center}
+\verb|\usepackage[lydian]{xtransliteration}|
+\end{center}
+
+Define a font switch \texttt{\textbackslash ftldfont}
+
+\begin{center}
+\verb|\newfontfamily\ftldfont{Noto Sans Lydian}[Scale=1.5]|
+\end{center}
+
+\section{Commands and Environments}
+
+\subsection{Inline Commands}
+\subsubsection{Unicode codepoint (UC) Input}
+\bqq{\cdr{\lduc{U+10920
+U+10921
+U+10922
+U+10923
+}}}
+
+\subsubsection{Unicode name (UN) Input}
+\bqq{\cdr{\ldun{a
+b
+g
+d
+}}}
+
+\subsubsection{Typing Shortcut (TS) Input}
+\bqq{\cdr{\ldts{a
+b
+g
+d
+}}}
+
+\subsubsection{Standard Transliteration Output}
+\bqq{\cdr{\ldst{a
+b
+g
+d s
+tt
+an
+en
+ly
+nn
+}}}
+
+\subsubsection{Word + Transliteration Output}
+\bqq{\cdr{\ldw{ora}}}
+
+\subsubsection{Gloss Output}
+\bqq{\cdr{\ldgloss{ora}{month}}}
+\bqq{\cdr{\ldgloss{bira}{house, home}}}
+
+\subsubsection{Ruby Text Output}
+\bqq{\cdr{\ldruby{b.i.r.a}}}
+
+\subsection{Environments}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Unicode codepoints: \bfseries\textcolor{blue!10}{ldtransuce}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{ldtransuce}
+U+10920 U+10921 U+10922 U+10923
+
+U+10920 U+10921 U+10922 U+10923
+\end{ldtransuce}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Unicode names: \bfseries\textcolor{blue!10}{ldtransune}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{ldtransune}
+abgd
+
+abgd
+\end{ldtransune}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Typing shortcuts: \bfseries\textcolor{blue!10}{ldtranstse}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{ldtranstse}
+abgd
+
+abgd
+\end{ldtranstse}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Standard transliteratioin: \bfseries\textcolor{blue!10}{ldtransste}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{ldtransste}
+ttan enlynn
+
+ttan enlynn
+\end{ldtransste}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Ruby text: \bfseries\textcolor{blue!10}{ldrubye}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{ldrubye}
+ttan enlynn
+
+ttan enlynn
+\end{ldrubye}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Tableture: \bfseries\textcolor{blue!10}{ldtableture}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{ldtableture}
+ttan enlynn
+\end{ldtableture}
+\end{tcblisting}
+
+
+\ldlists
+
+\ldshowconspectus
+
+\end{document}
