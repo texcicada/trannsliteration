@@ -4,30 +4,159 @@
 %\usepackage{graphicx}
 \usepackage{fontspec}
 \setmainfont{Noto Serif}
+\usepackage{abstract}
+%%%\usepackage{tabularray}
+
+
 %\usepackage{luacode}
 %\usepackage{etoolbox}
 %\usepackage{multicol}
 %\usepackage{xparse}
 
-\usepackage[unicode,meta,carian]{xtransliteration}
+\usepackage[unicode,meta,
+carian,
+lycian,
+]{xtransliteration}
+
+
+
 %============================== Font
 \newfontfamily\ftcafont{Noto Sans Carian}[Scale=1.5]%plain font
+\newfontfamily\ftlcfont{Noto Sans Lycian}[Scale=1.5]%plain font
+
 
 %\input{unicode_cb}
 \newfontface\fcarian{NotoSansCarian-Regular.ttf}[Colour=blue]
 \DeclareTextFontCommand\textcarian{\fcarian}
+\newfontface\flycian{NotoSansLycian-Regular.ttf}[Colour=blue]
+\DeclareTextFontCommand\textlycian{\flycian}
+
 
 \newfontface\nrffontname{NotoSansCarian-Regular.ttf}
 
-\begin{document}
+\title{The xtransliteration package}
+\author{}
+\date{}
 
-\section{Example Transliteration \catagb }
+\newcommand\tentry[5]{%
+#1 &
+\metac{#2} &
+\metacb{#3} &
+#4 &
+#5{#4} \\
+
+}
+
+\newcommand\sep{\vspace{1.2ex}\hskip 0.3\textwidth\leaders\hrule width 0.3\textwidth\hskip 0.3\textwidth\vspace{1.8ex}}
+
+\newcommand\dotexample[1]{%
+\begin{quotation}\ttfamily\noindent #1 \end{quotation}%
+}
+
+
+
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+The ~\texttt{xtransliteration} ~ package provides a set of \textsc{ASCII}-based input methods for various Unicode codeblock scripts, so that the scripts can be typeset using just the characters on an \textsc{ASCII} keyboard as input, for example Lycian \cdr{\lcts{abgd}}.
+\par Scripts are selected by package option and by defining a corresponding font switch.
+\par This document provides a very quick overview of the available scripts.
+
+%\begin{center}
+%\begin{tabular}{lllll}
+%\rowcolor{\theadercolour}
+%Script & Option & Font switch & Input & Output \\ 
+%\hline
+%\tentry{Carian}{carian}{ftcafont}{a p2 d l}{\cats}
+%\tentry{Lycian}{lycian}{ftlcfont}{a e b bh}{\lcts}
+%\hline
+%\end{tabular}
+%%%%\begin{tblr}{lllll}
+%%%%%\rowcolor{\theadercolour}
+%%%%Script & Option & Font switch & Input & Output \\ 
+%%%%\hline
+%%%%Carian & carian & ftcafont & a p2 d l & \textbackslash cats \\
+%%%%%Lycian}{lycian}{ftlcfont}{a e b bh}{\lcts}
+%%%%%\tentry{Carian}{carian}{ftcafont}{a p2 d l}{\cats}
+%%%%%\tentry{Lycian}{lycian}{ftlcfont}{a e b bh}{\lcts}
+%%%%\hline
+%%%%\end{tblr}
+%\end{center}
+\end{abstract}
+
+\sep
+
+
+
+
+\section{Usage}
+(a) \textsc{Activate a transliteration script}: -- Activate the package the usual way, and specify the desired script(s) as a comma-separated list of package options. For example, to switch on Carian and Lycian transliteration commands, do:
+
+\begin{verbatim}
+\usepackage[carian,lycian]{xtransliteration}
+\end{verbatim}
+
+\noindent (b) \textsc{Define a Font}: -- A font switch named \texttt{ft\textcolor{blue}{xx}font} is needed for the transliteration font, where \texttt{\textcolor{blue}{xx}} is the two-letter code for the script. For example, Carian and Lycian fonts are specified by:
+
+\begin{verbatim}
+\newfontfamily\ftcafont{Noto Sans Carian}
+\newfontfamily\ftlcfont{Noto Sans Lycian}
+\end{verbatim}
+
+\newpage\tableofcontents
+
+\sep
+
+%**** Carian
+\newpage\section{Carian}
+\subsection{Available Commands \catagb }
+
+{
+\rowcolors{2}{blue!12!green!2}{yellow!25!green!12}
+\begin{tabular}{lll}
+\rowcolor{blue!12}
+Type & Short Command &  General command \\
+\hline
+Codepoint & 
+\cdr{\cauc{U+102A0}} & 
+\cdr{\catrans[uc]{U+102A0}} \\
+Unicode name & 
+\cdr{\caun{a}} & 
+\cdr{\catrans[un]{a}} \\
+Typing shortcut & 
+\cdr{\cats{a}} & 
+\cdr{\catrans[ts]{a}} \\
+Transliteration & 
+\cdr{\cast{p2}} & 
+\cdr{\catrans[st]{p2}} \\
+\hline
+Word & 
+\cdr{\caw{kat}} & 
+\cdr{\catext[w]{kat}} \\
+Gloss & 
+\scriptsize\cdr{\cagloss{kat}{dog}} & 
+\scriptsize\cdr{\catext[gloss]{kat}{dog}} \\
+Ruby & 
+\cdr{\caruby{kat}} & 
+\cdr{\catext[ruby]{kat}} \\
+Ruby & 
+\cdr{\caruby{k.a.t.}} & 
+\cdr{\catext[ruby]{k.a.t.}} \\
+\hline
+\end{tabular}
+}
+
+\subsection{Example Transliteration \catagb }
 \begin{quotation}
 \cdr{\cats{kat}}
 
 direct input: \textcarian{𐊨𐊣𐊠𐊦𐊹𐊸}
 
 \cdr{\caruby{q.l.a.ld.i.ss.}}
+
+\cdr{\caruby{qlaldiss. qlaldiss.}}
 
 \cdr{\cagloss{ted}{father}}
 
@@ -47,6 +176,74 @@ direct input: \textcarian{𐊨𐊣𐊠𐊦𐊹𐊸}
 %\cashowplainlistuc
 %\eolist
 %\end{multicols}
+
+
+
+%**** Lycian
+\newpage\section{Lycian}
+\subsection{Available Commands \lctagb }
+
+{
+\rowcolors{2}{blue!12!green!2}{yellow!25!green!12}
+\begin{tabular}{lll}
+\rowcolor{blue!12}
+Type & Short Command &  General command \\
+\hline
+Codepoint & 
+\cdr{\lcuc{U+10280}} & 
+\cdr{\lctrans[uc]{U+10280}} \\
+Unicode name & 
+\cdr{\lcun{a}} & 
+\cdr{\lctrans[un]{a}} \\
+Typing shortcut & 
+\cdr{\lcts{a}} & 
+\cdr{\lctrans[ts]{a}} \\
+Transliteration & 
+\cdr{\lcst{enx}} & 
+\cdr{\lctrans[st]{enx}} \\
+\hline
+Word & 
+\cdr{\lcw{ken}} & 
+\cdr{\lctext[w]{ken}} \\
+Gloss & 
+\scriptsize\cdr{\lcgloss{kat}{dog}} & 
+\scriptsize\cdr{\lctext[gloss]{kat}{dog}} \\
+Ruby & 
+\cdr{\lcruby{kat}} & 
+\cdr{\lctext[ruby]{kat}} \\
+Ruby & 
+\cdr{\lcruby{k.a.t.}} & 
+\cdr{\lctext[ruby]{k.a.t.}} \\
+\hline
+\end{tabular}
+}
+
+
+\subsection{Example Transliteration \lctagb }
+\begin{quotation}
+\cdr{\lcts{kat}}
+
+\cdr{\lcgloss{esbe}{horse}}
+
+\cdr{\lcgloss{trmm.mili}{the Lycian language}}
+%\cdr{\caruby{q.l.a.ld.i.ss.}}
+%
+%\cdr{\cagloss{ted}{father}}
+%
+%\cdr{\cagloss{en}{mother}}
+\end{quotation}
+
+
+\textlycian{%
+\doprmbx{66176}{66207}{'Lycian'}{c:/windows/fonts/NotoSansLycian-Regular.ttf}}
+
+
+%\doprmb{67872}{67903}{'Lydian'}
+
+
+
+
+
 
 
 \end{document}
