@@ -16,6 +16,7 @@
 \usepackage[unicode,meta,
 carian,
 lycian,
+lydian,
 ]{xtransliteration}
 
 
@@ -23,13 +24,15 @@ lycian,
 %============================== Font
 \newfontfamily\ftcafont{Noto Sans Carian}[Scale=1.5]%plain font
 \newfontfamily\ftlcfont{Noto Sans Lycian}[Scale=1.5]%plain font
-
+\newfontfamily\ftldfont{Noto Sans Lydian}[Scale=1.5]
 
 %\input{unicode_cb}
 \newfontface\fcarian{NotoSansCarian-Regular.ttf}[Colour=blue]
 \DeclareTextFontCommand\textcarian{\fcarian}
 \newfontface\flycian{NotoSansLycian-Regular.ttf}[Colour=blue]
 \DeclareTextFontCommand\textlycian{\flycian}
+\newfontface\flydian{NotoSansLydian-Regular.ttf}[Colour=blue]
+\DeclareTextFontCommand\textlydian{\flydian}
 
 
 \newfontface\nrffontname{NotoSansCarian-Regular.ttf}
@@ -60,7 +63,7 @@ lycian,
 \begin{document}
 \maketitle
 \begin{abstract}
-The ~\texttt{xtransliteration} ~ package provides a set of \textsc{ASCII}-based input methods for various Unicode codeblock scripts, so that the scripts can be typeset using just the characters on an \textsc{ASCII} keyboard as input, for example Lycian \cdr{\lcts{abgd}}.
+The ~\texttt{xtransliteration} ~ package provides a set of \textsc{ASCII}-based input methods for various Unicode codeblock scripts, so that the scripts can be typeset using just the characters on an \textsc{ASCII} keyboard as input, for example, for Lycian, \cdr{\lcts{abgd}}.
 \par Scripts are selected by package option and by defining a corresponding font switch.
 \par This document provides a very quick overview of the available scripts.
 
@@ -98,7 +101,7 @@ The ~\texttt{xtransliteration} ~ package provides a set of \textsc{ASCII}-based 
 \usepackage[carian,lycian]{xtransliteration}
 \end{verbatim}
 
-\noindent (b) \textsc{Define a Font}: -- A font switch named \texttt{ft\textcolor{blue}{xx}font} is needed for the transliteration font, where \texttt{\textcolor{blue}{xx}} is the two-letter code for the script. For example, Carian and Lycian fonts are specified by:
+\noindent (b) \textsc{Define a Font}: -- A font switch named \texttt{ft\textcolor{blue}{xx}font} is needed for the transliteration font, where \texttt{\textcolor{blue}{xx}} is a two-letter code for the script. For example, Carian and Lycian fonts are specified by:
 
 \begin{verbatim}
 \newfontfamily\ftcafont{Noto Sans Carian}
@@ -237,6 +240,66 @@ Ruby &
 \textlycian{%
 \doprmbx{66176}{66207}{'Lycian'}{c:/windows/fonts/NotoSansLycian-Regular.ttf}}
 
+
+%**** Lydian
+\newpage\section{Lydian}
+\subsection{Available Commands \ldtagb }
+
+{
+\rowcolors{2}{blue!12!green!2}{yellow!25!green!12}
+\begin{tabular}{lll}
+\rowcolor{blue!12}
+Type & Short Command &  General command \\
+\hline
+Codepoint & 
+\cdr{\lduc{U+10920}} & 
+\cdr{\ldtrans[uc]{U+10920}} \\
+Unicode name & 
+\cdr{\ldun{a}} & 
+\cdr{\ldtrans[un]{a}} \\
+Typing shortcut & 
+\cdr{\ldts{a}} & 
+\cdr{\ldtrans[ts]{a}} \\
+Transliteration & 
+\cdr{\ldst{alynn}} & 
+\cdr{\ldtrans[st]{alynn}} \\
+\hline
+Word & 
+\cdr{\ldw{ken}} & 
+\cdr{\ldtext[w]{ken}} \\
+Gloss & 
+\scriptsize\cdr{\ldgloss{kat}{dog}} & 
+\scriptsize\cdr{\ldtext[gloss]{kat}{dog}} \\
+Ruby & 
+\cdr{\ldruby{kaly}} & 
+\cdr{\ldtext[ruby]{kaly}} \\
+Ruby & 
+\cdr{\ldruby{k.a.ly}} & 
+\cdr{\ldtext[ruby]{k.a.ly}} \\
+\hline
+\end{tabular}
+}
+
+
+\subsection{Example Transliteration \ldtagb }
+\begin{quotation}
+\cdr{\ldgloss{ora}{month}}
+
+\cdr{\ldgloss{bira}{house, home}}
+
+\cdr{\ldruby{bira}}
+
+\cdr{\ldruby{b.i.r.a}}
+%\cdr{\caruby{q.l.a.ld.i.ss.}}
+%
+%\cdr{\cagloss{ted}{father}}
+%
+%\cdr{\cagloss{en}{mother}}
+\end{quotation}
+
+
+\textlydian{%
+\doprmbx{67872}{67903}{'Lydian'}{c:/windows/fonts/NotoSansLydian-Regular.ttf}}
 
 %\doprmb{67872}{67903}{'Lydian'}
 

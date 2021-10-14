@@ -17,6 +17,8 @@
 \NewDocumentCommand { \ldtext } { O{w} m } {%
 \cs:w ld#1 \cs_end: {#2}
 }
+\seq_new:N \l_myldruby_seq
+%
 \tl_new:N \l_mylduc_tl
 \NewDocumentCommand { \lduc } { m } { \ldtransuc {#1} }
 \NewDocumentCommand { \ldtransuc } { m } {%
@@ -44,10 +46,13 @@
 \tl_put_right:Nn \l_myldts_tl { \ldleftarrow }
 \tl_use:N \l_myldts_tl
 }
+
 \NewDocumentCommand { \ldst } { m } { \ldtransst {#1} }
 \NewDocumentCommand{\ldtransst}{ > { \SplitList { . } } m }{%
 \ProcessList { #1 } { \doldtransst }
 }
+
+
 \tl_new:N \l_myldb_tl
 \tl_new:N \l_myldz_tl
 \NewDocumentCommand { \ldw } { m } {%
@@ -56,14 +61,20 @@
 \doldword
 %{ \ldfont \tl_use:N \l_myld_tl }
 }
+
 \NewDocumentCommand { \ldgloss } { m m } {%
 \tl_set:Nn \l_myldts_tl { #1 }
 \tl_set:Nn \l_myldb_tl { #1 }
 \doldgloss {#2}
 }
+
 \NewDocumentCommand{\ldruby}{ > { \SplitList { . } } m }{%
-\ProcessList {#1 } { \doldtranstsruby }
+\seq_clear:N \l_myldruby_seq
+\ProcessList { #1 } { \doldtranstsruby }
+%\seq_show:N \l_myldruby_seq
+\seq_use:Nnnn \l_myldruby_seq {}{}{}
 }
+
 %AX:
 \newcommand\doldrubye{%
 %yyy
@@ -159,15 +170,23 @@
 \tl_set:Nn \l_myldts_tl { #1 }
 %\tl_set:Nn \l_myz_tl { #1 }
 \doldtransts
+\tl_reverse:N \l_myldts_tl
 %
+%
+\seq_put_left:Nn
+   \l_myldruby_seq
 {
-\setlength{\tabcolsep}{-0.5pt}
+%\setlength{\tabcolsep}{-0.5pt}
 \begin{tabular}[b]{c}
 \scriptsize \doldtransst { #1 } \\
-\rule{0pt}{1.8ex} \ftldfont \tl_use:N \l_myldts_tl \\
+\rule{0pt}{1.8ex} 
+\ftldfont 
+% \tl_use:N \l_myldts_tl \\
+\ldts { #1 } \\
 \end{tabular}
 }
 }
+%----------------------
 %H:
 %%\tl_replace_all:Nnn \l_mylduc_tl { U+10280 } { { \ftldfont 𐊀 } }
 \newcommand\ldrepluc[2]{%
@@ -253,7 +272,7 @@
 	\tl_replace_all:Nnn 
 					\l_myldts_tl 
 					{ #1 } 
-					{ { #2 } }
+					{ #2 }
 }
 %----- Typing shortcut
 \newcommand\doldtransts{%
@@ -293,70 +312,73 @@
 	\tl_replace_all:Nnn 
 					\l_myldst_tl 
 					{ #1 } 
-					{ { #2 } }
+					{ #2 }
 }
 
 %%\tl_replace_all:Nnn \l_myz_tl{蝒}{θ}
 \newcommand\doldtransst[1]{%
 \tl_set:Nn \l_myldst_tl { #1 }
+
 %----- Ruby Part 2a
 %%yyy
-\ldreplts{tmark}{蝣}
-\ldreplts{ss}{蝗}
-\ldreplts{tt}{蝝}
-\ldreplts{an}{蝞}
-\ldreplts{en}{蝟}
-\ldreplts{ly}{蝠}
-\ldreplts{nn}{蝡}
-\ldreplts{a}{蝉}
-\ldreplts{b}{蝊}
-\ldreplts{g}{蝋}
-\ldreplts{d}{蝌}
-\ldreplts{e}{蝍}
-\ldreplts{v}{蝎}
-\ldreplts{i}{蝏}
-\ldreplts{y}{蝐}
-\ldreplts{k}{蝑}
-\ldreplts{l}{蝒}
-\ldreplts{m}{蝓}
-\ldreplts{n}{蝔}
-\ldreplts{o}{蝕}
-\ldreplts{r}{蝖}
-\ldreplts{t}{蝘}
-\ldreplts{u}{蝙}
-\ldreplts{f}{蝚}
-\ldreplts{q}{蝛}
-\ldreplts{s}{蝜}
-\ldreplts{c}{蝢}
+\ldreplst{tmark}{蝣}
+\ldreplst{ss}{蝗}
+\ldreplst{tt}{蝝}
+\ldreplst{an}{蝞}
+\ldreplst{en}{蝟}
+\ldreplst{ly}{蝠}
+\ldreplst{nn}{蝡}
+\ldreplst{a}{蝉}
+\ldreplst{b}{蝊}
+\ldreplst{g}{蝋}
+\ldreplst{d}{蝌}
+\ldreplst{e}{蝍}
+\ldreplst{v}{蝎}
+\ldreplst{i}{蝏}
+\ldreplst{y}{蝐}
+\ldreplst{k}{蝑}
+\ldreplst{l}{蝒}
+\ldreplst{m}{蝓}
+\ldreplst{n}{蝔}
+\ldreplst{o}{蝕}
+\ldreplst{r}{蝖}
+\ldreplst{t}{蝘}
+\ldreplst{u}{蝙}
+\ldreplst{f}{蝚}
+\ldreplst{q}{蝛}
+\ldreplst{s}{蝜}
+\ldreplst{c}{蝢}
+%%----- reverse direction
+%\tl_reverse:N \l_myldst_tl
 %----- Ruby Part 2b
 %%yyy
-\ldreplts{蝉}{a}
-\ldreplts{蝊}{p}
-\ldreplts{蝋}{g}
-\ldreplts{蝌}{d}
-\ldreplts{蝍}{e}
-\ldreplts{蝎}{w}
-\ldreplts{蝏}{i}
-\ldreplts{蝐}{y}
-\ldreplts{蝑}{k}
-\ldreplts{蝒}{l}
-\ldreplts{蝓}{m}
-\ldreplts{蝔}{n}
-\ldreplts{蝕}{o}
-\ldreplts{蝖}{r}
-\ldreplts{蝗}{s}
-\ldreplts{蝘}{t}
-\ldreplts{蝙}{u}
-\ldreplts{蝚}{f}
-\ldreplts{蝛}{q}
-\ldreplts{蝜}{š}
-\ldreplts{蝝}{τ}
-\ldreplts{蝞}{ã}
-\ldreplts{蝟}{ẽ}
-\ldreplts{蝠}{λ}
-\ldreplts{蝡}{ν}
-\ldreplts{蝢}{c}
-\ldreplts{蝣}{?}
+\ldreplst{蝉}{a}
+\ldreplst{蝊}{p}
+\ldreplst{蝋}{g}
+\ldreplst{蝌}{d}
+\ldreplst{蝍}{e}
+\ldreplst{蝎}{w}
+\ldreplst{蝏}{i}
+\ldreplst{蝐}{y}
+\ldreplst{蝑}{k}
+\ldreplst{蝒}{l}
+\ldreplst{蝓}{m}
+\ldreplst{蝔}{n}
+\ldreplst{蝕}{o}
+\ldreplst{蝖}{r}
+\ldreplst{蝗}{s}
+\ldreplst{蝘}{t}
+\ldreplst{蝙}{u}
+\ldreplst{蝚}{f}
+\ldreplst{蝛}{q}
+\ldreplst{蝜}{š}
+\ldreplst{蝝}{τ}
+\ldreplst{蝞}{ã}
+\ldreplst{蝟}{ẽ}
+\ldreplst{蝠}{λ}
+\ldreplst{蝡}{ν}
+\ldreplst{蝢}{c}
+\ldreplst{蝣}{?}
 %
 \tl_use:N \l_myldst_tl
 }
