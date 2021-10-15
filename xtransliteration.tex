@@ -17,6 +17,7 @@
 carian,
 lycian,
 lydian,
+mandaic,
 ]{xtransliteration}
 
 
@@ -25,6 +26,7 @@ lydian,
 \newfontfamily\ftcafont{Noto Sans Carian}[Scale=1.5]%plain font
 \newfontfamily\ftlcfont{Noto Sans Lycian}[Scale=1.5]%plain font
 \newfontfamily\ftldfont{Noto Sans Lydian}[Scale=1.5]
+\newfontfamily\ftmafont{Noto Sans Mandaic}[Scale=1.5,Script=Mandaic,Renderer=HarfBuzz]
 
 %\input{unicode_cb}
 \newfontface\fcarian{NotoSansCarian-Regular.ttf}[Colour=blue]
@@ -33,6 +35,8 @@ lydian,
 \DeclareTextFontCommand\textlycian{\flycian}
 \newfontface\flydian{NotoSansLydian-Regular.ttf}[Colour=blue]
 \DeclareTextFontCommand\textlydian{\flydian}
+\newfontface\fmandaic{NotoSansMandaic-Regular.ttf}[Colour=blue]
+\DeclareTextFontCommand\textmandaic{\fmandaic}
 
 
 \newfontface\nrffontname{NotoSansCarian-Regular.ttf}
@@ -305,6 +309,80 @@ Ruby &
 
 
 
+
+%**** Mandaic
+\newpage\section{Mandaic}
+\subsection{Available Commands \matagb }
+
+{
+\rowcolors{2}{blue!12!green!2}{yellow!25!green!12}
+\begin{tabular}{lll}
+\rowcolor{blue!12}
+Type & Short Command &  General command \\
+\hline
+Codepoint & 
+\cdr{\mauc{U+0841}} & 
+\cdr{\matrans[uc]{U+0841}} \\
+Unicode name & 
+\cdr{\maun{abagad}} & 
+\cdr{\matrans[un]{abagad}} \\
+Typing shortcut & 
+\cdr{\mats{b}} & 
+\cdr{\matrans[ts]{b}} \\
+Transliteration & 
+\cdr{\mast{hhtt?}} & 
+\cdr{\matrans[st]{hhtt?}} \\
+\hline
+Word & 
+\cdr{\maw{kn}} & 
+\cdr{\matext[w]{kn}} \\
+Gloss & 
+\scriptsize\cdr{\magloss{kta}{dog}} & 
+\scriptsize\cdr{\matext[gloss]{kta}{dog}} \\
+Ruby & 
+\cdr{\maruby{kla}} & 
+\cdr{\matext[ruby]{kla}} \\
+Ruby & 
+\cdr{\maruby{k.l.a}} & 
+\cdr{\matext[ruby]{k.l.a}} \\
+\hline
+\end{tabular}
+}
+
+
+\subsection{Example Transliteration \matagb }
+\begin{quotation}
+\noindent\cdr{\maw{kdndplssl}}
+
+\noindent\cdr{\maw{p}} + aff = \maw{affp} /f/
+
+\noindent\cdr{\magloss{ba bvoca}{/baa/ >> /ba/}}
+
+\noindent\cdr{\magloss{bu bvocu}{/bu/ >> /bo/}}
+
+\noindent\cdr{\magloss{bi bvoci}{/bi/ >> /be/}}
+
+\noindent\cdr{\magloss{lgemba}{lebba = heart}}
+
+\noindent\cdr{\magloss{rgemba}{rabba = great}}
+%%
+%%\cdr{\ldgloss{bira}{house, home}}
+%%
+%%\cdr{\ldruby{bira}}
+%%
+%%\cdr{\ldruby{b.i.r.a}}
+%%%\cdr{\caruby{q.l.a.ld.i.ss.}}
+%%%
+%%%\cdr{\cagloss{ted}{father}}
+%%%
+%%%\cdr{\cagloss{en}{mother}}
+\end{quotation}
+%%
+%%
+\textmandaic{%
+\doprmbx{2112}{2143}{'Mandaic'}{c:/windows/fonts/NotoSansMandaic-Regular.ttf}}
+%%
+%%%\doprmb{67872}{67903}{'Lydian'}
 
 
 

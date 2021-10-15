@@ -1,0 +1,623 @@
+\newcommand\mascripttag{Mandaic}
+\newcommand\matag{{\tiny [\mascripttag ]\par}}
+\newcommand\matagb{(\mascripttag)}
+\newcommand\maleftarrow{\kern-0.8em\raisebox{1.5ex}{$^\leftarrow$}}
+\ExplSyntaxOn
+%=====================================
+%uc
+%un
+%ts - default
+%st
+\NewDocumentCommand { \matrans } { O{ts} m } {%
+\cs:w matrans#1 \cs_end: {#2}
+}
+%w - default
+%%gloss
+%ruby
+\NewDocumentCommand { \matext } { O{w} m } {%
+\cs:w ma#1 \cs_end: {#2}
+}
+\seq_new:N \l_mymaruby_seq
+%
+\tl_new:N \l_mymauc_tl
+\NewDocumentCommand { \mauc } { m } { \matransuc {#1} }
+\NewDocumentCommand { \matransuc } { m } {%
+\tl_set:Nn \l_mymauc_tl { #1 }
+\domatransuc
+\tl_reverse:N  \l_mymauc_tl
+\tl_put_right:Nn \l_mymauc_tl { \maleftarrow }
+\tl_use:N \l_mymauc_tl
+}
+\tl_new:N \l_mymaun_tl
+\NewDocumentCommand { \maun } { m } { \matransun {#1} }
+\NewDocumentCommand { \matransun } { m } {%
+\tl_set:Nn \l_mymaun_tl { #1 }
+\domatransun
+\tl_reverse:N  \l_mymaun_tl
+\tl_put_right:Nn \l_mymaun_tl { \maleftarrow }
+\tl_use:N \l_mymaun_tl
+}
+\tl_new:N \l_mymats_tl
+\NewDocumentCommand { \mats } { m } { \matransts {#1} }
+\NewDocumentCommand { \matransts } { m } {%
+\tl_set:Nn \l_mymats_tl { #1 }
+\domatransts
+\tl_reverse:N  \l_mymats_tl
+\tl_put_right:Nn \l_mymats_tl { \maleftarrow }
+\tl_use:N \l_mymats_tl
+}
+
+\NewDocumentCommand { \mast } { m } { \matransst {#1} }
+\NewDocumentCommand{\matransst}{ > { \SplitList { . } } m }{%
+\ProcessList { #1 } { \domatransst }
+}
+
+
+\tl_new:N \l_mymab_tl
+\tl_new:N \l_mymaz_tl
+\NewDocumentCommand { \maw } { m } {%
+\tl_set:Nn \l_mymats_tl { #1 }
+\tl_set:Nn \l_mymab_tl { #1 }
+\domaword
+%{ \mafont \tl_use:N \l_myma_tl }
+}
+
+\NewDocumentCommand { \magloss } { m m } {%
+\tl_set:Nn \l_mymats_tl { #1 }
+\tl_set:Nn \l_mymab_tl { #1 }
+\domagloss {#2}
+}
+\NewDocumentCommand{\maruby}{ > { \SplitList { . } } m }{%
+\seq_clear:N \l_mymaruby_seq
+\ProcessList { #1 } { \domatranstsruby }
+%\seq_show:N \l_mymaruby_seq
+\seq_use:Nnnn \l_mymaruby_seq {}{}{}
+}
+%AX:
+\newcommand\domarubye{%
+%yyy
+}
+%\NewDocumentCommand{\marubysplit}{ > { \SplitList { . } } m }{%
+% \ProcessList {#1 } { \domaruby }
+%}
+%---- Environments
+\NewDocumentEnvironment{matransuce}{ +b }
+{
+\tl_set:Nn \l_mymauc_tl { #1 }
+\domatransuc
+%\tl_put_left:Nn \l_mymauc_tl { $\leftarrow$ }
+\tl_reverse:N  \l_mymauc_tl
+\tl_use:N \l_mymauc_tl
+}
+{ }
+\NewDocumentEnvironment{matransune}{ +b }
+{
+\tl_set:Nn \l_mymaun_tl { #1 }
+\domatransun
+\tl_reverse:N  \l_mymaun_tl
+%\tl_put_right:Nn \l_mymaun_tl { \maleftarrow }
+\tl_use:N \l_mymaun_tl
+}
+{ }
+\NewDocumentEnvironment{matranstse}{ +b }
+{
+\tl_set:Nn \l_mymats_tl { #1 }
+\domatransts
+\tl_reverse:N  \l_mymats_tl
+%\tl_put_right:Nn \l_mymats_tl { \maleftarrow }
+\tl_use:N \l_mymats_tl
+}
+{ }
+\NewDocumentEnvironment{matransste}{ +b }
+{
+% \tl_set:Nn \l_myma_tl { #1 }
+\domatransst {#1}
+%{ \mafont \tl_use:N \l_myma_tl }
+}
+{ }
+\NewDocumentEnvironment{marubye}{ +b }
+{
+\tl_set:Nn \l_mymay_tl { #1 }
+\domarubye
+{ \tl_use:N \l_mymay_tl }
+}
+{ }
+\NewDocumentEnvironment{matableture}{ +b }
+{
+\begin{quotation}\noindent
+\begin{matranstse}
+#1
+\end{matranstse}
+\par
+\bigskip
+\begin{matransste}
+#1
+\end{matransste}
+\end{quotation}
+}
+{ }
+%=========================== Commands
+\newcommand\domaword{%
+\domatransts
+%ldword+trans
+\regex_replace_all:nnN { \. } { } \l_mymats_tl
+\tl_reverse:N  \l_mymats_tl
+\tl_put_right:Nn \l_mymats_tl { \maleftarrow }
+\tl_use:N \l_mymats_tl \ (
+%\matransst { \tl_use:N \l_mymab_tl }
+\exp_args:No
+\matransst
+{ \l_mymab_tl }
+)
+}
+\newcommand\domagloss[1]{%
+\domatransts
+%ldword+trans
+\regex_replace_all:nnN { \. } { } \l_mymats_tl
+\tl_reverse:N  \l_mymats_tl
+\tl_put_right:Nn \l_mymats_tl { \maleftarrow }
+\tl_use:N \l_mymats_tl \ (
+%\matransst { \tl_use:N \l_mymab_tl }
+\exp_args:No
+\matransst
+{ \l_mymab_tl }
+, \ `#1'
+)
+}
+\newcommand\domatranstsruby[1]{%
+\tl_set:Nn \l_mymats_tl { #1 }
+%\tl_set:Nn \l_myz_tl { #1 }
+\domatransts
+\tl_reverse:N \l_mymats_tl
+%
+%
+\seq_put_left:Nn
+   \l_mymaruby_seq
+{
+%\setlength{\tabcolsep}{-0.5pt}
+\begin{tabular}[b]{c}
+\scriptsize \domatransst { #1 } \\
+\rule{0pt}{1.8ex} 
+\ftldfont 
+% \tl_use:N \l_mymats_tl \\
+\mats { #1 } \\
+\end{tabular}
+}
+}
+%----------------------
+%H:
+%%\tl_replace_all:Nnn \l_mymauc_tl { U+10280 } { { \ftldfont 𐊀 } }
+\newcommand\marepluc[2]{%
+	\tl_replace_all:Nnn 
+					\l_mymauc_tl 
+					{ #1 } 
+					{ { #2 } }
+}
+%----- Unicode codepoint
+\newcommand\domatransuc{%
+%yyy
+\marepluc{U+0840}{ { \ftmafont ࡀ } }
+\marepluc{U+0841}{ { \ftmafont ࡁ } }
+\marepluc{U+0842}{ { \ftmafont ࡂ } }
+\marepluc{U+0843}{ { \ftmafont ࡃ } }
+\marepluc{U+0844}{ { \ftmafont ࡄ } }
+\marepluc{U+0845}{ { \ftmafont ࡅ } }
+\marepluc{U+0846}{ { \ftmafont ࡆ } }
+\marepluc{U+0847}{ { \ftmafont ࡇ } }
+\marepluc{U+0848}{ { \ftmafont ࡈ } }
+\marepluc{U+0849}{ { \ftmafont ࡉ } }
+\marepluc{U+084A}{ { \ftmafont ࡊ } }
+\marepluc{U+084B}{ { \ftmafont ࡋ } }
+\marepluc{U+084C}{ { \ftmafont ࡌ } }
+\marepluc{U+084D}{ { \ftmafont ࡍ } }
+\marepluc{U+084E}{ { \ftmafont ࡎ } }
+\marepluc{U+084F}{ { \ftmafont ࡏ } }
+\marepluc{U+0850}{ { \ftmafont ࡐ } }
+\marepluc{U+0851}{ { \ftmafont ࡑ } }
+\marepluc{U+0852}{ { \ftmafont ࡒ } }
+\marepluc{U+0853}{ { \ftmafont ࡓ } }
+\marepluc{U+0854}{ { \ftmafont ࡔ } }
+\marepluc{U+0855}{ { \ftmafont ࡕ } }
+\marepluc{U+0856}{ { \ftmafont ࡖ } }
+\marepluc{U+0857}{ { \ftmafont ࡗ } }
+\marepluc{U+0858}{ { \ftmafont ࡘ } }
+\marepluc{U+0859}{ { \ftmafont ࡙ } }
+\marepluc{U+085A}{ { \ftmafont ࡚ } }
+\marepluc{U+085B}{ { \ftmafont ࡛ } }
+\marepluc{U+085E}{ { \ftmafont ࡞ } }
+}
+%Q:
+%%\tl_replace_all:Nnn \l_mymaun_tl { bh } { { \ftldfont 𐊃 } }
+\newcommand\mareplun[2]{%
+	\tl_replace_all:Nnn 
+					\l_mymaun_tl 
+					{ #1 } 
+					{ { #2 } }
+}
+%----- Unicode name
+\newcommand\domatransun{%
+%
+%yyy
+\mareplun{vocalizationmark}{ { \ftmafont ࡚ } }
+\mareplun{affricationmark}{ { \ftmafont ࡙ } }
+\mareplun{geminationmark}{ { \ftmafont ࡛ } }
+\mareplun{punctuation}{ { \ftmafont ࡞ } }
+\mareplun{dushenna}{ { \ftmafont ࡖ } }
+\mareplun{ushenna}{ { \ftmafont ࡅ } }
+\mareplun{halqa}{ { \ftmafont ࡀ } }
+\mareplun{aksa}{ { \ftmafont ࡉ } }
+\mareplun{att}{ { \ftmafont ࡈ } }
+\mareplun{asz}{ { \ftmafont ࡑ } }
+\mareplun{ash}{ { \ftmafont ࡔ } }
+\mareplun{kad}{ { \ftmafont ࡗ } }
+\mareplun{ain}{ { \ftmafont ࡘ } }
+\mareplun{ab}{ { \ftmafont ࡁ } }
+\mareplun{ag}{ { \ftmafont ࡂ } }
+\mareplun{ad}{ { \ftmafont ࡃ } }
+\mareplun{ah}{ { \ftmafont ࡄ } }
+\mareplun{az}{ { \ftmafont ࡆ } }
+\mareplun{it}{ { \ftmafont ࡇ } }
+\mareplun{ak}{ { \ftmafont ࡊ } }
+\mareplun{al}{ { \ftmafont ࡋ } }
+\mareplun{am}{ { \ftmafont ࡌ } }
+\mareplun{an}{ { \ftmafont ࡍ } }
+\mareplun{as}{ { \ftmafont ࡎ } }
+\mareplun{in}{ { \ftmafont ࡏ } }
+\mareplun{ap}{ { \ftmafont ࡐ } }
+\mareplun{aq}{ { \ftmafont ࡒ } }
+\mareplun{ar}{ { \ftmafont ࡓ } }
+\mareplun{at}{ { \ftmafont ࡕ } }
+}
+%V:
+%%\tl_replace_all:Nnn \l_mymats_tl { bh } { { \ftldfont 𐊃 } }
+\newcommand\mareplts[2]{%
+	\tl_replace_all:Nnn 
+					\l_mymats_tl 
+					{ #1 } 
+					{ #2 }
+}
+%----- Typing shortcut
+\newcommand\domatransts{%
+%
+%%yyy
+\mareplts{punct}{ { \ftmafont ࡞ } }
+\mareplts{kad}{ { \ftmafont ࡗ } }
+\mareplts{ain}{ { \ftmafont ࡘ } }
+\mareplts{aff}{ { \ftmafont ࡙ } }
+\mareplts{voc}{ { \ftmafont ࡚ } }
+\mareplts{gem}{ { \ftmafont ࡛ } }
+\mareplts{hh}{ { \ftmafont ࡇ } }
+\mareplts{tt}{ { \ftmafont ࡈ } }
+\mareplts{ss}{ { \ftmafont ࡑ } }
+\mareplts{sh}{ { \ftmafont ࡔ } }
+\mareplts{dh}{ { \ftmafont ࡖ } }
+\mareplts{a}{ { \ftmafont ࡀ } }
+\mareplts{b}{ { \ftmafont ࡁ } }
+\mareplts{g}{ { \ftmafont ࡂ } }
+\mareplts{d}{ { \ftmafont ࡃ } }
+\mareplts{h}{ { \ftmafont ࡄ } }
+\mareplts{u}{ { \ftmafont ࡅ } }
+\mareplts{z}{ { \ftmafont ࡆ } }
+\mareplts{i}{ { \ftmafont ࡉ } }
+\mareplts{k}{ { \ftmafont ࡊ } }
+\mareplts{l}{ { \ftmafont ࡋ } }
+\mareplts{m}{ { \ftmafont ࡌ } }
+\mareplts{n}{ { \ftmafont ࡍ } }
+\mareplts{s}{ { \ftmafont ࡎ } }
+\mareplts{?}{ { \ftmafont ࡏ } }
+\mareplts{p}{ { \ftmafont ࡐ } }
+\mareplts{q}{ { \ftmafont ࡒ } }
+\mareplts{r}{ { \ftmafont ࡓ } }
+\mareplts{t}{ { \ftmafont ࡕ } }
+}
+%AI:
+%%\tl_replace_all:Nnn \l_myz_tl{bh}{蝌}
+\newcommand\mareplst[2]{%
+	\tl_replace_all:Nnn 
+					\l_mymast_tl 
+					{ #1 } 
+					{ #2 }
+}
+
+%%\tl_replace_all:Nnn \l_myz_tl{蝒}{θ}
+\newcommand\domatransst[1]{%
+\tl_set:Nn \l_mymast_tl { #1 }
+
+%----- Ruby Part 2a
+%%yyy
+\mareplst{punct}{蝉}
+\mareplst{kad}{蝠}
+\mareplst{ain}{蝡}
+\mareplst{aff}{蝢}
+\mareplst{voc}{蝣}
+\mareplst{gem}{蝤}
+\mareplst{hh}{蝐}
+\mareplst{tt}{蝑}
+\mareplst{ss}{蝚}
+\mareplst{sh}{蝝}
+\mareplst{dh}{蝟}
+\mareplst{a}{蝉}
+\mareplst{b}{蝊}
+\mareplst{g}{蝋}
+\mareplst{d}{蝌}
+\mareplst{h}{蝍}
+\mareplst{u}{蝎}
+\mareplst{z}{蝏}
+\mareplst{i}{蝒}
+\mareplst{k}{蝓}
+\mareplst{l}{蝔}
+\mareplst{m}{蝕}
+\mareplst{n}{蝖}
+\mareplst{s}{蝗}
+\mareplst{?}{蝘}
+\mareplst{p}{蝙}
+\mareplst{q}{蝛}
+\mareplst{r}{蝜}
+\mareplst{t}{蝞}
+%%----- reverse direction
+%\tl_reverse:N \l_mymast_tl
+%----- Ruby Part 2b
+%%yyy
+\mareplst{蝉}{a}
+\mareplst{蝊}{b}
+\mareplst{蝋}{g}
+\mareplst{蝌}{d}
+\mareplst{蝍}{h}
+\mareplst{蝎}{u}
+\mareplst{蝏}{z}
+\mareplst{蝐}{-ẖ}
+\mareplst{蝑}{ṭ}
+\mareplst{蝒}{i}
+\mareplst{蝓}{k}
+\mareplst{蝔}{l}
+\mareplst{蝕}{m}
+\mareplst{蝖}{n}
+\mareplst{蝗}{s}
+\mareplst{蝘}{ʿ}
+\mareplst{蝙}{p}
+\mareplst{蝚}{ṣ}
+\mareplst{蝛}{q}
+\mareplst{蝜}{r}
+\mareplst{蝝}{š}
+\mareplst{蝞}{t}
+\mareplst{蝟}{ḏ-}
+\mareplst{蝠}{ADU}
+\mareplst{蝡}{AIN}
+\mareplst{蝢}{̤̤}
+\mareplst{蝣}{̱}
+\mareplst{蝤}{̣}
+\mareplst{蝥}{:}
+%
+\tl_use:N \l_mymast_tl
+}
+\ExplSyntaxOff
+%%%%%%
+%
+%BA:
+%%\noindent U+10280 $\mapsto$ {\ftldfont 𐊀}\par
+\newcommand\mamapsto[2]{%
+\noindent #1 $\mapsto$ {#2}\par
+}
+%----- List of Unicode codepoints
+\newcommand\mashowplainlistuc{%
+%\subsection{List of Unicode codepoints}\label{sec:listlduc}
+%yyy
+\mamapsto{U+0840}{\ftmafont ࡀ}
+\mamapsto{U+0841}{\ftmafont ࡁ}
+\mamapsto{U+0842}{\ftmafont ࡂ}
+\mamapsto{U+0843}{\ftmafont ࡃ}
+\mamapsto{U+0844}{\ftmafont ࡄ}
+\mamapsto{U+0845}{\ftmafont ࡅ}
+\mamapsto{U+0846}{\ftmafont ࡆ}
+\mamapsto{U+0847}{\ftmafont ࡇ}
+\mamapsto{U+0848}{\ftmafont ࡈ}
+\mamapsto{U+0849}{\ftmafont ࡉ}
+\mamapsto{U+084A}{\ftmafont ࡊ}
+\mamapsto{U+084B}{\ftmafont ࡋ}
+\mamapsto{U+084C}{\ftmafont ࡌ}
+\mamapsto{U+084D}{\ftmafont ࡍ}
+\mamapsto{U+084E}{\ftmafont ࡎ}
+\mamapsto{U+084F}{\ftmafont ࡏ}
+\mamapsto{U+0850}{\ftmafont ࡐ}
+\mamapsto{U+0851}{\ftmafont ࡑ}
+\mamapsto{U+0852}{\ftmafont ࡒ}
+\mamapsto{U+0853}{\ftmafont ࡓ}
+\mamapsto{U+0854}{\ftmafont ࡔ}
+\mamapsto{U+0855}{\ftmafont ࡕ}
+\mamapsto{U+0856}{\ftmafont ࡖ}
+\mamapsto{U+0857}{\ftmafont ࡗ}
+\mamapsto{U+0858}{\ftmafont ࡘ}
+\mamapsto{U+0859}{\ftmafont ࡙}
+\mamapsto{U+085A}{\ftmafont ࡚}
+\mamapsto{U+085B}{\ftmafont ࡛}
+\mamapsto{U+085E}{\ftmafont ࡞}
+}
+%BB:
+%%\noindent a $\mapsto$ {\ftldfont 𐊀}\par
+%----- List of Unicode names
+\newcommand\mashowplainlistun{%
+%\subsection{List of Unicode names}\label{sec:listldun}
+%yyy
+\mamapsto{halqa}{\ftmafont ࡀ}
+\mamapsto{ab}{\ftmafont ࡁ}
+\mamapsto{ag}{\ftmafont ࡂ}
+\mamapsto{ad}{\ftmafont ࡃ}
+\mamapsto{ah}{\ftmafont ࡄ}
+\mamapsto{ushenna}{\ftmafont ࡅ}
+\mamapsto{az}{\ftmafont ࡆ}
+\mamapsto{it}{\ftmafont ࡇ}
+\mamapsto{att}{\ftmafont ࡈ}
+\mamapsto{aksa}{\ftmafont ࡉ}
+\mamapsto{ak}{\ftmafont ࡊ}
+\mamapsto{al}{\ftmafont ࡋ}
+\mamapsto{am}{\ftmafont ࡌ}
+\mamapsto{an}{\ftmafont ࡍ}
+\mamapsto{as}{\ftmafont ࡎ}
+\mamapsto{in}{\ftmafont ࡏ}
+\mamapsto{ap}{\ftmafont ࡐ}
+\mamapsto{asz}{\ftmafont ࡑ}
+\mamapsto{aq}{\ftmafont ࡒ}
+\mamapsto{ar}{\ftmafont ࡓ}
+\mamapsto{ash}{\ftmafont ࡔ}
+\mamapsto{at}{\ftmafont ࡕ}
+\mamapsto{dushenna}{\ftmafont ࡖ}
+\mamapsto{kad}{\ftmafont ࡗ}
+\mamapsto{ain}{\ftmafont ࡘ}
+\mamapsto{affricationmark}{\ftmafont ࡙}
+\mamapsto{vocalizationmark}{\ftmafont ࡚}
+\mamapsto{geminationmark}{\ftmafont ࡛}
+\mamapsto{punctuation}{\ftmafont ࡞}
+}
+%BC:
+%%\noindent a $\mapsto$ {\ftldfont 𐊀}\par
+%----- List of Typing shortcuts
+\newcommand\mashowplainlistts{%
+%\subsection{List of Typing shortcuts}\label{sec:listldts}
+%%yyy
+\mamapsto{a}{\ftmafont ࡀ}
+\mamapsto{b}{\ftmafont ࡁ}
+\mamapsto{g}{\ftmafont ࡂ}
+\mamapsto{d}{\ftmafont ࡃ}
+\mamapsto{h}{\ftmafont ࡄ}
+\mamapsto{u}{\ftmafont ࡅ}
+\mamapsto{z}{\ftmafont ࡆ}
+\mamapsto{hh}{\ftmafont ࡇ}
+\mamapsto{tt}{\ftmafont ࡈ}
+\mamapsto{i}{\ftmafont ࡉ}
+\mamapsto{k}{\ftmafont ࡊ}
+\mamapsto{l}{\ftmafont ࡋ}
+\mamapsto{m}{\ftmafont ࡌ}
+\mamapsto{n}{\ftmafont ࡍ}
+\mamapsto{s}{\ftmafont ࡎ}
+\mamapsto{?}{\ftmafont ࡏ}
+\mamapsto{p}{\ftmafont ࡐ}
+\mamapsto{ss}{\ftmafont ࡑ}
+\mamapsto{q}{\ftmafont ࡒ}
+\mamapsto{r}{\ftmafont ࡓ}
+\mamapsto{sh}{\ftmafont ࡔ}
+\mamapsto{t}{\ftmafont ࡕ}
+\mamapsto{dh}{\ftmafont ࡖ}
+\mamapsto{kad}{\ftmafont ࡗ}
+\mamapsto{ain}{\ftmafont ࡘ}
+\mamapsto{aff}{\ftmafont ࡙}
+\mamapsto{voc}{\ftmafont ࡚}
+\mamapsto{gem}{\ftmafont ࡛}
+\mamapsto{punct}{\ftmafont ࡞}
+}
+%BD:
+%%\noindent a $\mapsto$ a\par
+%----- List of Standard Transliterations
+\newcommand\mashowplainlistst{%
+%\subsection{List of Standard Transliterations}\label{sec:listldst}
+%%yyy
+\mamapsto{a}{a\ftmafont ࡀ}
+\mamapsto{b}{b\ftmafont ࡁ}
+\mamapsto{g}{g\ftmafont ࡂ}
+\mamapsto{d}{d\ftmafont ࡃ}
+\mamapsto{h}{h\ftmafont ࡄ}
+\mamapsto{u}{u\ftmafont ࡅ}
+\mamapsto{z}{z\ftmafont ࡆ}
+\mamapsto{hh}{-ẖ\ftmafont ࡇ}
+\mamapsto{tt}{ṭ\ftmafont ࡈ}
+\mamapsto{i}{i\ftmafont ࡉ}
+\mamapsto{k}{k\ftmafont ࡊ}
+\mamapsto{l}{l\ftmafont ࡋ}
+\mamapsto{m}{m\ftmafont ࡌ}
+\mamapsto{n}{n\ftmafont ࡍ}
+\mamapsto{s}{s\ftmafont ࡎ}
+\mamapsto{?}{ʿ\ftmafont ࡏ}
+\mamapsto{p}{p\ftmafont ࡐ}
+\mamapsto{ss}{ṣ\ftmafont ࡑ}
+\mamapsto{q}{q\ftmafont ࡒ}
+\mamapsto{r}{r\ftmafont ࡓ}
+\mamapsto{sh}{š\ftmafont ࡔ}
+\mamapsto{t}{t\ftmafont ࡕ}
+\mamapsto{dh}{ḏ-\ftmafont ࡖ}
+\mamapsto{kad}{ADU\ftmafont ࡗ}
+\mamapsto{ain}{AIN\ftmafont ࡘ}
+\mamapsto{aff}{̤̤\ftmafont ࡙}
+\mamapsto{voc}{̱\ftmafont ࡚}
+\mamapsto{gem}{̣\ftmafont ࡛}
+\mamapsto{punct}{:\ftmafont ࡞}
+}
+%------ListUC
+\newcommand\malistuc{%
+\section{List of Unicode codepoints \matagb }\label{sec:listlduc}
+\begin{multicols}{4}\noindent
+\matag
+\mashowplainlistuc
+\eolist
+\end{multicols}
+}
+%------ListUN
+\newcommand\malistun{%
+\section{List of Unicode names \matagb }\label{sec:listldun}
+\begin{multicols}{4}\noindent
+\matag
+\mashowplainlistun
+\eolist
+\end{multicols}
+}
+%------ListTS
+\newcommand\malistts{%
+\section{List of Typing shortcuts \matagb }\label{sec:listldts}
+\begin{multicols}{4}\noindent
+\matag
+\mashowplainlistts
+\eolist
+\end{multicols}
+}
+%------ListST
+\newcommand\malistst{%
+\section{List of Standard transliterations \matagb }\label{sec:listldst}
+\begin{multicols}{4}\noindent
+\matag
+\mashowplainlistst
+\eolist
+\end{multicols}
+}
+%------All lists
+\newcommand\malists{%
+\malistuc
+\par\malistun
+\par\malistts
+\par\malistst
+}
+%EG:
+%%U+10280 & \ftldfont 𐊀 & LETTER A & a & a & a \\
+\providecommand\theadercolour{blue!12}
+\newcommand\mashowconspectus{%
+\section{Conspectus \matagb }
+\begin{longtable}[l]{lclccc}\rowcolor{\theadercolour}
+UC & Glyph & Name & UN & TS & ST \\ \hline
+%%yyy
+U+0840 & \ftldfont ࡀ & MANDAIC LETTER HALQA & halqa & a & a \\ 
+U+0841 & \ftldfont ࡁ & MANDAIC LETTER AB & ab & b & b \\ 
+U+0842 & \ftldfont ࡂ & MANDAIC LETTER AG & ag & g & g \\ 
+U+0843 & \ftldfont ࡃ & MANDAIC LETTER AD & ad & d & d \\ 
+U+0844 & \ftldfont ࡄ & MANDAIC LETTER AH & ah & h & h \\ 
+U+0845 & \ftldfont ࡅ & MANDAIC LETTER USHENNA & ushenna & u & u \\ 
+U+0846 & \ftldfont ࡆ & MANDAIC LETTER AZ & az & z & z \\ 
+U+0847 & \ftldfont ࡇ & MANDAIC LETTER IT & it & hh & -ẖ \\ 
+U+0848 & \ftldfont ࡈ & MANDAIC LETTER ATT & att & tt & ṭ \\ 
+U+0849 & \ftldfont ࡉ & MANDAIC LETTER AKSA & aksa & i & i \\ 
+U+084A & \ftldfont ࡊ & MANDAIC LETTER AK & ak & k & k \\ 
+U+084B & \ftldfont ࡋ & MANDAIC LETTER AL & al & l & l \\ 
+U+084C & \ftldfont ࡌ & MANDAIC LETTER AM & am & m & m \\ 
+U+084D & \ftldfont ࡍ & MANDAIC LETTER AN & an & n & n \\ 
+U+084E & \ftldfont ࡎ & MANDAIC LETTER AS & as & s & s \\ 
+U+084F & \ftldfont ࡏ & MANDAIC LETTER IN & in & ? & ʿ \\ 
+U+0850 & \ftldfont ࡐ & MANDAIC LETTER AP & ap & p & p \\ 
+U+0851 & \ftldfont ࡑ & MANDAIC LETTER ASZ & asz & ss & ṣ \\ 
+U+0852 & \ftldfont ࡒ & MANDAIC LETTER AQ & aq & q & q \\ 
+U+0853 & \ftldfont ࡓ & MANDAIC LETTER AR & ar & r & r \\ 
+U+0854 & \ftldfont ࡔ & MANDAIC LETTER ASH & ash & sh & š \\ 
+U+0855 & \ftldfont ࡕ & MANDAIC LETTER AT & at & t & t \\ 
+U+0856 & \ftldfont ࡖ & MANDAIC LETTER DUSHENNA & dushenna & dh & ḏ- \\ 
+U+0857 & \ftldfont ࡗ & MANDAIC LETTER KAD & kad & kad & ADU \\ 
+U+0858 & \ftldfont ࡘ & MANDAIC LETTER AIN & ain & ain & AIN \\ 
+U+0859 & \ftldfont ࡙ & MANDAIC AFFRICATION MARK & affricationmark & aff & ̤̤ \\ 
+U+085A & \ftldfont ࡚ & MANDAIC VOCALIZATION MARK & vocalizationmark & voc & ̱ \\ 
+U+085B & \ftldfont ࡛ & MANDAIC GEMINATION MARK & geminationmark & gem & ̣ \\ 
+U+085E & \ftldfont ࡞ & MANDAIC PUNCTUATION & punctuation & punct & : \\ \hline\end{longtable}
+}
