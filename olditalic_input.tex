@@ -1,0 +1,771 @@
+\newcommand\oitscripttag{Old Italic}
+\newcommand\oittag{{\tiny [\oitscripttag ]\par}}
+\newcommand\oittagb{(\oitscripttag)}
+\ExplSyntaxOn
+%=====================================
+%uc
+%un
+%ts - default
+%st
+\NewDocumentCommand { \oittrans } { O{ts} m } {%
+\cs:w oittrans#1 \cs_end: {#2}
+}
+%w - default
+%%gloss
+%ruby
+\NewDocumentCommand { \oittext } { O{w} m } {%
+\cs:w oit#1 \cs_end: {#2}
+}
+\tl_new:N \l_myoituc_tl
+\NewDocumentCommand { \oituc } { m } { \oittransuc {#1} }
+\NewDocumentCommand { \oittransuc } { m } {%
+\tl_set:Nn \l_myoituc_tl { #1 }
+\dooittransuc
+\tl_use:N \l_myoituc_tl
+}
+\tl_new:N \l_myoitun_tl
+\NewDocumentCommand { \oitun } { m } { \oittransun {#1} }
+\NewDocumentCommand { \oittransun } { m } {%
+\tl_set:Nn \l_myoitun_tl { #1 }
+\dooittransun
+\tl_use:N \l_myoitun_tl
+}
+\tl_new:N \l_myoitts_tl
+\NewDocumentCommand { \oitts } { m } { \oittransts {#1} }
+\NewDocumentCommand { \oittransts } { m } {%
+\tl_set:Nn \l_myoitts_tl { #1 }
+\dooittransts
+\tl_use:N \l_myoitts_tl
+}
+\tl_new:N \l_myoitst_tl
+\NewDocumentCommand { \oitst } { m } { \oittransst {#1} }
+\NewDocumentCommand{\oittransst}{ > { \SplitList { . } } m }{%
+\ProcessList { #1 } { \dooittransst }
+}
+\tl_new:N \l_myoitb_tl
+\NewDocumentCommand { \oitw } { m } {%
+\tl_set:Nn \l_myoitts_tl { #1 }
+\tl_set:Nn \l_myoitb_tl { #1 }
+\dooitword
+%{ \oitfont \tl_use:N \l_myoit_tl }
+}
+\NewDocumentCommand { \oitgloss } { m m } {%
+\tl_set:Nn \l_myoitts_tl { #1 }
+\tl_set:Nn \l_myoitb_tl { #1 }
+\dooitgloss {#2}
+}
+\NewDocumentCommand{\oitruby}{ > { \SplitList { . } } m }{%
+\ProcessList {#1 } { \dooittranstsruby }
+}
+
+%AX:
+\newcommand\dooitrubye{%
+%yyy-part1
+\tl_replace_all:Nnn  \l_myoity_tl { ssh } { 蝘 } 
+\tl_replace_all:Nnn  \l_myoity_tl { nts } { 蝯 } 
+\tl_replace_all:Nnn  \l_myoity_tl { sts } { 蝰 } 
+\tl_replace_all:Nnn  \l_myoity_tl { ke } { 蝌 } 
+\tl_replace_all:Nnn  \l_myoity_tl { th } { 蝒 } 
+\tl_replace_all:Nnn  \l_myoity_tl { ka } { 蝔 } 
+\tl_replace_all:Nnn  \l_myoity_tl { sh } { 蝛 } 
+\tl_replace_all:Nnn  \l_myoity_tl { ku } { 蝜 } 
+\tl_replace_all:Nnn  \l_myoity_tl { ph } { 蝢 } 
+\tl_replace_all:Nnn  \l_myoity_tl { kh } { 蝣 } 
+\tl_replace_all:Nnn  \l_myoity_tl { rr } { 蝥 } 
+\tl_replace_all:Nnn  \l_myoity_tl { ch } { 蝦 } 
+\tl_replace_all:Nnn  \l_myoity_tl { ii } { 蝧 } 
+\tl_replace_all:Nnn  \l_myoity_tl { uu } { 蝨 } 
+\tl_replace_all:Nnn  \l_myoity_tl { ss } { 蝩 } 
+\tl_replace_all:Nnn  \l_myoity_tl { 10 } { 蝬 } 
+\tl_replace_all:Nnn  \l_myoity_tl { 50 } { 蝭 } 
+\tl_replace_all:Nnn  \l_myoity_tl { a } { 蝊 } 
+\tl_replace_all:Nnn  \l_myoity_tl { b } { 蝋 } 
+\tl_replace_all:Nnn  \l_myoity_tl { d } { 蝍 } 
+\tl_replace_all:Nnn  \l_myoity_tl { e } { 蝎 } 
+\tl_replace_all:Nnn  \l_myoity_tl { v } { 蝏 } 
+\tl_replace_all:Nnn  \l_myoity_tl { z } { 蝐 } 
+\tl_replace_all:Nnn  \l_myoity_tl { h } { 蝑 } 
+\tl_replace_all:Nnn  \l_myoity_tl { I } { 蝓 } 
+\tl_replace_all:Nnn  \l_myoity_tl { l } { 蝕 } 
+\tl_replace_all:Nnn  \l_myoity_tl { m } { 蝖 } 
+\tl_replace_all:Nnn  \l_myoity_tl { n } { 蝗 } 
+\tl_replace_all:Nnn  \l_myoity_tl { o } { 蝙 } 
+\tl_replace_all:Nnn  \l_myoity_tl { p } { 蝚 } 
+\tl_replace_all:Nnn  \l_myoity_tl { r } { 蝝 } 
+\tl_replace_all:Nnn  \l_myoity_tl { s } { 蝞 } 
+\tl_replace_all:Nnn  \l_myoity_tl { t } { 蝟 } 
+\tl_replace_all:Nnn  \l_myoity_tl { u } { 蝠 } 
+\tl_replace_all:Nnn  \l_myoity_tl { x } { 蝡 } 
+\tl_replace_all:Nnn  \l_myoity_tl { f } { 蝤 } 
+\tl_replace_all:Nnn  \l_myoity_tl { 1 } { 蝪 } 
+\tl_replace_all:Nnn  \l_myoity_tl { 5 } { 蝫 } 
+\tl_replace_all:Nnn  \l_myoity_tl { y } { 蝮 } 
+%yyy-part2
+\tl_replace_all:Nnn  \l_myoity_tl { 蝊 } { \tablea a  \tableb { \ftoitfont 𐌀 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝋 } { \tablea b  \tableb { \ftoitfont 𐌁 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝌 } { \tablea ke  \tableb { \ftoitfont 𐌂 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝍 } { \tablea d  \tableb { \ftoitfont 𐌃 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝎 } { \tablea e  \tableb { \ftoitfont 𐌄 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝏 } { \tablea v  \tableb { \ftoitfont 𐌅 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝐 } { \tablea z  \tableb { \ftoitfont 𐌆 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝑 } { \tablea h  \tableb { \ftoitfont 𐌇 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝒 } { \tablea th  \tableb { \ftoitfont 𐌈 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝓 } { \tablea I  \tableb { \ftoitfont 𐌉 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝔 } { \tablea ka  \tableb { \ftoitfont 𐌊 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝕 } { \tablea l  \tableb { \ftoitfont 𐌋 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝖 } { \tablea m  \tableb { \ftoitfont 𐌌 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝗 } { \tablea n  \tableb { \ftoitfont 𐌍 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝘 } { \tablea ssh  \tableb { \ftoitfont 𐌎 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝙 } { \tablea o  \tableb { \ftoitfont 𐌏 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝚 } { \tablea p  \tableb { \ftoitfont 𐌐 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝛 } { \tablea sh  \tableb { \ftoitfont 𐌑 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝜 } { \tablea ku  \tableb { \ftoitfont 𐌒 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝝 } { \tablea r  \tableb { \ftoitfont 𐌓 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝞 } { \tablea s  \tableb { \ftoitfont 𐌔 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝟 } { \tablea t  \tableb { \ftoitfont 𐌕 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝠 } { \tablea u  \tableb { \ftoitfont 𐌖 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝡 } { \tablea x  \tableb { \ftoitfont 𐌗 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝢 } { \tablea ph  \tableb { \ftoitfont 𐌘 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝣 } { \tablea kh  \tableb { \ftoitfont 𐌙 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝤 } { \tablea f  \tableb { \ftoitfont 𐌚 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝥 } { \tablea rr  \tableb { \ftoitfont 𐌛 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝦 } { \tablea ch  \tableb { \ftoitfont 𐌜 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝧 } { \tablea ii  \tableb { \ftoitfont 𐌝 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝨 } { \tablea uu  \tableb { \ftoitfont 𐌞 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝩 } { \tablea ss  \tableb { \ftoitfont 𐌟 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝪 } { \tablea 1  \tableb { \ftoitfont 𐌠 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝫 } { \tablea 5  \tableb { \ftoitfont 𐌡 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝬 } { \tablea 10  \tableb { \ftoitfont 𐌢 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝭 } { \tablea 50  \tableb { \ftoitfont 𐌣 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝮 } { \tablea y  \tableb { \ftoitfont 𐌭 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝯 } { \tablea nts  \tableb { \ftoitfont 𐌮 } \tablec } 
+\tl_replace_all:Nnn  \l_myoity_tl { 蝰 } { \tablea sts  \tableb { \ftoitfont 𐌯 } \tablec } 
+
+}
+%\NewDocumentCommand{\oitrubysplit}{ > { \SplitList { . } } m }{%
+% \ProcessList {#1 } { \dooitruby }
+%}
+%---- Environments
+\NewDocumentEnvironment{oittransuce}{ +b }
+{
+\tl_set:Nn \l_myoituc_tl { #1 }
+\dooittransuc
+\tl_use:N \l_myoituc_tl
+}
+{ }
+\NewDocumentEnvironment{oittransune}{ +b }
+{
+\tl_set:Nn \l_myoitun_tl { #1 }
+\dooittransun
+\tl_use:N \l_myoitun_tl
+}
+{ }
+\NewDocumentEnvironment{oittranstse}{ +b }
+{
+\tl_set:Nn \l_myoitts_tl { #1 }
+\dooittransts
+\tl_use:N \l_myoitts_tl
+}
+{ }
+\NewDocumentEnvironment{oittransste}{ +b }
+{
+% \tl_set:Nn \l_myoit_tl { #1 }
+\dooittransst {#1}
+%{ \oitfont \tl_use:N \l_myoit_tl }
+}
+{ }
+\NewDocumentEnvironment{oitrubye}{ +b }
+{
+\tl_set:Nn \l_myoity_tl { #1 }
+\dooitrubye
+{ \tl_use:N \l_myoity_tl }
+}
+{ }
+\NewDocumentEnvironment{oittableture}{ +b }
+{
+\begin{quotation}\noindent
+\begin{oittranstse}
+#1
+\end{oittranstse}
+\par
+\bigskip
+\begin{oittransste}
+#1
+\end{oittransste}
+\end{quotation}
+}
+{ }
+%=========================== Commands
+\newcommand\dooitword{%
+\dooittransts
+%oitword+trans
+\regex_replace_all:nnN { \. } { } \l_myoitts_tl
+\tl_use:N \l_myoitts_tl \ (
+%\oittransst { \tl_use:N \l_myoitb_tl }
+\exp_args:No
+\oittransst
+{ \l_myoitb_tl }
+)
+}
+\newcommand\dooitgloss[1]{%
+\dooittransts
+%oitword+trans
+\regex_replace_all:nnN { \. } { } \l_myoitts_tl
+\tl_use:N \l_myoitts_tl \ (
+%\oittransst { \tl_use:N \l_myoitb_tl }
+\exp_args:No
+\oittransst
+{ \l_myoitb_tl }
+, \ `#1'
+)
+}
+\newcommand\dooittranstsruby[1]{%
+\tl_set:Nn \l_myoitts_tl { #1 }
+%\tl_set:Nn \l_myz_tl { #1 }
+\dooittransts
+%
+{
+\setlength{\tabcolsep}{-0.5pt}
+\begin{tabular}[b]{c}
+\scriptsize \dooittransst { #1 } \\
+\rule{0pt}{1.8ex} \ftoitfont \tl_use:N \l_myoitts_tl \\
+\end{tabular}
+}
+}
+%H:
+%%\tl_replace_all:Nnn \l_myoituc_tl { U+10280 } { { \ftoitfont 𐊀 } }
+\newcommand\oitrepluc[2]{%
+\tl_replace_all:Nnn 
+\l_myoituc_tl 
+{ #1 } 
+{ { #2 } }
+}
+
+%----- Unicode codepoint
+\newcommand\dooittransuc{%
+\oitrepluc{U+10300}{ { \ftoitfont 𐌀 } }
+\oitrepluc{U+10301}{ { \ftoitfont 𐌁 } }
+\oitrepluc{U+10302}{ { \ftoitfont 𐌂 } }
+\oitrepluc{U+10303}{ { \ftoitfont 𐌃 } }
+\oitrepluc{U+10304}{ { \ftoitfont 𐌄 } }
+\oitrepluc{U+10305}{ { \ftoitfont 𐌅 } }
+\oitrepluc{U+10306}{ { \ftoitfont 𐌆 } }
+\oitrepluc{U+10307}{ { \ftoitfont 𐌇 } }
+\oitrepluc{U+10308}{ { \ftoitfont 𐌈 } }
+\oitrepluc{U+10309}{ { \ftoitfont 𐌉 } }
+\oitrepluc{U+1030A}{ { \ftoitfont 𐌊 } }
+\oitrepluc{U+1030B}{ { \ftoitfont 𐌋 } }
+\oitrepluc{U+1030C}{ { \ftoitfont 𐌌 } }
+\oitrepluc{U+1030D}{ { \ftoitfont 𐌍 } }
+\oitrepluc{U+1030E}{ { \ftoitfont 𐌎 } }
+\oitrepluc{U+1030F}{ { \ftoitfont 𐌏 } }
+\oitrepluc{U+10310}{ { \ftoitfont 𐌐 } }
+\oitrepluc{U+10311}{ { \ftoitfont 𐌑 } }
+\oitrepluc{U+10312}{ { \ftoitfont 𐌒 } }
+\oitrepluc{U+10313}{ { \ftoitfont 𐌓 } }
+\oitrepluc{U+10314}{ { \ftoitfont 𐌔 } }
+\oitrepluc{U+10315}{ { \ftoitfont 𐌕 } }
+\oitrepluc{U+10316}{ { \ftoitfont 𐌖 } }
+\oitrepluc{U+10317}{ { \ftoitfont 𐌗 } }
+\oitrepluc{U+10318}{ { \ftoitfont 𐌘 } }
+\oitrepluc{U+10319}{ { \ftoitfont 𐌙 } }
+\oitrepluc{U+1031A}{ { \ftoitfont 𐌚 } }
+\oitrepluc{U+1031B}{ { \ftoitfont 𐌛 } }
+\oitrepluc{U+1031C}{ { \ftoitfont 𐌜 } }
+\oitrepluc{U+1031D}{ { \ftoitfont 𐌝 } }
+\oitrepluc{U+1031E}{ { \ftoitfont 𐌞 } }
+\oitrepluc{U+1031F}{ { \ftoitfont 𐌟 } }
+\oitrepluc{U+10320}{ { \ftoitfont 𐌠 } }
+\oitrepluc{U+10321}{ { \ftoitfont 𐌡 } }
+\oitrepluc{U+10322}{ { \ftoitfont 𐌢 } }
+\oitrepluc{U+10323}{ { \ftoitfont 𐌣 } }
+\oitrepluc{U+1032D}{ { \ftoitfont 𐌭 } }
+\oitrepluc{U+1032E}{ { \ftoitfont 𐌮 } }
+\oitrepluc{U+1032F}{ { \ftoitfont 𐌯 } }
+}
+%Q:
+%%\tl_replace_all:Nnn \l_myoitun_tl { bh } { { \ftoitfont 𐊃 } }
+\newcommand\oitreplun[2]{%
+\tl_replace_all:Nnn 
+\l_myoitun_tl 
+{ #1 } 
+{ { #2 } }
+}
+%----- Unicode name
+\newcommand\dooittransun{%
+%
+\oitreplun{ssh}{ { \ftoitfont 𐌎 } }
+\oitreplun{nts}{ { \ftoitfont 𐌮 } }
+\oitreplun{sts}{ { \ftoitfont 𐌯 } }
+\oitreplun{ke}{ { \ftoitfont 𐌂 } }
+\oitreplun{th}{ { \ftoitfont 𐌈 } }
+\oitreplun{ka}{ { \ftoitfont 𐌊 } }
+\oitreplun{sh}{ { \ftoitfont 𐌑 } }
+\oitreplun{ku}{ { \ftoitfont 𐌒 } }
+\oitreplun{ph}{ { \ftoitfont 𐌘 } }
+\oitreplun{kh}{ { \ftoitfont 𐌙 } }
+\oitreplun{rr}{ { \ftoitfont 𐌛 } }
+\oitreplun{ch}{ { \ftoitfont 𐌜 } }
+\oitreplun{ii}{ { \ftoitfont 𐌝 } }
+\oitreplun{uu}{ { \ftoitfont 𐌞 } }
+\oitreplun{ss}{ { \ftoitfont 𐌟 } }
+\oitreplun{10}{ { \ftoitfont 𐌢 } }
+\oitreplun{50}{ { \ftoitfont 𐌣 } }
+\oitreplun{a}{ { \ftoitfont 𐌀 } }
+\oitreplun{b}{ { \ftoitfont 𐌁 } }
+\oitreplun{d}{ { \ftoitfont 𐌃 } }
+\oitreplun{e}{ { \ftoitfont 𐌄 } }
+\oitreplun{v}{ { \ftoitfont 𐌅 } }
+\oitreplun{z}{ { \ftoitfont 𐌆 } }
+\oitreplun{h}{ { \ftoitfont 𐌇 } }
+\oitreplun{I}{ { \ftoitfont 𐌉 } }
+\oitreplun{l}{ { \ftoitfont 𐌋 } }
+\oitreplun{m}{ { \ftoitfont 𐌌 } }
+\oitreplun{n}{ { \ftoitfont 𐌍 } }
+\oitreplun{o}{ { \ftoitfont 𐌏 } }
+\oitreplun{p}{ { \ftoitfont 𐌐 } }
+\oitreplun{r}{ { \ftoitfont 𐌓 } }
+\oitreplun{s}{ { \ftoitfont 𐌔 } }
+\oitreplun{t}{ { \ftoitfont 𐌕 } }
+\oitreplun{u}{ { \ftoitfont 𐌖 } }
+\oitreplun{x}{ { \ftoitfont 𐌗 } }
+\oitreplun{f}{ { \ftoitfont 𐌚 } }
+\oitreplun{1}{ { \ftoitfont 𐌠 } }
+\oitreplun{5}{ { \ftoitfont 𐌡 } }
+\oitreplun{y}{ { \ftoitfont 𐌭 } }
+}
+%V:
+%%\tl_replace_all:Nnn \l_myoitts_tl { bh } { { \ftoitfont 𐊃 } }
+\newcommand\oitreplts[2]{%
+\tl_replace_all:Nnn 
+\l_myoitts_tl 
+{ #1 } 
+{ { #2 } }
+}
+%----- Typing shortcut
+\newcommand\dooittransts{%
+%
+\oitreplts{ssh}{ { \ftoitfont 𐌎 } }
+\oitreplts{nts}{ { \ftoitfont 𐌮 } }
+\oitreplts{sts}{ { \ftoitfont 𐌯 } }
+\oitreplts{ke}{ { \ftoitfont 𐌂 } }
+\oitreplts{th}{ { \ftoitfont 𐌈 } }
+\oitreplts{ka}{ { \ftoitfont 𐌊 } }
+\oitreplts{sh}{ { \ftoitfont 𐌑 } }
+\oitreplts{ku}{ { \ftoitfont 𐌒 } }
+\oitreplts{ph}{ { \ftoitfont 𐌘 } }
+\oitreplts{kh}{ { \ftoitfont 𐌙 } }
+\oitreplts{rr}{ { \ftoitfont 𐌛 } }
+\oitreplts{ch}{ { \ftoitfont 𐌜 } }
+\oitreplts{ii}{ { \ftoitfont 𐌝 } }
+\oitreplts{uu}{ { \ftoitfont 𐌞 } }
+\oitreplts{ss}{ { \ftoitfont 𐌟 } }
+\oitreplts{10}{ { \ftoitfont 𐌢 } }
+\oitreplts{50}{ { \ftoitfont 𐌣 } }
+\oitreplts{a}{ { \ftoitfont 𐌀 } }
+\oitreplts{b}{ { \ftoitfont 𐌁 } }
+\oitreplts{d}{ { \ftoitfont 𐌃 } }
+\oitreplts{e}{ { \ftoitfont 𐌄 } }
+\oitreplts{v}{ { \ftoitfont 𐌅 } }
+\oitreplts{z}{ { \ftoitfont 𐌆 } }
+\oitreplts{h}{ { \ftoitfont 𐌇 } }
+\oitreplts{I}{ { \ftoitfont 𐌉 } }
+\oitreplts{l}{ { \ftoitfont 𐌋 } }
+\oitreplts{m}{ { \ftoitfont 𐌌 } }
+\oitreplts{n}{ { \ftoitfont 𐌍 } }
+\oitreplts{o}{ { \ftoitfont 𐌏 } }
+\oitreplts{p}{ { \ftoitfont 𐌐 } }
+\oitreplts{r}{ { \ftoitfont 𐌓 } }
+\oitreplts{s}{ { \ftoitfont 𐌔 } }
+\oitreplts{t}{ { \ftoitfont 𐌕 } }
+\oitreplts{u}{ { \ftoitfont 𐌖 } }
+\oitreplts{x}{ { \ftoitfont 𐌗 } }
+\oitreplts{f}{ { \ftoitfont 𐌚 } }
+\oitreplts{1}{ { \ftoitfont 𐌠 } }
+\oitreplts{5}{ { \ftoitfont 𐌡 } }
+\oitreplts{y}{ { \ftoitfont 𐌭 } }
+}
+%AI:
+%%\tl_replace_all:Nnn \l_myz_tl{bh}{蝌}
+%%\tl_replace_all:Nnn \l_myz_tl{蝒}{θ}
+\newcommand\oitreplst[2]{%
+\tl_replace_all:Nnn 
+\l_myoitst_tl 
+{ #1 } 
+{ #2 }
+}
+\newcommand\dooittransst[1]{%
+\tl_set:Nn \l_myoit_tl { #1 }
+%----- Ruby Part 2a
+%%yyy
+\oitreplst {ssh} { 蝘 } 
+\oitreplst {nts} { 蝯 } 
+\oitreplst {sts} { 蝰 } 
+\oitreplst {ke} { 蝌 } 
+\oitreplst {th} { 蝒 } 
+\oitreplst {ka} { 蝔 } 
+\oitreplst {sh} { 蝛 } 
+\oitreplst {ku} { 蝜 } 
+\oitreplst {ph} { 蝢 } 
+\oitreplst {kh} { 蝣 } 
+\oitreplst {rr} { 蝥 } 
+\oitreplst {ch} { 蝦 } 
+\oitreplst {ii} { 蝧 } 
+\oitreplst {uu} { 蝨 } 
+\oitreplst {ss} { 蝩 } 
+\oitreplst {10} { 蝬 } 
+\oitreplst {50} { 蝭 } 
+\oitreplst {a} { 蝊 } 
+\oitreplst {b} { 蝋 } 
+\oitreplst {d} { 蝍 } 
+\oitreplst {e} { 蝎 } 
+\oitreplst {v} { 蝏 } 
+\oitreplst {z} { 蝐 } 
+\oitreplst {h} { 蝑 } 
+\oitreplst {I} { 蝓 } 
+\oitreplst {l} { 蝕 } 
+\oitreplst {m} { 蝖 } 
+\oitreplst {n} { 蝗 } 
+\oitreplst {o} { 蝙 } 
+\oitreplst {p} { 蝚 } 
+\oitreplst {r} { 蝝 } 
+\oitreplst {s} { 蝞 } 
+\oitreplst {t} { 蝟 } 
+\oitreplst {u} { 蝠 } 
+\oitreplst {x} { 蝡 } 
+\oitreplst {f} { 蝤 } 
+\oitreplst {1} { 蝪 } 
+\oitreplst {5} { 蝫 } 
+\oitreplst {y} { 蝮 } 
+%----- Ruby Part 2b
+%%yyy
+\oitreplst {蝊} { a } 
+\oitreplst {蝋} { b } 
+\oitreplst {蝌} { ke } 
+\oitreplst {蝍} { d } 
+\oitreplst {蝎} { e } 
+\oitreplst {蝏} { v } 
+\oitreplst {蝐} { z } 
+\oitreplst {蝑} { h } 
+\oitreplst {蝒} { th } 
+\oitreplst {蝓} { I } 
+\oitreplst {蝔} { ka } 
+\oitreplst {蝕} { l } 
+\oitreplst {蝖} { m } 
+\oitreplst {蝗} { n } 
+\oitreplst {蝘} { ssh } 
+\oitreplst {蝙} { o } 
+\oitreplst {蝚} { p } 
+\oitreplst {蝛} { sh } 
+\oitreplst {蝜} { ku } 
+\oitreplst {蝝} { r } 
+\oitreplst {蝞} { s } 
+\oitreplst {蝟} { t } 
+\oitreplst {蝠} { u } 
+\oitreplst {蝡} { x } 
+\oitreplst {蝢} { ph } 
+\oitreplst {蝣} { kh } 
+\oitreplst {蝤} { f } 
+\oitreplst {蝥} { rr } 
+\oitreplst {蝦} { ch } 
+\oitreplst {蝧} { ii } 
+\oitreplst {蝨} { uu } 
+\oitreplst {蝩} { ss } 
+\oitreplst {蝪} { 1 } 
+\oitreplst {蝫} { 5 } 
+\oitreplst {蝬} { 10 } 
+\oitreplst {蝭} { 50 } 
+\oitreplst {蝮} { y } 
+\oitreplst {蝯} { nts } 
+\oitreplst {蝰} { sts } 
+%
+\tl_use:N \l_myoit_tl
+}
+\ExplSyntaxOff
+%%%%%%
+%
+%BA:
+%%\noindent U+10280 $\mapsto$ {\ftoitfont 𐊀}\par
+\newcommand\oitmapsto[2]{%
+\noindent #1 $\mapsto$ {#2}\par
+}
+%----- List of Unicode codepoints
+\newcommand\oitshowplainlistuc{%
+%\subsection{List of Unicode codepoints}\label{sec:listoituc}
+\oitmapsto{U+10300}{\ftoitfont 𐌀}
+\oitmapsto{U+10301}{\ftoitfont 𐌁}
+\oitmapsto{U+10302}{\ftoitfont 𐌂}
+\oitmapsto{U+10303}{\ftoitfont 𐌃}
+\oitmapsto{U+10304}{\ftoitfont 𐌄}
+\oitmapsto{U+10305}{\ftoitfont 𐌅}
+\oitmapsto{U+10306}{\ftoitfont 𐌆}
+\oitmapsto{U+10307}{\ftoitfont 𐌇}
+\oitmapsto{U+10308}{\ftoitfont 𐌈}
+\oitmapsto{U+10309}{\ftoitfont 𐌉}
+\oitmapsto{U+1030A}{\ftoitfont 𐌊}
+\oitmapsto{U+1030B}{\ftoitfont 𐌋}
+\oitmapsto{U+1030C}{\ftoitfont 𐌌}
+\oitmapsto{U+1030D}{\ftoitfont 𐌍}
+\oitmapsto{U+1030E}{\ftoitfont 𐌎}
+\oitmapsto{U+1030F}{\ftoitfont 𐌏}
+\oitmapsto{U+10310}{\ftoitfont 𐌐}
+\oitmapsto{U+10311}{\ftoitfont 𐌑}
+\oitmapsto{U+10312}{\ftoitfont 𐌒}
+\oitmapsto{U+10313}{\ftoitfont 𐌓}
+\oitmapsto{U+10314}{\ftoitfont 𐌔}
+\oitmapsto{U+10315}{\ftoitfont 𐌕}
+\oitmapsto{U+10316}{\ftoitfont 𐌖}
+\oitmapsto{U+10317}{\ftoitfont 𐌗}
+\oitmapsto{U+10318}{\ftoitfont 𐌘}
+\oitmapsto{U+10319}{\ftoitfont 𐌙}
+\oitmapsto{U+1031A}{\ftoitfont 𐌚}
+\oitmapsto{U+1031B}{\ftoitfont 𐌛}
+\oitmapsto{U+1031C}{\ftoitfont 𐌜}
+\oitmapsto{U+1031D}{\ftoitfont 𐌝}
+\oitmapsto{U+1031E}{\ftoitfont 𐌞}
+\oitmapsto{U+1031F}{\ftoitfont 𐌟}
+\oitmapsto{U+10320}{\ftoitfont 𐌠}
+\oitmapsto{U+10321}{\ftoitfont 𐌡}
+\oitmapsto{U+10322}{\ftoitfont 𐌢}
+\oitmapsto{U+10323}{\ftoitfont 𐌣}
+\oitmapsto{U+1032D}{\ftoitfont 𐌭}
+\oitmapsto{U+1032E}{\ftoitfont 𐌮}
+\oitmapsto{U+1032F}{\ftoitfont 𐌯}
+}
+%BB:
+%%\noindent a $\mapsto$ {\ftoitfont 𐊀}\par
+%----- List of Unicode names
+\newcommand\oitshowplainlistun{%
+%\subsection{List of Unicode names}\label{sec:listoitun}
+\oitmapsto{a}{\ftoitfont 𐌀}
+\oitmapsto{b}{\ftoitfont 𐌁}
+\oitmapsto{ke}{\ftoitfont 𐌂}
+\oitmapsto{d}{\ftoitfont 𐌃}
+\oitmapsto{e}{\ftoitfont 𐌄}
+\oitmapsto{v}{\ftoitfont 𐌅}
+\oitmapsto{z}{\ftoitfont 𐌆}
+\oitmapsto{h}{\ftoitfont 𐌇}
+\oitmapsto{th}{\ftoitfont 𐌈}
+\oitmapsto{I}{\ftoitfont 𐌉}
+\oitmapsto{ka}{\ftoitfont 𐌊}
+\oitmapsto{l}{\ftoitfont 𐌋}
+\oitmapsto{m}{\ftoitfont 𐌌}
+\oitmapsto{n}{\ftoitfont 𐌍}
+\oitmapsto{ssh}{\ftoitfont 𐌎}
+\oitmapsto{o}{\ftoitfont 𐌏}
+\oitmapsto{p}{\ftoitfont 𐌐}
+\oitmapsto{sh}{\ftoitfont 𐌑}
+\oitmapsto{ku}{\ftoitfont 𐌒}
+\oitmapsto{r}{\ftoitfont 𐌓}
+\oitmapsto{s}{\ftoitfont 𐌔}
+\oitmapsto{t}{\ftoitfont 𐌕}
+\oitmapsto{u}{\ftoitfont 𐌖}
+\oitmapsto{x}{\ftoitfont 𐌗}
+\oitmapsto{ph}{\ftoitfont 𐌘}
+\oitmapsto{kh}{\ftoitfont 𐌙}
+\oitmapsto{f}{\ftoitfont 𐌚}
+\oitmapsto{rr}{\ftoitfont 𐌛}
+\oitmapsto{ch}{\ftoitfont 𐌜}
+\oitmapsto{ii}{\ftoitfont 𐌝}
+\oitmapsto{uu}{\ftoitfont 𐌞}
+\oitmapsto{ss}{\ftoitfont 𐌟}
+\oitmapsto{1}{\ftoitfont 𐌠}
+\oitmapsto{5}{\ftoitfont 𐌡}
+\oitmapsto{10}{\ftoitfont 𐌢}
+\oitmapsto{50}{\ftoitfont 𐌣}
+\oitmapsto{y}{\ftoitfont 𐌭}
+\oitmapsto{nts}{\ftoitfont 𐌮}
+\oitmapsto{sts}{\ftoitfont 𐌯}
+}
+%BC:
+%%\noindent a $\mapsto$ {\ftoitfont 𐊀}\par
+%----- List of Typing shortcuts
+\newcommand\oitshowplainlistts{%
+%\subsection{List of Typing shortcuts}\label{sec:listoitts}
+\oitmapsto{a}{\ftoitfont 𐌀}
+\oitmapsto{b}{\ftoitfont 𐌁}
+\oitmapsto{ke}{\ftoitfont 𐌂}
+\oitmapsto{d}{\ftoitfont 𐌃}
+\oitmapsto{e}{\ftoitfont 𐌄}
+\oitmapsto{v}{\ftoitfont 𐌅}
+\oitmapsto{z}{\ftoitfont 𐌆}
+\oitmapsto{h}{\ftoitfont 𐌇}
+\oitmapsto{th}{\ftoitfont 𐌈}
+\oitmapsto{I}{\ftoitfont 𐌉}
+\oitmapsto{ka}{\ftoitfont 𐌊}
+\oitmapsto{l}{\ftoitfont 𐌋}
+\oitmapsto{m}{\ftoitfont 𐌌}
+\oitmapsto{n}{\ftoitfont 𐌍}
+\oitmapsto{ssh}{\ftoitfont 𐌎}
+\oitmapsto{o}{\ftoitfont 𐌏}
+\oitmapsto{p}{\ftoitfont 𐌐}
+\oitmapsto{sh}{\ftoitfont 𐌑}
+\oitmapsto{ku}{\ftoitfont 𐌒}
+\oitmapsto{r}{\ftoitfont 𐌓}
+\oitmapsto{s}{\ftoitfont 𐌔}
+\oitmapsto{t}{\ftoitfont 𐌕}
+\oitmapsto{u}{\ftoitfont 𐌖}
+\oitmapsto{x}{\ftoitfont 𐌗}
+\oitmapsto{ph}{\ftoitfont 𐌘}
+\oitmapsto{kh}{\ftoitfont 𐌙}
+\oitmapsto{f}{\ftoitfont 𐌚}
+\oitmapsto{rr}{\ftoitfont 𐌛}
+\oitmapsto{ch}{\ftoitfont 𐌜}
+\oitmapsto{ii}{\ftoitfont 𐌝}
+\oitmapsto{uu}{\ftoitfont 𐌞}
+\oitmapsto{ss}{\ftoitfont 𐌟}
+\oitmapsto{1}{\ftoitfont 𐌠}
+\oitmapsto{5}{\ftoitfont 𐌡}
+\oitmapsto{10}{\ftoitfont 𐌢}
+\oitmapsto{50}{\ftoitfont 𐌣}
+\oitmapsto{y}{\ftoitfont 𐌭}
+\oitmapsto{nts}{\ftoitfont 𐌮}
+\oitmapsto{sts}{\ftoitfont 𐌯}
+}
+%BD:
+%%\noindent a $\mapsto$ a\par
+%----- List of Standard Transliterations
+\newcommand\oitshowplainlistst{%
+%\subsection{List of Standard Transliterations}\label{sec:listoitst}
+\oitmapsto{a}{\ftoitfont 𐌀}
+\oitmapsto{b}{\ftoitfont 𐌁}
+\oitmapsto{ke}{\ftoitfont 𐌂}
+\oitmapsto{d}{\ftoitfont 𐌃}
+\oitmapsto{e}{\ftoitfont 𐌄}
+\oitmapsto{v}{\ftoitfont 𐌅}
+\oitmapsto{z}{\ftoitfont 𐌆}
+\oitmapsto{h}{\ftoitfont 𐌇}
+\oitmapsto{th}{\ftoitfont 𐌈}
+\oitmapsto{I}{\ftoitfont 𐌉}
+\oitmapsto{ka}{\ftoitfont 𐌊}
+\oitmapsto{l}{\ftoitfont 𐌋}
+\oitmapsto{m}{\ftoitfont 𐌌}
+\oitmapsto{n}{\ftoitfont 𐌍}
+\oitmapsto{ssh}{\ftoitfont 𐌎}
+\oitmapsto{o}{\ftoitfont 𐌏}
+\oitmapsto{p}{\ftoitfont 𐌐}
+\oitmapsto{sh}{\ftoitfont 𐌑}
+\oitmapsto{ku}{\ftoitfont 𐌒}
+\oitmapsto{r}{\ftoitfont 𐌓}
+\oitmapsto{s}{\ftoitfont 𐌔}
+\oitmapsto{t}{\ftoitfont 𐌕}
+\oitmapsto{u}{\ftoitfont 𐌖}
+\oitmapsto{x}{\ftoitfont 𐌗}
+\oitmapsto{ph}{\ftoitfont 𐌘}
+\oitmapsto{kh}{\ftoitfont 𐌙}
+\oitmapsto{f}{\ftoitfont 𐌚}
+\oitmapsto{rr}{\ftoitfont 𐌛}
+\oitmapsto{ch}{\ftoitfont 𐌜}
+\oitmapsto{ii}{\ftoitfont 𐌝}
+\oitmapsto{uu}{\ftoitfont 𐌞}
+\oitmapsto{ss}{\ftoitfont 𐌟}
+\oitmapsto{1}{\ftoitfont 𐌠}
+\oitmapsto{5}{\ftoitfont 𐌡}
+\oitmapsto{10}{\ftoitfont 𐌢}
+\oitmapsto{50}{\ftoitfont 𐌣}
+\oitmapsto{y}{\ftoitfont 𐌭}
+\oitmapsto{nts}{\ftoitfont 𐌮}
+\oitmapsto{sts}{\ftoitfont 𐌯}
+}
+%------ListUC
+\newcommand\oitlistuc{%
+\section{List of Unicode codepoints \oittagb }\label{sec:listoituc}
+\begin{multicols}{4}\noindent
+\oittag
+\oitshowplainlistuc
+\eolist
+\end{multicols}
+}
+%------ListUN
+\newcommand\oitlistun{%
+\section{List of Unicode names \oittagb }\label{sec:listoitun}
+\begin{multicols}{4}\noindent
+\oittag
+\oitshowplainlistun
+\eolist
+\end{multicols}
+}
+%------ListTS
+\newcommand\oitlistts{%
+\section{List of Typing shortcuts \oittagb }\label{sec:listoitts}
+\begin{multicols}{4}\noindent
+\oittag
+\oitshowplainlistts
+\eolist
+\end{multicols}
+}
+%------ListST
+\newcommand\oitlistst{%
+\section{List of Standard transliterations \oittagb }\label{sec:listoitst}
+\begin{multicols}{4}\noindent
+\oittag
+\oitshowplainlistst
+\eolist
+\end{multicols}
+}
+%------All lists
+\newcommand\oitlists{%
+\oitlistuc
+\par\oitlistun
+\par\oitlistts
+\par\oitlistst
+}
+%EG:
+%%U+10280 & \ftoitfont 𐊀 & LETTER A & a & a & a \\
+\providecommand\theadercolour{blue!12}
+\newcommand\oitshowconspectus{%
+\section{Conspectus \oittagb }
+\begin{longtable}[l]{lclccc}\rowcolor{\theadercolour}
+UC & Glyph & Name & UN & TS & ST \\ \hline
+U+10300&\ftoitfont 𐌀&OLD ITALIC LETTER A&a&a&a \\ \hline
+U+10301&\ftoitfont 𐌁&OLD ITALIC LETTER BE&b&b&b \\ \hline
+U+10302&\ftoitfont 𐌂&OLD ITALIC LETTER KE&ke&ke&ke \\ \hline
+U+10303&\ftoitfont 𐌃&OLD ITALIC LETTER DE&d&d&d \\ \hline
+U+10304&\ftoitfont 𐌄&OLD ITALIC LETTER E&e&e&e \\ \hline
+U+10305&\ftoitfont 𐌅&OLD ITALIC LETTER VE&v&v&v \\ \hline
+U+10306&\ftoitfont 𐌆&OLD ITALIC LETTER ZE&z&z&z \\ \hline
+U+10307&\ftoitfont 𐌇&OLD ITALIC LETTER HE&h&h&h \\ \hline
+U+10308&\ftoitfont 𐌈&OLD ITALIC LETTER THE&th&th&th \\ \hline
+U+10309&\ftoitfont 𐌉&OLD ITALIC LETTER I&I&I&I \\ \hline
+U+1030A&\ftoitfont 𐌊&OLD ITALIC LETTER KA&ka&ka&ka \\ \hline
+U+1030B&\ftoitfont 𐌋&OLD ITALIC LETTER EL&l&l&l \\ \hline
+U+1030C&\ftoitfont 𐌌&OLD ITALIC LETTER EM&m&m&m \\ \hline
+U+1030D&\ftoitfont 𐌍&OLD ITALIC LETTER EN&n&n&n \\ \hline
+U+1030E&\ftoitfont 𐌎&OLD ITALIC LETTER ESH&ssh&ssh&ssh \\ \hline
+U+1030F&\ftoitfont 𐌏&OLD ITALIC LETTER O&o&o&o \\ \hline
+U+10310&\ftoitfont 𐌐&OLD ITALIC LETTER PE&p&p&p \\ \hline
+U+10311&\ftoitfont 𐌑&OLD ITALIC LETTER SHE&sh&sh&sh \\ \hline
+U+10312&\ftoitfont 𐌒&OLD ITALIC LETTER KU&ku&ku&ku \\ \hline
+U+10313&\ftoitfont 𐌓&OLD ITALIC LETTER ER&r&r&r \\ \hline
+U+10314&\ftoitfont 𐌔&OLD ITALIC LETTER ES&s&s&s \\ \hline
+U+10315&\ftoitfont 𐌕&OLD ITALIC LETTER TE&t&t&t \\ \hline
+U+10316&\ftoitfont 𐌖&OLD ITALIC LETTER U&u&u&u \\ \hline
+U+10317&\ftoitfont 𐌗&OLD ITALIC LETTER EKS&x&x&x \\ \hline
+U+10318&\ftoitfont 𐌘&OLD ITALIC LETTER PHE&ph&ph&ph \\ \hline
+U+10319&\ftoitfont 𐌙&OLD ITALIC LETTER KHE&kh&kh&kh \\ \hline
+U+1031A&\ftoitfont 𐌚&OLD ITALIC LETTER EF&f&f&f \\ \hline
+U+1031B&\ftoitfont 𐌛&OLD ITALIC LETTER ERS&rr&rr&rr \\ \hline
+U+1031C&\ftoitfont 𐌜&OLD ITALIC LETTER CHE&ch&ch&ch \\ \hline
+U+1031D&\ftoitfont 𐌝&OLD ITALIC LETTER II&ii&ii&ii \\ \hline
+U+1031E&\ftoitfont 𐌞&OLD ITALIC LETTER UU&uu&uu&uu \\ \hline
+U+1031F&\ftoitfont 𐌟&OLD ITALIC LETTER ESS&ss&ss&ss \\ \hline
+U+10320&\ftoitfont 𐌠&OLD ITALIC NUMERAL ONE&1&1&1 \\ \hline
+U+10321&\ftoitfont 𐌡&OLD ITALIC NUMERAL FIVE&5&5&5 \\ \hline
+U+10322&\ftoitfont 𐌢&OLD ITALIC NUMERAL TEN&10&10&10 \\ \hline
+U+10323&\ftoitfont 𐌣&OLD ITALIC NUMERAL FIFTY&50&50&50 \\ \hline
+U+1032D&\ftoitfont 𐌭&OLD ITALIC LETTER YE&y&y&y \\ \hline
+U+1032E&\ftoitfont 𐌮&OLD ITALIC LETTER NORTHERN TSE&nts&nts&nts \\ \hline
+U+1032F&\ftoitfont 𐌯&OLD ITALIC LETTER SOUTHERN TSE&sts&sts&sts \\ \hline
+\hline\end{longtable}
+}
+\newcommand\oitshowshort{%
+\section{Short Commmands \oittagb }
+\subsection{Trans}
+\bqq{\cdr{\oittrans[uc]{U+10319}}}
+\bqq{\cdr{\oittrans[un]{kh}}}
+\bqq{\cdr{\oittrans[ts]{kh}} (default)} 
+\bqq{\cdr{\oittrans[st]{kh}}}
+\subsection{Text}
+\bqq{\cdr{\oittext[w]{moku}} (default)} 
+\bqq{\cdr{\oittext[ruby]{moku}}}
+}

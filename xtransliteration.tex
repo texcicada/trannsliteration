@@ -18,7 +18,8 @@ carian,
 lycian,
 lydian,
 mandaic,
-]{xtransliteration}
+oldpersiandev,
+olditalic]{xtransliteration}
 
 
 
@@ -27,6 +28,7 @@ mandaic,
 \newfontfamily\ftlcfont{Noto Sans Lycian}[Scale=1.5]%plain font
 \newfontfamily\ftldfont{Noto Sans Lydian}[Scale=1.5]
 \newfontfamily\ftmafont{Noto Sans Mandaic}[Scale=1.5,Script=Mandaic,Renderer=HarfBuzz]
+\newfontfamily\ftopfont{Noto Sans OldPersian}[Scale=1.5]
 
 %\input{unicode_cb}
 \newfontface\fcarian{NotoSansCarian-Regular.ttf}[Colour=blue]
@@ -37,6 +39,8 @@ mandaic,
 \DeclareTextFontCommand\textlydian{\flydian}
 \newfontface\fmandaic{NotoSansMandaic-Regular.ttf}[Colour=blue]
 \DeclareTextFontCommand\textmandaic{\fmandaic}
+\newfontface\foldpersian{NotoSansOldPersian-Regular.ttf}[Colour=blue]
+\DeclareTextFontCommand\textoldpersian{\foldpersian}
 
 
 \newfontface\nrffontname{NotoSansCarian-Regular.ttf}
@@ -385,6 +389,77 @@ Ruby &
 %%%\doprmb{67872}{67903}{'Lydian'}
 
 
+%**** Old Persian
+\newpage\section{Old Persian}
+\subsection{Available Commands \optagb }
 
+\noindent{
+\rowcolors{2}{blue!12!green!2}{yellow!25!green!12}
+\begin{tabular}{lll}
+\rowcolor{blue!12}
+Type & Short Command &  General command \\
+\hline
+Codepoint & 
+\cdr{\opuc{U+103A0}} & 
+\cdr{\optrans[uc]{U+103A0}} \\
+Unicode name & 
+\cdr{\opun{akaxa}} & 
+\cdr{\optrans[un]{akaxa}} \\
+Typing shortcut & 
+\cdr{\opts{a}} & 
+\cdr{\optrans[ts]{a}} \\
+Transliteration \opts{ssa}& 
+\cdr{\opst{𐏂}} &  %
+\cdr{\optrans[st]{𐏂}} \\
+\hline
+Word & 
+\cdr{\opw{mi}} & 
+\cdr{\optext[w]{mi}} \\
+Gloss & 
+\scriptsize\cdr{\opgloss{kata}{dog}} & 
+\scriptsize\cdr{\optext[gloss]{kata}{dog}} \\
+Ruby & 
+\cdr{\opruby{kassa}} & 
+\cdr{\optext[ruby]{kassa}} \\
+Ruby & 
+\cdr{\opruby{ka.ssa}} & 
+\cdr{\optext[ruby]{ka.ssa}} \\
+\hline
+\end{tabular}
+}
+
+
+\subsection{Example Transliteration \matagb }
+\begin{quotation}
+\noindent\cdr{\maw{kdndplssl}}
+
+\noindent\cdr{\maw{p}} + aff = \maw{affp} /f/
+
+\noindent\cdr{\magloss{ba bvoca}{/baa/ >> /ba/}}
+
+\noindent\cdr{\magloss{bu bvocu}{/bu/ >> /bo/}}
+
+\noindent\cdr{\magloss{bi bvoci}{/bi/ >> /be/}}
+
+\noindent\cdr{\magloss{lgemba}{lebba = heart}}
+
+\noindent\cdr{\magloss{rgemba}{rabba = great}}
+%%
+%%\cdr{\ldgloss{bira}{house, home}}
+%%
+%%\cdr{\ldruby{bira}}
+%%
+%%\cdr{\ldruby{b.i.r.a}}
+%%%\cdr{\caruby{q.l.a.ld.i.ss.}}
+%%%
+%%%\cdr{\cagloss{ted}{father}}
+%%%
+%%%\cdr{\cagloss{en}{mother}}
+\end{quotation}
+%%
+%%
+\textmandaic{%
+\doprmbx{2112}{2143}{'Mandaic'}{c:/windows/fonts/NotoSansMandaic-Regular.ttf}}
+%%
 
 \end{document}

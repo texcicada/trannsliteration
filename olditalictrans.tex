@@ -1,0 +1,225 @@
+\documentclass{article}
+\usepackage[table]{xcolor}
+\pagecolor{green!3}
+\newcommand\theadercolour{red!20!yellow}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\usepackage{multicol}
+\setlength{\columnsep}{0.3cm} \setlength{\columnseprule}{1pt}
+\usepackage[listings]{tcolorbox}
+
+\usepackage[unicode,meta,lydian,olditalic]{xtransliteration}
+
+%============================== Font
+\newfontfamily\ftoitfont{Catrinity}[Scale=1.5]%plain font
+%Noto Sans Old Italic
+\newfontfamily\ftldfont{Noto Sans Lydian}[Scale=1.5]
+%==============================
+
+
+
+
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+%Common code: plain
+\newcommand\translitformat{\color{red}\bfseries}
+\newcommand\tablea{%
+\setlength{\tabcolsep}{-0.5pt}%
+\begin{tabular}[b]{c}
+\scriptsize 
+}
+\newcommand\tableb{%
+\\ \rule{0pt}{1.8ex} 
+}
+\newcommand\tablec{%
+\\\end{tabular}%
+}
+%\newcommand\eolist{{\tiny [End of List]}\par}
+
+
+
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\newcommand\sbucl{{\mdseries\markerfont\symbol{9121}}}% ⎡
+\newcommand\sbbcl{{\mdseries\markerfont\symbol{9123}}}% ⎣
+\newcommand\sbucr{{\mdseries\markerfont\symbol{9124}}}% ⎤
+\newcommand\sbbcr{{\mdseries\markerfont\symbol{9126}}}% ⎦
+\newcommand\tlcorner{{\mdseries\markerfont\symbol{8988}}}% ⌜
+\newcommand\trcorner{{\mdseries\markerfont\symbol{8989}}}% ⌝
+\newcommand\blcorner{{\mdseries\markerfont\symbol{8990}}}% ⌞
+\newcommand\brcorner{{\mdseries\markerfont\symbol{8991}}}% ⌟
+\newcommand\lbracket{{\mdseries\markerfontb\symbol{91}}}% [
+\newcommand\rbracket{{\mdseries\markerfontb\symbol{93}}}% ]
+
+%\input{metacs_input.tex}
+
+% Common code
+\ExplSyntaxOn
+
+\tl_new:N \l_myuc_tl
+\tl_new:N \l_myun_tl
+\tl_new:N \l_myts_tl
+%\tl_new:N \l_myb_tl %defined in metacs.tex
+\tl_new:N \l_myx_tl
+\tl_new:N \l_myy_tl
+\tl_new:N \l_myz_tl
+\tl_new:N \l_myzz_tl
+\tl_new:N \l_myrev_tl
+
+\NewDocumentCommand{\transrev}{ m }{
+
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+		\tl_use:N \l_myrev_tl
+}
+\NewDocumentCommand{\transrevonly}{ m }{
+		\tl_set:Nn \l_myrev_tl { #1 }
+		\tl_reverse:N \l_myrev_tl
+%		\tl_use:N \l_myrev_tl
+}
+
+
+
+
+
+\ExplSyntaxOff
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+\newcommand\bqq[1]{\begin{quotation}#1\end{quotation}}
+
+
+
+
+
+%===================================
+\begin{document}
+\begin{center}
+{\ttfamily\Large ASCII Input Method for Old Italic}
+
+\rule{0.4\textwidth}{0.2pt}
+\end{center}
+
+\tableofcontents
+
+\bigskip
+\hfill\rule{0.4\textwidth}{0.2pt}\hfill\ 
+
+\section{Usage}
+Activate the transliteration commands and environments for Old Italic script by specifying the package option \texttt{olditalic} for the \texttt{xtransliteration} package:
+
+\begin{center}
+\verb|\usepackage[olditalic]{xtransliteration}|
+\end{center}
+
+Define a font switch \texttt{\textbackslash ftoitfont}
+
+\begin{center}
+\verb|\newfontfamily\ftoitfont{Catrinity}[Scale=1.5]|
+\end{center}
+
+\section{Commands and Environments}
+
+\subsection{Inline Commands}
+\subsubsection{Unicode codepoint (UC) Input}
+\bqq{\cdr{\oituc{U+10300
+U+10301
+U+10302
+U+10303
+}}}
+
+\subsubsection{Unicode name (UN) Input}
+\bqq{\cdr{\oitun{a
+b
+ke
+d
+}}}
+
+\subsubsection{Typing Shortcut (TS) Input}
+\bqq{\cdr{\oitts{a
+b
+ke
+d
+}}}
+
+\subsubsection{Standard Transliteration Output}
+\bqq{\cdr{\oitst{a.b.g.d.}}}
+
+\subsubsection{Word + Transliteration Output}
+\bqq{\cdr{\oitw{*ounos}}}
+
+\subsubsection{Gloss Output}
+\bqq{\cdr{\oitgloss{kaat}{dog}}}
+
+
+\subsubsection{Ruby Text Output}
+\bqq{\cdr{\oitruby{ka.a.t}}}
+
+\oitshowshort
+
+\subsection{Environments}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Unicode codepoints: \bfseries\textcolor{blue!10}{oittransuce}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{oittransuce}
+U+10300 U+10301 U+10302 U+10303
+
+U+10300 U+10301 U+10302 U+10303
+\end{oittransuce}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Unicode names: \bfseries\textcolor{blue!10}{oittransune}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{oittransune}
+abked
+
+abked
+\end{oittransune}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Typing shortcuts: \bfseries\textcolor{blue!10}{oittranstse}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{oittranstse}
+abked
+
+abked
+\end{oittranstse}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Standard transliteration: \bfseries\textcolor{blue!10}{oittransste}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{oittransste}
+lupari
+
+lupari
+\end{oittransste}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Ruby text: \bfseries\textcolor{blue!10}{oitrubye}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{oitrubye}
+phthshuu
+
+phthshuu
+\end{oitrubye}
+\end{tcblisting}
+
+\bigskip
+\begin{tcblisting}{title={{\sffamily Tableture: \bfseries\textcolor{blue!10}{oittableture}}},colback=red!5!white,colframe=red!75!black,listing side text}
+\begin{oittableture}
+abked
+\end{oittableture}
+\end{tcblisting}
+
+
+\oitlists
+
+\oitshowconspectus
+
+\end{document}
